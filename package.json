@@ -1,0 +1,32 @@
+{
+  "name": "covid-lie-tracker-sa",
+  "version": "1.0.0",
+  "description": "A live tracker that aggregates Covid-19 data in South Africa (SA), on a total and Provincial basis. The tracker provides Stats, Graphs, and Interactive Map to display information about the infection.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+***REMOVED***
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TumoM/Covid-Live-Tracker-SA.git"
+***REMOVED***
+  "keywords": [
+    "covid-19",
+    "corona-virus-2019"
+  ],
+  "author": "Tumo N. Masire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TumoM/Covid-Live-Tracker-SA/issues"
+***REMOVED***
+  "homepage": "https://github.com/TumoM/Covid-Live-Tracker-SA#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "knex": "^0.20.13",
+    "path": "^0.12.7"
+***REMOVED***
+***REMOVED***

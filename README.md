@@ -1,8 +1,7 @@
 # Covid-19 Live Tracker - South Africa
 
 ## Description
-This application aims to provide statistics, and aggregated data about novel Corona Virus 2019 in South Africa. This includes
-data on a Provincial level.
+A live tracker that aggregates Covid-19 data in South Africa (SA), on a total and Provincial basis.. The tracker provides Stats, Graphs, and Interactive Map to display inforation about the infection.
 
 ## Tech Stack
 ### Front-End

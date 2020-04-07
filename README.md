@@ -16,4 +16,4 @@ The tracker provides Stats, Graphs, and Interactive Map to display information a
 - EJS
 - Knex
 ### Database
-- SQL - MySQL
+- SQL - MySQL/Postgres

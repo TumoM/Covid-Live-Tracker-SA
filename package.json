@@ -26,7 +26,11 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "jssoup": "0.0.11",
     "knex": "^0.20.13",
-    "path": "^0.12.7"
+    "node-html-parser": "^1.2.14",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   }
 }

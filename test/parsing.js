@@ -16,14 +16,13 @@ rp(url)
         //console.log(root.structure);
         var entries = root.querySelectorAll(".entry-title.fusion-post-title a");
         var links = []
-        console.log("About to filter");
         entries = entries.filter((entry) => {
             // return entry.getAttribute("href").match(linkRegex)
             if (entry.getAttribute("href").match(linkRegex)) {
-                console.log("Found One!\n", entry.text);
-                console.log("Outer: ", entry.outerHTML);
-                console.log("Inner: ", entry.innerHTML);
-                console.log("Href: ", entry.getAttribute("href"), "\n");
+                // console.log("Found One!\n", entry.text);
+                // console.log("Outer: ", entry.outerHTML);
+                // console.log("Inner: ", entry.innerHTML);
+                // console.log("Href: ", entry.getAttribute("href"), "\n");
                 links.push(entry.getAttribute("href"))
                 rp(entry.getAttribute("href"))
                     .then(function (html) {
@@ -40,6 +39,24 @@ rp(url)
                         // Extracts the rows from each table
                         const rowsTable1 = rootTable1.querySelectorAll("tr")
                         const rowsTable2 = rootTable2.querySelectorAll("tr")
+                        // console.log(rowsTable1);
+                        
+                        rowsTable1.forEach((row) =>{
+                            row = row.text.split(" ");
+                            let name = "";
+                            let count = 0;
+                            row.forEach((index) =>{
+                                if (index.match(/^\d+$/)){ // Checks that index value is a digit
+                                    count = Number(index)
+                                }
+                                else{
+                                    name += index+" " // Appends word and adds a space that was removed from split
+                                }
+                            })
+                            name = name.trim();
+                            name = name == "KWAZULU – NATAL"? "KWAZULU–NATAL":name
+                            console.log(name,"-",count);
+                        })
 
                         // pull out paragraph after 1st table
                         const tags = rootChild.querySelector(".post-content").childNodes;
@@ -60,7 +77,8 @@ rp(url)
                             }
                         });
                         console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
-                        console.log("Found Two!: ", entry.text, "\n");
+                        // console.log("Found Two!: ", entry.text, "\n");
+                        console.log("\n");
                     })
                     .catch(function (err) {
                         //handle error
@@ -69,10 +87,6 @@ rp(url)
             } else {
                 return false;
             }
-        });
-        console.log(links);
-        links.forEach(async link => {
-
         });
         // Pull the stats off a URL
     })

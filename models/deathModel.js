@@ -10,7 +10,7 @@ class Death {
 ***REMOVED***
 
   toString(){
-    return `${this.province***REMOVED***, ${this.sex***REMOVED***, ${this.age***REMOVED***`;
+    return `${this.province***REMOVED***, sex:${this.sex***REMOVED***, age:${this.age***REMOVED***`;
 ***REMOVED***
 ***REMOVED***
 module.exports = Death

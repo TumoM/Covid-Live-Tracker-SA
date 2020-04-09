@@ -18,6 +18,7 @@ let DbSetup = function DbSetup() {
         t.integer('deathCount').defaultTo(0);
         t.integer('recovered').defaultTo(0);
         t.integer('population').defaultTo(null);
+        t.integer("testCount").defaultTo(null)
         console.log("Provinces table CREATED")
       });
     }
@@ -68,7 +69,7 @@ let DbSetup = function DbSetup() {
         t.increments('id').primary().notNullable();
         t.integer('deathDateId').notNullable();
         t.string("provinceName");
-        t.string("gender");
+        t.string("sex");
         t.date('deathDate').notNullable();
         t.integer('age').defaultTo(null);
 

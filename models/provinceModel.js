@@ -22,6 +22,7 @@ class Province {
 ***REMOVED***
 
 
+
   // toString(){
   //   return `${name***REMOVED***, date${***REMOVED***,total${***REMOVED***,sick${***REMOVED***,sick${***REMOVED***,`
   // ***REMOVED***

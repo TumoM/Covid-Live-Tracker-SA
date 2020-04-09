@@ -159,8 +159,10 @@ rp(url)
                                 let provinceId = id[0]['id'];
                                 // Todo Inserts into sickDates table
                                 knex("sickDates")
-                                    .insert({provinceId,date,
-                                        sickCount:value.sick***REMOVED***, ['id','provinceName'])
+                                    .insert({provinceId,sickDate:date,
+                                        sickCount:value.sick***REMOVED***,"id").then(id =>{
+                                    // console.log("ID:",id);
+                              ***REMOVED***)
                                 knex("deathDates")
                                     .insert({provinceId,deathDate:date,
                                         deathCount:value.totalDead, deathMenCount:value.men, deathWomenCount:value.women***REMOVED***, ['id']).then(id => {
@@ -179,10 +181,6 @@ rp(url)
                           ***REMOVED***);
 
                       ***REMOVED***
-                        // knex("provinces").select("*").then(row => {
-                        //     console.log("ROW",row)
-                        // ***REMOVED***)
-                        //provincesList.push(currentProvinces);
                         //console.log("PROVINCE LIST:\n",currentProvinces);
                         // console.log(JSON.stringify(currentProvinces,null,2));
 

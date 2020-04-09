@@ -1,4 +1,4 @@
-let DbSetup = function DbSetup() {
+function DbSetup() {
   const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -82,8 +82,6 @@ let DbSetup = function DbSetup() {
     }
   });
   console.log("DB SETUP: COMPLETE");
-  
-  return knex
 }
+DbSetup();
 
-module.exports = DbSetup

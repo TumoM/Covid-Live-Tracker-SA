@@ -19,7 +19,7 @@ const knex = require('knex')({
     }
 });
 
-let testCount = 0;
+
 
 const PROVINCES = { // Name, [sick, dead]
                     "GAUTENG": Province,
@@ -114,7 +114,12 @@ rp(url)
                                 return tag;
                             }
                         });
-
+                        let testInt = "";
+                        let testArray = tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim().split(" ");
+                        testArray.forEach(digit=>{
+                            testInt += digit
+                        })
+                        testInt = parseInt(testInt);
                         const rootTable2 = HTMLParser.parse(table2.outerHTML);
                         const rowsTable2 = rootTable2.querySelectorAll("tr")
                         delete rowsTable2[0]
@@ -152,6 +157,7 @@ rp(url)
                             // console.log("Sick",value.sick);
                             // console.log("Death Count:",value.totalDead);
                             const date = value.date;
+
                             // Inserts into Provinces table
                             knex("provinces")
                                 .insert({provinceName:key,date,

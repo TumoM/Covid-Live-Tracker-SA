@@ -22,6 +22,7 @@ class Province {
   }
 
 
+
   // toString(){
   //   return `${name}, date${},total${},sick${},sick${},`
   // }

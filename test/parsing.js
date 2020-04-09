@@ -131,18 +131,30 @@ rp(url)
                         console.log("Done Table 2");
                         // console.log(currentProvinces);
                         for (const [key, value] of Object.entries(currentProvinces)) {
-                            console.log(key);
-                            console.log("Sick",value.sick);
-                            console.log("Death Count:",value.totalDead);
+                            // console.log(key);
+                            // console.log("Sick",value.sick);
+                            // console.log("Death Count:",value.totalDead);
+
+                            // Inserts into Provinces table
                             knex("provinces")
                                 .insert({provinceName:key,date:value.date,
-                                sickCount:value.sick,deathCount:value.totalDead}, ['id','provinceName']).then((id,name)=>{
-                                console.log(`Inserted ${id} into ${name}`)
+                                sickCount:value.sick,deathCount:value.totalDead}, ['id','provinceName']).then((id,other)=>{
+                                console.log(`Inserted ${id[0]['id']} into ${id[0]['provinceName']}`)
+                            }).catch(err=>{
+                                console.log("ERROR\n",err)
+                            });
+                            // Todo Inserts into sickDates table
+                            knex("provinces")
+                                .insert({provinceName:key,date:value.date,
+                                sickCount:value.sick,deathCount:value.totalDead}, ['id','provinceName']).then((id,other)=>{
+                                console.log(`Inserted ${id[0]['id']} into ${id[0]['provinceName']}`)
+                            }).catch(err=>{
+                                console.log("ERROR\n",err)
                             });
                         }
-                        knex("provinces").select("*").then(row => {
-                            console.log("ROW",row)
-                        })
+                        // knex("provinces").select("*").then(row => {
+                        //     console.log("ROW",row)
+                        // })
                         //provincesList.push(currentProvinces);
                         //console.log("PROVINCE LIST:\n",currentProvinces);
                         // console.log(JSON.stringify(currentProvinces,null,2));

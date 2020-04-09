@@ -96,7 +96,24 @@ rp(url)
 
                             // console.log(name,"-",count);
                       ***REMOVED***)
-                        // put table 2 parse here
+                        // pull out paragraph after 1st table
+                        const tags = rootChild.querySelector(".post-content").childNodes;
+
+                        let tableFound = false; // A able has been found in the html.
+                        let parFound = false; // a valid value has been returned.
+                        let tests = tags.filter(tag => { // Filters out the paragraph tag after the 1st table.
+                            if (!tableFound) {
+                                if (tag.tagName === "table") {
+                                    tableFound = true;
+                              ***REMOVED***
+                          ***REMOVED*** else if (!parFound) {
+                                if (tag.text === "\n") { // Ignores newlines that may crop up.
+                                    return false;
+                              ***REMOVED***
+                                parFound = true;
+                                return tag;
+                          ***REMOVED***
+                      ***REMOVED***);
 
                         const rootTable2 = HTMLParser.parse(table2.outerHTML);
                         const rowsTable2 = rootTable2.querySelectorAll("tr")
@@ -138,7 +155,7 @@ rp(url)
                             // Inserts into Provinces table
                             knex("provinces")
                                 .insert({provinceName:key,date,
-                                sickCount:value.sick,deathCount:value.totalDead***REMOVED***, ['id','provinceName']).then((id,other)=>{
+                                sickCount:value.sick,deathCount:value.totalDead,testCount:parseInt(tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim())***REMOVED***, ['id','provinceName']).then((id,other)=>{
                                 let provinceId = id[0]['id'];
                                 // Todo Inserts into sickDates table
                                 knex("sickDates")
@@ -169,26 +186,10 @@ rp(url)
                         //console.log("PROVINCE LIST:\n",currentProvinces);
                         // console.log(JSON.stringify(currentProvinces,null,2));
 
-                        // pull out paragraph after 1st table
-                        const tags = rootChild.querySelector(".post-content").childNodes;
 
-                        let tableFound = false; // A able has been found in the html.
-                        let parFound = false; // a valid value has been returned.
-                        let tests = tags.filter(tag => { // Filters out the paragraph tag after the 1st table.
-                            if (!tableFound) {
-                                if (tag.tagName === "table") {
-                                    tableFound = true;
-                              ***REMOVED***
-                          ***REMOVED*** else if (!parFound) {
-                                if (tag.text === "\n") { // Ignores newlines that may crop up.
-                                    return false;
-                              ***REMOVED***
-                                parFound = true;
-                                return tag;
-                          ***REMOVED***
-                      ***REMOVED***);
                         console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
                         // console.log("Found Two!: ", entry.text, "\n");
+                        // Todo Update provinces with test count.
                         console.log("\n");
                   ***REMOVED***)
                     .catch(function (err) {

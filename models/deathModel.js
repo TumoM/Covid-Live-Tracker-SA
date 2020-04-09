@@ -10,7 +10,7 @@ class Death {
   }
 
   toString(){
-    return `${this.province}, ${this.sex}, ${this.age}`;
+    return `${this.province}, sex:${this.sex}, age:${this.age}`;
   }
 }
 module.exports = Death

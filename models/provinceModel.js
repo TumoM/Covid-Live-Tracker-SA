@@ -18,6 +18,11 @@ class Province {
     this.women = 0; // Dead
     this.totalDead = 0; // Dead
   }
+
+
+  // toString(){
+  //   return `${name}, date${},total${},sick${},sick${},`
+  // }
 }
 module.exports = Province
 

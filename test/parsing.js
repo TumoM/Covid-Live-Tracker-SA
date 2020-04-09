@@ -2,11 +2,22 @@ const HTMLParser = require('node-html-parser'),
     rp = require('request-promise'),
     Province = require("../models/provinceModel"),
     Death = require("../models/deathModel"),
-    Day = require("../models/dayModel");
+    Day = require("../models/dayModel"),
+    DbSetup = require("../test/db");
 
 const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
 const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
 const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
+
+const knex = require('knex')({
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1',
+        user : 'test_user',
+        password : 'temp_pass',
+        database : 'covid-tracker-sa'
+    }
+});
 
 let testCount = 0;
 
@@ -76,7 +87,9 @@ rp(url)
                             name = name.trim();
                             name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/)? "KWAZULU–NATAL":name;
                             let currentProvince = new Province(name,count);
-                            currentProvince.date=DATE;
+                            let tempDate = DATE.split(" ");
+                            var d = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
+                            currentProvince.date=d;
                             // Adds the province to the list
                             currentProvinces[name] = currentProvince;
 
@@ -107,18 +120,33 @@ rp(url)
                             })
                             name = name.trim();
                             name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/)? "KWAZULU–NATAL":name;
-                            const death = new Death(name,gender,count)
+                            const death = new Death(name,gender,count);
                             // console.log("Death:",death.toString());
-                            currentProvinces[name].dead.push(death)
+                            currentProvinces[name].dead.push(death);
                             gender === "MALE"? currentProvinces[name].men += 1: gender === "FEMALE"? currentProvinces[name].women += 1: console.log("INVALID GENDER");
-                            currentProvinces[name].totalDead = currentProvinces[name].men + currentProvinces[name].women
+                            currentProvinces[name].totalDead = currentProvinces[name].men + currentProvinces[name].women;
+
 
                         })
-                        console.log("Done Table 2")
+                        console.log("Done Table 2");
+                        // console.log(currentProvinces);
+                        for (const [key, value] of Object.entries(currentProvinces)) {
+                            console.log(key);
+                            console.log("Sick",value.sick);
+                            console.log("Death Count:",value.totalDead);
+                            knex("provinces")
+                                .insert({provinceName:key,date:value.date,
+                                sickCount:value.sick,deathCount:value.totalDead}, ['id','provinceName']).then((id,name)=>{
+                                console.log(`Inserted ${id} into ${name}`)
+                            });
+                        }
+                        knex("provinces").select("*").then(row => {
+                            console.log("ROW",row)
+                        })
+                        //provincesList.push(currentProvinces);
+                        //console.log("PROVINCE LIST:\n",currentProvinces);
+                        // console.log(JSON.stringify(currentProvinces,null,2));
 
-                        provincesList.push(currentProvinces)
-                        console.log(JSON.stringify(currentProvinces,null,2));
-                        
                         // pull out paragraph after 1st table
                         const tags = rootChild.querySelector(".post-content").childNodes;
 
@@ -155,4 +183,4 @@ rp(url)
     .catch(function (err) {
         //handle error
     });
-console.log("ProvincesList:",JSON.stringify(provincesList,null,2));
+// console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

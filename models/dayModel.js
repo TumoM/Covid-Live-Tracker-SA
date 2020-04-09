@@ -1,10 +1,10 @@
-class Day{
+class DayModel{
     provinces = {***REMOVED***;
     tests = 0;
     totalSick = 0;
-    date = null;
+    date = "n/a";
 
-    constructor(provinces = {***REMOVED***, tests=0, totalSick=0, date=null) {
+    constructor(provinces = {***REMOVED***, tests=0, totalSick=0, date="n/a") {
       this.provinces = provinces;
       this.tests = tests;
       this.totalSick = totalSick;
@@ -12,4 +12,4 @@ class Day{
   ***REMOVED***
 ***REMOVED***
 
-module.exports = Day
+module.exports = DayModel

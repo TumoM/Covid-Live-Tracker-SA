@@ -134,23 +134,33 @@ rp(url)
                             // console.log(key);
                             // console.log("Sick",value.sick);
                             // console.log("Death Count:",value.totalDead);
-
+                            const date = value.date;
                             // Inserts into Provinces table
                             knex("provinces")
-                                .insert({provinceName:key,date:value.date,
+                                .insert({provinceName:key,date,
                                 sickCount:value.sick,deathCount:value.totalDead***REMOVED***, ['id','provinceName']).then((id,other)=>{
-                                console.log(`Inserted ${id[0]['id']***REMOVED*** into ${id[0]['provinceName']***REMOVED***`)
+                                let provinceId = id[0]['id'];
+                                // Todo Inserts into sickDates table
+                                knex("sickDates")
+                                    .insert({provinceId,date,
+                                        sickCount:value.sick***REMOVED***, ['id','provinceName'])
+                                knex("deathDates")
+                                    .insert({provinceId,deathDate:date,
+                                        deathCount:value.totalDead, deathMenCount:value.men, deathWomenCount:value.women***REMOVED***, ['id']).then(id => {
+                                    let deathDateId = id[0]['id'];
+                                    let parsedValues= [];
+                                    value.dead.forEach(deathDetails => {
+                                        parsedValues.push({deathDateId,provinceName:deathDetails.province,
+                                            sex:deathDetails.sex,deathDate:date,age:deathDetails.age***REMOVED***);
+                                  ***REMOVED***);
+                                    if (parsedValues.length > 0) {
+                                        knex.batchInsert('deathPersons', parsedValues);
+                                  ***REMOVED***
+                              ***REMOVED*** )
                           ***REMOVED***).catch(err=>{
                                 console.log("ERROR\n",err)
                           ***REMOVED***);
-                            // Todo Inserts into sickDates table
-                            knex("provinces")
-                                .insert({provinceName:key,date:value.date,
-                                sickCount:value.sick,deathCount:value.totalDead***REMOVED***, ['id','provinceName']).then((id,other)=>{
-                                console.log(`Inserted ${id[0]['id']***REMOVED*** into ${id[0]['provinceName']***REMOVED***`)
-                          ***REMOVED***).catch(err=>{
-                                console.log("ERROR\n",err)
-                          ***REMOVED***);
+
                       ***REMOVED***
                         // knex("provinces").select("*").then(row => {
                         //     console.log("ROW",row)

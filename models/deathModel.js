@@ -1,4 +1,4 @@
-class Death {
+class DeathModel {
   province; // String
   sex; // Char
   age; // int
@@ -10,10 +10,10 @@ class Death {
   }
 
   toString(){
-    return `${this.province}, sex:${this.sex}, age:${this.age}`;
+    return `${this.province}, ${this.sex}, ${this.age}`;
   }
 }
-module.exports = Death
+module.exports = DeathModel
 // let x = new age("Swag")
 // let y = new age("Swag 2", 1,0,100)
 // console.log(y);

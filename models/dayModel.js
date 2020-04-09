@@ -1,10 +1,10 @@
-class Day{
+class DayModel{
     provinces = {};
     tests = 0;
     totalSick = 0;
-    date = null;
+    date = "n/a";
 
-    constructor(provinces = {}, tests=0, totalSick=0, date=null) {
+    constructor(provinces = {}, tests=0, totalSick=0, date="n/a") {
       this.provinces = provinces;
       this.tests = tests;
       this.totalSick = totalSick;
@@ -12,4 +12,4 @@ class Day{
     }
 }
 
-module.exports = Day
+module.exports = DayModel

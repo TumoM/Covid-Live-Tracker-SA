@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A live tracker that aggregates Covid-19 data in South Africa (SA), on a total and Provincial basis. The tracker provides Stats, Graphs, and Interactive Map to display information about the infection.",
   "main": "app.js",
+  "engines": {
+    "node": ">=12.16.2."
+***REMOVED***
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
@@ -28,9 +31,9 @@
     "express-session": "^1.17.0",
     "jssoup": "0.0.11",
     "knex": "^0.20.13",
-    "node-html-parser": "^1.2.14",
+    "node-html-parser": "^1.2.15",
     "path": "^0.12.7",
-    "pg": "^8.0.0",
+    "pg": "^8.0.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
 ***REMOVED***

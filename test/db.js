@@ -19,6 +19,7 @@ function DbSetup() {
         t.integer('recovered').defaultTo(0);
         t.integer('population').defaultTo(null);
         t.integer("testCount").defaultTo(null)
+        t.unique(['provinceName','date'])
         console.log("Provinces table CREATED")
       });
     }
@@ -34,7 +35,7 @@ function DbSetup() {
         t.integer('provinceId').notNullable();
         t.date('sickDate').notNullable();
         t.integer('sickCount').defaultTo(0);
-
+        t.unique(['provinceId','sickDate'])
         t.foreign('provinceId').references('id').inTable('provinces');
         console.log("sickDates table CREATED")
       });
@@ -53,7 +54,7 @@ function DbSetup() {
         t.integer('deathCount').defaultTo(0);
         t.integer('deathMenCount').defaultTo(0);
         t.integer('deathWomenCount').defaultTo(0);
-
+        t.unique(['provinceId','deathDate'])
         t.foreign('provinceId').references('id').inTable('provinces');
         console.log("deathDates table CREATED")
       });
@@ -72,13 +73,28 @@ function DbSetup() {
         t.string("sex");
         t.date('deathDate').notNullable();
         t.integer('age').defaultTo(null);
-
+        t.unique(['provinceName','deathDateId','deathDate','age','sex'])
         t.foreign('deathDateId').references('id').inTable('provinces');
         console.log("deathPersons table CREATED")
       });
     }
     else {
       console.log("deathPersons table exists")
+    }
+  });
+
+  knex.schema.hasTable('dates').then((exists) => {
+    if (!exists) {
+      return knex.schema.createTable('dates', t => {
+        t.date('deathDate').notNullable().primary().unique();
+        t.boolean('parsed').defaultTo(false);
+        t.boolean('valid').defaultTo(true);
+
+        console.log("dates table CREATED")
+      });
+    }
+    else {
+      console.log("dates table exists")
     }
   });
   console.log("DB SETUP: COMPLETE");

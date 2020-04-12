@@ -11,27 +11,26 @@ const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
 const knex = require('knex')({
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
-        user : 'test_user',
-        password : 'temp_pass',
-        database : 'covid-tracker-sa'
+        host: '127.0.0.1',
+        user: 'test_user',
+        password: 'temp_pass',
+        database: 'covid-tracker-sa'
     }
 });
 
 
-
 const PROVINCES = { // Name, [sick, dead]
-                    "GAUTENG": Province,
-                    "WESTERN CAPE": Province,
-                    "KWAZULU–NATAL": Province,
-                    "FREE STATE": Province,
-                    "EASTERN CAPE": Province,
-                    "LIMPOPO": Province,
-                    "MPUMALANGA": Province,
-                    "NORTH WEST": Province,
-                    "NORTHERN CAPE": Province,
-                    "UNALLOCATED": Province
-                    }
+    "GAUTENG": Province,
+    "WESTERN CAPE": Province,
+    "KWAZULU–NATAL": Province,
+    "FREE STATE": Province,
+    "EASTERN CAPE": Province,
+    "LIMPOPO": Province,
+    "MPUMALANGA": Province,
+    "NORTH WEST": Province,
+    "NORTHERN CAPE": Province,
+    "UNALLOCATED": Province
+}
 let provincesList = []
 
 rp(url)
@@ -56,223 +55,222 @@ rp(url)
                 links.push(entry.getAttribute("href"))
                 rp(entry.getAttribute("href"))
                     .then(function (html) {
-                        try {
-                            console.log(DATE); // date
-                            let tempDate = DATE.split(" ");
-                            const d = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
-                            knex('dates')
-                                .where({deathDate: d})
-                                .then(rows => {
-                                    console.log("Row Count:", rows.length);
-                                    if (rows.length > 0 && rows[0].parsed) {
-                                        return true
-                                    } else if (rows.length > 0 && rows[0].maybeValid) {
+                        console.log(DATE); // date
+                        let tempDate = DATE.split(" ");
+                        const d = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
+                        knex('dates')
+                            .where({deathDate: d})
+                            .then(rows => {
+                                console.log("Row Count:", rows.length);
+                                if (rows.length > 0 && rows[0].parsed) {
+                                    return true
+                                } else if (rows.length > 0 && rows[0].maybeValid) {
+                                    // Maybe the format is all wrong. Parse another site/source?
+                                } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
+                                    const rootChild = HTMLParser.parse(html);
+                                    // pull out the two tables 1st
+                                    const tables = rootChild.querySelectorAll("table");
+                                    const [table1, table2] = tables;
+                                    try {
+                                        if (tables.length === 0) {
+                                            throw "No Tables\n"
+                                        }
+                                        const rootTable1 = HTMLParser.parse(table1.outerHTML);
+                                        // Extracts the rows from each table
+                                        const rowsTable1 = rootTable1.querySelectorAll("tr")
 
-                                    }
-                                    else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
-                                        const rootChild = HTMLParser.parse(html);
-                                        // pull out the two tables 1st
-                                        const tables = rootChild.querySelectorAll("table");
-                                        const [table1, table2] = tables;
-                                        try {
-                                            if (tables.length === 0) {
-                                                throw "No Tables\n"
-                                            }
-                                            const rootTable1 = HTMLParser.parse(table1.outerHTML);
-                                            // Extracts the rows from each table
-                                            const rowsTable1 = rootTable1.querySelectorAll("tr")
+                                        // console.log(rowsTable1);
+                                        let currentProvinces = Object.assign({}, PROVINCES);
 
-                                            // console.log(rowsTable1);
-                                            let currentProvinces = Object.assign({}, PROVINCES);
+                                        rowsTable1.forEach((row) => {
+                                            row = row.text.split(" ");
+                                            let name = "";
+                                            let count = 0;
+                                            row.forEach((index) => {
+                                                if (index.match(/^\d+$/)) { // Checks that index value is a digit
+                                                    count = Number(index)
+                                                } else {
+                                                    name += index + " " // Appends word and adds a space that was removed from split
+                                                }
+                                            })
+                                            name = name.trim();
+                                            name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/) ? "KWAZULU–NATAL" : name;
+                                            let currentProvince = new Province(name, count);
 
-                                            rowsTable1.forEach((row) => {
+                                            currentProvince.date = d;
+                                            // Adds the province to the list
+                                            currentProvinces[name] = currentProvince;
+
+
+                                            // console.log(name,"-",count);
+                                        })
+                                        let tags = null;
+                                        try { // pull out paragraph after 1st table
+                                            tags = rootChild.querySelector(".post-content").childNodes;
+                                            let tableFound = false; // A able has been found in the html.
+                                            let parFound = false; // a valid value has been returned.
+                                            let tests = tags.filter(tag => { // Filters out the paragraph tag after the 1st table.
+                                                if (!tableFound) {
+                                                    if (tag.tagName === "table") {
+                                                        tableFound = true;
+                                                    }
+                                                } else if (!parFound) {
+                                                    if (tag.text === "\n") { // Ignores newlines that may crop up.
+                                                        return false;
+                                                    }
+                                                    parFound = true;
+                                                    return tag;
+                                                }
+                                            });
+                                            let testInt = "";
+                                            let testArray = tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim().split(" ");
+                                            testArray.forEach(digit => {
+                                                testInt += digit
+                                            })
+                                            testInt = parseInt(testInt);
+                                            const rootTable2 = HTMLParser.parse(table2.outerHTML);
+                                            const rowsTable2 = rootTable2.querySelectorAll("tr")
+                                            delete rowsTable2[0]
+                                            rowsTable2.forEach(row => {
                                                 row = row.text.split(" ");
+                                                row.shift();
                                                 let name = "";
                                                 let count = 0;
+                                                let gender = "";
                                                 row.forEach((index) => {
                                                     if (index.match(/^\d+$/)) { // Checks that index value is a digit
-                                                        count = Number(index)
+                                                        count = Number(index);
+                                                    } else if (index !== "FEMALE" && index !== "MALE") {
+                                                        name += index + " "; // Appends word and adds a space that was removed from split
                                                     } else {
-                                                        name += index + " " // Appends word and adds a space that was removed from split
+                                                        gender = index;
                                                     }
                                                 })
                                                 name = name.trim();
                                                 name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/) ? "KWAZULU–NATAL" : name;
-                                                let currentProvince = new Province(name, count);
+                                                const death = new Death(name, gender, count);
+                                                // console.log("Death:",death.toString());
+                                                currentProvinces[name].dead.push(death);
+                                                gender === "MALE" ? currentProvinces[name].men += 1 : gender === "FEMALE" ? currentProvinces[name].women += 1 : console.log("INVALID GENDER");
+                                                currentProvinces[name].totalDead = currentProvinces[name].men + currentProvinces[name].women;
 
-                                                currentProvince.date = d;
-                                                // Adds the province to the list
-                                                currentProvinces[name] = currentProvince;
 
-
-                                                // console.log(name,"-",count);
                                             })
-                                            let tags = null;
-                                            try { // pull out paragraph after 1st table
-                                                tags = rootChild.querySelector(".post-content").childNodes;
-                                                let tableFound = false; // A able has been found in the html.
-                                                let parFound = false; // a valid value has been returned.
-                                                let tests = tags.filter(tag => { // Filters out the paragraph tag after the 1st table.
-                                                    if (!tableFound) {
-                                                        if (tag.tagName === "table") {
-                                                            tableFound = true;
-                                                        }
-                                                    } else if (!parFound) {
-                                                        if (tag.text === "\n") { // Ignores newlines that may crop up.
-                                                            return false;
-                                                        }
-                                                        parFound = true;
-                                                        return tag;
-                                                    }
-                                                });
-                                                let testInt = "";
-                                                let testArray = tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim().split(" ");
-                                                testArray.forEach(digit => {
-                                                    testInt += digit
-                                                })
-                                                testInt = parseInt(testInt);
-                                                const rootTable2 = HTMLParser.parse(table2.outerHTML);
-                                                const rowsTable2 = rootTable2.querySelectorAll("tr")
-                                                delete rowsTable2[0]
-                                                rowsTable2.forEach(row => {
-                                                    row = row.text.split(" ");
-                                                    row.shift();
-                                                    let name = "";
-                                                    let count = 0;
-                                                    let gender = "";
-                                                    row.forEach((index) => {
-                                                        if (index.match(/^\d+$/)) { // Checks that index value is a digit
-                                                            count = Number(index);
-                                                        } else if (index !== "FEMALE" && index !== "MALE") {
-                                                            name += index + " "; // Appends word and adds a space that was removed from split
-                                                        } else {
-                                                            gender = index;
-                                                        }
+                                            console.log("Done Table 2");
+                                            // console.log(currentProvinces);
+                                            for (const [key, value] of Object.entries(currentProvinces)) {
+                                                // console.log(key);
+                                                // console.log("Sick",value.sick);
+                                                // console.log("Death Count:",value.totalDead);
+                                                const date = value.date;
+
+                                                let testNum = 0;
+                                                let badString = "";
+                                                tests[0].text
+                                                    .match(/\s((\d+\s+)*\d+)/)[0]
+                                                    .trim()
+                                                    .split(" ")
+                                                    .forEach(word => {
+                                                        badString += word
                                                     })
-                                                    name = name.trim();
-                                                    name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/) ? "KWAZULU–NATAL" : name;
-                                                    const death = new Death(name, gender, count);
-                                                    // console.log("Death:",death.toString());
-                                                    currentProvinces[name].dead.push(death);
-                                                    gender === "MALE" ? currentProvinces[name].men += 1 : gender === "FEMALE" ? currentProvinces[name].women += 1 : console.log("INVALID GENDER");
-                                                    currentProvinces[name].totalDead = currentProvinces[name].men + currentProvinces[name].women;
-
-
-                                                })
-                                                console.log("Done Table 2");
-                                                // console.log(currentProvinces);
-                                                for (const [key, value] of Object.entries(currentProvinces)) {
-                                                    // console.log(key);
-                                                    // console.log("Sick",value.sick);
-                                                    // console.log("Death Count:",value.totalDead);
-                                                    const date = value.date;
-
-                                                    // Inserts into Provinces table
-                                                    knex("provinces")
-                                                        .insert({
-                                                                provinceName: key, date,
-                                                                sickCount: value.sick, deathCount: value.totalDead,
-                                                                testCount: parseInt(tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim())
-                                                            },
-                                                            ['id', 'provinceName'])
-                                                        .then((id, other) => {
-                                                            let provinceId = id[0]['id'];
-                                                            // Todo Inserts into sickDates table
-                                                            knex("sickDates")
-                                                                .insert({
-                                                                    provinceId, sickDate: date,
-                                                                    sickCount: value.sick
-                                                                }, "id")
-                                                                .then(id => {
-                                                                    // console.log("ID:",id);
-                                                                }).catch(err => {
-                                                                console.log("Error with sickDates\n", err);
-                                                            })
-                                                            knex("deathDates")
-                                                                .insert({
-                                                                    provinceId,
-                                                                    deathDate: date,
-                                                                    deathCount: value.totalDead,
-                                                                    deathMenCount: value.men,
-                                                                    deathWomenCount: value.women
-                                                                }, ['id']).then(id => {
-                                                                let deathDateId = id[0]['id'];
-                                                                let parsedValues = [];
-                                                                value.dead.forEach(deathDetails => {
-                                                                    parsedValues.push({
-                                                                        deathDateId,
-                                                                        provinceName: deathDetails.province,
-                                                                        sex: deathDetails.sex,
-                                                                        deathDate: date,
-                                                                        age: deathDetails.age
-                                                                    });
-                                                                });
-                                                                if (parsedValues.length > 0) {
-                                                                    knex.batchInsert('deathPersons', parsedValues).catch(err => {
-
-                                                                    })
-                                                                }
+                                                // Inserts into Provinces table
+                                                knex("provinces")
+                                                    .insert({
+                                                            provinceName: key, date,
+                                                            sickCount: value.sick, deathCount: value.totalDead,
+                                                            testCount: parseInt(badString)
+                                                        },
+                                                        ['id', 'provinceName'])
+                                                    .then((id, other) => {
+                                                        let provinceId = id[0]['id'];
+                                                        // Todo Inserts into sickDates table
+                                                        knex("sickDates")
+                                                            .insert({
+                                                                provinceId, sickDate: date,
+                                                                sickCount: value.sick
+                                                            }, "id")
+                                                            .then(id => {
+                                                                // console.log("ID:",id);
                                                             }).catch(err => {
-                                                                console.log("Error with deathDates:\n", err)
-                                                            })
+                                                            console.log("Error with sickDates\n", err);
+                                                        })
+                                                        knex("deathDates")
+                                                            .insert({
+                                                                provinceId,
+                                                                deathDate: date,
+                                                                deathCount: value.totalDead,
+                                                                deathMenCount: value.men,
+                                                                deathWomenCount: value.women
+                                                            }, ['id']).then(id => {
+                                                            let deathDateId = id[0]['id'];
+                                                            let parsedValues = [];
+                                                            value.dead.forEach(deathDetails => {
+                                                                parsedValues.push({
+                                                                    deathDateId,
+                                                                    provinceName: deathDetails.province,
+                                                                    sex: deathDetails.sex,
+                                                                    deathDate: date,
+                                                                    age: deathDetails.age
+                                                                });
+                                                            });
+                                                            if (parsedValues.length > 0) {
+                                                                knex.batchInsert('deathPersons', parsedValues).catch(err => {
+
+                                                                })
+                                                            }
                                                         }).catch(err => {
-                                                        // console.log("ERROR: Province Day already inserted")
-                                                    });
+                                                            console.log("Error with deathDates:\n", err)
+                                                        })
+                                                    }).catch(err => {
+                                                    console.log("ERROR: Province Day already inserted")
+                                                });
 
-                                                }
-                                                //console.log("PROVINCE LIST:\n",currentProvinces);
-                                                // console.log(JSON.stringify(currentProvinces,null,2));
-
-
-                                                console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
-                                                // console.log("Found Two!: ", entry.text, "\n");
-
-                                                // knex.raw(
-                                                //     `insert into dates ( deathDate, parsed ) as original
-                                                //           values ( :deathDate, :parsed )
-                                                //           on conflict do nothing
-                                                //           returning *`,
-                                                //     { deathDate:d, parsed:true }
-                                                // )
-                                                knex("dates ").insert({deathDate: d, parsed: true})
-                                                    .then(id => {
-                                                        //console.log(id)
-                                                    })
-                                                    .catch(err => {
-                                                        console.log("Day Error 1")
-                                                    })
-                                                console.log("\n");
-                                            } catch (e) {
-                                                knex("dates ").insert({deathDate: d, parsed: false})
-                                                    .then(id => {
-                                                        //console.log(id)
-                                                    })
-                                                    .catch(err => {
-                                                        console.log("Day Error 2")
-                                                    })
-                                                throw 'No post?\n'
                                             }
-                                        }
-                                        catch (e) {
-                                            console.log(e)
-                                            knex("dates ").insert({deathDate: d, parsed: false, maybeValid: false, error:true})
+
+
+                                            console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
+
+                                            knex("dates ").insert({deathDate: d, parsed: true})
                                                 .then(id => {
                                                     //console.log(id)
                                                 })
                                                 .catch(err => {
-                                                    console.log("Ignoring duplicates")
+                                                    console.log("Day Error 1")
                                                 })
+                                            console.log("\n");
+                                        } catch (e) {
+                                            knex("dates ").insert({deathDate: d, parsed: false})
+                                                .then(id => {
+                                                    //console.log(id)
+                                                })
+                                                .catch(err => {
+                                                    console.log("Day Error 2")
+                                                })
+                                            throw 'No post?\n'
                                         }
+                                    } catch (e) {
+                                        console.log(e)
+                                        // No table found error
+                                        knex("dates ").insert({
+                                            deathDate: d,
+                                            parsed: false,
+                                            maybeValid: false,
+                                            error: true
+                                        })
+                                            .then(id => {
+                                                //console.log(id)
+                                            })
+                                            .catch(err => {
+                                                console.log("Ignoring duplicates")
+                                            })
                                     }
+                                }
 
-                                }).catch((e) => {
-                                console.log(e)
-                            })
+                            }).catch((e) => {
+                            console.log(e)
+                        })
 
-                        } catch (err) {
-                            console.log(err)
-                        }
-                        ;
+
                     }).catch(err => {
                     console.log('Some error:', err)
                 });
@@ -283,7 +281,7 @@ rp(url)
     .catch(function (err) {
         console.log(err)
     });
-const upsert = (params)=> {
+const upsert = (params) => {
     const {table, object} = params;
     const insert = knex(table).insert(object);
     const update = knex.queryBuilder().update(object);

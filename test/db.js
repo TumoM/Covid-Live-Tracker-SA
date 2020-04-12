@@ -14,9 +14,9 @@ function DbSetup() {
         t.increments('id').primary().notNullable();
         t.string('provinceName').notNullable();
         t.date('date').notNullable();
-        t.integer('sickCount').defaultTo(0);
-        t.integer('deathCount').defaultTo(0);
-        t.integer('recovered').defaultTo(0);
+        t.integer('sickCount').defaultTo(null);
+        t.integer('deathCount').defaultTo(null);
+        t.integer('recovered').defaultTo(null);
         t.integer('population').defaultTo(null);
         t.integer("testCount").defaultTo(null)
         t.unique(['provinceName','date'])

@@ -35,6 +35,8 @@ let totalCases = 0, totalDeaths = 0
 rp(url)
     .then(function (html) {
         //success!
+        let currentProvinces = Object.assign({***REMOVED***, PROVINCES);
+
         // #######################################################################################
         const headHtml = html.match(/<h6.*block datestamp[\s\S]*<\/hgroup>/m) // The Header with total Cases and Deaths.
         const bodyHtml = html.match(/.*those details can be found here/gmiu) // The body with province counts.
@@ -59,10 +61,15 @@ rp(url)
         let recoveryDate = recoveriesLines[0].match(/\d+.*/)
         let RecoveryNumber = getNumber(recoveriesLines[1])
         let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
-        provinceRecoveries.pop() // Removes trailing blank index.
+        provinceRecoveries[provinceRecoveries.length-1].length === 0? provinceRecoveries.pop():provinceRecoveries // Removes trailing blank index.
         provinceRecoveries.forEach(line => {
             [provinceName, recoverCount] = line.trim().split("(")
-            console.log(`${provinceName***REMOVED***:${recoverCount***REMOVED***`)
+            let provinceNameDone = provinceName.trim();
+            const tempProvince = new Province(provinceNameDone)
+            tempProvince.recovered=recoverCount;
+            currentProvinces[provinceNameDone].recovered = recoverCount;
+            console.log(currentProvinces[provinceNameDone])
+            console.log(`${provinceNameDone***REMOVED***:${recoverCount***REMOVED***`);
       ***REMOVED***)
         // TODO 2: Parse info on New Cases by Province
 

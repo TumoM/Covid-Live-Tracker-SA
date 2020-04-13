@@ -16,3 +16,7 @@
 .colour2 {fill: #ce5263;***REMOVED***
 .colour3 {fill: #b11717;***REMOVED***
 .colour4 {fill: #47000a;***REMOVED***
+
+.series:hover .land.valid {
+	opacity: 0.8;
+***REMOVED***

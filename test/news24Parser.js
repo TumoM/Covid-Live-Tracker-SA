@@ -30,8 +30,46 @@ const PROVINCES = { // Name, [sick, dead]
     "NORTHERN CAPE": new Province("NORTHERN CAPE"),
     "UNALLOCATED": new Province("UNALLOCATED")
 ***REMOVED***
-let provincesList = []
-let totalCases = 0, totalDeaths = 0
+let provincesList = [
+    "Gauteng",
+    "Western Cape",
+    "KwaZulu-Natal",
+    "Free State",
+    "Eastern Cape",
+    "Limpopo",
+    "Mpumalanga",
+    "North West",
+    "Northern Cape",
+    "Unallocated"
+]
+let totalCases = 0, totalDeaths = 0, recoveryNumberTotal = 0;
+
+
+function updateDaysGood(itemData) {
+    let dateData = {
+        date: itemData.provDate,
+        totalCases,
+        totalDeaths,
+        totalRecoveries:recoveryNumberTotal,
+        maybeValid: false,
+        parsed: true
+  ***REMOVED***
+    knex('dates')
+    .select()
+    .where({date:itemData.provDate***REMOVED***)
+    .then(rows => {
+        if (rows.length === 0) {
+            knex("dates ").insert(dateData)
+                .then(id => {
+                    console.log("Updated Dates Table")
+              ***REMOVED***)
+                .catch(err => {
+                    console.log("Attempted duplicate insert")
+              ***REMOVED***)
+      ***REMOVED***
+  ***REMOVED***);
+  ***REMOVED***
+
 rp(url)
     .then(function (html) {
         //success!
@@ -53,7 +91,7 @@ rp(url)
             console.log("Row Count:", rows.length);
             if (rows.length > 0 && rows[0].parsed) {
                 parsed = true;
-                return true
+                console.log("Skipping");
           ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
                 // Maybe the format is all wrong. Parse another site/source?
           ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
@@ -67,15 +105,26 @@ rp(url)
 
                 // TODO 1: Parse info on Recoveries by Province
                 let recoveriesLines = soupBody.find('p').getText().split(":"),
-                    recoveryDate = recoveriesLines[0].match(/\d+.*/)[0],
-                    recoveryNumberTotal = getNumber(recoveriesLines[1]);
+                    recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
+
+                recoveryNumberTotal = getNumber(recoveriesLines[1]);
                 console.log(`Total Recovery:${recoveryNumberTotal***REMOVED***\n`)
 
                 let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
+                let provinceRecoveries2 = []
+                provinceRecoveries.forEach(value => {
+                    provinceRecoveries2.push(value.split('(')[0].trim())
+              ***REMOVED***)
                 provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
+                // TODO Loop over list of prov names, insert missing names in provinceRecoveries
+                provincesList.forEach(value => {
+                    if (!(provinceRecoveries2.includes(value))){
+                        provinceRecoveries.push(`${value***REMOVED*** (0`)
+                  ***REMOVED***
+              ***REMOVED***)
                 console.log(`Recovery Counts (${recoveryDate***REMOVED***):`)
                 provinceRecoveries.forEach(line => {
-                    let  recoverCount, provinceName;
+                    let recoverCount, provinceName;
                     [provinceName, recoverCount] = line.trim().split("(")
                     provinceName = provinceName.trim();
                     const tempProvince = new Province(provinceName)
@@ -90,33 +139,32 @@ rp(url)
                     let newTemp = dateFormatted.toLocaleDateString().split("/")
                     let itemData = {
                         provinceName,
-                        provDate:`${newTemp[2]***REMOVED***-${newTemp[0]***REMOVED***-${newTemp[1]***REMOVED***`,
-                        recovered:recoverCount
+                        provDate: `${newTemp[2]***REMOVED***-${newTemp[0]***REMOVED***-${newTemp[1]***REMOVED***`,
+                        recovered: recoverCount
                   ***REMOVED***;
 
-                    knex(tableName).select().where({provDate:itemData.provDate,provinceName***REMOVED***)
+                    knex(tableName).select().where({provDate: itemData.provDate, provinceName***REMOVED***)
                         .then(rows => {
-                            if (rows.length === 0){
+                            if (rows.length === 0) {
                                 knex(tableName).insert(itemData)
                                     .then(value => {
                                         console.log("Recovered Inserted")
                                   ***REMOVED***)
                                     .catch(reason => {
-                                        console.log("Error inserting Province Recovered",reason)
+                                        console.log("Error inserting Province Recovered", reason)
                                   ***REMOVED***)
-                          ***REMOVED***
-                            else{
-                                knex(tableName).update({recovered:recoveryNumberTotal***REMOVED***).where({provDate:recoveryDate***REMOVED***)
+                          ***REMOVED*** else {
+                                knex(tableName).update({recovered: recoveryNumberTotal***REMOVED***).where({provDate: recoveryDate***REMOVED***)
                                     .then(value => {
                                         console.log("Recovered Updated")
                                   ***REMOVED***)
                                     .catch(reason => {
-                                        console.log("Error Updating Province Recovered",reason)
+                                        console.log("Error Updating Province Recovered", reason)
                                   ***REMOVED***)
                           ***REMOVED***
                       ***REMOVED***)
                         .catch(reason => {
-                            console.log("Duplicate Province? ",reason)
+                            console.log("Duplicate Province? ", reason)
                       ***REMOVED***)
               ***REMOVED***)
                 // TODO 2: Parse info on New Cases by Province
@@ -149,35 +197,38 @@ rp(url)
                             // TODO Build object to upload to ProvinceDays using insertIgnore funct below
                             let tableName = 'provinceDays';
                             let tempDate = date.split(" ");
-                            const dateFormatted = new Date(`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`);
+                            const dateFormatted = new Date(date);
+                            let newTemp = dateFormatted.toLocaleDateString().split("/")
+                            let provDate = `${newTemp[2]***REMOVED***-${newTemp[0]***REMOVED***-${newTemp[1]***REMOVED***`
                             let itemData = {
                                 provinceName,
-                                provDate:dateFormatted.toISOString().split("T")[0],
+                                provDate,
                                 caseCount,
                                 deathCount
                           ***REMOVED***;
-                            knex(tableName).where({provDate:dateFormatted.toISOString().split("T")[0],provinceName***REMOVED***)
-                            .then(rows => {
-                                if (rows.length === 0){
-                                    knex(tableName).insert(itemData)
-                                    .catch(reason => {
-                                        console.log("Error inserting Province ",reason)
-                                  ***REMOVED***)
-                              ***REMOVED***
-                                else{
-                                    console.log("Already in.")
-                              ***REMOVED***
-                          ***REMOVED***)
+                            knex(tableName).where({provDate, provinceName***REMOVED***)
+                                .then(rows => {
+                                    if (rows.length === 0) {
+                                        knex(tableName).insert(itemData)
+                                            .then(value => {
+                                                updateDaysGood(itemData);
+                                          ***REMOVED***)
+                                            .catch(reason => {
+                                                console.log("Error inserting Province ", reason)
+                                          ***REMOVED***)
+                                  ***REMOVED*** else {
+                                        console.log("Already in.")
+                                        //updateDaysGood(itemData);
+
+                                  ***REMOVED***
+                              ***REMOVED***)
                                 .catch(reason => {
-                                    console.log("Duplicate Province? ",reason)
+                                    console.log("Duplicate Province? ", reason)
                               ***REMOVED***)
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
-
           ***REMOVED***
-
-
             console.log("Swag 2")
       ***REMOVED***)
         .catch(function (err) {

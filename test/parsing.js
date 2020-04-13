@@ -65,9 +65,11 @@ rp(url)
                                 console.log("Row Count:", rows.length);
                                 if (rows.length > 0 && rows[0].parsed) {
 
-                              ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
+                              ***REMOVED***
+                                else if (rows.length > 0 && rows[0].maybeValid) {
                                     // Maybe the format is all wrong. Parse another site/source?
-                              ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
+                              ***REMOVED***
+                                else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
                                     const rootChild = HTMLParser.parse(html);
                                     // pull out the two tables 1st
                                     const tables = rootChild.querySelectorAll("table");

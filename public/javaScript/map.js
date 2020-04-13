@@ -142,16 +142,16 @@ function setColours(dummyData, myProvinceList = provinceList) {
             console.log(`Max-I:${max-interval*2***REMOVED***, Val: ${val***REMOVED***`);
             console.log((max-interval*2) <= val);
 
-            if ((max-interval <= val) && (val< max)) {
+            if ((max-interval <= val) && (val < max)) {
                 answers[4].push(prov)
           ***REMOVED***
-            else if (max-(interval*2) <= val) {
+            else if (max-(interval*2) < val) {
                 answers[3].push(prov)
           ***REMOVED***
-            else if (max-(interval*3) <= val) {
+            else if (max-(interval*3) < val) {
                 answers[2].push(prov)
           ***REMOVED***
-            else if (max-(interval*4) <= val) {
+            else if (max-(interval*4) < val) {
                 answers[1].push(prov)
           ***REMOVED***
       ***REMOVED***

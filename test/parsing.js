@@ -224,7 +224,7 @@ rp(url)
                                                       ***REMOVED***)
                                                   ***REMOVED***)
                                                     .catch(err => {
-                                                    console.log("Passing: Province Day already inserted")
+                                                    // console.log("Passing: Province Day already inserted")
                                               ***REMOVED***);
 
                                           ***REMOVED***
@@ -234,10 +234,12 @@ rp(url)
                                             // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`)
                                             let parsedDate = d.toLocaleDateString().split("/")
                                             parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`
+                                            console.log("Parsed Date:",parsedDate)
                                             knex('dates')
-                                                .where({date:parsedDate***REMOVED***)
+                                                .select()
+                                                .where('date','=',`${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`)
                                                 .then(value => {
-                                                    if (value.length !== 0){
+                                                    if (value.length === 0){
                                                         knex("dates ")
                                                         .insert({
                                                             date: parsedDate,
@@ -245,10 +247,10 @@ rp(url)
                                                             totalTests: parseInt(badString),
                                                             maybeValid: false
                                                       ***REMOVED***)
-                                                            .then(id => {
-                                                                //console.log(id)
+                                                        .then(id => {
+                                                                console.log("Inserted Dates:",parsedDate)
                                                           ***REMOVED***)
-                                                            .catch(err => {
+                                                        .catch(err => {
                                                                 console.log("Day Error 1",err)
                                                           ***REMOVED***)
                                                         console.log("\n");
@@ -279,7 +281,7 @@ rp(url)
                                                 //console.log(id)
                                           ***REMOVED***)
                                             .catch(err => {
-                                                console.log("Ignoring duplicates",err)
+                                                console.log("Ignoring duplicates 1",err)
                                           ***REMOVED***)
                                   ***REMOVED***
                               ***REMOVED***

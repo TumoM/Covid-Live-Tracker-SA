@@ -49,12 +49,11 @@ let totalCases = 0,
 
 
 function updateDaysGood(itemData) {
-    let tableName = 'provinceDays';
+    console.log('Updating Day Function:')
     let dateData = {
-        date: itemData.provDate,
         totalCases,
         totalDeaths,
-        maybeValid: false,
+        maybeValid: true,
         parsed: true
     }
     console.log("Date:",itemData.provDate)
@@ -65,15 +64,24 @@ function updateDaysGood(itemData) {
         console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
         console.log("date in func",itemData.provDate)
         if (rows.length === 0) {
+            dateData.date = itemData.provDate,
             knex("dates ").insert(dateData)
+                .then(id => {
+                    console.log("Inserted into Dates Table")
+                })
+                .catch(err => {
+                    console.log("Attempted duplicate insert?",err)
+                })
+        }else{
+            knex("dates ")
+            .update(dateData)
+            .where('date',"=",itemData.provDate)
                 .then(id => {
                     console.log("Updated Dates Table")
                 })
                 .catch(err => {
-                    console.log("Attempted duplicate insert")
+                    console.log("Attempted duplicate update?",err)
                 })
-        }else{
-            console.log("Length too long")
         }
     });
     }
@@ -97,12 +105,15 @@ rp(url)
         let parsed = false
         knex('dates').where({date}).then(rows => {
             console.log("Row Count:", rows.length);
+            console.log("Row:", rows);
             if (rows.length > 0 && rows[0].parsed) {
                 parsed = true;
                 console.log("Skipping");
-            } else if (rows.length > 0 && rows[0].maybeValid) {
-                // Maybe the format is all wrong. Parse another site/source?
-            } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
+            }
+            // else if (rows.length > 0 && rows[0].maybeValid) {
+            //     // Maybe the format is all wrong. Parse another site/source?
+            // }
+            else if ((rows.length === 0)  || rows[0].maybeValid || (rows.length > 0 && !rows[0].error)) {
                 [totalCases, totalDeaths] = (templines[5].trim().split("."))
 
                 totalCases = getNumber(totalCases)
@@ -167,7 +178,7 @@ rp(url)
                                         if (count === 9){
                                             let dateData = {
                                                 totalRecoveries:recoveryNumberTotal,
-                                                maybeValid: true,
+                                                maybeValid: false,
                                                 parsed: true
                                             };
 
@@ -177,9 +188,9 @@ rp(url)
                                                 .then(value => {
                                                     console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
                                                     console.log("Value",value)
+                                                    dateData.date = itemData.provDate;
                                                     if (value === 0){
-                                                        dateData.date = itemData.provDate;
-                                                        dateData.parsed = false;
+                                                        dateData.parsed = true;
                                                         knex('dates')
                                                             .insert(dateData)
                                                             .then(value1 => {
@@ -187,6 +198,9 @@ rp(url)
                                                             .catch(reason => {
                                                                 console.log("Error on Recovery Dates Insert")
                                                             })
+                                                    }
+                                                    else{
+                                                        console.log("Should we do something here?")
                                                     }
 
                                                 })
@@ -203,37 +217,36 @@ rp(url)
                                         console.log("Error Updating Province Recovered", reason)
                                         valid = false;
                                     })
-                                //     .finally(() => {
-                                //     count+=1;
-                                //     if (count === 9){
-                                //         let dateData = {
-                                //             totalRecoveries:recoveryNumberTotal,
-                                //             maybeValid: true,
-                                //             parsed: true
-                                //         };
-                                //
-                                //         knex('dates')
-                                //             .update(dateData)
-                                //             .where('date','=',itemData.provDate)
-                                //             .then(value => {
-                                //                 console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
-                                //                 console.log("Value",value)
-                                //                 if (value === 0){
-                                //                     dateData.date = itemData.provDate;
-                                //                     dateData.parsed = false;
-                                //                     knex('dates')
-                                //                         .insert(dateData)
-                                //                         .then(value1 => {
-                                //                             console.log("Value1",value1)
-                                //                         })
-                                //                         .catch(reason => {
-                                //                             console.log("Error on Recovery Dates Insert")
-                                //                         })
-                                //                 }
-                                //
-                                //             })
-                                //     }
-                                // })
+                                    .finally(() => {
+                                    count+=1;
+                                    if (count === 9){
+                                        let dateData = {
+                                            totalRecoveries:recoveryNumberTotal,
+                                            maybeValid: false,
+                                            parsed: true
+                                        };
+
+                                        knex('dates')
+                                            .update(dateData)
+                                            .where('date','=',itemData.provDate)
+                                            .then(value => {
+                                                console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
+                                                console.log("Value",value)
+                                                dateData.date = itemData.provDate;
+                                                if (value === 0){
+                                                    dateData.parsed = true;
+                                                    knex('dates')
+                                                        .insert(dateData)
+                                                        .then(value1 => {
+                                                            console.log("Value1",value1)
+                                                        })
+                                                        .catch(reason => {
+                                                            console.log("Error on Recovery Dates Insert")
+                                                        })
+                                                }
+                                            })
+                                    }
+                                })
                             }
                         })
                         .catch(reason => {
@@ -286,7 +299,6 @@ rp(url)
                                         knex(tableName).insert(itemData)
                                             .then(value => {
                                                 if (index === 9) {
-
                                                     updateDaysGood(itemData);
                                                 }
                                             })
@@ -295,9 +307,9 @@ rp(url)
                                             })
                                     } else {
                                         console.log("Already in.")
-                                        // if (index === 9) {
-                                        //     updateDaysGood(itemData);
-                                        // }
+                                        if (index === 9) {
+                                            updateDaysGood(itemData);
+                                        }
                                     }
                                 })
                                 .catch(reason => {

@@ -47,77 +47,99 @@ rp(url)
 
         // Parses the 'head' of the page for Case and Death Numbers
         let templines = soupHead.prettify().trim().split(/<\/?\w*\s?\d?[\s\S]?>\n/);
-        let date = templines[0].split('Updated')[1].trim(),
-            intString = "";
-        [totalCases, totalDeaths] = (templines[5].trim().split("."))
+        let date = templines[0].split('Updated')[1].trim();
+        let parsed = false
+        knex('dates').where({date}).then(rows => {
+            console.log("Row Count:", rows.length);
+            if (rows.length > 0 && rows[0].parsed) {
+                parsed = true;
+                return true
+            } else if (rows.length > 0 && rows[0].maybeValid) {
+                // Maybe the format is all wrong. Parse another site/source?
+            } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
+                [totalCases, totalDeaths] = (templines[5].trim().split("."))
 
-        totalCases = getNumber(totalCases)
-        totalDeaths = getNumber(totalDeaths)
+                totalCases = getNumber(totalCases)
+                totalDeaths = getNumber(totalDeaths)
 
-        console.log(`${date}: Cases:${totalCases}, Deaths:${totalDeaths}`)
-        // #######################################################################################
+                console.log(`${date}: Cases:${totalCases}, Deaths:${totalDeaths}`)
+                // #######################################################################################
 
-        // TODO 1: Parse info on Recoveries by Province
-        let recoveriesLines = soupBody.find('p').getText().split(":"),
-            recoveryDate = recoveriesLines[0].match(/\d+.*/),
-            recoveryNumberTotal = getNumber(recoveriesLines[1]);
-        console.log(`Total Recovery:${recoveryNumberTotal}\n`)
+                // TODO 1: Parse info on Recoveries by Province
+                let recoveriesLines = soupBody.find('p').getText().split(":"),
+                    recoveryDate = recoveriesLines[0].match(/\d+.*/),
+                    recoveryNumberTotal = getNumber(recoveriesLines[1]);
+                console.log(`Total Recovery:${recoveryNumberTotal}\n`)
 
-        let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
-        provinceRecoveries[provinceRecoveries.length-1].length === 0? provinceRecoveries.pop():provinceRecoveries // Removes trailing blank index.
-        console.log(`Recovery Counts (${recoveryDate}):`)
-        provinceRecoveries.forEach(line => {
-            let recoverCount,provinceName;
-            [provinceName, recoverCount] = line.trim().split("(")
-            provinceName = provinceName.trim();
-             const tempProvince = new Province(provinceName)
-            tempProvince.recovered=recoverCount;
-            tempProvince.date=recoveryDate;
-            currentProvincesRecovery[provinceName] = tempProvince;
-            // console.log(currentProvincesRecovery[provinceName])
-            console.log(`${provinceName}: ${recoverCount}`);
-        })
-        // TODO 2: Parse info on New Cases by Province
-        console.log('\nCase Counts:')
-        let p = soupBody.find('p'),
-            breakdown = false,
-            caseCount = 0,
-            deathCount = 0,
-            provinceName = '';
+                let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
+                provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
+                console.log(`Recovery Counts (${recoveryDate}):`)
+                provinceRecoveries.forEach(line => {
+                    let recoverCount, provinceName;
+                    [provinceName, recoverCount] = line.trim().split("(")
+                    provinceName = provinceName.trim();
+                    const tempProvince = new Province(provinceName)
+                    tempProvince.recovered = recoverCount;
+                    tempProvince.date = recoveryDate;
+                    currentProvincesRecovery[provinceName] = tempProvince;
+                    // console.log(currentProvincesRecovery[provinceName])
+                    console.log(`${provinceName}: ${recoverCount}`);
+                })
+                // TODO 2: Parse info on New Cases by Province
+                console.log('\nCase Counts:')
+                let p = soupBody.find('p'),
+                    breakdown = false,
+                    caseCount = 0,
+                    deathCount = 0,
+                    provinceName = '';
 
-        while (!breakdown){
-            p = p.findNextSibling('p');
-            if (p.text === 'PROVINCIAL BREAKDOWN:'){
-                breakdown = true;
-                p = p.findNextSibling('p');
-                for (let index=0;index<10;index++){
-                    let vars = p.text.replace(/&nbsp;/g,'  ').split("-")
+                while (!breakdown) {
                     p = p.findNextSibling('p');
-                    provinceName = vars[1].trim() == "KwaZulu"? "KwaZulu-Natal": vars[1].trim();
-                    caseCount = vars[0].trim();
-                    deathCount = vars.length === 3 ? vars[2].split('  ')[0].trim()
-                        : vars.length === 4 ? vars[3].split('  ')[0].trim()
-                            : 0;
-                    let tempProv = new Province(provinceName,caseCount);
-                    tempProv.totalDead = deathCount;
-                    tempProv.date = date;
-                    console.log(`${provinceName} - Cases: ${tempProv.sick}, Dead: ${tempProv.totalDead}`)
-                    currentProvincesCasesDeaths[provinceName] = tempProv;
-                }
-            }
-        }
+                    if (p.text === 'PROVINCIAL BREAKDOWN:') {
+                        breakdown = true;
+                        p = p.findNextSibling('p');
+                        for (let index = 0; index < 10; index++) {
+                            let vars = p.text.replace(/&nbsp;/g, '  ').split("-")
+                            p = p.findNextSibling('p');
+                            provinceName = vars[1].trim() == "KwaZulu" ? "KwaZulu-Natal" : vars[1].trim();
+                            caseCount = vars[0].trim();
+                            deathCount = vars.length === 3 ? vars[2].split('  ')[0].trim()
+                                : vars.length === 4 ? vars[3].split('  ')[0].trim()
+                                    : 0;
+                            let tempProv = new Province(provinceName, caseCount);
+                            tempProv.totalDead = deathCount;
+                            tempProv.date = date;
+                            console.log(`${provinceName} - Cases: ${tempProv.sick}, Dead: ${tempProv.totalDead}`)
+                            currentProvincesCasesDeaths[provinceName] = tempProv;
 
-        let tableName = 'user_meta';
-        let conflictTarget = 'login';
-        let itemData = {
-            login: 'plurch',
-            user_id: 3332519
-        };
-        console.log("Swag 2")
+                            // TODO Build object to upload to ProvinceDays using insertIgnore funct below
+                            let tableName = 'provinceDays';
+                            let itemData = {
+                                provinceName,
+                                date,
+                                caseCount,
+                                deathCount
+                            };
+                            insertIgnore(tableName,itemData)
+                                .then(days =>{
+                                    //console.log(days)
+                                })
+                                .catch(err=>{
+                                    console.log("UPSERT ITEMS ERROR\n",err)
+                                })
+                        }
+                    }
+                }
+
+            }
+
+
+            console.log("Swag 2")
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
     })
-    .catch(function (err) {
-        console.log(err)
-    });
 
 function getNumber(line){
     let intString = "";
@@ -135,18 +157,22 @@ function getNumber(line){
  * @param {Object} itemData - a hash of properties to be inserted/updated into the row
  * @returns {Promise} - A Promise which resolves to the inserted/updated row
  */
-function upsertItems(tableName, conflictTarget, itemData) {
-    let firstObjectIfArray = Array.isArray(itemData) ? itemData[0] : itemData;
-    let exclusions = Object.keys(firstObjectIfArray)
-        .filter(c => c !== conflictTarget)
-        .map(c => knex.raw('?? = EXCLUDED.??', [c, c]).toString())
-        .join(",\n");
+function insertIgnore(tableName, itemData) {
 
     let insertString = knex(tableName).insert(itemData).toString();
     let conflictString = knex.raw(` ON CONFLICT DO NOTHING RETURNING *;`).toString();
     let query = (insertString + conflictString).replace(/\?/g, '\\?');
 
     return knex.raw(query)
-        .on('query', data => console.log('Knex: ' + data.sql))
+        .then(result => result.rows);
+};
+
+function insertUpdate(tableName, itemData) {
+
+    let insertString = knex(tableName).insert(itemData).toString();
+    let conflictString = knex.raw(` ON CONFLICT DO NOTHING RETURNING *;`).toString();
+    let query = (insertString + conflictString).replace(/\?/g, '\\?');
+
+    return knex.raw(query)
         .then(result => result.rows);
 };

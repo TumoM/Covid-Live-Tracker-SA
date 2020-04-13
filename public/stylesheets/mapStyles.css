@@ -4,12 +4,15 @@
 }
 
 .land {
-	fill: #b9b9b9;
+	fill: #cbd9db;
 	stroke: white;
 	stroke-width: 1.5;
 	stroke-miterlimit: 4;
 }
 
-.body{
-    background-color: coral;
-}
+/* chloropleth map */
+.colour0 {fill: #b9b9b9;}
+.colour1 {fill: #ff969b;}
+.colour2 {fill: #ce5263;}
+.colour3 {fill: #b11717;}
+.colour4 {fill: #47000a;}

@@ -1,0 +1,15 @@
+.contentContainer{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.land {
+	fill: #b9b9b9;
+	stroke: white;
+	stroke-width: 1.5;
+	stroke-miterlimit: 4;
+}
+
+.body{
+    background-color: coral;
+}

@@ -267,6 +267,7 @@ rp(url)
                                                 console.log("Unknown error:",reason)
                                           ***REMOVED***)
                                       ***REMOVED*** catch (e) {
+                                            console.log("ANOOOOTHER ERRROR?:",e)
                                             knex("dates ").insert({date: d, parsed: false***REMOVED***)
                                                 .then(id => {
                                                     //console.log(id)
@@ -274,7 +275,7 @@ rp(url)
                                                 .catch(err => {
                                                     console.log("Day Error 2")
                                               ***REMOVED***)
-                                            throw 'No post?\n'
+                                            throw 'No posts?\n'
                                       ***REMOVED***
                                   ***REMOVED*** catch (e) {
                                         console.log("SOME ERROR:",e)

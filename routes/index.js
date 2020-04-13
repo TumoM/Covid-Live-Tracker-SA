@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get("/", function (req, res) {
 
-    res.send("Hello");
+    res.render("index",{data:"Hello, Sir"});
 })
 
 

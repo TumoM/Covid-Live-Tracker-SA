@@ -5,7 +5,7 @@ function DbSetup() {
       host : '127.0.0.1',
       user : 'test_user',
       password : 'temp_pass',
-      database : 'covid-tracker-sa'
+      database : 'covid-tracker-sa2'
   ***REMOVED***
 ***REMOVED***);
   knex.schema.hasTable('provinceDays').then((exists) => {
@@ -14,7 +14,7 @@ function DbSetup() {
         t.increments('id').primary().notNullable();
         t.string('provinceName').notNullable();
         t.date('date').notNullable();
-        t.integer('sickCount').defaultTo(null);
+        t.integer('caseCount').defaultTo(null);
         t.integer('deathCount').defaultTo(null);
         t.integer('recovered').defaultTo(null);
         t.integer('population').defaultTo(null);
@@ -28,20 +28,20 @@ function DbSetup() {
   ***REMOVED***
 ***REMOVED***);
 
-  knex.schema.hasTable('sickDates').then((exists) => {
+  knex.schema.hasTable('caseDates').then((exists) => {
     if (!exists) {
-      return knex.schema.createTable('sickDates', t => {
+      return knex.schema.createTable('caseDates', t => {
         t.increments('id').primary().notNullable();
         t.integer('provinceId').notNullable();
         t.date('sickDate').notNullable();
         t.integer('sickCount').defaultTo(0);
         t.unique(['provinceId','sickDate'])
-        t.foreign('provinceId').references('id').inTable('provinces');
-        console.log("sickDates table CREATED")
+        t.foreign('provinceId').references('id').inTable('provinceDays');
+        console.log("caseDates table CREATED")
     ***REMOVED***);
   ***REMOVED***
     else {
-      console.log("sickDates table exists")
+      console.log("caseDates table exists")
   ***REMOVED***
 ***REMOVED***);
 
@@ -55,7 +55,7 @@ function DbSetup() {
         t.integer('deathMenCount').defaultTo(0);
         t.integer('deathWomenCount').defaultTo(0);
         t.unique(['provinceId','deathDate'])
-        t.foreign('provinceId').references('id').inTable('provinces');
+        t.foreign('provinceId').references('id').inTable('provinceDays');
         console.log("deathDates table CREATED")
     ***REMOVED***);
   ***REMOVED***
@@ -74,7 +74,7 @@ function DbSetup() {
         t.date('deathDate').notNullable();
         t.integer('age').defaultTo(null);
         t.unique(['provinceName','deathDateId','deathDate','age','sex'])
-        t.foreign('deathDateId').references('id').inTable('provinces');
+        t.foreign('deathDateId').references('id').inTable('provinceDays');
         console.log("deathPersons table CREATED")
     ***REMOVED***);
   ***REMOVED***
@@ -90,6 +90,7 @@ function DbSetup() {
         t.integer('totalCases').defaultTo(null);
         t.integer('totalDeaths').defaultTo(null);
         t.integer('totalRecoveries').defaultTo(null);
+        t.integer('totalTests').defaultTo(null);
         t.boolean('parsed').defaultTo(false);
         t.boolean('maybeValid').defaultTo(true);
         t.boolean('error').defaultTo(false);

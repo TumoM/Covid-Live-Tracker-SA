@@ -63,7 +63,7 @@ function updateDaysGood(itemData) {
     .where({date:itemData.provDate***REMOVED***)
     .then(rows => {
         console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
-        console.log("date",itemData.provDate)
+        console.log("date in func",itemData.provDate)
         if (rows.length === 0) {
             knex("dates ").insert(dateData)
                 .then(id => {
@@ -162,6 +162,36 @@ rp(url)
                                     .catch(reason => {
                                         console.log("Error inserting Province Recovered", reason)
                                   ***REMOVED***)
+                                    .finally(() => {
+                                        count+=1;
+                                        if (count === 9){
+                                            let dateData = {
+                                                totalRecoveries:recoveryNumberTotal,
+                                                maybeValid: true,
+                                                parsed: true
+                                          ***REMOVED***;
+
+                                            knex('dates')
+                                                .update(dateData)
+                                                .where('date','=',itemData.provDate)
+                                                .then(value => {
+                                                    console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`)
+                                                    console.log("Value",value)
+                                                    if (value === 0){
+                                                        dateData.date = itemData.provDate;
+                                                        dateData.parsed = false;
+                                                        knex('dates')
+                                                            .insert(dateData)
+                                                            .then(value1 => {
+                                                          ***REMOVED***)
+                                                            .catch(reason => {
+                                                                console.log("Error on Recovery Dates Insert")
+                                                          ***REMOVED***)
+                                                  ***REMOVED***
+
+                                              ***REMOVED***)
+                                      ***REMOVED***
+                                  ***REMOVED***)
                           ***REMOVED*** else {
                                 let valid = true;
                                 knex(tableName).update({recovered: recoveryNumberTotal***REMOVED***).where({provDate: recoveryDate***REMOVED***)
@@ -172,23 +202,38 @@ rp(url)
                                     .catch(reason => {
                                         console.log("Error Updating Province Recovered", reason)
                                         valid = false;
-                                  ***REMOVED***).finally(() => {
-                                    count+=1;
-                                    if (count === 9){
-                                        let dateData = {
-                                            totalRecoveries:recoveryNumberTotal,
-                                            maybeValid: true,
-                                            parsed: true
-                                      ***REMOVED***;
-
-                                        knex('dates')
-                                            .update(dateData)
-                                            .where('date','=',itemData.provDate)
-                                            .then(value => {
-                                                console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`)
-                                          ***REMOVED***)
-                                  ***REMOVED***
-                              ***REMOVED***)
+                                  ***REMOVED***)
+                                //     .finally(() => {
+                                //     count+=1;
+                                //     if (count === 9){
+                                //         let dateData = {
+                                //             totalRecoveries:recoveryNumberTotal,
+                                //             maybeValid: true,
+                                //             parsed: true
+                                //       ***REMOVED***;
+                                //
+                                //         knex('dates')
+                                //             .update(dateData)
+                                //             .where('date','=',itemData.provDate)
+                                //             .then(value => {
+                                //                 console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`)
+                                //                 console.log("Value",value)
+                                //                 if (value === 0){
+                                //                     dateData.date = itemData.provDate;
+                                //                     dateData.parsed = false;
+                                //                     knex('dates')
+                                //                         .insert(dateData)
+                                //                         .then(value1 => {
+                                //                             console.log("Value1",value1)
+                                //                       ***REMOVED***)
+                                //                         .catch(reason => {
+                                //                             console.log("Error on Recovery Dates Insert")
+                                //                       ***REMOVED***)
+                                //               ***REMOVED***
+                                //
+                                //           ***REMOVED***)
+                                //   ***REMOVED***
+                                // ***REMOVED***)
                           ***REMOVED***
                       ***REMOVED***)
                         .catch(reason => {

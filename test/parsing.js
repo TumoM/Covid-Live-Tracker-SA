@@ -44,6 +44,7 @@ rp(url)
         var links = []
 
         entries.map((entry) => {
+            let badString;
             // return entry.getAttribute("href").match(linkRegex)
             if (entry.getAttribute("href").match(linkRegex)) {
                 // console.log("Found One!\n", entry.text);
@@ -63,7 +64,7 @@ rp(url)
                             .then(rows => {
                                 console.log("Row Count:", rows.length);
                                 if (rows.length > 0 && rows[0].parsed) {
-                                    return true
+
                               ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
                                     // Maybe the format is all wrong. Parse another site/source?
                               ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
@@ -165,7 +166,7 @@ rp(url)
                                                 const date = value.date;
 
                                                 let testNum = 0;
-                                                let badString = "";
+                                                badString = "";
                                                 tests[0].text
                                                     .match(/\s((\d+\s+)*\d+)/)[0]
                                                     .trim()
@@ -178,11 +179,11 @@ rp(url)
                                                     .insert({
                                                             provinceName: key, provDate:date,
                                                             caseCount: value.sick, deathCount: value.totalDead,
-                                                            testCount: parseInt(badString)
+
                                             ***REMOVED*****REMOVED*****REMOVED***
-                                                        ['id', 'provinceName'])
-                                                    .then((id, other) => {
-                                                        let provinceId = id[0]['id'];
+                                                        'id')
+                                                    .then((id) => {
+                                                        let provinceId = id[0];
                                                         // Todo Inserts into caseDates table
                                                         knex("caseDates")
                                                             .insert({
@@ -202,7 +203,7 @@ rp(url)
                                                                 deathMenCount: value.men,
                                                                 deathWomenCount: value.women
                                                 ***REMOVED*****REMOVED*****REMOVED*** ['id']).then(id => {
-                                                            let deathDateId = id[0]['id'];
+                                                            let deathDateId = id[0];
                                                             let parsedValues = [];
                                                             value.dead.forEach(deathDetails => {
                                                                 parsedValues.push({
@@ -221,23 +222,40 @@ rp(url)
                                                       ***REMOVED***).catch(err => {
                                                             console.log("Error with deathDates:\n", err)
                                                       ***REMOVED***)
-                                                  ***REMOVED***).catch(err => {
-                                                    console.log("ERROR: Province Day already inserted",err)
+                                                  ***REMOVED***)
+                                                    .catch(err => {
+                                                    console.log("Passing: Province Day already inserted")
                                               ***REMOVED***);
 
                                           ***REMOVED***
 
 
                                             console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
-
-                                            knex("dates ").insert({date: d, parsed: true***REMOVED***)
-                                                .then(id => {
-                                                    //console.log(id)
-                                              ***REMOVED***)
-                                                .catch(err => {
-                                                    console.log("Day Error 1")
-                                              ***REMOVED***)
-                                            console.log("\n");
+                                            // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`)
+                                            let parsedDate = d.toLocaleDateString().split("/")
+                                            parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`
+                                            knex('dates')
+                                                .where({date:parsedDate***REMOVED***)
+                                                .then(value => {
+                                                    if (value.length !== 0){
+                                                        knex("dates ")
+                                                        .insert({
+                                                            date: parsedDate,
+                                                            parsed: true,
+                                                            totalTests: parseInt(badString),
+                                                            maybeValid: false
+                                                      ***REMOVED***)
+                                                            .then(id => {
+                                                                //console.log(id)
+                                                          ***REMOVED***)
+                                                            .catch(err => {
+                                                                console.log("Day Error 1",err)
+                                                          ***REMOVED***)
+                                                        console.log("\n");
+                                                  ***REMOVED***
+                                              ***REMOVED***).catch(reason => {
+                                                console.log("Unknown error:",reason)
+                                          ***REMOVED***)
                                       ***REMOVED*** catch (e) {
                                             knex("dates ").insert({date: d, parsed: false***REMOVED***)
                                                 .then(id => {
@@ -261,7 +279,7 @@ rp(url)
                                                 //console.log(id)
                                           ***REMOVED***)
                                             .catch(err => {
-                                                console.log("Ignoring duplicates")
+                                                console.log("Ignoring duplicates",err)
                                           ***REMOVED***)
                                   ***REMOVED***
                               ***REMOVED***

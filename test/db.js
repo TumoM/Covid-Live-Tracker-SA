@@ -86,7 +86,7 @@ function DbSetup() {
   knex.schema.hasTable('dates').then((exists) => {
     if (!exists) {
       return knex.schema.createTable('dates', t => {
-        t.date('deathDate').notNullable().primary().unique();
+        t.date('date').notNullable().primary().unique();
         t.boolean('parsed').defaultTo(false);
         t.boolean('maybeValid').defaultTo(true);
         t.boolean('error').defaultTo(false);

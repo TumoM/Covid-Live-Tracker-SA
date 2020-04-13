@@ -8,9 +8,9 @@ function DbSetup() {
       database : 'covid-tracker-sa'
     }
   });
-  knex.schema.hasTable('provinces').then((exists) => {
+  knex.schema.hasTable('provinceDays').then((exists) => {
     if (!exists) {
-      return knex.schema.createTable('provinces', t => {
+      return knex.schema.createTable('provinceDays', t => {
         t.increments('id').primary().notNullable();
         t.string('provinceName').notNullable();
         t.date('date').notNullable();
@@ -20,11 +20,11 @@ function DbSetup() {
         t.integer('population').defaultTo(null);
         t.integer("testCount").defaultTo(null)
         t.unique(['provinceName','date'])
-        console.log("Provinces table CREATED")
+        console.log("ProvinceDays table CREATED")
       });
     }
     else {
-      console.log("Provinces table exists")
+      console.log("ProvinceDays table exists")
     }
   });
 
@@ -86,7 +86,10 @@ function DbSetup() {
   knex.schema.hasTable('dates').then((exists) => {
     if (!exists) {
       return knex.schema.createTable('dates', t => {
-        t.date('deathDate').notNullable().primary().unique();
+        t.date('date').notNullable().primary().unique();
+        t.integer('totalCases').defaultTo(null);
+        t.integer('totalDeaths').defaultTo(null);
+        t.integer('totalRecoveries').defaultTo(null);
         t.boolean('parsed').defaultTo(false);
         t.boolean('maybeValid').defaultTo(true);
         t.boolean('error').defaultTo(false);

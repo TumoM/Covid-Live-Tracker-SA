@@ -3,7 +3,7 @@ const HTMLParser = require('node-html-parser'),
     Province = require("../models/provinceModel"),
     Death = require("../models/deathModel"),
     Day = require("../models/dayModel"),
-    DbSetup = require("../test/db");
+    DbSetup = require("../test/db24");
 const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
 const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\//
 const regex = RegExp('.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\/', 'g');
@@ -14,7 +14,7 @@ const knex = require('knex')({
         host: '127.0.0.1',
         user: 'test_user',
         password: 'temp_pass',
-        database: 'covid-tracker-sa'
+        database: 'covid-tracker-sa2'
   ***REMOVED***
 ***REMOVED***);
 
@@ -174,25 +174,25 @@ rp(url)
                                                         badString += word
                                                   ***REMOVED***)
                                                 // Inserts into Provinces table
-                                                knex("provinces")
+                                                knex("provinceDays")
                                                     .insert({
-                                                            provinceName: key, date,
-                                                            sickCount: value.sick, deathCount: value.totalDead,
+                                                            provinceName: key, provDate:date,
+                                                            caseCount: value.sick, deathCount: value.totalDead,
                                                             testCount: parseInt(badString)
                                             ***REMOVED*****REMOVED*****REMOVED***
                                                         ['id', 'provinceName'])
                                                     .then((id, other) => {
                                                         let provinceId = id[0]['id'];
-                                                        // Todo Inserts into sickDates table
-                                                        knex("sickDates")
+                                                        // Todo Inserts into caseDates table
+                                                        knex("caseDates")
                                                             .insert({
-                                                                provinceId, sickDate: date,
-                                                                sickCount: value.sick
+                                                                provinceId, caseDate: date,
+                                                                caseCount: value.sick
                                                 ***REMOVED*****REMOVED*****REMOVED*** "id")
                                                             .then(id => {
                                                                 // console.log("ID:",id);
                                                           ***REMOVED***).catch(err => {
-                                                            console.log("Error with sickDates\n", err);
+                                                            console.log("Error with caseDates\n", err);
                                                       ***REMOVED***)
                                                         knex("deathDates")
                                                             .insert({
@@ -222,7 +222,7 @@ rp(url)
                                                             console.log("Error with deathDates:\n", err)
                                                       ***REMOVED***)
                                                   ***REMOVED***).catch(err => {
-                                                    console.log("ERROR: Province Day already inserted")
+                                                    console.log("ERROR: Province Day already inserted",err)
                                               ***REMOVED***);
 
                                           ***REMOVED***

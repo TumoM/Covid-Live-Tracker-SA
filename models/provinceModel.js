@@ -9,15 +9,15 @@ class Province {
   women; // int
   tests; int
 
-  constructor(name, sick=0, dead=[], recovered=0) {
+  constructor(name, sick=0, dead=[],totalDead=0, recovered=0) {
     this.name = name;
-    this.sick = sick;
+    this.sick = parseInt(sick);
     this.dead = [];
-    this.recovered = recovered;
+    this.recovered = parseInt(recovered);
     this.date = null;
     this.men = 0; // Dead
     this.women = 0; // Dead
-    this.totalDead = 0; // Dead
+    this.totalDead = totalDead; // Dead
     this.tests = 0;
 ***REMOVED***
 

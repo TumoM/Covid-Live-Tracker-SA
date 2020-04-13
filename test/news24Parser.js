@@ -67,7 +67,7 @@ rp(url)
 
                 // TODO 1: Parse info on Recoveries by Province
                 let recoveriesLines = soupBody.find('p').getText().split(":"),
-                    recoveryDate = recoveriesLines[0].match(/\d+.*/),
+                    recoveryDate = recoveriesLines[0].match(/\d+.*/)[0],
                     recoveryNumberTotal = getNumber(recoveriesLines[1]);
                 console.log(`Total Recovery:${recoveryNumberTotal}\n`)
 
@@ -75,7 +75,7 @@ rp(url)
                 provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
                 console.log(`Recovery Counts (${recoveryDate}):`)
                 provinceRecoveries.forEach(line => {
-                    let recoverCount, provinceName;
+                    let  recoverCount, provinceName;
                     [provinceName, recoverCount] = line.trim().split("(")
                     provinceName = provinceName.trim();
                     const tempProvince = new Province(provinceName)
@@ -84,6 +84,40 @@ rp(url)
                     currentProvincesRecovery[provinceName] = tempProvince;
                     // console.log(currentProvincesRecovery[provinceName])
                     console.log(`${provinceName}: ${recoverCount}`);
+                    let tableName = 'provinceDays';
+                    let tempDate = recoveryDate.split(" ");
+                    const dateFormatted = new Date(recoveryDate);
+                    let newTemp = dateFormatted.toLocaleDateString().split("/")
+                    let itemData = {
+                        provinceName,
+                        provDate:`${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`,
+                        recovered:recoverCount
+                    };
+
+                    knex(tableName).select().where({provDate:itemData.provDate,provinceName})
+                        .then(rows => {
+                            if (rows.length === 0){
+                                knex(tableName).insert(itemData)
+                                    .then(value => {
+                                        console.log("Recovered Inserted")
+                                    })
+                                    .catch(reason => {
+                                        console.log("Error inserting Province Recovered",reason)
+                                    })
+                            }
+                            else{
+                                knex(tableName).update({recovered:recoveryNumberTotal}).where({provDate:recoveryDate})
+                                    .then(value => {
+                                        console.log("Recovered Updated")
+                                    })
+                                    .catch(reason => {
+                                        console.log("Error Updating Province Recovered",reason)
+                                    })
+                            }
+                        })
+                        .catch(reason => {
+                            console.log("Duplicate Province? ",reason)
+                        })
                 })
                 // TODO 2: Parse info on New Cases by Province
                 console.log('\nCase Counts:')
@@ -114,18 +148,28 @@ rp(url)
 
                             // TODO Build object to upload to ProvinceDays using insertIgnore funct below
                             let tableName = 'provinceDays';
+                            let tempDate = date.split(" ");
+                            const dateFormatted = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
                             let itemData = {
                                 provinceName,
-                                date,
+                                provDate:dateFormatted.toISOString().split("T")[0],
                                 caseCount,
                                 deathCount
                             };
-                            insertIgnore(tableName,itemData)
-                                .then(days =>{
-                                    //console.log(days)
-                                })
-                                .catch(err=>{
-                                    console.log("UPSERT ITEMS ERROR\n",err)
+                            knex(tableName).where({provDate:dateFormatted.toISOString().split("T")[0],provinceName})
+                            .then(rows => {
+                                if (rows.length === 0){
+                                    knex(tableName).insert(itemData)
+                                    .catch(reason => {
+                                        console.log("Error inserting Province ",reason)
+                                    })
+                                }
+                                else{
+                                    console.log("Already in.")
+                                }
+                            })
+                                .catch(reason => {
+                                    console.log("Duplicate Province? ",reason)
                                 })
                         }
                     }
@@ -149,30 +193,3 @@ function getNumber(line){
     })
     return (+intString)
 }
-
-/**
- * Perform an "Upsert" using the "INSERT ... ON CONFLICT ... " syntax in PostgreSQL 9.5
- * @param {string} tableName - The name of the database table
- * @param {string} conflictTarget - The column in the table which has a unique index constraint
- * @param {Object} itemData - a hash of properties to be inserted/updated into the row
- * @returns {Promise} - A Promise which resolves to the inserted/updated row
- */
-function insertIgnore(tableName, itemData) {
-
-    let insertString = knex(tableName).insert(itemData).toString();
-    let conflictString = knex.raw(` ON CONFLICT DO NOTHING RETURNING *;`).toString();
-    let query = (insertString + conflictString).replace(/\?/g, '\\?');
-
-    return knex.raw(query)
-        .then(result => result.rows);
-};
-
-function insertUpdate(tableName, itemData) {
-
-    let insertString = knex(tableName).insert(itemData).toString();
-    let conflictString = knex.raw(` ON CONFLICT DO NOTHING RETURNING *;`).toString();
-    let query = (insertString + conflictString).replace(/\?/g, '\\?');
-
-    return knex.raw(query)
-        .then(result => result.rows);
-};

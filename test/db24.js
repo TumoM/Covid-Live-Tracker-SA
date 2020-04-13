@@ -13,13 +13,13 @@ function DbSetup() {
       return knex.schema.createTable('provinceDays', t => {
         t.increments('id').primary().notNullable();
         t.string('provinceName').notNullable();
-        t.date('date').notNullable();
+        t.date('provDate').notNullable();
         t.integer('caseCount').defaultTo(null);
         t.integer('deathCount').defaultTo(null);
         t.integer('recovered').defaultTo(null);
         t.integer('population').defaultTo(null);
         t.integer("testCount").defaultTo(null)
-        t.unique(['provinceName','date'])
+        t.unique(['provinceName','provDate'])
         console.log("ProvinceDays table CREATED")
       });
     }
@@ -33,9 +33,9 @@ function DbSetup() {
       return knex.schema.createTable('caseDates', t => {
         t.increments('id').primary().notNullable();
         t.integer('provinceId').notNullable();
-        t.date('sickDate').notNullable();
-        t.integer('sickCount').defaultTo(0);
-        t.unique(['provinceId','sickDate'])
+        t.date('caseDate').notNullable();
+        t.integer('caseCount').defaultTo(0);
+        t.unique(['provinceId','caseDate'])
         t.foreign('provinceId').references('id').inTable('provinceDays');
         console.log("caseDates table CREATED")
       });

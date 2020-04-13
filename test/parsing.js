@@ -224,7 +224,7 @@ rp(url)
                                                         })
                                                     })
                                                     .catch(err => {
-                                                    console.log("Passing: Province Day already inserted")
+                                                    // console.log("Passing: Province Day already inserted")
                                                 });
 
                                             }
@@ -234,10 +234,12 @@ rp(url)
                                             // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`)
                                             let parsedDate = d.toLocaleDateString().split("/")
                                             parsedDate = `${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`
+                                            console.log("Parsed Date:",parsedDate)
                                             knex('dates')
-                                                .where({date:parsedDate})
+                                                .select()
+                                                .where('date','=',`${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`)
                                                 .then(value => {
-                                                    if (value.length !== 0){
+                                                    if (value.length === 0){
                                                         knex("dates ")
                                                         .insert({
                                                             date: parsedDate,
@@ -245,10 +247,10 @@ rp(url)
                                                             totalTests: parseInt(badString),
                                                             maybeValid: false
                                                         })
-                                                            .then(id => {
-                                                                //console.log(id)
+                                                        .then(id => {
+                                                                console.log("Inserted Dates:",parsedDate)
                                                             })
-                                                            .catch(err => {
+                                                        .catch(err => {
                                                                 console.log("Day Error 1",err)
                                                             })
                                                         console.log("\n");
@@ -279,7 +281,7 @@ rp(url)
                                                 //console.log(id)
                                             })
                                             .catch(err => {
-                                                console.log("Ignoring duplicates",err)
+                                                console.log("Ignoring duplicates 1",err)
                                             })
                                     }
                                 }

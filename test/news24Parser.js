@@ -63,7 +63,7 @@ function updateDaysGood(itemData) {
     .where({date:itemData.provDate})
     .then(rows => {
         console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
-        console.log("date",itemData.provDate)
+        console.log("date in func",itemData.provDate)
         if (rows.length === 0) {
             knex("dates ").insert(dateData)
                 .then(id => {
@@ -162,6 +162,36 @@ rp(url)
                                     .catch(reason => {
                                         console.log("Error inserting Province Recovered", reason)
                                     })
+                                    .finally(() => {
+                                        count+=1;
+                                        if (count === 9){
+                                            let dateData = {
+                                                totalRecoveries:recoveryNumberTotal,
+                                                maybeValid: true,
+                                                parsed: true
+                                            };
+
+                                            knex('dates')
+                                                .update(dateData)
+                                                .where('date','=',itemData.provDate)
+                                                .then(value => {
+                                                    console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
+                                                    console.log("Value",value)
+                                                    if (value === 0){
+                                                        dateData.date = itemData.provDate;
+                                                        dateData.parsed = false;
+                                                        knex('dates')
+                                                            .insert(dateData)
+                                                            .then(value1 => {
+                                                            })
+                                                            .catch(reason => {
+                                                                console.log("Error on Recovery Dates Insert")
+                                                            })
+                                                    }
+
+                                                })
+                                        }
+                                    })
                             } else {
                                 let valid = true;
                                 knex(tableName).update({recovered: recoveryNumberTotal}).where({provDate: recoveryDate})
@@ -172,23 +202,38 @@ rp(url)
                                     .catch(reason => {
                                         console.log("Error Updating Province Recovered", reason)
                                         valid = false;
-                                    }).finally(() => {
-                                    count+=1;
-                                    if (count === 9){
-                                        let dateData = {
-                                            totalRecoveries:recoveryNumberTotal,
-                                            maybeValid: true,
-                                            parsed: true
-                                        };
-
-                                        knex('dates')
-                                            .update(dateData)
-                                            .where('date','=',itemData.provDate)
-                                            .then(value => {
-                                                console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
-                                            })
-                                    }
-                                })
+                                    })
+                                //     .finally(() => {
+                                //     count+=1;
+                                //     if (count === 9){
+                                //         let dateData = {
+                                //             totalRecoveries:recoveryNumberTotal,
+                                //             maybeValid: true,
+                                //             parsed: true
+                                //         };
+                                //
+                                //         knex('dates')
+                                //             .update(dateData)
+                                //             .where('date','=',itemData.provDate)
+                                //             .then(value => {
+                                //                 console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
+                                //                 console.log("Value",value)
+                                //                 if (value === 0){
+                                //                     dateData.date = itemData.provDate;
+                                //                     dateData.parsed = false;
+                                //                     knex('dates')
+                                //                         .insert(dateData)
+                                //                         .then(value1 => {
+                                //                             console.log("Value1",value1)
+                                //                         })
+                                //                         .catch(reason => {
+                                //                             console.log("Error on Recovery Dates Insert")
+                                //                         })
+                                //                 }
+                                //
+                                //             })
+                                //     }
+                                // })
                             }
                         })
                         .catch(reason => {

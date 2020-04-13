@@ -59,7 +59,7 @@ rp(url)
                         let tempDate = DATE.split(" ");
                         const d = new Date(`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`);
                         knex('dates')
-                            .where({deathDate: d***REMOVED***)
+                            .where({date: d***REMOVED***)
                             .then(rows => {
                                 console.log("Row Count:", rows.length);
                                 if (rows.length > 0 && rows[0].parsed) {
@@ -230,7 +230,7 @@ rp(url)
 
                                             console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
 
-                                            knex("dates ").insert({deathDate: d, parsed: true***REMOVED***)
+                                            knex("dates ").insert({date: d, parsed: true***REMOVED***)
                                                 .then(id => {
                                                     //console.log(id)
                                               ***REMOVED***)
@@ -239,7 +239,7 @@ rp(url)
                                               ***REMOVED***)
                                             console.log("\n");
                                       ***REMOVED*** catch (e) {
-                                            knex("dates ").insert({deathDate: d, parsed: false***REMOVED***)
+                                            knex("dates ").insert({date: d, parsed: false***REMOVED***)
                                                 .then(id => {
                                                     //console.log(id)
                                               ***REMOVED***)
@@ -252,7 +252,7 @@ rp(url)
                                         console.log(e)
                                         // No table found error
                                         knex("dates ").insert({
-                                            deathDate: d,
+                                            date: d,
                                             parsed: false,
                                             maybeValid: false,
                                             error: true

@@ -4,7 +4,7 @@ const HTMLParser = require('node-html-parser'),
     Death = require("../models/deathModel"),
     Day = require("../models/dayModel"),
     DbSetup = require("../test/db24"),
-    JSSoup = require('jssoup').default;;
+    JSSoup = require('jssoup').default;
 const url = "https://www.health24.com/Medical/Infectious-diseases/Coronavirus/coronavirus-in-sa-all-the-confirmed-cases-20200312";
 
 const knex = require('knex')({
@@ -183,7 +183,7 @@ rp(url)
                         for (let index = 0; index < 10; index++) {
                             let vars = p.text.replace(/&nbsp;/g, '  ').split("-")
                             p = p.findNextSibling('p');
-                            provinceName = vars[1].trim() == "KwaZulu" ? "KwaZulu-Natal" : vars[1].trim();
+                            provinceName = vars[1].trim() === "KwaZulu" ? "KwaZulu-Natal" : vars[1].trim();
                             caseCount = vars[0].trim();
                             deathCount = vars.length === 3 ? vars[2].split('  ')[0].trim()
                                 : vars.length === 4 ? vars[3].split('  ')[0].trim()
@@ -238,7 +238,7 @@ rp(url)
 
 function getNumber(line){
     let intString = "";
-    let total = line.match(/\d[\d+\s+]*\d+/)[0].split(" ")
+    let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
     total.forEach(digit => {
         intString += digit
     })

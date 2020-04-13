@@ -4,12 +4,15 @@
 ***REMOVED***
 
 .land {
-	fill: #b9b9b9;
+	fill: #cbd9db;
 	stroke: white;
 	stroke-width: 1.5;
 	stroke-miterlimit: 4;
 ***REMOVED***
 
-.body{
-    background-color: coral;
-***REMOVED***
+/* chloropleth map***REMOVED***/
+.colour0 {fill: #b9b9b9;***REMOVED***
+.colour1 {fill: #ff969b;***REMOVED***
+.colour2 {fill: #ce5263;***REMOVED***
+.colour3 {fill: #b11717;***REMOVED***
+.colour4 {fill: #47000a;***REMOVED***

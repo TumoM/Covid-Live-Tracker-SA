@@ -20,3 +20,43 @@
 .series:hover .land.valid {
 	opacity: 0.8;
 }
+
+
+
+#svg-container
+{
+  display: flex;
+  position:relative;
+  align-items: center;
+  height: 100%;
+  display: -webkit-flex; /* Safari */  
+	display: flex;
+	-webkit-align-items: center; /* Safari 7.0+ */
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+#svg-1
+{
+	
+	position: absolute;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		left: 0;
+		right: 0;
+		margin: auto;
+		text-align: center;
+}
+
+.outside{
+    position:relative;
+}
+.inside{
+    position:absolute;
+    top:50%;
+    bottom:50%;
+    transform:translate(-50%, -50%);
+}

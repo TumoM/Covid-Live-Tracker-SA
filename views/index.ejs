@@ -7,51 +7,92 @@
 
     <%# Stats %>
     <section class="ui segment">
-      <div class="ui two column stackable center aligned grid">
-        <div class="ui"></div>
-        <div class="middle aligned row">
-          <div class="column">
-            <div class="ui statistics left aligned">
-                <div class="statistic">
-                    <div class="value">
-                        31,200
-                    </div>
-                    <div class="label">
-                        Total Cases
+        <div class="ui two column stackable center aligned grid">
+            <div class="ui"></div>
+            <div class="middle aligned row">
+                <div class="column">
+                    <div class="ui statistics three stackable left aligned">
+                        <div class="ui red large statistic">
+                            <div class="ui large value">
+                                31,200
+                            </div>
+                            <div class="label">
+                                Total Cases
+                            </div>
+                        </div>
+                        <br>
+                        <div class="statistic orange">
+                            <div class="value">
+                                25
+                            </div>
+                            <div class="label">
+                                Total Deaths
+                            </div>
+                        </div>
+                        <br>
+                        <div class="statistic blue">
+                            <div class="value">
+                                450
+                            </div>
+                            <div class="label">
+                                Total Recoveries
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="statistic">
-                    <div class="value">
-                        25
-                    </div>
-                    <div class="label">
-                        Total Deaths
-                    </div>
-                </div>
-                <br>
-                <div class="statistic">
-                    <div class="value">
-                        450
-                    </div>
-                    <div class="label">
-                        Total Recoveries
-                    </div>
+                <div class="column ">
+                    <p>Just some random text to be replaced later by Tumo</p>
                 </div>
             </div>
-          </div>
-          <div class="column ">
-            <p >Just some random text to be replaced later by Tumo</p>
-          </div>
         </div>
-      </div>
     </section>
 
     <%# Map %>
-    <section class="ui segment map">
+    <section class="ui segment map section expand one">
         <%- include("./map/mapFile") %>
     </section>
-    
+
+    <%# Stats %>
+    <section class="ui segment">
+        <div class="ui two column stackable center aligned grid">
+            <div class="ui"></div>
+            <div class="middle aligned row">
+                <div class="column">
+                    <div class="ui statistics left aligned">
+                        <div class="statistic">
+                            <div class="value">
+                                31,200
+                            </div>
+                            <div class="label">
+                                Total Cases
+                            </div>
+                        </div>
+                        <br>
+                        <div class="statistic">
+                            <div class="value">
+                                25
+                            </div>
+                            <div class="label">
+                                Total Deaths
+                            </div>
+                        </div>
+                        <br>
+                        <div class="statistic">
+                            <div class="value">
+                                450
+                            </div>
+                            <div class="label">
+                                Total Recoveries
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column ">
+                    <p>Just some random text to be replaced later by Tumo</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <%- include("./partials/footer") %>

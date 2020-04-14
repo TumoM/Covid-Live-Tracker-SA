@@ -1,61 +1,57 @@
-<%- include("./partials/header") %>    
+<%- include("./partials/header") %>
 
-<div class="container">
-    <h1><%=data%></h1>
+<div class="container segment main center">
+    <header class="ui segment">
+        <h1><%=data%></h1>
+    </header>
 
-    <button class="ui red button">Red</button>
-    <button class="ui orange button">Orange</button>
-    <button class="ui yellow button">Yellow</button>
-    <button class="ui olive button">Olive</button>
-    <button class="ui green button">Green</button>
-    <button class="ui teal button">Teal</button>
-    <button class="ui blue button">Blue</button>
-    <button class="ui violet button">Violet</button>
-    <button class="ui purple button">Purple</button>
-    <button class="ui pink button">Pink</button>
-    <button class="ui brown button">Brown</button>
-    <button class="ui grey button">Grey</button>
-    <button class="ui black button">Black</button>
-
-    <div class="ui card">
-      <div class="image">
-        <img src="/images/avatar2/large/kristy.png">
-      </div>
-      <div class="content">
-        <a class="header">Kristy</a>
-        <div class="meta">
-          <span class="date">Joined in 2013</span>
-        </div>
-        <div class="description">
-          Kristy is an art director living in New York.
-        </div>
-      </div>
-      <div class="extra content">
-        <a>
-          <i class="user icon"></i>
-          22 Friends
-        </a>
-      </div>
-    </div>
-
-    <form class="ui form">
-      <div class="field">
-        <label>First Name</label>
-        <input type="text" name="first-name" placeholder="First Name">
-      </div>
-      <div class="field">
-        <label>Last Name</label>
-        <input type="text" name="last-name" placeholder="Last Name">
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" tabindex="0" class="hidden">
-          <label>I agree to the Terms and Conditions</label>
+    <%# Stats %>
+    <section class="ui segment">
+      <div class="ui two column stackable center aligned grid">
+        <div class="ui"></div>
+        <div class="middle aligned row">
+          <div class="column">
+            <div class="ui statistics left aligned">
+                <div class="statistic">
+                    <div class="value">
+                        31,200
+                    </div>
+                    <div class="label">
+                        Total Cases
+                    </div>
+                </div>
+                <br>
+                <div class="statistic">
+                    <div class="value">
+                        25
+                    </div>
+                    <div class="label">
+                        Total Deaths
+                    </div>
+                </div>
+                <br>
+                <div class="statistic">
+                    <div class="value">
+                        450
+                    </div>
+                    <div class="label">
+                        Total Recoveries
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="column ">
+            <p >Just some random text to be replaced later by Tumo</p>
+          </div>
         </div>
       </div>
-      <button class="ui button" type="submit">Submit</button>
-    </form>
+    </section>
+
+    <%# Map %>
+    <section class="ui segment map">
+        <%- include("./map/mapFile") %>
+    </section>
     
 </div>
 
-<%- include("./partials/footer") %>    
+<%- include("./partials/footer") %>

@@ -1,0 +1,147 @@
+/*!
+***REMOVED*** # Fomantic-UI - Rail
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'element';
+@element : 'rail';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+             Rails
+*******************************/
+
+.ui.rail {
+  position: absolute;
+  top: 0;
+  width: @width;
+  height: @height;
+***REMOVED***
+
+.ui.left.rail {
+  left: auto;
+  right: 100%;
+  padding: 0 @splitDistance 0 0;
+  margin: 0 @splitDistance 0 0;
+***REMOVED***
+
+.ui.right.rail {
+  left: 100%;
+  right: auto;
+  padding: 0 0 0 @splitDistance;
+  margin: 0 0 0 @splitDistance;
+***REMOVED***
+
+***REMOVED********************************
+           Variations
+*******************************/
+
+& when (@variationRailInternal) {
+  /*--------------
+       Internal
+  ---------------*/
+
+  .ui.left.internal.rail {
+    left: 0;
+    right: auto;
+    padding: 0 0 0 @splitDistance;
+    margin: 0 0 0 @splitDistance;
+***REMOVED***
+
+  .ui.right.internal.rail {
+    left: auto;
+    right: 0;
+    padding: 0 @splitDistance 0 0;
+    margin: 0 @splitDistance 0 0;
+***REMOVED***
+***REMOVED***
+
+& when (@variationRailDividing) {
+  /*--------------
+      Dividing
+  ---------------*/
+
+  .ui.dividing.rail {
+    width: @dividingWidth;
+***REMOVED***
+  .ui.left.dividing.rail {
+    padding: 0 @splitDividingDistance 0 0;
+    margin: 0 @splitDividingDistance 0 0;
+    border-right: @dividingBorder;
+***REMOVED***
+  .ui.right.dividing.rail {
+    border-left: @dividingBorder;
+    padding: 0 0 0 @splitDividingDistance;
+    margin: 0 0 0 @splitDividingDistance;
+***REMOVED***
+***REMOVED***
+
+& when (@variationRailDistance) {
+  /*--------------
+      Distance
+  ---------------*/
+
+  .ui.close.rail {
+    width: @closeWidth;
+***REMOVED***
+  .ui.close.left.rail {
+    padding: 0 @splitCloseDistance 0 0;
+    margin: 0 @splitCloseDistance 0 0;
+***REMOVED***
+  .ui.close.right.rail {
+    padding: 0 0 0 @splitCloseDistance;
+    margin: 0 0 0 @splitCloseDistance;
+***REMOVED***
+
+  .ui.very.close.rail {
+    width: @veryCloseWidth;
+***REMOVED***
+  .ui.very.close.left.rail {
+    padding: 0 @splitVeryCloseDistance 0 0;
+    margin: 0 @splitVeryCloseDistance 0 0;
+***REMOVED***
+  .ui.very.close.right.rail {
+    padding: 0 0 0 @splitVeryCloseDistance;
+    margin: 0 0 0 @splitVeryCloseDistance;
+***REMOVED***
+***REMOVED***
+
+& when (@variationRailAttached) {
+  /*--------------
+      Attached
+  ---------------*/
+
+  .ui.attached.left.rail,
+  .ui.attached.right.rail {
+    padding: 0;
+    margin: 0;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+     Sizing
+---------------*/
+
+.ui.rail {
+  font-size: @medium;
+***REMOVED***
+& when not (@variationRailSizes = false) {
+  each(@variationRailSizes, {
+    @s: @@value;
+    .ui.@{value***REMOVED***.rail {
+      font-size: @s;
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+.loadUIOverrides();

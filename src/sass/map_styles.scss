@@ -1,3 +1,14 @@
+$colour0: #b9b9b9;
+$colour1: #fc9297;
+$colour2: #D87582;
+$colour3: #b82020;
+$colour4: #830000;
+
+%equal-heights {
+display: flex;
+flex-wrap: wrap;
+***REMOVED***
+
 .contentContainer{
     width: 80%;
     margin: 0 auto;
@@ -8,19 +19,23 @@
 	stroke: white;
 	stroke-width: 1.5;
 	stroke-miterlimit: 4;
+	.valid{
+			&:hover{
+			opacity: 0.8;
+		***REMOVED***
+	***REMOVED***
 ***REMOVED***
 
 /* chloropleth map***REMOVED***/
-.colour0 {fill: #b9b9b9;***REMOVED***
-.colour1 {fill: #fc9297;***REMOVED***
-.colour2 {fill: #D87582;***REMOVED***
-.colour3 {fill: #b82020;***REMOVED***
-.colour4 {fill: #830000;***REMOVED***
+.colour0 {fill: $colour0;***REMOVED***
+.colour1 {fill: $colour1;***REMOVED***
+.colour2 {fill: $colour2;***REMOVED***
+.colour3 {fill: $colour3;***REMOVED***
+.colour4 {fill: $colour4;***REMOVED***
 
-.series:hover .land.valid:hover {
+.land.valid:hover {
 	opacity: 0.8;
 ***REMOVED***
-
 
 
 #svg-container
@@ -39,9 +54,12 @@
 
 #svg-1
 {
-	margin-top:3rem;
+	// margin-top:3rem;
+	 width: 50%; 
+	// padding-bottom: 45%; 
+	// height: 1px; 
+	overflow: visible
+	
 ***REMOVED***
 
-.outside{
-    position:relative;
-***REMOVED***
+

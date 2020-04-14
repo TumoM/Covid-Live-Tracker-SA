@@ -9,6 +9,9 @@
   stroke-width: 1.5;
   stroke-miterlimit: 4;
 ***REMOVED***
+.land .valid:hover {
+  opacity: 0.8;
+***REMOVED***
 
 /* chloropleth map***REMOVED***/
 .colour0 {
@@ -31,7 +34,7 @@
   fill: #830000;
 ***REMOVED***
 
-.series:hover .land.valid:hover {
+.land.valid:hover {
   opacity: 0.8;
 ***REMOVED***
 
@@ -51,11 +54,8 @@
 ***REMOVED***
 
 #svg-1 {
-  margin-top: 3rem;
-***REMOVED***
-
-.outside {
-  position: relative;
+  width: 50%;
+  overflow: visible;
 ***REMOVED***
 
 /*# sourceMappingURL=map_styles.css.map***REMOVED***/

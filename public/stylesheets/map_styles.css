@@ -1,0 +1,61 @@
+.contentContainer {
+  width: 80%;
+  margin: 0 auto;
+***REMOVED***
+
+.land {
+  fill: #cbd9db;
+  stroke: white;
+  stroke-width: 1.5;
+  stroke-miterlimit: 4;
+***REMOVED***
+
+/* chloropleth map***REMOVED***/
+.colour0 {
+  fill: #b9b9b9;
+***REMOVED***
+
+.colour1 {
+  fill: #fc9297;
+***REMOVED***
+
+.colour2 {
+  fill: #D87582;
+***REMOVED***
+
+.colour3 {
+  fill: #b82020;
+***REMOVED***
+
+.colour4 {
+  fill: #830000;
+***REMOVED***
+
+.series:hover .land.valid:hover {
+  opacity: 0.8;
+***REMOVED***
+
+#svg-container {
+  display: flex;
+  position: relative;
+  align-items: center;
+  height: 100%;
+  display: -webkit-flex;
+  /* Safari***REMOVED***/
+  display: flex;
+  -webkit-align-items: center;
+  /* Safari 7.0+***REMOVED***/
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+***REMOVED***
+
+#svg-1 {
+  margin-top: 3rem;
+***REMOVED***
+
+.outside {
+  position: relative;
+***REMOVED***
+
+/*# sourceMappingURL=map_styles.css.map***REMOVED***/

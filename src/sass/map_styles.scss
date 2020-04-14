@@ -12,12 +12,12 @@
 
 /* chloropleth map***REMOVED***/
 .colour0 {fill: #b9b9b9;***REMOVED***
-.colour1 {fill: #ff969b;***REMOVED***
-.colour2 {fill: #ce5263;***REMOVED***
-.colour3 {fill: #b11717;***REMOVED***
-.colour4 {fill: #47000a;***REMOVED***
+.colour1 {fill: #fc9297;***REMOVED***
+.colour2 {fill: #D87582;***REMOVED***
+.colour3 {fill: #b82020;***REMOVED***
+.colour4 {fill: #830000;***REMOVED***
 
-.series:hover .land.valid {
+.series:hover .land.valid:hover {
 	opacity: 0.8;
 ***REMOVED***
 
@@ -39,24 +39,9 @@
 
 #svg-1
 {
-	
-	position: absolute;
-		top: 50%;
-		-webkit-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
-		transform: translateY(-50%);
-		left: 0;
-		right: 0;
-		margin: auto;
-		text-align: center;
+	margin-top:3rem;
 ***REMOVED***
 
 .outside{
     position:relative;
-***REMOVED***
-.inside{
-    position:absolute;
-    top:50%;
-    bottom:50%;
-    transform:translate(-50%, -50%);
 ***REMOVED***

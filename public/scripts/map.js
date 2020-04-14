@@ -1,12 +1,13 @@
 function displayName(name) {
     document.getElementById('country-name').firstChild.data = name;
 }
-console.log("We here boy!!!!!");
+
 var tooltip
 (function() {
     tooltip = document.getElementById('country-name');
 })();
 
+var svg = document.getElementById('svg-1');
 
 var triggers = document.getElementsByClassName('tooltip-trigger');
 for (var i = 0; i < triggers.length; i++) {
@@ -16,8 +17,15 @@ for (var i = 0; i < triggers.length; i++) {
 
 
 function showTooltip(evt) {
+    var CTM = svg.getScreenCTM();
+    var mouseX = (evt.clientX - CTM.e) / CTM.a;
+    var mouseY = (evt.clientY - CTM.f) / CTM.d;
+    tooltip.setAttributeNS(null, "x", mouseX + 6 / CTM.a);
+    tooltip.setAttributeNS(null, "y", mouseY + 20 / CTM.d);
     tooltip.setAttributeNS(null, "visibility", "visible");
 }
+
+
 
 function hideTooltip() {
 tooltip.setAttributeNS(null, "visibility", "hidden");

@@ -1,0 +1,15 @@
+.container.segment.main {
+  text-align: center;
+  width: 99%;
+  padding: 0 2%;
+  margin: 0 auto;
+}
+
+.ui.statistics {
+  /* text-align: center; */
+  width: 100%;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+/*# sourceMappingURL=index_styles.css.map */

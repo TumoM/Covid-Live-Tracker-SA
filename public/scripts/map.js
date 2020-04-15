@@ -74,7 +74,6 @@ function showTooltip(evt) {
 
 ***REMOVED***
 
-
 function hideTooltip() {
     // TODO Un-hide
     tooltip.style.opacity=0;

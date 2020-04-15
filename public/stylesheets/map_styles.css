@@ -43,13 +43,16 @@
 }
 
 #country-name {
-  dominant-baseline: hanging;
   transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
   opacity: 0;
 }
 
 .lightBack {
   fill: rgba(190, 190, 190, 0.801);
+}
+
+tspan.legend {
+  dominant-baseline: unset;
 }
 
 /*# sourceMappingURL=map_styles.css.map */

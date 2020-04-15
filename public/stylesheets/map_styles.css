@@ -9,8 +9,11 @@
   stroke-width: 1.5;
   stroke-miterlimit: 4;
 }
-.land .valid:hover {
-  opacity: 0.8;
+.land.valid {
+  transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.land.valid:hover {
+  opacity: 0.7;
 }
 
 /* chloropleth map */
@@ -34,28 +37,19 @@
   fill: #830000;
 }
 
-.land.valid:hover {
-  opacity: 0.8;
-}
-
-#svg-container {
-  display: flex;
-  position: relative;
-  align-items: center;
-  height: 100%;
-  display: -webkit-flex;
-  /* Safari */
-  display: flex;
-  -webkit-align-items: center;
-  /* Safari 7.0+ */
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-
 #svg-1 {
   width: 50%;
   overflow: visible;
+}
+
+#country-name {
+  dominant-baseline: hanging;
+  transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
+  opacity: 0;
+}
+
+.lightBack {
+  fill: rgba(190, 190, 190, 0.801);
 }
 
 /*# sourceMappingURL=map_styles.css.map */

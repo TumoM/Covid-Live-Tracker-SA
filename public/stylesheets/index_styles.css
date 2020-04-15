@@ -5,11 +5,36 @@
   margin: 0 auto;
 }
 
-.ui.statistics {
+.ui .statistics {
   /* text-align: center; */
   width: 100%;
   margin: 0 auto;
   display: inline-block;
+}
+.ui.segment {
+  padding: 0;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+body {
+  position: relative;
+  height: auto;
+  min-height: 100% !important;
+}
+
+#myTitle {
+  display: block;
+  overflow: auto;
+}
+
+#t1 {
+  font-size: 5rem;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 /*# sourceMappingURL=index_styles.css.map */

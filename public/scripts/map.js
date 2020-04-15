@@ -150,7 +150,7 @@ function colourCountries(data) {
 ***REMOVED***
 
 function legendSetup() {
-    let width = $('#key')[0].getBoundingClientRect().width;
+    let width = $('label key')[0].getBoundingClientRect().width;
     $('.lightBack').width(width)
     let length = legendTitle.getComputedTextLength()
     legendTitle.setAttributeNS(null,"x",(width-length)/2-xPen);

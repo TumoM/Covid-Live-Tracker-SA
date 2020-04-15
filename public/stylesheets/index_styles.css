@@ -5,11 +5,36 @@
   margin: 0 auto;
 ***REMOVED***
 
-.ui.statistics {
+.ui .statistics {
   /* text-align: center;***REMOVED***/
   width: 100%;
   margin: 0 auto;
   display: inline-block;
+***REMOVED***
+.ui.segment {
+  padding: 0;
+***REMOVED***
+
+header {
+  margin-bottom: 1rem;
+***REMOVED***
+
+body {
+  position: relative;
+  height: auto;
+  min-height: 100% !important;
+***REMOVED***
+
+#myTitle {
+  display: block;
+  overflow: auto;
+***REMOVED***
+
+#t1 {
+  font-size: 5rem;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0px;
 ***REMOVED***
 
 /*# sourceMappingURL=index_styles.css.map***REMOVED***/

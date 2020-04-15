@@ -9,8 +9,11 @@
   stroke-width: 1.5;
   stroke-miterlimit: 4;
 ***REMOVED***
-.land .valid:hover {
-  opacity: 0.8;
+.land.valid {
+  transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+***REMOVED***
+.land.valid:hover {
+  opacity: 0.7;
 ***REMOVED***
 
 /* chloropleth map***REMOVED***/
@@ -34,28 +37,19 @@
   fill: #830000;
 ***REMOVED***
 
-.land.valid:hover {
-  opacity: 0.8;
-***REMOVED***
-
-#svg-container {
-  display: flex;
-  position: relative;
-  align-items: center;
-  height: 100%;
-  display: -webkit-flex;
-  /* Safari***REMOVED***/
-  display: flex;
-  -webkit-align-items: center;
-  /* Safari 7.0+***REMOVED***/
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-***REMOVED***
-
 #svg-1 {
   width: 50%;
   overflow: visible;
+***REMOVED***
+
+#country-name {
+  dominant-baseline: hanging;
+  transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
+  opacity: 0;
+***REMOVED***
+
+.lightBack {
+  fill: rgba(190, 190, 190, 0.801);
 ***REMOVED***
 
 /*# sourceMappingURL=map_styles.css.map***REMOVED***/

@@ -19,9 +19,10 @@ flex-wrap: wrap;
 	stroke: white;
 	stroke-width: 1.5;
 	stroke-miterlimit: 4;
-	.valid{
-			&:hover{
-			opacity: 0.8;
+	&.valid{
+		transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+		&:hover{
+			opacity: 0.7;
 		***REMOVED***
 	***REMOVED***
 ***REMOVED***
@@ -33,33 +34,24 @@ flex-wrap: wrap;
 .colour3 {fill: $colour3;***REMOVED***
 .colour4 {fill: $colour4;***REMOVED***
 
-.land.valid:hover {
-	opacity: 0.8;
-***REMOVED***
-
-
-#svg-container
-{
-  display: flex;
-  position:relative;
-  align-items: center;
-  height: 100%;
-  display: -webkit-flex; /* Safari***REMOVED***/  
-	display: flex;
-	-webkit-align-items: center; /* Safari 7.0+***REMOVED***/
-	align-items: center;
-	-webkit-justify-content: center;
-	justify-content: center;
-***REMOVED***
-
 #svg-1
 {
 	// margin-top:3rem;
-	 width: 50%; 
-	// padding-bottom: 45%; 
-	// height: 1px; 
+	width: 50%; 
 	overflow: visible
-	
 ***REMOVED***
 
+#country-name {
+	dominant-baseline: hanging;
+	transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
+	opacity: 0;
+***REMOVED***
+
+.lightBack{
+	fill: rgba(190, 190, 190, 0.801);
+***REMOVED***
+
+#legTitle{
+
+***REMOVED***
 

@@ -1,9 +1,11 @@
 <%- include("./partials/header") %>
 
 <div class="container segment main center">
-    <header class="ui segment">
-        <h1><%=data%></h1>
-    </header>
+    <div id="myTitle" class="ui segment ">
+        <h1 id="t1" class="ui header center align block">
+            <span><%=data%></span>
+        </h1>
+    </div>
 
     <%# Stats %>
     <section class="ui segment">
@@ -50,8 +52,8 @@
     </section>
 
     <%# Map %>
-    <section class="ui segment map section expand raised">
-        <h2 class="ui center aligned header">Provincial Map</h2>
+    <section class="ui segment map section expand raised ">
+        <h2 class="ui center aligned header block">Provincial Map</h2>
         <%- include("./map/mapFile") %>
     </section>
 

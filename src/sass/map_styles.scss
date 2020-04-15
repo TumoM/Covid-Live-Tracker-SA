@@ -42,7 +42,7 @@ flex-wrap: wrap;
 ***REMOVED***
 
 #country-name {
-	dominant-baseline: hanging;
+	// dominant-baseline: hanging;
 	transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
 	opacity: 0;
 ***REMOVED***
@@ -51,7 +51,9 @@ flex-wrap: wrap;
 	fill: rgba(190, 190, 190, 0.801);
 ***REMOVED***
 
-#legTitle{
-
+tspan{
+	&.legend{
+		dominant-baseline: unset
+	***REMOVED***
 ***REMOVED***
 

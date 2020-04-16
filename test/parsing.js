@@ -65,11 +65,29 @@ rp(url)
                             .where({date: d})
                             .then(rows => {
                                 console.log("Row Count:", rows.length);
-                                if (rows.length > 0 && rows[0].parsed) {
+                                if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
 
                                 }
                                 else if (rows.length > 0 && rows[0].maybeValid) {
                                     // Maybe the format is all wrong. Parse another site/source?
+
+                                    // Make soup.
+                                    const paragraphs = HTMLParser.parse(html)
+                                    //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
+                                    console.log('\n')
+                                    // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                    let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
+                                        let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                        console.log("Paragraph:",paragraph)
+                                        if (!paragraph){
+                                            return false;
+                                        }
+                                        else{
+                                            return true
+                                        }
+                                    })
+                                    console.log("TestPar",testPar.text)
+                                    // Pull off data for update (Total tests)
                                 }
                                 else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
                                     const rootChild = HTMLParser.parse(html);

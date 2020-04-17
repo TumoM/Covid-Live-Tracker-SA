@@ -19,32 +19,31 @@ const knex = require('knex')({
 
 let x = function() {
     return knex('dates')
-        .select()
+        .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
         .whereNotNull("totalCases")
-        .andWhereNot("totalDeaths",'=',null)
-        .andWhereNot("totalTests",'=',null)
+        .whereNotNull("totalDeaths")
+        .whereNotNull("totalTests")
         .orderBy("date",'desc')
         .limit(1)
             .then(function(res1) {
-                console.log(res1)
-                return knex('users').where({ 'google_id':profile_id }).select('id')
-                    // ^^^^^^
-                    .then(function(uid) {
-                        return knex.insert({ 'unit_id':unit, 'user_id':uid }).into('users_units')
-                            // ^^^^^^
-                            .then(function(user_units) {
-                                return { 'unit_id':unit, 'user_id':uid, 'user_units':user_units };
-                                // ^^^^^^
-                            });
-                    });
-            });
+                if (res1[0].totalRecoveries === null){
+                    return knex('dates')
+                        .select('date','totalRecoveries')
+                        .whereNotNull('totalRecoveries')
+                        .limit(1)
+                        .orderBy('date','desc')
+                        .then(value => {
+                            res1[0].date2 = value[0].date;
+                            res1[0].totalRecoveries = value[0].totalRecoveries;
+                            return res1[0]
+                        })
+                }
+                else {
+                    return res1[0];
+                }
+            })
+        .catch(reason => {
+            console.log("You messed up?",reason)
+        });
 }
-
-knex('dates')
-    .select()
-    .whereNotNull("totalCases")
-    .andWhereNot("totalDeaths",'=',null)
-    .andWhereNot("totalTests",'=',null)
-    .orderBy("date",'desc')
-    .limit(1)
 

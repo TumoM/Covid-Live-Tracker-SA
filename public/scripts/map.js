@@ -1,3 +1,52 @@
+
+/*var data1 = [
+    [],
+    ['ZA-NW', 'ZA-EC', 'ZA-FS'],
+    ['ZA-MP', 'ZA-NC', 'ZA-LP'],
+    ['ZA-WC'],
+    ['ZA-GT', 'ZA-NL']
+];
+
+const provinceList = {
+    "NORTH WEST": 'ZA-NW',
+    "EASTERN CAPE": 'ZA-EC',
+    "FREE TATE": 'ZA-FS',
+    "MPUMALANGA": 'ZA-MP',
+    "NORTHERN CAPE": 'ZA-NC',
+    "LIMPOPO": 'ZA-LP',
+    "WESTERN CAPE": 'ZA-WC',
+    "GAUTENG": 'ZA-GT',
+    "KWAZULU-NATAL": 'ZA-NL',
+    "UNALLOCATED": 'ZA-UN'
+***REMOVED***
+
+const dummyData = {
+    'ZA-NW': 19,
+    'ZA-EC': 88,
+    'ZA-FS': 96,
+    'ZA-MP': 21,
+    'ZA-NC': 16,
+    'ZA-LP': 23,
+    'ZA-WC': 587,
+    'ZA-GT': 865,
+    'ZA-NL': 443,
+    'ZA-UN': 15
+***REMOVED***
+
+const dummyData2 = [{
+    'ZA-NW': 19,
+    'ZA-EC': 88,
+    'ZA-FS': 96,
+    'ZA-MP': 21,
+    'ZA-NC': 16,
+    'ZA-LP': 23,
+    'ZA-WC': 587,
+    'ZA-GT': 865,
+    'ZA-NL': 443,
+    'ZA-UN': 15
+***REMOVED***]*/
+
+
 var tooltip
 var tooltipText
 var tooltipRects
@@ -5,6 +54,9 @@ let width = 415;
 let legendTitle = $('#legTitle')[0];
 const xPen = 42,
     yPen = 220;
+
+let provCase = {***REMOVED***
+let provDeath = {***REMOVED***
 
 function displayName(name) {
     document.getElementById('country-name').firstChild.data = name;
@@ -63,11 +115,15 @@ function showTooltip(evt) {
     var CTM = svg.getScreenCTM();
     var x = 10;
     var y = 390;
+    let id = evt.target.getAttributeNS(null, "id");
     
     tooltipText.firstChild.data = evt.target.getAttributeNS(null, "title");
     tooltip.setAttributeNS(null, "transform", "translate(" + x + " " + y + ")");
     var length = tooltipText.getComputedTextLength();
     tooltipText.setAttributeNS(null,"x",(width-length)/2);
+    $("#casesTooltip").text(CommaFormatted(provCase[id]))
+    $("#deathsTooltip").text(CommaFormatted(provDeath[id]))
+    $("#recoveryTooltip").text("N/A")
     tooltip.style.opacity=1;
     // tooltip.setAttributeNS(null, "visibility", "visible");
 
@@ -93,52 +149,7 @@ function colourCountry(name, colour) {
 
 
 
-var data1 = [
-    [],
-    ['ZA-NW', 'ZA-EC', 'ZA-FS'],
-    ['ZA-MP', 'ZA-NC', 'ZA-LP'],
-    ['ZA-WC'],
-    ['ZA-GT', 'ZA-NL']
-];
 
-const provinceList = {
-    "NORTH WEST": 'ZA-NW',
-    "EASTERN CAPE": 'ZA-EC',
-    "FREE TATE": 'ZA-FS',
-    "MPUMALANGA": 'ZA-MP',
-    "NORTHERN CAPE": 'ZA-NC',
-    "LIMPOPO": 'ZA-LP',
-    "WESTERN CAPE": 'ZA-WC',
-    "GAUTENG": 'ZA-GT',
-    "KWAZULU-NATAL": 'ZA-NL',
-    "UNALLOCATED": 'ZA-UN'
-***REMOVED***
-
-const dummyData = {
-    'ZA-NW': 19,
-    'ZA-EC': 88,
-    'ZA-FS': 96,
-    'ZA-MP': 21,
-    'ZA-NC': 16,
-    'ZA-LP': 23,
-    'ZA-WC': 587,
-    'ZA-GT': 865,
-    'ZA-NL': 443,
-    'ZA-UN': 15
-***REMOVED***
-
-const dummyData2 = [{
-    'ZA-NW': 19,
-    'ZA-EC': 88,
-    'ZA-FS': 96,
-    'ZA-MP': 21,
-    'ZA-NC': 16,
-    'ZA-LP': 23,
-    'ZA-WC': 587,
-    'ZA-GT': 865,
-    'ZA-NL': 443,
-    'ZA-UN': 15
-***REMOVED***]
 
 function colourCountries(data) {
     for (var colour = 0; colour < data.length; colour++) {
@@ -152,11 +163,11 @@ function legendSetup(max,min,interval) {
     // setup text labels
     interval = Math.round(interval)
     let legendTexts = $('.keyText')
-    legendTexts[0].textContent=`0 to ${min-1***REMOVED***`
-    legendTexts[1].textContent=`${min***REMOVED*** to ${min+interval-1***REMOVED***`
-    legendTexts[2].textContent=`${max-interval*3***REMOVED*** to ${max-interval*2-1***REMOVED***`
-    legendTexts[3].textContent=`${max-interval*2***REMOVED*** to ${max-interval-1***REMOVED***`
-    legendTexts[4].textContent=`${max-interval***REMOVED*** to ${max***REMOVED***`
+    legendTexts[0].textContent=`0 to ${CommaFormatted(min-1)***REMOVED***`
+    legendTexts[1].textContent=`${CommaFormatted(min)***REMOVED*** to ${CommaFormatted(min+interval-1)***REMOVED***`
+    legendTexts[2].textContent=`${CommaFormatted(max-interval*3)***REMOVED*** to ${CommaFormatted(max-interval*2-1)***REMOVED***`
+    legendTexts[3].textContent=`${CommaFormatted(max-interval*2)***REMOVED*** to ${CommaFormatted(max-interval-1)***REMOVED***`
+    legendTexts[4].textContent=`${CommaFormatted(max-interval)***REMOVED*** to ${CommaFormatted(max)***REMOVED***`
     // setup width
     let width = $('#key')[0].getBoundingClientRect().width;
     $('.lightBack').width(width)
@@ -210,6 +221,32 @@ function setColours(dummyData) {
     console.log("ANSWERS:",answers)
     colourCountries(answers)
     legendSetup(max,min,interval)
+***REMOVED***
+
+function setProvs(cases,deaths  ) {
+    provCase = cases;
+    provDeath = deaths;
+***REMOVED***
+
+function CommaFormatted(amount) {
+    var delimiter = ","; // replace comma if desired
+    var i = parseInt(amount);
+    if(isNaN(i)) { return 'N/A'; ***REMOVED***
+    var minus = '';
+    if(i < 0) { minus = '-'; ***REMOVED***
+    i = Math.abs(i);
+    var n = new String(i);
+    var a = [];
+    while(n.length > 3) {
+        var nn = n.substr(n.length-3);
+        a.unshift(nn);
+        n = n.substr(0,n.length-3);
+  ***REMOVED***
+    if(n.length > 0) { a.unshift(n); ***REMOVED***
+    n = a.join(delimiter);
+    amount = n;
+    amount = minus + amount;
+    return amount;
 ***REMOVED***
 //
 // setColours(dummyData)

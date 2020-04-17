@@ -1,105 +1,84 @@
 <%- include("./partials/header") %>
 
 <div class="container segment main center">
-    <div id="myTitle" class="ui segment ">
-        <h1 id="t1" class="ui header center align block">
+    <div id="myTitle" class="">
+        <h1 id="t1" class="ui header block">
             <span><%=data%></span>
         </h1>
     </div>
+    <div class="ui section divider"></div>
 
     <%# Stats %>
-    <section class="ui segment">
-        <div class="ui two column stackable center aligned grid">
-            <div class="ui"></div>
-            <div class="middle aligned row">
-                <div class="column">
-                    <h2 class="center aligned">Summary Statistics</h2>
-                    <div class="ui statistics three stackable left aligned">
-                        <div class="ui red large statistic">
-                            <div class="ui large value">
-                                31,200
-                            </div>
-                            <div class="label">
-                                Total Cases
-                            </div>
-                        </div>
-                        <br>
-                        <div class="statistic orange">
-                            <div class="value">
-                                25
-                            </div>
-                            <div class="label">
-                                Total Deaths
-                            </div>
-                        </div>
-                        <br>
-                        <div class="statistic blue">
-                            <div class="value">
-                                450
-                            </div>
-                            <div class="label">
-                                Total Recoveries
-                            </div>
-                        </div>
+    <h2 class="ui header block top attached">Summary Statistics</h2>
+    <section class="ui segment padded section expand raised attached grid">
+        <div class="column">
+            <div class="ui statistics three stackable left aligned">
+                <div class="ui red large statistic">
+                    <div class="ui large value">
+                        31,200
+                    </div>
+                    <div class="label">
+                        Total Cases
                     </div>
                 </div>
-                <div class="ui vertical divider">
+                <br>
+                <div class="statistic orange">
+                    <div class="value">
+                        25
+                    </div>
+                    <div class="label">
+                        Total Deaths
+                    </div>
                 </div>
-                <div class="column">
-                    <h2 class="center aligned ">Graphs</h2>
-                    <p>Just some random text to be replaced later by Tumo</p>
+                <br>
+                <div class="statistic blue">
+                    <div class="value">
+                        450
+                    </div>
+                    <div class="label">
+                        Total Recoveries
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="ui section divider"></div>
 
     <%# Map %>
-    <section class="ui segment map section expand raised ">
-        <h2 class="ui center aligned header block">Provincial Map</h2>
-        <%- include("./map/mapFile") %>
-    </section>
-
-    <%# Stats %>
-    <section class="ui segment">
-        <div class="ui two column stackable center aligned grid">
-            <div class="ui"></div>
-            <div class="middle aligned row">
-                <div class="column">
-                    <div class="ui statistics left aligned">
-                        <div class="statistic">
-                            <div class="value">
-                                31,200
-                            </div>
-                            <div class="label">
-                                Total Cases
-                            </div>
-                        </div>
-                        <br>
-                        <div class="statistic">
-                            <div class="value">
-                                25
-                            </div>
-                            <div class="label">
-                                Total Deaths
-                            </div>
-                        </div>
-                        <br>
-                        <div class="statistic">
-                            <div class="value">
-                                450
-                            </div>
-                            <div class="label">
-                                Total Recoveries
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column ">
-                    <p>Just some random text to be replaced later by Tumo</p>
-                </div>
+    <h2 class="ui header block top attached">Provincial Map</h2>
+    <section class="ui segment section expand raised attached grid">
+        <div class="ui three column grid row">
+            <div class="four wide column left aligned">
+                    <p>Left Sidebar</p>
+            </div>
+            <div class="ten wide column">
+                <%- include("./map/mapFile") %>
+            </div>
+            <div class="two wide column left aligned">
+                    3
             </div>
         </div>
     </section>
+    <div class="ui section divider"></div>
+
+    <%# Graphs %>
+    <h2 class="ui header block top attached">Graphs</h2>
+    <section class="ui segment padded section expand raised attached">
+        <div>
+            <p>The Graphs go here</p>
+        </div>
+    </section>
+    <div class="ui section divider"></div>
+
+    <%# Table %>
+    <h2 class="ui header block top attached">Table</h2>
+    <section class="ui segment padded section expand raised attached">
+        <div>
+            <p>The Table will go here!!!</p>
+        </div>
+    </section>
+    <div class="ui section divider"></div>
+
 </div>
 
 <%- include("./partials/footer") %>

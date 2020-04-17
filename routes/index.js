@@ -3,8 +3,8 @@ var router = express.Router();
 
 
 router.get("/", function (req, res) {
-
-    res.render("index",{data:"Hello, Sir"***REMOVED***);
+    // TODO Load data for the day.
+    res.render("index",{data:"Tumo Was Here"***REMOVED***);
 ***REMOVED***)
 
 

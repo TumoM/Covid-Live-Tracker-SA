@@ -44,6 +44,7 @@ function parseNumber(number) {
     return testInt
 ***REMOVED***
 
+
 rp(url)
     .then(function (html) {
         //success!
@@ -68,8 +69,8 @@ rp(url)
                 rp(entry.getAttribute("href"))
                     .then(function (html) {
                         console.log(DATE); // date
-                        let totalCase = 0;
-                        let totalDeath = 0;
+                        totalCase = 0;
+                        totalDeath = 0;
                         let tempDate = DATE.split(" ");
                         const d = new Date(`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`);
                         let parsedDate = d.toLocaleDateString().split("/")
@@ -108,7 +109,7 @@ rp(url)
                                         .then(rows=>{
                                             knex('dates').update({totalTests,maybeValid:false***REMOVED***).where({date:parsedDate***REMOVED***)
                                                 .then(value => {
-                                                    console.log("Updated TTs:",value)
+                                                    console.log("Updated TTs1:",value)
                                               ***REMOVED***)
                                                 .catch(reason => {
                                                     console.log("Unknown 2:",reason);
@@ -311,14 +312,55 @@ rp(url)
                                           ***REMOVED***)
                                       ***REMOVED*** catch (e) {
                                             console.log("ANOOOOTHER ERRROR?:",e)
-                                            knex("dates ").insert({date: d, parsed: false***REMOVED***)
-                                                .then(id => {
-                                                    //console.log(id)
+                                            const paragraphs = HTMLParser.parse(html)
+                                            //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
+                                            // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                            let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
+                                                let paragraph = currentVal.text.match(/total number of.*tests\sconducted.*?\s[\s??\d+]+/i)
+                                                if (!paragraph){
+                                                    return false;
+                                              ***REMOVED***
+                                                else{
+                                                    paragraph = paragraph[0].split(".")[0]
+                                                    return true
+                                              ***REMOVED***
+                                          ***REMOVED***)
+                                            console.log("TestPar",testPar.text);
+                                            let totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                            if (totalTests){
+                                                totalTests = parseNumber(totalTests[0].trim());
+                                          ***REMOVED***
+                                            console.log("Value:",totalTests);
+                                            let data = {
+                                                date: parsedDate,
+                                                parsed: true,
+                                                totalTests: totalTests,
+                                                maybeValid: true
+                                          ***REMOVED***
+                                            console.log(data)
+                                            knex('dates').select('totalTests')
+                                                .whereNull('totalTests')
+                                                .andWhere({date:parsedDate***REMOVED***)
+                                                .then(rows=>{
+                                                    console.log(rows.length)
+                                                    knex('dates').update({totalTests,maybeValid:false***REMOVED***).where({date:parsedDate***REMOVED***)
+                                                        .then(value => {
+                                                            console.log("Updated TTs2:",value)
+                                                            if (value === 0){
+                                                                knex('dates').insert(data).then(value1 => {
+                                                                    console.log("Inserted my man")
+                                                              ***REMOVED***).catch(reason => {
+                                                                    console.log("Some errrr:",reason)
+                                                              ***REMOVED***)
+                                                          ***REMOVED***
+                                                      ***REMOVED***)
+                                                        .catch(reason => {
+                                                            console.log("Unknown 2:",reason);
+                                                      ***REMOVED***)
                                               ***REMOVED***)
-                                                .catch(err => {
-                                                    console.log("Day Error 2")
+                                                .catch(reason => {
+                                                    console.log("Error putting in Total Tests?",reason)
                                               ***REMOVED***)
-                                            throw 'No posts?\n'
                                       ***REMOVED***
                                   ***REMOVED*** catch (e) {
                                         console.log("SOME ERROR:",e)

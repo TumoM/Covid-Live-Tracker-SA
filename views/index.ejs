@@ -3,7 +3,7 @@
 <div class="container segment main center">
     <div id="myTitle" class="">
         <h1 id="t1" class="ui header block">
-            <span><%=data%></span>
+            Covid-19 Tracker SA
         </h1>
     </div>
     <div class="ui section divider"></div>
@@ -15,7 +15,7 @@
             <div class="ui statistics three stackable left aligned">
                 <div class="ui red large statistic">
                     <div class="ui large value">
-                        31,200
+                        <%=data.totalCases%>
                     </div>
                     <div class="label">
                         Total Cases
@@ -24,7 +24,7 @@
                 <br>
                 <div class="statistic orange">
                     <div class="value">
-                        25
+                        <%=data.totalDeaths%>
                     </div>
                     <div class="label">
                         Total Deaths
@@ -33,10 +33,19 @@
                 <br>
                 <div class="statistic blue">
                     <div class="value">
-                        450
+                        <%=data.totalRecoveries%>
                     </div>
                     <div class="label">
                         Total Recoveries
+                    </div>
+                </div>
+                <br>
+                <div class="statistic green">
+                    <div class="value">
+                        <%=data.totalTests%>
+                    </div>
+                    <div class="label">
+                        Total Tests
                     </div>
                 </div>
             </div>

@@ -105,7 +105,7 @@ rp(url)
         let parsed = false
         knex('dates').where({date}).then(rows => {
             console.log("Row Count:", rows.length);
-            if (rows.length > 0 && rows[0].parsed) {
+            if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
                 parsed = true;
                 console.log("Skipping");
             }

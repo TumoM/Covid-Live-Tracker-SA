@@ -315,7 +315,19 @@ rp(url)
                                             const paragraphs = HTMLParser.parse(html)
                                             //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
                                             // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
-                                            let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
+                                            let testPar = paragraphs.querySelectorAll("p")
+
+                                            let cases = testPar.find((currentVal,index,arr)=>{
+                                                let paragraph = currentVal.text.match(/total.*confirmed.*(covid-19)? cases.*?\s[\s??\d+]+/i)
+                                                if (!paragraph){
+                                                    return false;
+                                                }
+                                                else{
+                                                    paragraph = paragraph[0].split(".")[0]
+                                                    return true
+                                                }
+                                            })
+                                            let tests = testPar.find((currentVal,index,arr)=>{
                                                 let paragraph = currentVal.text.match(/total number of.*tests\sconducted.*?\s[\s??\d+]+/i)
                                                 if (!paragraph){
                                                     return false;
@@ -325,18 +337,34 @@ rp(url)
                                                     return true
                                                 }
                                             })
+                                            let death = paragraphs.text.match(/deaths[^\.].*?\s[\s??\d+]+/i)[0]
+
                                             console.log("TestPar",testPar.text);
-                                            let totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                            let totalTests = tests.text.trim().match(/\s((\d+\s+)*\d+)/);
                                             if (totalTests){
                                                 totalTests = parseNumber(totalTests[0].trim());
                                             }
-                                            console.log("Value:",totalTests);
+                                            let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
+                                            if (totalCases){
+                                                totalCases = parseNumber(totalCases[0].trim());
+                                            }
+
+                                            console.log("Total Tests:",totalTests);
+                                            console.log("Total Cases:",totalCases);
                                             let data = {
                                                 date: parsedDate,
                                                 parsed: true,
-                                                totalTests: totalTests,
+                                                totalTests,
+                                                totalCases,
                                                 maybeValid: true
                                             }
+                                            let totalDeaths = death.trim().match(/\s((\d+\s+)*\d+)/);
+                                            if (totalDeaths){
+                                                totalDeaths = parseNumber(totalDeaths[0].trim());
+                                            }
+                                            console.log("Total Deaths:",totalDeaths);
+                                            data.totalDeaths = totalDeaths
+
                                             console.log(data)
                                             knex('dates').select('totalTests')
                                                 .whereNull('totalTests')

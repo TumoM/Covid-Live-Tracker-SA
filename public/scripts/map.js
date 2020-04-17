@@ -101,18 +101,18 @@ var data1 = [
     ['ZA-GT', 'ZA-NL']
 ];
 
-const provinceList = [
-    'ZA-NW',
-    'ZA-EC',
-    'ZA-FS',
-    'ZA-MP',
-    'ZA-NC',
-    'ZA-LP',
-    'ZA-WC',
-    'ZA-GT',
-    'ZA-NL',
-    'ZA-UN'
-]
+const provinceList = {
+    "NORTH WEST": 'ZA-NW',
+    "EASTERN CAPE": 'ZA-EC',
+    "FREE TATE": 'ZA-FS',
+    "MPUMALANGA": 'ZA-MP',
+    "NORTHERN CAPE": 'ZA-NC',
+    "LIMPOPO": 'ZA-LP',
+    "WESTERN CAPE": 'ZA-WC',
+    "GAUTENG": 'ZA-GT',
+    "KWAZULU-NATAL": 'ZA-NL',
+    "UNALLOCATED": 'ZA-UN'
+}
 
 const dummyData = {
     'ZA-NW': 19,
@@ -148,16 +148,23 @@ function colourCountries(data) {
     }
 }
 
-function legendSetup() {
-    let width = $('label key')[0].getBoundingClientRect().width;
+function legendSetup(max,min,interval) {
+    // setup text labels
+    interval = Math.round(interval)
+    let legendTexts = $('.keyText')
+    legendTexts[0].textContent=`0 to ${min-1}`
+    legendTexts[1].textContent=`${min} to ${min+interval-1}`
+    legendTexts[2].textContent=`${max-interval*3} to ${max-interval*2-1}`
+    legendTexts[3].textContent=`${max-interval*2} to ${max-interval-1}`
+    legendTexts[4].textContent=`${max-interval} to ${max}`
+    // setup width
+    let width = $('#key')[0].getBoundingClientRect().width;
     $('.lightBack').width(width)
     let length = legendTitle.getComputedTextLength()
     legendTitle.setAttributeNS(null,"x",(width-length)/2-xPen);
 }
-
-colourCountries(data1)
-
-function setColours(dummyData, myProvinceList = provinceList) {
+// colourCountries(data1)
+function setColours(dummyData) {
     // Vars
     let max = 0,
         min = Infinity,
@@ -172,14 +179,6 @@ function setColours(dummyData, myProvinceList = provinceList) {
         []
     ];
 
-    let values = [];
-    for (let i in dummyData2) {
-        for (let j in dummyData2[i]) {
-            if (parseFloat(dummyData2[i][j]) > 0) {
-                values.push(parseFloat(dummyData2[i][j]));
-            }
-        }
-    }
     // Get Range
     Object.keys(dummyData).forEach((k) => {
         if (dummyData[k] !== null) {
@@ -197,9 +196,6 @@ function setColours(dummyData, myProvinceList = provinceList) {
     Object.keys(dummyData).forEach(prov => {
         if (prov !== 'ZA-UN') {
             let val = dummyData[prov];
-            console.log(`Max-I:${max-interval*2}, Val: ${val}`);
-            console.log((max - interval * 2) <= val);
-
             if ((max - interval <= val) && (val < max)) {
                 answers[4].push(prov)
             } else if (max - (interval * 2) < val) {
@@ -211,8 +207,9 @@ function setColours(dummyData, myProvinceList = provinceList) {
             }
         }
     })
+    console.log("ANSWERS:",answers)
     colourCountries(answers)
-    legendSetup()
+    legendSetup(max,min,interval)
 }
-
-setColours(dummyData)
+//
+// setColours(dummyData)

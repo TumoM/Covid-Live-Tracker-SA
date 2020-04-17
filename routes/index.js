@@ -10,13 +10,36 @@ const knex = require('knex')({
   ***REMOVED***
 ***REMOVED***);
 
+const provinceList = {
+    "NORTH WEST": 'ZA-NW',
+    "EASTERN CAPE": 'ZA-EC',
+    "FREE STATE": 'ZA-FS',
+    "MPUMALANGA": 'ZA-MP',
+    "NORTHERN CAPE": 'ZA-NC',
+    "LIMPOPO": 'ZA-LP',
+    "WESTERN CAPE": 'ZA-WC',
+    "GAUTENG": 'ZA-GT',
+    "KWAZULU-NATAL": 'ZA-NL',
+    "UNALLOCATED": 'ZA-UN'
+***REMOVED***
+
 
 router.get("/", function (req, res) {
     // TODO Load data for the day.
     getSummary()
         .then(value => {
-            console.log("Sending this var:",value)
-            res.render("index",{data:value***REMOVED***);
+            console.log("Sending these stats:",value)
+            getProvinces().then(value1 => {
+                let provCases = {***REMOVED***
+                let provDeaths = {***REMOVED***
+                value1.forEach(province =>{
+                    provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
+                    provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
+              ***REMOVED***)
+                console.log("Prov Cases:",provCases)
+                console.log("Prov Deaths:",provDeaths)
+                res.render("index",{data:value,provCases:provCases,provDeaths:provDeaths***REMOVED***);
+          ***REMOVED***)
 
       ***REMOVED***)
 ***REMOVED***)
@@ -50,6 +73,18 @@ let getSummary = function() {
       ***REMOVED***);
 ***REMOVED***
 
+let getProvinces = function() {
+    return knex('provinceDays')
+        .select("provinceName","provDate","caseCount","deathCount")
+        .orderBy("provDate",'desc')
+        .limit(10)
+        .then(function(res1) {
+            return res1
+      ***REMOVED***)
+        .catch(reason => {
+            console.log("You messed up?",reason)
+      ***REMOVED***);
+***REMOVED***
 
 
 module.exports = router;

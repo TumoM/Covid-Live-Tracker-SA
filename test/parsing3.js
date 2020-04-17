@@ -47,3 +47,17 @@ let x = function() {
       ***REMOVED***);
 ***REMOVED***
 
+let getProinces = function() {
+    return knex('provinceDays')
+        .select("provinceName","provDate","caseCount","deathCount")
+        .orderBy("provDate",'desc')
+        .limit(10)
+        .then(function(res1) {
+            console.log("Res 1:",res1)
+      ***REMOVED***)
+        .catch(reason => {
+            console.log("You messed up?",reason)
+      ***REMOVED***);
+***REMOVED***
+
+getProinces()

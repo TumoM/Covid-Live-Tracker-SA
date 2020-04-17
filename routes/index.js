@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var numeral = require('numeral');
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -28,6 +29,10 @@ router.get("/", function (req, res) {
     // TODO Load data for the day.
     getSummary()
         .then(value => {
+            value.totalCases = numeral(value.totalCases).format('0,0');
+            value.totalDeaths = numeral(value.totalDeaths).format('0,0');
+            value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
+            value.totalTests = numeral(value.totalTests).format('0,0');
             console.log("Sending these stats:",value)
             getProvinces().then(value1 => {
                 let provCases = {}
@@ -35,7 +40,11 @@ router.get("/", function (req, res) {
                 value1.forEach(province =>{
                     provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                     provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
+/*
+                    provCases[provinceList[province.provinceName.toUpperCase()]] = numeral(province.caseCount).format('0,0');
+                    provDeaths[provinceList[province.provinceName.toUpperCase()]] = numeral(province.deathCount).format('0,0');*/
                 })
+
                 console.log("Prov Cases:",provCases)
                 console.log("Prov Deaths:",provDeaths)
                 res.render("index",{data:value,provCases:provCases,provDeaths:provDeaths});

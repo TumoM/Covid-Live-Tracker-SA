@@ -1,8 +1,7 @@
 <%- include("./partials/header") %>
-
 <div class="container segment main center">
     <div id="myTitle" class="">
-        <h1 id="t1" class="ui header block">
+        <h1 id="t1" class="ui header">
             Covid-19 Tracker SA
         </h1>
     </div>
@@ -12,40 +11,40 @@
     <h2 class="ui header block top attached">Summary Statistics</h2>
     <section class="ui segment padded section expand raised attached grid">
         <div class="column">
-            <div class="ui statistics three stackable left aligned">
-                <div class="ui red large statistic">
-                    <div class="ui large value">
-                        <%=data.totalCases%>
+            <div class="ui statistics">
+                <div class="orange statistic">
+                    <div class="large label">
+                        <h2 class="ui huge header">Covid-19 Cases:</h2>
                     </div>
-                    <div class="label">
-                        Total Cases
+                    <div class="ui large value">
+                        <%= data.totalCases %>
                     </div>
                 </div>
                 <br>
-                <div class="statistic orange">
+                <div class="statistic bold red">
+                    <div class="large label">
+                        <h2 class="ui huge header">Covid-19 Deaths:</h2>
+                    </div>
                     <div class="value">
                         <%=data.totalDeaths%>
-                    </div>
-                    <div class="label">
-                        Total Deaths
                     </div>
                 </div>
                 <br>
                 <div class="statistic blue">
+                    <div class="">
+                        <h2 class="ui huge header">Covid-19 Recoveries:</h2>
+                    </div>
                     <div class="value">
                         <%=data.totalRecoveries%>
-                    </div>
-                    <div class="label">
-                        Total Recoveries
                     </div>
                 </div>
                 <br>
                 <div class="statistic green">
+                    <div class="label">
+                        <h2 class="ui huge header">Covid-19 Tests:</h2>
+                    </div>
                     <div class="value">
                         <%=data.totalTests%>
-                    </div>
-                    <div class="label">
-                        Total Tests
                     </div>
                 </div>
             </div>
@@ -92,6 +91,6 @@
 
 <%- include("./partials/footer") %>
 <script>
-    let dummyD = <%- JSON.stringify(provCases) %>
-    setColours(dummyD)
+    setColours(<%- JSON.stringify(provCases) %>)
+    setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>)
 </script>

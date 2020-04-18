@@ -37,9 +37,12 @@ router.get("/", function (req, res) {
             getProvinces().then(value1 => {
                 let provCases = {}
                 let provDeaths = {}
+                let provRecoveries = {}
                 value1.forEach(province =>{
                     provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                     provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
+                    provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
+                    console.log("Province:",province)
 /*
                     provCases[provinceList[province.provinceName.toUpperCase()]] = numeral(province.caseCount).format('0,0');
                     provDeaths[provinceList[province.provinceName.toUpperCase()]] = numeral(province.deathCount).format('0,0');*/
@@ -47,7 +50,8 @@ router.get("/", function (req, res) {
 
                 console.log("Prov Cases:",provCases)
                 console.log("Prov Deaths:",provDeaths)
-                res.render("index",{data:value,provCases:provCases,provDeaths:provDeaths});
+                console.log("Prov Recovs:",provRecoveries)
+                res.render("index",{data:value,provCases,provDeaths,provRecoveries});
             })
 
         })
@@ -84,7 +88,7 @@ let getSummary = function() {
 
 let getProvinces = function() {
     return knex('provinceDays')
-        .select("provinceName","provDate","caseCount","deathCount")
+        .select("provinceName","provDate","caseCount","deathCount","recovered")
         .orderBy("provDate",'desc')
         .limit(10)
         .then(function(res1) {

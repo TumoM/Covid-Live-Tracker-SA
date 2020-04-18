@@ -101,15 +101,29 @@ tspan{
 
 
 
+#svgColumn {
+	//transition: padding-left 0.2s ease-in;
+	transition: width 0.5s linear;
+
+	&.svgFocus {
+		padding-left: 20em;
+	}
+}
+
 #provStatsContainer{
 	margin-bottom: 0;
 	overflow-x: visible;
 	overflow-y: scroll;
 	height: 100%;
+	transition: width 0.5s linear;
 	&.scroll-pane
 	{
 		overflow-x: visible;
 		overflow-y: auto;
+	}
+	&.sidebarHidden{
+		//display: none !important;
+		width: 0 !important;
 	}
 }
 
@@ -125,5 +139,6 @@ tspan{
 		border-radius: 25px;
 	}
 }
+
 
 

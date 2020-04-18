@@ -18,8 +18,8 @@ module.exports = DeathModel
 // let y = new age("Swag 2", 1,0,100)
 // console.log(y);
 // console.log(y.province);
-// console.log(y.recovories);
-// y.recovories = 0;
-// console.log(y.recovories);
+// console.log(y.recoveries);
+// y.recoveries = 0;
+// console.log(y.recoveries);
 
   

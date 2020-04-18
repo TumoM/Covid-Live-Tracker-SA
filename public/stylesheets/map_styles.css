@@ -47,12 +47,40 @@
   opacity: 0;
 ***REMOVED***
 
-.lightBack {
-  fill: rgba(190, 190, 190, 0.801);
+.lightBack, #tooltipBackground {
+  fill: rgba(190, 190, 190, 0.31);
+  stroke: #0000007a;
 ***REMOVED***
 
 tspan.legend {
   dominant-baseline: unset;
+***REMOVED***
+
+#mapContainer {
+  padding-bottom: 0.1rem;
+  padding-top: 0;
+***REMOVED***
+
+.ui.cards > .card {
+  margin-bottom: 0;
+  margin-left: 1.5em;
+***REMOVED***
+.ui.cards > .card:last-of-type {
+  margin-bottom: 1rem;
+***REMOVED***
+.ui.cards > .card > .main.content {
+  padding-top: 0.5rem;
+  padding-bottom: 0.3rem;
+***REMOVED***
+.ui.cards > .card > .extra.content {
+  padding: 0.3rem 0;
+***REMOVED***
+
+#provStatsContainer {
+  margin-bottom: 0;
+  overflow-x: visible;
+  overflow-y: scroll;
+  height: 100%;
 ***REMOVED***
 
 /*# sourceMappingURL=map_styles.css.map***REMOVED***/

@@ -133,7 +133,7 @@ function showTooltip(evt) {
 
 function hideTooltip() {
     // TODO Un-hide
-    tooltip.style.opacity=0;
+    // tooltip.style.opacity=0;
     // tooltip.setAttributeNS(null, "visibility", "hidden");
 
 ***REMOVED***
@@ -250,5 +250,26 @@ function CommaFormatted(amount) {
     amount = minus + amount;
     return amount;
 ***REMOVED***
+
+console.log("Sidebar",$('.left.sidebar'))
+$('.ui.sidebar')
+    .sidebar({
+        dimPage: true,
+        context: $('.sidebar.items')
+  ***REMOVED***)
+    .sidebar('attach events', '.toggle.button')
+;
+$('.toggle.button')
+    .removeClass('disabled')
+    .click((event)=>{
+        console.log("you clicked me!")
+        $('.ui.sidebar').removeClass("animating")
+***REMOVED***)
+;
+console.log("MAX HEIGHT:",$("#svg-1").height() + Number($("#svgColumn").css('padding-top').split(/\D/)[0])  )
+$("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
+$(window).resize(()=>{
+    $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
+***REMOVED***)
 //
 // setColours(dummyData)

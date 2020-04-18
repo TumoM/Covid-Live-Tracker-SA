@@ -1,4 +1,5 @@
 <%- include("./partials/header") %>
+<div class="pusher">
 <div class="container segment main center">
     <div id="myTitle" class="">
         <h1 id="t1" class="ui header">
@@ -55,15 +56,105 @@
     <%# Map %>
     <h2 class="ui header block top attached">Provincial Map</h2>
     <section class="ui segment section expand raised attached grid">
-        <div class="ui three column grid row">
-            <div class="four wide column left aligned">
-                    <p>Left Sidebar</p>
+        <div class="ui three column grid row" id="mapContainer">
+            <div class="four wide column" id="provStatsContainer">
+                <div class="ui cards">
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng2
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng2
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng2
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng2
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="main content">
+                            <div class="header">
+                                Guteng2
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui two description">
+                                Active: <span class="provStats">10000</span> <br>
+                                Deaths: <span class="provStats">200</span> <br>
+                                Recoveries: <span class="provStats">20</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="ten wide column">
+
+            <div id="svgColumn" class="ten wide column">
                 <%- include("./map/mapFile") %>
             </div>
+
             <div class="two wide column left aligned">
-                    3
+                <div class="ui secondary labeled icon toggle button">
+                    <i class="left arrow icon"></i>
+                    Trigger Sidebar
+                </div>
             </div>
         </div>
     </section>
@@ -87,9 +178,10 @@
     </section>
     <div class="ui section divider"></div>
 
+    </div>
 </div>
-
 <%- include("./partials/footer") %>
+
 <script>
     setColours(<%- JSON.stringify(provCases) %>)
     setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)

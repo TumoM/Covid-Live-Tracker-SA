@@ -44,6 +44,7 @@ let width = 415;
 let legendTitle = $('#legTitle')[0];
 const xPen = 92,
     yPen = 220;
+let legendSet=false;
 
 let provCase = {***REMOVED***
 let provDeath = {***REMOVED***
@@ -133,8 +134,6 @@ function hideTooltip() {
 
 ***REMOVED***
 
-
-// colourCountry('algeria', 2)
 ***REMOVED***
 ***REMOVED*** @param {string***REMOVED*** name
 ***REMOVED*** @param {number|string***REMOVED*** colour
@@ -142,14 +141,12 @@ function hideTooltip() {
 function colourCountry(name, colour) {
     var country = document.getElementById(name);
     //country.className += ' colour' + colour;
+    console.log('NAME',name)
+    $("#"+name).removeClass()
+    $("#"+name).addClass("land tooltip-trigger valid")
     country.classList.add('colour' + colour)
 
 ***REMOVED***
-
-
-
-
-
 
 ***REMOVED***
 ***REMOVED*** @param {[][]***REMOVED*** data
@@ -172,10 +169,15 @@ function legendSetup(max,min,interval) {
     legendTexts[3].textContent=`${CommaFormatted(max-interval*2)***REMOVED*** to ${CommaFormatted(max-interval-1)***REMOVED***`
     legendTexts[4].textContent=`${CommaFormatted(max-interval)***REMOVED*** to ${CommaFormatted(max)***REMOVED***`
     // setup width
-    let width = $('#key')[0].getBoundingClientRect().width;
-    $('.lightBack').width(width)
-    let length = legendTitle.getComputedTextLength()
-    legendTitle.setAttributeNS(null,"x",(width-length)/2-xPen);
+    if (!legendSet) {
+        let width = $('#key')[0].getBoundingClientRect().width;
+        $('.lightBack').width(width)
+        let length = legendTitle.getComputedTextLength()
+        legendTitle.setAttributeNS(null, "x", (width - length) / 2 - xPen);
+  ***REMOVED***
+    else{
+        legendSet = true;
+  ***REMOVED***
 ***REMOVED***
 // colourCountries(data1)
 function setColours(dummyData) {
@@ -287,10 +289,12 @@ function setupSideBCards(){
     let province;
 
     for (const [nameFull, id] of Object.entries(provinceList)) {
-        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recovories:provRecoveries[id]***REMOVED***
+        console.log("This recovery:",provRecoveries[id])
+        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id]***REMOVED***
         cardList.push(province);
   ***REMOVED***
     populateSideCards(cardList.sort(compareValues('cases')))
+    console.log("All recovery:",provRecoveries)
 
 ***REMOVED***
 
@@ -302,14 +306,14 @@ function populateSideCards(cardList){
     let counter = 0;
     let cards = $(".card");
     let figures;
-    // console.log()
+
     cardList.forEach(item=>{
         // the html block containing the spans and br tags
         figures = cards[counter].children[1].children[0].children;
         cards[counter].firstElementChild.firstElementChild.innerText=item.name // sets Card Heading.
         figures[0].innerText=CommaFormatted(item.cases);
         figures[2].innerText=CommaFormatted(item.deaths);
-        figures[4].innerText=CommaFormatted(item.recovories);
+        figures[4].innerText=CommaFormatted(item.recoveries);
         counter++
   ***REMOVED***)
 ***REMOVED***
@@ -343,6 +347,34 @@ $(document).ready(()=>{
             $("#svgColumn").toggleClass("fourteen wide svgFocus");
             $("#hideIcon").toggleClass("left long arrow icon");
             $("#hideIcon").toggleClass("right long arrow icon");
+
+
+      ***REMOVED***)
+    $('#filterC')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provCase)
+            populateSideCards(cardList.sort(compareValues('cases')))
+
+
+      ***REMOVED***)
+    $('#filterD')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provDeath)
+            populateSideCards(cardList.sort(compareValues('deaths')))
+
+
+
+      ***REMOVED***)
+    $('#filterR')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries)
+            populateSideCards(cardList.sort(compareValues('recoveries')))
 
 
       ***REMOVED***)

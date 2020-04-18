@@ -52,7 +52,7 @@ var tooltipText
 var tooltipRects
 let width = 415;
 let legendTitle = $('#legTitle')[0];
-const xPen = 42,
+const xPen = 92,
     yPen = 220;
 
 let provCase = {}
@@ -271,5 +271,18 @@ $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#sv
 $(window).resize(()=>{
     $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
 })
+
+$(document).ready(()=>{
+    $(function()
+    {
+        $('.scroll-pane').jScrollPane(
+            {
+                showArrows: true,
+                resizeSensor: true
+            }
+        );
+    });
+})
+
 //
 // setColours(dummyData)

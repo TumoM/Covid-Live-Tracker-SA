@@ -63,10 +63,14 @@ tspan.legend {
 
 .ui.cards > .card {
   margin-bottom: 0;
-  margin-left: 1.5em;
+  margin-left: 2em;
+  width: 100%;
 }
 .ui.cards > .card:last-of-type {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ui.cards > .card:first-of-type {
+  margin-top: 1.5rem;
 }
 .ui.cards > .card > .main.content {
   padding-top: 0.5rem;
@@ -75,12 +79,31 @@ tspan.legend {
 .ui.cards > .card > .extra.content {
   padding: 0.3rem 0;
 }
+.ui.cards > .card > .extra.content > .description {
+  width: 70%;
+  text-align: left;
+  margin: 0 auto;
+}
 
 #provStatsContainer {
   margin-bottom: 0;
   overflow-x: visible;
   overflow-y: scroll;
   height: 100%;
+}
+#provStatsContainer.scroll-pane {
+  overflow-x: visible;
+  overflow-y: auto;
+}
+
+#mapContainer .jspDrag {
+  border-radius: 25px;
+}
+#mapContainer .jspVerticalBar .jspArrow {
+  height: 0;
+}
+#mapContainer .jspTrack {
+  border-radius: 25px;
 }
 
 /*# sourceMappingURL=map_styles.css.map */

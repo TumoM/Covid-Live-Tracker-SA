@@ -182,7 +182,6 @@ function setColours(dummyData) {
         range = 0,
         interval = 0;
     let answers = [
-
         [],
         [],
         [],

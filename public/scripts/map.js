@@ -7,31 +7,9 @@
     ['ZA-GT', 'ZA-NL']
 ];
 
-const provinceList = {
-    "NORTH WEST": 'ZA-NW',
-    "EASTERN CAPE": 'ZA-EC',
-    "FREE TATE": 'ZA-FS',
-    "MPUMALANGA": 'ZA-MP',
-    "NORTHERN CAPE": 'ZA-NC',
-    "LIMPOPO": 'ZA-LP',
-    "WESTERN CAPE": 'ZA-WC',
-    "GAUTENG": 'ZA-GT',
-    "KWAZULU-NATAL": 'ZA-NL',
-    "UNALLOCATED": 'ZA-UN'
-***REMOVED***
 
-const dummyData = {
-    'ZA-NW': 19,
-    'ZA-EC': 88,
-    'ZA-FS': 96,
-    'ZA-MP': 21,
-    'ZA-NC': 16,
-    'ZA-LP': 23,
-    'ZA-WC': 587,
-    'ZA-GT': 865,
-    'ZA-NL': 443,
-    'ZA-UN': 15
-***REMOVED***
+
+
 
 const dummyData2 = [{
     'ZA-NW': 19,
@@ -46,6 +24,18 @@ const dummyData2 = [{
     'ZA-UN': 15
 ***REMOVED***]*/
 
+const provinceList = {
+    "NORTH WEST": 'ZA-NW',
+    "EASTERN CAPE": 'ZA-EC',
+    "FREE TATE": 'ZA-FS',
+    "MPUMALANGA": 'ZA-MP',
+    "NORTHERN CAPE": 'ZA-NC',
+    "LIMPOPO": 'ZA-LP',
+    "WESTERN CAPE": 'ZA-WC',
+    "GAUTENG": 'ZA-GT',
+    "KWAZULU-NATAL": 'ZA-NL',
+    "UNALLOCATED": 'ZA-UN'
+***REMOVED***
 
 var tooltip
 var tooltipText
@@ -58,6 +48,8 @@ const xPen = 92,
 let provCase = {***REMOVED***
 let provDeath = {***REMOVED***
 let provRecoveries = {***REMOVED***
+let cardList = []
+
 
 function displayName(name) {
     document.getElementById('country-name').firstChild.data = name;
@@ -228,6 +220,7 @@ function setProvs(cases,deaths,recoveries  ) {
     provDeath = deaths;
     provRecoveries = recoveries;
     console.log("Recovs 1:",recoveries)
+    setupSideBCards()
 ***REMOVED***
 
 function CommaFormatted(amount) {
@@ -249,6 +242,63 @@ function CommaFormatted(amount) {
     amount = n;
     amount = minus + amount;
     return amount;
+***REMOVED***
+
+function compareValues(key, order = 'desc') {
+    return function innerSort(a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // property doesn't exist on either object
+            return 0;
+      ***REMOVED***
+
+        const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        try{
+        if ( varA >  varB) {
+            comparison = 1;
+      ***REMOVED*** else if (varA < varB) {
+            comparison = -1;
+      ***REMOVED***
+      ***REMOVED***catch (e) {
+            console.log("Error",e);
+            console.log("-",varA)
+      ***REMOVED***
+        return (
+            (order === 'desc') ? (comparison***REMOVED*** -1) : comparison
+        );
+  ***REMOVED***;
+***REMOVED***
+
+function setupSideBCards(){
+    let province;
+
+    for (const [nameFull, id] of Object.entries(provinceList)) {
+        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recovories:provRecoveries[id]***REMOVED***
+        cardList.push(province);
+  ***REMOVED***
+    populateSideCards(cardList.sort(compareValues('cases')))
+
+***REMOVED***
+
+function populateSideCards(cardList){
+    // console.log("Card List:",cardList)
+    let counter = 0;
+    let cards = $(".card");
+    let figures;
+    // console.log()
+    cardList.forEach(item=>{
+        // console.log("ITEM:",)
+        figures = cards[counter].children[1].children[0].children;
+        cards[counter].firstElementChild.firstElementChild.innerText=item.name
+        figures[0].innerText=CommaFormatted(item.cases);
+        figures[2].innerText=CommaFormatted(item.deaths);
+        figures[4].innerText=CommaFormatted(item.recovories);
+        counter++
+  ***REMOVED***)
 ***REMOVED***
 
 console.log("Sidebar",$('.left.sidebar'))

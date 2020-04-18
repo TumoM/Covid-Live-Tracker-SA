@@ -18,7 +18,7 @@ const knex = require('knex')({
 ***REMOVED***);
 
 
-const PROVINCES = { // Name, [sick, dead]
+const PROVINCES = { // Name, [cases, deadArr]
     "GAUTENG": new Province("GAUTENG"),
     "WESTERN CAPE": new Province("WESTERN CAPE"),
     "KWAZULU–NATAL": new Province("KWAZULU–NATAL"),
@@ -163,10 +163,24 @@ rp(url)
                             deathCount = vars.length === 3 ? vars[2].trim().split(/\s+/)[0].trim()
                                 : vars.length === 4 ? vars[3].split(/\s+/)[0].trim()
                                     : 0;
-                            let tempProv = new Province(provinceName, caseCount);
-                            tempProv.totalDead = deathCount;
+                            let caseInt="", deathInt = ""
+                            caseCount.split(/\s/).forEach(digit => {
+                                caseInt += digit
+                          ***REMOVED***)
+                            caseInt = parseInt(caseInt)
+                            if (deathCount.length > 0) {
+                                deathCount.split(/\s/).forEach(digit => {
+                                    deathInt += digit
+                              ***REMOVED***)
+                                deathInt = parseInt(deathInt)
+                          ***REMOVED***
+                            else{
+                                deathInt = 0
+                              ***REMOVED***
+                            let tempProv = new Province(provinceName, caseInt);
+                            tempProv.deaths = deathInt;
                             tempProv.date = date;
-                            console.log(`${provinceName***REMOVED*** - Cases: ${tempProv.sick***REMOVED***, Dead: ${tempProv.totalDead***REMOVED***`)
+                            console.log(`${provinceName***REMOVED*** - Cases: ${tempProv.cases***REMOVED***, Dead: ${tempProv.deaths***REMOVED***`)
                             currentProvincesCasesDeaths[provinceName] = tempProv;
 
                             // TODO Build object to upload to ProvinceDays using insertIgnore funct below
@@ -178,8 +192,8 @@ rp(url)
                             let itemData = {
                                 provinceName,
                                 provDate,
-                                caseCount,
-                                deathCount
+                                caseCount:caseInt,
+                                deathCount:deathInt
                           ***REMOVED***;
                             knex(tableName).where({provDate, provinceName***REMOVED***)
                                 .then(rows => {
@@ -214,7 +228,7 @@ rp(url)
                     [provinceName, recoverCount] = line.trim().split("(")
                     provinceName = provinceName.trim();
                     const tempProvince = new Province(provinceName)
-                    tempProvince.recovered = recoverCount;
+                    tempProvince.recovories = recoverCount;
                     tempProvince.date = recoveryDate;
                     currentProvincesRecovery[provinceName] = tempProvince;
 

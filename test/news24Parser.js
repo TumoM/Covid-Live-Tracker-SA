@@ -228,7 +228,7 @@ rp(url)
                     [provinceName, recoverCount] = line.trim().split("(")
                     provinceName = provinceName.trim();
                     const tempProvince = new Province(provinceName)
-                    tempProvince.recovories = recoverCount;
+                    tempProvince.recoveries = recoverCount;
                     tempProvince.date = recoveryDate;
                     currentProvincesRecovery[provinceName] = tempProvince;
 

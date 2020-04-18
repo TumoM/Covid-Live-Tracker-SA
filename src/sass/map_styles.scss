@@ -48,12 +48,48 @@ flex-wrap: wrap;
 }
 
 .lightBack{
-	fill: rgba(190, 190, 190, 0.801);
+	fill: rgba(190, 190, 190, 0.31);
+	stroke: #0000007a;
+
+}
+
+#tooltipBackground{
+	@extend .lightBack;
 }
 
 tspan{
 	&.legend{
 		dominant-baseline: unset
 	}
+}
+#mapContainer{
+	padding-bottom: 0.1rem;
+	padding-top: 0;
+}
+
+
+.ui{
+	&.cards{
+		>.card{
+			margin-bottom:0;
+			margin-left:1.5em;
+			&:last-of-type{
+				margin-bottom: 1rem;
+			}
+			>.main.content{
+				padding-top: 0.5rem;
+				padding-bottom: 0.3rem;
+			}>.extra.content{
+			    padding: 0.3rem 0;
+			}
+		}
+	}
+}
+
+#provStatsContainer{
+	margin-bottom: 0;
+	overflow-x: visible;
+	overflow-y: scroll;
+	height: 100%;
 }
 

@@ -72,24 +72,58 @@ tspan{
 	&.cards{
 		>.card{
 			margin-bottom:0;
-			margin-left:1.5em;
+			margin-left:2em;
+
+			width:100%;
 			&:last-of-type{
-				margin-bottom: 1rem;
+				margin-bottom: 1.5rem;
+			***REMOVED***
+			&:first-of-type{
+				margin-top: 1.5rem;
 			***REMOVED***
 			>.main.content{
 				padding-top: 0.5rem;
 				padding-bottom: 0.3rem;
-			***REMOVED***>.extra.content{
+			***REMOVED***
+			>.extra.content{
 			    padding: 0.3rem 0;
+				>.description{
+					width: 70%;
+					text-align: left;
+					margin: 0 auto;
+				***REMOVED***
 			***REMOVED***
 		***REMOVED***
 	***REMOVED***
 ***REMOVED***
+
+
+
+
 
 #provStatsContainer{
 	margin-bottom: 0;
 	overflow-x: visible;
 	overflow-y: scroll;
 	height: 100%;
+	&.scroll-pane
+	{
+		overflow-x: visible;
+		overflow-y: auto;
+	***REMOVED***
 ***REMOVED***
+
+#mapContainer{
+	.jspDrag{
+		border-radius: 25px;
+	***REMOVED***
+
+	.jspVerticalBar .jspArrow {
+		height: 0;
+	***REMOVED***
+	.jspTrack {
+		border-radius: 25px;
+	***REMOVED***
+***REMOVED***
+
 

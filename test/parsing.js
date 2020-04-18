@@ -19,7 +19,7 @@ const knex = require('knex')({
 });
 
 
-const PROVINCES = { // Name, [sick, dead]
+const PROVINCES = { // Name, [cases, deadArr]
     "GAUTENG": Province,
     "WESTERN CAPE": Province,
     "KWAZULU–NATAL": Province,
@@ -209,8 +209,8 @@ rp(url)
                                             // console.log(currentProvinces);
                                             for (const [key, value] of Object.entries(currentProvinces)) {
                                                 // console.log(key);
-                                                // console.log("Sick",value.sick);
-                                                // console.log("Death Count:",value.totalDead);
+                                                // console.log("Sick",value.cases);
+                                                // console.log("Death Count:",value.deaths);
                                                 const date = value.date;
 
                                                 let testNum = 0;
@@ -223,12 +223,12 @@ rp(url)
                                                         badString += word
                                                     })
                                                 totalCase += value.sick;
-                                                totalDeath += value.totalDead;
+                                                totalDeath += value.deaths;
                                                 // Inserts into Provinces table
                                                 knex("provinceDays")
                                                     .insert({
                                                             provinceName: key, provDate:date,
-                                                            caseCount: value.sick, deathCount: value.totalDead,
+                                                            caseCount: value.sick, deathCount: value.deaths,
 
                                                         },
                                                         'id')
@@ -249,13 +249,13 @@ rp(url)
                                                             .insert({
                                                                 provinceId,
                                                                 deathDate: date,
-                                                                deathCount: value.totalDead,
+                                                                deathCount: value.deaths,
                                                                 deathMenCount: value.men,
                                                                 deathWomenCount: value.women
                                                             }, ['id']).then(id => {
                                                             let deathDateId = id[0];
                                                             let parsedValues = [];
-                                                            value.dead.forEach(deathDetails => {
+                                                            value.deadArr.forEach(deathDetails => {
                                                                 parsedValues.push({
                                                                     deathDateId,
                                                                     provinceName: deathDetails.province,

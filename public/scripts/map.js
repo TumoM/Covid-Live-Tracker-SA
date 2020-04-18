@@ -147,6 +147,11 @@ function colourCountry(name, colour) {
 
 }
 
+
+
+
+
+
 /**
  * @param {[][]} data
  */
@@ -291,7 +296,6 @@ function setupSideBCards(){
         cardList.push(province);
     }
     populateSideCards(cardList.sort(compareValues('cases')))
-    console.log("All recovery:",provRecoveries)
 
 }
 

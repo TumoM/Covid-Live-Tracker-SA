@@ -51,6 +51,9 @@ let provRecoveries = {***REMOVED***
 let cardList = []
 
 
+***REMOVED***
+***REMOVED*** @param {string***REMOVED*** name
+***REMOVED***/
 function displayName(name) {
     document.getElementById('country-name').firstChild.data = name;
 ***REMOVED***
@@ -132,6 +135,10 @@ function hideTooltip() {
 
 
 // colourCountry('algeria', 2)
+***REMOVED***
+***REMOVED*** @param {string***REMOVED*** name
+***REMOVED*** @param {number|string***REMOVED*** colour
+***REMOVED***/
 function colourCountry(name, colour) {
     var country = document.getElementById(name);
     //country.className += ' colour' + colour;
@@ -144,6 +151,9 @@ function colourCountry(name, colour) {
 
 
 
+***REMOVED***
+***REMOVED*** @param {[][]***REMOVED*** data
+***REMOVED***/
 function colourCountries(data) {
     for (var colour = 0; colour < data.length; colour++) {
         for (var country = 0; country < data[colour].length; country++) {
@@ -284,6 +294,9 @@ function setupSideBCards(){
 
 ***REMOVED***
 
+***REMOVED***
+***REMOVED*** @param {Array***REMOVED*** cardList
+***REMOVED***/
 function populateSideCards(cardList){
     // console.log("Card List:",cardList)
     let counter = 0;
@@ -291,9 +304,9 @@ function populateSideCards(cardList){
     let figures;
     // console.log()
     cardList.forEach(item=>{
-        // console.log("ITEM:",)
+        // the html block containing the spans and br tags
         figures = cards[counter].children[1].children[0].children;
-        cards[counter].firstElementChild.firstElementChild.innerText=item.name
+        cards[counter].firstElementChild.firstElementChild.innerText=item.name // sets Card Heading.
         figures[0].innerText=CommaFormatted(item.cases);
         figures[2].innerText=CommaFormatted(item.deaths);
         figures[4].innerText=CommaFormatted(item.recovories);
@@ -301,23 +314,12 @@ function populateSideCards(cardList){
   ***REMOVED***)
 ***REMOVED***
 
-console.log("Sidebar",$('.left.sidebar'))
-$('.ui.sidebar')
-    .sidebar({
-        dimPage: true,
-        context: $('.sidebar.items')
-  ***REMOVED***)
-    .sidebar('attach events', '.toggle.button')
-;
-$('.toggle.button')
-    .removeClass('disabled')
-    .click((event)=>{
-        console.log("you clicked me!")
-        $('.ui.sidebar').removeClass("animating")
-***REMOVED***)
-;
 console.log("MAX HEIGHT:",$("#svg-1").height() + Number($("#svgColumn").css('padding-top').split(/\D/)[0])  )
+
+// Sets the height of the left sidebar using the svg + padding on top and bot.
 $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
+
+// Resets the container height as the window size changes. i.e when svg-1 and padding changes.
 $(window).resize(()=>{
     $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
 ***REMOVED***)
@@ -332,6 +334,15 @@ $(document).ready(()=>{
           ***REMOVED***
         );
   ***REMOVED***);
+    $('.toggle.button')
+        .click((event)=>{
+            console.log("you clicked me!")
+            // $("#provStatsContainer").transition('slide right')
+            $("#provStatsContainer").toggleClass("sidebarHidden");
+            $("#svgColumn").toggleClass("ten wide");
+            $("#svgColumn").toggleClass("fourteen wide svgFocus");
+
+      ***REMOVED***)
 ***REMOVED***)
 
 //

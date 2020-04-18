@@ -85,15 +85,26 @@ tspan.legend {
   margin: 0 auto;
 ***REMOVED***
 
+#svgColumn {
+  transition: width 0.5s linear;
+***REMOVED***
+#svgColumn.svgFocus {
+  padding-left: 20em;
+***REMOVED***
+
 #provStatsContainer {
   margin-bottom: 0;
   overflow-x: visible;
   overflow-y: scroll;
   height: 100%;
+  transition: width 0.5s linear;
 ***REMOVED***
 #provStatsContainer.scroll-pane {
   overflow-x: visible;
   overflow-y: auto;
+***REMOVED***
+#provStatsContainer.sidebarHidden {
+  width: 0 !important;
 ***REMOVED***
 
 #mapContainer .jspDrag {

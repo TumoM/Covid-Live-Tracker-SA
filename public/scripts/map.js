@@ -147,6 +147,11 @@ function colourCountry(name, colour) {
 
 ***REMOVED***
 
+
+
+
+
+
 ***REMOVED***
 ***REMOVED*** @param {[][]***REMOVED*** data
 ***REMOVED***/
@@ -291,7 +296,6 @@ function setupSideBCards(){
         cardList.push(province);
   ***REMOVED***
     populateSideCards(cardList.sort(compareValues('cases')))
-    console.log("All recovery:",provRecoveries)
 
 ***REMOVED***
 

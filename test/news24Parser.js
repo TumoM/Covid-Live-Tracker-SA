@@ -44,7 +44,7 @@ let provincesList = [
 ]
 let totalCases = 0,
     totalDeaths = 0,
-    recoveryNumberTotal = 0,
+    totalRecoveries = 0,
     date;
 
 
@@ -53,7 +53,8 @@ function updateDaysGood(itemData) {
     let dateData = {
         totalCases,
         totalDeaths,
-        maybeValid: true,
+        totalRecoveries,
+        maybeValid: false,
         parsed: true
   ***REMOVED***
     console.log("Date:",itemData.provDate)
@@ -61,7 +62,7 @@ function updateDaysGood(itemData) {
     .select()
     .where({date:itemData.provDate***REMOVED***)
     .then(rows => {
-        console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
+        // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
         console.log("date in func",itemData.provDate)
         if (rows.length === 0) {
             dateData.date = itemData.provDate,
@@ -125,8 +126,8 @@ rp(url)
                 let recoveriesLines = soupBody.find('p').getText().split(":"),
                     recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
 
-                recoveryNumberTotal = getNumber(recoveriesLines[1]);
-                console.log(`Total Recovery:${recoveryNumberTotal***REMOVED***\n`)
+                totalRecoveries = getNumber(recoveriesLines[1]);
+                console.log(`Total Recovery:${totalRecoveries***REMOVED***\n`)
 
                 let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
                 let provinceRecoveries2 = []
@@ -193,7 +194,7 @@ rp(url)
                                                 console.log("Error inserting Province ", reason)
                                           ***REMOVED***)
                                   ***REMOVED*** else {
-                                        console.log("Already in.")
+                                        // console.log("Already in.")
                                         if (index === 9) {
                                             updateDaysGood(itemData);
                                       ***REMOVED***
@@ -251,7 +252,7 @@ rp(url)
                                         count+=1;
                                         if (count === 9){
                                             let dateData = {
-                                                totalRecoveries:recoveryNumberTotal,
+                                                totalRecoveries:totalRecoveries,
                                                 maybeValid: false,
                                                 parsed: true
                                           ***REMOVED***;
@@ -282,7 +283,11 @@ rp(url)
                                   ***REMOVED***)
                           ***REMOVED*** else {
                                 let valid = true;
-                                knex(tableName).update({recovered: recoveryNumberTotal***REMOVED***).where({provDate: recoveryDate***REMOVED***)
+                                let day,month,year;
+                                [day,month,year]= (new Date(date).toLocaleDateString().split('/',3))
+                                knex(tableName).update({recovered: itemData.recovered***REMOVED***)
+                                    .where({provDate: recoveryDate,provinceName:itemData.provinceName***REMOVED***)
+                                    .orWhere({provDate: ([year,day,month].join("-")),provinceName:itemData.provinceName***REMOVED***)
                                     .then(value => {
                                         console.log("Recovered for single province Updated")
                                         // count+=1;
@@ -295,7 +300,7 @@ rp(url)
                                         count+=1;
                                         if (count === 9){
                                             let dateData = {
-                                                totalRecoveries:recoveryNumberTotal,
+                                                totalRecoveries:totalRecoveries,
                                                 maybeValid: false,
                                                 parsed: true
                                           ***REMOVED***;

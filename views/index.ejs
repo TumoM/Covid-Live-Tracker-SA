@@ -57,7 +57,7 @@
     <h2 class="ui header block top attached">Provincial Map</h2>
     <section class="ui segment section expand raised attached grid">
         <div class="ui three column grid row stackable" id="mapContainer">
-            <div class="four wide column scroll-pane horizontal-only" id="provStatsContainer">
+            <div class="four wide column scroll-pane" id="provStatsContainer">
                 <div class="ui cards">
                     <div class="card">
                         <div class="main content">
@@ -201,12 +201,15 @@
                     </div>
                 </div>
             </div>
-
+<!--            <div class="ui secondary labeled icon toggle butto">-->
+                <div class="ui toggle icon button" >
+                    <i id="hideIcon" class="left long arrow icon"></i>
+                </div>
             <div id="svgColumn" class="ten wide column">
                 <%- include("./map/mapFile") %>
             </div>
 
-            <div class="two wide column left aligned">
+            <div class="one wide column left aligned">
                 <div class="ui secondary labeled icon toggle button">
                     <i class="left arrow icon"></i>
                     Trigger Sidebar

@@ -85,6 +85,10 @@ tspan.legend {
   margin: 0 auto;
 }
 
+.toggle.button {
+  height: min-content;
+}
+
 #svgColumn {
   transition: width 0.5s linear;
 }

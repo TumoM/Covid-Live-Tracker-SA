@@ -341,6 +341,9 @@ $(document).ready(()=>{
             $("#provStatsContainer").toggleClass("sidebarHidden");
             $("#svgColumn").toggleClass("ten wide");
             $("#svgColumn").toggleClass("fourteen wide svgFocus");
+            $("#hideIcon").toggleClass("left long arrow icon");
+            $("#hideIcon").toggleClass("right long arrow icon");
+
 
         })
 })

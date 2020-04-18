@@ -57,6 +57,7 @@ const xPen = 42,
 
 let provCase = {***REMOVED***
 let provDeath = {***REMOVED***
+let provRecoveries = {***REMOVED***
 
 function displayName(name) {
     document.getElementById('country-name').firstChild.data = name;
@@ -82,7 +83,7 @@ for (var i = 0; i < triggers.length; i++) {
     triggers[i].addEventListener('mouseout', hideTooltip);
 ***REMOVED***
 
-let x,y;
+let x, y;
 
 // Setup Legend
 triggers = document.getElementsByClassName('keyText');
@@ -123,7 +124,7 @@ function showTooltip(evt) {
     tooltipText.setAttributeNS(null,"x",(width-length)/2);
     $("#casesTooltip").text(CommaFormatted(provCase[id]))
     $("#deathsTooltip").text(CommaFormatted(provDeath[id]))
-    $("#recoveryTooltip").text("N/A")
+    $("#recoveryTooltip").text(CommaFormatted(provRecoveries[id]))
     tooltip.style.opacity=1;
     // tooltip.setAttributeNS(null, "visibility", "visible");
 
@@ -222,9 +223,11 @@ function setColours(dummyData) {
     legendSetup(max,min,interval)
 ***REMOVED***
 
-function setProvs(cases,deaths  ) {
+function setProvs(cases,deaths,recoveries  ) {
     provCase = cases;
     provDeath = deaths;
+    provRecoveries = recoveries;
+    console.log("Recovs 1:",recoveries)
 ***REMOVED***
 
 function CommaFormatted(amount) {

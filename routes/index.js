@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
-var numeral = require('numeral');
+const numeral = require('numeral');
+const rp = require("request-promise")
+const HTMLParser = require('node-html-parser')
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -51,7 +53,23 @@ router.get("/", function (req, res) {
                 console.log("Prov Cases:",provCases)
                 console.log("Prov Deaths:",provDeaths)
                 console.log("Prov Recovs:",provRecoveries)
-                res.render("index",{data:value,provCases,provDeaths,provRecoveries***REMOVED***);
+
+                let urlSA = "https://www.worldometers.info/coronavirus/country/south-africa/"
+                rp(urlSA)
+                    .then(function (data) {
+                        let title,style,div,script
+                        const root = HTMLParser.parse(data);
+                        const table1 = root.querySelector(".col-md-12")
+
+                        // [title,style,div,script] = table1.childNodes
+                        // console.log(root.structuredText);
+                        // Process html...
+                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,caseTableHTML:data***REMOVED***);
+
+                  ***REMOVED***)
+                    .catch(function (err) {
+                        // Crawling failed...
+                  ***REMOVED***);
           ***REMOVED***)
 
       ***REMOVED***)

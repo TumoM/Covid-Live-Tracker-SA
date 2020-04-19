@@ -78,6 +78,7 @@ rp(url)
                         knex('dates')
                             .where({date: d***REMOVED***)
                             .then(rows => {
+                                let totalTests = 0;
                                 console.log("Row Count:", rows.length);
                                 if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
 
@@ -98,7 +99,7 @@ rp(url)
                                       ***REMOVED***
                                   ***REMOVED***)
                                     console.log("TestPar",testPar.text);
-                                    let totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                    totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
                                     if (totalTests){
                                         totalTests = parseNumber(totalTests[0].trim());
                                   ***REMOVED***
@@ -327,22 +328,23 @@ rp(url)
                                                     return true
                                               ***REMOVED***
                                           ***REMOVED***)
+                                            let testString = ""
                                             let tests = testPar.find((currentVal,index,arr)=>{
-                                                let paragraph = currentVal.text.match(/total number of.*tests\sconducted.*?\s[\s??\d+]+/i)
+                                                let paragraph = currentVal.text.match(/(number.*?tests\sconducted)([\D]*?\d[\s??\d+]+)/i)
                                                 if (!paragraph){
                                                     return false;
                                               ***REMOVED***
                                                 else{
-                                                    paragraph = paragraph[0].split(".")[0]
+                                                    testString = paragraph[2].split(".")[0]
                                                     return true
                                               ***REMOVED***
                                           ***REMOVED***)
-                                            let death = paragraphs.text.match(/deaths[^\.].*?\s[\s??\d+]+/i)[0]
+                                            let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)[0]
 
                                             console.log("TestPar",testPar.text);
-                                            let totalTests = tests.text.trim().match(/\s((\d+\s+)*\d+)/);
+                                            let totalTests = testString.trim().match(/\s((\d+\s+)*\d+)/)[0];
                                             if (totalTests){
-                                                totalTests = parseNumber(totalTests[0].trim());
+                                                totalTests = parseNumber(totalTests.trim());
                                           ***REMOVED***
                                             let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
                                             if (totalCases){
@@ -370,25 +372,65 @@ rp(url)
                                                 .whereNull('totalTests')
                                                 .andWhere({date:parsedDate***REMOVED***)
                                                 .then(rows=>{
-                                                    console.log(rows.length)
-                                                    knex('dates').update({totalTests,maybeValid:false***REMOVED***).where({date:parsedDate***REMOVED***)
-                                                        .then(value => {
-                                                            console.log("Updated TTs2:",value)
-                                                            if (value === 0){
-                                                                knex('dates').insert(data).then(value1 => {
-                                                                    console.log("Inserted my man")
-                                                              ***REMOVED***).catch(reason => {
-                                                                    console.log("Some errrr:",reason)
+                                                            console.log(rows.length)
+                                                            knex('dates').update({totalTests,maybeValid:false***REMOVED***).where({date:parsedDate***REMOVED***)
+                                                                .then(value => {
+                                                                    console.log("Updated TTs2:",value)
+                                                                    if (value === 0){
+                                                                        knex('dates').insert(data).then(value1 => {
+                                                                            console.log("Inserted my man")
+                                                                            knex.raw('WITH preTable AS (\n' +
+                                                                                '   SELECT\n' +
+                                                                                '      date,\n' +
+                                                                                '      "totalCases",\n' +
+                                                                                '      "totalDeaths",\n' +
+                                                                                '        "totalRecoveries",\n' +
+                                                                                '      LAG("totalCases",1)\n' +
+                                                                                '          OVER (\n' +
+                                                                                '            ORDER BY date\n' +
+                                                                                '            ) prevCases,\n' +
+                                                                                '      LAG("totalDeaths",1)\n' +
+                                                                                '          OVER (\n' +
+                                                                                '            ORDER BY date\n' +
+                                                                                '            ) prevDeaths,\n' +
+                                                                                '          LAG("totalRecoveries",1)\n' +
+                                                                                '            OVER(\n' +
+                                                                                '                ORDER BY date\n' +
+                                                                                '                ) prevRecoveries\n' +
+                                                                                '   FROM dates\n' +
+                                                                                '   ORDER BY date\n' +
+                                                                                ')\n' +
+                                                                                'select\n' +
+                                                                                '       date,\n' +
+                                                                                '       prevRecoveries as "prevRecoveries",\n' +
+                                                                                '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                                                                                '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                                                                                'from preTable\n' +
+                                                                                'order by date desc\n' +
+                                                                                'limit 1;')
+                                                                                .then(prevVals=>{
+                                                                                    knex('dates').update({
+                                                                                        dailyNew:prevVals.rows[0].dailyNew,
+                                                                                        dailyDeaths:prevVals.rows[0].dailyDeaths,
+                                                                                        totalRecoveries:prevVals.rows[0].prevRecoveries
+                                                                                  ***REMOVED***).where('date','=',parsedDate)
+                                                                                        .catch(reason => {
+                                                                                            log('WHAAAAAT?',reason)
+                                                                                      ***REMOVED***)
+                                                                              ***REMOVED***)
+                                                                      ***REMOVED***).catch(reason => {
+                                                                            console.log("Some errrr:",reason)
+                                                                      ***REMOVED***)
+                                                                  ***REMOVED***
                                                               ***REMOVED***)
-                                                          ***REMOVED***
+                                                                .catch(reason => {
+                                                                    console.log("Unknown 2:",reason);
+                                                              ***REMOVED***)
                                                       ***REMOVED***)
                                                         .catch(reason => {
-                                                            console.log("Unknown 2:",reason);
+                                                            console.log("Error putting in Total Tests?",reason)
                                                       ***REMOVED***)
-                                              ***REMOVED***)
-                                                .catch(reason => {
-                                                    console.log("Error putting in Total Tests?",reason)
-                                              ***REMOVED***)
+
                                       ***REMOVED***
                                   ***REMOVED*** catch (e) {
                                         console.log("SOME ERROR:",e)
@@ -421,7 +463,7 @@ rp(url)
         // Pull the stats off a URL
   ***REMOVED***)
     .catch(function (err) {
-        console.log(err)
+        console.log("WOOOOW",err)
   ***REMOVED***);
 const upsert = (params) => {
     const {table, object***REMOVED*** = params;

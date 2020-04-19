@@ -130,7 +130,7 @@ function showTooltip(evt) {
 
 function hideTooltip() {
     // TODO Un-hide
-    // tooltip.style.opacity=0;
+    tooltip.style.opacity=0;
     // tooltip.setAttributeNS(null, "visibility", "hidden");
 
 ***REMOVED***

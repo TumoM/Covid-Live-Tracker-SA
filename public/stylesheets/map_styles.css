@@ -17,24 +17,64 @@
 }
 
 /* chloropleth map */
-.colour0 {
+.colour10 {
   fill: #b9b9b9;
 }
 
-.colour1 {
+.colour11 {
   fill: #fc9297;
 }
 
-.colour2 {
+.colour12 {
   fill: #D87582;
 }
 
-.colour3 {
+.colour13 {
   fill: #b82020;
 }
 
-.colour4 {
+.colour14 {
   fill: #830000;
+}
+
+.colour20 {
+  fill: #b9b9b9;
+}
+
+.colour21 {
+  fill: #cbb946;
+}
+
+.colour22 {
+  fill: #d8af48;
+}
+
+.colour23 {
+  fill: #b89220;
+}
+
+.colour24 {
+  fill: #6d5f00;
+}
+
+.colour30 {
+  fill: #b9b9b9;
+}
+
+.colour31 {
+  fill: #1698fc;
+}
+
+.colour32 {
+  fill: #165dd8;
+}
+
+.colour33 {
+  fill: #2016b8;
+}
+
+.colour34 {
+  fill: #001683;
 }
 
 #svg-1 {

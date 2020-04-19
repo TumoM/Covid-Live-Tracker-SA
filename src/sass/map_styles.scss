@@ -1,8 +1,20 @@
-$colour0: #b9b9b9;
-$colour1: #fc9297;
-$colour2: #D87582;
-$colour3: #b82020;
-$colour4: #830000;
+$colour20: #b9b9b9;
+$colour21: #cbb946;
+$colour22: #d8af48;
+$colour23: #b89220;
+$colour24: #6d5f00;
+
+$colour10: #b9b9b9;
+$colour11: #fc9297;
+$colour12: #D87582;
+$colour13: #b82020;
+$colour14: #830000;
+
+$colour30: #b9b9b9;
+$colour31: #1698fc;
+$colour32: #165dd8;
+$colour33: #2016b8;
+$colour34: #001683;
 
 %equal-heights {
 display: flex;
@@ -28,11 +40,26 @@ flex-wrap: wrap;
 }
 
 /* chloropleth map */
-.colour0 {fill: $colour0;}
-.colour1 {fill: $colour1;}
-.colour2 {fill: $colour2;}
-.colour3 {fill: $colour3;}
-.colour4 {fill: $colour4;}
+// Cases
+.colour10 {fill: $colour10;}
+.colour11 {fill: $colour11;}
+.colour12 {fill: $colour12;}
+.colour13 {fill: $colour13;}
+.colour14 {fill: $colour14;}
+
+// Deaths
+.colour20 {fill: $colour20;}
+.colour21 {fill: $colour21;}
+.colour22 {fill: $colour22;}
+.colour23 {fill: $colour23;}
+.colour24 {fill: $colour24;}
+
+// Recovered
+.colour30 {fill: $colour30;}
+.colour31 {fill: $colour31;}
+.colour32 {fill: $colour32;}
+.colour33 {fill: $colour33;}
+.colour34 {fill: $colour34;}
 
 #svg-1
 {

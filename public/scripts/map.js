@@ -45,6 +45,7 @@ let legendTitle = $('#legTitle')[0];
 const xPen = 92,
     yPen = 220;
 let legendSet=false;
+let colourVal=1;
 
 let provCase = {}
 let provDeath = {}
@@ -138,13 +139,12 @@ function hideTooltip() {
  * @param {string} name
  * @param {number|string} colour
  */
-function colourCountry(name, colour) {
+function colourCountry(name, colour,colourTag) {
     var country = document.getElementById(name);
     //country.className += ' colour' + colour;
     $("#"+name).removeClass()
     $("#"+name).addClass("land tooltip-trigger valid")
-    country.classList.add('colour' + colour)
-
+    country.classList.add('colour' + colourTag+""+colour)
 }
 
 
@@ -155,10 +155,10 @@ function colourCountry(name, colour) {
 /**
  * @param {[][]} data
  */
-function colourCountries(data) {
+function colourCountries(data,colourTag=1) {
     for (var colour = 0; colour < data.length; colour++) {
         for (var country = 0; country < data[colour].length; country++) {
-            colourCountry(data[colour][country], colour);
+            colourCountry(data[colour][country], colour,colourTag);
         }
     }
 }
@@ -167,11 +167,17 @@ function legendSetup(max,min,interval) {
     // setup text labels
     interval = Math.round(interval)
     let legendTexts = $('.keyText')
-    legendTexts[0].textContent=`0 to ${CommaFormatted(min-1)}`
-    legendTexts[1].textContent=`${CommaFormatted(min)} to ${CommaFormatted(min+interval-1)}`
-    legendTexts[2].textContent=`${CommaFormatted(max-interval*3)} to ${CommaFormatted(max-interval*2-1)}`
-    legendTexts[3].textContent=`${CommaFormatted(max-interval*2)} to ${CommaFormatted(max-interval-1)}`
-    legendTexts[4].textContent=`${CommaFormatted(max-interval)} to ${CommaFormatted(max)}`
+    let legendCol = $('.key.legend')
+    legendCol.removeClass()
+    legendCol.addClass("key legend")
+    for (let i = 0; i < 5; i++) {
+        legendCol[i].classList.add('colour' + colourVal+""+i);
+    }
+    legendTexts[0].textContent=`0 to ${CommaFormatted(min)}`
+    legendTexts[1].textContent=`${CommaFormatted(min+1)} to ${CommaFormatted(min+interval)}`
+    legendTexts[2].textContent=`${CommaFormatted(max-interval*3+1)} to ${CommaFormatted(max-interval*2)}`
+    legendTexts[3].textContent=`${CommaFormatted(max-interval*2+1)} to ${CommaFormatted(max-interval)}`
+    legendTexts[4].textContent=`${CommaFormatted(max-interval+1)} to ${CommaFormatted(max)}`
     // setup width
     console.log("Legend Set:",legendSet)
     if (!legendSet) {
@@ -183,7 +189,7 @@ function legendSetup(max,min,interval) {
     }
 }
 // colourCountries(data1)
-function setColours(dummyData) {
+function setColours(dummyData,colour=1) {
     // Vars
     let max = 0,
         min = Infinity,
@@ -214,19 +220,23 @@ function setColours(dummyData) {
     Object.keys(dummyData).forEach(prov => {
         if (prov !== 'ZA-UN') {
             let val = dummyData[prov];
-            if ((max - interval <= val) && (val < max)) {
+            if ((max - interval < val) && (val <= max)) {
                 answers[4].push(prov)
-            } else if (max - (interval * 2) < val) {
+            } else if (max - (interval * 2) <= val) {
                 answers[3].push(prov)
-            } else if (max - (interval * 3) < val) {
+            } else if (max - (interval * 3) <= val) {
                 answers[2].push(prov)
             } else if (max - (interval * 4) < val) {
                 answers[1].push(prov)
             }
+            else {
+                answers[0].push(prov)
+            }
         }
     })
     console.log("ANSWERS:",answers)
-    colourCountries(answers)
+    colourVal = colour
+    colourCountries(answers,colour)
     legendSetup(max,min,interval)
 }
 
@@ -355,7 +365,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provCase)
+            setColours(provCase,1)
             populateSideCards(cardList.sort(compareValues('cases')))
 
 
@@ -364,7 +374,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provDeath)
+            setColours(provDeath,2)
             populateSideCards(cardList.sort(compareValues('deaths')))
 
 
@@ -374,7 +384,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provRecoveries)
+            setColours(provRecoveries,3)
             populateSideCards(cardList.sort(compareValues('recoveries')))
 
 

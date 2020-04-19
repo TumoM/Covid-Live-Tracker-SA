@@ -45,6 +45,7 @@ let legendTitle = $('#legTitle')[0];
 const xPen = 92,
     yPen = 220;
 let legendSet=false;
+let colourVal=1;
 
 let provCase = {***REMOVED***
 let provDeath = {***REMOVED***
@@ -138,13 +139,12 @@ function hideTooltip() {
 ***REMOVED*** @param {string***REMOVED*** name
 ***REMOVED*** @param {number|string***REMOVED*** colour
 ***REMOVED***/
-function colourCountry(name, colour) {
+function colourCountry(name, colour,colourTag) {
     var country = document.getElementById(name);
     //country.className += ' colour' + colour;
     $("#"+name).removeClass()
     $("#"+name).addClass("land tooltip-trigger valid")
-    country.classList.add('colour' + colour)
-
+    country.classList.add('colour' + colourTag+""+colour)
 ***REMOVED***
 
 
@@ -155,10 +155,10 @@ function colourCountry(name, colour) {
 ***REMOVED***
 ***REMOVED*** @param {[][]***REMOVED*** data
 ***REMOVED***/
-function colourCountries(data) {
+function colourCountries(data,colourTag=1) {
     for (var colour = 0; colour < data.length; colour++) {
         for (var country = 0; country < data[colour].length; country++) {
-            colourCountry(data[colour][country], colour);
+            colourCountry(data[colour][country], colour,colourTag);
       ***REMOVED***
   ***REMOVED***
 ***REMOVED***
@@ -167,11 +167,17 @@ function legendSetup(max,min,interval) {
     // setup text labels
     interval = Math.round(interval)
     let legendTexts = $('.keyText')
-    legendTexts[0].textContent=`0 to ${CommaFormatted(min-1)***REMOVED***`
-    legendTexts[1].textContent=`${CommaFormatted(min)***REMOVED*** to ${CommaFormatted(min+interval-1)***REMOVED***`
-    legendTexts[2].textContent=`${CommaFormatted(max-interval*3)***REMOVED*** to ${CommaFormatted(max-interval*2-1)***REMOVED***`
-    legendTexts[3].textContent=`${CommaFormatted(max-interval*2)***REMOVED*** to ${CommaFormatted(max-interval-1)***REMOVED***`
-    legendTexts[4].textContent=`${CommaFormatted(max-interval)***REMOVED*** to ${CommaFormatted(max)***REMOVED***`
+    let legendCol = $('.key.legend')
+    legendCol.removeClass()
+    legendCol.addClass("key legend")
+    for (let i = 0; i < 5; i++) {
+        legendCol[i].classList.add('colour' + colourVal+""+i);
+  ***REMOVED***
+    legendTexts[0].textContent=`0 to ${CommaFormatted(min)***REMOVED***`
+    legendTexts[1].textContent=`${CommaFormatted(min+1)***REMOVED*** to ${CommaFormatted(min+interval)***REMOVED***`
+    legendTexts[2].textContent=`${CommaFormatted(max-interval*3+1)***REMOVED*** to ${CommaFormatted(max-interval*2)***REMOVED***`
+    legendTexts[3].textContent=`${CommaFormatted(max-interval*2+1)***REMOVED*** to ${CommaFormatted(max-interval)***REMOVED***`
+    legendTexts[4].textContent=`${CommaFormatted(max-interval+1)***REMOVED*** to ${CommaFormatted(max)***REMOVED***`
     // setup width
     console.log("Legend Set:",legendSet)
     if (!legendSet) {
@@ -183,7 +189,7 @@ function legendSetup(max,min,interval) {
   ***REMOVED***
 ***REMOVED***
 // colourCountries(data1)
-function setColours(dummyData) {
+function setColours(dummyData,colour=1) {
     // Vars
     let max = 0,
         min = Infinity,
@@ -214,19 +220,23 @@ function setColours(dummyData) {
     Object.keys(dummyData).forEach(prov => {
         if (prov !== 'ZA-UN') {
             let val = dummyData[prov];
-            if ((max - interval <= val) && (val < max)) {
+            if ((max - interval < val) && (val <= max)) {
                 answers[4].push(prov)
-          ***REMOVED*** else if (max - (interval***REMOVED*** 2) < val) {
+          ***REMOVED*** else if (max - (interval***REMOVED*** 2) <= val) {
                 answers[3].push(prov)
-          ***REMOVED*** else if (max - (interval***REMOVED*** 3) < val) {
+          ***REMOVED*** else if (max - (interval***REMOVED*** 3) <= val) {
                 answers[2].push(prov)
           ***REMOVED*** else if (max - (interval***REMOVED*** 4) < val) {
                 answers[1].push(prov)
           ***REMOVED***
+            else {
+                answers[0].push(prov)
+          ***REMOVED***
       ***REMOVED***
   ***REMOVED***)
     console.log("ANSWERS:",answers)
-    colourCountries(answers)
+    colourVal = colour
+    colourCountries(answers,colour)
     legendSetup(max,min,interval)
 ***REMOVED***
 
@@ -355,7 +365,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provCase)
+            setColours(provCase,1)
             populateSideCards(cardList.sort(compareValues('cases')))
 
 
@@ -364,7 +374,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provDeath)
+            setColours(provDeath,2)
             populateSideCards(cardList.sort(compareValues('deaths')))
 
 
@@ -374,7 +384,7 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')
-            setColours(provRecoveries)
+            setColours(provRecoveries,3)
             populateSideCards(cardList.sort(compareValues('recoveries')))
 
 

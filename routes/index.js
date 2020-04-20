@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
-const rp = require("request-promise")
-const HTMLParser = require('node-html-parser')
+const rp = require("request-promise");
+const Chart = require('chart.js');
+const HTMLParser = require('node-html-parser');
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -24,7 +25,7 @@ const provinceList = {
     "GAUTENG": 'ZA-GT',
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
-***REMOVED***
+***REMOVED***;
 
 
 router.get("/", function (req, res) {
@@ -116,6 +117,5 @@ let getProvinces = function() {
             console.log("You messed up?",reason)
       ***REMOVED***);
 ***REMOVED***
-
 
 module.exports = router;

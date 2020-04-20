@@ -231,11 +231,28 @@
 
     <%# Graphs %>
     <h2 class="ui header block top attached">Graphs</h2>
-    <section class="ui segment padded section expand raised attached">
-        <div>
-            <p>The Graphs go here</p>
-            <%- caseTableHTML %>
-        </div>
+    <section class="ui segment padded section expand raised attached grid center aligned fluid stackable">
+            <p class="row">The Graphs go here</p>
+            <div class ="row">
+                <div class="eight wide column">
+                    <canvas id="chart1" class="column"></canvas>
+
+                </div>
+                <div class="eight wide column">
+                    <canvas id="chart2" class="column"></canvas>
+                </div>
+            </div>
+            <div class ="row">
+                <div class="eight wide column">
+                    <canvas id="chart3" class="column"></canvas>
+
+                </div>
+                <div class="eight wide column">
+                    <canvas id="chart4" class="column"></canvas>
+                </div>
+            </div>
+<!--            <- caseTableHTML >-->
+
     </section>
     <div class="ui section divider"></div>
 

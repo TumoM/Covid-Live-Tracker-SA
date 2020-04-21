@@ -344,12 +344,20 @@ rp(url)
                                                     return true
                                               ***REMOVED***
                                           ***REMOVED***)
-                                            let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)[0]
+                                            let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)
+                                            if (death){
+                                                death = death[0];
+                                          ***REMOVED***
+                                        else   {
+                                            death = null
+                                          ***REMOVED***
 
                                             console.log("TestPar",testPar.text);
                                             let totalTests = testString.trim().match(/\s((\d+\s+)*\d+)/)[0];
                                             if (totalTests){
                                                 totalTests = parseNumber(totalTests.trim());
+                                          ***REMOVED***else {
+                                                totalTests = null;
                                           ***REMOVED***
                                             let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
                                             if (totalCases){
@@ -365,7 +373,7 @@ rp(url)
                                                 totalCases,
                                                 maybeValid: true
                                           ***REMOVED***
-                                            let totalDeaths = death.trim().match(/\s((\d+\s+)*\d+)/);
+                                            let totalDeaths = death? death.trim().match(/\s((\d+\s+)*\d+)/):null;
                                             if (totalDeaths){
                                                 totalDeaths = parseNumber(totalDeaths[0].trim());
                                           ***REMOVED***
@@ -407,6 +415,7 @@ rp(url)
                                                                                 ')\n' +
                                                                                 'select\n' +
                                                                                 '       date,\n' +
+                                                                                '       prevDeaths as "prevDeaths",\n'+
                                                                                 '       prevRecoveries as "prevRecoveries",\n' +
                                                                                 '    ("totalCases"-prevCases) as "dailyNew",\n' +
                                                                                 '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
@@ -414,11 +423,16 @@ rp(url)
                                                                                 'order by date desc\n' +
                                                                                 'limit 1;')
                                                                                 .then(prevVals=>{
-                                                                                    knex('dates').update({
-                                                                                        dailyNew:prevVals.rows[0].dailyNew,
-                                                                                        dailyDeaths:prevVals.rows[0].dailyDeaths,
-                                                                                        totalRecoveries:prevVals.rows[0].prevRecoveries
-                                                                                  ***REMOVED***).where('date','=',parsedDate)
+                                                                                   data.totalDeaths = !data.totalDeaths?prevVals.rows[0].prevDeaths:data.totalDeaths;
+                                                                                   prevVals.rows[0].dailyDeaths = !prevVals.rows[0].dailyDeaths?0:prevVals.rows[0].dailyDeaths;
+                                                                                   prevVals.rows[0].dailyNew = !prevVals.rows[0].dailyNew?0:prevVals.rows[0].dailyNew;
+                                                                                   data = {
+                                                                                       totalDeaths:data.totalDeaths,
+                                                                                       dailyNew:prevVals.rows[0].dailyNew,
+                                                                                       dailyDeaths:prevVals.rows[0].dailyDeaths,
+                                                                                       totalRecoveries:prevVals.rows[0].prevRecoveries
+                                                                                 ***REMOVED***
+                                                                                   knex('dates').update(data).where('date','=',parsedDate)
                                                                                         .catch(reason => {
                                                                                             log('WHAAAAAT?',reason)
                                                                                       ***REMOVED***)

@@ -100,6 +100,10 @@ setTable = (data)=>{
             document.getElementById("sort-trigger").addEventListener("click", function(){
                 table.setSort(fieldEl.options[fieldEl.selectedIndex].value, dirEl.options[dirEl.selectedIndex].value);
           ***REMOVED***);
+            document.getElementById("sort-reset").addEventListener("click", function(){
+                table.clearSort();
+                table.setSort('date','desc');
+          ***REMOVED***);
       ***REMOVED***)
         .catch(function(error){
             //handle error loading data

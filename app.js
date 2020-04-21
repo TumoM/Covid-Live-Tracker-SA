@@ -2,15 +2,15 @@ const express     = require("express");
 const scout = require("@scout_apm/scout-apm");
 const app         = express();
     // Enable the app-wide scout middleware
-    app.use(scout.expressMiddleware({
-        config: {
-            allowShutdown: true, // allow shutting down spawned scout-agent processes from this program
-            monitor: process.env.SCOUT_MONITOR||false, // enable monitoring
-            name: process.env.SCOUNT_NAME||null,
-            key: process.env.SCOUT_KEY || null,
-        },
-        logFn: scout.consoleLogFn,
-    }));
+    // app.use(scout.expressMiddleware({
+    //     config: {
+    //         allowShutdown: true, // allow shutting down spawned scout-agent processes from this program
+    //         monitor: process.env.SCOUT_MONITOR||false, // enable monitoring
+    //         name: process.env.SCOUNT_NAME||null,
+    //         key: process.env.SCOUT_KEY || null,
+    //     },
+    //     logFn: scout.consoleLogFn,
+    // }));
 const bodyParser  = require("body-parser");
 const path = require('path');
 

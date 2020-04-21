@@ -1,0 +1,275 @@
+/*!
+***REMOVED*** # Fomantic-UI - Ad
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Copyright 2013 Contributors
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+         Advertisement
+*******************************/
+
+.ui.ad {
+  display: block;
+  overflow: hidden;
+  margin: 1em 0;
+***REMOVED***
+.ui.ad:first-child {
+  margin: 0;
+***REMOVED***
+.ui.ad:last-child {
+  margin: 0;
+***REMOVED***
+.ui.ad iframe {
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+***REMOVED***
+
+/*--------------
+     Common
+---------------*/
+
+
+/* Leaderboard***REMOVED***/
+.ui.leaderboard.ad {
+  width: 728px;
+  height: 90px;
+***REMOVED***
+
+/* Medium Rectangle***REMOVED***/
+.ui[class*="medium rectangle"].ad {
+  width: 300px;
+  height: 250px;
+***REMOVED***
+
+/* Large Rectangle***REMOVED***/
+.ui[class*="large rectangle"].ad {
+  width: 336px;
+  height: 280px;
+***REMOVED***
+
+/* Half Page***REMOVED***/
+.ui[class*="half page"].ad {
+  width: 300px;
+  height: 600px;
+***REMOVED***
+
+/*--------------
+       Square
+  ---------------*/
+
+
+/* Square***REMOVED***/
+.ui.square.ad {
+  width: 250px;
+  height: 250px;
+***REMOVED***
+
+/* Small Square***REMOVED***/
+.ui[class*="small square"].ad {
+  width: 200px;
+  height: 200px;
+***REMOVED***
+
+/*--------------
+      Rectangle
+  ---------------*/
+
+
+/* Small Rectangle***REMOVED***/
+.ui[class*="small rectangle"].ad {
+  width: 180px;
+  height: 150px;
+***REMOVED***
+
+/* Vertical Rectangle***REMOVED***/
+.ui[class*="vertical rectangle"].ad {
+  width: 240px;
+  height: 400px;
+***REMOVED***
+
+/*--------------
+       Button
+  ---------------*/
+
+.ui.button.ad {
+  width: 120px;
+  height: 90px;
+***REMOVED***
+.ui[class*="square button"].ad {
+  width: 125px;
+  height: 125px;
+***REMOVED***
+.ui[class*="small button"].ad {
+  width: 120px;
+  height: 60px;
+***REMOVED***
+
+/*--------------
+     Skyscrapers
+  ---------------*/
+
+
+/* Skyscraper***REMOVED***/
+.ui.skyscraper.ad {
+  width: 120px;
+  height: 600px;
+***REMOVED***
+
+/* Wide Skyscraper***REMOVED***/
+.ui[class*="wide skyscraper"].ad {
+  width: 160px;
+***REMOVED***
+
+/*--------------
+       Banners
+  ---------------*/
+
+
+/* Banner***REMOVED***/
+.ui.banner.ad {
+  width: 468px;
+  height: 60px;
+***REMOVED***
+
+/* Vertical Banner***REMOVED***/
+.ui[class*="vertical banner"].ad {
+  width: 120px;
+  height: 240px;
+***REMOVED***
+
+/* Top Banner***REMOVED***/
+.ui[class*="top banner"].ad {
+  width: 930px;
+  height: 180px;
+***REMOVED***
+
+/* Half Banner***REMOVED***/
+.ui[class*="half banner"].ad {
+  width: 234px;
+  height: 60px;
+***REMOVED***
+
+/*--------------
+    Boards
+---------------*/
+
+
+/* Leaderboard***REMOVED***/
+.ui[class*="large leaderboard"].ad {
+  width: 970px;
+  height: 90px;
+***REMOVED***
+
+/* Billboard***REMOVED***/
+.ui.billboard.ad {
+  width: 970px;
+  height: 250px;
+***REMOVED***
+
+/*--------------
+      Panorama
+  ---------------*/
+
+
+/* Panorama***REMOVED***/
+.ui.panorama.ad {
+  width: 980px;
+  height: 120px;
+***REMOVED***
+
+/*--------------
+       Netboard
+  ---------------*/
+
+
+/* Netboard***REMOVED***/
+.ui.netboard.ad {
+  width: 580px;
+  height: 400px;
+***REMOVED***
+
+/*--------------
+       Mobile
+  ---------------*/
+
+
+/* Large Mobile Banner***REMOVED***/
+.ui[class*="large mobile banner"].ad {
+  width: 320px;
+  height: 100px;
+***REMOVED***
+
+/* Mobile Leaderboard***REMOVED***/
+.ui[class*="mobile leaderboard"].ad {
+  width: 320px;
+  height: 50px;
+***REMOVED***
+
+
+***REMOVED********************************
+             Types
+*******************************/
+
+
+/* Mobile Sizes***REMOVED***/
+.ui.mobile.ad {
+  display: none;
+***REMOVED***
+@media only screen and (max-width: 767.98px) {
+  .ui.mobile.ad {
+    display: block;
+***REMOVED***
+***REMOVED***
+
+
+***REMOVED********************************
+           Variations
+*******************************/
+
+.ui.centered.ad {
+  margin-left: auto;
+  margin-right: auto;
+***REMOVED***
+.ui.test.ad {
+  position: relative;
+  background: #545454;
+***REMOVED***
+.ui.test.ad:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  content: 'Ad';
+  color: #FFFFFF;
+  font-size: 1em;
+  font-weight: bold;
+***REMOVED***
+.ui.mobile.test.ad:after {
+  font-size: 0.85714286em;
+***REMOVED***
+.ui.test.ad[data-text]:after {
+  content: attr(data-text);
+***REMOVED***
+
+
+***REMOVED********************************
+         Theme Overrides
+*******************************/
+
+
+
+***REMOVED********************************
+    User Variable Overrides
+*******************************/
+

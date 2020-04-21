@@ -1,0 +1,10 @@
+***REMOVED********************************
+           Overrides
+*******************************/
+
+.ui.steps .step:after {
+  display: none !important;
+***REMOVED***
+.ui.steps .step {
+  border-radius: 500px !important;
+***REMOVED***

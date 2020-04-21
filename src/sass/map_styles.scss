@@ -1,0 +1,196 @@
+//$colour20: #b9b9b9;
+//$colour21: #cbb946;
+//$colour22: #d8af48;
+//$colour23: #b89220;
+//$colour24: #6d5f00;
+
+//$colour10: #efc7e5; // efc7e5 cbeef3
+//$colour11: #f49cbb;
+//$colour12: #D87582;
+//$colour13: #dd2d4a;
+//$colour14: #830000;
+
+//$colour30: #b9b9b9;
+//$colour31: #1698fc;
+//$colour32: #165dd8;
+//$colour33: #2016b8;
+//$colour34: #001683;
+
+$colour10: #dbcdcd;	// Main Primary color***REMOVED***/
+$colour11: #ecafaf; // AA3939
+$colour12: #AA3939;
+$colour13: #9f0000;
+$colour14: #550000;
+
+$colour30: #c8c5fd;	// Main Secondary color (1)***REMOVED***/
+$colour31: #7597fd;
+$colour32: #4a4efd;
+$colour33: #2016b8;
+$colour34: #000081;
+
+$colour20: #D4EE9F;	// Main Secondary color (2)***REMOVED***/
+$colour21: #A5C663;
+$colour22: #7B9F35;
+$colour23: #567714;
+$colour24: #354F00;
+
+
+%equal-heights {
+display: flex;
+flex-wrap: wrap;
+***REMOVED***
+
+.contentContainer{
+    width: 80%;
+    margin: 0 auto;
+***REMOVED***
+
+.land {
+	fill: #cbd9db;
+	stroke: white;
+	stroke-width: 1.5;
+	stroke-miterlimit: 4;
+	&.valid{
+		transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+		&:hover{
+			opacity: 0.7;
+		***REMOVED***
+	***REMOVED***
+***REMOVED***
+
+/* chloropleth map***REMOVED***/
+// Cases
+.colour10 {fill: $colour10;***REMOVED***
+.colour11 {fill: $colour11;***REMOVED***
+.colour12 {fill: $colour12;***REMOVED***
+.colour13 {fill: $colour13;***REMOVED***
+.colour14 {fill: $colour14;***REMOVED***
+
+// Deaths
+.colour20 {fill: $colour20;***REMOVED***
+.colour21 {fill: $colour21;***REMOVED***
+.colour22 {fill: $colour22;***REMOVED***
+.colour23 {fill: $colour23;***REMOVED***
+.colour24 {fill: $colour24;***REMOVED***
+
+// Recovered
+.colour30 {fill: $colour30;***REMOVED***
+.colour31 {fill: $colour31;***REMOVED***
+.colour32 {fill: $colour32;***REMOVED***
+.colour33 {fill: $colour33;***REMOVED***
+.colour34 {fill: $colour34;***REMOVED***
+
+#svg-1
+{
+	// margin-top:3rem;
+	width: 50%; 
+	overflow: visible
+***REMOVED***
+
+#country-name {
+	// dominant-baseline: hanging;
+	transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
+	opacity: 0;
+***REMOVED***
+
+.lightBack{
+	fill: rgba(190, 190, 190, 0.31);
+	stroke: #0000007a;
+
+***REMOVED***
+
+#tooltipBackground{
+	@extend .lightBack;
+***REMOVED***
+
+tspan{
+	&.legend{
+		dominant-baseline: unset
+	***REMOVED***
+***REMOVED***
+#mapContainer{
+	padding-bottom: 0.1rem;
+	padding-top: 0;
+***REMOVED***
+
+
+.ui{
+	&.cards{
+		>.card{
+			margin-bottom:0;
+			margin-left:2em;
+
+			width:100%;
+			&:last-of-type{
+				margin-bottom: 1.5rem;
+			***REMOVED***
+			&:first-of-type{
+				margin-top: 1.5rem;
+			***REMOVED***
+			>.main.content{
+				padding-top: 0.5rem;
+				padding-bottom: 0.3rem;
+			***REMOVED***
+			>.extra.content{
+			    padding: 0.3rem 0;
+				>.description{
+					width: 70%;
+					text-align: left;
+					margin: 0 auto;
+				***REMOVED***
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***
+***REMOVED***
+
+
+.toggle.button{
+	height: min-content;
+***REMOVED***
+//
+//#hideIcon{
+//	width: 100%;
+//	margin: 0 auto;
+//***REMOVED***
+
+#svgColumn {
+	//transition: padding-left 0.2s ease-in;
+	transition: width 0.5s linear;
+
+	&.svgFocus {
+		padding-left: 20em;
+	***REMOVED***
+***REMOVED***
+
+#provStatsContainer{
+	margin-bottom: 0;
+	overflow-x: visible;
+	overflow-y: scroll;
+	height: 100%;
+	transition: width 0.5s linear;
+	&.scroll-pane
+	{
+		overflow-x: visible;
+		overflow-y: auto;
+	***REMOVED***
+	&.sidebarHidden{
+		//display: none !important;
+		width: 0 !important;
+	***REMOVED***
+***REMOVED***
+
+#mapContainer{
+	.jspDrag{
+		border-radius: 25px;
+	***REMOVED***
+
+	.jspVerticalBar .jspArrow {
+		height: 0;
+	***REMOVED***
+	.jspTrack {
+		border-radius: 25px;
+	***REMOVED***
+***REMOVED***
+
+
+

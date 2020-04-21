@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphs</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+<div class="tabbable-panel-cases">
+    <div class="tabbable-line-cases">
+        <ul class="nav nav-tabs ">
+            <li class="active">
+                <a href="#coronavirus-cases-linear" data-toggle="tab">
+                    linear </a>
+            </li>
+            <li>
+                <a href="#coronavirus-cases-log" data-toggle="tab">
+                    logarithmic </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="coronavirus-cases-linear">
+            </div>
+            <div class="tab-pane" id="coronavirus-cases-log">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    Highcharts.chart('coronavirus-cases-linear', {
+        chart: {
+            type: 'line'
+ ***REMOVED*****REMOVED***
+        title: {
+            text: 'Total Cases'
+ ***REMOVED*****REMOVED***
+
+        subtitle: {
+            text: '(Linear Scale)'
+ ***REMOVED*****REMOVED***
+
+        xAxis: {
+            categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"] ***REMOVED*****REMOVED***
+
+        yAxis: {
+            title: {
+                text: 'Total Coronavirus Cases'
+          ***REMOVED***
+
+
+ ***REMOVED*****REMOVED***
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+ ***REMOVED*****REMOVED***
+
+        credits: {
+            enabled: false
+ ***REMOVED*****REMOVED***
+
+
+        series: [{
+            name: 'Cases',
+            color: '#33CCFF',
+            lineWidth: 5,
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,7,7,13,16,24,38,61,64,85,116,150,202,240,274,402,554,709,927,1170,1187,1280,1326,1353,1380,1462,1505,1585,1655,1686,1749,1845,1934,2003,2028,2173,2272,2415,2506,2605,2783,3034]      ***REMOVED***],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 800
+    ***REMOVED*****REMOVED*****REMOVED***
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                  ***REMOVED***
+              ***REMOVED***
+          ***REMOVED***]
+      ***REMOVED***
+
+  ***REMOVED***);
+
+    Highcharts.chart('coronavirus-cases-log', {
+        chart: {
+            type: 'line'
+ ***REMOVED*****REMOVED***
+        title: {
+            text: 'Total Cases'
+ ***REMOVED*****REMOVED***
+
+        subtitle: {
+            text: '(Logarithmic Scale)'
+ ***REMOVED*****REMOVED***
+
+        xAxis: {
+            categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"] ***REMOVED*****REMOVED***
+
+        yAxis: {
+            title: {
+                text: 'Total Coronavirus Cases'
+***REMOVED*****REMOVED*****REMOVED***
+
+            type: 'logarithmic'
+
+
+ ***REMOVED*****REMOVED***
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+ ***REMOVED*****REMOVED***
+
+        credits: {
+            enabled: false
+ ***REMOVED*****REMOVED***
+
+
+        series: [{
+            name: 'Cases',
+            color: '#33CCFF',
+            lineWidth: 5,
+            data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,7,7,13,16,24,38,61,64,85,116,150,202,240,274,402,554,709,927,1170,1187,1280,1326,1353,1380,1462,1505,1585,1655,1686,1749,1845,1934,2003,2028,2173,2272,2415,2506,2605,2783,3034]      ***REMOVED***],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 800
+    ***REMOVED*****REMOVED*****REMOVED***
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                  ***REMOVED***
+              ***REMOVED***
+          ***REMOVED***]
+      ***REMOVED***
+
+  ***REMOVED***);
+</script> </div>
+</div>
+<div class="row graph_row">
+    <div class="col-md-12">
+        <h3>Daily New Cases in South Africa</h3>
+
+        <div id="graph-cases-daily"></div>
+        <script type="text/javascript">
+            Highcharts.chart('graph-cases-daily', {
+                chart: {
+                    type: 'column'
+    ***REMOVED*****REMOVED*****REMOVED***
+                title: {
+                    text: 'Daily New Cases'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                subtitle: {
+                    text: 'Cases per Day<br>Data as of 0:00 GMT+0'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                xAxis: {
+                    categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"] ***REMOVED*****REMOVED***
+
+                yAxis: {
+                    title: {
+                        text: 'Novel Coronavirus Daily Cases'
+                  ***REMOVED***
+    ***REMOVED*****REMOVED*****REMOVED***
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                credits: {
+                    enabled: false
+    ***REMOVED*****REMOVED*****REMOVED***
+
+
+                series: [{
+                    name: 'Daily Cases',
+                    color: '#999',
+                    lineWidth: 5,
+                    data: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,1,1,4,0,6,3,8,14,23,3,21,31,34,52,38,34,128,152,155,218,243,17,93,46,27,27,82,43,80,70,31,63,96,89,69,25,145,99,143,91,99,178,251]      ***REMOVED***],
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+            ***REMOVED*****REMOVED*****REMOVED***
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                          ***REMOVED***
+                      ***REMOVED***
+                  ***REMOVED***]
+              ***REMOVED***
+
+          ***REMOVED***);
+        </script> </div>
+</div>
+<div class="row graph_row">
+    <div class="col-md-12">
+        <h3>Active Cases in South Africa</h3>
+        <div id="graph-active-cases-total"></div>
+        <script type="text/javascript">
+            Highcharts.chart('graph-active-cases-total', {
+                chart: {
+                    type: 'line'
+    ***REMOVED*****REMOVED*****REMOVED***
+                title: {
+                    text: 'Active Cases'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                subtitle: {
+                    text: '(Number of Infected People)'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                xAxis: {
+                    categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"] ***REMOVED*****REMOVED***
+
+                yAxis: {
+                    title: {
+                        text: 'Total Coronavirus Currently Infected'
+                  ***REMOVED***
+
+
+    ***REMOVED*****REMOVED*****REMOVED***
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                credits: {
+                    enabled: false
+    ***REMOVED*****REMOVED*****REMOVED***
+
+
+                series: [{
+                    name: 'Currently Infected',
+                    color: '#00DDDD',
+                    lineWidth: 5,
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,7,7,13,16,24,38,61,64,85,116,150,202,238,272,398,550,697,915,1138,1155,1247,1292,1317,1325,1407,1401,1481,1549,1579,1641,1732,1821,1569,1593,1738,1835,1978,2062,1654,1830,2079]      ***REMOVED***
+            ***REMOVED***,
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+            ***REMOVED*****REMOVED*****REMOVED***
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                          ***REMOVED***
+                      ***REMOVED***
+                  ***REMOVED***]
+              ***REMOVED***
+
+          ***REMOVED***);
+        </script>
+    </div>
+</div>
+<div class="row graph_row">
+    <div class="col-md-12">
+        <h3>Total Coronavirus Deaths in South Africa</h3>
+        <style>
+            /* Tabs panel***REMOVED***/
+            .tabbable-panel-deaths {
+                border: 1px solid #ccc;
+                padding: 10px;
+          ***REMOVED***
+
+            /* Default mode***REMOVED***/
+            .tabbable-line-deaths>.nav-tabs {
+                border: none;
+                margin: 0px;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li {
+                margin-right: 2px;
+
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li>a {
+                border: 0;
+                margin-right: 0;
+                color: #737373;
+                font-size: 13px;
+                text-decoration: none !important;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li>a>i {
+                color: #a6a6a6;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.open,
+            .tabbable-line-deaths>.nav-tabs>li:hover {
+                border-bottom: 3px solid #fbcdcf;
+
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.open>a,
+            .tabbable-line-deaths>.nav-tabs>li:hover>a {
+                border: 0;
+                background: none !important;
+                color: #333333;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.open>a>i,
+            .tabbable-line-deaths>.nav-tabs>li:hover>a>i {
+                color: #77DDFF;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.open .dropdown-menu,
+            .tabbable-line-deaths>.nav-tabs>li:hover .dropdown-menu {
+                margin-top: 0px;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.active {
+                border-bottom: 3px solid #33CCFF;
+
+
+                position: relative;
+
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.active>a {
+                border: 0;
+                color: #333333;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.nav-tabs>li.active>a>i {
+                color: #404040;
+          ***REMOVED***
+
+            .tabbable-line-deaths>.tab-content {
+                margin-top: -3px;
+                background-color: #fff;
+                border: 0;
+                border-top: 1px solid #eee;
+                padding: 15px 0;
+          ***REMOVED***
+
+            .portlet .tabbable-line-deaths>.tab-content {
+                padding-bottom: 0;
+          ***REMOVED***
+        </style>
+
+        <div class="tabbable-panel-deaths">
+            <div class="tabbable-line-deaths">
+                <ul class="nav nav-tabs ">
+                    <li class="active">
+                        <a href="#coronavirus-deaths-linear" data-toggle="tab">
+                            linear </a>
+                    </li>
+                    <li>
+                        <a href="#coronavirus-deaths-log" data-toggle="tab">
+                            logarithmic </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="coronavirus-deaths-linear">
+                    </div>
+                    <div class="tab-pane" id="coronavirus-deaths-log">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            Highcharts.chart('coronavirus-deaths-linear', {
+                chart: {
+                    type: 'line'
+    ***REMOVED*****REMOVED*****REMOVED***
+                title: {
+                    text: 'Total Deaths'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                subtitle: {
+                    text: '(Linear Scale)'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                xAxis: {
+                    categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"]***REMOVED*****REMOVED*****REMOVED***
+
+                yAxis: {
+                    title: {
+                        text: 'Total Coronavirus Deaths'
+                  ***REMOVED***
+
+
+    ***REMOVED*****REMOVED*****REMOVED***
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                credits: {
+                    enabled: false
+    ***REMOVED*****REMOVED*****REMOVED***
+
+
+                series: [{
+                    name: 'Deaths',
+                    color: '#FF9900',
+                    lineWidth: 5,
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,5,5,5,9,9,11,12,13,18,18,24,25,25,27,27,34,48,50,52]          ***REMOVED***],
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+            ***REMOVED*****REMOVED*****REMOVED***
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                          ***REMOVED***
+                      ***REMOVED***
+                  ***REMOVED***]
+              ***REMOVED***
+
+          ***REMOVED***);
+            Highcharts.chart('coronavirus-deaths-log', {
+                chart: {
+                    type: 'line'
+    ***REMOVED*****REMOVED*****REMOVED***
+                title: {
+                    text: 'Total Deaths'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                subtitle: {
+                    text: '(Logarithmic Scale)'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                xAxis: {
+                    categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"]***REMOVED*****REMOVED*****REMOVED***
+
+                yAxis: {
+                    title: {
+                        text: 'Total Coronavirus Deaths'
+        ***REMOVED*****REMOVED*****REMOVED***
+
+                    type: 'logarithmic'
+
+
+    ***REMOVED*****REMOVED*****REMOVED***
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                credits: {
+                    enabled: false
+    ***REMOVED*****REMOVED*****REMOVED***
+
+
+                series: [{
+                    name: 'Deaths',
+                    color: '#FF9900',
+                    lineWidth: 5,
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,3,5,5,5,9,9,11,12,13,18,18,24,25,25,27,27,34,48,50,52]          ***REMOVED***],
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+            ***REMOVED*****REMOVED*****REMOVED***
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                          ***REMOVED***
+                      ***REMOVED***
+                  ***REMOVED***]
+              ***REMOVED***
+
+          ***REMOVED***);
+        </script>
+    </div>
+</div>
+<div class="row graph_row">
+    <div class="col-md-12">
+        <h3>Daily New Deaths in South Africa</h3>
+        <div id="graph-deaths-daily"></div>
+        <script type="text/javascript">
+            Highcharts.chart('graph-deaths-daily', {
+                chart: {
+                    type: 'column'
+    ***REMOVED*****REMOVED*****REMOVED***
+                title: {
+                    text: 'Daily Deaths'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                subtitle: {
+                    text: 'Deaths per Day<br>Data as of 0:00 GMT+0'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                xAxis: {
+                    categories: ["Feb 15","Feb 16","Feb 17","Feb 18","Feb 19","Feb 20","Feb 21","Feb 22","Feb 23","Feb 24","Feb 25","Feb 26","Feb 27","Feb 28","Feb 29","Mar 01","Mar 02","Mar 03","Mar 04","Mar 05","Mar 06","Mar 07","Mar 08","Mar 09","Mar 10","Mar 11","Mar 12","Mar 13","Mar 14","Mar 15","Mar 16","Mar 17","Mar 18","Mar 19","Mar 20","Mar 21","Mar 22","Mar 23","Mar 24","Mar 25","Mar 26","Mar 27","Mar 28","Mar 29","Mar 30","Mar 31","Apr 01","Apr 02","Apr 03","Apr 04","Apr 05","Apr 06","Apr 07","Apr 08","Apr 09","Apr 10","Apr 11","Apr 12","Apr 13","Apr 14","Apr 15","Apr 16","Apr 17","Apr 18"] ***REMOVED*****REMOVED***
+
+                yAxis: {
+                    title: {
+                        text: 'Novel Coronavirus Daily Deaths'
+                  ***REMOVED***
+    ***REMOVED*****REMOVED*****REMOVED***
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+    ***REMOVED*****REMOVED*****REMOVED***
+
+                credits: {
+                    enabled: false
+    ***REMOVED*****REMOVED*****REMOVED***
+
+
+                series: [{
+                    name: 'Daily Deaths',
+                    color: '#999',
+                    lineWidth: 5,
+                    data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,0,0,4,0,2,1,1,5,0,6,1,0,2,0,7,14,2,2]      ***REMOVED***],
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 800
+            ***REMOVED*****REMOVED*****REMOVED***
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                          ***REMOVED***
+                      ***REMOVED***
+                  ***REMOVED***]
+              ***REMOVED***
+
+          ***REMOVED***);
+        </script> </div>
+</div>
+<style type="text/css">
+    .style2 {
+        color: #222222
+  ***REMOVED***
+
+
+    .style4 {
+        font-weight: bold
+  ***REMOVED***
+
+
+    .red {
+        color: red
+  ***REMOVED***
+
+
+    .underline a {
+        text-decoration: underline;
+  ***REMOVED***
+
+    /*		.news_body ul li {     margin-bottom: 40px !important; ***REMOVED****/
+    .news_post {
+        margin-bottom: 40px;
+  ***REMOVED***
+</style>
+<style>
+    .btn:focus,
+    .btn:active {
+        outline: none !important;
+        /*box-shadow: none !important;*/
+  ***REMOVED***
+
+
+    .load-more__btn {
+
+
+        color: #000 !important;
+  ***REMOVED***
+
+
+    .news_date {
+
+
+        font-weight: bold;
+        text-align: left;
+        /* color: grey;*/
+        margin-bottom: 50px;
+  ***REMOVED***
+
+
+    .news_title {
+
+
+        color: #222;
+
+
+        font-size: 18px;
+        margin-bottom: 16px;
+
+
+  ***REMOVED***
+
+
+    .news_type {
+        float: left;
+        margin-right: 8px;
+  ***REMOVED***
+
+
+    .news_source {
+        /*        float: left;*/
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+
+  ***REMOVED***
+
+
+    .news_body {
+        position: relative;
+  ***REMOVED***
+
+
+    .date-btn {
+
+
+        font-size: 16px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 16px;
+  ***REMOVED***
+
+
+    .newsdate_div {
+
+
+        margin-top: 20px;
+  ***REMOVED***
+
+
+    .news_sources li {
+        list-style-type: none;
+        margin-bottom: 10px !important;
+  ***REMOVED***
+
+
+    .news_ul li {
+
+
+        margin-bottom: 10px !important;
+  ***REMOVED***
+
+    #news_block article {
+        margin-bottom: 20px !important;
+  ***REMOVED***
+</style>
+<div class="row">
+    <div class="col-md-12" id="news_block">
+        <h2 align="left" id="news" style="margin-bottom: 50px;">Latest Updates</h2>
+        <div class="news_date"><h4>April 18 (GMT)</h4></div><div id="newsdate2020-04-18"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>251 new cases</strong> and <strong>2 new deaths</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://sacoronavirus.co.za/">source</a>]</span>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://twitter.com/HealthZA/status/1251602917053861888">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-17">April 17 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-17"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>178 new cases</strong> and <strong>2 new deaths</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://twitter.com/SAgovnews/status/1251209252343087112">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-16">April 16 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-16"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>99 new cases</strong> and <strong>14 new deaths</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://mobile.twitter.com/DrZweliMkhize/status/1250854262910976000">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-15">April 15 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-15"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>91 new cases</strong> and <strong>7 new deaths</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://twitter.com/drzwelimkhize/status/1250458555720896517?s=21">source</a>]</span>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://sacoronavirus.co.za/">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-14">April 14 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-14"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>143 new cases</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://twitter.com/DrZweliMkhize/status/1250050683866435593/photo/1">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-13">April 13 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-13"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>99 new cases</strong> and <strong>2 new deaths</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://mobile.twitter.com/DrZweliMkhize/status/1249756457064714240">source</a>]</span></li></ul>
+        </div>
+    </div></div><button style="margin-top:30px;" class="btn btn-light date-btn" data-date="2020-04-12">April 12 <i class="fa fa-chevron-circle-down"></i></button><div class="newsdate_div" style="display: none;" id="newsdate2020-04-12"><div class="news_post">
+        <div class="news_body">
+            <ul class="news_ul"><li class="news_li"><strong>145 new cases</strong> in <strong><a style="text-decoration: underline;" href="/coronavirus/country/south-africa/">South Africa</a></strong>&nbsp;<span class="source">[<a class="news_source_a" target="_blank" href="https://twitter.com/drzwelimkhize/status/1249384781974056960?s=21">source</a>]</span></li></ul>
+        </div>
+    </div></div>
+        <div style="width:100%; text-align:center;margin: 0 auto;">
+            <a style="" href="javascript:void(0)" class="load-more__btn" data-country="ZAF" data-country="ZAF" data-days_count="7" id="lm_2020-04-12"><button class="btn">View More News <img alt="view more" style="width:16px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEX///90dHRsbGttbWxtbWtzc3Jqamlqamhra2lra2ppaWhnZ2ZpaWdmZmVwcHBoaGZvb25sbGptbW12dnZubm51dXV2dnVwcG9zc3Nzc3R3d3doaGdycnJnZ2VxcXF1dXZ0dHVvb28AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF9IACodnd2d3UAAAAAAAABAAAAAAAtRCHzwHcAABkAAAAAADAAAAAAAAAAAAAtRHgAAHcAAAAAAAAAAAAAAABMAAB2d3YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvFCwVLHc0ca8AGfQQAID0YMA4ABkAGfQAAAAAgAAAAAAAAAAAAAUAYAAAAAAAAAAwT6ReqHcABvgAxQAAAAD0NAA4ABkAGfQAAAAAAAAAAAAAAAAAAGQAAAAYAAAAzj8AABgAAAAMAAAAGAD4VvheqAYIBvgAzj/FAAAvKAD8p1MAGfMsUPaeyXcAdy0AAAAAAAAAAAAAAAAAAAAAAAC7KAAspgh2auQZ9KDkTQC3dmoAAAAAAAAAAABrwAB2auQAAGAAAAAFAAAAAAAAAIAAgAAAwBAAAAAACIgAAAADAAAAAABCAEBeqAAABvgAAAD4XqgAAAYAAAAAAAAAArEAAAAYAAAAAAAAAAD0QABAABkAAAAAAAD0kAAAABkAAAAAAAAAAAAAAAAAAABmABBmZmYMOSAAAAAAAAIBAQA4ABkydFcZ9NDhHgAAdmoAAAAAAAL0uAAAABkAAAAAABgAgAAAAAAAAAAAAAAAAADEi2NXAAAAAXRSTlMAQObYZgAAAAFiS0dEi/JvR+AAAAAJcEhZcwAALiMAAC4jAXilP3YAAACPSURBVHja5ZJBDoAgDATdg1dCVESNQfj/J4USlSrgXXujM5Ql0DR/KoF7R7JO16PlfFAY07UGJs7nhe/gxpOHFJfh5y+5nIeR46u4jMi1SbnZoL1hgxG5U8qlxgQ4mrE6yicVv9VpWABZToamGQV+GnR+jgfDUi5Z4McMz1F6U28MNU6GrXEyUP85b/yrtQMhJwlGqKwmOAAAAABJRU5ErkJggg==" /></button></a>
+        </div>
+        <div style="width:100%;text-align:center; ">
+            <div style="display: none;" class="loading lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

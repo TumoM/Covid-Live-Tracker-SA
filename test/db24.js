@@ -96,6 +96,8 @@ function DbSetup() {
         t.boolean('error').defaultTo(false);
 
         console.log("dates table CREATED")
+    ***REMOVED***).then(value => {
+        return knex.raw(```alter table dates\tadd activeCases numeric GENERATED ALWAYS AS (dates."totalCases" - (dates."totalRecoveries" + dates."totalDeaths")) STORED;```)
     ***REMOVED***);
   ***REMOVED***
     else {

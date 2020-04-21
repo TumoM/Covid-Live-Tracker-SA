@@ -1,0 +1,140 @@
+/*!
+***REMOVED*** # Fomantic-UI - Text
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** https://github.com/fomantic/Fomantic-UI/blob/master/LICENSE.md
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+             Text
+*******************************/
+
+span.ui.primary.text {
+  color: #2185D0;
+***REMOVED***
+span.ui.inverted.primary.text {
+  color: #54C8FF;
+***REMOVED***
+span.ui.secondary.text {
+  color: #1B1C1D;
+***REMOVED***
+span.ui.inverted.secondary.text {
+  color: #545454;
+***REMOVED***
+span.ui.red.text {
+  color: #DB2828;
+***REMOVED***
+span.ui.inverted.red.text {
+  color: #FF695E;
+***REMOVED***
+span.ui.orange.text {
+  color: #F2711C;
+***REMOVED***
+span.ui.inverted.orange.text {
+  color: #FF851B;
+***REMOVED***
+span.ui.yellow.text {
+  color: #FBBD08;
+***REMOVED***
+span.ui.inverted.yellow.text {
+  color: #FFE21F;
+***REMOVED***
+span.ui.olive.text {
+  color: #B5CC18;
+***REMOVED***
+span.ui.inverted.olive.text {
+  color: #D9E778;
+***REMOVED***
+span.ui.green.text {
+  color: #21BA45;
+***REMOVED***
+span.ui.inverted.green.text {
+  color: #2ECC40;
+***REMOVED***
+span.ui.teal.text {
+  color: #00B5AD;
+***REMOVED***
+span.ui.inverted.teal.text {
+  color: #6DFFFF;
+***REMOVED***
+span.ui.blue.text {
+  color: #2185D0;
+***REMOVED***
+span.ui.inverted.blue.text {
+  color: #54C8FF;
+***REMOVED***
+span.ui.violet.text {
+  color: #6435C9;
+***REMOVED***
+span.ui.inverted.violet.text {
+  color: #A291FB;
+***REMOVED***
+span.ui.purple.text {
+  color: #A333C8;
+***REMOVED***
+span.ui.inverted.purple.text {
+  color: #DC73FF;
+***REMOVED***
+span.ui.pink.text {
+  color: #E03997;
+***REMOVED***
+span.ui.inverted.pink.text {
+  color: #FF8EDF;
+***REMOVED***
+span.ui.brown.text {
+  color: #A5673F;
+***REMOVED***
+span.ui.inverted.brown.text {
+  color: #D67C1C;
+***REMOVED***
+span.ui.grey.text {
+  color: #767676;
+***REMOVED***
+span.ui.inverted.grey.text {
+  color: #DCDDDE;
+***REMOVED***
+span.ui.black.text {
+  color: #1B1C1D;
+***REMOVED***
+span.ui.inverted.black.text {
+  color: #545454;
+***REMOVED***
+span.ui.disabled.text {
+  opacity: 0.45;
+***REMOVED***
+
+/* Sizes***REMOVED***/
+span.ui.medium.text {
+  font-size: 1em;
+***REMOVED***
+span.ui.mini.text {
+  font-size: 0.4em;
+***REMOVED***
+span.ui.tiny.text {
+  font-size: 0.5em;
+***REMOVED***
+span.ui.small.text {
+  font-size: 0.75em;
+***REMOVED***
+span.ui.large.text {
+  font-size: 1.5em;
+***REMOVED***
+span.ui.big.text {
+  font-size: 2em;
+***REMOVED***
+span.ui.huge.text {
+  font-size: 4em;
+***REMOVED***
+span.ui.massive.text {
+  font-size: 8em;
+***REMOVED***
+
+
+***REMOVED********************************
+         Theme Overrides
+*******************************/
+

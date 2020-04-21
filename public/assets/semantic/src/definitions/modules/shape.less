@@ -1,0 +1,155 @@
+/*!
+***REMOVED*** # Fomantic-UI - Shape
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'module';
+@element : 'shape';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+              Shape
+*******************************/
+
+.ui.shape {
+  position: relative;
+  vertical-align: top;
+  display: @display;
+  perspective: @perspective;
+  transition: @transition;
+***REMOVED***
+
+.ui.shape .side,
+.ui.shape .sides {
+  transform-style: preserve-3d;
+***REMOVED***
+
+.ui.shape .side {
+  display: none;
+  opacity: 1;
+  width: 100%;
+
+  margin: @sideMargin !important;
+  backface-visibility: @backfaceVisibility;
+***REMOVED***
+
+.ui.shape .side***REMOVED*** {
+  backface-visibility: visible !important;
+***REMOVED***
+
+***REMOVED********************************
+             Types
+*******************************/
+
+& when (@variationShapeCube) {
+  .ui.cube.shape .side {
+    min-width: @cubeSize;
+    height: @cubeSize;
+
+    padding: @cubePadding;
+
+    background-color: @cubeBackground;
+    color: @cubeTextColor;
+    box-shadow: @cubeBoxShadow;
+***REMOVED***
+  .ui.cube.shape .side > .content {
+    width: 100%;
+    height: 100%;
+    display: table;
+
+    text-align: @cubeTextAlign;
+    user-select: text;
+***REMOVED***
+  .ui.cube.shape .side > .content > div {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: @cubeFontSize;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+          Variations
+*******************************/
+& when (@variationShapeText) {
+  .ui.text.shape.animating .sides {
+    position: static;
+***REMOVED***
+  .ui.text.shape .side {
+    white-space: nowrap;
+***REMOVED***
+  .ui.text.shape .side >***REMOVED*** {
+    white-space: normal;
+***REMOVED***
+***REMOVED***
+
+
+***REMOVED********************************
+             States
+*******************************/
+
+& when (@variationShapeLoading) {
+  /*--------------
+      Loading
+  ---------------*/
+
+  .ui.loading.shape {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+    Animating
+---------------*/
+
+.ui.shape .animating.side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: @animatingZIndex;
+***REMOVED***
+.ui.shape .hidden.side {
+  opacity: @hiddenSideOpacity;
+***REMOVED***
+
+
+/*--------------
+      CSS
+---------------*/
+
+.ui.shape.animating .sides {
+  position: absolute;
+  transition: @transition;
+***REMOVED***
+.ui.shape.animating .side {
+  transition: @sideTransition;
+***REMOVED***
+.ui.shape .animating.side***REMOVED***,
+.ui.shape.animating .side***REMOVED*** {
+  transition: none;
+***REMOVED***
+
+/*--------------
+     Active
+---------------*/
+
+.ui.shape .active.side {
+  display: block;
+***REMOVED***
+
+.loadUIOverrides();

@@ -1,83 +1,259 @@
+let ctx,chart1,chart2,chart3,chart4,chart5;
+let data;
+let type = 'linear';
+let mode = "nearest";
+let intersect = "false";
 Chart.defaults.global.hover.mode = 'nearest';
-let type = 'logarithmic';
-var ctx = document.getElementById('chart1').getContext('2d');
-var chart1 = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+Chart.defaults.global.hover.intersect = false;
+Chart.defaults.global.tooltips.mode = 'nearest';
+Chart.defaults.global.tooltips.intersect = false;
+// Chart.defaults.global.legend.labels = labels;
+let labels = [];
+let totalCasesArr = [];
+let totalDeathsArr = [];
+let activeCasesArr = [];
+let dailyNewArr = [];
+let dailyDeathsArr = [];
 
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: '# Cases',
-            // backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-            fill:false
-        }]
-    },
+titleCallback = (tooltipItem, data) => {
+    let date = data['labels'][tooltipItem[0]['index']].toString()
+    date = date.split(" ",5)
+    date = `${date[1]} ${date[2]}, ${date[3]}`
+    return date;
+};
+labelCallback = (tooltipItem, data) => {
+    return data['datasets'][0]['data'][tooltipItem['index']];
+};
 
-    // Configuration options go here
-    options: {
-        tooltips: {
-            mode: 'nearest'
+
+Chart.defaults.global.tooltips.callbacks.title = titleCallback;
+Chart.defaults.global.tooltips.callbacks.label = labelCallback;
+
+setGraphs = (graphData)=>{
+    graphData.forEach(row=>{
+        labels.push(new Date(row.date));
+        totalCasesArr.push(row.totalCases)
+        totalDeathsArr.push(row.totalDeaths)
+        activeCasesArr.push(row.activeCases)
+        dailyNewArr.push(row.dailyNew)
+        dailyDeathsArr.push(row.dailyDeaths)
+    })
+
+    // Total Case Count
+    ctx = document.getElementById('chart1').getContext('2d');
+    chart1 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels,
+            datasets: [{
+                label: '# Cases',
+                // backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: totalCasesArr,
+                fill:false
+            }]
         },
-        title: {
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: 'Daily Cases'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                            'millisecond': 'MMM DD',
+                            'second': 'MMM DD',
+                            'minute': 'MMM DD',
+                            'hour': 'MMM DD',
+                            'day': 'MMM DD',
+                            'week': 'MMM DD',
+                            'month': 'MMM DD',
+                            'quarter': 'MMM DD',
+                            'year': 'MMM DD',
+                        }
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    type: type
+                }]
+            }
+        }
+    });
+
+
+    // Daily New Cases
+    ctx = document.getElementById('chart2').getContext('2d');
+    chart2 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Daily New Cases',
+                data: dailyNewArr,
+                backgroundColor: [
+                    'grey'
+                ],
+                borderColor: [
+                    'grey'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        unitStepSize: 1,
+                        displayFormats: {
+                            'day': 'MMM DD'
+                        }
+                    }
+                }]
+            }
+        }});
+
+    // Active Cases
+    ctx = document.getElementById('chart3').getContext('2d');
+    chart3 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels,
+            datasets: [{
+                label: 'Active Cases',
+                // backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: activeCasesArr,
+                fill:false
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: 'Active Cases'
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                            'millisecond': 'MMM DD',
+                            'second': 'MMM DD',
+                            'minute': 'MMM DD',
+                            'hour': 'MMM DD',
+                            'day': 'MMM DD',
+                            'week': 'MMM DD',
+                            'month': 'MMM DD',
+                            'quarter': 'MMM DD',
+                            'year': 'MMM DD',
+                        }
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    type: type
+                }]
+            }
+        }
+    });
+
+    // Total Deaths
+    ctx = document.getElementById('chart4').getContext('2d');
+    chart4 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels,
+            datasets: [{
+                label: '# Deaths',
+                // backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: totalDeathsArr,
+                fill:false
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            tooltips: {
+                mode: 'nearest'
+            },
+            title: {
+                display: true,
+                text: 'Total Deaths ' + type
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                            'millisecond': 'MMM DD',
+                            'second': 'MMM DD',
+                            'minute': 'MMM DD',
+                            'hour': 'MMM DD',
+                            'day': 'MMM DD',
+                            'week': 'MMM DD',
+                            'month': 'MMM DD',
+                            'quarter': 'MMM DD',
+                            'year': 'MMM DD',
+                        }
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    type: type
+                }]
+            }
+        }
+    });
+
+    // Daily Deaths
+
+
+    //
+
+    document.getElementById('toggleScale').addEventListener('click', function() {
+        type = type === 'linear' ? 'logarithmic' : 'linear';
+        chart1.options.title.text = 'Total Cases - ' + type;
+        chart1.options.scales.yAxes[0] = {
             display: true,
-            text: 'Chart.js Line Chart - ' + type
-        },
-        scales: {
-            xAxes: [{
-                display: true,
-            }],
-            yAxes: [{
-                display: true,
-                type: type
-            }]
-        }
-    }
-});
+            type: type
+        };
 
-ctx = document.getElementById('chart2').getContext('2d');
-var chart2 = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }});
+        chart1.update();
+    });
+}
 
-ctx = document.getElementById('chart4').getContext('2d');
-var chart3 = new Chart(ctx, {
+// var ctx = document.getElementById('chart1').getContext('2d');
+
+
+
+chart3 = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
     data: {
@@ -115,7 +291,7 @@ var chart3 = new Chart(ctx, {
     }});
 
 ctx = document.getElementById('chart3').getContext('2d');
-var chart4 = new Chart(ctx, {
+chart4 = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
     data: {
@@ -152,13 +328,5 @@ var chart4 = new Chart(ctx, {
         }
     }});
 
-document.getElementById('toggleScale').addEventListener('click', function() {
-    type = type === 'linear' ? 'logarithmic' : 'linear';
-    window.chart1.options.title.text = 'Total Cases - ' + type;
-    window.chart1.options.scales.yAxes[0] = {
-        display: true,
-        type: type
-    };
 
-    window.chart1.update();
-});
+

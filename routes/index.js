@@ -46,21 +46,20 @@ router.get("/", function (req, res) {
                     provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                     provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
                     console.log("Province:",province)
-/*
-                    provCases[provinceList[province.provinceName.toUpperCase()]] = numeral(province.caseCount).format('0,0');
-                    provDeaths[provinceList[province.provinceName.toUpperCase()]] = numeral(province.deathCount).format('0,0');*/
                 })
-
-                console.log("Prov Cases:",provCases)
-                console.log("Prov Deaths:",provDeaths)
-                console.log("Prov Recovs:",provRecoveries)
-
-                res.render("index",{data:value,provCases,provDeaths,provRecoveries});
-                    })
-                    .catch(function (err) {
-                        // Crawling failed...
-                    });
+                //
+                // console.log("Prov Cases:",provCases)
+                // console.log("Prov Deaths:",provDeaths)
+                // console.log("Prov Recovs:",provRecoveries)
+                getGraphData().then(graphData => {
+                    console.log("Graph Data",graphData)
+                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
+                })
             })
+            .catch(function (err) {
+                // Crawling failed...
+            });
+        })
 })
 let getSummary = function() {
     return knex('dates')
@@ -96,8 +95,23 @@ let getProvinces = function() {
         .select("provinceName","provDate","caseCount","deathCount","recovered")
         .orderBy("provDate",'desc')
         .limit(10)
-        .then(function(res1) {
-            return res1
+        .then(function(res) {
+            return res
+        })
+        .catch(reason => {
+            console.log("You messed up?",reason)
+        });
+}
+
+let getGraphData = function() {
+    return knex('dates')
+        .select("date","totalCases",
+            "totalDeaths","totalRecoveries",
+            "activeCases","totalTests",
+            "dailyNew","dailyDeaths")
+        .orderBy("date",'asc')
+        .then(function(res) {
+            return res
         })
         .catch(reason => {
             console.log("You messed up?",reason)

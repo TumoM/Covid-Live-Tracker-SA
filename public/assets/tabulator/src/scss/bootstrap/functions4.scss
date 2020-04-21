@@ -1,0 +1,118 @@
+// Bootstrap functions
+//
+// Utility mixins and functions for evalutating source code across our variables, maps, and mixins.
+
+// Ascending
+// Used to evaluate Sass maps like our grid breakpoints.
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+  ***REMOVED*** @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name***REMOVED***: This map must be in ascending order, but key '#{$key***REMOVED***' has value #{$num***REMOVED*** whose unit makes it incomparable to #{$prev-num***REMOVED***, the value of the previous key '#{$prev-key***REMOVED***' !";
+  ***REMOVED*** @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name***REMOVED***: This map must be in ascending order, but key '#{$key***REMOVED***' has value #{$num***REMOVED*** which isn't greater than #{$prev-num***REMOVED***, the value of the previous key '#{$prev-key***REMOVED***' !";
+  ***REMOVED***
+    $prev-key: $key;
+    $prev-num: $num;
+***REMOVED***
+***REMOVED***
+
+// Starts at zero
+// Another grid mixin that ensures the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero($map) {
+  $values: map-values($map);
+  $first-value: nth($values, 1);
+  @if $first-value != 0 {
+    @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value***REMOVED***.";
+***REMOVED***
+***REMOVED***
+
+// Replace `$search` with `$replace` in `$string`
+// Used on our SVG icon backgrounds for custom forms.
+//
+// @author Hugo Giraudel
+// @param {String***REMOVED*** $string - Initial string
+// @param {String***REMOVED*** $search - Substring to replace
+// @param {String***REMOVED*** $replace ('') - New value
+// @return {String***REMOVED*** - Updated string
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+***REMOVED***
+
+  @return $string;
+***REMOVED***
+
+// Color contrast
+@function color-yiq($color) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r***REMOVED*** 299) + ($g***REMOVED*** 587) + ($b***REMOVED*** 114)) / 1000;
+
+  @if ($yiq >= $yiq-contrasted-threshold) {
+    @return $yiq-text-dark;
+***REMOVED*** @else {
+    @return $yiq-text-light;
+***REMOVED***
+***REMOVED***
+
+// Retrieve color Sass maps
+@function color($key: "blue") {
+  @return map-get($colors, $key);
+***REMOVED***
+
+@function theme-color($key: "primary") {
+  @return map-get($theme-colors, $key);
+***REMOVED***
+
+@function gray($key: "100") {
+  @return map-get($grays, $key);
+***REMOVED***
+
+// Request a theme color level
+@function theme-color-level($color-name: "primary", $level: 0) {
+  $color: theme-color($color-name);
+  $color-base: if($level > 0, $black, $white);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level***REMOVED*** $theme-color-interval);
+***REMOVED***
+
+
+// Tables
+
+@mixin table-row-variant($state, $background) {
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+  .table-#{$state***REMOVED*** {
+    &,
+    > th,
+    > td {
+      background-color: $background;
+  ***REMOVED***
+***REMOVED***
+
+  // Hover states for `.table-hover`
+  // Note: this is not available for cells or rows within `thead` or `tfoot`.
+  .table-hover {
+    $hover-background: darken($background, 5%);
+
+    .table-#{$state***REMOVED*** {
+      @include hover {
+        background-color: $hover-background;
+
+        > td,
+        > th {
+          background-color: $hover-background;
+      ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***

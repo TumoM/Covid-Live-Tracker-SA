@@ -1,6 +1,5 @@
 {
-  "autoInstall": true,
-  "base": "public\\assests",
+  "base": "public/assests",
   "paths": {
     "source": {
       "config": "src/theme.config",
@@ -17,7 +16,7 @@
     "clean": "dist/"
   },
   "permission": false,
-  "autoInstall": false,
+  "autoInstall": true,
   "rtl": false,
   "version": "2.8.4"
 }

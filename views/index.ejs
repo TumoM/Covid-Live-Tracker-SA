@@ -251,6 +251,15 @@
                     <canvas id="chart4" class="column"></canvas>
                 </div>
             </div>
+            <div class ="row">
+                <div class="eight wide column">
+                    <canvas id="chart5" class="column"></canvas>
+
+                </div>
+                <div class="eight wide column">
+                    <canvas id="chart6" class="column"></canvas>
+                </div>
+            </div>
 
     </section>
     <div class="ui section divider"></div>
@@ -272,4 +281,5 @@
 <script>
     setColours(<%- JSON.stringify(provCases) %>)
     setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
+    setGraphs(<%- JSON.stringify(graphData) %>)
 </script>

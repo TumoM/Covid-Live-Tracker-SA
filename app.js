@@ -1,6 +1,6 @@
-const express     = require("express"),
-    scout = require("@scout_apm/scout-apm"),
-    app         = express();
+const express     = require("express");
+const scout = require("@scout_apm/scout-apm");
+const app         = express();
     // Enable the app-wide scout middleware
     app.use(scout.expressMiddleware({
         config: {

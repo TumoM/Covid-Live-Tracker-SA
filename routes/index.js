@@ -5,7 +5,7 @@ const numeral = require('numeral');
 
 const knex = require('knex')({
     client: 'pg',
-    connection: {
+    connection: process.env.DATABASE_URL || {
         host: process.env.PG_HOST||'127.0.0.1',
         user: process.env.PG_USER||'test_user',
         password: process.env.PG_PASS||'temp_pass',

@@ -1,12 +1,28 @@
 let ctx,chart1,chart2,chart3,chart4,chart5;
 let data;
 let type = 'linear';
-let mode = "nearest";
+let mode = "x";
 let intersect = "false";
 Chart.defaults.global.hover.mode = 'nearest';
 Chart.defaults.global.hover.intersect = false;
 Chart.defaults.global.tooltips.mode = 'nearest';
 Chart.defaults.global.tooltips.intersect = false;
+Chart.scaleService.updateScaleDefaults('logarithmic', {
+    ticks: {
+        callback: function(value, index) {
+            if (value !== 0) return numeral(value).format('0a');
+        },
+            autoSkip: true,
+        autoSkipPadding:100,
+        min:0,
+        minRotation:0,
+        drawTicks:false,
+        beforeTickToLabelConversion : function(label){
+            console.log('Label',label)
+            return label
+        }
+    }
+});
 // Chart.defaults.global.legend.labels = labels;
 let labels = [];
 let totalCasesArr = [];
@@ -59,6 +75,13 @@ setGraphs = (graphData)=>{
 
         // Configuration options go here
         options: {
+            plugins: {
+                datalabels: {
+                    display: function(context) {
+                        return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+                    }
+                }
+            },
             title: {
                 display: true,
                 text: 'Daily Cases'
@@ -83,6 +106,7 @@ setGraphs = (graphData)=>{
                 }],
                 yAxes: [{
                     display: true,
+                    labelAutoFit: true,
                     type: type
                 }]
             }

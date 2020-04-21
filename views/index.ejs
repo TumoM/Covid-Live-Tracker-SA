@@ -266,9 +266,29 @@
 
     <%# Table %>
     <h2 class="ui header block top attached">Table</h2>
-    <section class="ui segment padded section expand raised attached">
-        <div>
-            <p>The Table will go here!!!</p>
+    <section class="ui segment padded section expand raised attached fluid grid">
+        <div class="ui column">
+            <div class="">
+                <select id="sort-field">
+                    <option value="date" selected>Date</option>
+                    <option value="totalCases">Cases</option>
+                    <option value="totalDeaths">Deaths</option>
+                    <option value="totalRecoveries">Recoveries</option>
+                    <option value="activeCases">Active</option>
+                    <option value="totalTests">Tests</option>
+                    <option value="dailyNew">Daily New</option>
+                    <option value="dailyDeaths">Daily Deaths</option>
+                </select>
+
+                <select id="sort-direction">
+                    <option value="asc" selected>asc</option>
+                    <option value="desc">desc</option>
+                </select>
+                <button id="sort-trigger">Trigger Sort</button>
+            </div>
+            <div class="ui container divider"></div>
+
+            <div class="sixteen wide column" id="example-table"></div>
         </div>
     </section>
     <div class="ui section divider"></div>
@@ -282,4 +302,5 @@
     setColours(<%- JSON.stringify(provCases) %>)
     setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
     setGraphs(<%- JSON.stringify(graphData) %>)
+    setTable(<%- JSON.stringify(graphData) %>)
 </script>

@@ -4,9 +4,11 @@ const numeral = require('numeral');
 const rp = require("request-promise");
 const Chart = require('chart.js');
 const HTMLParser = require('node-html-parser');
+
+
 const knex = require('knex')({
     client: 'pg',
-    connection: {
+    connection: process.env.DATABASE_URL || {
         host: '127.0.0.1',
         user: 'test_user',
         password: 'temp_pass',

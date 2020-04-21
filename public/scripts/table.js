@@ -22,8 +22,21 @@ var dateMutator = function(value, data, type, params, component){
     console.log("Type:",typeof value)
     console.log(value)
     date =new Date(value)
-    return value.split('T')[0]; //return the new value for the cell data.
+    // ToDo Return date, currently giving the wrong
+    // return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}` //return the new value for the cell data.
+    return date; //return the new value for the cell data.
 }
+
+var dateFormatter = function(cell, formatterParams){
+    var value = cell.getValue();
+
+    if(value){
+        value = moment(value).format("MMM DD, YYYY");
+    }
+
+    return value;
+}
+
 var numberFormat = function(value, data, type, params, component){
     //value - original value of the cell
     //data - the data for the row
@@ -51,13 +64,14 @@ setTable = (data)=>{
         resizableColumns: false,
         frozen:true,
         columns:[
-            {title:"Date", field:"date", widthGrow:1,headerSortTristate:true,sorter:"date", sorterParams:{
+            {title:"Date", field:"date", widthGrow:1,headerSortTristate:true,sorter:"datetime", sorterParams:{
             format:"YYYY/MM/DD",
             alignEmptyValues:"top",
-    },mutator: dateMutator, formatter:"date", formatterParams:{
-                    inputFormat:"YYYY-MM-DD",
-                    outputFormat:"DD/MM/YY",
-                    invalidPlaceholder:"(invalid date)"}},
+    },mutator: dateMutator, formatter:"datetime", formatterParams:{
+                    outputFormat:"MMM DD, YYYY",
+                    invalidPlaceholder:"(invalid date)"
+                }
+            },
             {title:"Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
             {title:"Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
             {title:"Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},

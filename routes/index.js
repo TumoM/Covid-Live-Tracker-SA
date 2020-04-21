@@ -5,11 +5,11 @@ const numeral = require('numeral');
 
 const knex = require('knex')({
     client: 'pg',
-    connection: process.env.DATABASE_URL || {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
+    connection: {
+        host: process.env.PG_HOST||'127.0.0.1',
+        user: process.env.PG_USER||'test_user',
+        password: process.env.PG_PASS||'temp_pass',
+        database: process.env.DB_NAME||'covid-tracker-sa2'
   ***REMOVED***
 ***REMOVED***);
 

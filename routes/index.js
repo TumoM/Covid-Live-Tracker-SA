@@ -9,11 +9,12 @@ let connection = process.env.DATABASE_URL || {
     database: process.env.DB_NAME||'covid-tracker-sa2'
 }
 
-// console.log("Connection:",connection)
+console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
+    ssl:true,
     connection
-});
+})
 
 const provinceList = {
     "NORTH WEST": 'ZA-NW',

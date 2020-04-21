@@ -55,44 +55,30 @@ router.get("/", function (req, res) {
                 console.log("Prov Deaths:",provDeaths)
                 console.log("Prov Recovs:",provRecoveries)
 
-                let urlSA = "https://www.worldometers.info/coronavirus/country/south-africa/"
-                rp(urlSA)
-                    .then(function (data) {
-                        let title,style,div,script
-                        const root = HTMLParser.parse(data);
-                        const table1 = root.querySelector(".col-md-12")
-
-                        // [title,style,div,script] = table1.childNodes
-                        // console.log(root.structuredText);
-                        // Process html...
-                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,caseTableHTML:data});
-
+                res.render("index",{data:value,provCases,provDeaths,provRecoveries});
                     })
                     .catch(function (err) {
                         // Crawling failed...
                     });
             })
-
-        })
 })
 let getSummary = function() {
     return knex('dates')
         .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
         .whereNotNull("totalCases")
         .whereNotNull("totalDeaths")
-        .whereNotNull("totalTests")
         .orderBy("date",'desc')
         .limit(1)
         .then(function(res1) {
-            if (res1[0].totalRecoveries === null){
+            if (res1[0].totalTests === null){
                 return knex('dates')
-                    .select('date','totalRecoveries')
-                    .whereNotNull('totalRecoveries')
+                    .select('date','totalTests')
+                    .whereNotNull('totalTests')
                     .limit(1)
                     .orderBy('date','desc')
                     .then(value => {
                         res1[0].date2 = value[0].date;
-                        res1[0].totalRecoveries = value[0].totalRecoveries;
+                        res1[0].totalTests = value[0].totalTests;
                         return res1[0]
                     })
             }

@@ -1,20 +1,39 @@
-$colour20: #b9b9b9;
-$colour21: #cbb946;
-$colour22: #d8af48;
-$colour23: #b89220;
-$colour24: #6d5f00;
+//$colour20: #b9b9b9;
+//$colour21: #cbb946;
+//$colour22: #d8af48;
+//$colour23: #b89220;
+//$colour24: #6d5f00;
 
-$colour10: #b9b9b9;
-$colour11: #fc9297;
-$colour12: #D87582;
-$colour13: #b82020;
-$colour14: #830000;
+//$colour10: #efc7e5; // efc7e5 cbeef3
+//$colour11: #f49cbb;
+//$colour12: #D87582;
+//$colour13: #dd2d4a;
+//$colour14: #830000;
 
-$colour30: #b9b9b9;
-$colour31: #1698fc;
-$colour32: #165dd8;
+//$colour30: #b9b9b9;
+//$colour31: #1698fc;
+//$colour32: #165dd8;
+//$colour33: #2016b8;
+//$colour34: #001683;
+
+$colour10: #dbcdcd;	// Main Primary color */
+$colour11: #ecafaf; // AA3939
+$colour12: #AA3939;
+$colour13: #9f0000;
+$colour14: #550000;
+
+$colour30: #c8c5fd;	// Main Secondary color (1) */
+$colour31: #7597fd;
+$colour32: #4a4efd;
 $colour33: #2016b8;
-$colour34: #001683;
+$colour34: #000081;
+
+$colour20: #D4EE9F;	// Main Secondary color (2) */
+$colour21: #A5C663;
+$colour22: #7B9F35;
+$colour23: #567714;
+$colour24: #354F00;
+
 
 %equal-heights {
 display: flex;

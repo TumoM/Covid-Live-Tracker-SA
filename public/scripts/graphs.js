@@ -1,5 +1,7 @@
+Chart.defaults.global.hover.mode = 'nearest';
+let type = 'logarithmic';
 var ctx = document.getElementById('chart1').getContext('2d');
-var chart = new Chart(ctx, {
+var chart1 = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
 
@@ -7,16 +9,35 @@ var chart = new Chart(ctx, {
     data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
+            label: '# Cases',
+            // backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: [0, 10, 5, 2, 20, 30, 45],
+            fill:false
         }]
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+        tooltips: {
+            mode: 'nearest'
+        },
+        title: {
+            display: true,
+            text: 'Chart.js Line Chart - ' + type
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+            }],
+            yAxes: [{
+                display: true,
+                type: type
+            }]
+        }
+    }
 });
+
 ctx = document.getElementById('chart2').getContext('2d');
 var chart2 = new Chart(ctx, {
     // The type of chart we want to create
@@ -54,8 +75,9 @@ var chart2 = new Chart(ctx, {
             }]
         }
     }});
+
 ctx = document.getElementById('chart4').getContext('2d');
-var chart2 = new Chart(ctx, {
+var chart3 = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
     data: {
@@ -91,8 +113,9 @@ var chart2 = new Chart(ctx, {
             }]
         }
     }});
+
 ctx = document.getElementById('chart3').getContext('2d');
-var chart2 = new Chart(ctx, {
+var chart4 = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
     data: {
@@ -128,3 +151,14 @@ var chart2 = new Chart(ctx, {
             }]
         }
     }});
+
+document.getElementById('toggleScale').addEventListener('click', function() {
+    type = type === 'linear' ? 'logarithmic' : 'linear';
+    window.chart1.options.title.text = 'Total Cases - ' + type;
+    window.chart1.options.scales.yAxes[0] = {
+        display: true,
+        type: type
+    };
+
+    window.chart1.update();
+});

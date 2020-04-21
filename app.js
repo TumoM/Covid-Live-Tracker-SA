@@ -1,6 +1,7 @@
 const express     = require("express");
-const scout = require("@scout_apm/scout-apm");
 const app         = express();
+const dotenv = require('dotenv');
+dotenv.config();
     // Enable the app-wide scout middleware
     // app.use(scout.expressMiddleware({
     //     config: {

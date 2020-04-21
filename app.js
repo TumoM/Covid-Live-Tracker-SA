@@ -1,13 +1,16 @@
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser");
-var path = require('path');
+const express     = require("express"),
+    scout = require("@scout_apm/scout-apm"),
+    app         = express();
+    // Enable the app-wide scout middleware
+    app.use(scout.expressMiddleware());
+const bodyParser  = require("body-parser");
+const path = require('path');
 
-var indexRoutes = require("./routes/index");
+const indexRoutes = require("./routes/index");
 
 let dbURL = process.env.DATABASEURL || "dbString";
 
-var port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 
 // Setup Express/App
 app.set("view engine", "ejs");
@@ -23,6 +26,7 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
+
 
 // Required Routes
 app.use("/",indexRoutes);

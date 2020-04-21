@@ -1,18 +1,15 @@
 var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
-const rp = require("request-promise");
-const Chart = require('chart.js');
-const HTMLParser = require('node-html-parser');
 
 
 const knex = require('knex')({
     client: 'pg',
-    connection: process.env.DATABASE_URL || {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
+    connection: {
+        host: process.env.PG_HOST||'127.0.0.1',
+        user: process.env.PG_USER||'test_user',
+        password: process.env.PG_PASS||'temp_pass',
+        database: process.env.DB_NAME||'covid-tracker-sa2'
     }
 });
 
@@ -38,7 +35,7 @@ router.get("/", function (req, res) {
             value.totalDeaths = numeral(value.totalDeaths).format('0,0');
             value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
             value.totalTests = numeral(value.totalTests).format('0,0');
-            console.log("Sending these stats:",value)
+            // console.log("Sending these stats:",value)
             getProvinces().then(value1 => {
                 let provCases = {}
                 let provDeaths = {}
@@ -47,14 +44,14 @@ router.get("/", function (req, res) {
                     provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                     provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                     provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
-                    console.log("Province:",province)
+                    // console.log("Province:",province)
                 })
                 //
                 // console.log("Prov Cases:",provCases)
                 // console.log("Prov Deaths:",provDeaths)
                 // console.log("Prov Recovs:",provRecoveries)
                 getGraphData().then(graphData => {
-                    console.log("Graph Data",graphData)
+                    // console.log("Graph Data",graphData)
                         res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
                 })
             })

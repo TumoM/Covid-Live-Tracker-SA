@@ -19,7 +19,7 @@ const knex = require('knex')({
 });
 
 
-const PROVINCES = { // Name, [sick, dead]
+const PROVINCES = { // Name, [cases, deadArr]
     "GAUTENG": Province,
     "WESTERN CAPE": Province,
     "KWAZULU–NATAL": Province,
@@ -32,6 +32,18 @@ const PROVINCES = { // Name, [sick, dead]
     "UNALLOCATED": Province
 }
 let provincesList = []
+
+function parseNumber(number) {
+    let testInt = "";
+    console.log("FUNC NUMBER:",number)
+    let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
+    testArray.forEach(digit => {
+        testInt += digit
+    })
+    testInt = parseInt(testInt);
+    return testInt
+}
+
 
 rp(url)
     .then(function (html) {
@@ -57,19 +69,62 @@ rp(url)
                 rp(entry.getAttribute("href"))
                     .then(function (html) {
                         console.log(DATE); // date
-                        let totalCase = 0;
-                        let totalDeath = 0;
+                        totalCase = 0;
+                        totalDeath = 0;
                         let tempDate = DATE.split(" ");
                         const d = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
+                        let parsedDate = d.toLocaleDateString().split("/")
+                        parsedDate = `${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`
                         knex('dates')
                             .where({date: d})
                             .then(rows => {
+                                let totalTests = 0;
                                 console.log("Row Count:", rows.length);
-                                if (rows.length > 0 && rows[0].parsed) {
+                                if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
 
                                 }
                                 else if (rows.length > 0 && rows[0].maybeValid) {
                                     // Maybe the format is all wrong. Parse another site/source?
+                                    // Make soup.
+                                    const paragraphs = HTMLParser.parse(html)
+                                    //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
+                                    // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                    let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
+                                        let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                        if (!paragraph){
+                                            return false;
+                                        }
+                                        else{
+                                            return true
+                                        }
+                                    })
+                                    if (testPar){
+                                        totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                    }
+                                    else {
+                                        testPar = html.match(/Tests.*?conducted.*?\d[\s?\d]+/)
+                                        totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
+                                    }
+                                    if (totalTests){
+                                        totalTests = parseNumber(totalTests[0].trim());
+                                    }
+                                    console.log("Value:",totalTests);
+                                    knex('dates').select('totalTests')
+                                        .whereNull('totalTests')
+                                        .andWhere({date:parsedDate})
+                                        .then(rows=>{
+                                            knex('dates').update({totalTests,maybeValid:false}).where({date:parsedDate})
+                                                .then(value => {
+                                                    console.log("Updated TTs1:",value)
+                                                })
+                                                .catch(reason => {
+                                                    console.log("Unknown 2:",reason);
+                                                })
+                                        })
+                                        .catch(reason => {
+                                            console.log("Error putting in Total Tests?",reason)
+                                        })
+                                    // Pull off data for update (Total tests)
                                 }
                                 else if ((rows.length === 0) || (rows.length > 0 && !rows[0].error)) {
                                     const rootChild = HTMLParser.parse(html);
@@ -127,12 +182,7 @@ rp(url)
                                                     return tag;
                                                 }
                                             });
-                                            let testInt = "";
-                                            let testArray = tests[0].text.match(/\s((\d+\s+)*\d+)/)[0].trim().split(" ");
-                                            testArray.forEach(digit => {
-                                                testInt += digit
-                                            })
-                                            testInt = parseInt(testInt);
+                                            parseNumber(tests[0].text);
                                             const rootTable2 = HTMLParser.parse(table2.outerHTML);
                                             const rowsTable2 = rootTable2.querySelectorAll("tr")
                                             delete rowsTable2[0]
@@ -165,8 +215,8 @@ rp(url)
                                             // console.log(currentProvinces);
                                             for (const [key, value] of Object.entries(currentProvinces)) {
                                                 // console.log(key);
-                                                // console.log("Sick",value.sick);
-                                                // console.log("Death Count:",value.totalDead);
+                                                // console.log("Sick",value.cases);
+                                                // console.log("Death Count:",value.deaths);
                                                 const date = value.date;
 
                                                 let testNum = 0;
@@ -179,12 +229,12 @@ rp(url)
                                                         badString += word
                                                     })
                                                 totalCase += value.sick;
-                                                totalDeath += value.totalDead;
+                                                totalDeath += value.deaths;
                                                 // Inserts into Provinces table
                                                 knex("provinceDays")
                                                     .insert({
                                                             provinceName: key, provDate:date,
-                                                            caseCount: value.sick, deathCount: value.totalDead,
+                                                            caseCount: value.sick, deathCount: value.deaths,
 
                                                         },
                                                         'id')
@@ -205,13 +255,13 @@ rp(url)
                                                             .insert({
                                                                 provinceId,
                                                                 deathDate: date,
-                                                                deathCount: value.totalDead,
+                                                                deathCount: value.deaths,
                                                                 deathMenCount: value.men,
                                                                 deathWomenCount: value.women
                                                             }, ['id']).then(id => {
                                                             let deathDateId = id[0];
                                                             let parsedValues = [];
-                                                            value.dead.forEach(deathDetails => {
+                                                            value.deadArr.forEach(deathDetails => {
                                                                 parsedValues.push({
                                                                     deathDateId,
                                                                     provinceName: deathDetails.province,
@@ -238,7 +288,7 @@ rp(url)
 
                                             console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
                                             // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`)
-                                            let parsedDate = d.toLocaleDateString().split("/")
+                                            parsedDate = d.toLocaleDateString().split("/")
                                             parsedDate = `${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`
                                             console.log("Parsed Date:",parsedDate)
                                             knex('dates')
@@ -268,14 +318,138 @@ rp(url)
                                             })
                                         } catch (e) {
                                             console.log("ANOOOOTHER ERRROR?:",e)
-                                            knex("dates ").insert({date: d, parsed: false})
-                                                .then(id => {
-                                                    //console.log(id)
-                                                })
-                                                .catch(err => {
-                                                    console.log("Day Error 2")
-                                                })
-                                            throw 'No posts?\n'
+                                            const paragraphs = HTMLParser.parse(html)
+                                            //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
+                                            // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                            let testPar = paragraphs.querySelectorAll("p")
+
+                                            let cases = testPar.find((currentVal,index,arr)=>{
+                                                let paragraph = currentVal.text.match(/total.*confirmed.*(covid-19)? cases.*?\s[\s??\d+]+/i)
+                                                if (!paragraph){
+                                                    return false;
+                                                }
+                                                else{
+                                                    paragraph = paragraph[0].split(".")[0]
+                                                    return true
+                                                }
+                                            })
+                                            let testString = ""
+                                            let tests = testPar.find((currentVal,index,arr)=>{
+                                                let paragraph = currentVal.text.match(/(number.*?tests\sconducted)([\D]*?\d[\s??\d+]+)/i)
+                                                if (!paragraph){
+                                                    return false;
+                                                }
+                                                else{
+                                                    testString = paragraph[2].split(".")[0]
+                                                    return true
+                                                }
+                                            })
+                                            let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)
+                                            if (death){
+                                                death = death[0];
+                                            }
+                                        else   {
+                                            death = null
+                                            }
+
+                                            console.log("TestPar",testPar.text);
+                                            let totalTests = testString.trim().match(/\s((\d+\s+)*\d+)/)[0];
+                                            if (totalTests){
+                                                totalTests = parseNumber(totalTests.trim());
+                                            }else {
+                                                totalTests = null;
+                                            }
+                                            let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
+                                            if (totalCases){
+                                                totalCases = parseNumber(totalCases[0].trim());
+                                            }
+
+                                            console.log("Total Tests:",totalTests);
+                                            console.log("Total Cases:",totalCases);
+                                            let data = {
+                                                date: parsedDate,
+                                                parsed: true,
+                                                totalTests,
+                                                totalCases,
+                                                maybeValid: true
+                                            }
+                                            let totalDeaths = death? death.trim().match(/\s((\d+\s+)*\d+)/):null;
+                                            if (totalDeaths){
+                                                totalDeaths = parseNumber(totalDeaths[0].trim());
+                                            }
+                                            console.log("Total Deaths:",totalDeaths);
+                                            data.totalDeaths = totalDeaths
+
+                                            console.log(data)
+                                            knex('dates').select('totalTests')
+                                                .whereNull('totalTests')
+                                                .andWhere({date:parsedDate})
+                                                .then(rows=>{
+                                                            console.log(rows.length)
+                                                            knex('dates').update({totalTests,maybeValid:false}).where({date:parsedDate})
+                                                                .then(value => {
+                                                                    console.log("Updated TTs2:",value)
+                                                                    if (value === 0){
+                                                                        knex('dates').insert(data).then(value1 => {
+                                                                            console.log("Inserted my man")
+                                                                            knex.raw('WITH preTable AS (\n' +
+                                                                                '   SELECT\n' +
+                                                                                '      date,\n' +
+                                                                                '      "totalCases",\n' +
+                                                                                '      "totalDeaths",\n' +
+                                                                                '        "totalRecoveries",\n' +
+                                                                                '      LAG("totalCases",1)\n' +
+                                                                                '          OVER (\n' +
+                                                                                '            ORDER BY date\n' +
+                                                                                '            ) prevCases,\n' +
+                                                                                '      LAG("totalDeaths",1)\n' +
+                                                                                '          OVER (\n' +
+                                                                                '            ORDER BY date\n' +
+                                                                                '            ) prevDeaths,\n' +
+                                                                                '          LAG("totalRecoveries",1)\n' +
+                                                                                '            OVER(\n' +
+                                                                                '                ORDER BY date\n' +
+                                                                                '                ) prevRecoveries\n' +
+                                                                                '   FROM dates\n' +
+                                                                                '   ORDER BY date\n' +
+                                                                                ')\n' +
+                                                                                'select\n' +
+                                                                                '       date,\n' +
+                                                                                '       prevDeaths as "prevDeaths",\n'+
+                                                                                '       prevRecoveries as "prevRecoveries",\n' +
+                                                                                '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                                                                                '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                                                                                'from preTable\n' +
+                                                                                'order by date desc\n' +
+                                                                                'limit 1;')
+                                                                                .then(prevVals=>{
+                                                                                   data.totalDeaths = !data.totalDeaths?prevVals.rows[0].prevDeaths:data.totalDeaths;
+                                                                                   prevVals.rows[0].dailyDeaths = !prevVals.rows[0].dailyDeaths?0:prevVals.rows[0].dailyDeaths;
+                                                                                   prevVals.rows[0].dailyNew = !prevVals.rows[0].dailyNew?0:prevVals.rows[0].dailyNew;
+                                                                                   data = {
+                                                                                       totalDeaths:data.totalDeaths,
+                                                                                       dailyNew:prevVals.rows[0].dailyNew,
+                                                                                       dailyDeaths:prevVals.rows[0].dailyDeaths,
+                                                                                       totalRecoveries:prevVals.rows[0].prevRecoveries
+                                                                                   }
+                                                                                   knex('dates').update(data).where('date','=',parsedDate)
+                                                                                        .catch(reason => {
+                                                                                            log('WHAAAAAT?',reason)
+                                                                                        })
+                                                                                })
+                                                                        }).catch(reason => {
+                                                                            console.log("Some errrr:",reason)
+                                                                        })
+                                                                    }
+                                                                })
+                                                                .catch(reason => {
+                                                                    console.log("Unknown 2:",reason);
+                                                                })
+                                                        })
+                                                        .catch(reason => {
+                                                            console.log("Error putting in Total Tests?",reason)
+                                                        })
+
                                         }
                                     } catch (e) {
                                         console.log("SOME ERROR:",e)
@@ -308,7 +482,7 @@ rp(url)
         // Pull the stats off a URL
     })
     .catch(function (err) {
-        console.log(err)
+        console.log("WOOOOW",err)
     });
 const upsert = (params) => {
     const {table, object} = params;

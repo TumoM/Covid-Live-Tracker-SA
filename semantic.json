@@ -1,5 +1,6 @@
 {
-  "base": "semantic\\",
+  "autoInstall": true,
+  "base": "public\\assests",
   "paths": {
     "source": {
       "config": "src/theme.config",

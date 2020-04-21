@@ -5,7 +5,7 @@ const express     = require("express"),
     app.use(scout.expressMiddleware({
         config: {
             allowShutdown: true, // allow shutting down spawned scout-agent processes from this program
-            monitor: process.env.SCOUT_MONITOR||null, // enable monitoring
+            monitor: process.env.SCOUT_MONITOR||false, // enable monitoring
             name: process.env.SCOUNT_NAME||null,
             key: process.env.SCOUT_KEY || null,
         },

@@ -98,8 +98,13 @@ rp(url)
                                             return true
                                       ***REMOVED***
                                   ***REMOVED***)
-                                    console.log("TestPar",testPar.text);
-                                    totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                    if (testPar){
+                                        totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                                  ***REMOVED***
+                                    else {
+                                        testPar = html.match(/Tests.*?conducted.*?\d[\s?\d]+/)
+                                        totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
+                                  ***REMOVED***
                                     if (totalTests){
                                         totalTests = parseNumber(totalTests[0].trim());
                                   ***REMOVED***

@@ -70,11 +70,50 @@ function updateDaysGood(itemData) {
             knex("dates ").insert(dateData)
                 .then(id => {
                     console.log("Inserted into Dates Table")
+                    knex.raw('WITH preTable AS (\n' +
+                        '   SELECT\n' +
+                        '      date,\n' +
+                        '      "totalCases",\n' +
+                        '      "totalDeaths",\n' +
+                        '        "totalRecoveries",\n' +
+                        '      LAG("totalCases",1)\n' +
+                        '          OVER (\n' +
+                        '            ORDER BY date\n' +
+                        '            ) prevCases,\n' +
+                        '      LAG("totalDeaths",1)\n' +
+                        '          OVER (\n' +
+                        '            ORDER BY date\n' +
+                        '            ) prevDeaths,\n' +
+                        '          LAG("totalRecoveries",1)\n' +
+                        '            OVER(\n' +
+                        '                ORDER BY date\n' +
+                        '                ) prevRecoveries\n' +
+                        '   FROM dates\n' +
+                        '   ORDER BY date\n' +
+                        ')\n' +
+                        'select\n' +
+                        '       date,\n' +
+                        '       prevRecoveries as "prevRecoveries",\n' +
+                        '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                        '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                        'from preTable\n' +
+                        'order by date desc\n' +
+                        'limit 1;')
+                        .then(prevVals=>{
+                            knex('dates').update({
+                                dailyNew:prevVals.rows[0].dailyNew,
+                                dailyDeaths:prevVals.rows[0].dailyDeaths,
+                                totalRecoveries:prevVals.rows[0].prevRecoveries
+                          ***REMOVED***).where('date','=',itemData.provDate)
+                                .catch(reason => {
+                                    log('WHAAAAAT?',reason)
+                              ***REMOVED***)
               ***REMOVED***)
                 .catch(err => {
                     console.log("Attempted duplicate insert?",err)
               ***REMOVED***)
-      ***REMOVED***else{
+      ***REMOVED***)***REMOVED***
+        else{
             knex("dates ")
             .update(dateData)
             .where('date',"=",itemData.provDate)
@@ -124,8 +163,9 @@ rp(url)
                 // #######################################################################################
 
                 // TODO 1: Parse info on Recoveries by Province
-                let recoveriesLines = soupBody.find('p').getText().split(":"),
-                    recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
+                let recoveriesLines = soupBody.find('p').getText().split(":");
+                recoveriesLines.length===2? recoveriesLines.unshift(date):recoveriesLines;
+                recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
 
                 totalRecoveries = getNumber(recoveriesLines[1]);
                 console.log(`Total Recovery:${totalRecoveries***REMOVED***\n`)
@@ -153,7 +193,7 @@ rp(url)
 
                 while (!breakdown) {
                     p = p.findNextSibling('p');
-                    if (p.text === 'PROVINCIAL BREAKDOWN:') {
+                    if (p.text.match(/PROVINCIAL BREAKDOWN:/i)) {
                         breakdown = true;
                         p = p.findNextSibling('p');
                         for (let index = 0; index < 10; index++) {

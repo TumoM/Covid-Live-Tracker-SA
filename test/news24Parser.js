@@ -308,7 +308,7 @@ rp(url)
                                         if (count === 9){
                                             let dateData = {
                                                 totalRecoveries:totalRecoveries,
-                                                maybeValid: false,
+                                                maybeValid: true,
                                                 parsed: true
                                           ***REMOVED***;
 
@@ -321,6 +321,7 @@ rp(url)
                                                     dateData.date = itemData.provDate;
                                                     if (value === 0){
                                                         dateData.parsed = true;
+                                                        dateData.maybeValid = true;
                                                         knex('dates')
                                                             .insert(dateData)
                                                             .then(value1 => {
@@ -356,7 +357,7 @@ rp(url)
                                         if (count === 9){
                                             let dateData = {
                                                 totalRecoveries:totalRecoveries,
-                                                maybeValid: false,
+                                                maybeValid: true,
                                                 parsed: true
                                           ***REMOVED***;
 

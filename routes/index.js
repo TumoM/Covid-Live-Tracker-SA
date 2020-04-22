@@ -2,29 +2,16 @@ var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
 
-let connection;
-if (!process.env.PORT){
-    connection = {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
-  ***REMOVED***
+let connection = process.env.DATABASE_URL || {
+    host: process.env.PG_HOST||'127.0.0.1',
+    user: process.env.PG_USER||'test_user',
+    password: process.env.PG_PASS||'temp_pass',
+    database: process.env.DB_NAME||'covid-tracker-sa2'
 ***REMOVED***
-else{
-    connection = process.env.DATABASE_URL || {
-        host: process.env.PG_HOST,
-        user: process.env.PG_USER,
-        password: process.env.PG_PASS,
-        database: process.env.DB_NAME
-  ***REMOVED***
-***REMOVED***
-
 
 console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
-    ssl:true,
     connection
 ***REMOVED***)
 
@@ -40,7 +27,6 @@ const provinceList = {
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
 ***REMOVED***;
-
 
 
 router.get("/", function (req, res) {

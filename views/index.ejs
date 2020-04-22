@@ -10,7 +10,7 @@
 
     <%# Stats %>
     <h2 class="ui header block top attached">Summary Statistics</h2>
-    <section class="ui segment padded section expand raised attached grid">
+    <section id="myStats" class="ui segment padded section expand raised attached grid">
         <div class="column">
             <div class="ui statistics">
                 <div class="orange statistic">
@@ -55,7 +55,7 @@
 
     <%# Map %>
     <h2 class="ui header block top attached">Provincial Map</h2>
-    <section class="ui segment section expand raised attached grid">
+    <section id="myMap" class="ui segment section expand raised attached grid">
         <div class="ui three column grid row stackable" id="mapContainer">
             <div class="four wide column scroll-pane" id="provStatsContainer">
                 <div class="ui cards">
@@ -231,7 +231,7 @@
 
     <%# Graphs %>
     <h2 class="ui header block top attached">Graphs</h2>
-    <section class="ui segment padded section expand raised attached grid center aligned fluid stackable">
+    <section id="myGraphs" class="ui segment padded section expand raised attached grid center aligned fluid stackable">
             <button id="toggleScale">Toggle Scale Type</button>
             <div class ="row ">
                 <div class="eight wide column">
@@ -266,7 +266,7 @@
 
     <%# Table %>
     <h2 class="ui header block top attached">Table</h2>
-    <section class="ui segment padded section expand raised attached fluid grid">
+    <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
         <div class="ui column">
             <div class="">
                 <select id="sort-field">

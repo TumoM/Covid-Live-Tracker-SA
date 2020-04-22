@@ -33,7 +33,7 @@ app.use(require("express-session")({
 app.use("/",indexRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
-    res.sendFile(path.join(__dirname, '/public', "loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt"))
+    res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
 ***REMOVED***)
 
 app.listen(port, function () {

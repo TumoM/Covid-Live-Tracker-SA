@@ -30,6 +30,7 @@ const provinceList = {
 };
 
 
+
 router.get("/", function (req, res) {
     // TODO Load data for the day.
     getSummary()

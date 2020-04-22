@@ -28,7 +28,7 @@ app.use(require("express-session")({
     saveUninitialized: false
 ***REMOVED***));
 
-
+app.use(bodyParser.json());
 // Required Routes
 app.use("/",indexRoutes);
 
@@ -37,14 +37,28 @@ app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
 ***REMOVED***)
 
 // Government Notification
-app.post('/governmentCheck/:type?',(req,res) =>{
+app.post('/governmentCheck/:type?',async (req,res) =>{
     let type = req.params.type? req.params.type:
         req.get("type")? req.get("type"): null;
     console.log("##################################################################################")
     console.log("TYPE:",type)
-    console.log("URL:",req.get("url"))
-    console.log("Request:",JSON.stringify(req,null,2))
+    console.log("Auth:",req.headers.authorization)
+    console.log("Data:",req.data)
+    console.log("Body:",req.body)
     console.log("##################################################################################")
+    if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+        return res.status(401).json({ message: 'Missing Authorization Header' ***REMOVED***);
+  ***REMOVED***
+
+    // verify auth credentials
+    const base64Credentials =  req.headers.authorization.split(' ')[1];
+    const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
+    if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
+        return res.status(200).json({ message: 'Valid Authentication Credentials' ***REMOVED***);
+  ***REMOVED***
+    else{
+        return res.status(401).json({ message: 'Invalid Authentication Credentials' ***REMOVED***);
+  ***REMOVED***
 
 ***REMOVED***)
 

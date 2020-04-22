@@ -12,9 +12,9 @@ let connection = process.env.DATABASE_URL || {
 console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
-    "pool": {
+    pool: {
         "min": 2,
-        "max": 6,
+        "max": 30,
         "createTimeoutMillis": 3000,
         "acquireTimeoutMillis": 30000,
         "idleTimeoutMillis": 30000,

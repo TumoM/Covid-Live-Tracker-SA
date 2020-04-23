@@ -1,5 +1,5 @@
 {
-  "base": "public/assests",
+  "base": "public/assets",
   "paths": {
     "source": {
       "config": "src/theme.config",

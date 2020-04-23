@@ -65,32 +65,32 @@ app.use("/",indexRoutes);
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
     res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
 })
-
-// Government Notification
-app.post('/governmentCheck/:type?',(req,res) =>{
-    let type = req.params.type? req.params.type:
-        req.get("type")? req.get("type"): null;
-    console.log("##################################################################################")
-    console.log("TYPE:",type)
-    console.log("Auth:",req.headers.authorization)
-    console.log("Data:",req.data)
-    console.log("Body:",req.body)
-    console.log("##################################################################################")
-    if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
-        return res.status(401).json({ message: 'Missing Authorization Header' });
-    }
-
-    // verify auth credentials
-    const base64Credentials =  req.headers.authorization.split(' ')[1];
-    const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
-    if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
-        return res.status(200).json({ message: 'Valid Authentication Credentials' });
-    }
-    else{
-        return res.status(401).json({ message: 'Invalid Authentication Credentials' });
-    }
-
-})
+//
+// // Government Notification
+// app.post('/governmentCheck/:type?',(req,res) =>{
+//     let type = req.params.type? req.params.type:
+//         req.get("type")? req.get("type"): null;
+//     console.log("##################################################################################")
+//     console.log("TYPE:",type)
+//     console.log("Auth:",req.headers.authorization)
+//     console.log("Data:",req.data)
+//     console.log("Body:",req.body)
+//     console.log("##################################################################################")
+//     if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+//         return res.status(401).json({ message: 'Missing Authorization Header' });
+//     }
+//
+//     // verify auth credentials
+//     const base64Credentials =  req.headers.authorization.split(' ')[1];
+//     const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
+//     if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
+//         return res.status(200).json({ message: 'Valid Authentication Credentials' });
+//     }
+//     else{
+//         return res.status(401).json({ message: 'Invalid Authentication Credentials' });
+//     }
+//
+// })
 
 
 app.listen(port, function () {

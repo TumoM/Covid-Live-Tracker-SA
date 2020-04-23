@@ -372,6 +372,7 @@ rp(url)
                                                     dateData.date = itemData.provDate;
                                                     if (value === 0){
                                                         dateData.parsed = true;
+                                                        dateData.maybeValid = true;
                                                         knex('dates')
                                                             .insert(dateData)
                                                             .then(value1 => {

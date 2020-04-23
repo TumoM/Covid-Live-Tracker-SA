@@ -22,6 +22,8 @@ const provinceList = {
 
 router.get("/", function (req, res) {
     const knex = res.locals.knex;
+    let workers = process.env.WEB_CONCURRENCY || 2;
+
     if (knex){
         console.log("found KNEX")
         // TODO Load data for the day.

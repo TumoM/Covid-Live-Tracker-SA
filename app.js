@@ -31,7 +31,7 @@ app.use(require("express-session")({
 app.use(bodyParser.json());
 
 
-let connection = process.env.DATABASE_URL || {
+let connection = process.env.DATABASE_URLL || {
     host: process.env.PG_HOST||'127.0.0.1',
     user: process.env.PG_USER||'test_user',
     password: process.env.PG_PASS||'temp_pass',

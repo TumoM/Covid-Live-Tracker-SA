@@ -1,0 +1,82 @@
+/*!
+***REMOVED*** # Fomantic-UI - Transition
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'module';
+@element : 'transition';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+          Transitions
+*******************************/
+
+.transition {
+  animation-iteration-count: 1;
+  animation-duration: @transitionDefaultDuration;
+  animation-timing-function: @transitionDefaultEasing;
+  animation-fill-mode: @transitionDefaultFill;
+***REMOVED***
+
+***REMOVED********************************
+            States
+*******************************/
+
+
+/* Animating***REMOVED***/
+.animating.transition {
+  backface-visibility: @backfaceVisibility;
+  visibility: visible !important;
+***REMOVED***
+
+& when (@variationTransitionLoading) {
+  /* Loading***REMOVED***/
+  .loading.transition {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+***REMOVED***
+***REMOVED***
+
+/* Hidden***REMOVED***/
+.hidden.transition {
+  display: none;
+  visibility: hidden;
+***REMOVED***
+
+/* Visible***REMOVED***/
+.visible.transition {
+  display: block !important;
+  visibility: visible !important;
+/*  backface-visibility: @backfaceVisibility;
+  transform: @use3DAcceleration;*/
+***REMOVED***
+
+& when (@variationTransitionDisabled) {
+  /* Disabled***REMOVED***/
+  .disabled.transition {
+    animation-play-state: paused;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+          Variations
+*******************************/
+& when (@variationTransitionLoading) {
+  .looping.transition {
+    animation-iteration-count: infinite;
+***REMOVED***
+***REMOVED***
+
+.loadUIOverrides();

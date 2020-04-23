@@ -1,0 +1,160 @@
+/*!
+***REMOVED*** # Fomantic-UI - Container
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'element';
+@element : 'container';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+            Container
+*******************************/
+
+/* All Sizes***REMOVED***/
+.ui.container {
+  display: block;
+  max-width: @maxWidth;
+***REMOVED***
+
+/* Mobile***REMOVED***/
+@media only screen and (max-width: @largestMobileScreen) {
+  .ui.ui.ui.container:not(.fluid) {
+    width: @mobileWidth;
+    margin-left: @mobileGutter;
+    margin-right: @mobileGutter;
+***REMOVED***
+  & when (@variationContainerGrid) or (@variationContainerRelaxed) {
+    .ui.ui.ui.grid.container {
+      width: @mobileGridWidth;
+  ***REMOVED***
+    & when (@variationContainerRelaxed) {
+      .ui.ui.ui.relaxed.grid.container {
+        width: @mobileRelaxedGridWidth;
+    ***REMOVED***
+      .ui.ui.ui.very.relaxed.grid.container {
+        width: @mobileVeryRelaxedGridWidth;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+/* Tablet***REMOVED***/
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  .ui.ui.ui.container:not(.fluid) {
+    width: @tabletWidth;
+    margin-left: @tabletGutter;
+    margin-right: @tabletGutter;
+***REMOVED***
+  & when (@variationContainerGrid) or (@variationContainerRelaxed) {
+    .ui.ui.ui.grid.container {
+      width: @tabletGridWidth;
+  ***REMOVED***
+    & when (@variationContainerRelaxed) {
+      .ui.ui.ui.relaxed.grid.container {
+        width: @tabletRelaxedGridWidth;
+    ***REMOVED***
+      .ui.ui.ui.very.relaxed.grid.container {
+        width: @tabletVeryRelaxedGridWidth;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+/* Small Monitor***REMOVED***/
+@media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
+  .ui.ui.ui.container:not(.fluid) {
+    width: @computerWidth;
+    margin-left: @computerGutter;
+    margin-right: @computerGutter;
+***REMOVED***
+  & when (@variationContainerGrid) or (@variationContainerRelaxed) {
+    .ui.ui.ui.grid.container {
+      width: @computerGridWidth;
+  ***REMOVED***
+    & when (@variationContainerRelaxed) {
+      .ui.ui.ui.relaxed.grid.container {
+        width: @computerRelaxedGridWidth;
+    ***REMOVED***
+      .ui.ui.ui.very.relaxed.grid.container {
+        width: @computerVeryRelaxedGridWidth;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+/* Large Monitor***REMOVED***/
+@media only screen and (min-width: @largeMonitorBreakpoint) {
+  .ui.ui.ui.container:not(.fluid) {
+    width: @largeMonitorWidth;
+    margin-left: @largeMonitorGutter;
+    margin-right: @largeMonitorGutter;
+***REMOVED***
+  & when (@variationContainerGrid) or (@variationContainerRelaxed) {
+    .ui.ui.ui.grid.container {
+      width: @largeMonitorGridWidth;
+  ***REMOVED***
+    & when (@variationContainerRelaxed) {
+      .ui.ui.ui.relaxed.grid.container {
+        width: @largeMonitorRelaxedGridWidth;
+    ***REMOVED***
+      .ui.ui.ui.very.relaxed.grid.container {
+        width: @largeMonitorVeryRelaxedGridWidth;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+             Types
+*******************************/
+
+& when (@variationContainerText) {
+  /* Text Container***REMOVED***/
+  .ui.text.container {
+    font-family: @textFontFamily;
+    max-width: @textWidth;
+    line-height: @textLineHeight;
+    font-size: @textSize;
+***REMOVED***
+***REMOVED***
+
+& when (@variationContainerFluid) {
+  /* Fluid***REMOVED***/
+  .ui.fluid.container {
+    width: 100%;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+           Variations
+*******************************/
+& when (@variationContainerAligned) {
+  .ui[class*="left aligned"].container {
+    text-align: left;
+***REMOVED***
+  .ui[class*="center aligned"].container {
+    text-align: center;
+***REMOVED***
+  .ui[class*="right aligned"].container {
+    text-align: right;
+***REMOVED***
+***REMOVED***
+& when (@variationContainerJustified) {
+  .ui.justified.container {
+    text-align: justify;
+    hyphens: auto;
+***REMOVED***
+***REMOVED***
+
+.loadUIOverrides();

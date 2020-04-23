@@ -1,0 +1,962 @@
+***REMOVED********************************
+          Transitions
+*******************************/
+
+/*
+  Some transitions adapted from Animate CSS
+  https://github.com/daneden/animate.css
+
+  Additional transitions adapted from Glide
+  by Nick Pettit - https://github.com/nickpettit/glide
+*/
+
+/*--------------
+     Browse
+---------------*/
+
+.transition.browse {
+  animation-duration: 500ms;
+***REMOVED***
+.transition.browse.in {
+  animation-name: browseIn;
+***REMOVED***
+.transition.browse.out,
+.transition.browse.left.out {
+  animation-name: browseOutLeft;
+***REMOVED***
+.transition.browse.right.out {
+  animation-name: browseOutRight;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes browseIn {
+  0% {
+    transform: scale(0.8) translateZ(0px);
+    z-index: -1;
+***REMOVED***
+  10% {
+    transform: scale(0.8) translateZ(0px);
+    z-index: -1;
+    opacity: 0.7;
+***REMOVED***
+  80% {
+    transform: scale(1.05) translateZ(0px);
+    opacity: 1;
+    z-index: 999;
+***REMOVED***
+  100% {
+    transform: scale(1) translateZ(0px);
+    z-index: 999;
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes browseOutLeft {
+  0% {
+    z-index: 999;
+    transform: translateX(0%) rotateY(0deg) rotateX(0deg);
+***REMOVED***
+  50% {
+    z-index: -1;
+    transform: translateX(-105%) rotateY(35deg) rotateX(10deg) translateZ(-10px);
+***REMOVED***
+  80% {
+    opacity: 1;
+***REMOVED***
+  100% {
+    z-index: -1;
+    transform: translateX(0%) rotateY(0deg) rotateX(0deg) translateZ(-10px);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+@keyframes browseOutRight {
+  0% {
+    z-index: 999;
+    transform: translateX(0%) rotateY(0deg) rotateX(0deg);
+***REMOVED***
+  50% {
+    z-index: 1;
+    transform: translateX(105%) rotateY(35deg) rotateX(10deg) translateZ(-10px);
+***REMOVED***
+  80% {
+    opacity: 1;
+***REMOVED***
+  100% {
+    z-index: 1;
+    transform: translateX(0%) rotateY(0deg) rotateX(0deg) translateZ(-10px);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+     Drop
+---------------*/
+
+.drop.transition {
+  transform-origin: top center;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.34, 1.61, 0.7, 1);
+***REMOVED***
+.drop.transition.in {
+  animation-name: dropIn;
+***REMOVED***
+.drop.transition.out {
+  animation-name: dropOut;
+***REMOVED***
+
+/* Drop***REMOVED***/
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+***REMOVED***
+@keyframes dropOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: scale(0);
+***REMOVED***
+***REMOVED***
+
+/*--------------
+      Fade
+---------------*/
+
+.transition.fade.in {
+  animation-name: fadeIn;
+***REMOVED***
+.transition[class*="fade up"].in {
+  animation-name: fadeInUp;
+***REMOVED***
+.transition[class*="fade down"].in {
+  animation-name: fadeInDown;
+***REMOVED***
+.transition[class*="fade left"].in {
+  animation-name: fadeInLeft;
+***REMOVED***
+.transition[class*="fade right"].in {
+  animation-name: fadeInRight;
+***REMOVED***
+
+.transition.fade.out {
+  animation-name: fadeOut;
+***REMOVED***
+.transition[class*="fade up"].out {
+  animation-name: fadeOutUp;
+***REMOVED***
+.transition[class*="fade down"].out {
+  animation-name: fadeOutDown;
+***REMOVED***
+.transition[class*="fade left"].out {
+  animation-name: fadeOutLeft;
+***REMOVED***
+.transition[class*="fade right"].out {
+  animation-name: fadeOutRight;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+***REMOVED***
+  100% {
+    opacity: 1;
+***REMOVED***
+***REMOVED***
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10%);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(10%);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-10%);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+***REMOVED***
+  100% {
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translateY(5%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translateY(-5%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translateX(5%);
+***REMOVED***
+***REMOVED***
+@keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translateX(-5%);
+***REMOVED***
+***REMOVED***
+
+/*--------------
+     Flips
+---------------*/
+
+.flip.transition.in,
+.flip.transition.out {
+  animation-duration: 600ms;
+***REMOVED***
+.horizontal.flip.transition.in {
+  animation-name: horizontalFlipIn;
+***REMOVED***
+.horizontal.flip.transition.out {
+  animation-name: horizontalFlipOut;
+***REMOVED***
+.vertical.flip.transition.in {
+  animation-name: verticalFlipIn;
+***REMOVED***
+.vertical.flip.transition.out {
+  animation-name: verticalFlipOut;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes horizontalFlipIn {
+  0% {
+    transform: perspective(2000px) rotateY(-90deg);
+    opacity: 0;
+***REMOVED***
+  100% {
+    transform: perspective(2000px) rotateY(0deg);
+    opacity: 1;
+***REMOVED***
+***REMOVED***
+@keyframes verticalFlipIn {
+  0% {
+    transform: perspective(2000px) rotateX(-90deg);
+    opacity: 0;
+***REMOVED***
+  100% {
+    transform: perspective(2000px) rotateX(0deg);
+    opacity: 1;
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes horizontalFlipOut {
+  0% {
+    transform: perspective(2000px) rotateY(0deg);
+    opacity: 1;
+***REMOVED***
+  100% {
+    transform: perspective(2000px) rotateY(90deg);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+@keyframes verticalFlipOut {
+  0% {
+    transform: perspective(2000px) rotateX(0deg);
+    opacity: 1;
+***REMOVED***
+  100% {
+    transform: perspective(2000px) rotateX(-90deg);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+      Scale
+---------------*/
+
+.scale.transition.in {
+  animation-name: scaleIn;
+***REMOVED***
+.scale.transition.out {
+  animation-name: scaleOut;
+***REMOVED***
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes scaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+      Fly
+---------------*/
+
+/* Inward***REMOVED***/
+.transition.fly {
+  animation-duration: 0.6s;
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+***REMOVED***
+.transition.fly.in {
+  animation-name: flyIn;
+***REMOVED***
+.transition[class*="fly up"].in {
+  animation-name: flyInUp;
+***REMOVED***
+.transition[class*="fly down"].in {
+  animation-name: flyInDown;
+***REMOVED***
+.transition[class*="fly left"].in {
+  animation-name: flyInLeft;
+***REMOVED***
+.transition[class*="fly right"].in {
+  animation-name: flyInRight;
+***REMOVED***
+
+/* Outward***REMOVED***/
+.transition.fly.out {
+  animation-name: flyOut;
+***REMOVED***
+.transition[class*="fly up"].out {
+  animation-name: flyOutUp;
+***REMOVED***
+.transition[class*="fly down"].out {
+  animation-name: flyOutDown;
+***REMOVED***
+.transition[class*="fly left"].out {
+  animation-name: flyOutLeft;
+***REMOVED***
+.transition[class*="fly right"].out {
+  animation-name: flyOutRight;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes flyIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+***REMOVED***
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+***REMOVED***
+  40% {
+    transform: scale3d(.9, .9, .9);
+***REMOVED***
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+***REMOVED***
+  80% {
+    transform: scale3d(.97, .97, .97);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+***REMOVED***
+***REMOVED***
+@keyframes flyInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 1500px, 0);
+***REMOVED***
+  60% {
+    opacity: 1;
+    transform: translate3d(0, -20px, 0);
+***REMOVED***
+  75% {
+    transform: translate3d(0, 10px, 0);
+***REMOVED***
+  90% {
+    transform: translate3d(0, -5px, 0);
+***REMOVED***
+  100% {
+    transform: translate3d(0, 0, 0);
+***REMOVED***
+***REMOVED***
+@keyframes flyInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -1500px, 0);
+***REMOVED***
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+***REMOVED***
+  75% {
+    transform: translate3d(0, -10px, 0);
+***REMOVED***
+  90% {
+    transform: translate3d(0, 5px, 0);
+***REMOVED***
+  100% {
+    transform: none;
+***REMOVED***
+***REMOVED***
+@keyframes flyInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(1500px, 0, 0);
+***REMOVED***
+  60% {
+    opacity: 1;
+    transform: translate3d(-25px, 0, 0);
+***REMOVED***
+  75% {
+    transform: translate3d(10px, 0, 0);
+***REMOVED***
+  90% {
+    transform: translate3d(-5px, 0, 0);
+***REMOVED***
+  100% {
+    transform: none;
+***REMOVED***
+***REMOVED***
+@keyframes flyInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(-1500px, 0, 0);
+***REMOVED***
+  60% {
+    opacity: 1;
+    transform: translate3d(25px, 0, 0);
+***REMOVED***
+  75% {
+    transform: translate3d(-10px, 0, 0);
+***REMOVED***
+  90% {
+    transform: translate3d(5px, 0, 0);
+***REMOVED***
+  100% {
+    transform: none;
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes flyOut {
+  20% {
+    transform: scale3d(.9, .9, .9);
+***REMOVED***
+  50%, 55% {
+    opacity: 1;
+    transform: scale3d(1.1, 1.1, 1.1);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+***REMOVED***
+***REMOVED***
+@keyframes flyOutUp {
+  20% {
+    transform: translate3d(0, 10px, 0);
+***REMOVED***
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, -20px, 0);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 2000px, 0);
+***REMOVED***
+***REMOVED***
+@keyframes flyOutDown {
+  20% {
+    transform: translate3d(0, -10px, 0);
+***REMOVED***
+  40%, 45% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+***REMOVED***
+***REMOVED***
+@keyframes flyOutRight {
+  20% {
+    opacity: 1;
+    transform: translate3d(20px, 0, 0);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translate3d(-2000px, 0, 0);
+***REMOVED***
+***REMOVED***
+@keyframes flyOutLeft {
+  20% {
+    opacity: 1;
+    transform: translate3d(-20px, 0, 0);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: translate3d(2000px, 0, 0);
+***REMOVED***
+***REMOVED***
+
+/*--------------
+     Slide
+---------------*/
+
+.transition.slide.in,
+.transition[class*="slide down"].in {
+  animation-name: slideInY;
+  transform-origin: top center;
+***REMOVED***
+.transition[class*="slide up"].in {
+  animation-name: slideInY;
+  transform-origin: bottom center;
+***REMOVED***
+.transition[class*="slide left"].in {
+  animation-name: slideInX;
+  transform-origin: center right;
+***REMOVED***
+.transition[class*="slide right"].in {
+  animation-name: slideInX;
+  transform-origin: center left;
+***REMOVED***
+
+.transition.slide.out,
+.transition[class*="slide down"].out {
+  animation-name: slideOutY;
+  transform-origin: top center;
+***REMOVED***
+.transition[class*="slide up"].out {
+  animation-name: slideOutY;
+  transform-origin: bottom center;
+***REMOVED***
+.transition[class*="slide left"].out {
+  animation-name: slideOutX;
+  transform-origin: center right;
+***REMOVED***
+.transition[class*="slide right"].out {
+  animation-name: slideOutX;
+  transform-origin: center left;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes slideInY {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+***REMOVED***
+***REMOVED***
+@keyframes slideInX {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes slideOutY {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+***REMOVED***
+***REMOVED***
+@keyframes slideOutX {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+***REMOVED***
+  100% {
+    opacity: 0;
+    transform: scaleX(0);
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+     Swing
+---------------*/
+
+.transition.swing {
+  animation-duration: 800ms;
+***REMOVED***
+
+.transition[class*="swing down"].in {
+  animation-name: swingInX;
+  transform-origin: top center;
+***REMOVED***
+.transition[class*="swing up"].in {
+  animation-name: swingInX;
+  transform-origin: bottom center;
+***REMOVED***
+.transition[class*="swing left"].in {
+  animation-name: swingInY;
+  transform-origin: center right;
+***REMOVED***
+.transition[class*="swing right"].in {
+  animation-name: swingInY;
+  transform-origin: center left;
+***REMOVED***
+
+.transition.swing.out,
+.transition[class*="swing down"].out {
+  animation-name: swingOutX;
+  transform-origin: top center;
+***REMOVED***
+.transition[class*="swing up"].out {
+  animation-name: swingOutX;
+  transform-origin: bottom center;
+***REMOVED***
+.transition[class*="swing left"].out {
+  animation-name: swingOutY;
+  transform-origin: center right;
+***REMOVED***
+.transition[class*="swing right"].out {
+  animation-name: swingOutY;
+  transform-origin: center left;
+***REMOVED***
+
+/* In***REMOVED***/
+@keyframes swingInX {
+  0% {
+    transform: perspective(1000px) rotateX(90deg);
+    opacity: 0;
+***REMOVED***
+  40% {
+    transform: perspective(1000px) rotateX(-30deg);
+    opacity: 1;
+***REMOVED***
+  60% {
+    transform: perspective(1000px) rotateX(15deg);
+***REMOVED***
+  80% {
+    transform: perspective(1000px) rotateX(-7.5deg);
+***REMOVED***
+  100% {
+    transform: perspective(1000px) rotateX(0deg);
+***REMOVED***
+***REMOVED***
+@keyframes swingInY {
+  0% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+***REMOVED***
+  40% {
+    transform: perspective(1000px) rotateY(30deg);
+    opacity: 1;
+***REMOVED***
+  60% {
+    transform: perspective(1000px) rotateY(-17.5deg);
+***REMOVED***
+  80% {
+    transform: perspective(1000px) rotateY(7.5deg);
+***REMOVED***
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+***REMOVED***
+***REMOVED***
+
+/* Out***REMOVED***/
+@keyframes swingOutX {
+  0% {
+    transform: perspective(1000px) rotateX(0deg);
+***REMOVED***
+  40% {
+    transform: perspective(1000px) rotateX(-7.5deg);
+***REMOVED***
+  60% {
+    transform: perspective(1000px) rotateX(17.5deg);
+***REMOVED***
+  80% {
+    transform: perspective(1000px) rotateX(-30deg);
+    opacity: 1;
+***REMOVED***
+  100% {
+    transform: perspective(1000px) rotateX(90deg);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+@keyframes swingOutY {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+***REMOVED***
+  40% {
+    transform: perspective(1000px) rotateY(7.5deg);
+***REMOVED***
+  60% {
+    transform: perspective(1000px) rotateY(-10deg);
+***REMOVED***
+  80% {
+    transform: perspective(1000px) rotateY(30deg);
+    opacity: 1;
+***REMOVED***
+  100% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+      Zoom
+---------------*/
+
+.transition.zoom.in {
+  animation-name: zoomIn;
+***REMOVED***
+.transition.zoom.out {
+  animation-name: zoomOut;
+***REMOVED***
+@keyframes zoomIn {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+***REMOVED***
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+***REMOVED***
+  100% {
+    opacity: 1;
+    transform: scale(0);
+***REMOVED***
+***REMOVED***
+
+
+***REMOVED********************************
+       Static Animations
+*******************************/
+
+/*--------------
+    Emphasis
+---------------*/
+
+
+.flash.transition {
+  animation-duration: 750ms;
+  animation-name: flash;
+***REMOVED***
+.shake.transition {
+  animation-duration: 750ms;
+  animation-name: shake;
+***REMOVED***
+.bounce.transition {
+  animation-duration: 750ms;
+  animation-name: bounce;
+***REMOVED***
+.tada.transition {
+  animation-duration: 750ms;
+  animation-name: tada;
+***REMOVED***
+.pulse.transition {
+  animation-duration: 500ms;
+  animation-name: pulse;
+***REMOVED***
+.jiggle.transition {
+  animation-duration: 750ms;
+  animation-name: jiggle;
+***REMOVED***
+.transition.glow {
+  animation-duration: 2000ms;
+  animation-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+***REMOVED***
+.transition.glow {
+  animation-name: glow;
+***REMOVED***
+
+
+/* Flash***REMOVED***/
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+***REMOVED***
+  25%, 75% {
+    opacity: 0;
+***REMOVED***
+***REMOVED***
+
+/* Shake***REMOVED***/
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+***REMOVED***
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+***REMOVED***
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+***REMOVED***
+***REMOVED***
+
+/* Bounce***REMOVED***/
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+***REMOVED***
+  40% {
+    transform: translateY(-30px);
+***REMOVED***
+  60% {
+    transform: translateY(-15px);
+***REMOVED***
+***REMOVED***
+
+/* Tada***REMOVED***/
+@keyframes tada {
+  0% {
+    transform: scale(1);
+***REMOVED***
+  10%, 20% {
+    transform: scale(0.9) rotate(-3deg);
+***REMOVED***
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(3deg);
+***REMOVED***
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(-3deg);
+***REMOVED***
+  100% {
+    transform: scale(1) rotate(0);
+***REMOVED***
+***REMOVED***
+
+/* Pulse***REMOVED***/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+***REMOVED***
+  50% {
+    transform: scale(0.9);
+    opacity: 0.7;
+***REMOVED***
+  100% {
+    transform: scale(1);
+    opacity: 1;
+***REMOVED***
+
+***REMOVED***
+
+/* Jiggle***REMOVED***/
+@keyframes jiggle {
+  0% {
+    transform: scale3d(1, 1, 1);
+***REMOVED***
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+***REMOVED***
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+***REMOVED***
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+***REMOVED***
+  65% {
+    transform: scale3d(.95, 1.05, 1);
+***REMOVED***
+  75% {
+    transform: scale3d(1.05, .95, 1);
+***REMOVED***
+  100% {
+    transform: scale3d(1, 1, 1);
+***REMOVED***
+***REMOVED***
+
+/* Glow***REMOVED***/
+@keyframes glow {
+  0% {
+    background-color: #FCFCFD;
+***REMOVED***
+  30% {
+    background-color: #FFF6CD;
+***REMOVED***
+  100% {
+    background-color: #FCFCFD;
+***REMOVED***
+***REMOVED***
+

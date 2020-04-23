@@ -380,7 +380,6 @@ rp(url)
                                             console.log("Total Deaths:",totalDeaths);
                                             data.totalDeaths = totalDeaths
 
-
                                             console.log(data)
                                             knex('dates').select('totalTests')
                                                 .whereNull('totalTests')
@@ -435,7 +434,7 @@ rp(url)
                                                                                    }
                                                                                    knex('dates').update(data).where('date','=',parsedDate)
                                                                                         .catch(reason => {
-                                                                                            console.log('WHAAAAAT?',reason)
+                                                                                            log('WHAAAAAT?',reason)
                                                                                         })
                                                                                 })
                                                                         }).catch(reason => {

@@ -2,24 +2,12 @@ var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
 
-let connection;
-if (!process.env.PORT){
-    connection = {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
-    }
-}
-else{
-    connection = process.env.DATABASE_URL || {
-        host: process.env.PG_HOST,
-        user: process.env.PG_USER,
-        password: process.env.PG_PASS,
-        database: process.env.DB_NAME
-    }
-}
-
+let connection = process.env.DATABASE_URL || {
+    host: process.env.PG_HOST||'127.0.0.1',
+    user: process.env.PG_USER||'test_user',
+    password: process.env.PG_PASS || 'temp_pass',
+    database: process.env.DB_NAME || 'covid-tracker-sa2'
+    };
 
 console.log("Connection:",connection)
 const knex = require('knex')({
@@ -27,6 +15,8 @@ const knex = require('knex')({
     ssl:true,
     connection
 })
+
+
 
 const provinceList = {
     "NORTH WEST": 'ZA-NW',
@@ -40,7 +30,6 @@ const provinceList = {
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
 };
-
 
 
 router.get("/", function (req, res) {
@@ -68,12 +57,12 @@ router.get("/", function (req, res) {
                 // console.log("Prov Recovs:",provRecoveries)
                 getGraphData().then(graphData => {
                     // console.log("Graph Data",graphData)
-                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
+                    res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
                 })
             })
-            .catch(function (err) {
-                // Crawling failed...
-            });
+                .catch(function (err) {
+                    // Crawling failed...
+                });
         })
 })
 let getSummary = function() {
@@ -104,7 +93,6 @@ let getSummary = function() {
             console.log("You messed up?",reason)
         });
 }
-
 let getProvinces = function() {
     return knex('provinceDays')
         .select("provinceName","provDate","caseCount","deathCount","recovered")
@@ -117,7 +105,6 @@ let getProvinces = function() {
             console.log("You messed up?",reason)
         });
 }
-
 let getGraphData = function() {
     return knex('dates')
         .select("date","totalCases",
@@ -132,5 +119,4 @@ let getGraphData = function() {
             console.log("You messed up?",reason)
         });
 }
-
 module.exports = router;

@@ -3,10 +3,10 @@ var router = express.Router();
 const numeral = require('numeral');
 
 let connection = process.env.DATABASE_URL || {
-    host: process.env.PG_HOST||'127.0.0.1',
-    user: process.env.PG_USER||'test_user',
-    password: process.env.PG_PASS || 'temp_pass',
-    database: process.env.DB_NAME || 'covid-tracker-sa2'
+    host:process.env.AWS_HOST|| process.env.PG_HOST||'127.0.0.1',
+    user:process.env.AWS_USER|| process.env.PG_USER||'test_user',
+    password:process.env.AWS_PASSWORD || process.env.PG_PASS ||'temp_pass',
+    database:process.env.AWS_DB ||process.env.DB_NAME ||'covid-tracker-sa2'
   ***REMOVED***;
 
 console.log("Connection:",connection)
@@ -14,10 +14,10 @@ const knex = require('knex')({
     client: 'pg',
     ssl:true,
     connection: connection,
-    debug:false,
+    debug:true,
     log:true,
     asyncStackTraces:true,
-    acquireConnectionTimeout: 30000,
+    acquireConnectionTimeout: 3000,
     pool: {
         min:2,
         max:100,
@@ -54,6 +54,7 @@ const provinceList = {
 
 router.get("/", function (req, res) {
     // TODO Load data for the day.
+    console.log("At index")
     getSummary()
         .then(value => {
             value.totalCases = numeral(value.totalCases).format('0,0');
@@ -82,6 +83,7 @@ router.get("/", function (req, res) {
           ***REMOVED***)
                 .catch(function (err) {
                     // Crawling failed...
+                    console.log("We failed my man",err)
               ***REMOVED***);
       ***REMOVED***)
 ***REMOVED***)

@@ -4,7 +4,7 @@
   "description": "A live tracker that aggregates Covid-19 data in South Africa (SA), on a total and Provincial basis. The tracker provides Stats, Graphs, and Interactive Map to display information about the infection.",
   "main": "app.js",
   "engines": {
-    "node": ">12.x"
+    "node": "12.x"
 ***REMOVED***
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

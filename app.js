@@ -46,21 +46,9 @@ const knex = require('knex')({
         acquireConnectionTimeout: 10000,
         pool: {
             "min": 1,
-            propagateCreateError: false,
             idleTimeoutMillis: 10000,
             createTimeoutMillis: 10000,
             acquireTimeoutMillis: 10000,
-            afterCreate: function (conn, done) {
-                conn.query('SET timezone="UTC";', function (err) {
-                    if (err) {
-                        console.log("ERROR HERE", err)
-                    } else {
-                        console.log("DONE")
-                    }
-                    done(err, conn);
-
-                })
-            }
             },
             connection
     }

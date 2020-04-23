@@ -141,7 +141,7 @@ rp(url)
 
                                         // console.log(rowsTable1);
                                         let currentProvinces = Object.assign({}, PROVINCES);
-
+                                        squash
                                         rowsTable1.forEach((row) => {
                                             row = row.text.split(" ");
                                             let name = "";
@@ -380,7 +380,6 @@ rp(url)
                                             console.log("Total Deaths:",totalDeaths);
                                             data.totalDeaths = totalDeaths
 
-
                                             console.log(data)
                                             knex('dates').select('totalTests')
                                                 .whereNull('totalTests')
@@ -435,7 +434,7 @@ rp(url)
                                                                                    }
                                                                                    knex('dates').update(data).where('date','=',parsedDate)
                                                                                         .catch(reason => {
-                                                                                            console.log('WHAAAAAT?',reason)
+                                                                                            log('WHAAAAAT?',reason)
                                                                                         })
                                                                                 })
                                                                         }).catch(reason => {

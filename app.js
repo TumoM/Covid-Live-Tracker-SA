@@ -35,7 +35,8 @@ let connection = process.env.DATABASE_URLL || {
     host: process.env.PG_HOST||'127.0.0.1',
     user: process.env.PG_USER||'test_user',
     password: process.env.PG_PASS||'temp_pass',
-    database: process.env.DB_NAME||'covid-tracker-sa2'
+    database: process.env.DB_NAME||'covid-tracker-sa2',
+    ssl:process.env.PORT?true:false
 }
 
 console.log("Connection:",connection)

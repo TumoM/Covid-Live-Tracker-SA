@@ -13,10 +13,30 @@ console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
     ssl:true,
-    connection
+    connection: connection,
+    debug:false,
+    log:true,
+    asyncStackTraces:true,
+    acquireConnectionTimeout: 30000,
+    pool: {
+        min:2,
+        max:100,
+        afterCreate: function (conn, done) {
+            // in this example we use pg driver's connection API
+            conn.query('SET statement_timeout TO "15s";', function (err) {
+                if (err) {
+                    // first query failed, return error and don't try to make next query
+                    console.log("Timeout NOT set")
+                    done(err, conn);
+                } else {
+                    // do the second query...
+                    console.log("Timeout set")
+                    done(err, conn);
+                }
+            });
+        }
+    }
 })
-
-
 
 const provinceList = {
     "NORTH WEST": 'ZA-NW',

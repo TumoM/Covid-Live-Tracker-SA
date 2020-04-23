@@ -5,9 +5,9 @@ const numeral = require('numeral');
 let connection = process.env.DATABASE_URL || {
     host: process.env.PG_HOST||'127.0.0.1',
     user: process.env.PG_USER||'test_user',
-    password: process.env.PG_PASS || 'temp_pass',
-    database: process.env.DB_NAME || 'covid-tracker-sa2'
-  ***REMOVED***;
+    password: process.env.PG_PASS||'temp_pass',
+    database: process.env.DB_NAME||'covid-tracker-sa2'
+***REMOVED***
 
 console.log("Connection:",connection)
 const knex = require('knex')({
@@ -15,8 +15,6 @@ const knex = require('knex')({
     ssl:true,
     connection
 ***REMOVED***)
-
-
 
 const provinceList = {
     "NORTH WEST": 'ZA-NW',
@@ -30,6 +28,7 @@ const provinceList = {
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
 ***REMOVED***;
+
 
 
 router.get("/", function (req, res) {
@@ -57,12 +56,12 @@ router.get("/", function (req, res) {
                 // console.log("Prov Recovs:",provRecoveries)
                 getGraphData().then(graphData => {
                     // console.log("Graph Data",graphData)
-                    res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData***REMOVED***);
+                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData***REMOVED***);
               ***REMOVED***)
           ***REMOVED***)
-                .catch(function (err) {
-                    // Crawling failed...
-              ***REMOVED***);
+            .catch(function (err) {
+                // Crawling failed...
+          ***REMOVED***);
       ***REMOVED***)
 ***REMOVED***)
 let getSummary = function() {
@@ -93,6 +92,7 @@ let getSummary = function() {
             console.log("You messed up?",reason)
       ***REMOVED***);
 ***REMOVED***
+
 let getProvinces = function() {
     return knex('provinceDays')
         .select("provinceName","provDate","caseCount","deathCount","recovered")
@@ -105,6 +105,7 @@ let getProvinces = function() {
             console.log("You messed up?",reason)
       ***REMOVED***);
 ***REMOVED***
+
 let getGraphData = function() {
     return knex('dates')
         .select("date","totalCases",
@@ -119,4 +120,5 @@ let getGraphData = function() {
             console.log("You messed up?",reason)
       ***REMOVED***);
 ***REMOVED***
+
 module.exports = router;

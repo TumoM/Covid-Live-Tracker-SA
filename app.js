@@ -44,14 +44,8 @@ const knex = require('knex')({
         client: 'pg',
         debug: true,
         asyncStackTraces: true,
-        pool: {
-            "min": 1,
-            "max":150
-***REMOVED*****REMOVED*****REMOVED***
-        connection,
-    migrations: {
-        tableName: 'knex_migrations'
-  ***REMOVED***
+    ssl:true,
+        connection
   ***REMOVED***
 )
 

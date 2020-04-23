@@ -62,7 +62,7 @@ router.get("/", function (req, res) {
 
 ***REMOVED***)
 let getSummary = function(knex) {
-
+    console.log("Getting Summary")
     return knex.transaction((trx) =>{
         return knex('dates')
             .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
@@ -87,14 +87,13 @@ let getSummary = function(knex) {
                             console.log("Done Summary")
                             // return res1[0];
                             let promise = util.insert(res1[0]);
-                            return promise.transacting(trx) ;
+                            return promise;
                       ***REMOVED***)
                         .then(trx.commit)
                         .catch(trx.rollback);
               ***REMOVED***
                 else {
                     console.log("Done Summary 3")
-                    trx.commit
                     let promise = res1[0];
                     return promise
               ***REMOVED***

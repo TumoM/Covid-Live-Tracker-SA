@@ -30,7 +30,7 @@ app.use(require("express-session")({
 
 app.use(bodyParser.json());
 
-
+/*
 let connection = process.env.DATABASE_URL || {
     host: process.env.PG_HOST||'127.0.0.1',
     user: process.env.PG_USER||'test_user',
@@ -51,17 +51,20 @@ const knex = require('knex')({
 
 // Required Routes
 app.set('knex', knex);
+
 app.use(function(req,res, next) {
     res.locals.knex = knex;
     next();
 });
+*/
+
+
 
 app.use("/",indexRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
     res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
 })
-/*
 
 // Government Notification
 app.post('/governmentCheck/:type?',(req,res) =>{
@@ -89,7 +92,6 @@ app.post('/governmentCheck/:type?',(req,res) =>{
 
 })
 
-*/
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port}`);

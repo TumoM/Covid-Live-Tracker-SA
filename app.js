@@ -43,15 +43,11 @@ const knex = require('knex')({
         client: 'pg',
         debug: true,
         asyncStackTraces: true,
-        acquireConnectionTimeout: 10000,
         pool: {
             "min": 1,
-            "max":150,
-            idleTimeoutMillis: 10000,
-            createTimeoutMillis: 10000,
-            acquireTimeoutMillis: 10000,
+            "max":150
 ***REMOVED*****REMOVED*****REMOVED***
-            connection
+        connection
   ***REMOVED***
 )
 

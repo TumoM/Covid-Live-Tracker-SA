@@ -45,10 +45,10 @@ const knex = require('knex')({
         asyncStackTraces: true,
         pool: {
             "min": 0,
-            "max": 30,
+            "max": 150,
             "createTimeoutMillis": 3000,
             "idleTimeoutMillis": 30000,
-            "reapIntervalMillis": 1000,
+            "reapIntervalMillis": 600,
             "createRetryIntervalMillis": 100,
             "propagateCreateError": false, // <- default is true, set to false
             afterCreate: function (conn, done) {

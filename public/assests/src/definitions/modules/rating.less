@@ -1,0 +1,177 @@
+/*!
+***REMOVED*** # Fomantic-UI - Rating
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'module';
+@element : 'rating';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+           Rating
+*******************************/
+
+.ui.rating {
+  display: inline-flex;
+  white-space: @whiteSpace;
+  vertical-align: @verticalAlign;
+***REMOVED***
+.ui.rating:last-child {
+  margin-right: 0;
+***REMOVED***
+
+/* Icon***REMOVED***/
+.ui.rating .icon {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-weight: @normal;
+  font-style: normal;
+  flex: 1 0 auto;
+  cursor: @iconCursor;
+  width: @iconWidth;
+  height: @iconHeight;
+  transition: @iconTransition;
+  line-height: 1;
+  backface-visibility: hidden;
+***REMOVED***
+
+
+***REMOVED********************************
+             Types
+*******************************/
+
+
+/*-------------------
+      Standard
+--------------------*/
+
+/* Inactive Icon***REMOVED***/
+.ui.rating .icon {
+  background: @inactiveBackground;
+  color: @inactiveColor;
+***REMOVED***
+
+/* Active Icon***REMOVED***/
+.ui.rating .active.icon {
+  background: @activeBackground;
+  color: @activeColor;
+***REMOVED***
+
+/* Partially Active Icon***REMOVED***/
+.ui.rating .icon.partial.active {
+  background: linear-gradient(to right, @activeColor 0% var(--full), @inactiveColor var(--full) 100%);
+  background-clip: text;
+  color: transparent;
+***REMOVED***
+
+/* Selected Icon***REMOVED***/
+.ui.rating .icon.selected,
+.ui.rating .icon.selected.active,
+.ui.rating .icon.selected.partial.active {
+  background: @selectedBackground;
+  color: @selectedColor;
+  background-clip: unset;
+***REMOVED***
+
+/*--------------
+     Colors
+--------------***REMOVED***/
+
+each(@colors, {
+  @color: replace(@key, '@', '');
+  @c: @colors[@@color][color];
+  @l: @colors[@@color][light];
+  @h: @colors[@@color][hover];
+  @lh: @colors[@@color][lightHover];
+
+  .ui.@{color***REMOVED***.rating .active.icon {
+    color: @l;
+    text-shadow: 0px -@shadowWidth 0px @c,
+                 -@shadowWidth 0px 0px @c,
+                 0px @shadowWidth 0px @c,
+                 @shadowWidth 0px 0px @c;
+***REMOVED***
+  .ui.@{color***REMOVED***.rating .icon.selected,
+  .ui.@{color***REMOVED***.rating .icon.selected.active,
+  .ui.@{color***REMOVED***.rating .icon.selected.partial.active {
+    background: inherit;
+    color: @lh;
+    text-shadow: 0px -@shadowWidth 0px @h,
+                 -@shadowWidth 0px 0px @h,
+                 0px @shadowWidth 0px @h,
+                 @shadowWidth 0px 0px @h;
+
+    -webkit-text-stroke: unset;
+    background-clip: unset;
+***REMOVED***
+  .ui.@{color***REMOVED***.rating .icon.partial.active {
+    background: linear-gradient(to right, @l 0% var(--full), @inactiveColor var(--full) 100%);
+    text-shadow: none;
+    -webkit-text-stroke: @c 0.78px;
+    background-clip: text;
+    color: transparent;
+***REMOVED***
+***REMOVED***)
+
+
+***REMOVED********************************
+             States
+*******************************/
+
+& when (@variationRatingDisabled) {
+  /*-------------------
+         Disabled
+  --------------------*/
+
+  /* disabled rating***REMOVED***/
+  .ui.disabled.rating .icon {
+    cursor: default;
+***REMOVED***
+***REMOVED***
+
+
+/*-------------------
+   User Interactive
+--------------------*/
+
+/* Selected Rating***REMOVED***/
+.ui.rating.selected .active.icon {
+  opacity: @interactiveActiveIconOpacity;
+***REMOVED***
+.ui.rating.selected .icon.selected,
+.ui.rating .icon.selected {
+  opacity: @interactiveSelectedIconOpacity;
+***REMOVED***
+
+
+
+***REMOVED********************************
+          Variations
+*******************************/
+
+.ui.rating {
+  font-size: @medium;
+***REMOVED***
+& when not (@variationRatingSizes = false) {
+  each(@variationRatingSizes, {
+    @s: @@value;
+    .ui.@{value***REMOVED***.rating  {
+      font-size: @s;
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+
+.loadUIOverrides();

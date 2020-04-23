@@ -1,0 +1,1021 @@
+/*!
+***REMOVED*** # Fomantic-UI - List
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'element';
+@element : 'list';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+            List
+*******************************/
+
+ul.ui.list,
+ol.ui.list,
+.ui.list {
+  list-style-type: @listStyleType;
+  margin: @margin;
+  padding: @verticalPadding @horizontalPadding;
+***REMOVED***
+
+ul.ui.list:first-child,
+ol.ui.list:first-child,
+.ui.list:first-child {
+  margin-top: 0;
+  padding-top: 0;
+***REMOVED***
+
+ul.ui.list:last-child,
+ol.ui.list:last-child,
+.ui.list:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+***REMOVED***
+
+***REMOVED********************************
+            Content
+*******************************/
+
+/* List Item***REMOVED***/
+ul.ui.list li,
+ol.ui.list li,
+.ui.list > .item,
+.ui.list .list > .item {
+  display: list-item;
+  table-layout: fixed;
+  list-style-type: @listStyleType;
+  list-style-position: @listStylePosition;
+
+  padding: @itemPadding;
+  line-height: @itemLineHeight;
+***REMOVED***
+
+ul.ui.list > li:first-child:after,
+ol.ui.list > li:first-child:after,
+.ui.list > .list > .item:after,
+.ui.list > .item:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+***REMOVED***
+
+ul.ui.list li:first-child,
+ol.ui.list li:first-child,
+.ui.list .list > .item:first-child,
+.ui.list > .item:first-child {
+  padding-top: 0;
+***REMOVED***
+ul.ui.list li:last-child,
+ol.ui.list li:last-child,
+.ui.list .list > .item:last-child,
+.ui.list > .item:last-child {
+  padding-bottom: 0;
+***REMOVED***
+
+/* Child List***REMOVED***/
+ul.ui.list ul,
+ol.ui.list ol,
+.ui.list .list:not(.icon) {
+  clear: both;
+  margin: 0;
+  padding: @childListPadding;
+***REMOVED***
+
+/* Child Item***REMOVED***/
+ul.ui.list ul li,
+ol.ui.list ol li,
+.ui.list .list > .item {
+  padding: @childItemPadding;
+  line-height: @childItemLineHeight;
+***REMOVED***
+
+& when (@variationListIcon) {
+  /* Icon***REMOVED***/
+  .ui.list .list > .item > i.icon,
+  .ui.list > .item > i.icon {
+    display: table-cell;
+    min-width: 1.55em;
+    margin: 0;
+    padding-top: @iconOffset;
+    transition: @iconTransition;
+    &:not(.loading) {
+      padding-right: @iconDistance;
+      vertical-align: @iconContentVerticalAlign;
+  ***REMOVED***
+***REMOVED***
+  .ui.list .list > .item > i.icon:only-child,
+  .ui.list > .item > i.icon:only-child {
+    display: inline-block;
+    min-width: auto;
+    vertical-align: @iconVerticalAlign;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListImage) {
+  /* Image***REMOVED***/
+  .ui.list .list > .item > .image,
+  .ui.list > .item > .image {
+    display: table-cell;
+    background-color: transparent;
+    margin: 0;
+    vertical-align: @imageAlign;
+***REMOVED***
+  .ui.list .list > .item > .image:not(:only-child):not(img),
+  .ui.list > .item > .image:not(:only-child):not(img) {
+    padding-right: @imageDistance;
+***REMOVED***
+  .ui.list .list > .item > .image img,
+  .ui.list > .item > .image img {
+    vertical-align: @imageAlign;
+***REMOVED***
+
+  .ui.list .list > .item > img.image,
+  .ui.list .list > .item > .image:only-child,
+  .ui.list > .item > img.image,
+  .ui.list > .item > .image:only-child {
+    display: inline-block;
+***REMOVED***
+***REMOVED***
+
+/* Content***REMOVED***/
+.ui.list .list > .item > .content,
+.ui.list > .item > .content {
+  line-height: @contentLineHeight;
+  color: @contentColor;
+***REMOVED***
+& when (@variationListImage) or (@variationListIcon) {
+  .ui.list .list > .item > .image + .content,
+  .ui.list .list > .item > .icon + .content,
+  .ui.list > .item > .image + .content,
+  .ui.list > .item > .icon + .content {
+    display: table-cell;
+    width: 100%;
+    padding: 0 0 0 @contentDistance;
+    vertical-align: @contentVerticalAlign;
+***REMOVED***
+***REMOVED***
+& when (@variationListIcon) {
+  .ui.list .list > .item > .loading.icon + .content,
+  .ui.list > .item > .loading.icon + .content {
+    padding-left: e(%("calc(%d + %d)", @iconDistance, @contentDistance));
+***REMOVED***
+***REMOVED***
+& when (@variationListImage) {
+  .ui.list .list > .item > img.image + .content,
+  .ui.list > .item > img.image + .content {
+    display: inline-block;
+    width: auto;
+***REMOVED***
+***REMOVED***
+.ui.list .list > .item > .content > .list,
+.ui.list > .item > .content > .list {
+  margin-left: 0;
+  padding-left: 0;
+***REMOVED***
+
+/* Header***REMOVED***/
+.ui.list .list > .item .header,
+.ui.list > .item .header {
+  display: block;
+  margin: 0;
+  font-family: @itemHeaderFontFamily;
+  font-weight: @itemHeaderFontWeight;
+  color: @itemHeaderColor;
+***REMOVED***
+
+/* Description***REMOVED***/
+.ui.list .list > .item .description,
+.ui.list > .item .description {
+  display: block;
+  color: @itemDescriptionColor;
+***REMOVED***
+
+/* Child Link***REMOVED***/
+.ui.list > .item a,
+.ui.list .list > .item a {
+  cursor: pointer;
+***REMOVED***
+
+/* Linking Item***REMOVED***/
+.ui.list .list > a.item,
+.ui.list > a.item {
+  cursor: pointer;
+  color: @itemLinkColor;
+***REMOVED***
+.ui.list .list > a.item:hover,
+.ui.list > a.item:hover {
+  color: @itemLinkHoverColor;
+***REMOVED***
+
+& when (@variationListIcon) {
+  /* Linked Item Icons***REMOVED***/
+  .ui.list .list > a.item > i.icons,
+  .ui.list > a.item > i.icons,
+  .ui.list .list > a.item > i.icon,
+  .ui.list > a.item > i.icon {
+    color: @itemLinkIconColor;
+***REMOVED***
+***REMOVED***
+
+/* Header Link***REMOVED***/
+.ui.list .list > .item a.header,
+.ui.list > .item a.header {
+  cursor: pointer;
+  color: @itemHeaderLinkColor !important;
+***REMOVED***
+.ui.list .list > .item > a.header:hover,
+.ui.list > .item > a.header:hover {
+  color: @itemHeaderLinkHoverColor !important;
+***REMOVED***
+
+& when (@variationListFloated) {
+  /* Floated Content***REMOVED***/
+  .ui[class*="left floated"].list {
+    float: left;
+***REMOVED***
+  .ui[class*="right floated"].list {
+    float: right;
+***REMOVED***
+
+  .ui.list .list > .item [class*="left floated"],
+  .ui.list > .item [class*="left floated"] {
+    float: left;
+    margin: @leftFloatMargin;
+***REMOVED***
+  .ui.list .list > .item [class*="right floated"],
+  .ui.list > .item [class*="right floated"] {
+    float: right;
+    margin: @rightFloatMargin;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+            Coupling
+*******************************/
+
+.ui.menu .ui.list > .item,
+.ui.menu .ui.list .list > .item {
+  display: list-item;
+  table-layout: fixed;
+  background-color: transparent;
+
+  list-style-type: @listStyleType;
+  list-style-position: @listStylePosition;
+
+  padding: @itemVerticalPadding @itemHorizontalPadding;
+  line-height: @itemLineHeight;
+***REMOVED***
+.ui.menu .ui.list .list > .item:before,
+.ui.menu .ui.list > .item:before {
+  border: none;
+  background: none;
+***REMOVED***
+.ui.menu .ui.list .list > .item:first-child,
+.ui.menu .ui.list > .item:first-child {
+  padding-top: 0;
+***REMOVED***
+.ui.menu .ui.list .list > .item:last-child,
+.ui.menu .ui.list > .item:last-child {
+  padding-bottom: 0;
+***REMOVED***
+
+
+***REMOVED********************************
+            Types
+*******************************/
+
+& when (@variationListHorizontal) {
+  /*-------------------
+        Horizontal
+  --------------------*/
+
+  .ui.horizontal.list {
+    display: inline-block;
+    font-size: 0;
+***REMOVED***
+  .ui.horizontal.list > .item {
+    display: inline-block;
+    margin-right: @horizontalSpacing;
+    font-size: 1rem;
+***REMOVED***
+  .ui.horizontal.list:not(.celled) > .item:last-child {
+    margin-right: 0;
+    padding-right: 0;
+***REMOVED***
+  .ui.horizontal.list .list:not(.icon) {
+    padding-left: 0;
+    padding-bottom: 0;
+***REMOVED***
+  .ui.horizontal.list > .item > .image,
+  .ui.horizontal.list .list > .item > .image,
+  .ui.horizontal.list > .item > .icon,
+  .ui.horizontal.list .list > .item > .icon,
+  .ui.horizontal.list > .item > .content,
+  .ui.horizontal.list .list > .item > .content {
+    vertical-align: @horizontalVerticalAlign;
+***REMOVED***
+
+  /* Padding on all elements***REMOVED***/
+  .ui.horizontal.list > .item:first-child,
+  .ui.horizontal.list > .item:last-child {
+    padding-top: @itemVerticalPadding;
+    padding-bottom: @itemVerticalPadding;
+***REMOVED***
+  & when (@variationListIcon) {
+    /* Horizontal List***REMOVED***/
+    .ui.horizontal.list > .item > i.icon ,
+    .ui.horizontal.list .item > i.icons > i.icon {
+      margin: 0;
+      padding: 0 @horizontalIconDistance 0 0;
+  ***REMOVED***
+***REMOVED***
+  & when (@variationListImage) or (@variationListIcon) {
+    .ui.horizontal.list > .item > .image + .content,
+    .ui.horizontal.list > .item > .icon,
+    .ui.horizontal.list > .item > .icon + .content {
+      float: none;
+      display: inline-block;
+      width: auto;
+  ***REMOVED***
+***REMOVED***
+  & when (@variationListImage) {
+    .ui.horizontal.list > .item > .image {
+      display: inline-block;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+             States
+*******************************/
+
+& when (@variationListDisabled) {
+  /*-------------------
+         Disabled
+  --------------------*/
+
+  .ui.list .list > .disabled.item,
+  .ui.list > .disabled.item {
+    pointer-events: none;
+    color: @disabledColor !important;
+***REMOVED***
+  & when (@variationListInverted) {
+    .ui.inverted.list .list > .disabled.item,
+    .ui.inverted.list > .disabled.item {
+      color: @invertedDisabledColor !important;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+/*-------------------
+        Hover
+--------------------*/
+& when (@variationListIcon) {
+  .ui.list .list > a.item:hover > .icons,
+  .ui.list > a.item:hover > .icons,
+  .ui.list .list > a.item:hover > .icon,
+  .ui.list > a.item:hover > .icon {
+    color: @itemLinkIconHoverColor;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+           Variations
+*******************************/
+
+& when (@variationListInverted) {
+  /*-------------------
+         Inverted
+  --------------------*/
+  & when (@variationListIcon) {
+    .ui.inverted.list .list > a.item > .icon,
+    .ui.inverted.list > a.item > .icon {
+      color: @invertedIconLinkColor;
+  ***REMOVED***
+***REMOVED***
+  .ui.inverted.list .list > .item .header,
+  .ui.inverted.list > .item .header {
+    color: @invertedHeaderColor;
+***REMOVED***
+  .ui.inverted.list .list > .item .description,
+  .ui.inverted.list > .item .description {
+    color: @invertedDescriptionColor;
+***REMOVED***
+  .ui.inverted.list .list > .item > .content,
+  .ui.inverted.list > .item > .content {
+    color: @invertedContentColor;
+***REMOVED***
+  /* Item Link***REMOVED***/
+  .ui.inverted.list .list > a.item,
+  .ui.inverted.list > a.item {
+    cursor: pointer;
+    color: @invertedItemLinkColor;
+***REMOVED***
+  .ui.inverted.list .list > a.item:hover,
+  .ui.inverted.list > a.item:hover {
+    color: @invertedItemLinkHoverColor;
+***REMOVED***
+
+
+  /* Linking Content***REMOVED***/
+  .ui.inverted.list .item a:not(.ui) {
+    color: @invertedItemLinkColor !important;
+***REMOVED***
+  .ui.inverted.list .item a:not(.ui):hover {
+    color: @invertedItemLinkHoverColor !important;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListAligned) {
+  /*-------------------
+         Aligned
+  --------------------*/
+
+  .ui.list[class*="top aligned"] .image,
+  .ui.list[class*="top aligned"] .content,
+  .ui.list [class*="top aligned"] {
+    vertical-align: top !important;
+***REMOVED***
+  .ui.list[class*="middle aligned"] .image,
+  .ui.list[class*="middle aligned"] .content,
+  .ui.list [class*="middle aligned"] {
+    vertical-align: middle !important;
+***REMOVED***
+  .ui.list[class*="bottom aligned"] .image,
+  .ui.list[class*="bottom aligned"] .content,
+  .ui.list [class*="bottom aligned"] {
+    vertical-align: bottom !important;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListLink) {
+  /*-------------------
+         Link
+  --------------------*/
+
+  .ui.link.list .item,
+  .ui.link.list a.item,
+  .ui.link.list .item a:not(.ui) {
+    color: @linkListItemColor;
+    transition: @linkListTransition;
+***REMOVED***
+  .ui.link.list.list a.item:hover,
+  .ui.link.list.list .item a:not(.ui):hover {
+    color: @linkListItemHoverColor;
+***REMOVED***
+  .ui.link.list.list a.item:active,
+  .ui.link.list.list .item a:not(.ui):active {
+    color: @linkListItemDownColor;
+***REMOVED***
+  .ui.link.list.list .active.item,
+  .ui.link.list.list .active.item a:not(.ui) {
+    color: @linkListItemActiveColor;
+***REMOVED***
+  & when (@variationListInverted) {
+    /* Inverted***REMOVED***/
+    .ui.inverted.link.list .item,
+    .ui.inverted.link.list a.item,
+    .ui.inverted.link.list .item a:not(.ui) {
+      color: @invertedLinkListItemColor;
+  ***REMOVED***
+    .ui.inverted.link.list.list a.item:hover,
+    .ui.inverted.link.list.list .item a:not(.ui):hover {
+      color: @invertedLinkListItemHoverColor;
+  ***REMOVED***
+    .ui.inverted.link.list.list a.item:active,
+    .ui.inverted.link.list.list .item a:not(.ui):active {
+      color: @invertedLinkListItemDownColor;
+  ***REMOVED***
+    .ui.inverted.link.list.list a.active.item,
+    .ui.inverted.link.list.list .active.item a:not(.ui) {
+      color: @invertedLinkListItemActiveColor;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationListSelection) {
+  /*-------------------
+        Selection
+  --------------------*/
+
+  .ui.selection.list .list > .item,
+  .ui.selection.list > .item {
+    cursor: pointer;
+    background: @selectionListBackground;
+    padding: @selectionListItemVerticalPadding @selectionListItemHorizontalPadding;
+    margin: @selectionListItemMargin;
+    color: @selectionListColor;
+    border-radius: @selectionListItemBorderRadius;
+    transition: @selectionListTransition;
+***REMOVED***
+  .ui.selection.list .list > .item:last-child,
+  .ui.selection.list > .item:last-child {
+    margin-bottom: 0;
+***REMOVED***
+  .ui.selection.list .list > .item:hover,
+  .ui.selection.list > .item:hover {
+    background: @selectionListHoverBackground;
+    color: @selectionListHoverColor;
+***REMOVED***
+  .ui.selection.list .list > .item:active,
+  .ui.selection.list > .item:active {
+    background: @selectionListDownBackground;
+    color: @selectionListDownColor;
+***REMOVED***
+  .ui.selection.list .list > .item.active,
+  .ui.selection.list > .item.active {
+    background: @selectionListActiveBackground;
+    color: @selectionListActiveColor;
+***REMOVED***
+
+  & when (@variationListInverted) {
+    /* Inverted***REMOVED***/
+    .ui.inverted.selection.list > .item {
+      background: @invertedSelectionListBackground;
+      color: @invertedSelectionListColor;
+  ***REMOVED***
+    .ui.inverted.selection.list > .item:hover {
+      background: @invertedSelectionListHoverBackground;
+      color: @invertedSelectionListHoverColor;
+  ***REMOVED***
+    .ui.inverted.selection.list > .item:active {
+      background: @invertedSelectionListDownBackground;
+      color: @invertedSelectionListDownColor;
+  ***REMOVED***
+    .ui.inverted.selection.list > .item.active {
+      background: @invertedSelectionListActiveBackground;
+      color: @invertedSelectionListActiveColor;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListCelled) or (@variationListDivided) {
+    /* Celled / Divided Selection List***REMOVED***/
+    .ui.celled.selection.list .list > .item,
+    .ui.divided.selection.list .list > .item,
+    .ui.celled.selection.list > .item,
+    .ui.divided.selection.list > .item {
+      border-radius: 0;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationListAnimated) {
+  /*-------------------
+         Animated
+  --------------------*/
+
+  .ui.animated.list > .item {
+    transition: @animatedListTransition;
+***REMOVED***
+  .ui.animated.list:not(.horizontal) > .item:hover {
+    padding-left: @animatedListIndent;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListFitted) {
+  /*-------------------
+         Fitted
+  --------------------*/
+  .ui.fitted.list:not(.selection) .list > .item,
+  .ui.fitted.list:not(.selection) > .item {
+    padding-left: 0;
+    padding-right: 0;
+***REMOVED***
+  .ui.fitted.selection.list .list > .item,
+  .ui.fitted.selection.list > .item {
+    margin-left: -@selectionListItemHorizontalPadding;
+    margin-right: -@selectionListItemHorizontalPadding;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListBulleted) {
+  /*-------------------
+        Bulleted
+  --------------------*/
+
+  ul.ui.list,
+  .ui.bulleted.list {
+    margin-left: @bulletDistance;
+***REMOVED***
+  ul.ui.list li,
+  .ui.bulleted.list .list > .item,
+  .ui.bulleted.list > .item {
+    position: relative;
+***REMOVED***
+  ul.ui.list li:before,
+  .ui.bulleted.list .list > .item:before,
+  .ui.bulleted.list > .item:before {
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    top: auto;
+    left: auto;
+    font-weight: @normal;
+    margin-left: @bulletOffset;
+    content: @bulletCharacter;
+    opacity: @bulletOpacity;
+    color: @bulletColor;
+    vertical-align: @bulletVerticalAlign;
+***REMOVED***
+
+  ul.ui.list li:before,
+  .ui.bulleted.list .list > a.item:before,
+  .ui.bulleted.list > a.item:before {
+    color: @bulletLinkColor;
+***REMOVED***
+
+  ul.ui.list ul,
+  .ui.bulleted.list .list:not(.icon) {
+    padding-left: @bulletChildDistance;
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    /* Horizontal Bulleted***REMOVED***/
+    ul.ui.horizontal.bulleted.list,
+    .ui.horizontal.bulleted.list {
+      margin-left: 0;
+  ***REMOVED***
+    ul.ui.horizontal.bulleted.list li,
+    .ui.horizontal.bulleted.list > .item {
+      margin-left: @horizontalBulletSpacing;
+  ***REMOVED***
+    ul.ui.horizontal.bulleted.list li:first-child,
+    .ui.horizontal.bulleted.list > .item:first-child {
+      margin-left: 0;
+  ***REMOVED***
+    ul.ui.horizontal.bulleted.list li::before,
+    .ui.horizontal.bulleted.list > .item::before {
+      color: @horizontalBulletColor;
+  ***REMOVED***
+    ul.ui.horizontal.bulleted.list li:first-child::before,
+    .ui.horizontal.bulleted.list > .item:first-child::before {
+      display: none;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationListOrdered) {
+  /*-------------------
+         Ordered
+  --------------------*/
+
+  ol.ui.list,
+  .ui.ordered.list,
+  .ui.ordered.list .list:not(.icon),
+  ol.ui.list ol {
+    counter-reset: ordered;
+    margin-left: @orderedCountDistance;
+    list-style-type: none;
+***REMOVED***
+  ol.ui.list li,
+  .ui.ordered.list .list > .item,
+  .ui.ordered.list > .item {
+    list-style-type: none;
+    position: relative;
+***REMOVED***
+  ol.ui.list li:before,
+  .ui.ordered.list .list > .item:before,
+  .ui.ordered.list > .item:before {
+    position: absolute;
+    top: auto;
+    left: auto;
+    user-select: none;
+    pointer-events: none;
+    margin-left: -(@orderedCountDistance);
+    counter-increment: @orderedCountName;
+    content: @orderedCountContent;
+    text-align: @orderedCountTextAlign;
+    color: @orderedCountColor;
+    vertical-align: @orderedCountVerticalAlign;
+    opacity: @orderedCountOpacity;
+***REMOVED***
+
+  & when (@variationListInverted) {
+    ol.ui.inverted.list li:before,
+    .ui.ordered.inverted.list .list > .item:before,
+    .ui.ordered.inverted.list > .item:before {
+      color: @orderedInvertedCountColor;
+  ***REMOVED***
+***REMOVED***
+
+  /* Value***REMOVED***/
+  .ui.ordered.list .list > .item[data-value]:before,
+  .ui.ordered.list > .item[data-value]:before {
+    content: attr(data-value);
+***REMOVED***
+  ol.ui.list li[value]:before {
+    content: attr(value);
+***REMOVED***
+
+  /* Child Lists***REMOVED***/
+  ol.ui.list ol,
+  .ui.ordered.list .list:not(.icon) {
+    margin-left: @orderedChildCountDistance;
+***REMOVED***
+  ol.ui.list ol li:before,
+  .ui.ordered.list .list > .item:before {
+    margin-left: @orderedChildCountOffset;
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    /* Horizontal Ordered***REMOVED***/
+    ol.ui.horizontal.list,
+    .ui.ordered.horizontal.list {
+      margin-left: 0;
+  ***REMOVED***
+    ol.ui.horizontal.list li:before,
+    .ui.ordered.horizontal.list .list > .item:before,
+    .ui.ordered.horizontal.list > .item:before {
+      position: static;
+      margin: 0 @horizontalOrderedCountDistance 0 0;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationListSuffixed) {
+  /* Suffixed Ordered***REMOVED***/
+  ol.ui.suffixed.list li:before,
+  .ui.suffixed.ordered.list .list > .item:before,
+  .ui.suffixed.ordered.list > .item:before {
+    content: @orderedCountContentSuffixed;
+***REMOVED***
+***REMOVED***
+
+& when (@variationListDivided) {
+  /*-------------------
+         Divided
+  --------------------*/
+
+  .ui.divided.list > .item {
+    border-top: @dividedBorder;
+***REMOVED***
+  .ui.divided.list .list > .item {
+    border-top: @dividedChildListBorder;
+***REMOVED***
+  .ui.divided.list .item .list > .item {
+    border-top: @dividedChildItemBorder;
+***REMOVED***
+  .ui.divided.list .list > .item:first-child,
+  .ui.divided.list > .item:first-child {
+    border-top: none;
+***REMOVED***
+
+  /* Sub Menu***REMOVED***/
+  .ui.divided.list:not(.horizontal) .list > .item:first-child {
+    border-top-width: @dividedBorderWidth;
+***REMOVED***
+
+  & when (@variationListBulleted) {
+    /* Divided bulleted***REMOVED***/
+    .ui.divided.bulleted.list:not(.horizontal),
+    .ui.divided.bulleted.list .list:not(.icon) {
+      margin-left: 0;
+      padding-left: 0;
+  ***REMOVED***
+    .ui.divided.bulleted.list > .item:not(.horizontal) {
+      padding-left: @bulletDistance;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListOrdered) {
+    /* Divided Ordered***REMOVED***/
+    .ui.divided.ordered.list {
+      margin-left: 0;
+  ***REMOVED***
+    .ui.divided.ordered.list .list > .item,
+    .ui.divided.ordered.list > .item {
+      padding-left: @orderedCountDistance;
+  ***REMOVED***
+    .ui.divided.ordered.list .item .list:not(.icon) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-bottom: @itemVerticalPadding;
+  ***REMOVED***
+    .ui.divided.ordered.list .item .list > .item {
+      padding-left: @orderedChildCountDistance;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListSelection) {
+    /* Divided Selection***REMOVED***/
+
+    .ui.divided.selection.list .list > .item,
+    .ui.divided.selection.list > .item {
+      margin: 0;
+      border-radius: 0;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    /* Divided horizontal***REMOVED***/
+    .ui.divided.horizontal.list {
+      margin-left: 0;
+  ***REMOVED***
+    .ui.divided.horizontal.list > .item {
+      padding-left: @horizontalDividedSpacing;
+  ***REMOVED***
+    .ui.divided.horizontal.list > .item:not(:last-child) {
+      padding-right: @horizontalDividedSpacing;
+  ***REMOVED***
+    .ui.divided.horizontal.list > .item {
+      border-top: none;
+      border-right: @dividedBorder;
+      margin: 0;
+      line-height: @horizontalDividedLineHeight;
+  ***REMOVED***
+    .ui.horizontal.divided.list > .item:last-child {
+      border-right: none;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListInverted) {
+    /* Inverted***REMOVED***/
+
+    .ui.divided.inverted.list > .item,
+    .ui.divided.inverted.list > .list,
+    .ui.divided.inverted.horizontal.list > .item {
+      border-color: @dividedInvertedBorderColor;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationListCelled) {
+  /*-------------------
+          Celled
+  --------------------*/
+
+  .ui.celled.list > .item,
+  .ui.celled.list > .list {
+    border-top: @celledBorder;
+    padding-left: @celledHorizontalPadding;
+    padding-right: @celledHorizontalPadding;
+***REMOVED***
+  .ui.celled.list > .item:last-child {
+    border-bottom: @celledBorder;
+***REMOVED***
+
+  /* Padding on all elements***REMOVED***/
+  .ui.celled.list > .item:first-child,
+  .ui.celled.list > .item:last-child {
+    padding-top: @itemVerticalPadding;
+    padding-bottom: @itemVerticalPadding;
+***REMOVED***
+
+  /* Sub Menu***REMOVED***/
+  .ui.celled.list .item .list > .item {
+    border-width: 0;
+***REMOVED***
+  .ui.celled.list .list > .item:first-child {
+    border-top-width: 0;
+***REMOVED***
+
+  & when (@variationListBulleted) {
+    /* Celled Bulleted***REMOVED***/
+    .ui.celled.bulleted.list {
+      margin-left: 0;
+  ***REMOVED***
+    .ui.celled.bulleted.list .list > .item,
+    .ui.celled.bulleted.list > .item {
+      padding-left: (@bulletDistance);
+  ***REMOVED***
+    .ui.celled.bulleted.list .item .list:not(.icon) {
+      margin-left: -(@bulletDistance);
+      margin-right: -(@bulletDistance);
+      padding-bottom: @itemVerticalPadding;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListOrdered) {
+    /* Celled Ordered***REMOVED***/
+    .ui.celled.ordered.list {
+      margin-left: 0;
+  ***REMOVED***
+    .ui.celled.ordered.list .list > .item,
+    .ui.celled.ordered.list > .item {
+      padding-left: @orderedCountDistance;
+  ***REMOVED***
+    .ui.celled.ordered.list .item .list:not(.icon) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-bottom: @itemVerticalPadding;
+  ***REMOVED***
+    .ui.celled.ordered.list .list > .item {
+      padding-left: @orderedChildCountDistance;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    /* Celled Horizontal***REMOVED***/
+    .ui.horizontal.celled.list {
+      margin-left: 0;
+  ***REMOVED***
+    .ui.horizontal.celled.list .list > .item,
+    .ui.horizontal.celled.list > .item {
+      border-top: none;
+      border-left: @celledBorder;
+      margin: 0;
+      padding-left: @horizontalCelledSpacing;
+      padding-right: @horizontalCelledSpacing;
+
+      line-height: @horizontalCelledLineHeight;
+  ***REMOVED***
+    .ui.horizontal.celled.list .list > .item:last-child,
+    .ui.horizontal.celled.list > .item:last-child {
+      border-bottom: none;
+      border-right: @celledBorder;
+  ***REMOVED***
+***REMOVED***
+
+  & when (@variationListInverted) {
+    /* Inverted***REMOVED***/
+    .ui.celled.inverted.list > .item,
+    .ui.celled.inverted.list > .list {
+      border-color: @celledInvertedBorder;
+  ***REMOVED***
+    .ui.celled.inverted.horizontal.list .list > .item,
+    .ui.celled.inverted.horizontal.list > .item {
+      border-color: @celledInvertedBorder;
+  ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+
+& when (@variationListRelaxed) {
+  /*-------------------
+         Relaxed
+  --------------------*/
+
+  .ui.relaxed.list:not(.horizontal) > .item:not(:first-child) {
+    padding-top: @relaxedItemVerticalPadding;
+***REMOVED***
+  .ui.relaxed.list:not(.horizontal) > .item:not(:last-child) {
+    padding-bottom: @relaxedItemVerticalPadding;
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    .ui.horizontal.relaxed.list .list > .item:not(:first-child),
+    .ui.horizontal.relaxed.list > .item:not(:first-child) {
+      padding-left: @relaxedHorizontalPadding;
+  ***REMOVED***
+    .ui.horizontal.relaxed.list .list > .item:not(:last-child),
+    .ui.horizontal.relaxed.list > .item:not(:last-child) {
+      padding-right: @relaxedHorizontalPadding;
+  ***REMOVED***
+***REMOVED***
+
+  /* Very Relaxed***REMOVED***/
+  .ui[class*="very relaxed"].list:not(.horizontal) > .item:not(:first-child) {
+    padding-top: @veryRelaxedItemVerticalPadding;
+***REMOVED***
+  .ui[class*="very relaxed"].list:not(.horizontal) > .item:not(:last-child) {
+    padding-bottom: @veryRelaxedItemVerticalPadding;
+***REMOVED***
+
+  & when (@variationListHorizontal) {
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:first-child),
+    .ui.horizontal[class*="very relaxed"].list > .item:not(:first-child) {
+      padding-left: @veryRelaxedHorizontalPadding;
+  ***REMOVED***
+    .ui.horizontal[class*="very relaxed"].list .list > .item:not(:last-child),
+    .ui.horizontal[class*="very relaxed"].list > .item:not(:last-child) {
+      padding-right: @veryRelaxedHorizontalPadding;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+/*-------------------
+      Sizes
+--------------------*/
+
+.ui.list {
+  font-size: @relativeMedium;
+***REMOVED***
+& when not (@variationListSizes = false) {
+  each(@variationListSizes, {
+    @rs: @{value***REMOVED***ListSize;
+    @s: @@value;
+    .ui.@{value***REMOVED***.list {
+      font-size: @@rs;
+  ***REMOVED***
+    & when (@variationListHorizontal) {
+      .ui.@{value***REMOVED***.horizontal.list .list > .item,
+      .ui.@{value***REMOVED***.horizontal.list > .item {
+        font-size: @s;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+.loadUIOverrides();
+

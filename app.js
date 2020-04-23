@@ -32,22 +32,6 @@ app.use(require("express-session")({
 // Required Routes
 app.use("/",indexRoutes);
 
-app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
-    res.sendFile(path.join(__dirname, '/public', "loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt"))
-***REMOVED***)
-
-// Government Notification
-app.post('/governmentCheck/:type?',(req,res) =>{
-    let type = req.params.type? req.params.type:
-        req.get("type")? req.get("type"): null;
-    console.log("##################################################################################")
-    console.log("TYPE:",type)
-    console.log("URL:",req.get("url"))
-    console.log("Request:",JSON.stringify(req,null,2))
-    console.log("##################################################################################")
-
-***REMOVED***)
-
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port***REMOVED***`);

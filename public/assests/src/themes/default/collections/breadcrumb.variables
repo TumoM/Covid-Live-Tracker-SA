@@ -1,0 +1,38 @@
+***REMOVED********************************
+          Breadcrumb
+*******************************/
+
+/*-------------------
+     Breadcrumb
+--------------------*/
+
+@verticalMargin: 0;
+@display: inline-block;
+@verticalAlign: middle;
+
+@dividerSpacing: @3px;
+@dividerOpacity: 0.7;
+@dividerColor: @lightTextColor;
+
+@dividerSize: @relativeSmall;
+@dividerVerticalAlign: baseline;
+
+@iconDividerSize: @relativeTiny;
+@iconDividerVerticalAlign: baseline;
+
+@sectionMargin: 0;
+@sectionPadding: 0;
+
+/* Coupling***REMOVED***/
+@segmentPadding: @relativeMini @relativeMedium;
+
+/* Inverted***REMOVED***/
+@invertedColor: @midWhite;
+@invertedActiveColor: @white;
+@invertedDividerColor: @invertedLightTextColor;
+
+/*-------------------
+       States
+--------------------*/
+
+@activeFontWeight: @bold;

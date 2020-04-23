@@ -1,0 +1,74 @@
+/*!
+***REMOVED*** # Fomantic-UI - Sticky
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'module';
+@element : 'sticky';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+            Sticky
+*******************************/
+
+.ui.sticky {
+  position: static;
+  transition: @transition;
+  z-index: @zIndex;
+***REMOVED***
+
+***REMOVED********************************
+            States
+*******************************/
+
+/* Bound***REMOVED***/
+.ui.sticky.bound {
+  position: absolute;
+  left: auto;
+  right: auto;
+***REMOVED***
+
+/* Fixed***REMOVED***/
+.ui.sticky.fixed {
+  position: fixed;
+  left: auto;
+  right: auto;
+***REMOVED***
+
+/* Bound/Fixed Position***REMOVED***/
+.ui.sticky.bound.top,
+.ui.sticky.fixed.top {
+  top: 0;
+  bottom: auto;
+***REMOVED***
+.ui.sticky.bound.bottom,
+.ui.sticky.fixed.bottom {
+  top: auto;
+  bottom: 0;
+***REMOVED***
+
+
+***REMOVED********************************
+            Types
+*******************************/
+
+.ui.native.sticky {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+***REMOVED***
+
+.loadUIOverrides();

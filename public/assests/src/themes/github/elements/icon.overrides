@@ -1,0 +1,208 @@
+/* Octicons***REMOVED***/
+
+.icon.alert:before { content: '\f02d'***REMOVED*** /* ***REMOVED***/
+.icon.alignment.align:before { content: '\f08a'***REMOVED*** /* ***REMOVED***/
+.icon.alignment.aligned.to:before { content: '\f08e'***REMOVED*** /* ***REMOVED***/
+.icon.alignment.unalign:before { content: '\f08b'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.down:before { content: '\f03f'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.left:before { content: '\f040'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.right:before { content: '\f03e'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.small.down:before { content: '\f0a0'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.small.left:before { content: '\f0a1'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.small.right:before { content: '\f071'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.small.up:before { content: '\f09f'***REMOVED*** /* ***REMOVED***/
+.icon.arrow.up:before { content: '\f03d'***REMOVED*** /* ***REMOVED***/
+.icon.beer:before { content: '\f069'***REMOVED*** /* ***REMOVED***/
+.icon.book:before { content: '\f007'***REMOVED*** /* ***REMOVED***/
+.icon.bookmark:before { content: '\f07b'***REMOVED*** /* ***REMOVED***/
+.icon.briefcase:before { content: '\f0d3'***REMOVED*** /* ***REMOVED***/
+.icon.broadcast:before { content: '\f048'***REMOVED*** /* ***REMOVED***/
+.icon.browser:before { content: '\f0c5'***REMOVED*** /* ***REMOVED***/
+.icon.bug:before { content: '\f091'***REMOVED*** /* ***REMOVED***/
+.icon.calendar:before { content: '\f068'***REMOVED*** /* ***REMOVED***/
+.icon.check:before { content: '\f03a'***REMOVED*** /* ***REMOVED***/
+.icon.checklist:before { content: '\f076'***REMOVED*** /* ***REMOVED***/
+.icon.chevron.down:before { content: '\f0a3'***REMOVED*** /* ***REMOVED***/
+.icon.chevron.left:before { content: '\f0a4'***REMOVED*** /* ***REMOVED***/
+.icon.chevron.right:before { content: '\f078'***REMOVED*** /* ***REMOVED***/
+.icon.chevron.up:before { content: '\f0a2'***REMOVED*** /* ***REMOVED***/
+.icon.circle.slash:before { content: '\f084'***REMOVED*** /* ***REMOVED***/
+.icon.circuit.board:before { content: '\f0d6'***REMOVED*** /* ***REMOVED***/
+.icon.clippy:before { content: '\f035'***REMOVED*** /* ***REMOVED***/
+.icon.clock:before { content: '\f046'***REMOVED*** /* ***REMOVED***/
+.icon.cloud.download:before { content: '\f00b'***REMOVED*** /* ***REMOVED***/
+.icon.cloud.upload:before { content: '\f00c'***REMOVED*** /* ***REMOVED***/
+.icon.code:before { content: '\f05f'***REMOVED*** /* ***REMOVED***/
+.icon.color.mode:before { content: '\f065'***REMOVED*** /* ***REMOVED***/
+.icon.comment.add:before,
+.icon.comment:before { content: '\f02b'***REMOVED*** /* ***REMOVED***/
+.icon.comment.discussion:before { content: '\f04f'***REMOVED*** /* ***REMOVED***/
+.icon.credit.card:before { content: '\f045'***REMOVED*** /* ***REMOVED***/
+.icon.dash:before { content: '\f0ca'***REMOVED*** /* ***REMOVED***/
+.icon.dashboard:before { content: '\f07d'***REMOVED*** /* ***REMOVED***/
+.icon.database:before { content: '\f096'***REMOVED*** /* ***REMOVED***/
+.icon.device.camera:before { content: '\f056'***REMOVED*** /* ***REMOVED***/
+.icon.device.camera.video:before { content: '\f057'***REMOVED*** /* ***REMOVED***/
+.icon.device.desktop:before { content: '\f27c'***REMOVED*** /* ***REMOVED***/
+.icon.device.mobile:before { content: '\f038'***REMOVED*** /* ***REMOVED***/
+.icon.diff:before { content: '\f04d'***REMOVED*** /* ***REMOVED***/
+.icon.diff.added:before { content: '\f06b'***REMOVED*** /* ***REMOVED***/
+.icon.diff.ignored:before { content: '\f099'***REMOVED*** /* ***REMOVED***/
+.icon.diff.modified:before { content: '\f06d'***REMOVED*** /* ***REMOVED***/
+.icon.diff.removed:before { content: '\f06c'***REMOVED*** /* ***REMOVED***/
+.icon.diff.renamed:before { content: '\f06e'***REMOVED*** /* ***REMOVED***/
+.icon.ellipsis:before { content: '\f09a'***REMOVED*** /* ***REMOVED***/
+.icon.eye.unwatch:before,
+.icon.eye.watch:before,
+.icon.eye:before { content: '\f04e'***REMOVED*** /* ***REMOVED***/
+.icon.file.binary:before { content: '\f094'***REMOVED*** /* ***REMOVED***/
+.icon.file.code:before { content: '\f010'***REMOVED*** /* ***REMOVED***/
+.icon.file.directory:before { content: '\f016'***REMOVED*** /* ***REMOVED***/
+.icon.file.media:before { content: '\f012'***REMOVED*** /* ***REMOVED***/
+.icon.file.pdf:before { content: '\f014'***REMOVED*** /* ***REMOVED***/
+.icon.file.submodule:before { content: '\f017'***REMOVED*** /* ***REMOVED***/
+.icon.file.symlink.directory:before { content: '\f0b1'***REMOVED*** /* ***REMOVED***/
+.icon.file.symlink.file:before { content: '\f0b0'***REMOVED*** /* ***REMOVED***/
+.icon.file.text:before { content: '\f011'***REMOVED*** /* ***REMOVED***/
+.icon.file.zip:before { content: '\f013'***REMOVED*** /* ***REMOVED***/
+.icon.flame:before { content: '\f0d2'***REMOVED*** /* ***REMOVED***/
+.icon.fold:before { content: '\f0cc'***REMOVED*** /* ***REMOVED***/
+.icon.gear:before { content: '\f02f'***REMOVED*** /* ***REMOVED***/
+.icon.gift:before { content: '\f042'***REMOVED*** /* ***REMOVED***/
+.icon.gist:before { content: '\f00e'***REMOVED*** /* ***REMOVED***/
+.icon.gist.secret:before { content: '\f08c'***REMOVED*** /* ***REMOVED***/
+.icon.git.branch.create:before,
+.icon.git.branch.delete:before,
+.icon.git.branch:before { content: '\f020'***REMOVED*** /* ***REMOVED***/
+.icon.git.commit:before { content: '\f01f'***REMOVED*** /* ***REMOVED***/
+.icon.git.compare:before { content: '\f0ac'***REMOVED*** /* ***REMOVED***/
+.icon.git.merge:before { content: '\f023'***REMOVED*** /* ***REMOVED***/
+.icon.git.pull.request.abandoned:before,
+.icon.git.pull.request:before { content: '\f009'***REMOVED*** /* ***REMOVED***/
+.icon.globe:before { content: '\f0b6'***REMOVED*** /* ***REMOVED***/
+.icon.graph:before { content: '\f043'***REMOVED*** /* ***REMOVED***/
+.icon.heart:before { content: '\2665'***REMOVED*** /* ♥***REMOVED***/
+.icon.history:before { content: '\f07e'***REMOVED*** /* ***REMOVED***/
+.icon.home:before { content: '\f08d'***REMOVED*** /* ***REMOVED***/
+.icon.horizontal.rule:before { content: '\f070'***REMOVED*** /* ***REMOVED***/
+.icon.hourglass:before { content: '\f09e'***REMOVED*** /* ***REMOVED***/
+.icon.hubot:before { content: '\f09d'***REMOVED*** /* ***REMOVED***/
+.icon.inbox:before { content: '\f0cf'***REMOVED*** /* ***REMOVED***/
+.icon.info:before { content: '\f059'***REMOVED*** /* ***REMOVED***/
+.icon.issue.closed:before { content: '\f028'***REMOVED*** /* ***REMOVED***/
+.icon.issue.opened:before { content: '\f026'***REMOVED*** /* ***REMOVED***/
+.icon.issue.reopened:before { content: '\f027'***REMOVED*** /* ***REMOVED***/
+.icon.jersey:before { content: '\f019'***REMOVED*** /* ***REMOVED***/
+.icon.jump.down:before { content: '\f072'***REMOVED*** /* ***REMOVED***/
+.icon.jump.left:before { content: '\f0a5'***REMOVED*** /* ***REMOVED***/
+.icon.jump.right:before { content: '\f0a6'***REMOVED*** /* ***REMOVED***/
+.icon.jump.up:before { content: '\f073'***REMOVED*** /* ***REMOVED***/
+.icon.key:before { content: '\f049'***REMOVED*** /* ***REMOVED***/
+.icon.keyboard:before { content: '\f00d'***REMOVED*** /* ***REMOVED***/
+.icon.law:before { content: '\f0d8'***REMOVED*** /* ***REMOVED***/
+.icon.light.bulb:before { content: '\f000'***REMOVED*** /* ***REMOVED***/
+.icon.linkify:before { content: '\f05c'***REMOVED*** /* ***REMOVED***/
+.icon.linkify.external:before { content: '\f07f'***REMOVED*** /* ***REMOVED***/
+.icon.list.ordered:before { content: '\f062'***REMOVED*** /* ***REMOVED***/
+.icon.list.unordered:before { content: '\f061'***REMOVED*** /* ***REMOVED***/
+.icon.location:before { content: '\f060'***REMOVED*** /* ***REMOVED***/
+.icon.gist.private:before,
+.icon.mirror.private:before,
+.icon.git.fork.private:before,
+.icon.lock:before { content: '\f06a'***REMOVED*** /* ***REMOVED***/
+.icon.logo.github:before { content: '\f092'***REMOVED*** /* ***REMOVED***/
+.icon.mail:before { content: '\f03b'***REMOVED*** /* ***REMOVED***/
+.icon.mail.read:before { content: '\f03c'***REMOVED*** /* ***REMOVED***/
+.icon.mail.reply:before { content: '\f051'***REMOVED*** /* ***REMOVED***/
+.icon.mark.github:before { content: '\f00a'***REMOVED*** /* ***REMOVED***/
+.icon.markdown:before { content: '\f0c9'***REMOVED*** /* ***REMOVED***/
+.icon.megaphone:before { content: '\f077'***REMOVED*** /* ***REMOVED***/
+.icon.mention:before { content: '\f0be'***REMOVED*** /* ***REMOVED***/
+.icon.microscope:before { content: '\f089'***REMOVED*** /* ***REMOVED***/
+.icon.milestone:before { content: '\f075'***REMOVED*** /* ***REMOVED***/
+.icon.mirror.public:before,
+.icon.mirror:before { content: '\f024'***REMOVED*** /* ***REMOVED***/
+.icon.mortar.board:before { content: '\f0d7'***REMOVED*** /* ***REMOVED***/
+.icon.move.down:before { content: '\f0a8'***REMOVED*** /* ***REMOVED***/
+.icon.move.left:before { content: '\f074'***REMOVED*** /* ***REMOVED***/
+.icon.move.right:before { content: '\f0a9'***REMOVED*** /* ***REMOVED***/
+.icon.move.up:before { content: '\f0a7'***REMOVED*** /* ***REMOVED***/
+.icon.mute:before { content: '\f080'***REMOVED*** /* ***REMOVED***/
+.icon.no.newline:before { content: '\f09c'***REMOVED*** /* ***REMOVED***/
+.icon.octoface:before { content: '\f008'***REMOVED*** /* ***REMOVED***/
+.icon.organization:before { content: '\f037'***REMOVED*** /* ***REMOVED***/
+.icon.package:before { content: '\f0c4'***REMOVED*** /* ***REMOVED***/
+.icon.paintcan:before { content: '\f0d1'***REMOVED*** /* ***REMOVED***/
+.icon.pencil:before { content: '\f058'***REMOVED*** /* ***REMOVED***/
+.icon.person.add:before,
+.icon.person.follow:before,
+.icon.person:before { content: '\f018'***REMOVED*** /* ***REMOVED***/
+.icon.pin:before { content: '\f041'***REMOVED*** /* ***REMOVED***/
+.icon.playback.fast.forward:before { content: '\f0bd'***REMOVED*** /* ***REMOVED***/
+.icon.playback.pause:before { content: '\f0bb'***REMOVED*** /* ***REMOVED***/
+.icon.playback.play:before { content: '\f0bf'***REMOVED*** /* ***REMOVED***/
+.icon.playback.rewind:before { content: '\f0bc'***REMOVED*** /* ***REMOVED***/
+.icon.plug:before { content: '\f0d4'***REMOVED*** /* ***REMOVED***/
+.icon.repo.create:before,
+.icon.gist.new:before,
+.icon.file.directory.create:before,
+.icon.file.add:before,
+.icon.plus:before { content: '\f05d'***REMOVED*** /* ***REMOVED***/
+.icon.podium:before { content: '\f0af'***REMOVED*** /* ***REMOVED***/
+.icon.primitive.dot:before { content: '\f052'***REMOVED*** /* ***REMOVED***/
+.icon.primitive.square:before { content: '\f053'***REMOVED*** /* ***REMOVED***/
+.icon.pulse:before { content: '\f085'***REMOVED*** /* ***REMOVED***/
+.icon.puzzle:before { content: '\f0c0'***REMOVED*** /* ***REMOVED***/
+.icon.question:before { content: '\f02c'***REMOVED*** /* ***REMOVED***/
+.icon.quote:before { content: '\f063'***REMOVED*** /* ***REMOVED***/
+.icon.radio.tower:before { content: '\f030'***REMOVED*** /* ***REMOVED***/
+.icon.repo.delete:before,
+.icon.repo:before { content: '\f001'***REMOVED*** /* ***REMOVED***/
+.icon.repo.clone:before { content: '\f04c'***REMOVED*** /* ***REMOVED***/
+.icon.repo.force.push:before { content: '\f04a'***REMOVED*** /* ***REMOVED***/
+.icon.gist.fork:before,
+.icon.repo.forked:before { content: '\f002'***REMOVED*** /* ***REMOVED***/
+.icon.repo.pull:before { content: '\f006'***REMOVED*** /* ***REMOVED***/
+.icon.repo.push:before { content: '\f005'***REMOVED*** /* ***REMOVED***/
+.icon.rocket:before { content: '\f033'***REMOVED*** /* ***REMOVED***/
+.icon.rss:before { content: '\f034'***REMOVED*** /* ***REMOVED***/
+.icon.ruby:before { content: '\f047'***REMOVED*** /* ***REMOVED***/
+.icon.screen.full:before { content: '\f066'***REMOVED*** /* ***REMOVED***/
+.icon.screen.normal:before { content: '\f067'***REMOVED*** /* ***REMOVED***/
+.icon.search.save:before,
+.icon.search:before { content: '\f02e'***REMOVED*** /* ***REMOVED***/
+.icon.server:before { content: '\f097'***REMOVED*** /* ***REMOVED***/
+.icon.settings:before { content: '\f07c'***REMOVED*** /* ***REMOVED***/
+.icon.log.in:before,
+.icon.sign.in:before { content: '\f036'***REMOVED*** /* ***REMOVED***/
+.icon.log.out:before,
+.icon.sign.out:before { content: '\f032'***REMOVED*** /* ***REMOVED***/
+.icon.split:before { content: '\f0c6'***REMOVED*** /* ***REMOVED***/
+.icon.squirrel:before { content: '\f0b2'***REMOVED*** /* ***REMOVED***/
+.icon.star.add:before,
+.icon.star.delete:before,
+.icon.star:before { content: '\f02a'***REMOVED*** /* ***REMOVED***/
+.icon.steps:before { content: '\f0c7'***REMOVED*** /* ***REMOVED***/
+.icon.stop:before { content: '\f08f'***REMOVED*** /* ***REMOVED***/
+.icon.repo.sync:before,
+.icon.sync:before { content: '\f087'***REMOVED*** /* ***REMOVED***/
+.icon.tag.remove:before,
+.icon.tag.add:before,
+.icon.tag:before { content: '\f015'***REMOVED*** /* ***REMOVED***/
+.icon.telescope:before { content: '\f088'***REMOVED*** /* ***REMOVED***/
+.icon.terminal:before { content: '\f0c8'***REMOVED*** /* ***REMOVED***/
+.icon.three.bars:before { content: '\f05e'***REMOVED*** /* ***REMOVED***/
+.icon.thumbsdown:before { content: '\f0db'***REMOVED*** /* ***REMOVED***/
+.icon.thumbsup:before { content: '\f0da'***REMOVED*** /* ***REMOVED***/
+.icon.tools:before { content: '\f031'***REMOVED*** /* ***REMOVED***/
+.icon.trashcan:before { content: '\f0d0'***REMOVED*** /* ***REMOVED***/
+.icon.triangle.down:before { content: '\f05b'***REMOVED*** /* ***REMOVED***/
+.icon.triangle.left:before { content: '\f044'***REMOVED*** /* ***REMOVED***/
+.icon.triangle.right:before { content: '\f05a'***REMOVED*** /* ***REMOVED***/
+.icon.triangle.up:before { content: '\f0aa'***REMOVED*** /* ***REMOVED***/
+.icon.unfold:before { content: '\f039'***REMOVED*** /* ***REMOVED***/
+.icon.unmute:before { content: '\f0ba'***REMOVED*** /* ***REMOVED***/
+.icon.versions:before { content: '\f064'***REMOVED*** /* ***REMOVED***/
+.icon.remove.close:before,
+.icon.x:before { content: '\f081'***REMOVED*** /* ***REMOVED***/
+.icon.zap:before { content: '\26A1'***REMOVED*** /* ⚡***REMOVED***/

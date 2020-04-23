@@ -1,0 +1,13 @@
+***REMOVED********************************
+            Flag
+*******************************/
+
+/*-------------------
+       Element
+--------------------*/
+
+@spritePath: "@{imagePath***REMOVED***/flags.png";
+@width: 16px;
+@height: 11px;
+@verticalAlign: baseline;
+@margin: 0.5em;

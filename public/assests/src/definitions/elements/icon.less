@@ -1,0 +1,374 @@
+/*!
+***REMOVED*** # Fomantic-UI - Icon
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'element';
+@element : 'icon';
+
+@import (multiple) '../../theme.config';
+
+
+***REMOVED********************************
+             Icon
+*******************************/
+
+@font-face {
+  font-family: 'Icons';
+  src: @fallbackSRC;
+  src: @src;
+  font-style: normal;
+  font-weight: @normal;
+  font-variant: normal;
+  text-decoration: inherit;
+  text-transform: none;
+***REMOVED***
+
+i.icon {
+  display: inline-block;
+  opacity: @opacity;
+
+  margin: 0 @distanceFromText 0 0;
+
+  width: @width;
+  height: @height;
+
+  font-family: 'Icons';
+  font-style: normal;
+  font-weight: @normal;
+  text-decoration: inherit;
+  text-align: center;
+
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+***REMOVED***
+
+i.icon:before {
+  background: none !important;
+***REMOVED***
+
+***REMOVED********************************
+             Types
+*******************************/
+
+& when (@variationIconLoading) {
+  /*--------------
+      Loading
+  ---------------*/
+
+  i.icon.loading {
+    height: 1em;
+    line-height: 1;
+    animation: loader @loadingDuration linear infinite;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+             States
+*******************************/
+
+i.icon:hover, i.icons:hover,
+i.icon:active, i.icons:active,
+i.emphasized.icon:not(.disabled), i.emphasized.icons:not(.disabled) {
+  opacity: 1;
+***REMOVED***
+
+& when (@variationIconDisabled) {
+  i.disabled.icon, i.disabled.icons {
+    opacity: @disabledOpacity;
+    cursor: default;
+    pointer-events: none;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+           Variations
+*******************************/
+
+& when (@variationIconFitted) {
+  /*-------------------
+          Fitted
+  --------------------*/
+
+  i.fitted.icon {
+    width: auto;
+    margin: 0 !important;
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconLink) {
+  /*-------------------
+           Link
+  --------------------*/
+
+  i.link.icon:not(.disabled), i.link.icons:not(.disabled) {
+    cursor: pointer;
+    opacity: @linkOpacity;
+    transition: opacity @defaultDuration @defaultEasing;
+***REMOVED***
+  i.link.icon:hover, i.link.icons:hover {
+    opacity: 1;
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconCircular) {
+  /*-------------------
+        Circular
+  --------------------*/
+
+  i.circular.icon {
+    border-radius: 500em !important;
+    line-height: 1 !important;
+
+    padding: @circularPadding !important;
+    box-shadow: @circularShadow;
+
+    width: @circularSize !important;
+    height: @circularSize !important;
+***REMOVED***
+  & when (@variationIconInverted) {
+    i.circular.inverted.icon {
+      border: none;
+      box-shadow: none;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconFlipped) {
+  /*-------------------
+        Flipped
+  --------------------*/
+
+  i.flipped.icon,
+  i.horizontally.flipped.icon {
+    transform: scale(-1, 1);
+***REMOVED***
+  i.vertically.flipped.icon {
+    transform: scale(1, -1);
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconRotated) {
+  /*-------------------
+        Rotated
+  --------------------*/
+
+  i.rotated.icon,
+  i.right.rotated.icon,
+  i.clockwise.rotated.icon {
+    transform: rotate(90deg);
+***REMOVED***
+
+  i.left.rotated.icon,
+  i.counterclockwise.rotated.icon {
+    transform: rotate(-90deg);
+***REMOVED***
+
+  i.halfway.rotated.icon {
+    transform: rotate(180deg);
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconFlipped) and (@variationIconRotated) {
+  /*--------------------------
+        Flipped & Rotated
+  ---------------------------*/
+
+  i.rotated.flipped.icon,
+  i.right.rotated.flipped.icon,
+  i.clockwise.rotated.flipped.icon {
+    transform: scale(-1, 1) rotate(90deg);
+***REMOVED***
+
+  i.left.rotated.flipped.icon,
+  i.counterclockwise.rotated.flipped.icon {
+    transform: scale(-1, 1) rotate(-90deg);
+***REMOVED***
+
+  i.halfway.rotated.flipped.icon {
+    transform: scale(-1, 1) rotate(180deg);
+***REMOVED***
+
+  i.rotated.vertically.flipped.icon,
+  i.right.rotated.vertically.flipped.icon,
+  i.clockwise.rotated.vertically.flipped.icon {
+    transform: scale(1, -1) rotate(90deg);
+***REMOVED***
+
+  i.left.rotated.vertically.flipped.icon,
+  i.counterclockwise.rotated.vertically.flipped.icon {
+    transform: scale(1, -1) rotate(-90deg);
+***REMOVED***
+
+  i.halfway.rotated.vertically.flipped.icon {
+    transform: scale(1, -1) rotate(180deg);
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconBordered) {
+  /*-------------------
+        Bordered
+  --------------------*/
+
+  i.bordered.icon {
+    line-height: 1;
+    vertical-align: baseline;
+
+    width: @borderedSize;
+    height: @borderedSize;
+    padding: @borderedVerticalPadding @borderedHorizontalPadding !important;
+    box-shadow: @borderedShadow;
+***REMOVED***
+  & when (@variationIconInverted) {
+    i.bordered.inverted.icon {
+      border: none;
+      box-shadow: none;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationIconInverted) {
+  /*-------------------
+        Inverted
+  --------------------*/
+
+  /* Inverted Shapes***REMOVED***/
+  i.inverted.bordered.icon,
+  i.inverted.circular.icon {
+    background-color: @black;
+    color: @white;
+***REMOVED***
+
+  i.inverted.icon {
+    color: @white;
+***REMOVED***
+***REMOVED***
+
+/*-------------------
+       Colors
+--------------------*/
+
+each(@colors, {
+  @color: replace(@key, '@', '');
+  @c: @colors[@@color][color];
+  @l: @colors[@@color][light];
+
+  i.@{color***REMOVED***.icon.icon.icon.icon {
+    color: @c;
+***REMOVED***
+  & when (@variationIconInverted) {
+    i.inverted.@{color***REMOVED***.icon.icon.icon.icon {
+      color: @l;
+  ***REMOVED***
+    i.inverted.bordered.@{color***REMOVED***.icon.icon.icon.icon,
+    i.inverted.circular.@{color***REMOVED***.icon.icon.icon.icon {
+      background-color: @c;
+      color: @white;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***)
+
+
+/*-------------------
+        Sizes
+--------------------*/
+
+i.icon,
+i.icons {
+  font-size: @medium;
+***REMOVED***
+& when not (@variationIconSizes = false) {
+  each(@variationIconSizes, {
+    @s: @@value;
+    i.@{value***REMOVED***.@{value***REMOVED***.@{value***REMOVED***.icon,
+    i.@{value***REMOVED***.@{value***REMOVED***.@{value***REMOVED***.icons {
+      line-height: 1;
+      vertical-align: middle;
+      font-size: @s;
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+& when (@variationIconGroups) or (@variationIconCorner) {
+ ***REMOVED*****REMOVED********************************
+              Groups
+ ***REMOVED*********************************/
+
+  i.icons {
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+***REMOVED***
+
+  i.icons .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    margin: 0;
+***REMOVED***
+
+  i.icons .icon:first-child {
+    position: static;
+    width: auto;
+    height: auto;
+    vertical-align: top;
+    transform: none;
+***REMOVED***
+
+  & when (@variationIconCorner) {
+    /* Corner Icon***REMOVED***/
+    i.icons .corner.icon {
+      top: auto;
+      left: auto;
+      right: 0;
+      bottom: 0;
+      transform: none;
+      font-size: @cornerIconSize;
+      text-shadow: @cornerIconShadow;
+  ***REMOVED***
+    i.icons .icon.corner[class*="top right"] {
+      top: 0;
+      left: auto;
+      right: 0;
+      bottom: auto;
+  ***REMOVED***
+    i.icons .icon.corner[class*="top left"] {
+      top: 0;
+      left: 0;
+      right: auto;
+      bottom: auto;
+  ***REMOVED***
+    i.icons .icon.corner[class*="bottom left"] {
+      top: auto;
+      left: 0;
+      right: auto;
+      bottom: 0;
+  ***REMOVED***
+    i.icons .icon.corner[class*="bottom right"] {
+      top: auto;
+      left: auto;
+      right: 0;
+      bottom: 0;
+  ***REMOVED***
+    & when (@variationIconInverted) {
+      i.icons .inverted.corner.icon {
+        text-shadow: @cornerIconInvertedShadow;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+.loadUIOverrides();

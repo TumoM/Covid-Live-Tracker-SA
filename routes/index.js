@@ -62,6 +62,8 @@ let getSummary = function(knex) {
         .orderBy("date",'desc')
         .limit(1)
         .then(function(res1) {
+            console.log("Done Summary 1")
+
             if (res1[0].totalTests === null){
                 return knex('dates')
                     .select('date','totalTests')
@@ -71,10 +73,12 @@ let getSummary = function(knex) {
                     .then(value => {
                         res1[0].date2 = value[0].date;
                         res1[0].totalTests = value[0].totalTests;
+                        console.log("Done Summary")
                         return res1[0]
                   ***REMOVED***)
           ***REMOVED***
             else {
+                console.log("Done Summary 3")
                 return res1[0];
           ***REMOVED***
       ***REMOVED***)

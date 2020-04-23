@@ -32,9 +32,6 @@ app.use(require("express-session")({
 // Required Routes
 app.use("/",indexRoutes);
 
-app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
-    res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
-})
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port}`);

@@ -22,97 +22,155 @@ const provinceList = {
 
 router.get("/", function (req, res) {
     const knex = res.locals.knex;
-    // TODO Load data for the day.
-    getSummary(knex)
-        .then(value => {
-            value.totalCases = numeral(value.totalCases).format('0,0');
-            value.totalDeaths = numeral(value.totalDeaths).format('0,0');
-            value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
-            value.totalTests = numeral(value.totalTests).format('0,0');
-            // console.log("Sending these stats:",value)
-            getProvinces(knex).then(value1 => {
-                let provCases = {}
-                let provDeaths = {}
-                let provRecoveries = {}
-                value1.forEach(province =>{
-                    provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
-                    provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
-                    provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
-                    // console.log("Province:",province)
-                })
-                //
-                // console.log("Prov Cases:",provCases)
-                // console.log("Prov Deaths:",provDeaths)
-                // console.log("Prov Recovs:",provRecoveries)
-                getGraphData(knex).then(graphData => {
-                    // console.log("Graph Data",graphData)
+    if (knex){
+        console.log("found KNEX")
+        // TODO Load data for the day.
+        getSummary(knex)
+            .then(value => {
+                value.totalCases = numeral(value.totalCases).format('0,0');
+                value.totalDeaths = numeral(value.totalDeaths).format('0,0');
+                value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
+                value.totalTests = numeral(value.totalTests).format('0,0');
+                // console.log("Sending these stats:",value)
+                getProvinces(knex).then(value1 => {
+                    let provCases = {}
+                    let provDeaths = {}
+                    let provRecoveries = {}
+                    value1.forEach(province =>{
+                        provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
+                        provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
+                        provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
+                        // console.log("Province:",province)
+                    })
+                    //
+                    // console.log("Prov Cases:",provCases)
+                    // console.log("Prov Deaths:",provDeaths)
+                    // console.log("Prov Recovs:",provRecoveries)
+                    getGraphData(knex).then(graphData => {
+                        // console.log("Graph Data",graphData)
                         res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
+                    })
                 })
+                    .catch(function (err) {
+                        // Crawling failed...
+                    });
             })
-            .catch(function (err) {
-                // Crawling failed...
-            });
-        })
+    }
+    else{
+        console.log("No Knex?")
+    }
+
 })
 let getSummary = function(knex) {
-    return knex('dates')
-        .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
-        .whereNotNull("totalCases")
-        .whereNotNull("totalDeaths")
-        .orderBy("date",'desc')
-        .limit(1)
-        .then(function(res1) {
-            console.log("Done Summary 1")
 
-            if (res1[0].totalTests === null){
-                return knex('dates')
-                    .select('date','totalTests')
-                    .whereNotNull('totalTests')
-                    .limit(1)
-                    .orderBy('date','desc')
-                    .then(value => {
-                        res1[0].date2 = value[0].date;
-                        res1[0].totalTests = value[0].totalTests;
-                        console.log("Done Summary")
-                        return res1[0]
-                    })
-            }
-            else {
-                console.log("Done Summary 3")
-                return res1[0];
-            }
-        })
-        .catch(reason => {
-            console.log("You messed up 1?",reason)
-        });
+    return knex.transaction((trx) =>{
+        return knex('dates')
+            .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
+            .whereNotNull("totalCases")
+            .whereNotNull("totalDeaths")
+            .orderBy("date",'desc')
+            .limit(1)
+            .transacting(trx)
+            .then(function(res1) {
+                console.log("Done Summary 1")
+
+                if (res1[0].totalTests === null){
+                    return knex('dates')
+                        .select('date','totalTests')
+                        .whereNotNull('totalTests')
+                        .limit(1)
+                        .orderBy('date','desc')
+                        .transacting(trx)
+                        .then(value => {
+                            res1[0].date2 = value[0].date;
+                            res1[0].totalTests = value[0].totalTests;
+                            console.log("Done Summary")
+                            // return res1[0];
+                            let promise = util.insert(res1[0]);
+                            return promise.transacting(trx) ;
+                        })
+                        .then(trx.commit)
+                        .catch(trx.rollback);
+                }
+                else {
+                    console.log("Done Summary 3")
+                    trx.commit
+                    let promise = res1[0];
+                    return promise
+                }
+            })
+            .then(trx.commit)
+            .catch(reason => {
+                console.log("You messed up 1?",reason)
+                trx.rollback
+            });
+    })
+
+
 }
 
-let getProvinces = function(knex) {
-    return knex('provinceDays')
-        .select("provinceName","provDate","caseCount","deathCount","recovered")
-        .orderBy("provDate",'desc')
-        .limit(10)
-        .then(function(res) {
-            return res
+
+/*
+knex.transaction((trx) => {
+    return knex('tab1')
+        .update({ col2: 'val2' })
+        .where({ col1: 'val1' })
+        .transacting(trx)
+        .then((result) => {
+            let promise;
+            if (result1 != 0) {
+                promise = util.insert(data1);
+            } else {
+                promise = util.mark(data2);
+            }
+            return promise.transacting(trx);
         })
-        .catch(reason => {
-            console.log("You messed up 2?",reason)
-        });
+        .then(trx.commit)
+        .catch(trx.rollback)
+})
+    .then(() => {
+        // blabla
+    })
+    .catch((err) => {
+        // handle your error together
+    });
+*/
+
+let getProvinces = function(knex) {
+    return knex.transaction((trx) => {
+        return knex('provinceDays')
+            .select("provinceName", "provDate", "caseCount", "deathCount", "recovered")
+            .orderBy("provDate", 'desc')
+            .limit(10)
+            .transacting(trx)
+            .then(function (res) {
+                return res
+            })
+            .then(trx.commit)
+            .catch(reason => {
+                console.log("You messed up 2?", reason)
+                trx.rollback
+            });
+    })
 }
 
 let getGraphData = function(knex) {
-    return knex('dates')
-        .select("date","totalCases",
-            "totalDeaths","totalRecoveries",
-            "activeCases","totalTests",
-            "dailyNew","dailyDeaths")
-        .orderBy("date",'asc')
-        .then(function(res) {
-            return res
-        })
-        .catch(reason => {
-            console.log("You messed up 3?",reason)
-        });
+    return knex.transaction((trx) => {
+        return knex('dates')
+            .select("date", "totalCases",
+                "totalDeaths", "totalRecoveries",
+                "activeCases", "totalTests",
+                "dailyNew", "dailyDeaths")
+            .orderBy("date", 'asc')
+            .then(function (res) {
+                return res
+            })
+            .then(trx.commit)
+            .catch(reason => {
+                console.log("You messed up 3?", reason)
+                trx.rollback
+            });
+    })
 }
 
 module.exports = router;

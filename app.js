@@ -31,20 +31,20 @@ app.use(require("express-session")({
 app.use(bodyParser.json());
 
 
-let connection = process.env.DATABASE_URLL || {
+let connection = process.env.DATABASE_URL || {
     host: process.env.PG_HOST||'127.0.0.1',
     user: process.env.PG_USER||'test_user',
     password: process.env.PG_PASS||'temp_pass',
     database: process.env.DB_NAME||'covid-tracker-sa2',
-    ssl:process.env.PORT?true:false
+    // ssl:process.env.PORT?true:false
 }
 
 console.log("Connection:",connection)
 const knex = require('knex')({
         client: 'pg',
         debug: true,
+        ssl:true,
         asyncStackTraces: true,
-    ssl:true,
         connection
     }
 )
@@ -61,9 +61,10 @@ app.use("/",indexRoutes);
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
     res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
 })
+/*
 
 // Government Notification
-app.post('/governmentCheck/:type?',async (req,res) =>{
+app.post('/governmentCheck/:type?',(req,res) =>{
     let type = req.params.type? req.params.type:
         req.get("type")? req.get("type"): null;
     console.log("##################################################################################")
@@ -88,6 +89,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
 
 })
 
+*/
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port}`);

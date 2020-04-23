@@ -2,28 +2,9 @@ var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
 
-let connection = process.env.DATABASE_URL || {
-    host: process.env.PG_HOST||'127.0.0.1',
-    user: process.env.PG_USER||'test_user',
-    password: process.env.PG_PASS||'temp_pass',
-    database: process.env.DB_NAME||'covid-tracker-sa2'
-***REMOVED***
 
-console.log("Connection:",connection)
-const knex = require('knex')({
-    client: 'pg',
-    pool: {
-        "min": 0,
-        "max": 30,
-        "createTimeoutMillis": 3000,
-        "acquireTimeoutMillis": 30000,
-        "idleTimeoutMillis": 30000,
-        "reapIntervalMillis": 1000,
-        "createRetryIntervalMillis": 100,
-        "propagateCreateError": false // <- default is true, set to false
-  ***REMOVED***
-    connection
-***REMOVED***)
+
+
 
 const provinceList = {
     "NORTH WEST": 'ZA-NW',
@@ -40,15 +21,16 @@ const provinceList = {
 
 
 router.get("/", function (req, res) {
+    const knex = res.locals.knex;
     // TODO Load data for the day.
-    getSummary()
+    getSummary(knex)
         .then(value => {
             value.totalCases = numeral(value.totalCases).format('0,0');
             value.totalDeaths = numeral(value.totalDeaths).format('0,0');
             value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
             value.totalTests = numeral(value.totalTests).format('0,0');
             // console.log("Sending these stats:",value)
-            getProvinces().then(value1 => {
+            getProvinces(knex).then(value1 => {
                 let provCases = {***REMOVED***
                 let provDeaths = {***REMOVED***
                 let provRecoveries = {***REMOVED***
@@ -62,7 +44,7 @@ router.get("/", function (req, res) {
                 // console.log("Prov Cases:",provCases)
                 // console.log("Prov Deaths:",provDeaths)
                 // console.log("Prov Recovs:",provRecoveries)
-                getGraphData().then(graphData => {
+                getGraphData(knex).then(graphData => {
                     // console.log("Graph Data",graphData)
                         res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData***REMOVED***);
               ***REMOVED***)
@@ -72,7 +54,7 @@ router.get("/", function (req, res) {
           ***REMOVED***);
       ***REMOVED***)
 ***REMOVED***)
-let getSummary = function() {
+let getSummary = function(knex) {
     return knex('dates')
         .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
         .whereNotNull("totalCases")
@@ -97,11 +79,11 @@ let getSummary = function() {
           ***REMOVED***
       ***REMOVED***)
         .catch(reason => {
-            console.log("You messed up?",reason)
+            console.log("You messed up 1?",reason)
       ***REMOVED***);
 ***REMOVED***
 
-let getProvinces = function() {
+let getProvinces = function(knex) {
     return knex('provinceDays')
         .select("provinceName","provDate","caseCount","deathCount","recovered")
         .orderBy("provDate",'desc')
@@ -110,11 +92,11 @@ let getProvinces = function() {
             return res
       ***REMOVED***)
         .catch(reason => {
-            console.log("You messed up?",reason)
+            console.log("You messed up 2?",reason)
       ***REMOVED***);
 ***REMOVED***
 
-let getGraphData = function() {
+let getGraphData = function(knex) {
     return knex('dates')
         .select("date","totalCases",
             "totalDeaths","totalRecoveries",
@@ -125,7 +107,7 @@ let getGraphData = function() {
             return res
       ***REMOVED***)
         .catch(reason => {
-            console.log("You messed up?",reason)
+            console.log("You messed up 3?",reason)
       ***REMOVED***);
 ***REMOVED***
 

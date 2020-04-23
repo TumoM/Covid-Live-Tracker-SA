@@ -47,7 +47,10 @@ const knex = require('knex')({
             "min": 1,
             "max":150
             },
-        connection
+        connection,
+    migrations: {
+        tableName: 'knex_migrations'
+    }
     }
 )
 

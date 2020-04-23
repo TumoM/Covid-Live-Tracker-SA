@@ -165,11 +165,9 @@ rp(url)
                 // TODO 1: Parse info on Recoveries by Province
                 let recoveriesLines = soupBody.find('p').getText().split(":");
                 recoveriesLines.length===2? recoveriesLines.unshift(date):recoveriesLines;
-                // recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
-                recoveryDate = soupBody.text.match(/\d{1,2***REMOVED***\s\w{3,9***REMOVED***\s\d{4***REMOVED***/)[0]
+                recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
 
-                // totalRecoveries = getNumber(recoveriesLines[1]);
-                totalRecoveries = getNumber(soupBody.text.match(/\D\..*?recoveries/)[0]);
+                totalRecoveries = getNumber(recoveriesLines[1]);
                 console.log(`Total Recovery:${totalRecoveries***REMOVED***\n`)
 
                 let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
@@ -310,7 +308,7 @@ rp(url)
                                         if (count === 9){
                                             let dateData = {
                                                 totalRecoveries:totalRecoveries,
-                                                maybeValid: true,
+                                                maybeValid: false,
                                                 parsed: true
                                           ***REMOVED***;
 
@@ -323,7 +321,6 @@ rp(url)
                                                     dateData.date = itemData.provDate;
                                                     if (value === 0){
                                                         dateData.parsed = true;
-                                                        dateData.maybeValid = true;
                                                         knex('dates')
                                                             .insert(dateData)
                                                             .then(value1 => {
@@ -359,7 +356,7 @@ rp(url)
                                         if (count === 9){
                                             let dateData = {
                                                 totalRecoveries:totalRecoveries,
-                                                maybeValid: true,
+                                                maybeValid: false,
                                                 parsed: true
                                           ***REMOVED***;
 
@@ -372,7 +369,6 @@ rp(url)
                                                     dateData.date = itemData.provDate;
                                                     if (value === 0){
                                                         dateData.parsed = true;
-                                                        dateData.maybeValid = true;
                                                         knex('dates')
                                                             .insert(dateData)
                                                             .then(value1 => {

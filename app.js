@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
 
-// Setup Persistance
+/*// Setup Persistance
 app.use(require("express-session")({
     secret: process.env.SECRET || "swag",
     resave: false,
     saveUninitialized: false
-}));
+}));*/
 
 app.use(bodyParser.json());
 // Required Routes

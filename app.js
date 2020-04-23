@@ -46,6 +46,7 @@ const knex = require('knex')({
         acquireConnectionTimeout: 10000,
         pool: {
             "min": 1,
+            "max":150,
             idleTimeoutMillis: 10000,
             createTimeoutMillis: 10000,
             acquireTimeoutMillis: 10000,

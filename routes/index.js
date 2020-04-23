@@ -162,6 +162,7 @@ let getGraphData = function(knex) {
                 "activeCases", "totalTests",
                 "dailyNew", "dailyDeaths")
             .orderBy("date", 'asc')
+            .transacting(trx)
             .then(function (res) {
                 return res
           ***REMOVED***)

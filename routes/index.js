@@ -9,6 +9,7 @@ let connection = process.env.DATABASE_URL || {
     database:process.env.AWS_DB ||process.env.DB_NAME ||'covid-tracker-sa2'
     };
 
+
 console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
@@ -52,6 +53,7 @@ const provinceList = {
 };
 
 
+
 router.get("/", function (req, res) {
     // TODO Load data for the day.
     console.log("At index")
@@ -78,7 +80,7 @@ router.get("/", function (req, res) {
                 // console.log("Prov Recovs:",provRecoveries)
                 getGraphData().then(graphData => {
                     // console.log("Graph Data",graphData)
-                    res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
+                        res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData});
                 })
             })
                 .catch(function (err) {
@@ -115,6 +117,7 @@ let getSummary = function() {
             console.log("You messed up?",reason)
         });
 }
+
 let getProvinces = function() {
     return knex('provinceDays')
         .select("provinceName","provDate","caseCount","deathCount","recovered")
@@ -127,6 +130,7 @@ let getProvinces = function() {
             console.log("You messed up?",reason)
         });
 }
+
 let getGraphData = function() {
     return knex('dates')
         .select("date","totalCases",
@@ -141,4 +145,5 @@ let getGraphData = function() {
             console.log("You messed up?",reason)
         });
 }
+
 module.exports = router;

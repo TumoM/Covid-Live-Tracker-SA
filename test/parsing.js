@@ -9,8 +9,8 @@ dotenv.config();
         Death = require("../models/deathModel"),
         Day = require("../models/dayModel"),
         DbSetup = require("../test/db24");
-    // const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
-    const url = "https://sacoronavirus.co.za/?s=update";
+    const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
+    // const url = "https://sacoronavirus.co.za/?s=update";
     // const url = "https://sacoronavirus.co.za/page/2/?s=update";
     // const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\//
     const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***/
@@ -120,7 +120,8 @@ console.log("Host: ",process.env.AWS_HOST)
                                         //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
                                         // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
                                         let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
-                                            let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                            let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i) ||
+                                                            currentVal.text.match(/total.*((\d\s?)|(tests))/i)
                                             if (!paragraph){
                                                 return false;
                                           ***REMOVED***

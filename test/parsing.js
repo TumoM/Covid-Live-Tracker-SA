@@ -9,8 +9,11 @@ dotenv.config();
         Death = require("../models/deathModel"),
         Day = require("../models/dayModel"),
         DbSetup = require("../test/db24");
-    const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
-    const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
+    // const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
+    const url = "https://sacoronavirus.co.za/?s=update";
+    // const url = "https://sacoronavirus.co.za/page/2/?s=update";
+    // const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
+    const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}/
     const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
 
 

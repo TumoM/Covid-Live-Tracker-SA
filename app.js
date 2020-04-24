@@ -80,25 +80,49 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
         req.get("type")? req.get("type"): null;
     console.log("##################################################################################")
     console.log("TYPE:",type)
-    console.log("Auth:",req.headers.authorization)
-    console.log("Data:",req.data)
-    console.log("Body:",req.body)
+    console.log("Subject:",req.body.subject)
+    console.log("Date:",req.body.Date)
+    console.log("Content (body-html):",req.body["body-html"])
+    console.log("Content (body-plain):",req.body["body-plain"])
     console.log("##################################################################################")
-    if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+
+    let text,date,workingText;
+    if (req.body["X-Mailgun-Incoming"]){
+        console.log("MailGun Hook")
+        // type = "mailGun"
+  ***REMOVED***
+    if (type && type === "mailGun"){
+        [text,date] = req.body["body-html"].trim().match(/<p.*class[\s\S]*?<\/p>/g);
+        console.log("Text BEFORE:",text)
+        console.log("Date BEFORE:",date)
+        text = text.replace(/(\r\n)/g," ").split('>')[1].split("<")[0].split(':')[1]
+        date = date.split('>')[1].split("<")[0].split(':')[1]
+        console.log(text,'\n',date)
+         workingText = text.match(/today[\s\S]*?number[\s\S]*?covid.?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || null
+        if (workingText){
+            workingText = workingText[0]
+      ***REMOVED***
+  ***REMOVED***
+
+    else if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
         return res.status(401).json({ message: 'Missing Authorization Header' ***REMOVED***);
   ***REMOVED***
-
-    // verify auth credentials
-    const base64Credentials =  req.headers.authorization.split(' ')[1];
-    const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
-    if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
-        // TODO Scheduler : Parser ---> Parser24, until vail OR until xx:xx am?
-        return res.status(200).json({ message: 'Valid Authentication Credentials' ***REMOVED***);
-  ***REMOVED***
     else{
-        return res.status(401).json({ message: 'Invalid Authentication Credentials' ***REMOVED***);
+        // verify auth credentials
+        const base64Credentials =  req.headers.authorization.split(' ')[1];
+        const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
+        if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
+            // TODO Scheduler : Parser ---> Parser24, until vail OR until xx:xx am?
+            text = req.body.text;
+            date = req.body.date;
+            return res.status(200).json({ message: 'Valid Authentication Credentials' ***REMOVED***);
+      ***REMOVED***
+        else{
+            return res.status(401).json({ message: 'Invalid Authentication Credentials' ***REMOVED***);
+      ***REMOVED***
   ***REMOVED***
-
+    console.log("Text:",text);
+    console.log("workingText:",workingText);
 ***REMOVED***)
 
 

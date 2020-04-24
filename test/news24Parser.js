@@ -8,15 +8,37 @@ const HTMLParser = require('node-html-parser'),
 const url = "https://www.health24.com/Medical/Infectious-diseases/Coronavirus/coronavirus-in-sa-all-the-confirmed-cases-20200312";
 // const url = "http://127.0.0.1:5500/Coronavirus%20in%20SA%20%20All%20the%20confirmed%20cases%20%20%20Health24-1.html";
 
+const dotenv = require('dotenv');
+dotenv.config();
+let connection;
+if (process.env.DBMODE && process.env.DBMODE === "herokuDB"){
+    connection = process.env.DATABASE_URL
+}
+else{
+    connection = {
+        host:process.env.AWS_HOST|| process.env.PG_HOST||'127.0.0.1',
+        user:process.env.AWS_USER|| process.env.PG_USER||'test_user',
+        password:process.env.AWS_PASSWORD || process.env.PG_PASS ||'temp_pass',
+        database:process.env.AWS_DB ||process.env.DB_NAME ||'covid-tracker-sa2'
+    };
+}
+
+console.log("Connection:",connection)
 const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
+        client: 'pg',
+        debug: true,
+        asyncStackTraces: true,
+        acquireConnectionTimeout: 10000,
+        pool: {
+            "min": 2,
+            "max":50,
+            idleTimeoutMillis: 10000,
+            createTimeoutMillis: 10000,
+            acquireTimeoutMillis: 10000,
+        },
+        connection
     }
-});
+)
 
 
 const PROVINCES = { // Name, [cases, deadArr]

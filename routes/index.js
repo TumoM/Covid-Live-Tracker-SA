@@ -3,17 +3,40 @@ var router = express.Router();
 const numeral = require('numeral');
 
 let connection = process.env.DATABASE_URL || {
-    host: process.env.PG_HOST||'127.0.0.1',
-    user: process.env.PG_USER||'test_user',
-    password: process.env.PG_PASS||'temp_pass',
-    database: process.env.DB_NAME||'covid-tracker-sa2'
-***REMOVED***
+    host:process.env.AWS_HOST|| process.env.PG_HOST||'127.0.0.1',
+    user:process.env.AWS_USER|| process.env.PG_USER||'test_user',
+    password:process.env.AWS_PASSWORD || process.env.PG_PASS ||'temp_pass',
+    database:process.env.AWS_DB ||process.env.DB_NAME ||'covid-tracker-sa2'
+  ***REMOVED***;
+
 
 console.log("Connection:",connection)
 const knex = require('knex')({
     client: 'pg',
     ssl:true,
-    connection
+    connection: connection,
+    debug:true,
+    log:true,
+    asyncStackTraces:true,
+    acquireConnectionTimeout: 3000,
+    pool: {
+        min:2,
+        max:100,
+        afterCreate: function (conn, done) {
+            // in this example we use pg driver's connection API
+            conn.query('SET statement_timeout TO "15s";', function (err) {
+                if (err) {
+                    // first query failed, return error and don't try to make next query
+                    console.log("Timeout NOT set")
+                    done(err, conn);
+              ***REMOVED*** else {
+                    // do the second query...
+                    console.log("Timeout set")
+                    done(err, conn);
+              ***REMOVED***
+          ***REMOVED***);
+      ***REMOVED***
+  ***REMOVED***
 ***REMOVED***)
 
 const provinceList = {
@@ -33,6 +56,7 @@ const provinceList = {
 
 router.get("/", function (req, res) {
     // TODO Load data for the day.
+    console.log("At index")
     getSummary()
         .then(value => {
             value.totalCases = numeral(value.totalCases).format('0,0');
@@ -59,9 +83,10 @@ router.get("/", function (req, res) {
                         res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData***REMOVED***);
               ***REMOVED***)
           ***REMOVED***)
-            .catch(function (err) {
-                // Crawling failed...
-          ***REMOVED***);
+                .catch(function (err) {
+                    // Crawling failed...
+                    console.log("We failed my man",err)
+              ***REMOVED***);
       ***REMOVED***)
 ***REMOVED***)
 let getSummary = function() {

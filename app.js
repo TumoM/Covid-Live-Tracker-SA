@@ -91,9 +91,8 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
     // verify auth credentials
     const base64Credentials =  req.headers.authorization.split(' ')[1];
     const [username, password]  = Buffer.from(base64Credentials, 'base64').toString('ascii').split(":");
-    console.log("Body:",username,password)
-
     if (username===process.env.ZAPIER_USER && password===process.env.ZAPIER_PASSWORD) {
+        // TODO Scheduler : Parser ---> Parser24, until vail OR until xx:xx am?
         return res.status(200).json({ message: 'Valid Authentication Credentials' });
     }
     else{

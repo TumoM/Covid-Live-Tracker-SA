@@ -75,6 +75,9 @@ app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
 })
 
 // Government Notification
+app.get('/governmentCheck/:type?',async (req,res) =>{
+            return res.status(200).json({ message: 'Get Working' });
+    });
 app.post('/governmentCheck/:type?',async (req,res) =>{
     let type = req.params.type? req.params.type:
         req.get("type")? req.get("type"): null;
@@ -125,6 +128,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
     }
     console.log("Text:",text);
     console.log("workingText:",workingText);
+    return res.status(200).json({ text});
 })
 
 

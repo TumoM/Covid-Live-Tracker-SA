@@ -3,9 +3,9 @@ let data;
 let type = 'linear';
 let mode = "x";
 let intersect = "false";
-Chart.defaults.global.hover.mode = 'nearest';
-Chart.defaults.global.hover.intersect = false;
-Chart.defaults.global.tooltips.mode = 'nearest';
+Chart.defaults.global.hover.mode = 'x';
+Chart.defaults.global.hover.intersect = true;
+Chart.defaults.global.tooltips.mode = 'x';
 Chart.defaults.global.tooltips.intersect = false;
 Chart.scaleService.updateScaleDefaults('logarithmic', {
     ticks: {
@@ -44,6 +44,15 @@ labelCallback = (tooltipItem, data) => {
 
 Chart.defaults.global.tooltips.callbacks.title = titleCallback;
 Chart.defaults.global.tooltips.callbacks.label = labelCallback;
+/*Chart.defaults.global.tooltips.callbacks.labelColor = function(tooltipItem, chart) {
+                        return {
+                            backgroundColor: 'rgb(255, 0, 0)'
+                      ***REMOVED***;
+***REMOVED****/
+// Chart.defaults.global.tooltips.alignments.bodyAlign = 'center';
+Chart.defaults.global.tooltips.bodyAlign = 'center';
+Chart.defaults.global.tooltips.titleAlign = 'center';
+// Chart.defaults.global.tooltips.label = 'Number:';
 
 setGraphs = (graphData)=>{
     graphData.forEach(row=>{
@@ -66,30 +75,52 @@ setGraphs = (graphData)=>{
             labels,
             datasets: [{
                 label: '# Cases',
-                // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(210,210,210)',
+                borderColor: 'rgb(239,23,71)',
+                borderWidth:2.5,
+               /* backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(239,23,71)',*/
                 data: totalCasesArr,
-                fill:false
+                fill:true
           ***REMOVED***]
  ***REMOVED*****REMOVED***
 
         // Configuration options go here
         options: {
-            plugins: {
+            /*plugins: {
                 datalabels: {
-                    display: function(context) {
+                    display: function (context) {
                         return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+        ***REMOVED*****REMOVED*****REMOVED***
+                    align: 'center',
+                    anchor: 'center',
+                    formatter: function (value, index, values) {
+                        if (value > 0) {
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            value = value.join(',');
+                            return value;
+                      ***REMOVED*** else {
+                            value = "";
+                            return value;
+                      ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
+***REMOVED*****REMOVED*****REMOVED****/
+            point: {
+                pointBackgroundColor:'rgb(64,128,46)',
 ***REMOVED*****REMOVED*****REMOVED***
             title: {
                 display: true,
-                text: 'Daily Cases'
+                text: 'Total Cases'
 ***REMOVED*****REMOVED*****REMOVED***
             scales: {
                 xAxes: [{
                     display: true,
                     type: 'time',
+                    gridLines: {
+                        drawOnChartArea: false
+        ***REMOVED*****REMOVED*****REMOVED***
                     time: {
                         displayFormats: {
                             'millisecond': 'MMM DD',
@@ -111,6 +142,7 @@ setGraphs = (graphData)=>{
               ***REMOVED***]
           ***REMOVED***
       ***REMOVED***
+
   ***REMOVED***);
 
 
@@ -122,15 +154,15 @@ setGraphs = (graphData)=>{
         data: {
             labels,
             datasets: [{
-                label: 'Daily New Cases',
+                label: 'New Cases',
                 data: dailyNewArr,
                 backgroundColor: [
-                    'grey'
+                    'white'
             ***REMOVED***,
                 borderColor: [
                     'grey'
             ***REMOVED***,
-                borderWidth: 1
+                maxBarThickness: 10
           ***REMOVED***]
  ***REMOVED*****REMOVED***
         options: {
@@ -163,7 +195,7 @@ setGraphs = (graphData)=>{
         data: {
             labels,
             datasets: [{
-                label: 'Active Cases',
+                label: '# of Cases',
                 // backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: activeCasesArr,

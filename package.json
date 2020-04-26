@@ -28,6 +28,8 @@
     "@scout_apm/scout-apm": "^0.1.8",
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.3",
+    "chromedriver": "^81.0.0",
+    "cloudscraper": "^4.6.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
@@ -43,7 +45,8 @@
     "path": "^0.12.7",
     "pg": "^8.0.2",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "devDependencies": {
     "gulp": "^4.0.2"

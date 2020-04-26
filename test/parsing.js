@@ -1,3 +1,4 @@
+async function main() {
 const dotenv = require('dotenv');
 dotenv.config();
 var cloudscraper = require('cloudscraper');
@@ -80,32 +81,34 @@ function parseNumber(number) {
     testInt = parseInt(testInt);
     return testInt
 }
-let driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
 
-(async function main() {
+
+    let ps = [];
+    let driver = new Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(options)
+        .build();
+
     try {
         // Navigate to Url
         await driver.get(url);
         await driver.wait(until.elementsLocated(By.css('.entry-title.fusion-post-title a')));
         let html = await driver.getPageSource();
-        console.log("success!!");
+        console.log("success!! Page bag secured.");
         //   console.log(html);
         const root = HTMLParser.parse(html);
 
         var entries = root.querySelectorAll(".entry-title.fusion-post-title a");
         var links = []
 
-        await entries.map(async (entry) => {
+        await Promise.all(entries.map(async (entry) => {
             let badString;
             // return entry.getAttribute("href").match(linkRegex)
             if (entry.getAttribute("href").match(linkRegex)) {
 
                 const DATE = entry.text.split("(")[1].split(")")[0];
                 links.push(entry.getAttribute("href"))
-                await driver.get(entry.getAttribute("href"))
+                return ps.push(driver.get(entry.getAttribute("href"))
                     .then(async function () {
                         await driver.wait(until.elementsLocated(By.css('.single-post')));
                         let html = await driver.getPageSource();
@@ -122,57 +125,56 @@ let driver = new Builder()
                                 let totalTests = 0;
                                 console.log("Row Count:", rows.length);
                                 if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
-                                    console.log("Skipping:",d,"\n")
-                                }
-                                else if (rows.length > 0 && rows[0].maybeValid) {
-                                    console.log("Date maybe valid:",d,"\n")
+                                    console.log("Skipping:", d, "\n")
+                                } else if (rows.length > 0 && rows[0].maybeValid) {
+                                    console.log("Date maybe valid:", d, "\n")
 
                                     // Maybe the format is all wrong. Parse another site/source?
                                     // Make soup.
                                     const paragraphs = HTMLParser.parse(html)
                                     //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
                                     // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
-                                    let testPar = paragraphs.querySelectorAll("p").find((currentVal,index,arr)=>{
+                                    let testPar = paragraphs.querySelectorAll("p").find((currentVal, index, arr) => {
                                         let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i) ||
                                             currentVal.text.match(/total.*((\d\s?)|(tests))/i)
-                                        if (!paragraph){
+                                        if (!paragraph) {
                                             return false;
-                                        }
-                                        else{
+                                        } else {
                                             return true
                                         }
                                     })
-                                    if (testPar){
+                                    if (testPar) {
                                         totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
-                                    }
-                                    else {
+                                    } else {
                                         testPar = paragraphs.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i)
                                         totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
                                     }
-                                    if (totalTests){
+                                    if (totalTests) {
                                         totalTests = parseNumber(totalTests[0].trim());
                                     }
-                                    console.log("Value:",totalTests);
+                                    console.log("Value:", totalTests);
                                     knex('dates').select('totalTests')
                                         .whereNull('totalTests')
-                                        .andWhere({date:parsedDate})
-                                        .then(rows=>{
-                                            knex('dates').update({totalTests,maybeValid:false}).where({date:parsedDate})
+                                        .andWhere({date: parsedDate})
+                                        .then(rows => {
+                                            knex('dates').update({
+                                                totalTests,
+                                                maybeValid: false
+                                            }).where({date: parsedDate})
                                                 .then(value => {
-                                                    console.log("Updated TTs1:",value)
+                                                    console.log("Updated TTs1:", value)
                                                     return true
                                                 })
                                                 .catch(reason => {
-                                                    console.log("Unknown 2:",reason);
+                                                    console.log("Unknown 2:", reason);
                                                 })
                                         })
                                         .catch(reason => {
-                                            console.log("Error putting in Total Tests?",reason)
+                                            console.log("Error putting in Total Tests?", reason)
                                         })
                                     // Pull off data for update (Total tests)
-                                }
-                                else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
-                                    console.log("Parsing 1 time:",d,"\n")
+                                } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                                    console.log("Parsing 1 time:", d, "\n")
                                     const rootChild = HTMLParser.parse(html);
                                     // pull out the two tables 1st
                                     const tables = rootChild.querySelectorAll("table");
@@ -279,7 +281,7 @@ let driver = new Builder()
                                                 // Inserts into Provinces table
                                                 knex("provinceDays")
                                                     .insert({
-                                                            provinceName: key, provDate:date,
+                                                            provinceName: key, provDate: date,
                                                             caseCount: value.sick, deathCount: value.deaths,
 
                                                         },
@@ -336,12 +338,12 @@ let driver = new Builder()
                                             // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`)
                                             parsedDate = d.toLocaleDateString().split("/")
                                             parsedDate = `${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`
-                                            console.log("Parsed Date:",parsedDate)
+                                            console.log("Parsed Date:", parsedDate)
                                             knex('dates')
                                                 .select()
-                                                .where('date','=',`${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`)
+                                                .where('date', '=', `${parsedDate[2]}-${parsedDate[0]}-${parsedDate[1]}`)
                                                 .then(value => {
-                                                    if (value.length === 0){
+                                                    if (value.length === 0) {
                                                         knex("dates ")
                                                             .insert({
                                                                 date: parsedDate,
@@ -352,66 +354,63 @@ let driver = new Builder()
                                                                 maybeValid: true
                                                             })
                                                             .then(id => {
-                                                                console.log("Inserted Dates:",parsedDate)
+                                                                console.log("Inserted Dates:", parsedDate)
                                                             })
                                                             .catch(err => {
-                                                                console.log("Day Error 1",err)
+                                                                console.log("Day Error 1", err)
                                                             })
                                                         console.log("\n");
                                                     }
                                                 }).catch(reason => {
-                                                console.log("Unknown error:",reason)
+                                                console.log("Unknown error:", reason)
                                             })
                                         } catch (e) {
-                                            console.log("ANOOOOTHER ERRROR?:",e)
+                                            console.log("ANOOOOTHER ERRROR?:", e)
                                             const paragraphs = HTMLParser.parse(html)
                                             //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
                                             // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
                                             let testPar = paragraphs.querySelectorAll("p")
 
-                                            let cases = testPar.find((currentVal,index,arr)=>{
+                                            let cases = testPar.find((currentVal, index, arr) => {
                                                 let paragraph = currentVal.text.match(/total.*confirmed.*(covid-19)? cases.*?\s[\s??\d+]+/i)
-                                                if (!paragraph){
+                                                if (!paragraph) {
                                                     return false;
-                                                }
-                                                else{
+                                                } else {
                                                     paragraph = paragraph[0].split(".")[0]
                                                     return true
                                                 }
                                             })
                                             let testString = ""
-                                            let tests = testPar.find((currentVal,index,arr)=>{
+                                            let tests = testPar.find((currentVal, index, arr) => {
                                                 let paragraph = currentVal.text.match(/(number.*?tests\sconducted)([\D]*?\d[\s??\d+]+)/i)
-                                                if (!paragraph){
+                                                if (!paragraph) {
                                                     return false;
-                                                }
-                                                else{
+                                                } else {
                                                     testString = paragraph[2].split(".")[0]
                                                     return true
                                                 }
                                             })
                                             let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)
-                                            if (death){
+                                            if (death) {
                                                 death = death[0];
-                                            }
-                                            else   {
+                                            } else {
                                                 death = null
                                             }
 
-                                            console.log("TestPar",testPar.text);
+                                            console.log("TestPar", testPar.text);
                                             let totalTests = testString.trim().match(/\s((\d+\s+)*\d+)/)[0];
-                                            if (totalTests){
+                                            if (totalTests) {
                                                 totalTests = parseNumber(totalTests.trim());
-                                            }else {
+                                            } else {
                                                 totalTests = null;
                                             }
                                             let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
-                                            if (totalCases){
+                                            if (totalCases) {
                                                 totalCases = parseNumber(totalCases[0].trim());
                                             }
 
-                                            console.log("Total Tests:",totalTests);
-                                            console.log("Total Cases:",totalCases);
+                                            console.log("Total Tests:", totalTests);
+                                            console.log("Total Cases:", totalCases);
                                             let data = {
                                                 date: parsedDate,
                                                 parsed: true,
@@ -419,23 +418,26 @@ let driver = new Builder()
                                                 totalCases,
                                                 maybeValid: true
                                             }
-                                            let totalDeaths = death? death.trim().match(/\s((\d+\s+)*\d+)/):null;
-                                            if (totalDeaths){
+                                            let totalDeaths = death ? death.trim().match(/\s((\d+\s+)*\d+)/) : null;
+                                            if (totalDeaths) {
                                                 totalDeaths = parseNumber(totalDeaths[0].trim());
                                             }
-                                            console.log("Total Deaths:",totalDeaths);
+                                            console.log("Total Deaths:", totalDeaths);
                                             data.totalDeaths = totalDeaths
 
                                             console.log(data)
                                             knex('dates').select('totalTests')
                                                 .whereNull('totalTests')
-                                                .andWhere({date:parsedDate})
-                                                .then(rows=>{
+                                                .andWhere({date: parsedDate})
+                                                .then(rows => {
                                                     console.log(rows.length)
-                                                    knex('dates').update({totalTests,maybeValid:false}).where({date:parsedDate})
+                                                    knex('dates').update({
+                                                        totalTests,
+                                                        maybeValid: false
+                                                    }).where({date: parsedDate})
                                                         .then(value => {
-                                                            console.log("Updated TTs2:",value)
-                                                            if (value === 0){
+                                                            console.log("Updated TTs2:", value)
+                                                            if (value === 0) {
                                                                 knex('dates').insert(data).then(value1 => {
                                                                     console.log("Inserted my man")
                                                                     knex.raw('WITH preTable AS (\n' +
@@ -461,44 +463,44 @@ let driver = new Builder()
                                                                         ')\n' +
                                                                         'select\n' +
                                                                         '       date,\n' +
-                                                                        '       prevDeaths as "prevDeaths",\n'+
+                                                                        '       prevDeaths as "prevDeaths",\n' +
                                                                         '       prevRecoveries as "prevRecoveries",\n' +
                                                                         '    ("totalCases"-prevCases) as "dailyNew",\n' +
                                                                         '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
                                                                         'from preTable\n' +
                                                                         'order by date desc\n' +
                                                                         'limit 1;')
-                                                                        .then(prevVals=>{
-                                                                            data.totalDeaths = !data.totalDeaths?prevVals.rows[0].prevDeaths:data.totalDeaths;
-                                                                            prevVals.rows[0].dailyDeaths = !prevVals.rows[0].dailyDeaths?0:prevVals.rows[0].dailyDeaths;
-                                                                            prevVals.rows[0].dailyNew = !prevVals.rows[0].dailyNew?0:prevVals.rows[0].dailyNew;
+                                                                        .then(prevVals => {
+                                                                            data.totalDeaths = !data.totalDeaths ? prevVals.rows[0].prevDeaths : data.totalDeaths;
+                                                                            prevVals.rows[0].dailyDeaths = !prevVals.rows[0].dailyDeaths ? 0 : prevVals.rows[0].dailyDeaths;
+                                                                            prevVals.rows[0].dailyNew = !prevVals.rows[0].dailyNew ? 0 : prevVals.rows[0].dailyNew;
                                                                             data = {
-                                                                                totalDeaths:data.totalDeaths,
-                                                                                dailyNew:prevVals.rows[0].dailyNew,
-                                                                                dailyDeaths:prevVals.rows[0].dailyDeaths,
-                                                                                totalRecoveries:prevVals.rows[0].prevRecoveries
+                                                                                totalDeaths: data.totalDeaths,
+                                                                                dailyNew: prevVals.rows[0].dailyNew,
+                                                                                dailyDeaths: prevVals.rows[0].dailyDeaths,
+                                                                                totalRecoveries: prevVals.rows[0].prevRecoveries
                                                                             }
-                                                                            knex('dates').update(data).where('date','=',parsedDate)
+                                                                            knex('dates').update(data).where('date', '=', parsedDate)
                                                                                 .catch(reason => {
-                                                                                    log('WHAAAAAT?',reason)
+                                                                                    log('WHAAAAAT?', reason)
                                                                                 })
                                                                         })
                                                                 }).catch(reason => {
-                                                                    console.log("Some errrr:",reason)
+                                                                    console.log("Some errrr:", reason)
                                                                 })
                                                             }
                                                         })
                                                         .catch(reason => {
-                                                            console.log("Unknown 2:",reason);
+                                                            console.log("Unknown 2:", reason);
                                                         })
                                                 })
                                                 .catch(reason => {
-                                                    console.log("Error putting in Total Tests?",reason)
+                                                    console.log("Error putting in Total Tests?", reason)
                                                 })
 
                                         }
                                     } catch (e) {
-                                        console.log("SOME ERROR:",e)
+                                        console.log("SOME ERROR:", e)
                                         // No table found error
                                         knex("dates ").insert({
                                             date: d,
@@ -510,39 +512,56 @@ let driver = new Builder()
                                                 //console.log(id)
                                             })
                                             .catch(err => {
-                                                console.log("Ignoring duplicates 1",err)
+                                                console.log("Ignoring duplicates 1", err)
                                             })
                                     }
-                                }
-                                else {
+                                } else {
 
                                 }
 
                             }).catch((e) => {
-                            console.log(e)
-                        })
+                                console.log(e)
+                            })
 
 
                     }).catch(err => {
-                    console.log('Some error:', err)
-                });
+                        console.log('Some error:', err)
+                    })) ;
             }
+        }))
+        let status = await Promise.all(ps)
+            .then((results) => {
+                console.log("Results",results);
+                console.log("closing chrome. OK")
+                driver.close()
+                return 200
+                process.exit(200);
+            }).catch(err => {
+            console.log("Error Bro",err);
+            console.log("closing chrome. Bad")
+            driver.close()
+            return -1
+            process.exit(200);
         })
         console.log('Done map?')
-        // Pull the stats off a URL
+        return status
     }
+    catch (e) {
+        console.log("Error Bro",e);
+        driver.close();
+        return(-1)
+    } /*
     finally{
-        // await driver.quit();
-        setTimeout(()=>{
-            driver.close()
-        },15 * 1000)
-    }
 
-  /*  return process.exit(200);
-    driver.close()*/
+    }*/
 
-})();
+};
 
+main()
+    .then(result=>{
+        console.log("result:",result);
+    })
+    .catch(err=> console.log('Your Err',err));
 const upsert = (params) => {
     const {table, object} = params;
     const insert = knex(table).insert(object);

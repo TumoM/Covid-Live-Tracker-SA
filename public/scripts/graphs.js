@@ -3,6 +3,30 @@ let data;
 let type = 'linear';
 let mode = "x";
 let intersect = "false";
+// Chart.defaults.global.legend.labels = labels;
+let labels = [];
+let totalCasesArr = [];
+let totalDeathsArr = [];
+let activeCasesArr = [];
+let dailyNewArr = [];
+let dailyDeathsArr = [];
+let timeFormat = 'MM/DD/YYYY HH:mm';
+let date = 'MMM DD';
+let now;
+let dragOptions = {
+    animationDuration: 1000
+***REMOVED***;
+
+titleCallback = (tooltipItem, data) => {
+    let date = data['labels'][tooltipItem[0]['index']].toString()
+    date = date.split(" ",5)
+    date = `${date[1]***REMOVED*** ${date[2]***REMOVED***, ${date[3]***REMOVED***`
+    return date;
+***REMOVED***;
+labelCallback = (tooltipItem, data) => {
+    return String(data['datasets'][0]['data'][tooltipItem['index']]);
+***REMOVED***;
+
 Chart.defaults.global.hover.mode = 'x';
 Chart.defaults.global.hover.intersect = true;
 Chart.defaults.global.tooltips.mode = 'x';
@@ -12,7 +36,7 @@ Chart.scaleService.updateScaleDefaults('logarithmic', {
         callback: function(value, index) {
             if (value !== 0) return numeral(value).format('0a');
  ***REMOVED*****REMOVED***
-            autoSkip: true,
+        autoSkip: true,
         autoSkipPadding:100,
         min:0,
         minRotation:0,
@@ -23,25 +47,6 @@ Chart.scaleService.updateScaleDefaults('logarithmic', {
       ***REMOVED***
   ***REMOVED***
 ***REMOVED***);
-// Chart.defaults.global.legend.labels = labels;
-let labels = [];
-let totalCasesArr = [];
-let totalDeathsArr = [];
-let activeCasesArr = [];
-let dailyNewArr = [];
-let dailyDeathsArr = [];
-
-titleCallback = (tooltipItem, data) => {
-    let date = data['labels'][tooltipItem[0]['index']].toString()
-    date = date.split(" ",5)
-    date = `${date[1]***REMOVED*** ${date[2]***REMOVED***, ${date[3]***REMOVED***`
-    return date;
-***REMOVED***;
-labelCallback = (tooltipItem, data) => {
-    return data['datasets'][0]['data'][tooltipItem['index']];
-***REMOVED***;
-
-
 Chart.defaults.global.tooltips.callbacks.title = titleCallback;
 Chart.defaults.global.tooltips.callbacks.label = labelCallback;
 /*Chart.defaults.global.tooltips.callbacks.labelColor = function(tooltipItem, chart) {
@@ -53,6 +58,16 @@ Chart.defaults.global.tooltips.callbacks.label = labelCallback;
 Chart.defaults.global.tooltips.bodyAlign = 'center';
 Chart.defaults.global.tooltips.titleAlign = 'center';
 // Chart.defaults.global.tooltips.label = 'Number:';
+Chart.scaleService.updateScaleDefaults( "linear",{time:{min:"2020-03-04"***REMOVED******REMOVED***)
+// Chart.scaleService.updateScaleDefaults( "bar",{ticks:{min:"2020-03-04"***REMOVED******REMOVED***)
+Chart.scaleService.updateScaleDefaults('linear', {
+    ticks: {
+        min: 0
+  ***REMOVED***
+***REMOVED***);
+// Chart.defaults.scales.ticks.min=1;
+Chart.defaults.scale.ticks.beginAtZero = true;
+
 
 setGraphs = (graphData)=>{
     graphData.forEach(row=>{
@@ -63,13 +78,13 @@ setGraphs = (graphData)=>{
         dailyNewArr.push(row.dailyNew)
         dailyDeathsArr.push(row.dailyDeaths)
   ***REMOVED***)
-
+    now = moment();
     // Total Case Count
     ctx = document.getElementById('chart1').getContext('2d');
     chart1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-
+        responsive: true,
         // The data for our dataset
         data: {
             labels,
@@ -77,9 +92,12 @@ setGraphs = (graphData)=>{
                 label: '# Cases',
                 backgroundColor: 'rgb(210,210,210)',
                 borderColor: 'rgb(239,23,71)',
-                borderWidth:2.5,
-               /* backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(239,23,71)',*/
+                borderWidth: 2,
+                pointBackgroundColor:'rgb(64,128,46)',
+                pointBorderColor:'rgb(108,13,147)',
+
+                /* backgroundColor: 'rgb(255, 99, 132)',
+                 borderColor: 'rgb(239,23,71)',*/
                 data: totalCasesArr,
                 fill:true
           ***REMOVED***]
@@ -87,28 +105,34 @@ setGraphs = (graphData)=>{
 
         // Configuration options go here
         options: {
-            /*plugins: {
-                datalabels: {
-                    display: function (context) {
-                        return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+            plugins: {
+                // datalabels: {
+                //     // display: function (context) {
+                //     //     return context.dataset.data[context.dataIndex]; // or >= 1 or ...
+                //     // ***REMOVED***,
+                //     formatter: function (value, index, values) {
+                //         if (!value || value == 0) {
+                //             return 0;
+                //       ***REMOVED*** else {
+                //             return value;
+                //       ***REMOVED***
+                //   ***REMOVED***
+                // ***REMOVED***,
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+
         ***REMOVED*****REMOVED*****REMOVED***
-                    align: 'center',
-                    anchor: 'center',
-                    formatter: function (value, index, values) {
-                        if (value > 0) {
-                            value = value.toString();
-                            value = value.split(/(?=(?:...)*$)/);
-                            value = value.join(',');
-                            return value;
-                      ***REMOVED*** else {
-                            value = "";
-                            return value;
-                      ***REMOVED***
+                    zoom: {
+                        enabled: false,
+                        mode: 'x',
+                        drag: dragOptions,
+                        speed: 0.05
                   ***REMOVED***
-              ***REMOVED***
-***REMOVED*****REMOVED*****REMOVED****/
+    ***REMOVED*****REMOVED*****REMOVED***
+***REMOVED*****REMOVED*****REMOVED***
             point: {
-                pointBackgroundColor:'rgb(64,128,46)',
 ***REMOVED*****REMOVED*****REMOVED***
             title: {
                 display: true,
@@ -122,22 +146,17 @@ setGraphs = (graphData)=>{
                         drawOnChartArea: false
         ***REMOVED*****REMOVED*****REMOVED***
                     time: {
+                        min: "2020-02-15",
+                        unit: 'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
+                            'year': 'MMM DD YY'
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***],
                 yAxes: [{
                     display: true,
-                    labelAutoFit: true,
+                    labelAutoFit: false,
                     type: type
               ***REMOVED***]
           ***REMOVED***
@@ -156,29 +175,30 @@ setGraphs = (graphData)=>{
             datasets: [{
                 label: 'New Cases',
                 data: dailyNewArr,
-                backgroundColor: [
-                    'white'
-            ***REMOVED***,
-                borderColor: [
-                    'grey'
-            ***REMOVED***,
-                maxBarThickness: 10
+                backgroundColor: 'rgb(109,35,35)',
+                borderColor:
+                    'rgb(109,35,35)'
+                ,
+                borderWidth:0,
+                maxBarThickness: 100
           ***REMOVED***]
  ***REMOVED*****REMOVED***
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        min: Math.min.apply(this, dailyNewArr),
+                        beginAtZero: true,
                   ***REMOVED***
               ***REMOVED***],
                 xAxes: [{
                     type: 'time',
                     time: {
+                        min: "2020-03-04",
                         unit: 'day',
-                        unitStepSize: 1,
                         displayFormats: {
-                            'day': 'MMM DD'
+                            'day': 'MMM DD',
+                            'year': 'MMM DD YY'
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***]
@@ -214,16 +234,10 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
+                        min:"2020-03-04",
+                        unit:'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***],
@@ -267,16 +281,10 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
+                        min:"2020-03-04",
+                        unit:'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***],

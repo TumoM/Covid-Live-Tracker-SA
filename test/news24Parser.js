@@ -77,7 +77,7 @@ function updateDaysGood(itemData) {
         totalCases,
         totalDeaths,
         totalRecoveries,
-        maybeValid: false,
+        maybeValid: true,
         parsed: true
   ***REMOVED***
     console.log("Date:",itemData.provDate)

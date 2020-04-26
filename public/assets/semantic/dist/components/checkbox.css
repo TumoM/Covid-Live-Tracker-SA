@@ -82,7 +82,7 @@
   height: 17px;
   text-align: center;
   opacity: 0;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
   -webkit-transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: border 0.1s ease, opacity 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
@@ -97,7 +97,7 @@
 /* Inside***REMOVED***/
 .ui.checkbox label,
 .ui.checkbox + label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
   -webkit-transition: color 0.1s ease;
   transition: color 0.1s ease;
 ***REMOVED***
@@ -131,7 +131,7 @@
 ---------------*/
 
 .ui.checkbox label:active::before {
-  background: #F9FAFB;
+  background: #FAFAFA;
   border-color: rgba(34, 36, 38, 0.35);
 ***REMOVED***
 .ui.checkbox label:active::after {
@@ -284,7 +284,7 @@
   border-radius: 500rem;
   -webkit-transform: scale(0.46666667);
           transform: scale(0.46666667);
-  background-color: rgba(0, 0, 0, 0.87);
+  background-color: #212121;
 ***REMOVED***
 
 /* Focus***REMOVED***/
@@ -398,7 +398,7 @@
   color: rgba(0, 0, 0, 0.95) !important;
 ***REMOVED***
 .ui.slider.checkbox input:checked ~ label:before {
-  background-color: #545454 !important;
+  background-color: #333333 !important;
 ***REMOVED***
 .ui.slider.checkbox input:checked ~ label:after {
   left: 2rem;
@@ -430,7 +430,7 @@
 .ui.toggle.checkbox label {
   min-height: 1.5rem;
   padding-left: 4.5rem;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.toggle.checkbox label {
   padding-top: 0.15em;
@@ -497,7 +497,7 @@
   color: rgba(0, 0, 0, 0.95) !important;
 ***REMOVED***
 .ui.toggle.checkbox input:checked ~ label:before {
-  background-color: #2185D0 !important;
+  background-color: #2196F3 !important;
 ***REMOVED***
 .ui.toggle.checkbox input:checked ~ label:after {
   left: 2.15rem;
@@ -510,7 +510,7 @@
   color: rgba(0, 0, 0, 0.95) !important;
 ***REMOVED***
 .ui.toggle.checkbox input:focus:checked ~ label:before {
-  background-color: #0d71bb !important;
+  background-color: #0083eb !important;
 ***REMOVED***
 
 
@@ -595,7 +595,7 @@
   color: #ffffff !important;
 ***REMOVED***
 .ui.inverted.toggle.checkbox input:checked ~ label:before {
-  background-color: #2185D0 !important;
+  background-color: #2196F3 !important;
 ***REMOVED***
 
 /* Toggle Active Focus***REMOVED***/
@@ -603,7 +603,7 @@
   color: #ffffff !important;
 ***REMOVED***
 .ui.inverted.toggle.checkbox input:focus:checked ~ label:before {
-  background-color: #0d71bb !important;
+  background-color: #0083eb !important;
 ***REMOVED***
 
 /*--------------------

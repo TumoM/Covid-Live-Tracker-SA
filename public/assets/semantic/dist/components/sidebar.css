@@ -88,7 +88,7 @@
 
 /* Whole Page***REMOVED***/
 body.pushable {
-  background: #545454;
+  background: #333333;
 ***REMOVED***
 body.pushable.dimmed {
   background: inherit;
@@ -141,7 +141,7 @@ body.pushable.dimmed {
   background: inherit;
 ***REMOVED***
 body.pushable > .pusher {
-  background: #FFFFFF;
+  background: #F9F9F9;
 ***REMOVED***
 
 /*--------------

@@ -14,34 +14,34 @@
 *******************************/
 
 span.ui.primary.text {
-  color: #2185D0;
+  color: #2196F3;
 ***REMOVED***
 span.ui.inverted.primary.text {
-  color: #54C8FF;
+  color: #2979FF;
 ***REMOVED***
 span.ui.secondary.text {
-  color: #1B1C1D;
+  color: #9E9E9E;
 ***REMOVED***
 span.ui.inverted.secondary.text {
-  color: #545454;
+  color: #DCDDDE;
 ***REMOVED***
 span.ui.red.text {
-  color: #DB2828;
+  color: #F44336;
 ***REMOVED***
 span.ui.inverted.red.text {
-  color: #FF695E;
+  color: #FF1744;
 ***REMOVED***
 span.ui.orange.text {
-  color: #F2711C;
+  color: #FF9800;
 ***REMOVED***
 span.ui.inverted.orange.text {
-  color: #FF851B;
+  color: #FF9100;
 ***REMOVED***
 span.ui.yellow.text {
-  color: #FBBD08;
+  color: #FFEB3B;
 ***REMOVED***
 span.ui.inverted.yellow.text {
-  color: #FFE21F;
+  color: #FFEA00;
 ***REMOVED***
 span.ui.olive.text {
   color: #B5CC18;
@@ -50,22 +50,22 @@ span.ui.inverted.olive.text {
   color: #D9E778;
 ***REMOVED***
 span.ui.green.text {
-  color: #21BA45;
+  color: #4CAF50;
 ***REMOVED***
 span.ui.inverted.green.text {
-  color: #2ECC40;
+  color: #00E676;
 ***REMOVED***
 span.ui.teal.text {
-  color: #00B5AD;
+  color: #1de9b6;
 ***REMOVED***
 span.ui.inverted.teal.text {
-  color: #6DFFFF;
+  color: #1DE9B6;
 ***REMOVED***
 span.ui.blue.text {
-  color: #2185D0;
+  color: #2196F3;
 ***REMOVED***
 span.ui.inverted.blue.text {
-  color: #54C8FF;
+  color: #2979FF;
 ***REMOVED***
 span.ui.violet.text {
   color: #6435C9;
@@ -74,16 +74,16 @@ span.ui.inverted.violet.text {
   color: #A291FB;
 ***REMOVED***
 span.ui.purple.text {
-  color: #A333C8;
+  color: #9C27B0;
 ***REMOVED***
 span.ui.inverted.purple.text {
-  color: #DC73FF;
+  color: #D500F9;
 ***REMOVED***
 span.ui.pink.text {
-  color: #E03997;
+  color: #E91E63;
 ***REMOVED***
 span.ui.inverted.pink.text {
-  color: #FF8EDF;
+  color: #F50057;
 ***REMOVED***
 span.ui.brown.text {
   color: #A5673F;
@@ -92,7 +92,7 @@ span.ui.inverted.brown.text {
   color: #D67C1C;
 ***REMOVED***
 span.ui.grey.text {
-  color: #767676;
+  color: #9E9E9E;
 ***REMOVED***
 span.ui.inverted.grey.text {
   color: #DCDDDE;
@@ -101,7 +101,7 @@ span.ui.black.text {
   color: #1B1C1D;
 ***REMOVED***
 span.ui.inverted.black.text {
-  color: #545454;
+  color: #333333;
 ***REMOVED***
 span.ui.disabled.text {
   opacity: 0.45;

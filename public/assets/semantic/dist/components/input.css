@@ -25,7 +25,7 @@
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.input > input {
   margin: 0;
@@ -37,12 +37,12 @@
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   text-align: left;
   line-height: 1.21428571em;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   padding: 0.67857143em 1em;
   background: #FFFFFF;
   border: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
-  border-radius: 0.28571429rem;
+  color: #212121;
+  border-radius: 4px;
   -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease;
   transition: box-shadow 0.1s ease, border-color 0.1s ease;
@@ -58,13 +58,13 @@
 
 /* browsers require these rules separate***REMOVED***/
 .ui.input > input::-webkit-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #e0e0e0;
 ***REMOVED***
 .ui.input > input::-moz-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #e0e0e0;
 ***REMOVED***
 .ui.input > input:-ms-input-placeholder {
-  color: rgba(191, 191, 191, 0.87);
+  color: #e0e0e0;
 ***REMOVED***
 
 
@@ -94,7 +94,7 @@
 .ui.input.down input {
   border-color: rgba(0, 0, 0, 0.3);
   background: #FAFAFA;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
   -webkit-box-shadow: none;
           box-shadow: none;
 ***REMOVED***
@@ -124,7 +124,7 @@
   height: 1.28571429em;
   -webkit-animation: loader 0.6s infinite linear;
           animation: loader 0.6s infinite linear;
-  border: 0.2em solid #767676;
+  border: 0.2em solid #9E9E9E;
   border-radius: 500rem;
   -webkit-box-shadow: 0 0 0 1px transparent;
           box-shadow: 0 0 0 1px transparent;
@@ -144,15 +144,15 @@
 ***REMOVED***
 .ui.input.focus > input::-webkit-input-placeholder,
 .ui.input > input:focus::-webkit-input-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #949494;
 ***REMOVED***
 .ui.input.focus > input::-moz-placeholder,
 .ui.input > input:focus::-moz-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #949494;
 ***REMOVED***
 .ui.input.focus > input:-ms-input-placeholder,
 .ui.input > input:focus:-ms-input-placeholder {
-  color: rgba(115, 115, 115, 0.87);
+  color: #949494;
 ***REMOVED***
 
 /*--------------------
@@ -345,7 +345,7 @@
   height: 100%;
   width: 2.67142857em;
   opacity: 0.5;
-  border-radius: 0 0.28571429rem 0.28571429rem 0;
+  border-radius: 0 4px 4px 0;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 ***REMOVED***
@@ -377,7 +377,7 @@
 .ui[class*="left icon"].input > i.icon {
   right: auto;
   left: 1px;
-  border-radius: 0.28571429rem 0 0 0.28571429rem;
+  border-radius: 4px 0 0 4px;
 ***REMOVED***
 .ui[class*="left icon"].input > i.circular.icon {
   right: auto;
@@ -446,7 +446,7 @@
   top: 1px;
   right: 1px;
   font-size: 0.64285714em;
-  border-radius: 0 0.28571429rem 0 0;
+  border-radius: 0 4px 0 0;
 ***REMOVED***
 
 /* Spacing with corner label***REMOVED***/
@@ -624,7 +624,7 @@
 .ui.action.input > .dropdown:first-child,
 .ui.action.input > .button:first-child,
 .ui.action.input > .buttons:first-child > .button {
-  border-radius: 0.28571429rem 0 0 0.28571429rem;
+  border-radius: 4px 0 0 4px;
 ***REMOVED***
 .ui.action.input > .dropdown:not(:first-child),
 .ui.action.input > .button:not(:first-child),
@@ -634,7 +634,7 @@
 .ui.action.input > .dropdown:last-child,
 .ui.action.input > .button:last-child,
 .ui.action.input > .buttons:last-child > .button {
-  border-radius: 0 0.28571429rem 0.28571429rem 0;
+  border-radius: 0 4px 4px 0;
 ***REMOVED***
 
 /* Input Focus***REMOVED***/

@@ -14,7 +14,7 @@
 *******************************/
 
 .ui.breadcrumb {
-  line-height: 1.4285em;
+  line-height: 1.33;
   display: inline-block;
   margin: 0 0;
   vertical-align: middle;
@@ -44,10 +44,10 @@
 
 /* Link */
 .ui.breadcrumb a {
-  color: #4183C4;
+  color: #009FDA;
 }
 .ui.breadcrumb a:hover {
-  color: #1e70bf;
+  color: #00b2f3;
 }
 
 /* Icon Divider */

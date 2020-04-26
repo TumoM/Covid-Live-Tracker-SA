@@ -130,11 +130,11 @@ tspan.legend {
 ***REMOVED***
 
 #svgColumn {
-  transition: all 0.5s linear;
+  transition: all 1s linear;
 ***REMOVED***
 #svgColumn.svgFocus {
-  padding-left: 24em;
-  transition: all 0.5s linear;
+  padding-left: 22em;
+  transition: all 1s linear;
 ***REMOVED***
 
 #provStatsContainer {
@@ -142,7 +142,7 @@ tspan.legend {
   overflow-x: visible;
   overflow-y: scroll;
   height: 100%;
-  transition: all 0.5s linear;
+  transition: all 1s linear;
 ***REMOVED***
 #provStatsContainer.scroll-pane {
   overflow-x: visible;
@@ -150,7 +150,7 @@ tspan.legend {
 ***REMOVED***
 #provStatsContainer.sidebarHidden {
   width: 0 !important;
-  transition: all 0.5s linear;
+  transition: all 1s linear;
 ***REMOVED***
 
 #mapContainer .jspDrag {

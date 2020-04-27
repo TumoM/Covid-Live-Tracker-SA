@@ -95,9 +95,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
         // type = "mailGun"
   ***REMOVED***
     if (type && type === "mailGun"){
-        [text,date] = req.body["body-html"].trim().match(/<p.*?class[\s\S]*?<\/p>/g);
-        console.log("ATTEMPT 1:",req.body["body-html"].trim().match(/<p.*?class[\s\S]*?<\/p>/ig));
-        console.log("ATTEMPT 2:",req.body["body-html"].trim().match(/<p.*?class[\s\S^(<\/)]*?<\/p>/ig));
+        [text,date] = req.body["body-html"].trim().match(/<p.*class[\s\S]*?<\/p>/g);
         console.log("Text BEFORE:",text)
         console.log("Date BEFORE:",date)
         text = text.replace(/(\r\n)/g," ").split('>')[1].split("<")[0].split(':')[1]

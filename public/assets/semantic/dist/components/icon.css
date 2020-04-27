@@ -15,8 +15,8 @@
 
 @font-face {
   font-family: 'Icons';
-  src: url("./../themes/default/assets/fonts/icons.eot");
-  src: url("./../themes/default/assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/icons.woff") format('woff'), url("./../themes/default/assets/fonts/icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/icons.svg#icons") format('svg');
+  src: url("./../themes/material/assets/fonts/icons.eot");
+  src: url("./../themes/material/assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("./../themes/material/assets/fonts/icons.woff2") format('woff2'), url("./../themes/material/assets/fonts/icons.woff") format('woff'), url("./../themes/material/assets/fonts/icons.ttf") format('truetype'), url("./../themes/material/assets/fonts/icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -239,58 +239,58 @@ i.inverted.icon {
 --------------------*/
 
 i.primary.icon.icon.icon.icon {
-  color: #2185D0;
+  color: #2196F3;
 ***REMOVED***
 i.inverted.primary.icon.icon.icon.icon {
-  color: #54C8FF;
+  color: #2979FF;
 ***REMOVED***
 i.inverted.bordered.primary.icon.icon.icon.icon,
 i.inverted.circular.primary.icon.icon.icon.icon {
-  background-color: #2185D0;
+  background-color: #2196F3;
   color: #FFFFFF;
 ***REMOVED***
 i.secondary.icon.icon.icon.icon {
-  color: #1B1C1D;
+  color: #9E9E9E;
 ***REMOVED***
 i.inverted.secondary.icon.icon.icon.icon {
-  color: #545454;
+  color: #DCDDDE;
 ***REMOVED***
 i.inverted.bordered.secondary.icon.icon.icon.icon,
 i.inverted.circular.secondary.icon.icon.icon.icon {
-  background-color: #1B1C1D;
+  background-color: #9E9E9E;
   color: #FFFFFF;
 ***REMOVED***
 i.red.icon.icon.icon.icon {
-  color: #DB2828;
+  color: #F44336;
 ***REMOVED***
 i.inverted.red.icon.icon.icon.icon {
-  color: #FF695E;
+  color: #FF1744;
 ***REMOVED***
 i.inverted.bordered.red.icon.icon.icon.icon,
 i.inverted.circular.red.icon.icon.icon.icon {
-  background-color: #DB2828;
+  background-color: #F44336;
   color: #FFFFFF;
 ***REMOVED***
 i.orange.icon.icon.icon.icon {
-  color: #F2711C;
+  color: #FF9800;
 ***REMOVED***
 i.inverted.orange.icon.icon.icon.icon {
-  color: #FF851B;
+  color: #FF9100;
 ***REMOVED***
 i.inverted.bordered.orange.icon.icon.icon.icon,
 i.inverted.circular.orange.icon.icon.icon.icon {
-  background-color: #F2711C;
+  background-color: #FF9800;
   color: #FFFFFF;
 ***REMOVED***
 i.yellow.icon.icon.icon.icon {
-  color: #FBBD08;
+  color: #FFEB3B;
 ***REMOVED***
 i.inverted.yellow.icon.icon.icon.icon {
-  color: #FFE21F;
+  color: #FFEA00;
 ***REMOVED***
 i.inverted.bordered.yellow.icon.icon.icon.icon,
 i.inverted.circular.yellow.icon.icon.icon.icon {
-  background-color: #FBBD08;
+  background-color: #FFEB3B;
   color: #FFFFFF;
 ***REMOVED***
 i.olive.icon.icon.icon.icon {
@@ -305,36 +305,36 @@ i.inverted.circular.olive.icon.icon.icon.icon {
   color: #FFFFFF;
 ***REMOVED***
 i.green.icon.icon.icon.icon {
-  color: #21BA45;
+  color: #4CAF50;
 ***REMOVED***
 i.inverted.green.icon.icon.icon.icon {
-  color: #2ECC40;
+  color: #00E676;
 ***REMOVED***
 i.inverted.bordered.green.icon.icon.icon.icon,
 i.inverted.circular.green.icon.icon.icon.icon {
-  background-color: #21BA45;
+  background-color: #4CAF50;
   color: #FFFFFF;
 ***REMOVED***
 i.teal.icon.icon.icon.icon {
-  color: #00B5AD;
+  color: #1de9b6;
 ***REMOVED***
 i.inverted.teal.icon.icon.icon.icon {
-  color: #6DFFFF;
+  color: #1DE9B6;
 ***REMOVED***
 i.inverted.bordered.teal.icon.icon.icon.icon,
 i.inverted.circular.teal.icon.icon.icon.icon {
-  background-color: #00B5AD;
+  background-color: #1de9b6;
   color: #FFFFFF;
 ***REMOVED***
 i.blue.icon.icon.icon.icon {
-  color: #2185D0;
+  color: #2196F3;
 ***REMOVED***
 i.inverted.blue.icon.icon.icon.icon {
-  color: #54C8FF;
+  color: #2979FF;
 ***REMOVED***
 i.inverted.bordered.blue.icon.icon.icon.icon,
 i.inverted.circular.blue.icon.icon.icon.icon {
-  background-color: #2185D0;
+  background-color: #2196F3;
   color: #FFFFFF;
 ***REMOVED***
 i.violet.icon.icon.icon.icon {
@@ -349,25 +349,25 @@ i.inverted.circular.violet.icon.icon.icon.icon {
   color: #FFFFFF;
 ***REMOVED***
 i.purple.icon.icon.icon.icon {
-  color: #A333C8;
+  color: #9C27B0;
 ***REMOVED***
 i.inverted.purple.icon.icon.icon.icon {
-  color: #DC73FF;
+  color: #D500F9;
 ***REMOVED***
 i.inverted.bordered.purple.icon.icon.icon.icon,
 i.inverted.circular.purple.icon.icon.icon.icon {
-  background-color: #A333C8;
+  background-color: #9C27B0;
   color: #FFFFFF;
 ***REMOVED***
 i.pink.icon.icon.icon.icon {
-  color: #E03997;
+  color: #E91E63;
 ***REMOVED***
 i.inverted.pink.icon.icon.icon.icon {
-  color: #FF8EDF;
+  color: #F50057;
 ***REMOVED***
 i.inverted.bordered.pink.icon.icon.icon.icon,
 i.inverted.circular.pink.icon.icon.icon.icon {
-  background-color: #E03997;
+  background-color: #E91E63;
   color: #FFFFFF;
 ***REMOVED***
 i.brown.icon.icon.icon.icon {
@@ -382,21 +382,21 @@ i.inverted.circular.brown.icon.icon.icon.icon {
   color: #FFFFFF;
 ***REMOVED***
 i.grey.icon.icon.icon.icon {
-  color: #767676;
+  color: #9E9E9E;
 ***REMOVED***
 i.inverted.grey.icon.icon.icon.icon {
   color: #DCDDDE;
 ***REMOVED***
 i.inverted.bordered.grey.icon.icon.icon.icon,
 i.inverted.circular.grey.icon.icon.icon.icon {
-  background-color: #767676;
+  background-color: #9E9E9E;
   color: #FFFFFF;
 ***REMOVED***
 i.black.icon.icon.icon.icon {
   color: #1B1C1D;
 ***REMOVED***
 i.inverted.black.icon.icon.icon.icon {
-  color: #545454;
+  color: #333333;
 ***REMOVED***
 i.inverted.bordered.black.icon.icon.icon.icon,
 i.inverted.circular.black.icon.icon.icon.icon {
@@ -4360,8 +4360,8 @@ i.icon.zoom.out:before {
 /* Load & Define Icon Font***REMOVED***/
 @font-face {
   font-family: 'outline-icons';
-  src: url("./../themes/default/assets/fonts/outline-icons.eot");
-  src: url("./../themes/default/assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/outline-icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/outline-icons.woff") format('woff'), url("./../themes/default/assets/fonts/outline-icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/outline-icons.svg#icons") format('svg');
+  src: url("./../themes/material/assets/fonts/outline-icons.eot");
+  src: url("./../themes/material/assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/material/assets/fonts/outline-icons.woff2") format('woff2'), url("./../themes/material/assets/fonts/outline-icons.woff") format('woff'), url("./../themes/material/assets/fonts/outline-icons.ttf") format('truetype'), url("./../themes/material/assets/fonts/outline-icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -4836,8 +4836,8 @@ i.icon.window.restore.outline:before {
 /* Load & Define Brand Font***REMOVED***/
 @font-face {
   font-family: 'brand-icons';
-  src: url("./../themes/default/assets/fonts/brand-icons.eot");
-  src: url("./../themes/default/assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/brand-icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/brand-icons.woff") format('woff'), url("./../themes/default/assets/fonts/brand-icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/brand-icons.svg#icons") format('svg');
+  src: url("./../themes/material/assets/fonts/brand-icons.eot");
+  src: url("./../themes/material/assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/material/assets/fonts/brand-icons.woff2") format('woff2'), url("./../themes/material/assets/fonts/brand-icons.woff") format('woff'), url("./../themes/material/assets/fonts/brand-icons.ttf") format('truetype'), url("./../themes/material/assets/fonts/brand-icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

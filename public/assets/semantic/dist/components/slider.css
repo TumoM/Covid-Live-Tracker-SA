@@ -241,7 +241,7 @@
   ---------------*/
 
 .ui.inverted.slider .inner .track-fill {
-  background-color: #545454;
+  background-color: #333333;
 ***REMOVED***
 .ui.inverted.slider .inner .track {
   background-color: rgba(255, 255, 255, 0.08);
@@ -254,132 +254,132 @@
 
 /* Standard***REMOVED***/
 .ui.primary.slider .inner .track-fill {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.primary.inverted.slider .inner .track-fill {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.primary.slider.basic .inner .thumb {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.primary.slider.basic .inner .thumb:hover,
 .ui.primary.slider.basic:focus .inner .thumb {
-  background-color: #1678c2;
+  background-color: #028bf9;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.primary.inverted.slider.basic .inner .thumb {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 .ui.primary.inverted.slider.basic .inner .thumb:hover,
 .ui.primary.inverted.slider.basic:focus .inner .thumb {
-  background-color: #21b8ff;
+  background-color: #005cf5;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.secondary.slider .inner .track-fill {
-  background-color: #1B1C1D;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.secondary.inverted.slider .inner .track-fill {
-  background-color: #545454;
+  background-color: #DCDDDE;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.secondary.slider.basic .inner .thumb {
-  background-color: #1B1C1D;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.secondary.slider.basic .inner .thumb:hover,
 .ui.secondary.slider.basic:focus .inner .thumb {
-  background-color: #27292a;
+  background-color: #ababab;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.secondary.inverted.slider.basic .inner .thumb {
-  background-color: #545454;
+  background-color: #DCDDDE;
 ***REMOVED***
 .ui.secondary.inverted.slider.basic .inner .thumb:hover,
 .ui.secondary.inverted.slider.basic:focus .inner .thumb {
-  background-color: #6e6e6e;
+  background-color: #f6f7f7;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.red.slider .inner .track-fill {
-  background-color: #DB2828;
+  background-color: #F44336;
 ***REMOVED***
 .ui.red.inverted.slider .inner .track-fill {
-  background-color: #FF695E;
+  background-color: #FF1744;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.red.slider.basic .inner .thumb {
-  background-color: #DB2828;
+  background-color: #F44336;
 ***REMOVED***
 .ui.red.slider.basic .inner .thumb:hover,
 .ui.red.slider.basic:focus .inner .thumb {
-  background-color: #d01919;
+  background-color: #fd2313;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.red.inverted.slider.basic .inner .thumb {
-  background-color: #FF695E;
+  background-color: #FF1744;
 ***REMOVED***
 .ui.red.inverted.slider.basic .inner .thumb:hover,
 .ui.red.inverted.slider.basic:focus .inner .thumb {
-  background-color: #ff392b;
+  background-color: #e3002c;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.orange.slider .inner .track-fill {
-  background-color: #F2711C;
+  background-color: #FF9800;
 ***REMOVED***
 .ui.orange.inverted.slider .inner .track-fill {
-  background-color: #FF851B;
+  background-color: #FF9100;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.orange.slider.basic .inner .thumb {
-  background-color: #F2711C;
+  background-color: #FF9800;
 ***REMOVED***
 .ui.orange.slider.basic .inner .thumb:hover,
 .ui.orange.slider.basic:focus .inner .thumb {
-  background-color: #f26202;
+  background-color: #e68900;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.orange.inverted.slider.basic .inner .thumb {
-  background-color: #FF851B;
+  background-color: #FF9100;
 ***REMOVED***
 .ui.orange.inverted.slider.basic .inner .thumb:hover,
 .ui.orange.inverted.slider.basic:focus .inner .thumb {
-  background-color: #e76b00;
+  background-color: #cc7400;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.yellow.slider .inner .track-fill {
-  background-color: #FBBD08;
+  background-color: #FFEB3B;
 ***REMOVED***
 .ui.yellow.inverted.slider .inner .track-fill {
-  background-color: #FFE21F;
+  background-color: #FFEA00;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.yellow.slider.basic .inner .thumb {
-  background-color: #FBBD08;
+  background-color: #FFEB3B;
 ***REMOVED***
 .ui.yellow.slider.basic .inner .thumb:hover,
 .ui.yellow.slider.basic:focus .inner .thumb {
-  background-color: #eaae00;
+  background-color: #ffe821;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.yellow.inverted.slider.basic .inner .thumb {
-  background-color: #FFE21F;
+  background-color: #FFEA00;
 ***REMOVED***
 .ui.yellow.inverted.slider.basic .inner .thumb:hover,
 .ui.yellow.inverted.slider.basic:focus .inner .thumb {
-  background-color: #ebcd00;
+  background-color: #ccbb00;
 ***REMOVED***
 
 /* Standard***REMOVED***/
@@ -410,80 +410,80 @@
 
 /* Standard***REMOVED***/
 .ui.green.slider .inner .track-fill {
-  background-color: #21BA45;
+  background-color: #4CAF50;
 ***REMOVED***
 .ui.green.inverted.slider .inner .track-fill {
-  background-color: #2ECC40;
+  background-color: #00E676;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.green.slider.basic .inner .thumb {
-  background-color: #21BA45;
+  background-color: #4CAF50;
 ***REMOVED***
 .ui.green.slider.basic .inner .thumb:hover,
 .ui.green.slider.basic:focus .inner .thumb {
-  background-color: #16ab39;
+  background-color: #40a244;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.green.inverted.slider.basic .inner .thumb {
-  background-color: #2ECC40;
+  background-color: #00E676;
 ***REMOVED***
 .ui.green.inverted.slider.basic .inner .thumb:hover,
 .ui.green.inverted.slider.basic:focus .inner .thumb {
-  background-color: #1ea92e;
+  background-color: #00b35c;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.teal.slider .inner .track-fill {
-  background-color: #00B5AD;
+  background-color: #1de9b6;
 ***REMOVED***
 .ui.teal.inverted.slider .inner .track-fill {
-  background-color: #6DFFFF;
+  background-color: #1DE9B6;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.teal.slider.basic .inner .thumb {
-  background-color: #00B5AD;
+  background-color: #1de9b6;
 ***REMOVED***
 .ui.teal.slider.basic .inner .thumb:hover,
 .ui.teal.slider.basic:focus .inner .thumb {
-  background-color: #009c95;
+  background-color: #0be1ac;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.teal.inverted.slider.basic .inner .thumb {
-  background-color: #6DFFFF;
+  background-color: #1DE9B6;
 ***REMOVED***
 .ui.teal.inverted.slider.basic .inner .thumb:hover,
 .ui.teal.inverted.slider.basic:focus .inner .thumb {
-  background-color: #3affff;
+  background-color: #0ac999;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.blue.slider .inner .track-fill {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.blue.inverted.slider .inner .track-fill {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.blue.slider.basic .inner .thumb {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.blue.slider.basic .inner .thumb:hover,
 .ui.blue.slider.basic:focus .inner .thumb {
-  background-color: #1678c2;
+  background-color: #028bf9;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.blue.inverted.slider.basic .inner .thumb {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 .ui.blue.inverted.slider.basic .inner .thumb:hover,
 .ui.blue.inverted.slider.basic:focus .inner .thumb {
-  background-color: #21b8ff;
+  background-color: #005cf5;
 ***REMOVED***
 
 /* Standard***REMOVED***/
@@ -514,54 +514,54 @@
 
 /* Standard***REMOVED***/
 .ui.purple.slider .inner .track-fill {
-  background-color: #A333C8;
+  background-color: #9C27B0;
 ***REMOVED***
 .ui.purple.inverted.slider .inner .track-fill {
-  background-color: #DC73FF;
+  background-color: #D500F9;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.purple.slider.basic .inner .thumb {
-  background-color: #A333C8;
+  background-color: #9C27B0;
 ***REMOVED***
 .ui.purple.slider.basic .inner .thumb:hover,
 .ui.purple.slider.basic:focus .inner .thumb {
-  background-color: #9627ba;
+  background-color: #8e1ca1;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.purple.inverted.slider.basic .inner .thumb {
-  background-color: #DC73FF;
+  background-color: #D500F9;
 ***REMOVED***
 .ui.purple.inverted.slider.basic .inner .thumb:hover,
 .ui.purple.inverted.slider.basic:focus .inner .thumb {
-  background-color: #cf40ff;
+  background-color: #a900c6;
 ***REMOVED***
 
 /* Standard***REMOVED***/
 .ui.pink.slider .inner .track-fill {
-  background-color: #E03997;
+  background-color: #E91E63;
 ***REMOVED***
 .ui.pink.inverted.slider .inner .track-fill {
-  background-color: #FF8EDF;
+  background-color: #F50057;
 ***REMOVED***
 
 /* Basic***REMOVED***/
 .ui.pink.slider.basic .inner .thumb {
-  background-color: #E03997;
+  background-color: #E91E63;
 ***REMOVED***
 .ui.pink.slider.basic .inner .thumb:hover,
 .ui.pink.slider.basic:focus .inner .thumb {
-  background-color: #e61a8d;
+  background-color: #e20b54;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
 .ui.pink.inverted.slider.basic .inner .thumb {
-  background-color: #FF8EDF;
+  background-color: #F50057;
 ***REMOVED***
 .ui.pink.inverted.slider.basic .inner .thumb:hover,
 .ui.pink.inverted.slider.basic:focus .inner .thumb {
-  background-color: #ff5bd1;
+  background-color: #c20045;
 ***REMOVED***
 
 /* Standard***REMOVED***/
@@ -592,7 +592,7 @@
 
 /* Standard***REMOVED***/
 .ui.grey.slider .inner .track-fill {
-  background-color: #767676;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.grey.inverted.slider .inner .track-fill {
   background-color: #DCDDDE;
@@ -600,11 +600,11 @@
 
 /* Basic***REMOVED***/
 .ui.grey.slider.basic .inner .thumb {
-  background-color: #767676;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.grey.slider.basic .inner .thumb:hover,
 .ui.grey.slider.basic:focus .inner .thumb {
-  background-color: #838383;
+  background-color: #ababab;
 ***REMOVED***
 
 /* Basic Inverted***REMOVED***/
@@ -621,7 +621,7 @@
   background-color: #1B1C1D;
 ***REMOVED***
 .ui.black.inverted.slider .inner .track-fill {
-  background-color: #545454;
+  background-color: #333333;
 ***REMOVED***
 
 /* Basic***REMOVED***/
@@ -635,7 +635,7 @@
 
 /* Basic Inverted***REMOVED***/
 .ui.black.inverted.slider.basic .inner .thumb {
-  background-color: #545454;
+  background-color: #333333;
 ***REMOVED***
 .ui.black.inverted.slider.basic .inner .thumb:hover,
 .ui.black.inverted.slider.basic:focus .inner .thumb {
@@ -663,7 +663,7 @@
 
 /* Standard***REMOVED***/
 .ui.inverted.slider.basic .inner .thumb {
-  background-color: #545454;
+  background-color: #333333;
 ***REMOVED***
 .ui.inverted.slider.basic .inner .thumb:hover,
 .ui.inverted.slider.basic:focus .inner .thumb {

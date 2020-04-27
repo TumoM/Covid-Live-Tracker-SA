@@ -129,7 +129,7 @@
   margin: 0;
   font-size: 1em;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 
 /* Summary Image***REMOVED***/
@@ -184,7 +184,7 @@
   margin: 0.5em 0 0;
   background: none;
   padding: 0;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 
 /* Images***REMOVED***/
@@ -200,7 +200,7 @@
   border-left: none;
   font-size: 1em;
   max-width: 500px;
-  line-height: 1.4285em;
+  line-height: 1.33;
 ***REMOVED***
 
 /*--------------

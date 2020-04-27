@@ -23,7 +23,7 @@
           box-shadow: none;
   background: rgba(0, 0, 0, 0.1);
   padding: 0;
-  border-radius: 0.28571429rem;
+  border-radius: 4px;
 ***REMOVED***
 .ui.progress:first-child {
   margin: 0 0 2.5em;
@@ -46,7 +46,7 @@
   width: 0;
   min-width: 2em;
   background: #888888;
-  border-radius: 0.28571429rem;
+  border-radius: 4px;
   -webkit-transition: width 0.1s ease, background-color 0.1s ease;
   transition: width 0.1s ease, background-color 0.1s ease;
   overflow: hidden;
@@ -56,7 +56,7 @@
   background: transparent;
 ***REMOVED***
 .ui.progress[data-percent="0"] .bar .progress {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.inverted.progress[data-percent="0"] .bar .progress {
   color: rgba(255, 255, 255, 0.9);
@@ -88,7 +88,7 @@
   right: auto;
   left: 0;
   bottom: auto;
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
   font-weight: bold;
   text-shadow: none;
   margin-top: 0.2em;
@@ -130,25 +130,25 @@
 /* Indicating Label***REMOVED***/
 .ui.indicating.progress[data-percent^="1"] .label,
 .ui.indicating.progress[data-percent^="2"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.indicating.progress[data-percent^="3"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.indicating.progress[data-percent^="4"] .label,
 .ui.indicating.progress[data-percent^="5"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.indicating.progress[data-percent^="6"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.indicating.progress[data-percent^="7"] .label,
 .ui.indicating.progress[data-percent^="8"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.indicating.progress[data-percent^="9"] .label,
 .ui.indicating.progress[data-percent^="100"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 
 /* Inverted Indicating Label***REMOVED***/
@@ -197,7 +197,7 @@
 .ui.indicating.progress[data-percent="7"] .label,
 .ui.indicating.progress[data-percent="8"] .label,
 .ui.indicating.progress[data-percent="9"] .label {
-  color: rgba(0, 0, 0, 0.87);
+  color: #212121;
 ***REMOVED***
 .ui.inverted.indicating.progress[data-percent="0"] .label,
 .ui.inverted.indicating.progress[data-percent="1"] .label,
@@ -235,7 +235,7 @@
   ---------------*/
 
 .ui.ui.progress.success .bar {
-  background-color: #21BA45;
+  background-color: #4CAF50;
 ***REMOVED***
 .ui.ui.progress.success .bar,
 .ui.ui.progress.success .bar::after {
@@ -267,7 +267,7 @@
   ---------------*/
 
 .ui.ui.progress.error .bar {
-  background-color: #DB2828;
+  background-color: #F44336;
 ***REMOVED***
 .ui.ui.progress.error .bar,
 .ui.ui.progress.error .bar::after {
@@ -295,7 +295,7 @@
   right: 0;
   bottom: 0;
   background: #FFFFFF;
-  border-radius: 0.28571429rem;
+  border-radius: 4px;
   -webkit-animation: progress-active 2s ease infinite;
           animation: progress-active 2s ease infinite;
   -webkit-transform-origin: left;
@@ -363,13 +363,13 @@
   color: #FFFFFF;
 ***REMOVED***
 .ui.inverted.progress.success > .label {
-  color: #21BA45;
+  color: #4CAF50;
 ***REMOVED***
 .ui.inverted.progress.warning > .label {
   color: #F2C037;
 ***REMOVED***
 .ui.inverted.progress.error > .label {
-  color: #DB2828;
+  color: #F44336;
 ***REMOVED***
 
 /*--------------
@@ -390,7 +390,7 @@
   height: 0.2rem;
   padding: 0;
   overflow: hidden;
-  border-radius: 0 0 0.28571429rem 0.28571429rem;
+  border-radius: 0 0 4px 4px;
 ***REMOVED***
 .ui.progress.attached .bar {
   border-radius: 0;
@@ -400,7 +400,7 @@
 .ui.progress.top.attached,
 .ui.progress.top.attached .bar {
   top: 0;
-  border-radius: 0.28571429rem 0.28571429rem 0 0;
+  border-radius: 4px 4px 0 0;
 ***REMOVED***
 .ui.progress.top.attached .bar {
   border-radius: 0;
@@ -428,52 +428,52 @@
 .ui.indeterminate.primary.progress .bar::before,
 .ui.primary.progress .bar,
 .ui.progress .primary.bar {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.inverted.indeterminate.primary.progress .bar::before,
 .ui.primary.inverted.progress .bar,
 .ui.inverted.progress .primary.bar {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 .ui.indeterminate.secondary.progress .bar::before,
 .ui.secondary.progress .bar,
 .ui.progress .secondary.bar {
-  background-color: #1B1C1D;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.inverted.indeterminate.secondary.progress .bar::before,
 .ui.secondary.inverted.progress .bar,
 .ui.inverted.progress .secondary.bar {
-  background-color: #545454;
+  background-color: #DCDDDE;
 ***REMOVED***
 .ui.indeterminate.red.progress .bar::before,
 .ui.red.progress .bar,
 .ui.progress .red.bar {
-  background-color: #DB2828;
+  background-color: #F44336;
 ***REMOVED***
 .ui.inverted.indeterminate.red.progress .bar::before,
 .ui.red.inverted.progress .bar,
 .ui.inverted.progress .red.bar {
-  background-color: #FF695E;
+  background-color: #FF1744;
 ***REMOVED***
 .ui.indeterminate.orange.progress .bar::before,
 .ui.orange.progress .bar,
 .ui.progress .orange.bar {
-  background-color: #F2711C;
+  background-color: #FF9800;
 ***REMOVED***
 .ui.inverted.indeterminate.orange.progress .bar::before,
 .ui.orange.inverted.progress .bar,
 .ui.inverted.progress .orange.bar {
-  background-color: #FF851B;
+  background-color: #FF9100;
 ***REMOVED***
 .ui.indeterminate.yellow.progress .bar::before,
 .ui.yellow.progress .bar,
 .ui.progress .yellow.bar {
-  background-color: #FBBD08;
+  background-color: #FFEB3B;
 ***REMOVED***
 .ui.inverted.indeterminate.yellow.progress .bar::before,
 .ui.yellow.inverted.progress .bar,
 .ui.inverted.progress .yellow.bar {
-  background-color: #FFE21F;
+  background-color: #FFEA00;
 ***REMOVED***
 .ui.indeterminate.olive.progress .bar::before,
 .ui.olive.progress .bar,
@@ -488,32 +488,32 @@
 .ui.indeterminate.green.progress .bar::before,
 .ui.green.progress .bar,
 .ui.progress .green.bar {
-  background-color: #21BA45;
+  background-color: #4CAF50;
 ***REMOVED***
 .ui.inverted.indeterminate.green.progress .bar::before,
 .ui.green.inverted.progress .bar,
 .ui.inverted.progress .green.bar {
-  background-color: #2ECC40;
+  background-color: #00E676;
 ***REMOVED***
 .ui.indeterminate.teal.progress .bar::before,
 .ui.teal.progress .bar,
 .ui.progress .teal.bar {
-  background-color: #00B5AD;
+  background-color: #1de9b6;
 ***REMOVED***
 .ui.inverted.indeterminate.teal.progress .bar::before,
 .ui.teal.inverted.progress .bar,
 .ui.inverted.progress .teal.bar {
-  background-color: #6DFFFF;
+  background-color: #1DE9B6;
 ***REMOVED***
 .ui.indeterminate.blue.progress .bar::before,
 .ui.blue.progress .bar,
 .ui.progress .blue.bar {
-  background-color: #2185D0;
+  background-color: #2196F3;
 ***REMOVED***
 .ui.inverted.indeterminate.blue.progress .bar::before,
 .ui.blue.inverted.progress .bar,
 .ui.inverted.progress .blue.bar {
-  background-color: #54C8FF;
+  background-color: #2979FF;
 ***REMOVED***
 .ui.indeterminate.violet.progress .bar::before,
 .ui.violet.progress .bar,
@@ -528,22 +528,22 @@
 .ui.indeterminate.purple.progress .bar::before,
 .ui.purple.progress .bar,
 .ui.progress .purple.bar {
-  background-color: #A333C8;
+  background-color: #9C27B0;
 ***REMOVED***
 .ui.inverted.indeterminate.purple.progress .bar::before,
 .ui.purple.inverted.progress .bar,
 .ui.inverted.progress .purple.bar {
-  background-color: #DC73FF;
+  background-color: #D500F9;
 ***REMOVED***
 .ui.indeterminate.pink.progress .bar::before,
 .ui.pink.progress .bar,
 .ui.progress .pink.bar {
-  background-color: #E03997;
+  background-color: #E91E63;
 ***REMOVED***
 .ui.inverted.indeterminate.pink.progress .bar::before,
 .ui.pink.inverted.progress .bar,
 .ui.inverted.progress .pink.bar {
-  background-color: #FF8EDF;
+  background-color: #F50057;
 ***REMOVED***
 .ui.indeterminate.brown.progress .bar::before,
 .ui.brown.progress .bar,
@@ -558,7 +558,7 @@
 .ui.indeterminate.grey.progress .bar::before,
 .ui.grey.progress .bar,
 .ui.progress .grey.bar {
-  background-color: #767676;
+  background-color: #9E9E9E;
 ***REMOVED***
 .ui.inverted.indeterminate.grey.progress .bar::before,
 .ui.grey.inverted.progress .bar,
@@ -573,7 +573,7 @@
 .ui.inverted.indeterminate.black.progress .bar::before,
 .ui.black.inverted.progress .bar,
 .ui.inverted.progress .black.bar {
-  background-color: #545454;
+  background-color: #333333;
 ***REMOVED***
 
 /*--------------
@@ -646,7 +646,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border-radius: 0.28571429rem;
+  border-radius: 4px;
   -webkit-animation: progress-pulsating 2s ease infinite;
           animation: progress-pulsating 2s ease infinite;
   -webkit-transform-origin: center;

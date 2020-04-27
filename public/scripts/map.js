@@ -148,10 +148,6 @@ function colourCountry(name, colour,colourTag) {
 ***REMOVED***
 
 
-
-
-
-
 ***REMOVED***
 ***REMOVED*** @param {[][]***REMOVED*** data
 ***REMOVED***/
@@ -353,9 +349,10 @@ $(document).ready(()=>{
         .click((event)=>{
             console.log("you clicked me!")
             // $("#provStatsContainer").transition('slide right')
-            $("#provStatsContainer").toggleClass("sidebarHidden");
             $("#svgColumn").toggleClass("ten wide");
             $("#svgColumn").toggleClass("fourteen wide svgFocus");
+            $("#provStatsContainer").toggleClass("sidebarHidden");
+
             $("#hideIcon").toggleClass("left long arrow icon");
             $("#hideIcon").toggleClass("right long arrow icon");
 

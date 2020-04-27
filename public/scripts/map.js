@@ -53,7 +53,6 @@ let provRecoveries = {}
 let cardList = []
 
 
-
 /**
  * @param {string} name
  */
@@ -178,9 +177,8 @@ function legendSetup(max,min,interval) {
     // setup width
     console.log("Legend Set:",legendSet)
     if (!legendSet) {
-        let width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
-        console.log("WIDTH:",width)
-        $('.lightBack').width("55%")
+        let width = $('#key')[0].getBoundingClientRect().width;
+        $('.lightBack').width(width)
         let length = legendTitle.getComputedTextLength()
         legendTitle.setAttributeNS(null, "x", (width - length) / 2 - xPen);
         legendSet = true;
@@ -313,7 +311,7 @@ function setupSideBCards(){
 function populateSideCards(cardList){
     // console.log("Card List:",cardList)
     let counter = 0;
-    let cards = $("#mapContainer .card");
+    let cards = $(".card");
     let figures;
 
     cardList.forEach(item=>{
@@ -336,6 +334,7 @@ $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#sv
 $(window).resize(()=>{
     $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
 })
+
 $(document).ready(()=>{
     $(function()
     {
@@ -354,7 +353,8 @@ $(document).ready(()=>{
             $("#svgColumn").toggleClass("fourteen wide svgFocus");
             $("#provStatsContainer").toggleClass("sidebarHidden");
 
-            $("#hideIcon").toggleClass("fa-rotate-180");
+            $("#hideIcon").toggleClass("left long arrow icon");
+            $("#hideIcon").toggleClass("right long arrow icon");
 
 
         })
@@ -378,34 +378,6 @@ $(document).ready(()=>{
 
         })
     $('#filterR')
-        .click((event)=>{
-            console.log("you clicked me to filter!")
-            // $("#provStatsContainer").transition('slide right')
-            setColours(provRecoveries,3)
-            populateSideCards(cardList.sort(compareValues('recoveries')))
-
-
-        })
-    $('#filterC2')
-        .click((event)=>{
-            console.log("you clicked me to filter!")
-            // $("#provStatsContainer").transition('slide right')
-            setColours(provCase,1)
-            populateSideCards(cardList.sort(compareValues('cases')))
-
-
-        })
-    $('#filterD2')
-        .click((event)=>{
-            console.log("you clicked me to filter!")
-            // $("#provStatsContainer").transition('slide right')
-            setColours(provDeath,2)
-            populateSideCards(cardList.sort(compareValues('deaths')))
-
-
-
-        })
-    $('#filterR2')
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')

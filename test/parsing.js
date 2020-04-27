@@ -98,80 +98,67 @@ function parseNumber(number) {
         //   console.log(html);
         const root = HTMLParser.parse(html);
 
-        var entries = root.querySelectorAll(".entry-title.fusion-post-title a");
+        var entries = root.querySelectorAll(".fusion-link-wrapper");
         var links = []
 
-        await Promise.all(entries.map(async (entry) => {
+        Promise.all(entries.map(async (entry) => {
             let badString;
+            let totalCase;
+            let totalDeath;
             // return entry.getAttribute("href").match(linkRegex)
             if (entry.getAttribute("href").match(linkRegex)) {
+                // links.push(entry.getAttribute("href"))
+                await driver.get(entry.getAttribute("href"))
 
-                const DATE = entry.text.split("(")[1].split(")")[0];
-                links.push(entry.getAttribute("href"))
-                return ps.push(driver.get(entry.getAttribute("href"))
-                    .then(async function () {
                         await driver.wait(until.elementsLocated(By.css('.single-post')));
-                        let html = await driver.getPageSource();
+                        html = await driver.getPageSource();
+                        const DATE = html.match(/\d{2***REMOVED***\w{2***REMOVED***\s\w{3,9***REMOVED***\s20\d{2***REMOVED***/i)[0]
                         console.log(DATE); // date
                         totalCase = 0;
                         totalDeath = 0;
                         let tempDate = DATE.split(" ");
                         const d = new Date(`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`);
                         let parsedDate = d.toLocaleDateString().split("/")
-                        parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`
-                        await knex('dates')
-                            .where({date: d***REMOVED***)
-                            .then(rows => {
-                                let totalTests = 0;
-                                console.log("Row Count:", rows.length);
-                                if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
-                                    console.log("Skipping:", d, "\n")
-                              ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
-                                    console.log("Date maybe valid:", d, "\n")
+                        parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`;
+                        let rows = knex('dates').where({date: d***REMOVED***)
+                        let totalTests = 0;
+                        console.log("Row Count:", rows.length);
+                        if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
+                            console.log("Skipping:", d.toLocaleDateString(), "\n")
+                      ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
+                            console.log("Date maybe valid:", d, "\n")
 
-                                    // Maybe the format is all wrong. Parse another site/source?
-                                    // Make soup.
-                                    const paragraphs = HTMLParser.parse(html)
-                                    //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
-                                    // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
-                                    let testPar = paragraphs.querySelectorAll("p").find((currentVal, index, arr) => {
-                                        let paragraph = currentVal.text.match(/total number of.*tests.*\s\d+[\.|\n]/i) ||
-                                            currentVal.text.match(/total.*((\d\s?)|(tests))/i)
-                                        if (!paragraph) {
-                                            return false;
-                                      ***REMOVED*** else {
-                                            return true
-                                      ***REMOVED***
-                                  ***REMOVED***)
-                                    if (testPar) {
-                                        totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
-                                  ***REMOVED*** else {
-                                        testPar = paragraphs.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i)
-                                        totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
-                                  ***REMOVED***
-                                    if (totalTests) {
-                                        totalTests = parseNumber(totalTests[0].trim());
-                                  ***REMOVED***
-                                    console.log("Value:", totalTests);
-                                    knex('dates').select('totalTests')
+                            // Maybe the format is all wrong. Parse another site/source?
+                            // Make soup.
+                            const paragraphs = HTMLParser.parse(html)
+                            let testPar = paragraphs.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i);
+                            if (testPar) {
+                                totalTests = testPar.text.match(/\s((\d+\s+)*\d+)/);
+                          ***REMOVED*** else {
+                                testPar = paragraphs.text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
+                          ***REMOVED***
+                            if (totalTests) {
+                                totalTests = parseNumber(totalTests[0].trim());
+                          ***REMOVED***
+                            console.log("Value:", totalTests);
+                            rows = await knex('dates').select('totalTests')
                                         .whereNull('totalTests')
                                         .andWhere({date: parsedDate***REMOVED***)
-                                        .then(rows => {
-                                            knex('dates').update({
-                                                totalTests,
-                                                maybeValid: false
-                                          ***REMOVED***).where({date: parsedDate***REMOVED***)
-                                                .then(value => {
-                                                    console.log("Updated TTs1:", value)
-                                                    return true
-                                              ***REMOVED***)
-                                                .catch(reason => {
-                                                    console.log("Unknown 2:", reason);
-                                              ***REMOVED***)
-                                      ***REMOVED***)
-                                        .catch(reason => {
-                                            console.log("Error putting in Total Tests?", reason)
-                                      ***REMOVED***)
+                            if (rows.length > 0){
+                                let value = await knex('dates').update({
+                                    totalTests,
+                                    maybeValid: false
+                              ***REMOVED***).where({date: parsedDate***REMOVED***)
+                                    if (value.length > 0) {
+                                        console.log("Updated TTs1:", value)
+                                        return true
+                                  ***REMOVED***
+                                    else{
+                                        console.log("Unknown 2:", reason);
+                                        return false
+                                  ***REMOVED***
+                          ***REMOVED***
                                     // Pull off data for update (Total tests)
                               ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
                                     console.log("Parsing 1 time:", d, "\n")
@@ -214,127 +201,40 @@ function parseNumber(number) {
                                       ***REMOVED***)
                                         let tags = null;
                                         try { // pull out paragraph after 1st table
-                                            tags = rootChild.querySelector(".post-content").childNodes;
+                                            /*tags = rootChild.querySelector(".post-content").childNodes;
                                             let tableFound = false; // A able has been found in the html.
                                             let parFound = false; // a valid value has been returned.
-                                            let tests = tags.filter(tag => { // Filters out the paragraph tag after the 1st table.
-                                                if (!tableFound) {
-                                                    if (tag.tagName === "table") {
-                                                        tableFound = true;
-                                                  ***REMOVED***
-                                              ***REMOVED*** else if (!parFound) {
-                                                    if (tag.text === "\n") { // Ignores newlines that may crop up.
-                                                        return false;
-                                                  ***REMOVED***
-                                                    parFound = true;
-                                                    return tag;
-                                              ***REMOVED***
-                                          ***REMOVED***);
-                                            parseNumber(tests[0].text);
                                             const rootTable2 = HTMLParser.parse(table2.outerHTML);
                                             const rowsTable2 = rootTable2.querySelectorAll("tr")
                                             delete rowsTable2[0]
-                                            rowsTable2.forEach(row => {
-                                                row = row.text.split(" ");
-                                                row.shift();
-                                                let name = "";
-                                                let count = 0;
-                                                let gender = "";
-                                                row.forEach((index) => {
-                                                    if (index.match(/^\d+$/)) { // Checks that index value is a digit
-                                                        count = Number(index);
-                                                  ***REMOVED*** else if (index !== "FEMALE" && index !== "MALE") {
-                                                        name += index + " "; // Appends word and adds a space that was removed from split
-                                                  ***REMOVED*** else {
-                                                        gender = index;
-                                                  ***REMOVED***
-                                              ***REMOVED***)
-                                                name = name.trim();
-                                                name = name.match(/(KWAZULU)(\s?)+(.*)+(\s?)+(NATAL)/) ? "KWAZULU–NATAL" : name;
-                                                const death = new Death(name, gender, count);
-                                                // console.log("Death:",death.toString());
-                                                currentProvinces[name].dead.push(death);
-                                                gender === "MALE" ? currentProvinces[name].men += 1 : gender === "FEMALE" ? currentProvinces[name].women += 1 : console.log("INVALID GENDER");
-                                                currentProvinces[name].totalDead = currentProvinces[name].men + currentProvinces[name].women;
-
-
-                                          ***REMOVED***)
-                                            console.log("Done Table 2");
-                                            // console.log(currentProvinces);
-                                            for (const [key, value] of Object.entries(currentProvinces)) {
-                                                // console.log(key);
-                                                // console.log("Sick",value.cases);
-                                                // console.log("Death Count:",value.deaths);
-                                                const date = value.date;
-
-                                                let testNum = 0;
-                                                badString = "";
-                                                tests[0].text
-                                                    .match(/\s((\d+\s+)*\d+)/)[0]
-                                                    .trim()
-                                                    .split(" ")
-                                                    .forEach(word => {
-                                                        badString += word
-                                                  ***REMOVED***)
-                                                totalCase += value.sick;
-                                                totalDeath += value.deaths;
-                                                // Inserts into Provinces table
-                                                knex("provinceDays")
-                                                    .insert({
-                                                            provinceName: key, provDate: date,
-                                                            caseCount: value.sick, deathCount: value.deaths,
-
-                                            ***REMOVED*****REMOVED*****REMOVED***
-                                                        'id')
-                                                    .then((id) => {
-                                                        let provinceId = id[0];
-                                                        // Todo Inserts into caseDates table
-                                                        knex("caseDates")
-                                                            .insert({
-                                                                provinceId, caseDate: date,
-                                                                caseCount: value.sick
-                                                ***REMOVED*****REMOVED*****REMOVED*** "id")
-                                                            .then(id => {
-                                                                // console.log("ID:",id);
-                                                          ***REMOVED***).catch(err => {
-                                                            console.log("Error with caseDates\n", err);
-                                                      ***REMOVED***)
-                                                        knex("deathDates")
-                                                            .insert({
-                                                                provinceId,
-                                                                deathDate: date,
-                                                                deathCount: value.deaths,
-                                                                deathMenCount: value.men,
-                                                                deathWomenCount: value.women
-                                                ***REMOVED*****REMOVED*****REMOVED*** ['id']).then(id => {
-                                                            let deathDateId = id[0];
-                                                            let parsedValues = [];
-                                                            value.deadArr.forEach(deathDetails => {
-                                                                parsedValues.push({
-                                                                    deathDateId,
-                                                                    provinceName: deathDetails.province,
-                                                                    sex: deathDetails.sex,
-                                                                    deathDate: date,
-                                                                    age: deathDetails.age
-                                                              ***REMOVED***);
-                                                          ***REMOVED***);
-                                                            if (parsedValues.length > 0) {
-                                                                knex.batchInsert('deathPersons', parsedValues).catch(err => {
-
-                                                              ***REMOVED***)
-                                                          ***REMOVED***
-                                                      ***REMOVED***).catch(err => {
-                                                            console.log("Error with deathDates:\n", err)
-                                                      ***REMOVED***)
-                                                  ***REMOVED***)
-                                                    .catch(err => {
-                                                        // console.log("Passing: Province Day already inserted")
-                                                  ***REMOVED***);
-
+                                  ***REMOVED*****REMOVED*****REMOVED***/
+                                            let cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                            let tests =  rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
+                                            let death = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)
+                                            if (death) {
+                                                death = death[0];
+                                          ***REMOVED*** else {
+                                                death = null
                                           ***REMOVED***
 
+                                            console.log("TestPar", tests);
+                                            let totalTests = tests.match(/\s((\d+\s+)*\d+)/)[0];
+                                            if (totalTests) {
+                                                totalTests = parseNumber(totalTests.trim());
+                                          ***REMOVED*** else {
+                                                totalTests = null;
+                                          ***REMOVED***
+                                            let totalCases = cases.trim().match(/\s((\d+\s+)*\d+)/);
+                                            if (totalCases) {
+                                                totalCases = parseNumber(totalCases[0].trim());
+                                          ***REMOVED***
 
-                                            console.log("TESTS:", (tests[0].text).match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
+                                            console.log("Total Tests:", totalTests);
+                                            console.log("Total Cases:", totalCases);
+                                            console.log("Done Table 2");
+
+
+                                            console.log("TESTS:", tests.match(/\s((\d+\s+)*\d+)/)[0].trim()); // Matches the string for for the test cases.
                                             // console.log("SEARCH DATE: ",`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`)
                                             parsedDate = d.toLocaleDateString().split("/")
                                             parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`
@@ -367,29 +267,11 @@ function parseNumber(number) {
                                       ***REMOVED*** catch (e) {
                                             console.log("ANOOOOTHER ERRROR?:", e)
                                             const paragraphs = HTMLParser.parse(html)
-                                            //console.log(html.match(/total number of.*tests.*\s\d+[\.|\n]/i)[0])
-                                            // paragraphs.querySelectorAll("p")[2].text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
                                             let testPar = paragraphs.querySelectorAll("p")
 
-                                            let cases = testPar.find((currentVal, index, arr) => {
-                                                let paragraph = currentVal.text.match(/total.*confirmed.*(covid-19)? cases.*?\s[\s??\d+]+/i)
-                                                if (!paragraph) {
-                                                    return false;
-                                              ***REMOVED*** else {
-                                                    paragraph = paragraph[0].split(".")[0]
-                                                    return true
-                                              ***REMOVED***
-                                          ***REMOVED***)
-                                            let testString = ""
-                                            let tests = testPar.find((currentVal, index, arr) => {
-                                                let paragraph = currentVal.text.match(/(number.*?tests\sconducted)([\D]*?\d[\s??\d+]+)/i)
-                                                if (!paragraph) {
-                                                    return false;
-                                              ***REMOVED*** else {
-                                                    testString = paragraph[2].split(".")[0]
-                                                    return true
-                                              ***REMOVED***
-                                          ***REMOVED***)
+                                            let date = rootChild.text.match(/\d{2***REMOVED***\s\w{,9***REMOVED***\s20\d{2***REMOVED***/)
+                                            let cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                            let tests =  rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
                                             let death = paragraphs.text.match(/death[s]?[^\.].*?\d[\s?\d]*/)
                                             if (death) {
                                                 death = death[0];
@@ -397,14 +279,14 @@ function parseNumber(number) {
                                                 death = null
                                           ***REMOVED***
 
-                                            console.log("TestPar", testPar.text);
-                                            let totalTests = testString.trim().match(/\s((\d+\s+)*\d+)/)[0];
+                                            console.log("TestPar", tests);
+                                            let totalTests = tests.match(/\s((\d+\s+)*\d+)/)[0];
                                             if (totalTests) {
                                                 totalTests = parseNumber(totalTests.trim());
                                           ***REMOVED*** else {
                                                 totalTests = null;
                                           ***REMOVED***
-                                            let totalCases = cases.text.trim().match(/\s((\d+\s+)*\d+)/);
+                                            let totalCases = cases.trim().match(/\s((\d+\s+)*\d+)/);
                                             if (totalCases) {
                                                 totalCases = parseNumber(totalCases[0].trim());
                                           ***REMOVED***
@@ -519,32 +401,12 @@ function parseNumber(number) {
 
                               ***REMOVED***
 
-                          ***REMOVED***).catch((e) => {
-                                console.log(e)
-                          ***REMOVED***)
 
 
-                  ***REMOVED***).catch(err => {
-                        console.log('Some error:', err)
-                  ***REMOVED***)) ;
+
           ***REMOVED***
-      ***REMOVED***))
-        let status = await Promise.all(ps)
-            .then((results) => {
-                console.log("Results",results);
-                console.log("closing chrome. OK")
-                driver.close()
-                return 200
-                process.exit(200);
-          ***REMOVED***).catch(err => {
-            console.log("Error Bro",err);
-            console.log("closing chrome. Bad")
-            driver.close()
-            return -1
-            process.exit(200);
-      ***REMOVED***)
-        console.log('Done map?')
-        return status
+      ***REMOVED***));
+        // return 400
   ***REMOVED***
     catch (e) {
         console.log("Error Bro",e);

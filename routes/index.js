@@ -3,9 +3,6 @@ var router = express.Router();
 const numeral = require('numeral');
 
 
-
-
-
 const provinceList = {
     "NORTH WEST": 'ZA-NW',
     "EASTERN CAPE": 'ZA-EC',
@@ -48,6 +45,7 @@ router.get("/", function (req, res) {
                     // console.log("Prov Recovs:",provRecoveries)
                     getGraphData(knex).then(graphData => {
                         // console.log("Graph Data",graphData)
+
                         res.render("index",{data:value,provCases,provDeaths,provRecoveries,graphData***REMOVED***);
                   ***REMOVED***)
               ***REMOVED***)
@@ -55,11 +53,11 @@ router.get("/", function (req, res) {
                         // Crawling failed...
                   ***REMOVED***);
           ***REMOVED***)
+
   ***REMOVED***
     else{
         console.log("No Knex?")
   ***REMOVED***
-
 ***REMOVED***)
 let getSummary = function(knex) {
 

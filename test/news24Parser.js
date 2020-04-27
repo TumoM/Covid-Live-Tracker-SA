@@ -272,7 +272,7 @@ async function main() {
                                                                     .then(value1 => {
                                                                   ***REMOVED***)
                                                                     .catch(reason => {
-                                                                        console.log("Error on Recovery Dates Insert")
+                                                                        console.log("Error on Recovery Dates Insert", reason)
                                                                   ***REMOVED***)
                                                           ***REMOVED*** else {
                                                                 console.log("Should we do something here?")
@@ -357,95 +357,97 @@ catch (e) {
     console.log("Error Bro",e);
     return(-1)
 ***REMOVED***
-***REMOVED***
-function getNumber(line){
-    let intString = "";
-    let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
-    total.forEach(digit => {
-        intString += digit
-  ***REMOVED***)
-    return (+intString)
-***REMOVED***
 
-function updateDaysGood(itemData) {
-    console.log('Updating Day Function:')
-    let dateData = {
-        totalCases,
-        totalDeaths,
-        totalRecoveries,
-        maybeValid: true,
-        parsed: true
+    function getNumber(line){
+        let intString = "";
+        let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
+        total.forEach(digit => {
+            intString += digit
+      ***REMOVED***)
+        return (+intString)
   ***REMOVED***
-    console.log("Date:", itemData.provDate)
-    knex('dates')
-        .select()
-        .where({date: itemData.provDate***REMOVED***)
-        .then(rows => {
-            // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
-            console.log("date in func", itemData.provDate)
-            if (rows.length === 0) {
-                dateData.date = itemData.provDate,
-                    knex("dates ").insert(dateData)
+
+    function updateDaysGood(itemData) {
+        console.log('Updating Day Function:')
+
+        let dateData = {
+            totalCases,
+            totalDeaths,
+            totalRecoveries,
+            maybeValid: true,
+            parsed: true
+      ***REMOVED***
+        console.log("Date:", itemData.provDate)
+        knex('dates')
+            .select()
+            .where({date: itemData.provDate***REMOVED***)
+            .then(rows => {
+                // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
+                console.log("date in func", itemData.provDate)
+                if (rows.length === 0) {
+                    dateData.date = itemData.provDate,
+                        knex("dates ").insert(dateData)
+                            .then(id => {
+                                console.log("Inserted into Dates Table")
+                                knex.raw('WITH preTable AS (\n' +
+                                    '   SELECT\n' +
+                                    '      date,\n' +
+                                    '      "totalCases",\n' +
+                                    '      "totalDeaths",\n' +
+                                    '        "totalRecoveries",\n' +
+                                    '      LAG("totalCases",1)\n' +
+                                    '          OVER (\n' +
+                                    '            ORDER BY date\n' +
+                                    '            ) prevCases,\n' +
+                                    '      LAG("totalDeaths",1)\n' +
+                                    '          OVER (\n' +
+                                    '            ORDER BY date\n' +
+                                    '            ) prevDeaths,\n' +
+                                    '          LAG("totalRecoveries",1)\n' +
+                                    '            OVER(\n' +
+                                    '                ORDER BY date\n' +
+                                    '                ) prevRecoveries\n' +
+                                    '   FROM dates\n' +
+                                    '   ORDER BY date\n' +
+                                    ')\n' +
+                                    'select\n' +
+                                    '       date,\n' +
+                                    '       prevRecoveries as "prevRecoveries",\n' +
+                                    '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                                    '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                                    'from preTable\n' +
+                                    'order by date desc\n' +
+                                    'limit 1;')
+                                    .then(prevVals => {
+                                        knex('dates').update({
+                                            dailyNew: prevVals.rows[0].dailyNew,
+                                            dailyDeaths: prevVals.rows[0].dailyDeaths,
+                                            totalRecoveries: prevVals.rows[0].prevRecoveries
+                                      ***REMOVED***).where('date', '=', itemData.provDate)
+                                            .catch(reason => {
+                                                log('WHAAAAAT?', reason)
+                                          ***REMOVED***)
+                                  ***REMOVED***)
+                                    .catch(err => {
+                                        console.log("Attempted duplicate insert?", err)
+                                  ***REMOVED***)
+                          ***REMOVED***)
+              ***REMOVED*** else {
+                    knex("dates ")
+                        .update(dateData)
+                        .where('date', "=", itemData.provDate)
                         .then(id => {
-                            console.log("Inserted into Dates Table")
-                            knex.raw('WITH preTable AS (\n' +
-                                '   SELECT\n' +
-                                '      date,\n' +
-                                '      "totalCases",\n' +
-                                '      "totalDeaths",\n' +
-                                '        "totalRecoveries",\n' +
-                                '      LAG("totalCases",1)\n' +
-                                '          OVER (\n' +
-                                '            ORDER BY date\n' +
-                                '            ) prevCases,\n' +
-                                '      LAG("totalDeaths",1)\n' +
-                                '          OVER (\n' +
-                                '            ORDER BY date\n' +
-                                '            ) prevDeaths,\n' +
-                                '          LAG("totalRecoveries",1)\n' +
-                                '            OVER(\n' +
-                                '                ORDER BY date\n' +
-                                '                ) prevRecoveries\n' +
-                                '   FROM dates\n' +
-                                '   ORDER BY date\n' +
-                                ')\n' +
-                                'select\n' +
-                                '       date,\n' +
-                                '       prevRecoveries as "prevRecoveries",\n' +
-                                '    ("totalCases"-prevCases) as "dailyNew",\n' +
-                                '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
-                                'from preTable\n' +
-                                'order by date desc\n' +
-                                'limit 1;')
-                                .then(prevVals => {
-                                    knex('dates').update({
-                                        dailyNew: prevVals.rows[0].dailyNew,
-                                        dailyDeaths: prevVals.rows[0].dailyDeaths,
-                                        totalRecoveries: prevVals.rows[0].prevRecoveries
-                                  ***REMOVED***).where('date', '=', itemData.provDate)
-                                        .catch(reason => {
-                                            log('WHAAAAAT?', reason)
-                                      ***REMOVED***)
-                              ***REMOVED***)
-                                .catch(err => {
-                                    console.log("Attempted duplicate insert?", err)
-                              ***REMOVED***)
+                            console.log("Updated Dates Table")
                       ***REMOVED***)
-          ***REMOVED*** else {
-                knex("dates ")
-                    .update(dateData)
-                    .where('date', "=", itemData.provDate)
-                    .then(id => {
-                        console.log("Updated Dates Table")
-                  ***REMOVED***)
-                    .catch(err => {
-                        console.log("Attempted duplicate update?", err)
-                  ***REMOVED***)
-          ***REMOVED***
-      ***REMOVED***);
+                        .catch(err => {
+                            console.log("Attempted duplicate update?", err)
+                      ***REMOVED***)
+              ***REMOVED***
+          ***REMOVED***);
+  ***REMOVED***
+
+
 ***REMOVED***
-
-
 ***REMOVED***
 ***REMOVED*** Perform an "Upsert" using the "INSERT ... ON CONFLICT ... " syntax in PostgreSQL 9.5
 ***REMOVED*** @param {string***REMOVED*** tableName - The name of the database table

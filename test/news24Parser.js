@@ -1,410 +1,453 @@
-const HTMLParser = require('node-html-parser'),
-    rp = require('request-promise'),
-    Province = require("../models/provinceModel"),
-    Death = require("../models/deathModel"),
-    Day = require("../models/dayModel"),
-    DbSetup = require("../test/db24"),
-    JSSoup = require('jssoup').default;
-const url = "https://www.health24.com/Medical/Infectious-diseases/Coronavirus/coronavirus-in-sa-all-the-confirmed-cases-20200312";
+async function main() {
+    const HTMLParser = require('node-html-parser'),
+        rp = require('request-promise'),
+        Province = require("../models/provinceModel"),
+        Death = require("../models/deathModel"),
+        Day = require("../models/dayModel"),
+        DbSetup = require("../test/db24"),
+        JSSoup = require('jssoup').default;
+    const url = "https://www.health24.com/Medical/Infectious-diseases/Coronavirus/coronavirus-in-sa-all-the-confirmed-cases-20200312";
 // const url = "http://127.0.0.1:5500/Coronavirus%20in%20SA%20%20All%20the%20confirmed%20cases%20%20%20Health24-1.html";
 
-const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: '127.0.0.1',
-        user: 'test_user',
-        password: 'temp_pass',
-        database: 'covid-tracker-sa2'
+    const dotenv = require('dotenv');
+    dotenv.config();
+    let connection;
+    if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
+        connection = process.env.DATABASE_URL
+    } else {
+        connection = {
+            host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
+            user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
+            password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
+            database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
+        };
     }
-});
 
-
-const PROVINCES = { // Name, [cases, deadArr]
-    "GAUTENG": new Province("GAUTENG"),
-    "WESTERN CAPE": new Province("WESTERN CAPE"),
-    "KWAZULU–NATAL": new Province("KWAZULU–NATAL"),
-    "FREE STATE": new Province("FREE STATE"),
-    "EASTERN CAPE": new Province("EASTERN CAPE"),
-    "LIMPOPO": new Province("LIMPOPO"),
-    "MPUMALANGA": new Province("MPUMALANGA"),
-    "NORTH WEST": new Province("NORTH WEST"),
-    "NORTHERN CAPE": new Province("NORTHERN CAPE"),
-    "UNALLOCATED": new Province("UNALLOCATED")
-}
-let provincesList = [
-    "Gauteng",
-    "Western Cape",
-    "KwaZulu-Natal",
-    "Free State",
-    "Eastern Cape",
-    "Limpopo",
-    "Mpumalanga",
-    "North West",
-    "Northern Cape",
-    "Unallocated"
-]
-let totalCases = 0,
-    totalDeaths = 0,
-    totalRecoveries = 0,
-    date;
-
-
-function updateDaysGood(itemData) {
-    console.log('Updating Day Function:')
-    let dateData = {
-        totalCases,
-        totalDeaths,
-        totalRecoveries,
-        maybeValid: false,
-        parsed: true
-    }
-    console.log("Date:",itemData.provDate)
-    knex('dates')
-    .select()
-    .where({date:itemData.provDate})
-    .then(rows => {
-        // console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
-        console.log("date in func",itemData.provDate)
-        if (rows.length === 0) {
-            dateData.date = itemData.provDate,
-            knex("dates ").insert(dateData)
-                .then(id => {
-                    console.log("Inserted into Dates Table")
-                    knex.raw('WITH preTable AS (\n' +
-                        '   SELECT\n' +
-                        '      date,\n' +
-                        '      "totalCases",\n' +
-                        '      "totalDeaths",\n' +
-                        '        "totalRecoveries",\n' +
-                        '      LAG("totalCases",1)\n' +
-                        '          OVER (\n' +
-                        '            ORDER BY date\n' +
-                        '            ) prevCases,\n' +
-                        '      LAG("totalDeaths",1)\n' +
-                        '          OVER (\n' +
-                        '            ORDER BY date\n' +
-                        '            ) prevDeaths,\n' +
-                        '          LAG("totalRecoveries",1)\n' +
-                        '            OVER(\n' +
-                        '                ORDER BY date\n' +
-                        '                ) prevRecoveries\n' +
-                        '   FROM dates\n' +
-                        '   ORDER BY date\n' +
-                        ')\n' +
-                        'select\n' +
-                        '       date,\n' +
-                        '       prevRecoveries as "prevRecoveries",\n' +
-                        '    ("totalCases"-prevCases) as "dailyNew",\n' +
-                        '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
-                        'from preTable\n' +
-                        'order by date desc\n' +
-                        'limit 1;')
-                        .then(prevVals=>{
-                            knex('dates').update({
-                                dailyNew:prevVals.rows[0].dailyNew,
-                                dailyDeaths:prevVals.rows[0].dailyDeaths,
-                                totalRecoveries:prevVals.rows[0].prevRecoveries
-                            }).where('date','=',itemData.provDate)
-                                .catch(reason => {
-                                    log('WHAAAAAT?',reason)
-                                })
-                })
-                .catch(err => {
-                    console.log("Attempted duplicate insert?",err)
-                })
-        })}
-        else{
-            knex("dates ")
-            .update(dateData)
-            .where('date',"=",itemData.provDate)
-                .then(id => {
-                    console.log("Updated Dates Table")
-                })
-                .catch(err => {
-                    console.log("Attempted duplicate update?",err)
-                })
+    console.log("Connection:", connection)
+    const knex = require('knex')({
+            client: 'pg',
+            debug: true,
+            asyncStackTraces: true,
+            acquireConnectionTimeout: 10000,
+            pool: {
+                "min": 2,
+                "max": 50,
+                idleTimeoutMillis: 10000,
+                createTimeoutMillis: 10000,
+                acquireTimeoutMillis: 10000,
+            },
+            connection
         }
-    });
+    )
+
+
+    const PROVINCES = { // Name, [cases, deadArr]
+        "GAUTENG": new Province("GAUTENG"),
+        "WESTERN CAPE": new Province("WESTERN CAPE"),
+        "KWAZULU–NATAL": new Province("KWAZULU–NATAL"),
+        "FREE STATE": new Province("FREE STATE"),
+        "EASTERN CAPE": new Province("EASTERN CAPE"),
+        "LIMPOPO": new Province("LIMPOPO"),
+        "MPUMALANGA": new Province("MPUMALANGA"),
+        "NORTH WEST": new Province("NORTH WEST"),
+        "NORTHERN CAPE": new Province("NORTHERN CAPE"),
+        "UNALLOCATED": new Province("UNALLOCATED")
     }
+    let provincesList = [
+        "Gauteng",
+        "Western Cape",
+        "KwaZulu-Natal",
+        "Free State",
+        "Eastern Cape",
+        "Limpopo",
+        "Mpumalanga",
+        "North West",
+        "Northern Cape",
+        "Unallocated"
+    ]
+    let totalCases = 0,
+        totalDeaths = 0,
+        totalRecoveries = 0,
+        date;
 
-rp(url)
-    .then(function (html) {
-        //success!
-        let currentProvincesRecovery = Object.assign({}, PROVINCES);
-        let currentProvincesCasesDeaths = Object.assign({}, PROVINCES);
-
-        // #######################################################################################
-        const headHtml = html.match(/<h6.*block datestamp[\s\S]*<\/hgroup>/m), // The Header with total Cases and Deaths.
-            bodyHtml = html.match(/.*those details can be found here/m), // The body with province counts.
-            soupHead = new JSSoup(headHtml),
-            soupBody = new JSSoup(bodyHtml);
 
 
-        // Parses the 'head' of the page for Case and Death Numbers
-        let templines = soupHead.prettify().trim().split(/<\/?\w*\s?\d?[\s\S]?>\n/);
-        date = templines[0].split('Updated')[1].trim();
-        let parsed = false
-        knex('dates').where({date}).then(rows => {
-            console.log("Row Count:", rows.length);
-            if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
-                parsed = true;
-                console.log("Skipping");
-            }
-            // else if (rows.length > 0 && rows[0].maybeValid) {
-            //     // Maybe the format is all wrong. Parse another site/source?
-            // }
-            else if ((rows.length === 0)  || rows[0].maybeValid || (rows.length > 0 && !rows[0].error)) {
-                [totalCases, totalDeaths] = (templines[5].trim().split("."))
+    let ps = [];
+    try {
+        let status = await rp(url)
+            .then(async function (html) {
+                //success!
+                let currentProvincesRecovery = Object.assign({}, PROVINCES);
+                let currentProvincesCasesDeaths = Object.assign({}, PROVINCES);
 
-                totalCases = getNumber(totalCases)
-                totalDeaths = getNumber(totalDeaths)
-
-                console.log(`${date}: Cases:${totalCases}, Deaths:${totalDeaths}`)
                 // #######################################################################################
+                const headHtml = html.match(/<h6.*block datestamp[\s\S]*<\/hgroup>/m), // The Header with total Cases and Deaths.
+                    bodyHtml = html.match(/.*those details can be found here/m), // The body with province counts.
+                    soupHead = new JSSoup(headHtml),
+                    soupBody = new JSSoup(bodyHtml);
 
-                // TODO 1: Parse info on Recoveries by Province
-                let recoveriesLines = soupBody.find('p').getText().split(":");
-                recoveriesLines.length===2? recoveriesLines.unshift(date):recoveriesLines;
-                recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
 
-                totalRecoveries = getNumber(recoveriesLines[1]);
-                console.log(`Total Recovery:${totalRecoveries}\n`)
-
-                let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
-                let provinceRecoveries2 = []
-                provinceRecoveries.forEach(value => {
-                    provinceRecoveries2.push(value.split('(')[0].trim())
-                })
-                provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
-                // TODO Loop over list of prov names, insert missing names in provinceRecoveries
-                provincesList.forEach(value => { // Adds any missing provinces not mentioned as having any recoveries, and sets them to 0.
-                    if (!(provinceRecoveries2.includes(value))){
-                        provinceRecoveries.push(`${value} (0`)
+                // Parses the 'head' of the page for Case and Death Numbers
+                let templines = soupHead.prettify().trim().split(/<\/?\w*\s?\d?[\s\S]?>\n/);
+                date = templines[0].split('Updated')[1].trim();
+                let parsed = false
+                return await knex('dates').where({date}).then(rows => {
+                    console.log("Row Count:", rows.length);
+                    if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
+                        parsed = true;
+                        console.log("Skipping");
                     }
-                })
+                        // else if (rows.length > 0 && rows[0].maybeValid) {
+                        //     // Maybe the format is all wrong. Parse another site/source?
+                    // }
+                    else if ((rows.length === 0) || rows[0].maybeValid || (rows.length > 0 && !rows[0].error)) {
+                        [totalCases, totalDeaths] = (templines[5].trim().split("."))
 
-                // TODO 2: Parse info on New Cases by Province
-                console.log('\nCase Counts:')
-                let p = soupBody.find('p'),
-                    breakdown = false,
-                    caseCount = 0,
-                    deathCount = 0,
-                    provinceName = '';
+                        totalCases = getNumber(totalCases)
+                        totalDeaths = getNumber(totalDeaths)
 
-                while (!breakdown) {
-                    p = p.findNextSibling('p');
-                    if (p.text.match(/PROVINCIAL BREAKDOWN:/i)) {
-                        breakdown = true;
-                        p = p.findNextSibling('p');
-                        for (let index = 0; index < 10; index++) {
-                            let vars = p.text.replace(/&nbsp;/g, '  ').split(/[\s+]?-[\s+]?/)
-                            p = p.findNextSibling('p');
-                            provinceName = vars[1].trim() === "KwaZulu" ? "KwaZulu-Natal" : vars[1].trim();
-                            caseCount = vars[0].trim();
-                            deathCount = vars.length === 3 ? vars[2].trim().split(/\s+/)[0].trim()
-                                : vars.length === 4 ? vars[3].split(/\s+/)[0].trim()
-                                    : 0;
-                            let caseInt="", deathInt = ""
-                            caseCount.split(/\s/).forEach(digit => {
-                                caseInt += digit
-                            })
-                            caseInt = parseInt(caseInt)
-                            if (deathCount.length > 0) {
-                                deathCount.split(/\s/).forEach(digit => {
-                                    deathInt += digit
-                                })
-                                deathInt = parseInt(deathInt)
+                        console.log(`${date}: Cases:${totalCases}, Deaths:${totalDeaths}`)
+                        // #######################################################################################
+
+                        // TODO 1: Parse info on Recoveries by Province
+                        let recoveriesLines = soupBody.find('p').getText().split(":");
+                        recoveriesLines.length === 2 ? recoveriesLines.unshift(date) : recoveriesLines;
+                        recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
+
+                        totalRecoveries = getNumber(recoveriesLines[1]);
+                        console.log(`Total Recovery:${totalRecoveries}\n`)
+
+                        let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
+                        let provinceRecoveries2 = []
+                        provinceRecoveries.forEach(value => {
+                            provinceRecoveries2.push(value.split('(')[0].trim())
+                        })
+                        provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
+                        // TODO Loop over list of prov names, insert missing names in provinceRecoveries
+                        provincesList.forEach(value => { // Adds any missing provinces not mentioned as having any recoveries, and sets them to 0.
+                            if (!(provinceRecoveries2.includes(value))) {
+                                provinceRecoveries.push(`${value} (0`)
                             }
-                            else{
-                                deathInt = 0
-                                }
-                            let tempProv = new Province(provinceName, caseInt);
-                            tempProv.deaths = deathInt;
-                            tempProv.date = date;
-                            console.log(`${provinceName} - Cases: ${tempProv.cases}, Dead: ${tempProv.deaths}`)
-                            currentProvincesCasesDeaths[provinceName] = tempProv;
+                        })
 
-                            // TODO Build object to upload to ProvinceDays using insertIgnore funct below
+                        // TODO 2: Parse info on New Cases by Province
+                        console.log('\nCase Counts:')
+                        let p = soupBody.find('p'),
+                            breakdown = false,
+                            caseCount = 0,
+                            deathCount = 0,
+                            provinceName = '';
+
+                        while (!breakdown) {
+                            p = p.findNextSibling('p');
+                            if (p.text.match(/PROVINCIAL BREAKDOWN:/i)) {
+                                breakdown = true;
+                                p = p.findNextSibling('p');
+                                for (let index = 0; index < 10; index++) {
+                                    let vars = p.text.replace(/&nbsp;/g, '  ').split(/[\s+]?-[\s+]?/)
+                                    p = p.findNextSibling('p');
+                                    provinceName = vars[1].trim() === "KwaZulu" ? "KwaZulu-Natal" : vars[1].trim();
+                                    caseCount = vars[0].trim();
+                                    deathCount = vars.length === 3 ? vars[2].trim().split(/\s+/)[0].trim()
+                                        : vars.length === 4 ? vars[3].split(/\s+/)[0].trim()
+                                            : 0;
+                                    let caseInt = "", deathInt = ""
+                                    caseCount.split(/\s/).forEach(digit => {
+                                        caseInt += digit
+                                    })
+                                    caseInt = parseInt(caseInt)
+                                    if (deathCount.length > 0) {
+                                        deathCount.split(/\s/).forEach(digit => {
+                                            deathInt += digit
+                                        })
+                                        deathInt = parseInt(deathInt)
+                                    } else {
+                                        deathInt = 0
+                                    }
+                                    let tempProv = new Province(provinceName, caseInt);
+                                    tempProv.deaths = deathInt;
+                                    tempProv.date = date;
+                                    console.log(`${provinceName} - Cases: ${tempProv.cases}, Dead: ${tempProv.deaths}`)
+                                    currentProvincesCasesDeaths[provinceName] = tempProv;
+
+                                    // TODO Build object to upload to ProvinceDays using insertIgnore funct below
+                                    let tableName = 'provinceDays';
+                                    let tempDate = date.split(" ");
+                                    const dateFormatted = new Date(date);
+                                    let newTemp = dateFormatted.toLocaleDateString().split("/")
+                                    let provDate = `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`
+                                    let itemData = {
+                                        provinceName,
+                                        provDate,
+                                        caseCount: caseInt,
+                                        deathCount: deathInt
+                                    };
+                                    knex(tableName).where({provDate, provinceName})
+                                        .then(rows => {
+                                            if (rows.length === 0) {
+                                                knex(tableName).insert(itemData)
+                                                    .then(value => {
+                                                        if (index === 9) {
+                                                            updateDaysGood(itemData);
+                                                        }
+                                                    })
+                                                    .catch(reason => {
+                                                        console.log("Error inserting Province ", reason)
+                                                    })
+                                            } else {
+                                                // console.log("Already in.")
+                                                if (index === 9) {
+                                                    updateDaysGood(itemData);
+                                                }
+                                            }
+                                        })
+                                        .catch(reason => {
+                                            console.log("Duplicate Province? ", reason)
+                                        })
+                                }
+                            }
+                        }
+
+                        console.log(`Recovery Counts (${recoveryDate}):`)
+                        let count = 0;
+                        provinceRecoveries.forEach(line => {
+                            let recoverCount, provinceName;
+                            [provinceName, recoverCount] = line.trim().split("(")
+                            provinceName = provinceName.trim();
+                            const tempProvince = new Province(provinceName)
+                            tempProvince.recoveries = recoverCount;
+                            tempProvince.date = recoveryDate;
+                            currentProvincesRecovery[provinceName] = tempProvince;
+
+                            console.log(`${provinceName}: ${recoverCount}`);
                             let tableName = 'provinceDays';
-                            let tempDate = date.split(" ");
-                            const dateFormatted = new Date(date);
+                            let tempDate = recoveryDate.split(" ");
+                            const dateFormatted = new Date(recoveryDate);
                             let newTemp = dateFormatted.toLocaleDateString().split("/")
-                            let provDate = `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`
                             let itemData = {
                                 provinceName,
-                                provDate,
-                                caseCount:caseInt,
-                                deathCount:deathInt
+                                provDate: `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`,
+                                recovered: recoverCount
                             };
-                            knex(tableName).where({provDate, provinceName})
+
+                             knex(tableName).select().where({provDate: itemData.provDate, provinceName})
                                 .then(rows => {
                                     if (rows.length === 0) {
                                         knex(tableName).insert(itemData)
                                             .then(value => {
-                                                if (index === 9) {
-                                                    updateDaysGood(itemData);
-                                                }
+                                                console.log("Recovered Inserted")
                                             })
                                             .catch(reason => {
-                                                console.log("Error inserting Province ", reason)
+                                                console.log("Error inserting Province Recovered, attempting to Update")
+                                                knex(tableName)
+                                                    .update({recovered: itemData.recovered})
+                                                    .where('provinceName', '=', itemData.provinceName)
+                                                    .then(value => {
+                                                        console.log("Province Recoveries Updated")
+                                                    })
+                                                    .catch(reason1 => {
+                                                        console.log("Error Updating Province Recovered", reason1)
+                                                    })
+                                            })
+                                            .finally(() => {
+                                                count += 1;
+                                                if (count === 9) {
+                                                    let dateData = {
+                                                        totalRecoveries: totalRecoveries,
+                                                        maybeValid: false,
+                                                        parsed: true
+                                                    };
+
+                                                    knex('dates')
+                                                        .update(dateData)
+                                                        .where('date', '=', itemData.provDate)
+                                                        .then(value => {
+                                                            console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
+                                                            console.log("Value", value)
+                                                            dateData.date = itemData.provDate;
+                                                            if (value === 0) {
+                                                                dateData.parsed = true;
+                                                                knex('dates')
+                                                                    .insert(dateData)
+                                                                    .then(value1 => {
+                                                                    })
+                                                                    .catch(reason => {
+                                                                        console.log("Error on Recovery Dates Insert", reason)
+                                                                    })
+                                                            } else {
+                                                                console.log("Should we do something here?")
+                                                            }
+
+                                                        })
+                                                }
                                             })
                                     } else {
-                                        // console.log("Already in.")
-                                        if (index === 9) {
-                                            updateDaysGood(itemData);
-                                        }
+                                        let valid = true;
+                                        let day, month, year;
+                                        [day, month, year] = (new Date(date).toLocaleDateString().split('/', 3))
+                                        knex(tableName).update({recovered: itemData.recovered})
+                                            .where({provDate: recoveryDate, provinceName: itemData.provinceName})
+                                            .orWhere({
+                                                provDate: ([year, day, month].join("-")),
+                                                provinceName: itemData.provinceName
+                                            })
+                                            .then(value => {
+                                                console.log("Recovered for single province Updated")
+                                                // count+=1;
+                                            })
+                                            .catch(reason => {
+                                                console.log("Error Updating Province Recovered", reason)
+                                                valid = false;
+                                            })
+                                            .finally(() => {
+                                                count += 1;
+                                                if (count === 9) {
+                                                    let dateData = {
+                                                        totalRecoveries: totalRecoveries,
+                                                        maybeValid: false,
+                                                        parsed: true
+                                                    };
+
+                                                    knex('dates')
+                                                        .update(dateData)
+                                                        .where('date', '=', itemData.provDate)
+                                                        .then(value => {
+                                                            console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
+                                                            console.log("Value", value)
+                                                            dateData.date = itemData.provDate;
+                                                            if (value === 0) {
+                                                                dateData.parsed = true;
+                                                                knex('dates')
+                                                                    .insert(dateData)
+                                                                    .then(value1 => {
+                                                                        console.log("Value1", value1)
+                                                                    })
+                                                                    .catch(reason => {
+                                                                        console.log("Error on Recovery Dates Insert")
+                                                                    })
+                                                            }
+                                                        })
+                                                }
+                                            })
                                     }
                                 })
                                 .catch(reason => {
                                     console.log("Duplicate Province? ", reason)
                                 })
-                        }
+                        })
                     }
-                }
-
-                console.log(`Recovery Counts (${recoveryDate}):`)
-                let count = 0;
-                provinceRecoveries.forEach(line => {
-                    let recoverCount, provinceName;
-                    [provinceName, recoverCount] = line.trim().split("(")
-                    provinceName = provinceName.trim();
-                    const tempProvince = new Province(provinceName)
-                    tempProvince.recoveries = recoverCount;
-                    tempProvince.date = recoveryDate;
-                    currentProvincesRecovery[provinceName] = tempProvince;
-
-                    console.log(`${provinceName}: ${recoverCount}`);
-                    let tableName = 'provinceDays';
-                    let tempDate = recoveryDate.split(" ");
-                    const dateFormatted = new Date(recoveryDate);
-                    let newTemp = dateFormatted.toLocaleDateString().split("/")
-                    let itemData = {
-                        provinceName,
-                        provDate: `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`,
-                        recovered: recoverCount
-                    };
-
-                    knex(tableName).select().where({provDate: itemData.provDate, provinceName})
-                        .then(rows => {
-                            if (rows.length === 0) {
-                                knex(tableName).insert(itemData)
-                                    .then(value => {
-                                        console.log("Recovered Inserted")
-                                    })
-                                    .catch(reason => {
-                                        console.log("Error inserting Province Recovered, attempting to Update")
-                                        knex(tableName)
-                                        .update({recovered:itemData.recovered})
-                                        .where('provinceName','=',itemData.provinceName)
-                                            .then(value => {
-                                                console.log("Province Recoveries Updated")
-                                            })
-                                            .catch(reason1 => {
-                                                console.log("Error Updating Province Recovered", reason1)
-                                            })
-                                    })
-                                    .finally(() => {
-                                        count+=1;
-                                        if (count === 9){
-                                            let dateData = {
-                                                totalRecoveries:totalRecoveries,
-                                                maybeValid: false,
-                                                parsed: true
-                                            };
-
-                                            knex('dates')
-                                                .update(dateData)
-                                                .where('date','=',itemData.provDate)
-                                                .then(value => {
-                                                    console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
-                                                    console.log("Value",value)
-                                                    dateData.date = itemData.provDate;
-                                                    if (value === 0){
-                                                        dateData.parsed = true;
-                                                        knex('dates')
-                                                            .insert(dateData)
-                                                            .then(value1 => {
-                                                            })
-                                                            .catch(reason => {
-                                                                console.log("Error on Recovery Dates Insert")
-                                                            })
-                                                    }
-                                                    else{
-                                                        console.log("Should we do something here?")
-                                                    }
-
-                                                })
-                                        }
-                                    })
-                            } else {
-                                let valid = true;
-                                let day,month,year;
-                                [day,month,year]= (new Date(date).toLocaleDateString().split('/',3))
-                                knex(tableName).update({recovered: itemData.recovered})
-                                    .where({provDate: recoveryDate,provinceName:itemData.provinceName})
-                                    .orWhere({provDate: ([year,day,month].join("-")),provinceName:itemData.provinceName})
-                                    .then(value => {
-                                        console.log("Recovered for single province Updated")
-                                        // count+=1;
-                                    })
-                                    .catch(reason => {
-                                        console.log("Error Updating Province Recovered", reason)
-                                        valid = false;
-                                    })
-                                    .finally(() => {
-                                        count+=1;
-                                        if (count === 9){
-                                            let dateData = {
-                                                totalRecoveries:totalRecoveries,
-                                                maybeValid: false,
-                                                parsed: true
-                                            };
-
-                                            knex('dates')
-                                                .update(dateData)
-                                                .where('date','=',itemData.provDate)
-                                                .then(value => {
-                                                    console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`)
-                                                    console.log("Value",value)
-                                                    dateData.date = itemData.provDate;
-                                                    if (value === 0){
-                                                        dateData.parsed = true;
-                                                        knex('dates')
-                                                            .insert(dateData)
-                                                            .then(value1 => {
-                                                                console.log("Value1",value1)
-                                                            })
-                                                            .catch(reason => {
-                                                                console.log("Error on Recovery Dates Insert")
-                                                            })
-                                                    }
-                                                })
-                                        }
-                                    })
-                            }
-                        })
-                        .catch(reason => {
-                            console.log("Duplicate Province? ", reason)
-                        })
+                    console.log("Swag 2")
+                    return 200
+                    process.exit(200);
                 })
-            }
-            console.log("Swag 2")
-        })
-        .catch(function (err) {
-            console.log(err)
-        });
-    })
-
-function getNumber(line){
-    let intString = "";
-    let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
-    total.forEach(digit => {
-        intString += digit
-    })
-    return (+intString)
+                    .catch(function (err) {
+                        console.log(err)
+                    });
+            })
+            .then((results) => {
+                console.log("Results!!::", results);
+            }).catch(err => {
+                console.log("Error Bro", err);
+                return -1
+            })
+        console.log('Done map?')
+        return status
+}
+catch (e) {
+    console.log("Error Bro",e);
+    return(-1)
 }
 
+    function getNumber(line){
+        let intString = "";
+        let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
+        total.forEach(digit => {
+            intString += digit
+        })
+        return (+intString)
+    }
 
+    function updateDaysGood(itemData) {
+        console.log('Updating Day Function:')
+
+        let dateData = {
+            totalCases,
+            totalDeaths,
+            totalRecoveries,
+            maybeValid: true,
+            parsed: true
+        }
+        console.log("Date:", itemData.provDate)
+        knex('dates')
+            .select()
+            .where({date: itemData.provDate})
+            .then(rows => {
+                // console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
+                console.log("date in func", itemData.provDate)
+                if (rows.length === 0) {
+                    dateData.date = itemData.provDate,
+                        knex("dates ").insert(dateData)
+                            .then(id => {
+                                console.log("Inserted into Dates Table")
+                                knex.raw('WITH preTable AS (\n' +
+                                    '   SELECT\n' +
+                                    '      date,\n' +
+                                    '      "totalCases",\n' +
+                                    '      "totalDeaths",\n' +
+                                    '        "totalRecoveries",\n' +
+                                    '      LAG("totalCases",1)\n' +
+                                    '          OVER (\n' +
+                                    '            ORDER BY date\n' +
+                                    '            ) prevCases,\n' +
+                                    '      LAG("totalDeaths",1)\n' +
+                                    '          OVER (\n' +
+                                    '            ORDER BY date\n' +
+                                    '            ) prevDeaths,\n' +
+                                    '          LAG("totalRecoveries",1)\n' +
+                                    '            OVER(\n' +
+                                    '                ORDER BY date\n' +
+                                    '                ) prevRecoveries\n' +
+                                    '   FROM dates\n' +
+                                    '   ORDER BY date\n' +
+                                    ')\n' +
+                                    'select\n' +
+                                    '       date,\n' +
+                                    '       prevRecoveries as "prevRecoveries",\n' +
+                                    '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                                    '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                                    'from preTable\n' +
+                                    'order by date desc\n' +
+                                    'limit 1;')
+                                    .then(prevVals => {
+                                        knex('dates').update({
+                                            dailyNew: prevVals.rows[0].dailyNew,
+                                            dailyDeaths: prevVals.rows[0].dailyDeaths,
+                                            totalRecoveries: prevVals.rows[0].prevRecoveries
+                                        }).where('date', '=', itemData.provDate)
+                                            .catch(reason => {
+                                                log('WHAAAAAT?', reason)
+                                            })
+                                    })
+                                    .catch(err => {
+                                        console.log("Attempted duplicate insert?", err)
+                                    })
+                            })
+                } else {
+                    knex("dates ")
+                        .update(dateData)
+                        .where('date', "=", itemData.provDate)
+                        .then(id => {
+                            console.log("Updated Dates Table")
+                        })
+                        .catch(err => {
+                            console.log("Attempted duplicate update?", err)
+                        })
+                }
+            });
+    }
+
+
+}
 /**
  * Perform an "Upsert" using the "INSERT ... ON CONFLICT ... " syntax in PostgreSQL 9.5
  * @param {string} tableName - The name of the database table
@@ -431,3 +474,8 @@ function insertUpdateRecovered(tableName, itemData) {
         .then(result => result.rows);
 };
 
+main()
+    .then(result=>{
+        console.log("main result:",result);
+    })
+    .catch(err=> console.log('Your Err',err));

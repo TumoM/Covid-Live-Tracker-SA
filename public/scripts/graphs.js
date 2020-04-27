@@ -3,16 +3,40 @@ let data;
 let type = 'linear';
 let mode = "x";
 let intersect = "false";
-Chart.defaults.global.hover.mode = 'nearest';
-Chart.defaults.global.hover.intersect = false;
-Chart.defaults.global.tooltips.mode = 'nearest';
+// Chart.defaults.global.legend.labels = labels;
+let labels = [];
+let totalCasesArr = [];
+let totalDeathsArr = [];
+let activeCasesArr = [];
+let dailyNewArr = [];
+let dailyDeathsArr = [];
+let timeFormat = 'MM/DD/YYYY HH:mm';
+let date = 'MMM DD';
+let now;
+let dragOptions = {
+    animationDuration: 1000
+};
+
+titleCallback = (tooltipItem, data) => {
+    let date = data['labels'][tooltipItem[0]['index']].toString()
+    date = date.split(" ",5)
+    date = `${date[1]} ${date[2]}, ${date[3]}`
+    return date;
+};
+labelCallback = (tooltipItem, data) => {
+    return String(data['datasets'][0]['data'][tooltipItem['index']]);
+};
+
+Chart.defaults.global.hover.mode = 'x';
+Chart.defaults.global.hover.intersect = true;
+Chart.defaults.global.tooltips.mode = 'x';
 Chart.defaults.global.tooltips.intersect = false;
 Chart.scaleService.updateScaleDefaults('logarithmic', {
     ticks: {
         callback: function(value, index) {
             if (value !== 0) return numeral(value).format('0a');
         },
-            autoSkip: true,
+        autoSkip: true,
         autoSkipPadding:100,
         min:0,
         minRotation:0,
@@ -23,27 +47,27 @@ Chart.scaleService.updateScaleDefaults('logarithmic', {
         }
     }
 });
-// Chart.defaults.global.legend.labels = labels;
-let labels = [];
-let totalCasesArr = [];
-let totalDeathsArr = [];
-let activeCasesArr = [];
-let dailyNewArr = [];
-let dailyDeathsArr = [];
-
-titleCallback = (tooltipItem, data) => {
-    let date = data['labels'][tooltipItem[0]['index']].toString()
-    date = date.split(" ",5)
-    date = `${date[1]} ${date[2]}, ${date[3]}`
-    return date;
-};
-labelCallback = (tooltipItem, data) => {
-    return data['datasets'][0]['data'][tooltipItem['index']];
-};
-
-
 Chart.defaults.global.tooltips.callbacks.title = titleCallback;
 Chart.defaults.global.tooltips.callbacks.label = labelCallback;
+/*Chart.defaults.global.tooltips.callbacks.labelColor = function(tooltipItem, chart) {
+                        return {
+                            backgroundColor: 'rgb(255, 0, 0)'
+                        };
+}*/
+// Chart.defaults.global.tooltips.alignments.bodyAlign = 'center';
+Chart.defaults.global.tooltips.bodyAlign = 'center';
+Chart.defaults.global.tooltips.titleAlign = 'center';
+// Chart.defaults.global.tooltips.label = 'Number:';
+Chart.scaleService.updateScaleDefaults( "linear",{time:{min:"2020-03-04"}})
+// Chart.scaleService.updateScaleDefaults( "bar",{ticks:{min:"2020-03-04"}})
+Chart.scaleService.updateScaleDefaults('linear', {
+    ticks: {
+        min: 0
+    }
+});
+// Chart.defaults.scales.ticks.min=1;
+Chart.defaults.scale.ticks.beginAtZero = true;
+
 
 setGraphs = (graphData)=>{
     graphData.forEach(row=>{
@@ -54,63 +78,90 @@ setGraphs = (graphData)=>{
         dailyNewArr.push(row.dailyNew)
         dailyDeathsArr.push(row.dailyDeaths)
     })
-
+    now = moment();
     // Total Case Count
     ctx = document.getElementById('chart1').getContext('2d');
     chart1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-
+        responsive: true,
         // The data for our dataset
         data: {
             labels,
             datasets: [{
                 label: '# Cases',
-                // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(210,210,210)',
+                borderColor: 'rgb(239,23,71)',
+                borderWidth: 2,
+                pointBackgroundColor:'rgb(64,128,46)',
+                pointBorderColor:'rgb(108,13,147)',
+
+                /* backgroundColor: 'rgb(255, 99, 132)',
+                 borderColor: 'rgb(239,23,71)',*/
                 data: totalCasesArr,
-                fill:false
+                fill:true
             }]
         },
 
         // Configuration options go here
         options: {
             plugins: {
-                datalabels: {
-                    display: function(context) {
-                        return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+                // datalabels: {
+                //     // display: function (context) {
+                //     //     return context.dataset.data[context.dataIndex]; // or >= 1 or ...
+                //     // },
+                //     formatter: function (value, index, values) {
+                //         if (!value || value == 0) {
+                //             return 0;
+                //         } else {
+                //             return value;
+                //         }
+                //     }
+                // },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x',
+
+                    },
+                    zoom: {
+                        enabled: false,
+                        mode: 'x',
+                        drag: dragOptions,
+                        speed: 0.05
                     }
-                }
+                },
+            },
+            point: {
             },
             title: {
                 display: true,
-                text: 'Daily Cases'
+                text: 'Total Cases'
             },
             scales: {
                 xAxes: [{
                     display: true,
                     type: 'time',
+                    gridLines: {
+                        drawOnChartArea: false
+                    },
                     time: {
+                        min: "2020-02-15",
+                        unit: 'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
+                            'year': 'MMM DD YY'
                         }
                     }
                 }],
                 yAxes: [{
                     display: true,
-                    labelAutoFit: true,
+                    labelAutoFit: false,
                     type: type
                 }]
             }
         }
+
     });
 
 
@@ -122,31 +173,32 @@ setGraphs = (graphData)=>{
         data: {
             labels,
             datasets: [{
-                label: 'Daily New Cases',
+                label: 'New Cases',
                 data: dailyNewArr,
-                backgroundColor: [
-                    'grey'
-                ],
-                borderColor: [
-                    'grey'
-                ],
-                borderWidth: 1
+                backgroundColor: 'rgb(109,35,35)',
+                borderColor:
+                    'rgb(109,35,35)'
+                ,
+                borderWidth:0,
+                maxBarThickness: 100
             }]
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        min: Math.min.apply(this, dailyNewArr),
+                        beginAtZero: true,
                     }
                 }],
                 xAxes: [{
                     type: 'time',
                     time: {
+                        min: "2020-03-04",
                         unit: 'day',
-                        unitStepSize: 1,
                         displayFormats: {
-                            'day': 'MMM DD'
+                            'day': 'MMM DD',
+                            'year': 'MMM DD YY'
                         }
                     }
                 }]
@@ -163,7 +215,7 @@ setGraphs = (graphData)=>{
         data: {
             labels,
             datasets: [{
-                label: 'Active Cases',
+                label: '# of Cases',
                 // backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: activeCasesArr,
@@ -182,16 +234,10 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
+                        min:"2020-03-04",
+                        unit:'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
                         }
                     }
                 }],
@@ -235,16 +281,10 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
+                        min:"2020-03-04",
+                        unit:'day',
                         displayFormats: {
-                            'millisecond': 'MMM DD',
-                            'second': 'MMM DD',
-                            'minute': 'MMM DD',
-                            'hour': 'MMM DD',
                             'day': 'MMM DD',
-                            'week': 'MMM DD',
-                            'month': 'MMM DD',
-                            'quarter': 'MMM DD',
-                            'year': 'MMM DD',
                         }
                     }
                 }],

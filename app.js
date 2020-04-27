@@ -81,13 +81,13 @@ app.get('/governmentCheck/:type?',async (req,res) =>{
 app.post('/governmentCheck/:type?',async (req,res) =>{
     let type = req.params.type? req.params.type:
         req.get("type")? req.get("type"): null;
-    /*console.log("##################################################################################")
+    console.log("##################################################################################")
     console.log("TYPE:",type)
     console.log("Subject:",req.body.subject)
     console.log("Date:",req.body.Date)
     console.log("Content (body-html):",req.body["body-html"])
     console.log("Content (body-plain):",req.body["body-plain"])
-    console.log("##################################################################################")*/
+    console.log("##################################################################################")
 
     let text,date,workingText;
     if (req.body["X-Mailgun-Incoming"]){
@@ -95,7 +95,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
         // type = "mailGun"
   ***REMOVED***
     if (type && type === "mailGun"){
-        [text,date] = req.body["body-html"].trim().match(/<p.*?class[\s\S]*?<\/p>/g);
+        [text,date] = req.body["body-html"].trim().match(/<p.*class[\s\S]*?<\/p>/g);
         console.log("Text BEFORE:",text)
         console.log("Date BEFORE:",date)
         text = text.replace(/(\r\n)/g," ").split('>')[1].split("<")[0].split(':')[1]
@@ -104,8 +104,6 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
          workingText = text.match(/today[\s\S]*?number[\s\S]*?covid.?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || null
         if (workingText){
             workingText = workingText[0]
-            console.log('Sending Response:',{response:{text,date***REMOVED******REMOVED***)
-            res.status(200).json({message:'Good Respons',response:{text,date***REMOVED******REMOVED***)
       ***REMOVED***
   ***REMOVED***
 
@@ -120,16 +118,15 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
             // TODO Scheduler : Parser ---> Parser24, until vail OR until xx:xx am?
             text = req.body.text;
             date = req.body.date;
-            return res.status(200).json({ message: 'Valid Authentication Credentials', response:{text,date***REMOVED******REMOVED***);
+            return res.status(200).json({ message: 'Valid Authentication Credentials' ***REMOVED***);
       ***REMOVED***
         else{
             return res.status(401).json({ message: 'Invalid Authentication Credentials' ***REMOVED***);
       ***REMOVED***
   ***REMOVED***
-    console.log("NOT SENDING?:", {response: {text, date***REMOVED******REMOVED***);
-    return res.status(200).json({
-        response:{text,date***REMOVED***
-***REMOVED***);
+    console.log("workingText:",workingText);
+    console.log("SENDING:",{ text, date***REMOVED***);
+    return res.status(200).json({ text, date***REMOVED***);
 ***REMOVED***)
 
 

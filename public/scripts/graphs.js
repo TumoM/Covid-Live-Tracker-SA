@@ -58,13 +58,12 @@ Chart.defaults.global.tooltips.callbacks.label = labelCallback;
 Chart.defaults.global.tooltips.bodyAlign = 'center';
 Chart.defaults.global.tooltips.titleAlign = 'center';
 // Chart.defaults.global.tooltips.label = 'Number:';
-Chart.scaleService.updateScaleDefaults( "linear",{time:{min:"2020-03-04"***REMOVED******REMOVED***)
+Chart.scaleService.updateScaleDefaults( "linear", {xAxes: [{ticks:{min:"2020-03-20", max: moment()***REMOVED******REMOVED***]
+***REMOVED***)
 // Chart.scaleService.updateScaleDefaults( "bar",{ticks:{min:"2020-03-04"***REMOVED******REMOVED***)
-Chart.scaleService.updateScaleDefaults('linear', {
-    ticks: {
-        min: 0
-  ***REMOVED***
-***REMOVED***);
+// Chart.scaleService.updateScaleDefaults('linear', {
+//     ticks:{min:"2020-02-15",max:moment()***REMOVED***
+// ***REMOVED***);
 // Chart.defaults.scales.ticks.min=1;
 Chart.defaults.scale.ticks.beginAtZero = true;
 
@@ -92,7 +91,7 @@ setGraphs = (graphData)=>{
                 label: '# Cases',
                 backgroundColor: 'rgb(210,210,210)',
                 borderColor: 'rgb(239,23,71)',
-                borderWidth: 2,
+                borderWidth: 0,
                 pointBackgroundColor:'rgb(64,128,46)',
                 pointBorderColor:'rgb(108,13,147)',
 
@@ -145,8 +144,12 @@ setGraphs = (graphData)=>{
                     gridLines: {
                         drawOnChartArea: false
         ***REMOVED*****REMOVED*****REMOVED***
+                    ticks: {
+                        min: moment('2020-02-15'),
+                        max: moment()
+        ***REMOVED*****REMOVED*****REMOVED***
                     time: {
-                        min: "2020-02-15",
+                        // min: "2020-02-15",
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -194,7 +197,7 @@ setGraphs = (graphData)=>{
                 xAxes: [{
                     type: 'time',
                     time: {
-                        min: "2020-03-04",
+
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -234,7 +237,7 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
-                        min:"2020-03-04",
+
                         unit:'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -281,7 +284,7 @@ setGraphs = (graphData)=>{
                     display: true,
                     type: 'time',
                     time: {
-                        min:"2020-03-04",
+
                         unit:'day',
                         displayFormats: {
                             'day': 'MMM DD',

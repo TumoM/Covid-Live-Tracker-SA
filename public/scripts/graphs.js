@@ -18,10 +18,10 @@ let dragOptions = {
 };
 
 titleCallback = (tooltipItem, data) => {
-    let date = data['labels'][tooltipItem[0]['index']].toString()
-    date = date.split(" ",5)
-    date = `${date[1]} ${date[2]}, ${date[3]}`
-    return date;
+    let date2 = data['labels'][tooltipItem[0]['index']].toString()
+    date2 = date2.split(" ",5)
+    date2 = `${date2[1]} ${date2[2]}, ${date2[3]}`
+    return date2;
 };
 labelCallback = (tooltipItem, data) => {
     return String(data['datasets'][0]['data'][tooltipItem['index']]);

@@ -86,8 +86,8 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-        responsive: false,
-        maintainAspectRatio: false,
+        responsive: true,
+        maintainAspectRatio: true,
         // The data for our dataset
         data: {
             labels,

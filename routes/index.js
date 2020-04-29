@@ -30,6 +30,7 @@ router.get("/", function (req, res) {
                 value.totalTests = numeral(value.totalTests).format('0,0');
                 value.dailyNew = numeral(value.dailyNew).format('0,0');
                 value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
+
                 // console.log("Sending these stats:",value)
                 getProvinces(knex).then(value1 => {
                     let provCases = {***REMOVED***

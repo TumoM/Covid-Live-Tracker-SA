@@ -9,6 +9,7 @@ let labels = [];
 let totalCasesArr = [];
 let provinceNameArr = [];
 let provinceCaseArr = [];
+
 let totalDeathsArr = [];
 let activeCasesArr = [];
 let dailyNewArr = [];
@@ -21,6 +22,7 @@ let dragOptions = {
 ***REMOVED***;
 
 titleCallback = (tooltipItem, data) => {
+
     let date2 = data['labels'][tooltipItem[0]['index']].toString()
     date2 = date2.split(" ",5)
     date2 = `${date2[1]***REMOVED*** ${date2[2]***REMOVED***, ${date2[3]***REMOVED***`
@@ -32,6 +34,7 @@ labelCallback = (tooltipItem, data) => {
 
 Chart.defaults.global.hover.mode = 'x';
 Chart.defaults.global.hover.intersect = false;
+
 Chart.defaults.global.tooltips.mode = 'x';
 Chart.defaults.global.tooltips.intersect = false;
 Chart.scaleService.updateScaleDefaults('logarithmic', {
@@ -61,6 +64,7 @@ Chart.defaults.global.tooltips.callbacks.label = labelCallback;
 Chart.defaults.global.tooltips.bodyAlign = 'center';
 Chart.defaults.global.tooltips.titleAlign = 'center';
 // Chart.defaults.global.tooltips.label = 'Number:';
+
 Chart.scaleService.updateScaleDefaults( "linear", {xAxes: [{ticks:{min:"2020-03-20", max: moment()***REMOVED******REMOVED***]
 ***REMOVED***)
 // Chart.scaleService.updateScaleDefaults( "bar",{ticks:{min:"2020-03-04"***REMOVED******REMOVED***)
@@ -69,6 +73,7 @@ Chart.scaleService.updateScaleDefaults( "linear", {xAxes: [{ticks:{min:"2020-03-
 // ***REMOVED***);
 // Chart.defaults.scales.ticks.min=1;
 Chart.defaults.scale.ticks.beginAtZero = true;
+
 
 
 setGraphs = (graphData,provinceCaseData)=>{
@@ -86,6 +91,7 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
+
         responsive: false,
         maintainAspectRatio: false,
         // The data for our dataset
@@ -95,9 +101,11 @@ setGraphs = (graphData,provinceCaseData)=>{
                 label: '# Cases',
                 backgroundColor: 'rgb(210,210,210)',
                 borderColor: 'rgb(239,23,71)',
+
                 borderWidth: 0,
                 // pointBackgroundColor:'rgb(64,128,46)',
                 // pointBorderColor:'rgb(108,13,147)',
+
 
                 /* backgroundColor: 'rgb(255, 99, 132)',
                  borderColor: 'rgb(239,23,71)',*/
@@ -135,6 +143,7 @@ setGraphs = (graphData,provinceCaseData)=>{
                   ***REMOVED***
     ***REMOVED*****REMOVED*****REMOVED***
 ***REMOVED*****REMOVED*****REMOVED***
+
             elements: {
                 point:{
                     radius: 0
@@ -143,6 +152,7 @@ setGraphs = (graphData,provinceCaseData)=>{
             title: {
                 display: true,
                 text: 'Total Cases ' + typeCases
+
 ***REMOVED*****REMOVED*****REMOVED***
             scales: {
                 xAxes: [{
@@ -151,12 +161,14 @@ setGraphs = (graphData,provinceCaseData)=>{
                     gridLines: {
                         drawOnChartArea: false
         ***REMOVED*****REMOVED*****REMOVED***
+
                     ticks: {
                         min: moment('2020-03-01'),
                         
         ***REMOVED*****REMOVED*****REMOVED***
                     time: {
                         // min: "2020-02-15",
+
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -167,7 +179,9 @@ setGraphs = (graphData,provinceCaseData)=>{
                 yAxes: [{
                     display: true,
                     labelAutoFit: false,
+
                     type: typeCases
+
               ***REMOVED***]
           ***REMOVED***
       ***REMOVED***
@@ -211,7 +225,6 @@ setGraphs = (graphData,provinceCaseData)=>{
                         
         ***REMOVED*****REMOVED*****REMOVED***
                     time: {
-
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -233,6 +246,7 @@ setGraphs = (graphData,provinceCaseData)=>{
             labels,
             datasets: [{
                 label: '# Deaths',
+
                 // backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: totalDeathsArr,
@@ -267,7 +281,6 @@ setGraphs = (graphData,provinceCaseData)=>{
         ***REMOVED*****REMOVED*****REMOVED***
                     type: 'time',
                     time: {
-
                         unit:'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -369,7 +382,6 @@ setGraphs = (graphData,provinceCaseData)=>{
                         drawOnChartArea: false
         ***REMOVED*****REMOVED*****REMOVED***
                     time: {
-
                         unit:'day',
                         displayFormats: {
                             'day': 'MMM DD',

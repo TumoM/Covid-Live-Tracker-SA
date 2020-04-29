@@ -27,6 +27,7 @@ async function main() {
     const knex = require('knex')({
             client: 'pg',
             debug: false,
+
             asyncStackTraces: true,
             acquireConnectionTimeout: 10000,
             pool: {
@@ -69,7 +70,6 @@ async function main() {
         totalDeaths = 0,
         totalRecoveries = 0,
         date;
-
 
     let ps = [];
     let recoveryDate;
@@ -191,9 +191,29 @@ async function main() {
                                 await updateDaysGood(itemData);
                           ***REMOVED***
                       ***REMOVED***
-                  ***REMOVED***
-              ***REMOVED***
 
+                  ***REMOVED***
+                    console.log("Swag 2")
+                    return 200
+                    process.exit(200);
+              ***REMOVED***)
+                    .catch(function (err) {
+                        console.log(err)
+                  ***REMOVED***);
+          ***REMOVED***)
+            .then((results) => {
+                console.log("Results!!::", results);
+          ***REMOVED***).catch(err => {
+                console.log("Error Bro", err);
+                return -1
+          ***REMOVED***)
+        console.log('Done map?')
+        return status
+***REMOVED***
+catch (e) {
+    console.log("Error Bro",e);
+    return(-1)
+***REMOVED***
             console.log(`Recovery Counts (${recoveryDate***REMOVED***):`)
             let count = 0;
             console.log('Starting the parsing of province Recoveries.')
@@ -326,7 +346,9 @@ async function main() {
                             loop = false;
                             console.log("Loop False")
 
+
                       ***REMOVED***
+
 
 
               ***REMOVED***

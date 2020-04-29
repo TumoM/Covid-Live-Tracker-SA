@@ -1,6 +1,7 @@
     <%- include("./partials/header") %>
     <div class="pusher">
         <div class="container segment main center">
+
         <div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
@@ -151,6 +152,113 @@
                                     Guteng2
                                 </div>
                             </div>
+=======
+
+        <%# Stats %>
+        <h2 class="ui header block top attached">Summary Statistics</h2>
+        <section id="myStats" class="ui segment padded section expand raised attached grid">
+            <div class="column">
+                <div class="ui statistics">
+                    <div class="orange statistic">
+                        <div class="large label">
+                            <h2 class="ui huge header">Covid-19 Cases:</h2>
+                        </div>
+                        <div class="ui large value">
+                            <%= data.totalCases %>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="statistic bold red">
+                        <div class="large label">
+                            <h2 class="ui huge header">Covid-19 Deaths:</h2>
+                        </div>
+                        <div class="value">
+                            <%=data.totalDeaths%>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="statistic blue">
+                        <div class="">
+                            <h2 class="ui huge header">Covid-19 Recoveries:</h2>
+                        </div>
+                        <div class="value">
+                            <%=data.totalRecoveries%>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="statistic green">
+                        <div class="label">
+                            <h2 class="ui huge header">Covid-19 Tests:</h2>
+                        </div>
+                        <div class="value">
+                            <%=data.totalTests%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="ui section divider"></div>
+
+        <%# Map %>
+        <h2 class="ui header block top attached">Provincial Map</h2>
+        <section id="myMap" class="ui segment section expand raised attached grid">
+            <div class="ui three column grid row stackable" id="mapContainer">
+                <div class="four wide column scroll-pane" id="provStatsContainer">
+                    <div class="ui cards">
+                        <div class="card">
+                            <div class="main content">
+                                <div class="header">
+                                    Guteng
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui two description">
+                                    Active: <span class="provStats">10000</span> <br>
+                                    Deaths: <span class="provStats">200</span> <br>
+                                    Recoveries: <span class="provStats">20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="main content">
+                                <div class="header">
+                                    Guteng2
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui two description">
+                                    Active: <span class="provStats">10000</span> <br>
+                                    Deaths: <span class="provStats">200</span> <br>
+                                    Recoveries: <span class="provStats">20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="main content">
+                                <div class="header">
+                                    Guteng2
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui two description">
+                                    Active: <span class="provStats">10000</span> <br>
+                                    Deaths: <span class="provStats">200</span> <br>
+                                    Recoveries: <span class="provStats">20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="main content">
+                                <div class="header">
+                                    Guteng2
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui two description">
+                                    Active: <span class="provStats">10000</span> <br>
+                                    Deaths: <span class="provStats">200</span> <br>
+                                    Recoveries: <span class="provStats">20</span>
+
                             <div class="extra content">
                                 <div class="ui two description">
                                     Active: <span class="provStats">10000</span> <br>
@@ -275,11 +383,11 @@
                 </div>
                     <div class="ui toggle icon button" >
                         <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
+
                     </div>
                 <div id="svgColumn" class="ten wide column">
                     <%- include("./map/mapFile") %>
                 </div>
-
                 <div class="one wide column tablet only one wide column computer only">
                     <div class="ui grid center aligned">
                         <h3 class="ui heading">Filters:</h3>
@@ -361,7 +469,6 @@
                     <button id="sort-reset">Reset Table</button>
                 </div>
                 <div class="ui container divider"></div>
-
             </div>
         </section>
         <div class="ui section divider"></div>

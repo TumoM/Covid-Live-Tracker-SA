@@ -357,6 +357,7 @@ $(document).ready(()=>{
             $("#hideIcon").toggleClass("fa-rotate-180");
 
 
+
         })
     $('#filterC')
         .click((event)=>{

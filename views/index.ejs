@@ -1,6 +1,6 @@
     <%- include("./partials/header") %>
     <div class="pusher">
-    <div class="container segment main center">
+        <div class="container segment main center">
         <div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
@@ -10,47 +10,118 @@
 
         <%# Stats %>
         <h2 class="ui header block top attached">Summary Statistics</h2>
-        <section id="myStats" class="ui segment padded section expand raised attached grid">
-            <div class="column">
-                <div class="ui statistics">
-                    <div class="orange statistic">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Cases:</h2>
-                        </div>
-                        <div class="ui large value">
-                            <%= data.totalCases %>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic bold red">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Deaths:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalDeaths%>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic blue">
-                        <div class="">
-                            <h2 class="ui huge header">Covid-19 Recoveries:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalRecoveries%>
+        <section id="myStats" class="ui segment padded section expand raised attached middle aligned">
+            <div class="ui centered grid">
+                <div class="grid two column row">
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statTotalCases" class="ui card ">
+                            <div class="image">
+                                <i class="fas fa-diagnoses fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Confirmed Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.totalCases %>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="statistic green">
-                        <div class="label">
-                            <h2 class="ui huge header">Covid-19 Tests:</h2>
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statNewCases"class="ui card ">
+                            <div class="image">
+                                <i class="fas fa-search-plus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.totalCases %>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="value">
-                            <%=data.totalTests%>
+                    </div>
+                </div>
+                <div class="grid two column row">
+                    <div id="statTotalDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui card">
+                                    <div class="image">
+                                        <i class="fas fa-heart-broken fa-7x statIcon"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="ui huge header">Total Deaths:</div>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="ui statistic red bold">
+                                            <div class="value">
+                                                <%=data.totalDeaths%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                    <div id="statNewDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui card">
+                            <div class="image">
+                                <i class="fas fa-search-minus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Deaths:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic red bold">
+                                    <div class="value">
+                                        <%=data.totalDeaths%>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+                <div class="ui centered grid">
+                    <div id="statTotalRecoveries"class="five wide tablet eight wide computer">
+                        <div class="ui card">
+                            <div class="image">
+                                <i class="fas fa-heartbeat fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Recoveries:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic blue bold">
+                                    <div class="value">
+                                        <%=data.totalRecoveries%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="statTotalTests"class="five wide tablet eight wide computer">
+                        <div class="ui card">
+                            <div class="image">
+                                <i class="fas fa-bong fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Tests:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic green bold">
+                                    <div class="value">
+                                        <%=data.totalTests%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section><
         <div class="ui section divider"></div>
 
         <%# Map %>
@@ -201,9 +272,8 @@
                         </div>
                     </div>
                 </div>
-    <!--            <div class="ui secondary labeled icon toggle butto">-->
                     <div class="ui toggle icon button" >
-                        <i id="hideIcon" class="left long arrow icon"></i>
+                        <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
                     </div>
                 <div id="svgColumn" class="ten wide column">
                     <%- include("./map/mapFile") %>

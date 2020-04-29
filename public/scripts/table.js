@@ -54,10 +54,15 @@ setTable = (data)=>{
     var table = new Tabulator("#example-table", {
         index:"date", //set the index field to the "age" field.
         layout:"fitColumns",
+        responsiveLayout:"hide",
+        height:"100%",
         sortOrderReverse:true,
         movableColumns: true,
+        pagination:"local",
+        paginationSize:30,
+        paginationSizeSelector:[10,20,30,50,100,200,500],
         initialSort:[
-            {column:"totalCases", dir:"desc"}, //sort by this first
+            {column:"date", dir:"desc"}, //sort by this first
             // {column:"height", dir:"desc"}, //then sort by this second
         ],
         resizableColumns: false,
@@ -65,17 +70,17 @@ setTable = (data)=>{
         columns:[
             {title:"Date", field:"date", widthGrow:1,headerSortTristate:true,sorter:"datetime", sorterParams:{
             format:"YYYY/MM/DD",
-            alignEmptyValues:"top",
+            alignEmptyValues:"bottom",
     },mutator: dateMutator, formatter:"datetime", formatterParams:{
                     outputFormat:"MMM DD, YYYY",
                     invalidPlaceholder:"(invalid date)"
                 }
             },
-            {title:"Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Active", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Tests", field:"totalTests",sorter:'number', sorterParams:{alignEmptyValues:"bottom",},formatter:function(cell, formatterParams, onRendered)
+            {title:"Total Cases", field:"totalCases",widthGrow:3,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Deaths", field:"totalDeaths",widthGrow:1,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Recoveries", field:"totalRecoveries",widthGrow:3,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Active Cases", field:"activeCases",widthGrow:2,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Tests", field:"totalTests",widthGrow:3,sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",},formatter:function(cell, formatterParams, onRendered)
                 {
                     //cell - the cell component
                     //formatterParams - parameters set for the column

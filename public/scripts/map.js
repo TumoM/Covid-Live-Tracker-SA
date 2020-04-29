@@ -386,6 +386,34 @@ $(document).ready(()=>{
 
 
         })
+    $('#filterC2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provCase,1)
+            populateSideCards(cardList.sort(compareValues('cases')))
+
+
+        })
+    $('#filterD2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provDeath,2)
+            populateSideCards(cardList.sort(compareValues('deaths')))
+
+
+
+        })
+    $('#filterR2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('recoveries')))
+
+
+        })
 })
 
 //

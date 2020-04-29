@@ -306,32 +306,30 @@
         <%# Graphs %>
         <h2 class="ui header block top attached">Graphs</h2>
         <section id="myGraphs" class="ui segment padded section expand raised attached grid center aligned fluid stackable">
-                <button id="toggleScale">Toggle Scale Type</button>
+                <button id="toggleScaleCases">Toggle Scale Type</button>
                 <div class ="row ">
                     <div class="eight wide column">
-                        <canvas id="chart1" class="column"></canvas>
-
+                        <canvas id="chart1" class="column chart"></canvas>
                     </div>
                     <div class="eight wide column">
-                        <canvas id="chart2" class="column"></canvas>
+                        <canvas id="chart2" class="column chart"></canvas>
+                    </div>
+                </div>
+            <button id="toggleScaleDeaths">Toggle Scale Type</button>
+            <div class ="row">
+                    <div class="eight wide column">
+                        <canvas id="chart3" class="column chart"></canvas>
+                    </div>
+                    <div class="eight wide column">
+                        <canvas id="chart4" class="column chart"></canvas>
                     </div>
                 </div>
                 <div class ="row">
                     <div class="eight wide column">
-                        <canvas id="chart3" class="column"></canvas>
-
+                        <canvas id="chart5" class="column chart"></canvas>
                     </div>
                     <div class="eight wide column">
-                        <canvas id="chart4" class="column"></canvas>
-                    </div>
-                </div>
-                <div class ="row">
-                    <div class="eight wide column">
-                        <canvas id="chart5" class="column"></canvas>
-
-                    </div>
-                    <div class="eight wide column">
-                        <canvas id="chart6" class="column"></canvas>
+                        <canvas id="chart6" class="column chart"></canvas>
                     </div>
                 </div>
 
@@ -363,7 +361,6 @@
                 </div>
                 <div class="ui container divider"></div>
 
-                <div class="sixteen wide column" id="example-table"></div>
             </div>
         </section>
         <div class="ui section divider"></div>

@@ -28,6 +28,8 @@ router.get("/", function (req, res) {
                 value.totalDeaths = numeral(value.totalDeaths).format('0,0');
                 value.totalRecoveries = numeral(value.totalRecoveries).format('0,0');
                 value.totalTests = numeral(value.totalTests).format('0,0');
+                value.dailyNew = numeral(value.dailyNew).format('0,0');
+                value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
                 // console.log("Sending these stats:",value)
                 getProvinces(knex).then(value1 => {
                     let provCases = {***REMOVED***
@@ -63,7 +65,7 @@ let getSummary = function(knex) {
 
     return knex.transaction((trx) =>{
         return knex('dates')
-            .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries")
+            .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries","dailyNew","dailyDeaths","updateTime")
             .whereNotNull("totalCases")
             .whereNotNull("totalDeaths")
             .orderBy("date",'desc')
@@ -106,33 +108,6 @@ let getSummary = function(knex) {
 
 
 ***REMOVED***
-
-
-/*
-knex.transaction((trx) => {
-    return knex('tab1')
-        .update({ col2: 'val2' ***REMOVED***)
-        .where({ col1: 'val1' ***REMOVED***)
-        .transacting(trx)
-        .then((result) => {
-            let promise;
-            if (result1 != 0) {
-                promise = util.insert(data1);
-          ***REMOVED*** else {
-                promise = util.mark(data2);
-          ***REMOVED***
-            return promise.transacting(trx);
-      ***REMOVED***)
-        .then(trx.commit)
-        .catch(trx.rollback)
-***REMOVED***)
-    .then(() => {
-        // blabla
-  ***REMOVED***)
-    .catch((err) => {
-        // handle your error together
-  ***REMOVED***);
-*/
 
 let getProvinces = function(knex) {
     return knex.transaction((trx) => {

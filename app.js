@@ -126,8 +126,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
             return res.status(401).json({ message: 'Invalid Authentication Credentials' });
         }
     }
-    console.log("workingText:",workingText);
-    console.log("SENDING:", {response: {text, date}});
+    console.log("NOT SENDING?:", {response: {text, date}});
     return res.status(200).json({
         response:{text,date}
 });

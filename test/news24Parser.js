@@ -111,19 +111,19 @@ async function main() {
             // #######################################################################################
 
             // TODO 1: Parse info on Recoveries by Province
-            let recoveriesLines = soupBody.find('p').getText().split(":");
-            recoveriesLines.length === 2 ? recoveriesLines.unshift(date) : recoveriesLines;
-            recoveryDate = recoveriesLines[0].match(/\d+.*/)[0];
-
-            totalRecoveries = getNumber(recoveriesLines[1]);
+            let recoveriesLines = soupBody.text.match(/(?:recoveries?.*)?[\d*\s?]*recoveries?/)
+            /*recoveriesLines.length === 2 ? recoveriesLines.unshift(date) : recoveriesLines;
+            recoveryDate = recoveriesLines[0].match(/\d+.*!/)[0];
+*/
+            totalRecoveries = getNumber(recoveriesLines[0]);
             console.log(`Total Recovery:${totalRecoveries}\n`)
 
-            let provinceRecoveries = recoveriesLines[2].split(/\),?\.?/)
+            let provinceRecoveries = soupBody.text.match(/provincial breakdown.*?:.*?\./)[0].split(':')[1].split(',')
             let provinceRecoveries2 = []
             provinceRecoveries.forEach(value => {
                 provinceRecoveries2.push(value.split('(')[0].trim())
             })
-            provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
+            // provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
             // Loop over list of prov names, insert missing names in provinceRecoveries
             provincesList.forEach(value => { // Adds any missing provinces not mentioned as having any recoveries, and sets them to 0.
                 if (!(provinceRecoveries2.includes(value))) {
@@ -202,9 +202,11 @@ async function main() {
                 while (loop){
                         let recoverCount, provinceName;
                         [provinceName, recoverCount] = provinceRecoveries[index].trim().split("(")
+                    recoverCount = recoverCount.split(')')[0]
+                    recoveryDate=date
                         provinceName = provinceName.trim();
                         const tempProvince = new Province(provinceName)
-                        tempProvince.recoveries = recoverCount;
+                        tempProvince.recoveries = getNumber(recoverCount.split('.')[0]);
                         tempProvince.date = recoveryDate;
                         currentProvincesRecovery[provinceName] = tempProvince;
 
@@ -343,7 +345,7 @@ async function main() {
     }
     function getNumber(line) {
         let intString = "";
-        let total = line.match(/\d[\d+\s]*\d+/)[0].split(" ")
+        let total = line.match(/\d?[\d+\s?]*\d+/)[0].split(" ")
         total.forEach(digit => {
             intString += digit
         })
@@ -371,7 +373,7 @@ async function main() {
                         let id = await knex("dates").insert(dateData).returning('date');
                             if (id && id.length > 0) {
                                 console.log("Inserted into Dates Table")
-                                let preVals = await knex.raw('WITH preTable AS (\n' +
+                                let prevVals = await knex.raw('WITH preTable AS (\n' +
                                     '   SELECT\n' +
                                     '      date,\n' +
                                     '      "totalCases",\n' +
@@ -400,12 +402,12 @@ async function main() {
                                     'from preTable\n' +
                                     'order by date desc\n' +
                                     'limit 1;')
-                                let vals = await knex('dates').update({
+                                let val = await knex('dates').update({
                                             dailyNew: prevVals.rows[0].dailyNew,
                                             dailyDeaths: prevVals.rows[0].dailyDeaths,
                                             totalRecoveries: prevVals.rows[0].prevRecoveries
                                         }).where('date', '=', itemData.provDate);
-                                if (!vals || vals === 0){
+                                if (!val || val === 0){
                                                 log('WHAAAAAT?', reason)
                                             }
                                     }

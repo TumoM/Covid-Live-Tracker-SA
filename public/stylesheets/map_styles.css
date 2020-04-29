@@ -153,6 +153,9 @@ tspan.legend {
   transition: all 1s linear;
 ***REMOVED***
 
+#mapContainer #hideIcon {
+  transition: all 1s linear;
+***REMOVED***
 #mapContainer .jspDrag {
   border-radius: 25px;
 ***REMOVED***

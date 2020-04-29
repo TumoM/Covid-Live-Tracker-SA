@@ -18,8 +18,6 @@ var dateMutator = function(value, data, type, params, component){
     //type - the type of mutation occurring  (data|edit)
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
-    console.log("Type:",typeof value)
-    console.log(value)
     let date =new Date(value)
     // ToDo Return date, currently giving the wrong
     // return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***` //return the new value for the cell data.
@@ -44,7 +42,8 @@ var numberFormat = function(value, data, type, params, component){
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
     // console.log("Type:",typeof value)
     // console.log(component)
-    return value; //return the new value for the cell data.
+
+    return value === null?null:numeral(value).format('0,0'); //return the new value for the cell data.
 ***REMOVED***
 
 setTable = (data)=>{
@@ -66,9 +65,8 @@ setTable = (data)=>{
             // {column:"height", dir:"desc"***REMOVED***, //then sort by this second
     ***REMOVED***,
         resizableColumns: false,
-        frozen:true,
         columns:[
-            {title:"Date", field:"date", widthGrow:1,headerSortTristate:true,sorter:"datetime", sorterParams:{
+            {title:"Date", field:"date",headerSortTristate:true,sorter:"datetime", sorterParams:{
             format:"YYYY/MM/DD",
             alignEmptyValues:"bottom",
   ***REMOVED***mutator: dateMutator, formatter:"datetime", formatterParams:{
@@ -76,11 +74,11 @@ setTable = (data)=>{
                     invalidPlaceholder:"(invalid date)"
               ***REMOVED***
 ***REMOVED*****REMOVED*****REMOVED***
-            {title:"Total Cases", field:"totalCases",widthGrow:3,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Deaths", field:"totalDeaths",widthGrow:1,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Recoveries", field:"totalRecoveries",widthGrow:3,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Active Cases", field:"activeCases",widthGrow:2,sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Tests", field:"totalTests",widthGrow:3,sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",***REMOVED***,formatter:function(cell, formatterParams, onRendered)
+            {title:"Total Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
+            {title:"Total Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
+            {title:"Total Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
+            {title:"Active Cases", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
+            {title:"Total Tests", field:"totalTests",sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",***REMOVED***,formatter:function(cell, formatterParams, onRendered)
                 {
                     //cell - the cell component
                     //formatterParams - parameters set for the column

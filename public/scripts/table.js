@@ -11,7 +11,6 @@ let dummyData = [
     {id:9, name:"Brendon Philips", age:"125", gender:"male", height:1, col:"orange", dob:"01/08/1980"},
     {id:10, name:"Margret Marmajuke", age:"16", gender:"female", height:5, col:"yellow", dob:"31/01/1999"},
 ];
-let date
 //define custom mutator
 var dateMutator = function(value, data, type, params, component){
     //value - original value of the cell
@@ -19,9 +18,7 @@ var dateMutator = function(value, data, type, params, component){
     //type - the type of mutation occurring  (data|edit)
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
-    console.log("Type:",typeof value)
-    console.log(value)
-    date =new Date(value)
+    let date =new Date(value)
     // ToDo Return date, currently giving the wrong
     // return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}` //return the new value for the cell data.
     return date; //return the new value for the cell data.
@@ -43,9 +40,10 @@ var numberFormat = function(value, data, type, params, component){
     //type - the type of mutation occurring  (data|edit)
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
-    console.log("Type:",typeof value)
-    console.log(component)
-    return value; //return the new value for the cell data.
+    // console.log("Type:",typeof value)
+    // console.log(component)
+
+    return value === null?null:numeral(value).format('0,0'); //return the new value for the cell data.
 }
 
 setTable = (data)=>{
@@ -55,34 +53,38 @@ setTable = (data)=>{
     var table = new Tabulator("#example-table", {
         index:"date", //set the index field to the "age" field.
         layout:"fitColumns",
+        responsiveLayout:"hide",
+        height:"100%",
         sortOrderReverse:true,
         movableColumns: true,
+        pagination:"local",
+        paginationSize:30,
+        paginationSizeSelector:[10,20,30,50,100,200,500],
         initialSort:[
-            {column:"totalCases", dir:"desc"}, //sort by this first
+            {column:"date", dir:"desc"}, //sort by this first
             // {column:"height", dir:"desc"}, //then sort by this second
         ],
         resizableColumns: false,
-        frozen:true,
         columns:[
-            {title:"Date", field:"date", widthGrow:1,headerSortTristate:true,sorter:"datetime", sorterParams:{
+            {title:"Date", field:"date",headerSortTristate:true,sorter:"datetime", sorterParams:{
             format:"YYYY/MM/DD",
-            alignEmptyValues:"top",
+            alignEmptyValues:"bottom",
     },mutator: dateMutator, formatter:"datetime", formatterParams:{
                     outputFormat:"MMM DD, YYYY",
                     invalidPlaceholder:"(invalid date)"
                 }
             },
-            {title:"Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Active", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
-            {title:"Tests", field:"totalTests",sorter:'number', sorterParams:{alignEmptyValues:"bottom",},formatter:function(cell, formatterParams, onRendered)
+            {title:"Total Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Active Cases", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Tests", field:"totalTests",sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",},formatter:function(cell, formatterParams, onRendered)
                 {
                     //cell - the cell component
                     //formatterParams - parameters set for the column
                     //onRendered - function to call when the formatter has been rendered
-                    console.log("Get Value Len",cell.getValue())
-                    console.log(cell.getValue())
+                    /*console.log("Get Value Len",cell.getValue())
+                    console.log(cell.getValue())*/
                     let x = cell.getValue()
                     if (!x){
                         x = "N/A";

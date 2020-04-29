@@ -153,6 +153,9 @@ tspan.legend {
   transition: all 1s linear;
 }
 
+#mapContainer #hideIcon {
+  transition: all 1s linear;
+}
 #mapContainer .jspDrag {
   border-radius: 25px;
 }
@@ -161,6 +164,10 @@ tspan.legend {
 }
 #mapContainer .jspTrack {
   border-radius: 25px;
+}
+
+#filterColumn .filter {
+  margin-right: 3.5rem !important;
 }
 
 /*# sourceMappingURL=map_styles.css.map */

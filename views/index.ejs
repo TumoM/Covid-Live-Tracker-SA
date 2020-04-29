@@ -209,23 +209,27 @@
                     <%- include("./map/mapFile") %>
                 </div>
 
-                <div class="one wide column left aligned">
-                    <div id="filterC" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter C
+                <div class="one wide column tablet only one wide column computer only">
+                    <div class="ui grid center aligned">
+                        <h3 class="ui heading">Filters:</h3>
+                        <button id="filterC" class="ui button left floated filter">Cases</button>
+                        <div class="ui divider"></div>
+                        <button id="filterD" class="ui button left floated filter">Deaths</button>
+                        <div class="ui divider"></div>
+                        <button id="filterR" class="ui button left floated filter">Recoveries</button>
                     </div>
-                    <br>
-                    <div id="filterD" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter D
-                    </div>
-                    <br>
-                    <div id="filterR" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter R
+                </div>
+                <div id="filterColumn" class="sixteen wide mobile only column">
+                    <div class="equal width grid">
+                        <h3 class="ui heading">Filters:</h3>
+                        <div class="ui row">
+                            <button id="filterC2" class="ui button column">Cases</button>
+                            <button id="filterD2" class="ui button column">Deaths</button>
+                            <button id="filterR2" class="ui button column">Recoveries</button></div>
                     </div>
                 </div>
             </div>
+
         </section>
         <div class="ui section divider"></div>
 

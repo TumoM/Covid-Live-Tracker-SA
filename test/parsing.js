@@ -240,7 +240,18 @@ async function main() {
                                 let date = rootChild.text.match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]
                                 let cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
                                 let tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
-                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./)[0]
+                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./)
+                                let totalDeaths = null;
+                                if (!deaths){
+                                    deaths = null
+                                }
+                                else{
+                                    deaths = deaths[0]
+                                    let totalDeaths = deaths.trim().match(/\s((\d+\s+)*\d+)/);
+                                    if (totalDeaths) {
+                                        totalDeaths = parseNumber(totalDeaths[0].trim());
+                                    }
+                                }
                                 console.log("TestPar", tests);
                                 let totalTests = tests.match(/\s((\d+\s+)*\d+)/)[0];
                                 if (totalTests) {
@@ -252,10 +263,7 @@ async function main() {
                                 if (totalCases) {
                                     totalCases = parseNumber(totalCases[0].trim());
                                 }
-                                let totalDeaths = deaths.trim().match(/\s((\d+\s+)*\d+)/);
-                                if (totalDeaths) {
-                                    totalDeaths = parseNumber(totalDeaths[0].trim());
-                                }
+
 
                                 console.log("Total Tests:", totalTests);
                                 console.log("Total Cases:", totalCases);

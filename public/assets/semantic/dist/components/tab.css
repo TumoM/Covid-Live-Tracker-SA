@@ -1,0 +1,88 @@
+/*!
+***REMOVED*** # Fomantic-UI - Tab
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+           UI Tabs
+*******************************/
+
+.ui.tab {
+  display: none;
+***REMOVED***
+
+
+***REMOVED********************************
+             States
+*******************************/
+
+
+/*--------------------
+       Active
+---------------------*/
+
+.ui.tab.active,
+.ui.tab.open {
+  display: block;
+***REMOVED***
+
+/*--------------------
+         Loading
+  ---------------------*/
+
+.ui.tab.loading {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  min-height: 250px;
+***REMOVED***
+.ui.tab.loading***REMOVED*** {
+  position: relative !important;
+  left: -10000px !important;
+***REMOVED***
+.ui.tab.loading:before,
+.ui.tab.loading.segment:before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  margin: -1.25em 0 0 -1.25em;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 500rem;
+  border: 0.2em solid rgba(0, 0, 0, 0.1);
+***REMOVED***
+.ui.tab.loading:after,
+.ui.tab.loading.segment:after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  margin: -1.25em 0 0 -1.25em;
+  width: 2.5em;
+  height: 2.5em;
+  -webkit-animation: loader 0.6s infinite linear;
+          animation: loader 0.6s infinite linear;
+  border: 0.2em solid #9E9E9E;
+  border-radius: 500rem;
+  -webkit-box-shadow: 0 0 0 1px transparent;
+          box-shadow: 0 0 0 1px transparent;
+***REMOVED***
+
+
+***REMOVED********************************
+         Tab Overrides
+*******************************/
+
+
+
+***REMOVED********************************
+        User Overrides
+*******************************/
+

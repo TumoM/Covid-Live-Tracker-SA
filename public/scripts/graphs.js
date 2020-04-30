@@ -1,11 +1,15 @@
-let ctx,chart1,chart2,chart3,chart4,chart5;
+let ctx,chart1,chart2,chart3,chart4,chart5, chart6;
 let data;
-let type = 'linear';
+let typeCases = 'linear';
+let typeDeaths = 'linear';
 let mode = "x";
 let intersect = "false";
 // Chart.defaults.global.legend.labels = labels;
 let labels = [];
 let totalCasesArr = [];
+let provinceNameArr = [];
+let provinceCaseArr = [];
+
 let totalDeathsArr = [];
 let activeCasesArr = [];
 let dailyNewArr = [];
@@ -18,17 +22,19 @@ let dragOptions = {
 };
 
 titleCallback = (tooltipItem, data) => {
-    let date = data['labels'][tooltipItem[0]['index']].toString()
-    date = date.split(" ",5)
-    date = `${date[1]} ${date[2]}, ${date[3]}`
-    return date;
+
+    let date2 = data['labels'][tooltipItem[0]['index']].toString()
+    date2 = date2.split(" ",5)
+    date2 = `${date2[1]} ${date2[2]}, ${date2[3]}`
+    return date2;
 };
 labelCallback = (tooltipItem, data) => {
     return String(data['datasets'][0]['data'][tooltipItem['index']]);
 };
 
 Chart.defaults.global.hover.mode = 'x';
-Chart.defaults.global.hover.intersect = true;
+Chart.defaults.global.hover.intersect = false;
+
 Chart.defaults.global.tooltips.mode = 'x';
 Chart.defaults.global.tooltips.intersect = false;
 Chart.scaleService.updateScaleDefaults('logarithmic', {
@@ -58,18 +64,19 @@ Chart.defaults.global.tooltips.callbacks.label = labelCallback;
 Chart.defaults.global.tooltips.bodyAlign = 'center';
 Chart.defaults.global.tooltips.titleAlign = 'center';
 // Chart.defaults.global.tooltips.label = 'Number:';
-Chart.scaleService.updateScaleDefaults( "linear",{time:{min:"2020-03-04"}})
+
+Chart.scaleService.updateScaleDefaults( "linear", {xAxes: [{ticks:{min:"2020-03-20", max: moment()}}]
+})
 // Chart.scaleService.updateScaleDefaults( "bar",{ticks:{min:"2020-03-04"}})
-Chart.scaleService.updateScaleDefaults('linear', {
-    ticks: {
-        min: 0
-    }
-});
+// Chart.scaleService.updateScaleDefaults('linear', {
+//     ticks:{min:"2020-02-15",max:moment()}
+// });
 // Chart.defaults.scales.ticks.min=1;
 Chart.defaults.scale.ticks.beginAtZero = true;
 
 
-setGraphs = (graphData)=>{
+
+setGraphs = (graphData,provinceCaseData)=>{
     graphData.forEach(row=>{
         labels.push(new Date(row.date));
         totalCasesArr.push(row.totalCases)
@@ -84,17 +91,20 @@ setGraphs = (graphData)=>{
     chart1 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-        responsive: true,
+
+        responsive: false,
+        maintainAspectRatio: false,
         // The data for our dataset
         data: {
             labels,
             datasets: [{
                 label: '# Cases',
                 backgroundColor: 'rgb(210,210,210)',
-                borderColor: 'rgb(239,23,71)',
-                borderWidth: 2,
-                pointBackgroundColor:'rgb(64,128,46)',
-                pointBorderColor:'rgb(108,13,147)',
+                borderColor: 'rgb(102,0,80)',
+
+                // pointBackgroundColor:'rgb(64,128,46)',
+                // pointBorderColor:'rgb(108,13,147)',
+
 
                 /* backgroundColor: 'rgb(255, 99, 132)',
                  borderColor: 'rgb(239,23,71)',*/
@@ -132,11 +142,16 @@ setGraphs = (graphData)=>{
                     }
                 },
             },
-            point: {
+
+            elements: {
+                point:{
+                    radius: 0
+                }
             },
             title: {
                 display: true,
-                text: 'Total Cases'
+                text: 'Total Cases ' + typeCases
+
             },
             scales: {
                 xAxes: [{
@@ -145,8 +160,14 @@ setGraphs = (graphData)=>{
                     gridLines: {
                         drawOnChartArea: false
                     },
+
+                    ticks: {
+                        min: moment('2020-03-01'),
+                        
+                    },
                     time: {
-                        min: "2020-02-15",
+                        // min: "2020-02-15",
+
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -157,7 +178,9 @@ setGraphs = (graphData)=>{
                 yAxes: [{
                     display: true,
                     labelAutoFit: false,
-                    type: type
+
+                    type: typeCases
+
                 }]
             }
         }
@@ -193,8 +216,120 @@ setGraphs = (graphData)=>{
                 }],
                 xAxes: [{
                     type: 'time',
+                    gridLines: {
+                        drawOnChartArea: false
+                    },
+                    ticks: {
+                        min: moment('2020-03-01'),
+                        
+                    },
                     time: {
-                        min: "2020-03-04",
+                        unit: 'day',
+                        displayFormats: {
+                            'day': 'MMM DD',
+                            'year': 'MMM DD YY'
+                        }
+                    }
+                }]
+            }
+        }});
+
+    // Total Deaths
+    ctx = document.getElementById('chart3').getContext('2d');
+    chart3 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels,
+            datasets: [{
+                label: '# Deaths',
+                backgroundColor: 'rgb(210,210,210)',
+                // backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(139,51,67)',
+                data: totalDeathsArr,
+                fill:true
+            }]
+        },
+
+
+        // Configuration options go here
+        options: {
+            tooltips: {
+                mode: 'nearest'
+            },
+            title: {
+                display: true,
+                text: 'Total Deaths ' + typeDeaths
+            },
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        min: moment('2020-03-01'),
+                        
+                    },
+                    gridLines: {
+                        drawOnChartArea: false
+                    },
+                    type: 'time',
+                    time: {
+                        unit:'day',
+                        displayFormats: {
+                            'day': 'MMM DD',
+                        }
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    type: typeDeaths
+                }]
+            }
+        }
+    });
+
+    // Daily New Deaths
+    ctx = document.getElementById('chart4').getContext('2d');
+    chart4 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Daily Deaths',
+                data: dailyDeathsArr,
+                backgroundColor: 'rgb(109,35,35)',
+                borderColor:
+                    'rgb(109,35,35)'
+                ,
+                borderWidth:0,
+                maxBarThickness: 100
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: Math.min.apply(this, dailyDeathsArr),
+                        beginAtZero: true,
+                    }
+                }],
+                xAxes: [{
+                    type: 'time',
+                    ticks: {
+                        min: moment('2020-03-01'),
+                        
+                    },
+                    gridLines: {
+                        drawOnChartArea: false
+                    },
+                    time: {
                         unit: 'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -206,8 +341,8 @@ setGraphs = (graphData)=>{
         }});
 
     // Active Cases
-    ctx = document.getElementById('chart3').getContext('2d');
-    chart3 = new Chart(ctx, {
+    ctx = document.getElementById('chart5').getContext('2d');
+    chart5 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
@@ -216,10 +351,11 @@ setGraphs = (graphData)=>{
             labels,
             datasets: [{
                 label: '# of Cases',
+                backgroundColor: 'rgb(210,210,210)',
                 // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(31,206,102)',
                 data: activeCasesArr,
-                fill:false
+                fill:true
             }]
         },
 
@@ -229,12 +365,23 @@ setGraphs = (graphData)=>{
                 display: true,
                 text: 'Active Cases'
             },
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
             scales: {
                 xAxes: [{
                     display: true,
                     type: 'time',
+                    ticks: {
+                        min: moment('2020-03-01'),
+                        
+                    },
+                    gridLines: {
+                        drawOnChartArea: false
+                    },
                     time: {
-                        min:"2020-03-04",
                         unit:'day',
                         displayFormats: {
                             'day': 'MMM DD',
@@ -243,154 +390,36 @@ setGraphs = (graphData)=>{
                 }],
                 yAxes: [{
                     display: true,
-                    type: type
+                    type: 'linear'
                 }]
             }
         }
     });
 
-    // Total Deaths
-    ctx = document.getElementById('chart4').getContext('2d');
-    chart4 = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
 
-        // The data for our dataset
-        data: {
-            labels,
-            datasets: [{
-                label: '# Deaths',
-                // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: totalDeathsArr,
-                fill:false
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            tooltips: {
-                mode: 'nearest'
-            },
-            title: {
-                display: true,
-                text: 'Total Deaths ' + type
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    type: 'time',
-                    time: {
-                        min:"2020-03-04",
-                        unit:'day',
-                        displayFormats: {
-                            'day': 'MMM DD',
-                        }
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    type: type
-                }]
-            }
-        }
-    });
-
-    // Daily Deaths
-
-
-    //
-
-    document.getElementById('toggleScale').addEventListener('click', function() {
-        type = type === 'linear' ? 'logarithmic' : 'linear';
-        chart1.options.title.text = 'Total Cases - ' + type;
+    document.getElementById('toggleScaleCases').addEventListener('click', function() {
+        typeCases = typeCases === 'linear' ? 'logarithmic' : 'linear';
+        chart1.options.title.text = 'Total Cases - ' + typeCases;
         chart1.options.scales.yAxes[0] = {
             display: true,
-            type: type
+            type: typeCases
         };
 
         chart1.update();
     });
+    document.getElementById('toggleScaleDeaths').addEventListener('click', function() {
+        typeDeaths = typeDeaths === 'linear' ? 'logarithmic' : 'linear';
+        chart3.options.title.text = 'Total Deaths - ' + typeDeaths;
+        chart3.options.scales.yAxes[0] = {
+            display: true,
+            type: typeDeaths
+        };
+
+        chart3.update();
+    });
 }
 
-// var ctx = document.getElementById('chart1').getContext('2d');
 
-
-
-chart3 = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }});
-
-ctx = document.getElementById('chart3').getContext('2d');
-chart4 = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }});
 
 
 

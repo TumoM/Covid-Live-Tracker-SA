@@ -19,9 +19,11 @@ const provinceList = {
 
 router.get("/", function (req, res) {
     const knex = res.locals.knex;
+    const cache = res.locals.cache;
     if (knex){
         console.log("found KNEX")
         // TODO Load data for the day.
+        // If valid cache.
         getSummary(knex)
             .then(value => {
                 value.totalCases = numeral(value.totalCases).format('0,0');

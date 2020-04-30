@@ -1,5 +1,9 @@
 const express     = require("express");
 const app         = express();
+const CacheService = require('./models/cacheModel');
+
+const ttl = 60 * 60 * 1; // cache for 1 Hour
+const cache = new CacheService(ttl);
 // Enable the app-wide scout middleware
 
 const dotenv = require('dotenv');
@@ -65,6 +69,7 @@ const knex = require('knex')({
 app.set('knex', knex);
 app.use(function(req,res, next) {
     res.locals.knex = knex;
+    res.locals.cache = cache;
     next();
 });
 

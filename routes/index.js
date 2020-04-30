@@ -17,9 +17,20 @@ const provinceList = {
 };
 
 
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
+    const pool = res.locals.pool;
+    const result = await pool.connect(async (connection) => {
+        await connection.query(sql`SELECT 1`);
+        await connection.query(sql`SELECT 2`);
+
+        return 'foo';
+    });
+    // {data:value,provCases,provDeaths,provRecoveries,graphData}
+
+
+
     if (knex){
         console.log("found KNEX")
         // TODO Load data for the day.
@@ -64,8 +75,87 @@ router.get("/", function (req, res) {
         console.log("No Knex?")
     }
 })
-let getSummary = function(knex) {
+let getSummary = async function(knex) {
 
+    return knex.transaction((trx) =>{
+        return knex('dates')
+            .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries","dailyNew","dailyDeaths","updateTime")
+            .whereNotNull("totalCases")
+            .whereNotNull("totalDeaths")
+            .orderBy("date",'desc')
+            .limit(1)
+            .transacting(trx)
+            .then(function(res1) {
+                console.log("Done Summary 1")
+
+                if (res1[0].totalTests === null){
+                    return knex('dates')
+                        .select('date','totalTests')
+                        .whereNotNull('totalTests')
+                        .limit(1)
+                        .orderBy('date','desc')
+                        .transacting(trx)
+                        .then(value => {
+                            res1[0].date2 = value[0].date;
+                            res1[0].totalTests = value[0].totalTests;
+                            console.log("Done Summary")
+                            // return res1[0];
+                            let promise = res1[0];
+                            return promise ;
+                        })
+                        .then(trx.commit)
+                        .catch(trx.rollback);
+                }
+                else {
+                    console.log("Done Summary 3")
+                    trx.commit
+                    let promise = res1[0];
+                    return promise
+                }
+            })
+            .then(trx.commit)
+            .catch(reason => {
+                console.log("You messed up 1?",reason)
+                trx.rollback
+            });
+    })
+
+
+}
+let getInfoSol = async function(pool) {
+    return pool.connect(async (connection) => {
+        let value = await connection.query(sql` select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit ${1}`);
+        if (res1[0].totalTests === null){
+            return knex('dates')
+                .select('date','totalTests')
+                .whereNotNull('totalTests')
+                .limit(1)
+                .orderBy('date','desc')
+                .transacting(trx)
+                .then(value => {
+                    res1[0].date2 = value[0].date;
+                    res1[0].totalTests = value[0].totalTests;
+                    console.log("Done Summary")
+                    // return res1[0];
+                    let promise = res1[0];
+                    return promise ;
+                })
+                .then(trx.commit)
+                .catch(trx.rollback);
+        }
+        else {
+            console.log("Done Summary 3")
+            trx.commit
+            let promise = res1[0];
+            return promise
+        }
+
+
+
+
+        let value1 = await connection.query(sql` select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit ${1}`);
+        let graphData = await connection.query(sql` select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit ${1}`);
+    });
     return knex.transaction((trx) =>{
         return knex('dates')
             .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries","dailyNew","dailyDeaths","updateTime")

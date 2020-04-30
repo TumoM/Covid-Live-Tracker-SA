@@ -25,5 +25,4 @@ npm-debug.log
 .DS_Store
 /*.env
 /test/.env
-/public/assets/semantic/dist
 /public/assests

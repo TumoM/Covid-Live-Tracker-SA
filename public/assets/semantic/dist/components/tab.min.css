@@ -1,9 +1,0 @@
-/*!
-***REMOVED*** # Fomantic-UI - Tab
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/.ui.tab{display:none***REMOVED***.ui.tab.active,.ui.tab.open{display:block***REMOVED***.ui.tab.loading{position:relative;overflow:hidden;display:block;min-height:250px***REMOVED***.ui.tab.loading***REMOVED***{position:relative!important;left:-10000px!important***REMOVED***.ui.tab.loading.segment:before,.ui.tab.loading:before{position:absolute;content:'';top:50%;left:50%;margin:-1.25em 0 0 -1.25em;width:2.5em;height:2.5em;border-radius:500rem;border:.2em solid rgba(0,0,0,.1)***REMOVED***.ui.tab.loading.segment:after,.ui.tab.loading:after{position:absolute;content:'';top:50%;left:50%;margin:-1.25em 0 0 -1.25em;width:2.5em;height:2.5em;-webkit-animation:loader .6s infinite linear;animation:loader .6s infinite linear;border:.2em solid #9e9e9e;border-radius:500rem;-webkit-box-shadow:0 0 0 1px transparent;box-shadow:0 0 0 1px transparent***REMOVED***

@@ -10,7 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "sass": "sass --watch src/sass:public/stylesheets",
-    "heroku": "git push heroku working:master"
+    "heroku": "git push heroku working:master",
+    "watch": "sass --watch src/sass:public/stylesheets"
 ***REMOVED***
   "repository": {
     "type": "git",

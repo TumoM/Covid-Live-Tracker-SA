@@ -1,20 +1,16 @@
 const express     = require("express");
 const app         = express();
 const CacheService = require('./models/cacheModel');
+// Enable the app-wide scout middleware
+const dotenv = require('dotenv');
+const bodyParser  = require("body-parser");
+const path = require('path');
+const indexRoutes = require("./routes/index");
+
+dotenv.config();
 
 const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
 const cache = new CacheService(ttl);
-// Enable the app-wide scout middleware
-
-const dotenv = require('dotenv');
-dotenv.config();
-const bodyParser  = require("body-parser");
-const path = require('path');
-
-const indexRoutes = require("./routes/index");
-
-let dbURL = process.env.DATABASEURL || "dbString";
-
 const port = process.env.PORT || 3000;
 
 // Setup Express/App
@@ -41,7 +37,7 @@ if (process.env.DBMODE && process.env.DBMODE === "herokuDB"){
 ***REMOVED***
 else{
     connection = {
-        host:process.env.AWS_HOST|| process.env.PG_HOST||'127.0.0.1',
+        host:process.env.AWS_HOST|| process.env.PG_HOST||'postgres://127.0.0.1',
         user:process.env.AWS_USER|| process.env.PG_USER||'test_user',
         password:process.env.AWS_PASSWORD || process.env.PG_PASS ||'temp_pass',
         database:process.env.AWS_DB ||process.env.DB_NAME ||'covid-tracker-sa2'
@@ -64,12 +60,15 @@ const knex = require('knex')({
         connection
   ***REMOVED***
 )
+const slonik = require('slonik');
+const createPool = slonik.createPool, sql = slonik.createSqlTag;
+const pool = createPool(connection);
 
 // Required Routes
-app.set('knex', knex);
 app.use(function(req,res, next) {
     res.locals.knex = knex;
     res.locals.cache = cache;
+    res.locals.pool = pool;
     next();
 ***REMOVED***);
 

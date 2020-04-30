@@ -153,6 +153,12 @@ tspan.legend {
   transition: all 1s linear;
 ***REMOVED***
 
+@media only screen and (max-width: 767px) {
+  [class*="mobile hidden"],
+[class*="or lower hidden"] {
+    display: none !important;
+***REMOVED***
+***REMOVED***
 #mapContainer #hideIcon {
   transition: all 1s linear;
 ***REMOVED***

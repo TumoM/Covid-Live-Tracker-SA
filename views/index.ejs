@@ -10,18 +10,19 @@
         <div class="ui section divider"></div>
 
         <%# Stats %>
-        <h2 class="ui header block top attached">Summary Statistics</h2>
+        <h2 id="myStatsHeading" class="ui header block top attached">Summary Statistics</h2>
         <section id="myStats" class="ui segment padded section expand raised attached middle aligned">
-            <h3>(Updated: <%= data.updateTime %>)</h3>
+            <h2 class="ui sub header grey text">Updated: <%= data.updateTime%></h2>
+            <br/>
             <div class="ui centered grid">
                 <div class="grid two column row">
                     <div class="five wide tablet eight wide computer">
-                        <div id="statTotalCases" class="ui card ">
+                        <div id="statTotalCases" class="ui orange card ">
                             <div class="image">
                                 <i class="fas fa-diagnoses fa-7x statIcon"></i>
                             </div>
                             <div class="content">
-                                <div class="ui huge header">Total Confirmed Cases:</div>
+                                <div class="ui huge header">Total Cases:</div>
                             </div>
                             <div class="extra content">
                                 <div class="ui statistic orange bold">
@@ -33,7 +34,7 @@
                         </div>
                     </div>
                     <div class="five wide tablet eight wide computer">
-                        <div id="statNewCases"class="ui card ">
+                        <div id="statNewCases"class="ui yellow card ">
                             <div class="image">
                                 <i class="fas fa-search-plus fa-7x statIcon"></i>
                             </div>
@@ -52,7 +53,7 @@
                 </div>
                 <div class="grid two column row">
                     <div id="statTotalDeaths" class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui red card">
                                     <div class="image">
                                         <i class="fas fa-heart-broken fa-7x statIcon"></i>
                                     </div>
@@ -69,7 +70,7 @@
                                 </div>
                     </div>
                     <div id="statNewDeaths" class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui pink card">
                             <div class="image">
                                 <i class="fas fa-search-minus fa-7x statIcon"></i>
                             </div>
@@ -88,7 +89,7 @@
                 </div>
                 <div class="frid two column row">
                     <div id="statTotalRecoveries"class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui blue card">
                             <div class="image">
                                 <i class="fas fa-heartbeat fa-7x statIcon"></i>
                             </div>
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div id="statTotalTests"class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui green card">
                             <div class="image">
                                 <i class="fas fa-bong fa-7x statIcon"></i>
                             </div>
@@ -123,18 +124,18 @@
                     </div>
                 </div>
             </div>
-        </section><
+        </section>
         <div class="ui section divider"></div>
 
         <%# Map %>
-        <h2 class="ui header block top attached">Provincial Map</h2>
-        <section id="myMap" class="ui segment section expand raised attached grid">
+        <h2 id="myMap" class="ui header block top attached">Provincial Map</h2>
+        <section  class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
                     <div class="ui cards">
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng
                                 </div>
                             </div>
@@ -148,7 +149,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -162,7 +163,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -176,7 +177,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -190,7 +191,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -204,7 +205,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -218,7 +219,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -232,7 +233,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -246,7 +247,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -260,7 +261,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -274,7 +275,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui toggle icon button" >
+                <div class="ui toggle icon button mobile hidden" >
                     <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
                 </div>
                 <div id="svgColumn" class="ten wide column">
@@ -306,9 +307,9 @@
         <div class="ui section divider"></div>
 
         <%# Graphs %>
-        <h2 class="ui header block top attached">Graphs</h2>
-        <section id="myGraphs" class="ui segment padded section expand raised attached grid center aligned fluid stackable">
-                <button id="toggleScaleCases">Toggle Scale Type</button>
+        <h2 id="myGraphs" class="ui header block top attached">Graphs</h2>
+        <section  class="ui segment padded section expand raised attached grid center aligned fluid stackable">
+                <button id="toggleScaleCases" class="ui button">Toggle Scale Type</button>
                 <div class ="row ">
                     <div class="eight wide column">
                         <canvas id="chart1" class="column chart"></canvas>
@@ -317,7 +318,7 @@
                         <canvas id="chart2" class="column chart"></canvas>
                     </div>
                 </div>
-            <button id="toggleScaleDeaths">Toggle Scale Type</button>
+            <button id="toggleScaleDeaths" class="ui button">Toggle Scale Type</button>
             <div class ="row">
                     <div class="eight wide column">
                         <canvas id="chart3" class="column chart"></canvas>
@@ -326,12 +327,9 @@
                         <canvas id="chart4" class="column chart"></canvas>
                     </div>
                 </div>
-                <div class ="row">
+                <div class ="centered row">
                     <div class="eight wide column">
                         <canvas id="chart5" class="column chart"></canvas>
-                    </div>
-                    <div class="eight wide column">
-                        <canvas id="chart6" class="column chart"></canvas>
                     </div>
                 </div>
 
@@ -339,12 +337,13 @@
         <div class="ui section divider"></div>
 
         <%# Table %>
-        <h2 class="ui header block top attached">Table</h2>
-        <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
+        <h2 id="myTable" class="ui header block top attached">Table</h2>
+        <section  class="ui segment padded section expand raised attached fluid grid">
             <div class="ui column">
                 <div class="">
-                    <select id="sort-field">
-                        <option value="date" selected>Date</option>
+                    <select id="sort-field" class="ui dropdown">
+                        <option value="" selected>Filter Table</option>
+                        <option value="date">Date</option>
                         <option value="totalCases">Cases</option>
                         <option value="totalDeaths">Deaths</option>
                         <option value="totalRecoveries">Recoveries</option>
@@ -354,11 +353,13 @@
                         <option value="dailyDeaths">Daily Deaths</option>
                     </select>
 
-                    <select id="sort-direction">
-                        <option value="asc" selected>asc</option>
+
+                    <select id="sort-direction" class="ui dropdown">
+                        <option value="" selected>Sort Direction</option>
+                        <option value="asc">asc</option>
                         <option value="desc">desc</option>
                     </select>
-                    <button class="ui button"  id="sort-trigger">Trigger Sort</button>
+                    <button class="ui button"  id="sort-trigger">Sort Table</button>
                     <button  class="ui button" id="sort-reset">Reset Table</button>
                 </div>
                 <div class="ui container divider"></div>

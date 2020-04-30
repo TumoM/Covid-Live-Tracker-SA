@@ -187,6 +187,12 @@ tspan{
 	}
 
 }
+@media only screen and (max-width: 767px) {
+	[class*="mobile hidden"],
+	[class*="or lower hidden"] {
+		display: none !important;
+	}
+}
 
 #mapContainer{
 	#hideIcon {

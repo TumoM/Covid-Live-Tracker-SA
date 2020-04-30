@@ -100,9 +100,8 @@ setGraphs = (graphData,provinceCaseData)=>{
             datasets: [{
                 label: '# Cases',
                 backgroundColor: 'rgb(210,210,210)',
-                borderColor: 'rgb(239,23,71)',
+                borderColor: 'rgb(102,0,80)',
 
-                borderWidth: 0,
                 // pointBackgroundColor:'rgb(64,128,46)',
                 // pointBorderColor:'rgb(108,13,147)',
 
@@ -246,11 +245,11 @@ setGraphs = (graphData,provinceCaseData)=>{
             labels,
             datasets: [{
                 label: '# Deaths',
-
+                backgroundColor: 'rgb(210,210,210)',
                 // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(139,51,67)',
                 data: totalDeathsArr,
-                fill:false
+                fill:true
             }]
         },
 
@@ -352,10 +351,11 @@ setGraphs = (graphData,provinceCaseData)=>{
             labels,
             datasets: [{
                 label: '# of Cases',
+                backgroundColor: 'rgb(210,210,210)',
                 // backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(31,206,102)',
                 data: activeCasesArr,
-                fill:false
+                fill:true
             }]
         },
 

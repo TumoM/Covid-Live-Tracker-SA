@@ -316,7 +316,9 @@ function populateSideCards(cardList){
     let cards = $("#mapContainer .card");
     let figures;
 
+    console.log('Cards',cards)
     cardList.forEach(item=>{
+        console.log('Counter',counter)
         // the html block containing the spans and br tags
         figures = cards[counter].children[1].children[0].children;
         cards[counter].firstElementChild.firstElementChild.innerText=item.name // sets Card Heading.

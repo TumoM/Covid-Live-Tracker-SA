@@ -8,10 +8,9 @@
 ***REMOVED***
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
-    "watch": "sass --watch src/sass:public/stylesheets",
     "reinstal": "rmdir /S /Q node_modules & npm i"
 ***REMOVED***
   "repository": {

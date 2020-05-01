@@ -34,7 +34,7 @@ const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
 const cache = new NodeCache({
     checkperiod: 60,
     maxKeys: 10000,
-    stdTTL: ttl,
+    stdTTL: 5,
     useClones: false,
 ***REMOVED***);
 

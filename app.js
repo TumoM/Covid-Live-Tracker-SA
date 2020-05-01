@@ -1,8 +1,8 @@
 const express     = require("express");
 // Require scout-apm after express, but before all other requires.
-const scout = require("@scout_apm/scout-apm");
+// const scout = require("@scout_apm/scout-apm");
 const dotenv = require('dotenv');
-scout.install(
+/*scout.install(
     {
         allowShutdown: true, // allow shutting down spawned scout-agent processes from this program
         monitor: process.env.SCOUT_MONITOR || false, // enable monitoring
@@ -10,9 +10,10 @@ scout.install(
         key: process.env.SCOUT_KEY,
     },
 );
-const app        = express();
 // Enable the app-wide scout middleware
-app.use(scout.expressMiddleware());
+app.use(scout.expressMiddleware());*/
+const app        = express();
+
 const CacheService = require('./models/cacheModel');
 // Enable the app-wide scout middleware
 const bodyParser  = require("body-parser");

@@ -15,11 +15,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.4"></script>
 <!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>-->
 <script>
-    $('.ui.sticky')
-        .sticky({
-            context: '#example1'
-      ***REMOVED***)
-    ;
+    $(document).ready(function() {
+        $(".ui.toggle.button.nav").click(function() {
+            $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+      ***REMOVED***);
+        $("#myNav .item.close").click(function() {
+            $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+      ***REMOVED***);
+
+        $(".ui.dropdown").dropdown();
+  ***REMOVED***);
 </script>
 </body>
 </html>

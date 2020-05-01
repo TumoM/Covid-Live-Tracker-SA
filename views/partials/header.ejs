@@ -15,15 +15,16 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/table.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stats.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/graphs.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/nav.css">
     <!-- styles needed by jScrollPane -->
     <link type="text/css" href="/stylesheets/jquery.jscrollpane.css" rel="stylesheet" media="all" />
-    <script>
+    <!--<script>
 
         var viewport_meta = document.getElementById('viewport-meta');
 
         // Define our viewport meta values
         var viewports = {
-            default: viewport_meta.getAttribute('content'),
+            // default: viewport_meta.getAttribute('content'),
             landscape: 'width=990',
             mine:'width=780'
       ***REMOVED***;
@@ -44,7 +45,7 @@
         window.onresize = function() {
             viewport_set();
       ***REMOVED***
-    </script>
+    </script>-->
 
     <title>Covid-19 Live Tracker: SA</title>
 </head>
@@ -53,25 +54,48 @@
 </script>
 
 <body>
-    <header id="example1" class="ui segment ">
+<header class="" id="myNav">
+    <div class="ui tablet computer only padded grid">
+        <div class="ui borderless fluid huge menu">
+            <div class="ui container centered grid">
+                <a href="/" class="header item">Rona Tracker SA</a>
+                <a href="/" class="active item">Home</a>
+                <a href="#myStatsHeading" class="item">Stats</a>
+                <a href="#myMap" class="item">Map</a>
+                <a href="#myGraphs" class="item ">Graphs</a>
+                <a href="#myTable" class="item ">Historical</a>
+                <a href="#" class="item ">About</a>
+            </div>
+        </div>
+    </div>
+    <div class="ui mobile only padded grid">
+        <div class="ui borderless huge fluid fixed menu">
+            <a href="/" class="header item">Rona Tracker SA</a>
+            <div class="right menu">
+                <div class="item">
+                    <button class="ui icon toggle basic button nav">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ui vertical borderless fluid menu">
+                <a href="/" class="item active close">Home</a>
+                <a href="#myStatsHeading" class="item close">Stats</a>
+                <a href="#myMap" class="item close">Map</a>
+                <a href="#myGraphs" class="item  close">Graphs</a>
+                <a href="#myTable" class="item  close">Historical</a>
+                <a href="#" class="item ">About</a>
+            </div>
+        </div>
+    </div>
+</header>
+    <!--<header id="example1" class="ui segment ">
         <nav class="ui fixed  secondary menu sticky">
-            <a href="/" class="item active">
-                Home
-            </a>
-                <a href="#myStatsHeading" class="item">
-                Stats
-            </a>
-            <a href="#myMap" class="item">
-                Map
-            </a>
-            <a href="#myGraphs" class="item ">
-                Graphs
-            </a>
-            <a href="#myTable" class="item ">
-                Historical
-            </a>
-            <a href="#" class="item ">
-                About
-            </a>
+                <a href="/" class="active item">Home</a>
+                <a href="#myStatsHeading" class="item">Stats</a>
+                <a href="#myMap" class="item">Map</a>
+                <a href="#myGraphs" class="item ">Graphs</a>
+                <a href="#myTable" class="item ">Historical</a>
+                <a href="#" class="item ">About</a>
         </nav>
-    </header>
+    </header>-->

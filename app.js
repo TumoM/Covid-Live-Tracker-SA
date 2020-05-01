@@ -36,7 +36,7 @@ if (process.env.DBMODE && process.env.DBMODE === "herokuDB"){
     connection = process.env.DATABASE_URL
 ***REMOVED***
 else{
-    connection = {
+    connection = process.env.AWS_CONNECTIONSTRING || {
         host:process.env.AWS_HOST|| process.env.PG_HOST||'postgres://127.0.0.1',
         user:process.env.AWS_USER|| process.env.PG_USER||'test_user',
         password:process.env.AWS_PASSWORD || process.env.PG_PASS ||'temp_pass',
@@ -69,6 +69,7 @@ app.use(function(req,res, next) {
     res.locals.knex = knex;
     res.locals.cache = cache;
     res.locals.pool = pool;
+    res.locals.sql = sql;
     next();
 ***REMOVED***);
 

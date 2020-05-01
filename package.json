@@ -11,7 +11,8 @@
     "start": "nodemon app.js",
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
-    "watch": "sass --watch src/sass:public/stylesheets"
+    "watch": "sass --watch src/sass:public/stylesheets",
+    "reinstal": "rmdir /S /Q node_modules & npm i"
 ***REMOVED***
   "repository": {
     "type": "git",
@@ -51,7 +52,9 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "selenium-webdriver": "^4.0.0-alpha.7",
-    "slonik": "^22.4.4"
+    "slonik": "^22.4.4",
+    "sql-tagged-template-literal": "^1.0.2",
+    "sql-template-strings": "^2.2.2"
 ***REMOVED***
   "devDependencies": {
     "gulp": "^4.0.2"

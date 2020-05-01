@@ -20,7 +20,12 @@ const provinceList = {
     "UNALLOCATED": 'ZA-UN'
 };
 
-
+const hashQuery = (query) => {
+    return JSON.stringify(query);
+};
+const unhashQuery = (query) => {
+    return JSON.parse(query);
+};
 router.get("/", async function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
@@ -28,7 +33,7 @@ router.get("/", async function (req, res) {
     if (pool){
         console.log("Pool Present")
         // TODO Load data for the day.
-        await getSummarySlonik(pool)
+        await getSummarySlonik(pool,cache)
             .then(async r => {
                 console.log('Done');
                 console.log('R',r.summary.length);
@@ -42,8 +47,16 @@ router.get("/", async function (req, res) {
         console.log("No Knex?")
     }
 })
-const getSummarySlonik = async (pool) => {
-        console.log("In Main.")
+const getSummarySlonik = async (pool,cache) => {
+    console.log("In Main.")
+    const responseCache = cache.get("data");
+
+    if (responseCache) {
+        console.log("CACHE FOUND")
+        return Promise.resolve(unhashQuery(responseCache));
+    }
+
+    {
         let value, value2, value3, value4;
         let provCases = {}, provDeaths = {}, provRecoveries = {};
         const result = await pool.connect(async (connection) => {
@@ -53,13 +66,13 @@ const getSummarySlonik = async (pool) => {
             // Start Transaction
             return await connection.transaction(async (transactionConnection) => {
                 // 1 - getSummary()
-                mysql = sql`-- @cache-ttl 1800 \n select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
+                mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
                 console.log("Transaction 1");
                 value = await transactionConnection.maybeOne(mysql); // Transaction call 1 (Get latest row)
                 console.log("Done 1")
                 if (value) {
                     if (!value.totalTests) {
-                        mysql = sql`-- @cache-ttl 1800 \n SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;
+                        mysql = sql`-- @cache-ttl 600 \n SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;
                         console.log("Transaction 2");
                         value2 = await transactionConnection.maybeOne(mysql); // Transaction call 2 (Get valid Test value)
                         if (value2) {
@@ -67,12 +80,11 @@ const getSummarySlonik = async (pool) => {
                             value.totalTests = value2.totalTests
                         }
                         console.log("Done 2")
-                    }
-                    else{
+                    } else {
                         console.log('Done 2 - Skipped')
                     }
                 }
-                if (value){
+                if (value) {
                     // Number formatting:
                     value.totalCases = numeral(value.totalCases).format('0,0');
                     value.totalDeaths = numeral(value.totalDeaths).format('0,0');
@@ -82,11 +94,11 @@ const getSummarySlonik = async (pool) => {
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
 
                     // 2 - getProvinces()
-                    mysql = sql`-- @cache-ttl 1800 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`
+                    mysql = sql`-- @cache-ttl 600 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`
                     console.log("Transaction 3");
                     value3 = await transactionConnection.many(mysql)
-                    if (value3 && value3.length > 0){
-                        value3.forEach(province =>{
+                    if (value3 && value3.length > 0) {
+                        value3.forEach(province => {
                             provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                             provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                             provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
@@ -94,25 +106,27 @@ const getSummarySlonik = async (pool) => {
                         })
                         console.log('Done 3')
                     }
-                    mysql = sql`-- @cache-ttl 1800 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
+                    mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
                     console.log("Transaction 4");
                     value4 = await transactionConnection.many(mysql)
-                    if (value4 && value4.length > 0){
+                    if (value4 && value4.length > 0) {
                         console.log('Done 4')
                     }
 
                 }
                 // End Transaction
                 console.log('Returning Value of:', value)
-                return {'summary':value,'provinces': {provCases,provDeaths,provRecoveries},'graphs':value4};
+                return {'summary': value, 'provinces': {provCases, provDeaths, provRecoveries}, 'graphs': value4};
             })
         })
         if (result) {
+            console.log("SETTING CACHE")
+            cache.set("data", hashQuery(result));
             return Promise.resolve(result)
+        } else {
+            return Promise.reject("Something went down: " + result)
         }
-        else {
-            return Promise.reject("Something went down: "+result)
-        }
+    }
 }
 
 module.exports = router;

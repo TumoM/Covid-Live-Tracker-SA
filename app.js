@@ -83,11 +83,11 @@ const options = {
         createQueryCacheInterceptor({
             storage: {
                 get: (query) => {
-                    console.log("Returning cached item:",query)
+                    // console.log("Returning cached item:",query)
                     return cache.get(hashQuery(query)) || null;
     ***REMOVED*****REMOVED*****REMOVED***
                 set: (query, cacheAttributes, queryResult) => {
-                    console.log('Setting cahce:',query, queryResult, cacheAttributes.ttl)
+                    // console.log('Setting cache:',query, queryResult, cacheAttributes.ttl)
                     cache.set(hashQuery(query), queryResult, cacheAttributes.ttl);
     ***REMOVED*****REMOVED*****REMOVED***
 ***REMOVED*****REMOVED*****REMOVED***
@@ -96,6 +96,9 @@ const options = {
 ***REMOVED***
 const hashQuery = (query) => {
     return JSON.stringify(query);
+***REMOVED***;
+const unhashQuery = (query) => {
+    return JSON.parse(query);
 ***REMOVED***;
 const pool = createPool(connection, options);
 

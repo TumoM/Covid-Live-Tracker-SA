@@ -92,7 +92,7 @@ setGraphs = (graphData,provinceCaseData)=>{
         // The type of chart we want to create
         type: 'line',
 
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         // The data for our dataset
         data: {
@@ -163,7 +163,7 @@ setGraphs = (graphData,provinceCaseData)=>{
 
                     ticks: {
                         min: moment('2020-03-01'),
-                        
+
                     },
                     time: {
                         // min: "2020-02-15",
@@ -193,6 +193,8 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart2 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'bar',
+        responsive: true,
+        maintainAspectRatio: false,
         data: {
             labels,
             datasets: [{
@@ -221,7 +223,7 @@ setGraphs = (graphData,provinceCaseData)=>{
                     },
                     ticks: {
                         min: moment('2020-03-01'),
-                        
+
                     },
                     time: {
                         unit: 'day',
@@ -239,7 +241,8 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart3 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-
+        responsive: true,
+        maintainAspectRatio: false,
         // The data for our dataset
         data: {
             labels,
@@ -273,7 +276,7 @@ setGraphs = (graphData,provinceCaseData)=>{
                     display: true,
                     ticks: {
                         min: moment('2020-03-01'),
-                        
+
                     },
                     gridLines: {
                         drawOnChartArea: false
@@ -299,6 +302,8 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart4 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'bar',
+        responsive: true,
+        maintainAspectRatio: false,
         data: {
             labels,
             datasets: [{
@@ -324,7 +329,7 @@ setGraphs = (graphData,provinceCaseData)=>{
                     type: 'time',
                     ticks: {
                         min: moment('2020-03-01'),
-                        
+
                     },
                     gridLines: {
                         drawOnChartArea: false
@@ -345,7 +350,8 @@ setGraphs = (graphData,provinceCaseData)=>{
     chart5 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
-
+        responsive: true,
+        maintainAspectRatio: false,
         // The data for our dataset
         data: {
             labels,

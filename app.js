@@ -6,11 +6,25 @@ const dotenv = require('dotenv');
 const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
+const NodeCache = require('node-cache');
 
 dotenv.config();
 
 const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
-const cache = new CacheService(ttl);
+/*const cache = new CacheService({
+    checkperiod: 60,
+    maxKeys: 10000,
+    stdTTL: ttl,
+    useClones: false,
+***REMOVED***);*/
+
+const cache = new NodeCache({
+    checkperiod: 60,
+    maxKeys: 10000,
+    stdTTL: ttl,
+    useClones: false,
+***REMOVED***);
+
 const port = process.env.PORT || 3000;
 
 // Setup Express/App
@@ -61,8 +75,29 @@ const knex = require('knex')({
   ***REMOVED***
 )
 const slonik = require('slonik');
+const siqc = require("slonik-interceptor-query-cache")
+const createQueryCacheInterceptor = siqc.createQueryCacheInterceptor
 const createPool = slonik.createPool, sql = slonik.createSqlTag;
-const pool = createPool(connection);
+const options = {
+    interceptors: [
+        createQueryCacheInterceptor({
+            storage: {
+                get: (query) => {
+                    console.log("Returning cached item:",query)
+                    return cache.get(hashQuery(query)) || null;
+    ***REMOVED*****REMOVED*****REMOVED***
+                set: (query, cacheAttributes, queryResult) => {
+                    console.log('Setting cahce:',query, queryResult, cacheAttributes.ttl)
+                    cache.set(hashQuery(query), queryResult, cacheAttributes.ttl);
+    ***REMOVED*****REMOVED*****REMOVED***
+***REMOVED*****REMOVED*****REMOVED***
+      ***REMOVED***),
+***REMOVED***
+***REMOVED***
+const hashQuery = (query) => {
+    return JSON.stringify(query);
+***REMOVED***;
+const pool = createPool(connection, options);
 
 // Required Routes
 app.use(function(req,res, next) {

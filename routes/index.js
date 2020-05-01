@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
-const slonik = require('slonik');
-const sql = slonik.sql;
+const sql = require('slonik').sql;
+// const sql = slonik.sql;
 
 
 
@@ -37,7 +37,6 @@ router.get("/", async function (req, res) {
           ***REMOVED***);
         // If valid cache.
 
-
   ***REMOVED***
     else{
         console.log("No Knex?")
@@ -54,13 +53,13 @@ const getSummarySlonik = async (pool) => {
             // Start Transaction
             return await connection.transaction(async (transactionConnection) => {
                 // 1 - getSummary()
-                mysql = sql`select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
+                mysql = sql`-- @cache-ttl 1800 \n select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
                 console.log("Transaction 1");
                 value = await transactionConnection.maybeOne(mysql); // Transaction call 1 (Get latest row)
                 console.log("Done 1")
                 if (value) {
                     if (!value.totalTests) {
-                        mysql = sql`SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;
+                        mysql = sql`-- @cache-ttl 1800 \n SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;
                         console.log("Transaction 2");
                         value2 = await transactionConnection.maybeOne(mysql); // Transaction call 2 (Get valid Test value)
                         if (value2) {
@@ -83,7 +82,7 @@ const getSummarySlonik = async (pool) => {
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
 
                     // 2 - getProvinces()
-                    mysql = sql`select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`
+                    mysql = sql`-- @cache-ttl 1800 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`
                     console.log("Transaction 3");
                     value3 = await transactionConnection.many(mysql)
                     if (value3 && value3.length > 0){
@@ -95,7 +94,7 @@ const getSummarySlonik = async (pool) => {
                       ***REMOVED***)
                         console.log('Done 3')
                   ***REMOVED***
-                    mysql = sql`select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
+                    mysql = sql`-- @cache-ttl 1800 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
                     console.log("Transaction 4");
                     value4 = await transactionConnection.many(mysql)
                     if (value4 && value4.length > 0){
@@ -114,91 +113,6 @@ const getSummarySlonik = async (pool) => {
         else {
             return Promise.reject("Something went down: "+result)
       ***REMOVED***
-***REMOVED***
-
-let getSummary = async function(knex) {
-
-    return knex.transaction((trx) =>{
-        return knex('dates')
-            .select('date',"totalCases","totalDeaths","totalTests","totalRecoveries","dailyNew","dailyDeaths","updateTime")
-            .whereNotNull("totalCases")
-            .whereNotNull("totalDeaths")
-            .orderBy("date",'desc')
-            .limit(1)
-            .transacting(trx)
-            .then(function(res1) {
-                console.log("Done Summary 1")
-
-                if (res1[0].totalTests === null){
-                    return knex('dates')
-                        .select('date','totalTests')
-                        .whereNotNull('totalTests')
-                        .limit(1)
-                        .orderBy('date','desc')
-                        .transacting(trx)
-                        .then(value => {
-                            res1[0].date2 = value[0].date;
-                            res1[0].totalTests = value[0].totalTests;
-                            console.log("Done Summary")
-                            // return res1[0];
-                            let promise = res1[0];
-                            return promise ;
-                      ***REMOVED***)
-                        .then(trx.commit)
-                        .catch(trx.rollback);
-              ***REMOVED***
-                else {
-                    console.log("Done Summary 3")
-                    trx.commit
-                    let promise = res1[0];
-                    return promise
-              ***REMOVED***
-          ***REMOVED***)
-            .then(trx.commit)
-            .catch(reason => {
-                console.log("You messed up 1?",reason)
-                trx.rollback
-          ***REMOVED***);
-  ***REMOVED***)
-
-
-***REMOVED***
-
-let getProvinces = function(knex) {
-    return knex.transaction((trx) => {
-        return knex('provinceDays')
-            .select("provinceName", "provDate", "caseCount", "deathCount", "recovered")
-            .orderBy("provDate", 'desc')
-            .limit(10)
-            .transacting(trx)
-            .then(function (res) {
-                return res
-          ***REMOVED***)
-            .then(trx.commit)
-            .catch(reason => {
-                console.log("You messed up 2?", reason)
-                trx.rollback
-          ***REMOVED***);
-  ***REMOVED***)
-***REMOVED***
-
-let getGraphData = function(knex) {
-    return knex.transaction((trx) => {
-        return knex('dates')
-            .select("date", "totalCases",
-                "totalDeaths", "totalRecoveries",
-                "activeCases", "totalTests",
-                "dailyNew", "dailyDeaths")
-            .orderBy("date", 'asc')
-            .then(function (res) {
-                return res
-          ***REMOVED***)
-            .then(trx.commit)
-            .catch(reason => {
-                console.log("You messed up 3?", reason)
-                trx.rollback
-          ***REMOVED***);
-  ***REMOVED***)
 ***REMOVED***
 
 module.exports = router;

@@ -1,12 +1,31 @@
-.column.chart {
-  min-height: 300px;
-  width: 100%;
-}
-
 .chart-container {
   position: relative;
-  height: 40vh;
-  width: 80vw;
+  min-height: 200px;
+  /*height:40vh;
+  width:40vw*/
+}
+
+.chart {
+  /*width: 400px !important;
+  height: 400px !important;*/
+}
+
+.row {
+  /* @media only screen and (max-width: 767px) {
+     .chart{
+       width: 90vw !important;
+       height: 40vh !important;
+     }
+   }*/
+  /* {
+     //max-height:  !important;
+     //height: !important;
+
+     //height:19.5vh;
+     //width: 100%;
+     //height:40vh;
+     //width:80vw;
+   }*/
 }
 
 /*# sourceMappingURL=graphs.css.map */

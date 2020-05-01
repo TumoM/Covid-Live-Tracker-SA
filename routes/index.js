@@ -53,7 +53,8 @@ const getSummarySlonik = async (pool,cache) => {
 
     if (responseCache) {
         console.log("CACHE FOUND")
-        return Promise.resolve(unhashQuery(responseCache));
+        console.log("But ignoring")
+        /*return Promise.resolve(unhashQuery(responseCache));*/
     }
 
     {

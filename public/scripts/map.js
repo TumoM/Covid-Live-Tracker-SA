@@ -347,7 +347,7 @@ $(document).ready(()=>{
             }
         );
     });
-    $('.toggle.button')
+    $('.toggle.button.map')
         .click((event)=>{
             console.log("you clicked me!")
             // $("#provStatsContainer").transition('slide right')

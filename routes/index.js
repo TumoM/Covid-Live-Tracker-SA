@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const sql = require('slonik').sql;
 // const sql = slonik.sql;
 
@@ -27,15 +27,18 @@ const hashQuery = (query) => {
 const unhashQuery = (query) => {
     return JSON.parse(query);
 };
-router.get("/", async function (req, res) {
+
+moment.tz.setDefault("Africa/Johannesburg")
+
+router.get("/", function (req, res) {
+    res.setHeader('Cache-Control', 'public, max-age=86400');
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
     if (pool){
-        console.log("Pool Present")
         // TODO Load data for the day.
-        await getSummarySlonik(pool,cache)
-            .then(async r => {
+        getSummarySlonik(pool,cache)
+            .then( r => {
                 console.log('Done');
                 // console.log('R',r.summary.length);
                 res.render("index",{data:r.summary,provCases:r.provinces.provCases,provDeaths:r.provinces.provDeaths,provRecoveries:r.provinces.provRecoveries,graphData:r.graphs});
@@ -55,14 +58,18 @@ const getSummarySlonik = async (pool,cache) => {
     if (responseCache) {
         console.log("CACHE FOUND")
         // console.log("But ignoring")
-        return Promise.resolve(unhashQuery(responseCache));
+        if (responseCache !== null){
+            return Promise.resolve(unhashQuery(responseCache));
+        }
+        else{
+            console.log("cache was null, ignoring.")
+            }
     }
 
     {
         let value, value2, value3, value4;
         let provCases = {}, provDeaths = {}, provRecoveries = {};
         const result = await pool.connect(async (connection) => {
-            console.log("Got result?")
             let mysql;
 
             // Start Transaction
@@ -71,7 +78,7 @@ const getSummarySlonik = async (pool,cache) => {
                 mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
                 console.log("Transaction 1");
                 value = await transactionConnection.maybeOne(mysql); // Transaction call 1 (Get latest row)
-                console.log("Done 1")
+                // console.log("Done 1")
                 if (value) {
                     if (!value.totalTests) {
                         mysql = sql`-- @cache-ttl 600 \n SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;
@@ -94,7 +101,8 @@ const getSummarySlonik = async (pool,cache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    value.updateTime = moment(value.updateTime).toDate();
+                    // value.updateTime = moment(value.updateTime).format("dddd, MMMM do YYYY, HH:mm:ssA (zz)");
+                    value.updateTime = (new Date(value.updateTime)).toString();
 
                     // 2 - getProvinces()
                     mysql = sql`-- @cache-ttl 600 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`

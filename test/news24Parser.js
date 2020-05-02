@@ -431,5 +431,6 @@ async function main() {
 main()
     .then(result=>{
         console.log("main result:",result);
+        process.exit(0)
   ***REMOVED***)
     .catch(err=> console.log('Your Err',err));

@@ -130,6 +130,7 @@ async function main() {
           ***REMOVED***
       ***REMOVED***
         console.log('Quitting Driver.')
+        await driver.close();
         await driver.quit();
         console.log('Returning Promise.')
         return Promise.resolve(htmls);
@@ -141,8 +142,10 @@ async function main() {
     console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
 
     console.log('Swag')
+    let fullLoop = 0
     for (let i = 0; i < links2.length; i++) {
         let loop = true;
+        fullLoop = i;
         while (loop){
             {
                 let DATE = htmls[i].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0]
@@ -348,8 +351,6 @@ async function main() {
                                                     await knex('dates').update(data).where('date', '=', parsedDate)
                                                     loop=false;
                                               ***REMOVED***
-
-
                               ***REMOVED*** catch (e) {
                                 console.log("SOME ERROR:", e)
                                 loop = false;
@@ -366,13 +367,18 @@ async function main() {
                                     .catch(err => {
                                         console.log("Ignoring duplicates 1", err)
                                   ***REMOVED***)
-                          ***REMOVED***
+                              ***REMOVED***
                           ***REMOVED***
                       ***REMOVED***
                   ***REMOVED***
-          ***REMOVED***
+              ***REMOVED***
     console.log("We done?")
-    return Promise.resolve(true)
+    console.log("Full Loop?", fullLoop === links2.length-1);
+    if (fullLoop === links2.length-1) {
+        return Promise.resolve(true);
+  ***REMOVED***
+    return Promise.resolve(false);
+
 
 ***REMOVED***
 
@@ -383,4 +389,5 @@ main().then((res)=>{
   ***REMOVED***
 )
 
+module.exports = main
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

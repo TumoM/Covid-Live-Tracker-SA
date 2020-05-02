@@ -20,6 +20,7 @@ const Sentry = require('@sentry/node');
 const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
+const aboutRoutes = require("./routes/about");
 const parsing = require("./test/parsing");
 const parsing24 = require("./test/news24Parser");
 const NodeCache = require('node-cache');
@@ -56,7 +57,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(bodyParser.json());
-
 
 let connection;
 if (process.env.DBMODE && process.env.DBMODE === "herokuDB"){
@@ -121,10 +121,11 @@ app.use(function(req,res, next) {
     next();
 ***REMOVED***);
 
-console.log("SETTING CACHE")
-cache.set("data", null);
+console.log("DELETING OLD CACHE")
+cache.del("data");
 
 app.use("/",indexRoutes);
+app.use("/about",aboutRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
     res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");

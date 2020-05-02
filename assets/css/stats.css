@@ -1,0 +1,42 @@
+#myStats .statIcon {
+  margin: 1.5rem 1rem; }
+
+#myStats .ui.card {
+  height: 90%;
+  margin: 1rem; }
+
+#myStats .grid.two.column.row {
+  padding-top: 0; }
+
+#myStats #statTotalCases i, #myStats #statTotalCases .value {
+  color: #ff9800; }
+
+#myStats #statNewCases i, #myStats #statNewCases .value {
+  color: #d2b300; }
+
+#myStats #statTotalDeaths i, #myStats #statTotalDeaths .value {
+  color: #8b0000; }
+
+#myStats #statNewDeaths i, #myStats #statNewDeaths .value {
+  color: #b30542; }
+
+#myStats #statTotalRecoveries i, #myStats #statTotalRecoveries .value {
+  color: #065fa3; }
+
+#myStats #statTotalTests i, #myStats #statTotalTests .value {
+  color: #016936; }
+
+#myStats .statistics.red {
+  color: #8b0000; }
+
+#myStats .statistics.orange {
+  color: #ff9800; }
+
+#myStats .statistics.blue {
+  color: #065fa3; }
+
+#myStats .statistics.green {
+  color: #016936; }
+
+#myStats .statistics.orange {
+  color: #ff9800; }

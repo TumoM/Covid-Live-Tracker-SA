@@ -13,12 +13,13 @@ const dotenv = require('dotenv');
 // Enable the app-wide scout middleware
 app.use(scout.expressMiddleware());*/
 const app        = express();
-
+const CronJob = require('cron').CronJob;
 const CacheService = require('./models/cacheModel');
 // Enable the app-wide scout middleware
 const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
+const parsing = require("./test/parsing");
 const NodeCache = require('node-cache');
 
 dotenv.config();
@@ -30,11 +31,6 @@ const ttl = 60 * 60 * 1; // cache for 1 Hour
 //     stdTTL: ttl,
 //     useClones: false,
 // });
-let x = new Date(1588358454339)
-x.toISOString()
-x.toLocaleTimeString()
-x.toLocaleString()
-x.toLocaleString('en-ZA', { timeZone: 'Africa/Gaborone' })
 const cache = new NodeCache({
     checkperiod: 600,
     maxKeys: 10000,
@@ -131,29 +127,36 @@ app.get('/governmentCheck/:type?',async (req,res) =>{
 app.post('/governmentCheck/:type?',async (req,res) =>{
     let type = req.params.type? req.params.type:
         req.get("type")? req.get("type"): null;
-    console.log("##################################################################################")
-    console.log("TYPE:",type)
-    console.log("Subject:",req.body.subject)
-    console.log("Date:",req.body.Date)
-    console.log("Content (body-html):",req.body["body-html"])
-    console.log("Content (body-plain):",req.body["body-plain"])
-    console.log("##################################################################################")
+
+//     console.log("TYPE:",type)
+//     console.log("Subject:",req.body.subject)
+//     console.log("Date:",req.body.Date)
+//     console.log("Content (body-html):",req.body["body-html"])
+//     console.log("Content (body-plain):",req.body["body-plain"])
+
 
     let text,date,workingText;
     if (req.body["X-Mailgun-Incoming"]){
         console.log("MailGun Hook")
+        console.log('Type:',type)
         // type = "mailGun"
     }
-    if (type && type === "mailGun"){
-        [text,date] = req.body["body-html"].trim().match(/<p.*class[\s\S]*?<\/p>/g);
+    if ((type && type === "mailGun") || req.body["X-Mailgun-Incoming"]){
+
+        [text,date] = req.body["body-html"].trim().match(/<p.*?class[\s\S]*?<\/p>/g);
+
         console.log("Text BEFORE:",text)
         console.log("Date BEFORE:",date)
         text = text.replace(/(\r\n)/g," ").split('>')[1].split("<")[0].split(':')[1]
         date = date.split('>')[1].split("<")[0].split(':')[1]
         console.log(text,'\n',date)
-         workingText = text.match(/today[\s\S]*?number[\s\S]*?covid.?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || null
+         workingText = text.match(/today[\s\S]*?number[\s\S]*?covid.*?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || null
         if (workingText){
             workingText = workingText[0]
+
+            console.log('Sending Response:',{response:{text,date}})
+            res.status(200).json({message:'Good Respons',response:{text,date}})
+
         }
     }
 
@@ -168,18 +171,43 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
             // TODO Scheduler : Parser ---> Parser24, until vail OR until xx:xx am?
             text = req.body.text;
             date = req.body.date;
-            return res.status(200).json({ message: 'Valid Authentication Credentials' });
+            return res.status(200).json({ message: 'Valid Authentication Credentials', response:{text,date}});
+
         }
         else{
             return res.status(401).json({ message: 'Invalid Authentication Credentials' });
         }
     }
-    console.log("workingText:",workingText);
-    console.log("SENDING:",{ text, date});
-    return res.status(200).json({ text, date});
+    console.log("NOT SENDING?:", {response: {text, date}});
+    return res.status(200).json({
+        response:{text,date}
+});
 })
 
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port}`);
+    console.log('Before job instantiation');
 })
+
+const mainJob = new CronJob('0 17 * * *', function() {
+    let job1 = new CronJob('0 */3 19-23 * * *', async function() {
+        const d = new Date();
+        const daddy = this
+        console.log('Every 3 minutes between 19-17:', d);
+        await parsing().then((res)=>{
+                console.log('Res',res)
+                if (res === true){
+                    console.log('Stopping Cron?')
+                    daddy.stop();
+                }
+                else{
+                    console.log('Continue with Cron')
+                }
+            }
+        )
+    });
+    job1.start();
+    console.log('Job 1 Set in Job');
+},null,true,'Africa/Johannesburg');
+

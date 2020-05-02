@@ -1,5 +1,5 @@
     <%- include("./partials/header") %>
-    <div class="main text container">
+    <main class="main text container">
         <div id="myMainContainer" class="container segment main center">
 
         <!--<div id="myTitle" class="">
@@ -128,8 +128,8 @@
         <div class="ui section divider"></div>
 
         <%# Map %>
-        <h2 id="myMap" class="ui header block top attached">Provincial Map</h2>
-        <section  class="ui segment section expand raised attached grid">
+        <h2 id="myMapHeading" class="ui header block top attached">Provincial Map</h2>
+        <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
                     <div class="ui cards">
@@ -343,8 +343,8 @@
         <div class="ui section divider"></div>
 
         <%# Table %>
-        <h2 id="myTable" class="ui header block top attached">Table</h2>
-        <section  class="ui segment padded section expand raised attached fluid grid">
+        <h2 id="myTableHeading" class="ui header block top attached">Table</h2>
+        <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
             <div class="ui column">
                 <div class="">
                     <select id="sort-field" class="ui dropdown">
@@ -375,7 +375,7 @@
         <div class="ui section divider"></div>
 
         </div>
-    </div>
+    </main>
 
     <%- include("./partials/footer") %>
 
@@ -384,5 +384,56 @@
         setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
         setTable(<%- JSON.stringify(graphData) %>)
         setGraphs(<%- JSON.stringify(graphData) %>)
+        </script>
+      <script>
+        $(document).ready(function() {
+            $(".ui.toggle.button.nav").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+          ***REMOVED***);
+            $("#myNav .item.close").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+          ***REMOVED***);
+
+            $(".ui.dropdown").dropdown();
+      ***REMOVED***);
+    </script>
+    <script>
+        let mainNavLinks = document.querySelectorAll("nav a.item.fluid");
+        console.log(mainNavLinks)
+        let mainSections = document.querySelectorAll("main section");
+
+        let lastId;
+        let cur = [];
+
+        // This should probably be throttled.
+        // Especially because it triggers during smooth scrolling.
+        // https://lodash.com/docs/4.17.10#throttle
+        // You could do like...
+        // window.addEventListener("scroll", () => {
+        //    _.throttle(doThatStuff, 100);
+        // ***REMOVED***);
+        // Only not doing it here to keep this Pen dependency-free.
+
+        window.addEventListener("scroll", event => {
+            let fromTop = window.scrollY+110;
+
+            mainNavLinks.forEach(link => {
+                let section = document.querySelector(link.dataset.section);
+                /*  console.log('fromTop:',fromTop)
+                  console.log('section offset:',section.offsetTop)
+                  console.log('section height:',section.offsetHeight)*/
+                // console.log('fromTop:',fromTop)
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    link.classList.add("active");
+              ***REMOVED*** else {
+                    link.classList.remove("active");
+              ***REMOVED***
+          ***REMOVED***);
+      ***REMOVED***);
+
+    </script>
 
     </script>

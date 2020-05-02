@@ -146,9 +146,9 @@ tspan{
 ***REMOVED***
 
 
-.toggle.button{
+/*.toggle.button{
 	height: min-content;
-***REMOVED***
+***REMOVED****/
 //
 //#hideIcon{
 //	width: 100%;
@@ -186,6 +186,12 @@ tspan{
 
 	***REMOVED***
 
+***REMOVED***
+@media only screen and (max-width: 767px) {
+	[class*="mobile hidden"],
+	[class*="or lower hidden"] {
+		display: none !important;
+	***REMOVED***
 ***REMOVED***
 
 #mapContainer{

@@ -1,27 +1,28 @@
     <%- include("./partials/header") %>
-    <div class="pusher">
-        <div class="container segment main center">
+    <main class="main text container">
+        <div id="myMainContainer" class="container segment main center">
 
-        <div id="myTitle" class="">
+        <!--<div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
             </h1>
-        </div>
+        </div>-->
         <div class="ui section divider"></div>
 
         <%# Stats %>
-        <h2 class="ui header block top attached">Summary Statistics</h2>
+        <h2 id="myStatsHeading" class="ui header block top attached">Summary Statistics</h2>
         <section id="myStats" class="ui segment padded section expand raised attached middle aligned">
-            <h3>(Updated: <%= data.updateTime %>)</h3>
+            <h2 class="ui sub header grey text">Updated: <%= data.updateTime%></h2>
+            <br/>
             <div class="ui centered grid">
                 <div class="grid two column row">
                     <div class="five wide tablet eight wide computer">
-                        <div id="statTotalCases" class="ui card ">
+                        <div id="statTotalCases" class="ui orange card ">
                             <div class="image">
                                 <i class="fas fa-diagnoses fa-7x statIcon"></i>
                             </div>
                             <div class="content">
-                                <div class="ui huge header">Total Confirmed Cases:</div>
+                                <div class="ui huge header">Total Cases:</div>
                             </div>
                             <div class="extra content">
                                 <div class="ui statistic orange bold">
@@ -33,7 +34,7 @@
                         </div>
                     </div>
                     <div class="five wide tablet eight wide computer">
-                        <div id="statNewCases"class="ui card ">
+                        <div id="statNewCases"class="ui yellow card ">
                             <div class="image">
                                 <i class="fas fa-search-plus fa-7x statIcon"></i>
                             </div>
@@ -52,7 +53,7 @@
                 </div>
                 <div class="grid two column row">
                     <div id="statTotalDeaths" class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui red card">
                                     <div class="image">
                                         <i class="fas fa-heart-broken fa-7x statIcon"></i>
                                     </div>
@@ -69,7 +70,7 @@
                                 </div>
                     </div>
                     <div id="statNewDeaths" class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui pink card">
                             <div class="image">
                                 <i class="fas fa-search-minus fa-7x statIcon"></i>
                             </div>
@@ -88,7 +89,7 @@
                 </div>
                 <div class="frid two column row">
                     <div id="statTotalRecoveries"class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui blue card">
                             <div class="image">
                                 <i class="fas fa-heartbeat fa-7x statIcon"></i>
                             </div>
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div id="statTotalTests"class="five wide tablet eight wide computer">
-                        <div class="ui card">
+                        <div class="ui green card">
                             <div class="image">
                                 <i class="fas fa-bong fa-7x statIcon"></i>
                             </div>
@@ -123,91 +124,18 @@
                     </div>
                 </div>
             </div>
-        </section><
-        <div class="ui section divider"></div>
-
-        <%# Map %>
-        <h2 class="ui header block top attached">Provincial Map</h2>
-        <section id="myMap" class="ui segment section expand raised attached grid">
-            <div class="ui three column grid row stackable" id="mapContainer">
-                <div class="four wide column scroll-pane" id="provStatsContainer">
-                    <div class="ui cards">
-                        <div class="card">
-                            <div class="main content">
-                                <div class="header">
-                                    Guteng
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <div class="ui two description">
-                                    Active: <span class="provStats">10000</span> <br>
-                                    Deaths: <span class="provStats">200</span> <br>
-                                    Recoveries: <span class="provStats">20</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="main content">
-                                <div class="header">
-                                    Guteng2
-                                </div>
-                            </div>
-=======
-
-        <%# Stats %>
-        <h2 class="ui header block top attached">Summary Statistics</h2>
-        <section id="myStats" class="ui segment padded section expand raised attached grid">
-            <div class="column">
-                <div class="ui statistics">
-                    <div class="orange statistic">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Cases:</h2>
-                        </div>
-                        <div class="ui large value">
-                            <%= data.totalCases %>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic bold red">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Deaths:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalDeaths%>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic blue">
-                        <div class="">
-                            <h2 class="ui huge header">Covid-19 Recoveries:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalRecoveries%>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic green">
-                        <div class="label">
-                            <h2 class="ui huge header">Covid-19 Tests:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalTests%>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
         <div class="ui section divider"></div>
 
         <%# Map %>
-        <h2 class="ui header block top attached">Provincial Map</h2>
-        <section id="myMap" class="ui segment section expand raised attached grid">
+        <h2 id="myMapHeading" class="ui header block top attached">Provincial Map</h2>
+        <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
                     <div class="ui cards">
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng
                                 </div>
                             </div>
@@ -221,7 +149,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -235,7 +163,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -249,27 +177,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
-                                    Guteng2
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <div class="ui two description">
-                                    Active: <span class="provStats">10000</span> <br>
-                                    Deaths: <span class="provStats">200</span> <br>
-                                    Recoveries: <span class="provStats">20</span>
-
-                            <div class="extra content">
-                                <div class="ui two description">
-                                    Active: <span class="provStats">10000</span> <br>
-                                    Deaths: <span class="provStats">200</span> <br>
-                                    Recoveries: <span class="provStats">20</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -283,7 +191,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -297,7 +205,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -311,7 +219,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -325,7 +233,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -339,7 +247,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -353,21 +261,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
-                                    Guteng2
-                                </div>
-                            </div>
-                            <div class="extra content">
-                                <div class="ui two description">
-                                    Active: <span class="provStats">10000</span> <br>
-                                    Deaths: <span class="provStats">200</span> <br>
-                                    Recoveries: <span class="provStats">20</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -381,13 +275,13 @@
                         </div>
                     </div>
                 </div>
-                    <div class="ui toggle icon button" >
-                        <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
-
-                    </div>
+                <div class="ui toggle icon button mobile hidden map" >
+                    <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
+                </div>
                 <div id="svgColumn" class="ten wide column">
                     <%- include("./map/mapFile") %>
                 </div>
+
                 <div class="one wide column tablet only one wide column computer only">
                     <div class="ui grid center aligned">
                         <h3 class="ui heading">Filters:</h3>
@@ -413,32 +307,35 @@
         <div class="ui section divider"></div>
 
         <%# Graphs %>
-        <h2 class="ui header block top attached">Graphs</h2>
-        <section id="myGraphs" class="ui segment padded section expand raised attached grid center aligned fluid stackable">
-                <button id="toggleScaleCases">Toggle Scale Type</button>
-                <div class ="row ">
-                    <div class="eight wide column">
-                        <canvas id="chart1" class="column chart"></canvas>
+        <h2 id="myGraphsHeading" class="ui header block top attached">Graphs</h2>
+        <section id="myGraphs" class="ui segment section expand raised attached two column centered grid">
+            <div class ="centered row ">
+                <button id="toggleScaleCases" class="ui button">Toggle Scale Type</button>
+            </div>
+                <div class ="centered row ">
+                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                            <canvas id="chart1" class="chart "></canvas>
                     </div>
-                    <div class="eight wide column">
-                        <canvas id="chart2" class="column chart"></canvas>
-                    </div>
-                </div>
-            <button id="toggleScaleDeaths">Toggle Scale Type</button>
-            <div class ="row">
-                    <div class="eight wide column">
-                        <canvas id="chart3" class="column chart"></canvas>
-                    </div>
-                    <div class="eight wide column">
-                        <canvas id="chart4" class="column chart"></canvas>
+                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                            <canvas id="chart2" class="chart "></canvas>
+
                     </div>
                 </div>
-                <div class ="row">
-                    <div class="eight wide column">
-                        <canvas id="chart5" class="column chart"></canvas>
+            <button id="toggleScaleDeaths" class="ui button">Toggle Scale Type</button>
+            <div class ="centered row">
+                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                            <canvas id="chart3" class="chart "></canvas>
+
                     </div>
-                    <div class="eight wide column">
-                        <canvas id="chart6" class="column chart"></canvas>
+                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                            <canvas id="chart4" class="chart "></canvas>
+
+                    </div>
+                </div>
+                <div class ="centered row">
+                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                            <canvas id="chart5" class="chart "></canvas>
+
                     </div>
                 </div>
 
@@ -446,12 +343,13 @@
         <div class="ui section divider"></div>
 
         <%# Table %>
-        <h2 class="ui header block top attached">Table</h2>
+        <h2 id="myTableHeading" class="ui header block top attached">Table</h2>
         <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
             <div class="ui column">
                 <div class="">
-                    <select id="sort-field">
-                        <option value="date" selected>Date</option>
+                    <select id="sort-field" class="ui dropdown">
+                        <option value="" selected>Filter Table</option>
+                        <option value="date">Date</option>
                         <option value="totalCases">Cases</option>
                         <option value="totalDeaths">Deaths</option>
                         <option value="totalRecoveries">Recoveries</option>
@@ -461,26 +359,81 @@
                         <option value="dailyDeaths">Daily Deaths</option>
                     </select>
 
-                    <select id="sort-direction">
-                        <option value="asc" selected>asc</option>
+
+                    <select id="sort-direction" class="ui dropdown">
+                        <option value="" selected>Sort Direction</option>
+                        <option value="asc">asc</option>
                         <option value="desc">desc</option>
                     </select>
-                    <button id="sort-trigger">Trigger Sort</button>
-                    <button id="sort-reset">Reset Table</button>
+                    <button class="ui button"  id="sort-trigger">Sort Table</button>
+                    <button  class="ui button" id="sort-reset">Reset Table</button>
                 </div>
                 <div class="ui container divider"></div>
+                <div class="sixteen wide column" id="example-table"></div>
             </div>
         </section>
         <div class="ui section divider"></div>
 
         </div>
-    </div>
+    </main>
 
     <%- include("./partials/footer") %>
 
     <script>
         setColours(<%- JSON.stringify(provCases) %>)
         setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
-        setGraphs(<%- JSON.stringify(graphData) %>)
         setTable(<%- JSON.stringify(graphData) %>)
+        setGraphs(<%- JSON.stringify(graphData) %>)
+        </script>
+      <script>
+        $(document).ready(function() {
+            $(".ui.toggle.button.nav").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+            });
+            $("#myNav .item.close").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+            });
+
+            $(".ui.dropdown").dropdown();
+        });
+    </script>
+    <script>
+        let mainNavLinks = document.querySelectorAll("nav a.item.fluid");
+        console.log(mainNavLinks)
+        let mainSections = document.querySelectorAll("main section");
+
+        let lastId;
+        let cur = [];
+
+        // This should probably be throttled.
+        // Especially because it triggers during smooth scrolling.
+        // https://lodash.com/docs/4.17.10#throttle
+        // You could do like...
+        // window.addEventListener("scroll", () => {
+        //    _.throttle(doThatStuff, 100);
+        // });
+        // Only not doing it here to keep this Pen dependency-free.
+
+        window.addEventListener("scroll", event => {
+            let fromTop = window.scrollY+110;
+
+            mainNavLinks.forEach(link => {
+                let section = document.querySelector(link.dataset.section);
+                /*  console.log('fromTop:',fromTop)
+                  console.log('section offset:',section.offsetTop)
+                  console.log('section height:',section.offsetHeight)*/
+                // console.log('fromTop:',fromTop)
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        });
+
+    </script>
+
     </script>

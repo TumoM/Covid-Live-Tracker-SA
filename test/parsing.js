@@ -130,22 +130,24 @@ async function main() {
             }
         }
         console.log('Quitting Driver.')
+        await driver.close();
         await driver.quit();
         console.log('Returning Promise.')
         return Promise.resolve(htmls);
     }
     htmls = await getHtml(links2)
 
-    console.log("HTMLS DATE 0",htmls[0].match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
-    console.log("HTMLS DATE 1",htmls[1].match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
-    console.log("HTMLS DATE 2",htmls[2].match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
+    /*console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
+    console.log("HTMLS DATE 1",htmls[1].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
+    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])*/
 
-    console.log('Swag')
+    let fullLoop = 0
     for (let i = 0; i < links2.length; i++) {
         let loop = true;
+        fullLoop = i;
         while (loop){
             {
-                let DATE = htmls[i].match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]
+                let DATE = htmls[i].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]
                 console.log(DATE); // date
                 let totalCase = 0;
                 let totalDeath = 0;
@@ -184,7 +186,7 @@ async function main() {
                             if (rows.length > 0) {
                                 let value = await knex('dates').update({
                                     totalTests,
-                                    maybeValid: false
+                                    maybeValid: true
                                 }).where({date: parsedDate})
                                     .returning('date')
                                 if (value.length > 0) {
@@ -240,9 +242,33 @@ async function main() {
                                 let date = rootChild.text.match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]
                                 let cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
                                 let tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
-                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./)[0]
+                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./)
+                                let recoveries = rootChild.text.match(/recoveries.*?[\d*\s?]\./)
+                                let totalDeaths = null;
+                                if (!deaths){
+                                    deaths = null
+                                }
+                                else{
+                                    deaths = deaths[0]
+                                    totalDeaths = deaths.trim().match(/\s((\d+\s+)*\d+)/);
+                                    if (totalDeaths) {
+                                        totalDeaths = parseNumber(totalDeaths[0].trim());
+                                    }
+                                }
+                                let totalRecoveries = null;
+                                if (!recoveries){
+                                    totalRecoveries = null
+                                }
+                                else{
+                                    recoveries = recoveries[0]
+                                    totalRecoveries = recoveries.trim().match(/\s((\d+\s+)*\d+)/);
+                                    if (totalRecoveries) {
+                                        totalRecoveries = parseNumber(totalRecoveries[0].trim());
+                                    }
+                                }
                                 console.log("TestPar", tests);
                                 let totalTests = tests.match(/\s((\d+\s+)*\d+)/)[0];
+
                                 if (totalTests) {
                                     totalTests = parseNumber(totalTests.trim());
                                 } else {
@@ -252,14 +278,12 @@ async function main() {
                                 if (totalCases) {
                                     totalCases = parseNumber(totalCases[0].trim());
                                 }
-                                let totalDeaths = deaths.trim().match(/\s((\d+\s+)*\d+)/);
-                                if (totalDeaths) {
-                                    totalDeaths = parseNumber(totalDeaths[0].trim());
-                                }
+
 
                                 console.log("Total Tests:", totalTests);
                                 console.log("Total Cases:", totalCases);
                                 console.log("Total Deaths:", totalDeaths);
+                                console.log("Total Recoveries:", totalRecoveries);
 
                                 let data = {
                                     date: parsedDate,
@@ -267,7 +291,7 @@ async function main() {
                                     totalTests,
                                     totalCases,
                                     totalDeaths,
-                                    maybeValid: false
+                                    maybeValid: true
                                 }
                                 console.log(data)
                                 let rows = await knex('dates').select('totalTests')
@@ -276,7 +300,7 @@ async function main() {
                                         console.log(rows.length)
                                         let value = await knex('dates').update({
                                             totalTests,
-                                            maybeValid: false
+                                            maybeValid: true
                                         }).where({date: parsedDate})
                                                 console.log("Updated TTs2:", value)
                                             if (value === 0) {
@@ -320,14 +344,12 @@ async function main() {
                                                         totalDeaths: data.totalDeaths,
                                                         dailyNew: prevVals.rows[0].dailyNew,
                                                         dailyDeaths: prevVals.rows[0].dailyDeaths,
-                                                        totalRecoveries: prevVals.rows[0].prevRecoveries,
+                                                        totalRecoveries: totalRecoveries || prevVals.rows[0].prevRecoveries,
                                                         ...data
                                                     }
                                                     await knex('dates').update(data).where('date', '=', parsedDate)
                                                     loop=false;
                                                 }
-
-
                                 } catch (e) {
                                 console.log("SOME ERROR:", e)
                                 loop = false;
@@ -335,7 +357,7 @@ async function main() {
                                 knex("dates ").insert({
                                     date: parsedDate,
                                     parsed: false,
-                                    maybeValid: false,
+                                    maybeValid: true,
                                     error: true
                                 })
                                     .then(id => {
@@ -344,21 +366,25 @@ async function main() {
                                     .catch(err => {
                                         console.log("Ignoring duplicates 1", err)
                                     })
-                            }
+                                }
                             }
                         }
                     }
-            }
-    console.log("We done?")
-    return Promise.resolve(true)
+                }
+    if (fullLoop === links2.length-1) {
+        return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
+
 
 }
 
 
-main().then((res)=>{
+/*main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
     }
-)
+)*/
 
+module.exports = main
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

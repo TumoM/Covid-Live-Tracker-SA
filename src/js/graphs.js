@@ -76,7 +76,7 @@ Chart.defaults.scale.ticks.beginAtZero = true;
 
 
 
-setGraphs = (graphData,provinceCaseData)=>{
+function setGraphs(graphData){
     graphData.forEach(row=>{
         labels.push(new Date(row.date));
         totalCasesArr.push(row.totalCases)

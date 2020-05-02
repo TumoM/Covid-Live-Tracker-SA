@@ -46,7 +46,7 @@ var numberFormat = function(value, data, type, params, component){
     return value === null?null:numeral(value).format('0,0'); //return the new value for the cell data.
 ***REMOVED***
 
-setTable = (data)=>{
+function setTable(data){
     var fieldEl = document.getElementById("sort-field");
     var dirEl = document.getElementById("sort-direction");
 

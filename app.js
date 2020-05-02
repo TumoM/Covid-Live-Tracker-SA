@@ -30,15 +30,19 @@ const ttl = 60 * 60 * 1; // cache for 1 Hour
 //     stdTTL: ttl,
 //     useClones: false,
 // });
-
+let x = new Date(1588358454339)
+x.toISOString()
+x.toLocaleTimeString()
+x.toLocaleString()
+x.toLocaleString('en-ZA', { timeZone: 'Africa/Gaborone' })
 const cache = new NodeCache({
-    checkperiod: 60,
+    checkperiod: 600,
     maxKeys: 10000,
     stdTTL: ttl,
     useClones: false,
 });
-
-const port = process.env.PORT || 3000;
+cache.set("data", null);
+const port = process.env.PORT || 5000;
 
 // Setup Express/App
 app.set("view engine", "ejs");
@@ -47,13 +51,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
-
-/*// Setup Persistance
-app.use(require("express-session")({
-    secret: process.env.SECRET || "swag",
-    resave: false,
-    saveUninitialized: false
-}));*/
 
 app.use(bodyParser.json());
 
@@ -109,9 +106,6 @@ const options = {
 }
 const hashQuery = (query) => {
     return JSON.stringify(query);
-};
-const unhashQuery = (query) => {
-    return JSON.parse(query);
 };
 const pool = createPool(connection, options);
 

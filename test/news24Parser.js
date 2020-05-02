@@ -71,8 +71,8 @@ async function main() {
         date;
 
 
-    let ps = [];
     let recoveryDate;
+    let count
     try {
         let status = await rp(url)
         let html = status
@@ -195,7 +195,7 @@ async function main() {
           ***REMOVED***
 
             console.log(`Recovery Counts (${recoveryDate***REMOVED***):`)
-            let count = 0;
+            count = 0;
             console.log('Starting the parsing of province Recoveries.')
             for (let index = 0; index < provinceRecoveries.length; index++) {
                 let loop = true;
@@ -338,99 +338,108 @@ async function main() {
         // return 200
         // process.exit(200);
         console.log('Done map?')
-        return Promise.resolve(true)
-  ***REMOVED*** catch (e) {
-        console.log("Error Bro", e);
-        return (-1)
-  ***REMOVED***
-    function getNumber(line) {
-        let intString = "";
-        let total = line.match(/\d?[\d+\s?]*\d+/)[0].split(" ")
-        total.forEach(digit => {
-            intString += digit
-      ***REMOVED***)
-        return (+intString)
-  ***REMOVED***
-
-    async function updateDaysGood(itemData) {
-        console.log('Updating Day Function:')
-
-        let dateData = {
-            totalCases,
-            totalDeaths,
-            totalRecoveries,
-            maybeValid: true,
-            parsed: true
-      ***REMOVED***
-        console.log("Date:", itemData.provDate)
-        let rows = await knex('dates')
-            .select()
-            .where({date: itemData.provDate***REMOVED***)
-        // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
-        console.log("date in func", itemData.provDate)
-        if (rows && rows.length === 0) {
-            dateData.date = itemData.provDate;
-            let id = await knex("dates").insert(dateData).returning('date');
-            if (id && id.length > 0) {
-                console.log("Inserted into Dates Table")
-                let prevVals = await knex.raw('WITH preTable AS (\n' +
-                    '   SELECT\n' +
-                    '      date,\n' +
-                    '      "totalCases",\n' +
-                    '      "totalDeaths",\n' +
-                    '        "totalRecoveries",\n' +
-                    '      LAG("totalCases",1)\n' +
-                    '          OVER (\n' +
-                    '            ORDER BY date\n' +
-                    '            ) prevCases,\n' +
-                    '      LAG("totalDeaths",1)\n' +
-                    '          OVER (\n' +
-                    '            ORDER BY date\n' +
-                    '            ) prevDeaths,\n' +
-                    '          LAG("totalRecoveries",1)\n' +
-                    '            OVER(\n' +
-                    '                ORDER BY date\n' +
-                    '                ) prevRecoveries\n' +
-                    '   FROM dates\n' +
-                    '   ORDER BY date\n' +
-                    ')\n' +
-                    'select\n' +
-                    '       date,\n' +
-                    '       prevRecoveries as "prevRecoveries",\n' +
-                    '    ("totalCases"-prevCases) as "dailyNew",\n' +
-                    '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
-                    'from preTable\n' +
-                    'order by date desc\n' +
-                    'limit 1;')
-                let val = await knex('dates').update({
-                    dailyNew: prevVals.rows[0].dailyNew,
-                    dailyDeaths: prevVals.rows[0].dailyDeaths,
-                    totalRecoveries: prevVals.rows[0].prevRecoveries
-              ***REMOVED***).where('date', '=', itemData.provDate);
-                if (!val || val === 0){
-                    log('WHAAAAAT?', reason)
-              ***REMOVED***
-          ***REMOVED***
+        if ((count && count === 9 )|| parsed){
+            return Promise.resolve(true)
       ***REMOVED***
         else {
-            let id = await knex("dates ")
-                .update(dateData)
-                .where('date', "=", itemData.provDate)
-            if (id && id > 0){
-                console.log("Updated Dates Table")
+            return Promise.resolve(false)
+      ***REMOVED***
+  ***REMOVED*** catch (e) {
+        console.log("Error Bro", e);
+        return Promise.resolve(false);
+  ***REMOVED***
+***REMOVED***
+
+function getNumber(line) {
+    let intString = "";
+    let total = line.match(/\d?[\d+\s?]*\d+/)[0].split(" ")
+    total.forEach(digit => {
+        intString += digit
+  ***REMOVED***)
+    return (+intString)
+***REMOVED***
+
+async function updateDaysGood(itemData) {
+    console.log('Updating Day Function:')
+
+    let dateData = {
+        totalCases,
+        totalDeaths,
+        totalRecoveries,
+        maybeValid: true,
+        parsed: true
+  ***REMOVED***
+    console.log("Date:", itemData.provDate)
+    let rows = await knex('dates')
+        .select()
+        .where({date: itemData.provDate***REMOVED***)
+    // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
+    console.log("date in func", itemData.provDate)
+    if (rows && rows.length === 0) {
+        dateData.date = itemData.provDate;
+        let id = await knex("dates").insert(dateData).returning('date');
+        if (id && id.length > 0) {
+            console.log("Inserted into Dates Table")
+            let prevVals = await knex.raw('WITH preTable AS (\n' +
+                '   SELECT\n' +
+                '      date,\n' +
+                '      "totalCases",\n' +
+                '      "totalDeaths",\n' +
+                '        "totalRecoveries",\n' +
+                '      LAG("totalCases",1)\n' +
+                '          OVER (\n' +
+                '            ORDER BY date\n' +
+                '            ) prevCases,\n' +
+                '      LAG("totalDeaths",1)\n' +
+                '          OVER (\n' +
+                '            ORDER BY date\n' +
+                '            ) prevDeaths,\n' +
+                '          LAG("totalRecoveries",1)\n' +
+                '            OVER(\n' +
+                '                ORDER BY date\n' +
+                '                ) prevRecoveries\n' +
+                '   FROM dates\n' +
+                '   ORDER BY date\n' +
+                ')\n' +
+                'select\n' +
+                '       date,\n' +
+                '       prevRecoveries as "prevRecoveries",\n' +
+                '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                'from preTable\n' +
+                'order by date desc\n' +
+                'limit 1;')
+            let val = await knex('dates').update({
+                dailyNew: prevVals.rows[0].dailyNew,
+                dailyDeaths: prevVals.rows[0].dailyDeaths,
+                totalRecoveries: prevVals.rows[0].prevRecoveries
+          ***REMOVED***).where('date', '=', itemData.provDate);
+            if (!val || val === 0){
+                log('WHAAAAAT?', reason)
           ***REMOVED***
-            else{
-                console.log("Attempted duplicate update?", err)
-          ***REMOVED***
+      ***REMOVED***
+  ***REMOVED***
+    else {
+        let id = await knex("dates ")
+            .update(dateData)
+            .where('date', "=", itemData.provDate)
+        if (id && id > 0){
+            console.log("Updated Dates Table")
+      ***REMOVED***
+        else{
+            console.log("Attempted duplicate update?", err)
       ***REMOVED***
   ***REMOVED***
 ***REMOVED***
 
 
-
+/*
 main()
     .then(result=>{
         console.log("main result:",result);
         process.exit(0)
   ***REMOVED***)
     .catch(err=> console.log('Your Err',err));
+*/
+
+module.exports = main

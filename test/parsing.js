@@ -137,11 +137,10 @@ async function main() {
   ***REMOVED***
     htmls = await getHtml(links2)
 
-    console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
+    /*console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
     console.log("HTMLS DATE 1",htmls[1].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
-    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
+    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])*/
 
-    console.log('Swag')
     let fullLoop = 0
     for (let i = 0; i < links2.length; i++) {
         let loop = true;
@@ -187,7 +186,7 @@ async function main() {
                             if (rows.length > 0) {
                                 let value = await knex('dates').update({
                                     totalTests,
-                                    maybeValid: false
+                                    maybeValid: true
                               ***REMOVED***).where({date: parsedDate***REMOVED***)
                                     .returning('date')
                                 if (value.length > 0) {
@@ -292,7 +291,7 @@ async function main() {
                                     totalTests,
                                     totalCases,
                                     totalDeaths,
-                                    maybeValid: false
+                                    maybeValid: true
                               ***REMOVED***
                                 console.log(data)
                                 let rows = await knex('dates').select('totalTests')
@@ -301,7 +300,7 @@ async function main() {
                                         console.log(rows.length)
                                         let value = await knex('dates').update({
                                             totalTests,
-                                            maybeValid: false
+                                            maybeValid: true
                                       ***REMOVED***).where({date: parsedDate***REMOVED***)
                                                 console.log("Updated TTs2:", value)
                                             if (value === 0) {
@@ -358,7 +357,7 @@ async function main() {
                                 knex("dates ").insert({
                                     date: parsedDate,
                                     parsed: false,
-                                    maybeValid: false,
+                                    maybeValid: true,
                                     error: true
                               ***REMOVED***)
                                     .then(id => {
@@ -372,8 +371,6 @@ async function main() {
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
-    console.log("We done?")
-    console.log("Full Loop?", fullLoop === links2.length-1);
     if (fullLoop === links2.length-1) {
         return Promise.resolve(true);
   ***REMOVED***
@@ -383,11 +380,11 @@ async function main() {
 ***REMOVED***
 
 
-main().then((res)=>{
+/*main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
   ***REMOVED***
-)
+)*/
 
 module.exports = main
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

@@ -20,7 +20,10 @@ const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
 const parsing = require("./test/parsing");
+const parsing24 = require("./test/news24Parser");
 const NodeCache = require('node-cache');
+const moment = require('moment')
+
 
 dotenv.config();
 
@@ -190,16 +193,36 @@ app.listen(port, function () {
     console.log('Before job instantiation');
 ***REMOVED***)
 
+let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
+    const d = moment();
+    const daddy24 = this
+    console.log('CronJob 2 - Calling Parsing24:', d.toString());
+    await parsing24().then((res)=>{
+        console.log('Res 2',res)
+        if (res === true){
+            console.log('Stopping Cron 2?')
+            daddy24.stop();
+            console.log('')
+
+      ***REMOVED***
+        else{
+            console.log('Continue with Cron 2')
+      ***REMOVED***
+  ***REMOVED***)
+***REMOVED***)
 const mainJob = new CronJob('0 17***REMOVED******REMOVED******REMOVED***', function() {
     let job1 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
-        const d = new Date();
+        const d = moment();
         const daddy = this
-        console.log('Every 3 minutes between 19-17:', d);
+        console.log('CronJob 1 - Calling Parsing:', d.toString());
         await parsing().then((res)=>{
                 console.log('Res',res)
                 if (res === true){
-                    console.log('Stopping Cron?')
+                    console.log('Stopping Cron 1?')
                     daddy.stop();
+                    console.log('')
+                    job2.start()
+                    parsing24();
               ***REMOVED***
                 else{
                     console.log('Continue with Cron')

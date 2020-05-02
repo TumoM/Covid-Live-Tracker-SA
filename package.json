@@ -29,6 +29,7 @@
   "homepage": "https://github.com/TumoM/Covid-Live-Tracker-SA#readme",
   "dependencies": {
     "@scout_apm/scout-apm": "^0.1.8",
+    "@sentry/node": "^5.15.5",
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.3",
     "chromedriver": "^81.0.0",

@@ -15,6 +15,7 @@ app.use(scout.expressMiddleware());*/
 const app        = express();
 const CronJob = require('cron').CronJob;
 const CacheService = require('./models/cacheModel');
+const Sentry = require('@sentry/node');
 // Enable the app-wide scout middleware
 const bodyParser  = require("body-parser");
 const path = require('path');
@@ -24,7 +25,10 @@ const parsing24 = require("./test/news24Parser");
 const NodeCache = require('node-cache');
 const moment = require('moment')
 
+Sentry.init({ dsn: 'https://58ae4a8b4ff545d0bb1449730d6b2762@o386838.ingest.sentry.io/5221539' ***REMOVED***);
 
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
 dotenv.config();
 
 const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
@@ -187,6 +191,7 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
 ***REMOVED***);
 ***REMOVED***)
 
+app.use(Sentry.Handlers.errorHandler());
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port***REMOVED***`);

@@ -197,6 +197,10 @@ app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port***REMOVED***`);
 ***REMOVED***)
 
+process.on('exit', (code) => {
+    console.log(`About to exit with code: ${code***REMOVED***`);
+***REMOVED***);
+
 let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
     const d = moment();
     const daddy24 = this
@@ -206,7 +210,7 @@ let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOV
         if (res === true){
             console.log('Stopping Cron 2?')
             daddy24.stop();
-            console.log('')
+            console.log('Done Cron 2')
 
       ***REMOVED***
         else{
@@ -214,19 +218,28 @@ let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOV
       ***REMOVED***
   ***REMOVED***)
 ***REMOVED***)
-const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', function() {
-    let job1 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
+const mainJob = new CronJob('0***REMOVED***/30 17-23***REMOVED******REMOVED******REMOVED***', function() {
+    const d2 = moment();
+
+    let job1 = new CronJob('0***REMOVED***/2 19-23***REMOVED******REMOVED******REMOVED***', async function() {
         const d = moment();
         const daddy = this
         console.log('CronJob 1 - Calling Parsing:', d.toString());
-        await parsing().then((res)=>{
+        await parsing()
+            .then(async (res)=>{
                 console.log('Res',res)
                 if (res === true){
                     console.log('Stopping Cron 1?')
                     daddy.stop();
-                    console.log('')
+                    console.log('Done Cron 1')
+                    console.log('Staring Job 2')
                     job2.start()
-                    parsing24();
+                    let res = await parsing24()
+                    if (res === true) {
+                        console.log('Stopping Job 2')
+                        job2.stop()
+                        console.log('Stopped Job 2')
+                  ***REMOVED***
               ***REMOVED***
                 else{
                     console.log('Continue with Cron')
@@ -235,6 +248,6 @@ const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED*****
         )
   ***REMOVED***);
     job1.start();
-    console.log('Job 1 Set in Job');
+    console.log('Job 1 Set at:',d2.toString());
 ***REMOVED***,()=>console.log("Done Setting Jobs."),true,'Africa/Johannesburg');
 

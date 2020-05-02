@@ -24,19 +24,19 @@ const NodeCache = require('node-cache');
 dotenv.config();
 
 const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
-/*const cache = new CacheService({
+const cache = new CacheService({
     checkperiod: 60,
     maxKeys: 10000,
     stdTTL: ttl,
     useClones: false,
-***REMOVED***);*/
-
-const cache = new NodeCache({
-    checkperiod: 60,
-    maxKeys: 10000,
-    stdTTL: 5,
-    useClones: false,
 ***REMOVED***);
+
+// const cache = new NodeCache({
+//     checkperiod: 60,
+//     maxKeys: 10000,
+//     stdTTL: 5,
+//     useClones: false,
+// ***REMOVED***);
 
 const port = process.env.PORT || 3000;
 

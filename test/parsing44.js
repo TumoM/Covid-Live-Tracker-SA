@@ -1,102 +1,26 @@
- // request is a peer dependency.
-var rp = require("request-promise")
- const knex = require('knex')({
-     client: 'pg',
-     connection: {
-         host : '127.0.0.1',
-         user : 'test_user',
-         password : 'temp_pass',
-         database : 'covid-tracker-sa2'
-   ***REMOVED***
- ***REMOVED***);
-const HTMLParser = require('node-html-parser')
-let urlSA = "https://www.worldometers.info/coronavirus/country/south-africa/"
-// let urlSA = "http://localhost:63343/Corvid-Live-Tracker-SA/test/graphs.html?_ijt=vr8qfhscqegh261ci8bd8la3eq"
-let dict = {
-    Feb:'02',
-    Mar:'03',
-    Apr:'04'
-***REMOVED***
-let answers = [];
-rp(urlSA)
-    .then(function (data) {
-        /*
-        const root = HTMLParser.parse(data);
-        const table1 = root.querySelector(".col-md-12")
-        table1.outerHTML;
-        [title,style,div,script] = table1.childNodes
-        // console.log(root.structuredText);*/
-        // Process html...
-        let date,totalCases,dailyNew,activeCases,totalDeaths, dailyDeaths,a,b
-        [totalCases,a,dailyNew,activeCases,totalDeaths,b,dailyDeaths] = data.match(/data:.*?\[.*?]/g)
-        dailyNew = dailyNew.replace(/null/g,0)
-        let dateDates,totalCasesDates,dailyNewDates,activeCasesDates,totalDeathsDates, dailyDathsDates
-        date = data.match(/categories:.*?\[.*?]/g)[0].replace(/"/g,"").match(/[A-Z][a-z]{2***REMOVED***\s.*\d{2***REMOVED***/)[0].split(',').reverse()
-        a="",b="";
-        totalCases = totalCases.match(/\d[\d,?]*/)[0].split(',').reverse()
-        totalDeaths = totalDeaths.match(/\d[\d,?]*/)[0].split(',').reverse()
-        activeCases = activeCases.match(/\d[\d,?]*/)[0].split(',').reverse()
-        dailyNew = dailyNew.match(/\d[\d,?]*/)[0].split(',').reverse()
-        dailyDeaths = dailyDeaths.match(/\d[\d,?]*/)[0].split(',').reverse()
-
-        for (let i = 0; i < date.length; i++) {
-            dates = date[i].split(" ");
-            dates[0] = dict[dates[0]];
-            dates.push(2020)
-            date[i] = `${dates[2]***REMOVED***-${dates[0]***REMOVED***-${dates[1]***REMOVED***`
-            answers.push({
-                [date[i]]: {
-                    date:date[i],
-                        totalCases:totalCases[i],
-                    totalDeaths:totalDeaths[i],
-                    dailyNew:dailyNew[i],
-                    dailyDeaths:dailyDeaths[i],
-                    totalRecoveries:(totalCases[i]-activeCases[i]-totalDeaths[i]),
-                    parsed:false,
-                    maybeValid:false
+const CronJob = require('cron').CronJob;
+const parsing = require("./parsing");
+let job2 = null;
+let i = 0;
+main = async ()=> {
+    console.log('in Main')
+    job2 = new CronJob('30***REMOVED***/1***REMOVED******REMOVED******REMOVED******REMOVED***', async function () {
+        console.log(++i)
+        const d = new Date();
+        const daddy = this
+        console.log('Every 30 minutes between 19-17:', d);
+        await parsing().then((res) => {
+                console.log('Res', res)
+                if (res === true) {
+                    console.log('Stopping Cron?')
+                    daddy.stop();
+              ***REMOVED*** else {
+                    console.log('Continue with Cron')
               ***REMOVED***
           ***REMOVED***
-            )
-      ***REMOVED***
-        found = false;
-        let answers2=[]
-        let key;
-        answers.forEach(k=> {
-            key = Object.keys(k)[0]
-            if (!found) {
-                if (key === "2020-04-09") {
-                    found = true
-              ***REMOVED***
-
-                console.log(k)
-          ***REMOVED***
-            else{
-                console.log("pass")
-          ***REMOVED***
-            answers2.push(k[key])
-      ***REMOVED***)
-        // knex.batchInsert('dates',answers2)
-        answers2.forEach(row=>{
-            knex('dates').insert(row)
-                .then(value => {
-                    console.log('Clean insert for',row['date'])
-              ***REMOVED***)
-                .catch(reason => {
-                    knex('dates')
-                        .update({dailyNew:row.dailyNew,dailyDeaths:row.dailyDeaths***REMOVED***)
-                        .where('date','=',row.date)
-                        .then(value => {
-                            console.log("Had to update daily:",row['date'])
-                      ***REMOVED***)
-                        .catch(reason1 => {
-                            console.log("Some sort of error for:",row['date'])
-                            console.log(reason1)
-                      ***REMOVED***)
-              ***REMOVED***)
-      ***REMOVED***)
-        console.log("swag")
+        )
   ***REMOVED***)
-    .catch(function (err) {
-        // Crawling failed...
-        console.log(err)
-  ***REMOVED***);
+    console.log('Starting cron job')
+    job2.start()
+***REMOVED***
+main();

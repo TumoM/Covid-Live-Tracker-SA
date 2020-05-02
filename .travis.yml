@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 13
+deploy:
+  provider: heroku
+  api_key:
+    secure: "5acedee3-6965-486c-a0a0-d8b381a55108"
+
+
+before_script:
+  - npm install -g gulp-cli
+script: gulp pack

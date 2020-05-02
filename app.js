@@ -15,13 +15,20 @@ app.use(scout.expressMiddleware());*/
 const app        = express();
 const CronJob = require('cron').CronJob;
 const CacheService = require('./models/cacheModel');
+const Sentry = require('@sentry/node');
 // Enable the app-wide scout middleware
 const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
 const parsing = require("./test/parsing");
+const parsing24 = require("./test/news24Parser");
 const NodeCache = require('node-cache');
+const moment = require('moment')
 
+Sentry.init({ dsn: 'https://58ae4a8b4ff545d0bb1449730d6b2762@o386838.ingest.sentry.io/5221539' });
+
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler());
 dotenv.config();
 
 const ttl = 60 * 60 * 1; // cache for 1 Hour
@@ -184,22 +191,55 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
 });
 })
 
+app.use(Sentry.Handlers.errorHandler());
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port}`);
-    console.log('Before job instantiation');
 })
 
-const mainJob = new CronJob('0 17 * * *', function() {
-    let job1 = new CronJob('0 */3 19-23 * * *', async function() {
-        const d = new Date();
+process.on('exit', (code) => {
+    console.log(`About to exit with code: ${code}`);
+});
+
+let job2 = new CronJob('0 */3 19-23 * * *', async function() {
+    const d = moment();
+    const daddy24 = this
+    console.log('CronJob 2 - Calling Parsing24:', d.toString());
+    await parsing24().then((res)=>{
+        console.log('Res 2',res)
+        if (res === true){
+            console.log('Stopping Cron 2?')
+            daddy24.stop();
+            console.log('Done Cron 2')
+
+        }
+        else{
+            console.log('Continue with Cron 2')
+        }
+    })
+})
+const mainJob = new CronJob('0 */30 17-23 * * *', function() {
+    const d2 = moment();
+
+    let job1 = new CronJob('0 */2 19-23 * * *', async function() {
+        const d = moment();
         const daddy = this
-        console.log('Every 3 minutes between 19-17:', d);
-        await parsing().then((res)=>{
+        console.log('CronJob 1 - Calling Parsing:', d.toString());
+        await parsing()
+            .then(async (res)=>{
                 console.log('Res',res)
                 if (res === true){
-                    console.log('Stopping Cron?')
+                    console.log('Stopping Cron 1?')
                     daddy.stop();
+                    console.log('Done Cron 1')
+                    console.log('Staring Job 2')
+                    job2.start()
+                    let res = await parsing24()
+                    if (res === true) {
+                        console.log('Stopping Job 2')
+                        job2.stop()
+                        console.log('Stopped Job 2')
+                    }
                 }
                 else{
                     console.log('Continue with Cron')
@@ -208,6 +248,6 @@ const mainJob = new CronJob('0 17 * * *', function() {
         )
     });
     job1.start();
-    console.log('Job 1 Set in Job');
-},null,true,'Africa/Johannesburg');
+    console.log('Job 1 Set at:',d2.toString());
+},()=>console.log("Done Setting Jobs."),true,'Africa/Johannesburg');
 

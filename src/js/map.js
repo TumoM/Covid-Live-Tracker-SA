@@ -1,30 +1,4 @@
-
-/*var data1 = [
-    [],
-    ['ZA-NW', 'ZA-EC', 'ZA-FS'],
-    ['ZA-MP', 'ZA-NC', 'ZA-LP'],
-    ['ZA-WC'],
-    ['ZA-GT', 'ZA-NL']
-];
-
-
-
-
-
-const dummyData2 = [{
-    'ZA-NW': 19,
-    'ZA-EC': 88,
-    'ZA-FS': 96,
-    'ZA-MP': 21,
-    'ZA-NC': 16,
-    'ZA-LP': 23,
-    'ZA-WC': 587,
-    'ZA-GT': 865,
-    'ZA-NL': 443,
-    'ZA-UN': 15
-}]*/
-
-const provinceList = {
+var provinceList = {
     "NORTH WEST": 'ZA-NW',
     "EASTERN CAPE": 'ZA-EC',
     "FREE TATE": 'ZA-FS',
@@ -40,18 +14,22 @@ const provinceList = {
 var tooltip
 var tooltipText
 var tooltipRects
-let width = 415;
-let legendTitle = $('#legTitle')[0];
-const xPen = 92,
-    yPen = 220;
-let legendSet=false;
-let colourVal=1;
+var width = 415;
+var legendTitle = $('#legTitle')[0];
+var xPen = 92;
+var yPen = 220;
+var legendSet=false;
+var colourVal=1;
 
-let provCase = {}
-let provDeath = {}
-let provRecoveries = {}
-let cardList = []
+var provCase = {};
+var provDeath = {};
+var provRecoveries = {};
+var cardList = [];
 
+(function main() {
+    console.log('In Main')
+    cardList=[]
+})()
 
 /**
  * @param {string} name
@@ -107,14 +85,12 @@ x = $('.lightBack').attr('x');
 y = $('.lightBack').attr('y');
 $('.lightBack').attr({'x':x-xPen,'y':y-yPen})
 
-
-
 function showTooltip(evt) {
     var CTM = svg.getScreenCTM();
     var x = 10;
     var y = 390;
     let id = evt.target.getAttributeNS(null, "id");
-    
+
     tooltipText.firstChild.data = evt.target.getAttributeNS(null, "title");
     tooltip.setAttributeNS(null, "transform", "translate(" + x + " " + y + ")");
     var length = tooltipText.getComputedTextLength();
@@ -177,15 +153,18 @@ function legendSetup(max,min,interval) {
     // setup width
     console.log("Legend Set:",legendSet)
     if (!legendSet) {
-        let width = $('#key')[0].getBoundingClientRect().width;
-        $('.lightBack').width(width)
+        let width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
+        console.log("WIDTH:",width)
+        $('.lightBack').width("55%")
         let length = legendTitle.getComputedTextLength()
         legendTitle.setAttributeNS(null, "x", (width - length) / 2 - xPen);
         legendSet = true;
     }
 }
 // colourCountries(data1)
-function setColours(dummyData,colour=1) {
+
+function setColours(dummyData,colour=1,) {
+    colourVal = colour;
     // Vars
     let max = 0,
         min = Infinity,
@@ -231,7 +210,6 @@ function setColours(dummyData,colour=1) {
         }
     })
     console.log("ANSWERS:",answers)
-    colourVal = colour
     colourCountries(answers,colour)
     legendSetup(max,min,interval)
 }
@@ -311,7 +289,7 @@ function setupSideBCards(){
 function populateSideCards(cardList){
     // console.log("Card List:",cardList)
     let counter = 0;
-    let cards = $(".card");
+    let cards = $("#mapContainer .card");
     let figures;
 
     console.log('Cards',cards)
@@ -336,7 +314,6 @@ $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#sv
 $(window).resize(()=>{
     $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
 })
-
 $(document).ready(()=>{
     $(function()
     {
@@ -355,11 +332,12 @@ $(document).ready(()=>{
             $("#svgColumn").toggleClass("fourteen wide svgFocus");
             $("#provStatsContainer").toggleClass("sidebarHidden");
 
-            $("#hideIcon").toggleClass("left long arrow icon");
-            $("#hideIcon").toggleClass("right long arrow icon");
+            $("#hideIcon").toggleClass("fa-rotate-180");
+
 
 
         })
+
     $('#filterC')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -380,6 +358,34 @@ $(document).ready(()=>{
 
         })
     $('#filterR')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('recoveries')))
+
+
+        })
+    $('#filterC2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provCase,1)
+            populateSideCards(cardList.sort(compareValues('cases')))
+
+
+        })
+    $('#filterD2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provDeath,2)
+            populateSideCards(cardList.sort(compareValues('deaths')))
+
+
+
+        })
+    $('#filterR2')
         .click((event)=>{
             console.log("you clicked me to filter!")
             // $("#provStatsContainer").transition('slide right')

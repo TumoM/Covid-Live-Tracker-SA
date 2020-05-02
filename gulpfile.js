@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var clean = require('gulp-clean');
 // var autoprefixer = require('gulp-autoprefixer');
 var autoprefixer = require('autoprefixer');
 // var uglify = require('gulp-uglify');
@@ -12,6 +13,9 @@ const pfm = require('postcss-font-magician');
 var postcss = require('gulp-postcss')
 var pipeline = require('readable-stream').pipeline;
 let babel = require('gulp-babel');
+const eslint = require('gulp-eslint')
+var browserSync = require('browser-sync').create();
+const series =gulp.series, parallel =gulp.parallel, watch =gulp.watch;
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
@@ -26,7 +30,10 @@ const AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-
+gulp.task('clean',()=>{
+    return gulp.src('public/build/**/*', {read: false})
+        .pipe(clean());
+})
 // Compile SASS --> CSS, the minify CSS
 gulp.task('sass', function () {
   /*return gulp.src(['src/sass/!*.scss', 'src/sass/!**!/!*.scss'])
@@ -47,29 +54,106 @@ gulp.task('sass', function () {
       .pipe(gulp.dest('assets/css'));
 });
 
-gulp.task('scripts', function () {
-    return gulp.src(['src/js/vendor/*.js', 'src/js/*.js'])
+gulp.task('js', function () {
+    return gulp.src(['src/js/*.js'])
         .pipe(uglify())
         .pipe(gulp.dest('assets/js'))
 
 });
 
 gulp.task('pack-js', function () {
-  return gulp.src(['assets/js/vendor/jquery.min.js','assets/js/vendor/jquery*.js','assets/js/vendor/*.js', 'assets/js/*.js'])
+  return gulp.src(['assets/js/vendor/jquery.min.js',
+      'assets/js/vendor/jquery*.js',
+      'assets/js/vendor/semantic.min*.js',
+      'assets/js/vendor/moment*.js',
+      'assets/js/vendor/numerals*.js',
+      'assets/js/vendor/hammer*.js',
+      'assets/js/vendor/chart.min.js',
+      'assets/js/vendor/chartjs-plugin-zoom.min.js',
+      'assets/js/vendor/jquery.jscrollpane.min.js',
+      'assets/js/vendor/*.js', 'assets/js/*.js'])
       .pipe(concat('bundle.js'))
       .pipe(uglify())
       .pipe(gulp.dest('public/build/js'));
 });
 
 gulp.task('pack-css', function () {
-  return gulp.src(['assets/css/vendor/semantic.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
+  return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
       .pipe(postcss([pfm()]))
       .pipe(concat('stylesheet.css'))
       .pipe(cleanCss())
       .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('public/build/css'));
+      .pipe(gulp.dest('public/build/css'))
+      .pipe(browserSync.stream());
 });
 
-gulp.task('default', gulp.series['sass','pack']);
-gulp.task('pack', gulp.parallel(['pack-js', 'pack-css']));
+gulp.task('reload', function (done) {
+    console.log("Reloading Browser")
+    browserSync.reload();
+    done();
+});
+
+
+gulp.task('watch', ()=>{
+    console.log("Watching SASS")
+    watch('src/sass/**/*.scss',{ ignoreInitial: true }, series("sass","pack-css"));
+    // Or a composed task
+    console.log("Watching JS")
+    watch('src/js/*.js',{ ignoreInitial: true }, series("js","pack-js"));
+    console.log("Watching EJS")
+    // watch("js/*.js", ['js-watch']);
+})
+
+gulp.task('browserSync', function(cd) {
+    browserSync.init({
+        files:['public/build/**/*.js','public/build/**/*.css'],
+        proxy: "localhost:5000",
+        ui: {
+            port: 5001 //Or whatever port you want for browsersync ui
+        },
+    })
+    cd();
+})
+
+// The lint task
+gulp.task('lint', function() {
+  return gulp
+    // Define the source files
+    .src(['src/js/*.js'])
+    .pipe(eslint({}))
+    // Output the results in the console
+    .pipe(eslint.format());
+});
+// The lint task
+gulp.task('lintF', function() {
+  return gulp
+    // Define the source files
+    .src(['src/js/*.js'])
+    .pipe(eslint({fix:true}))
+    // Output the results in the console
+    .pipe(eslint.format());
+});
+
+gulp.task('pack', parallel(['pack-js', 'pack-css']));
+gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
+
+// The `clean` function is not exported so it can be considered a private task.
+// It can still be used within the `series()` composition.
+function clean(cb) {
+    // body omitted
+    cb();
+}
+
+// The `build` function is exported so it is public and can be run with the `gulp` command.
+// It can also be used within the `series()` composition.
+function build(cb) {
+    // body omitted
+    cb();
+}
+
+if (process.env.NODE_ENV === 'development') {
+    exports.default = "default";
+} else {
+    exports.default = "default";
+}

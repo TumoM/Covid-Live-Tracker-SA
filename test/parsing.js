@@ -1,91 +1,91 @@
-async function main() {
-    const dotenv = require('dotenv');
-    dotenv.config();
-    var cloudscraper = require('cloudscraper');
-    const {Builder, By, Key, until, Driver} = require('selenium-webdriver');
-    const chrome = require('selenium-webdriver/chrome');
-    const chromedriver = require('chromedriver');
-    chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
-    const HTMLParser = require('node-html-parser'),
-        rp = require('request-promise'),
-        Province = require("../models/provinceModel"),
-        Death = require("../models/deathModel"),
-        Day = require("../models/dayModel");
-    // DbSetup = require("../test/db24");
-    const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
+const dotenv = require('dotenv');
+dotenv.config();
+var cloudscraper = require('cloudscraper');
+const {Builder, By, Key, until, Driver} = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+const chromedriver = require('chromedriver');
+chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
+const HTMLParser = require('node-html-parser'),
+    rp = require('request-promise'),
+    Province = require("../models/provinceModel"),
+    Death = require("../models/deathModel"),
+    Day = require("../models/dayModel");
+// DbSetup = require("../test/db24");
+const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
 // const url = "http://sacoronavirus.co.za/?s=update";
 // const url = "https://www.nicd.ac.za/media/alerts/";
 // const url = "https://sacoronavirus.co.za/page/2/?s=update";
 // const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
-    const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i
-    const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
+const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i
+const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
 
 
-    let connection;
-    console.log("Host: ", process.env.AWS_HOST)
-    if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
-        connection = process.env.DATABASE_URL
-    } else {
-        connection = {
-            host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
-            user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
-            password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
-            database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
-        };
+let connection;
+console.log("Host: ", process.env.AWS_HOST)
+if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
+    connection = process.env.DATABASE_URL
+} else {
+    connection = {
+        host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
+        user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
+        password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
+        database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
+    };
+}
+
+console.log("Connection:", connection)
+const knex = require('knex')({
+        client: 'pg',
+        acquireConnectionTimeout: 10000,
+        pool: {
+            "min": 2,
+            "max": 50,
+            idleTimeoutMillis: 10000,
+            createTimeoutMillis: 10000,
+            acquireTimeoutMillis: 10000,
+        },
+        connection
     }
+)
 
-    console.log("Connection:", connection)
-    const knex = require('knex')({
-            client: 'pg',
-            acquireConnectionTimeout: 10000,
-            pool: {
-                "min": 2,
-                "max": 50,
-                idleTimeoutMillis: 10000,
-                createTimeoutMillis: 10000,
-                acquireTimeoutMillis: 10000,
-            },
-            connection
-        }
-    )
+const PROVINCES = { // Name, [cases, deadArr]
+    "GAUTENG": Province,
+    "WESTERN CAPE": Province,
+    "KWAZULU–NATAL": Province,
+    "FREE STATE": Province,
+    "EASTERN CAPE": Province,
+    "LIMPOPO": Province,
+    "MPUMALANGA": Province,
+    "NORTH WEST": Province,
+    "NORTHERN CAPE": Province,
+    "UNALLOCATED": Province
+}
+let provincesList = []
 
-    const PROVINCES = { // Name, [cases, deadArr]
-        "GAUTENG": Province,
-        "WESTERN CAPE": Province,
-        "KWAZULU–NATAL": Province,
-        "FREE STATE": Province,
-        "EASTERN CAPE": Province,
-        "LIMPOPO": Province,
-        "MPUMALANGA": Province,
-        "NORTH WEST": Province,
-        "NORTHERN CAPE": Province,
-        "UNALLOCATED": Province
-    }
-    let provincesList = []
-
-    let options = new chrome.Options();
+let options = new chrome.Options();
 //Below arguments are critical for Heroku deployment
-    options.addArguments("--headless");
-    options.addArguments("--disable-gpu");
-    options.addArguments("--no-sandbox");
+options.addArguments("--headless");
+options.addArguments("--disable-gpu");
+options.addArguments("--no-sandbox");
 
-    function parseNumber(number) {
-        let testInt = "";
-        console.log("FUNC NUMBER:", number)
-        let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
-        testArray.forEach(digit => {
-            testInt += digit
-        })
-        testInt = parseInt(testInt);
-        return testInt
-    }
+function parseNumber(number) {
+    let testInt = "";
+    console.log("FUNC NUMBER:", number)
+    let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
+    testArray.forEach(digit => {
+        testInt += digit
+    })
+    testInt = parseInt(testInt);
+    return testInt
+}
 
-
-    let ps = [];
-    let driver = new Builder()
+async function main() {
+        let driver = new Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
         .build();
+
+    let valid = false;
 
     // Navigate to Url
     await driver.get(url);
@@ -130,18 +130,18 @@ async function main() {
             }
         }
         console.log('Quitting Driver.')
-        await driver.close();
         await driver.quit();
+        console.log('Driver Quit')
+
         console.log('Returning Promise.')
         return Promise.resolve(htmls);
     }
     htmls = await getHtml(links2)
 
-    console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
+    /*console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
     console.log("HTMLS DATE 1",htmls[1].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
-    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
+    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])*/
 
-    console.log('Swag')
     let fullLoop = 0
     for (let i = 0; i < links2.length; i++) {
         let loop = true;
@@ -164,8 +164,9 @@ async function main() {
                             console.log("Skipping:", d, "\n")
                             loop = false;
 
-                        } else if (rows.length > 0 && rows[0].maybeValid) {
-                            console.log("Date maybe valid:", d, "\n")
+                        }
+                        else if (rows.length > 0 && rows[0].maybeValid) {
+                            console.log("\nDate maybe valid:", d)
 
                             // Maybe the format is all wrong. Parse another site/source?
                             // Make soup.
@@ -187,21 +188,28 @@ async function main() {
                             if (rows.length > 0) {
                                 let value = await knex('dates').update({
                                     totalTests,
-                                    maybeValid: false
+                                    maybeValid: true
                                 }).where({date: parsedDate})
                                     .returning('date')
                                 if (value.length > 0) {
                                     console.log("Updated TTs1:", value)
                                     loop = false;
+                                    valid = true
                                     return true
                                 } else {
                                     console.log("TotalTests not updated?");
                                     loop = false;
+                                    valid = true
                                     return false
                                 }
                             }
+                            else {
+                                loop = false
+                                valid = true
+                            }
                             // Pull off data for update (Total tests)
-                        } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                        }
+                        else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
                             console.log("Parsing 1 time:", d.toLocaleDateString(), "\n")
                             const rootChild = HTMLParser.parse(htmls[i]);
                             // pull out the two tables 1st
@@ -292,7 +300,7 @@ async function main() {
                                     totalTests,
                                     totalCases,
                                     totalDeaths,
-                                    maybeValid: false
+                                    maybeValid: true
                                 }
                                 console.log(data)
                                 let rows = await knex('dates').select('totalTests')
@@ -301,7 +309,7 @@ async function main() {
                                         console.log(rows.length)
                                         let value = await knex('dates').update({
                                             totalTests,
-                                            maybeValid: false
+                                            maybeValid: true
                                         }).where({date: parsedDate})
                                                 console.log("Updated TTs2:", value)
                                             if (value === 0) {
@@ -358,7 +366,7 @@ async function main() {
                                 knex("dates ").insert({
                                     date: parsedDate,
                                     parsed: false,
-                                    maybeValid: false,
+                                    maybeValid: true,
                                     error: true
                                 })
                                     .then(id => {
@@ -372,9 +380,7 @@ async function main() {
                         }
                     }
                 }
-    console.log("We done?")
-    console.log("Full Loop?", fullLoop === links2.length-1);
-    if (fullLoop === links2.length-1) {
+    if (fullLoop === links2.length-1 || valid) {
         return Promise.resolve(true);
     }
     return Promise.resolve(false);
@@ -383,11 +389,11 @@ async function main() {
 }
 
 
-main().then((res)=>{
+/*main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
     }
-)
+)*/
 
 module.exports = main
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

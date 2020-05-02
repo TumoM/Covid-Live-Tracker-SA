@@ -71,8 +71,8 @@ async function main() {
         date;
 
 
-    let ps = [];
     let recoveryDate;
+    let count
     try {
         let status = await rp(url)
         let html = status
@@ -195,7 +195,7 @@ async function main() {
             }
 
             console.log(`Recovery Counts (${recoveryDate}):`)
-            let count = 0;
+            count = 0;
             console.log('Starting the parsing of province Recoveries.')
             for (let index = 0; index < provinceRecoveries.length; index++) {
                 let loop = true;
@@ -338,10 +338,15 @@ async function main() {
         // return 200
         // process.exit(200);
         console.log('Done map?')
-        return Promise.resolve(true)
+        if ((count && count === 9 )|| parsed){
+            return Promise.resolve(true)
+        }
+        else {
+            return Promise.resolve(false)
+        }
     } catch (e) {
         console.log("Error Bro", e);
-        return (-1)
+        return Promise.resolve(false);
     }
     function getNumber(line) {
         let intString = "";
@@ -428,9 +433,14 @@ async function main() {
 
 
 
+
+/*
 main()
     .then(result=>{
         console.log("main result:",result);
         process.exit(0)
     })
     .catch(err=> console.log('Your Err',err));
+*/
+
+module.exports = main

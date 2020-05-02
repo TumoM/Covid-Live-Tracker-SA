@@ -1,7 +1,11 @@
     <%- include("./partials/header") %>
     <main class="main text container">
         <div id="myMainContainer" class="container segment main center">
-
+            <div class="ui top aligned page dimmer">
+                <div class="ui segment section container content">
+                    <%- include("./about") %>
+                </div>
+            </div>
         <!--<div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
@@ -275,7 +279,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui toggle icon button mobile hidden map" >
+                <div class="ui circular toggle icon button mobile hidden map" >
                     <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
                 </div>
                 <div id="svgColumn" class="ten wide column">
@@ -313,38 +317,37 @@
                 <button id="toggleScaleCases" class="ui button">Toggle Scale Type</button>
             </div>
                 <div class ="centered row ">
-                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
                             <canvas id="chart1" class="chart "></canvas>
                     </div>
-                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
                             <canvas id="chart2" class="chart "></canvas>
 
                     </div>
                 </div>
             <button id="toggleScaleDeaths" class="ui button">Toggle Scale Type</button>
             <div class ="centered row">
-                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
                             <canvas id="chart3" class="chart "></canvas>
 
                     </div>
-                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
                             <canvas id="chart4" class="chart "></canvas>
 
                     </div>
                 </div>
                 <div class ="centered row">
-                    <div class="sixteen wide mobile eight wide tablet seven wide computer column chart-container">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
                             <canvas id="chart5" class="chart "></canvas>
 
                     </div>
                 </div>
-
         </section>
         <div class="ui section divider"></div>
 
         <%# Table %>
         <h2 id="myTableHeading" class="ui header block top attached">Table</h2>
-        <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
+        <section id="myTable" class="ui segment section expand raised attached fluid grid">
             <div class="ui column">
                 <div class="">
                     <select id="sort-field" class="ui dropdown">
@@ -365,6 +368,7 @@
                         <option value="asc">asc</option>
                         <option value="desc">desc</option>
                     </select>
+                    <br/>
                     <button class="ui button"  id="sort-trigger">Sort Table</button>
                     <button  class="ui button" id="sort-reset">Reset Table</button>
                 </div>
@@ -376,16 +380,53 @@
 
         </div>
     </main>
-
-    <%- include("./partials/footer") %>
+    <script src="/build/js/bundle.js"></script>
 
     <script>
         setColours(<%- JSON.stringify(provCases) %>)
         setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
         setTable(<%- JSON.stringify(graphData) %>)
         setGraphs(<%- JSON.stringify(graphData) %>)
-        </script>
-      <script>
+    </script>
+    <script>
+        $('.aboutButton')
+            .click((event)=>{
+                console.log("you clicked me!")
+
+                $('.page.dimmer:first')
+                    .dimmer('toggle')
+                ;
+
+               /* $('#myMainContainer > .dimmer')
+                    .dimmer('toggle')
+                ;*/
+            })
+        $('#menuToggler')
+            .click((event)=>{
+                console.log("you clicked me 2!")
+                if( document.getElementById("myNavOverlay").classList.toString() === "overlay"){ // Not Open
+                    console.log("Not Open! opening")
+                    document.getElementById("myNavOverlay").style.height = "100%";
+                    document.getElementById("myNavOverlay").classList.add('open');
+                }
+                else{
+                    console.log("Already Open! closing")
+                    document.getElementById("myNavOverlay").style.height = "0%";
+                    document.getElementById("myNavOverlay").classList.remove('open');
+                }
+
+                console.log('Class List',document.getElementById("myNavOverlay").classList);
+            })
+        $('.closebtnNavOverlay')
+            .click((event)=>{
+                console.log("you clicked me 3!")
+                if( document.getElementById("myNavOverlay").classList.toString() === "overlay open"){ // Not Open
+                    document.getElementById("myNavOverlay").style.height = "0%";
+                    document.getElementById("myNavOverlay").classList.remove('open');
+                }
+            })
+    </script>
+    <script>
         $(document).ready(function() {
             $(".ui.toggle.button.nav").click(function() {
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);
@@ -395,6 +436,9 @@
             });
 
             $(".ui.dropdown").dropdown();
+
+
+
         });
     </script>
     <script>
@@ -435,5 +479,4 @@
         });
 
     </script>
-
-    </script>
+    <%- include("./partials/footer") %>

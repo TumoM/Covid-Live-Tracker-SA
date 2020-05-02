@@ -3,6 +3,11 @@
   overflow: visible;
 }
 
+/*
 [role=columnheader]{
   padding-top: 1%;
+}*/
+
+#example-table{
+  height: unset !important;
 }

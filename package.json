@@ -54,7 +54,8 @@
     "request-promise": "^4.2.5",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "slonik": "^22.4.4",
-    "slonik-interceptor-query-cache": "^2.0.1"
+    "slonik-interceptor-query-cache": "^2.0.1",
+    "travis-ci": "^2.2.0"
 ***REMOVED***
   "devDependencies": {
     "@babel/core": "^7.9.6",

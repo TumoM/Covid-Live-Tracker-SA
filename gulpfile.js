@@ -43,6 +43,7 @@ gulp.task('sass', function () {
       // Auto-prefix css styles for cross browser compatibility
       // Output
       .pipe(postcss([ autoprefixer() ]))
+      .pipe(cleanCss())
       .pipe(gulp.dest('assets/css'));
 });
 
@@ -61,7 +62,7 @@ gulp.task('pack-js', function () {
 });
 
 gulp.task('pack-css', function () {
-  return gulp.src(['assets/css/*.css', 'assets/css/**/*.css'])
+  return gulp.src(['assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
       .pipe(postcss([pfm()]))
       .pipe(concat('stylesheet.css'))

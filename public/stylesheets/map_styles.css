@@ -125,10 +125,9 @@ tspan.legend {
   margin: 0 auto;
 }
 
-.toggle.button {
-  height: min-content;
-}
-
+/*.toggle.button{
+	height: min-content;
+}*/
 #svgColumn {
   transition: all 1s linear;
 }

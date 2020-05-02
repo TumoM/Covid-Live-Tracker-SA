@@ -190,7 +190,6 @@ app.post('/governmentCheck/:type?',async (req,res) =>{
 
 app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port***REMOVED***`);
-    console.log('Before job instantiation');
 ***REMOVED***)
 
 let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
@@ -210,7 +209,7 @@ let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOV
       ***REMOVED***
   ***REMOVED***)
 ***REMOVED***)
-const mainJob = new CronJob('0 17***REMOVED******REMOVED******REMOVED***', function() {
+const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', function() {
     let job1 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
         const d = moment();
         const daddy = this
@@ -232,5 +231,5 @@ const mainJob = new CronJob('0 17***REMOVED******REMOVED******REMOVED***', funct
   ***REMOVED***);
     job1.start();
     console.log('Job 1 Set in Job');
-***REMOVED***,null,true,'Africa/Johannesburg');
+***REMOVED***,()=>console.log("Done Setting Jobs."),true,'Africa/Johannesburg');
 

@@ -36,7 +36,7 @@ router.get("/", async function (req, res) {
         await getSummarySlonik(pool,cache)
             .then(async r => {
                 console.log('Done');
-                console.log('R',r.summary.length);
+                // console.log('R',r.summary.length);
                 res.render("index",{data:r.summary,provCases:r.provinces.provCases,provDeaths:r.provinces.provDeaths,provRecoveries:r.provinces.provRecoveries,graphData:r.graphs});
                 /*await pool.end(); // ??*/
             });
@@ -53,8 +53,8 @@ const getSummarySlonik = async (pool,cache) => {
 
     if (responseCache) {
         console.log("CACHE FOUND")
-        console.log("But ignoring")
-        /*return Promise.resolve(unhashQuery(responseCache));*/
+        // console.log("But ignoring")
+        return Promise.resolve(unhashQuery(responseCache));
     }
 
     {

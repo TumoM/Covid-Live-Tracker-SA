@@ -121,6 +121,9 @@ app.use(function(req,res, next) {
     next();
 ***REMOVED***);
 
+console.log("SETTING CACHE")
+cache.set("data", null);
+
 app.use("/",indexRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{

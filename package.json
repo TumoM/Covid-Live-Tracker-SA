@@ -8,7 +8,7 @@
 ***REMOVED***
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
     "reinstal": "rmdir /S /Q node_modules & npm i"
@@ -66,6 +66,7 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify-es": "^2.0.0",
+    "moment": "^2.25.1",
     "postcss-font-magician": "^2.3.1",
     "readable-stream": "^3.6.0"
 ***REMOVED***

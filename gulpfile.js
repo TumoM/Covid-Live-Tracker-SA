@@ -47,14 +47,14 @@ gulp.task('sass', function () {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(['src/js/**/*.js', 'src/js/*.js'])
+    return gulp.src(['src/js/vendor/*.js', 'src/js/*.js'])
         .pipe(uglify())
         .pipe(gulp.dest('assets/js'))
 
 });
 
 gulp.task('pack-js', function () {
-  return gulp.src(['assets/js/vendor/*.js', 'assets/js/*.js'])
+  return gulp.src(['assets/js/vendor/jquery.min.js','assets/js/vendor/jquery*.js','assets/js/vendor/*.js', 'assets/js/*.js'])
       .pipe(concat('bundle.js'))
       .pipe(uglify())
       .pipe(gulp.dest('public/build/js'));

@@ -1,0 +1,178 @@
+<%- include("./partials/header") %>
+<main class="main text container">
+    <div id="myMainContainer" class="container segment main center">
+        <div class="ui section divider"></div>
+
+        <%# Stats %>
+        <h2 id="myStatsHeading" class="ui header block top attached">About Sitr</h2>
+        <section id="myStats" class="ui segment padded section expand raised attached middle aligned">
+            <h2 class="ui sub header grey text">Updated: <%= data.updateTime%></h2>
+            <br/>
+            <div class="ui centered grid">
+                <div class="grid two column row">
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statTotalCases" class="ui orange card ">
+                            <div class="image">
+                                <i class="fas fa-diagnoses fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.totalCases %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statNewCases"class="ui yellow card ">
+                            <div class="image">
+                                <i class="fas fa-search-plus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.dailyNew %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid two column row">
+                    <div id="statTotalDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui red card">
+                            <div class="image">
+                                <i class="fas fa-heart-broken fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Deaths:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic red bold">
+                                    <div class="value">
+                                        <%=data.totalDeaths%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="statNewDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui pink card">
+                            <div class="image">
+                                <i class="fas fa-search-minus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Deaths:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic red bold">
+                                    <div class="value">
+                                        <%=data.dailyDeaths%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frid two column row">
+                    <div id="statTotalRecoveries"class="five wide tablet eight wide computer">
+                        <div class="ui blue card">
+                            <div class="image">
+                                <i class="fas fa-heartbeat fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Recoveries:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic blue bold">
+                                    <div class="value">
+                                        <%=data.totalRecoveries%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="statTotalTests"class="five wide tablet eight wide computer">
+                        <div class="ui green card">
+                            <div class="image">
+                                <i class="fas fa-bong fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Tests:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic green bold">
+                                    <div class="value">
+                                        <%=data.totalTests%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="ui section divider"></div>
+
+    </div>
+</main>
+<script>
+    let mainNavLinks = document.querySelectorAll("nav a.item.fluid");
+    console.log(mainNavLinks)
+    let mainSections = document.querySelectorAll("main section");
+
+    let lastId;
+    let cur = [];
+
+    // This should probably be throttled.
+    // Especially because it triggers during smooth scrolling.
+    // https://lodash.com/docs/4.17.10#throttle
+    // You could do like...
+    // window.addEventListener("scroll", () => {
+    //    _.throttle(doThatStuff, 100);
+    // });
+    // Only not doing it here to keep this Pen dependency-free.
+
+    window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY+110;
+
+        mainNavLinks.forEach(link => {
+            let section = document.querySelector(link.dataset.section);
+            /*  console.log('fromTop:',fromTop)
+              console.log('section offset:',section.offsetTop)
+              console.log('section height:',section.offsetHeight)*/
+            // console.log('fromTop:',fromTop)
+            if (
+                section.offsetTop <= fromTop &&
+                section.offsetTop + section.offsetHeight > fromTop
+            ) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function() {
+        $(".ui.toggle.button.nav").click(function() {
+            $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+        });
+        $("#myNav .item.close").click(function() {
+            $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+        });
+
+        $(".ui.dropdown").dropdown();
+    });
+</script>
+
+<%- include("./partials/footer") %>
+

@@ -1,18 +1,20 @@
 language: node_js
 node_js:
-- 13
+  - 13
+dist: trusty
 branches:
   only:
   - master
   - working
 before_script:
-- npm install -g gulp-cli
+  - npm install -g gulp-cli
 script:
-- gulp clean
-- gulp pack
+  - gulp clean
+  - gulp pack
 deploy:
   provider: heroku
   api_key:
     secure: TgE0gTwTFCxS512m6KierwRhgPDBP6dNgEFgf/No9fmUcplneFnasaHjh9YEkVUJUWuZEvoicbZdPXVcHOKEKvb9vzT4CacjaJoaJ2fGNxDTCTJqQjtSYgWr+mFhfc2p7Rds0emlevv7qI4DGzHip4y31YFeOuS9eiPvGZiReTDwzgu9VQ7TVaxz50J/wPzseSZjzX6CyTqTYqGtNqrE0hFZj0hzLy70ogmXg+VOIlsnzbX/SfDdWBNM+LJEn9YjYfDBhjftuOlETLmkBPod9zMbQZ8h0aT+pell4cmClOKFm8Rb+/GMMdQ2zcC71LD44X8bdXwMAUnYD9lkuKwDgwJTeuj3ski6esz8KKYA7+HMCWBAzHgKByy+/SsGR7dghffA5kKJp422MfXzXkkDI5/PAI3WFdkBegIvgnK8crYz5mic9lMNgDzBJ857+LxBq03DPOFCVcGiFTggEvGaWA42uWDe2atNOtZqnrg8EioeSDLeHD134TViQkTzhUxf9rWxYC2FN2kdZn+T3Vb5EvChj9wmhv9XJ+KtkA4Pozmce+y3DHl5RvzQOCvhriI8Zvs4Zz08ko05FZMNs49z7q3tWcfBp4buZxf3bk/6Mvmp8ht8p0pYqWKyzirJ/u0BNRoAshf+Q1ICB/dnIWR6ryEIR5PF1uS8UGdG6iZyehs=
+  app: covid-tracker-sa
   on:
     repo: TumoM/Covid-Live-Tracker-SA

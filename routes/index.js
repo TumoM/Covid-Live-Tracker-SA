@@ -30,15 +30,15 @@ const unhashQuery = (query) => {
 
 moment.tz.setDefault("Africa/Johannesburg")
 
-router.get("/", async function (req, res) {
+router.get("/", function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
     if (pool){
         console.log("Pool Present")
         // TODO Load data for the day.
-        await getSummarySlonik(pool,cache)
-            .then(async r => {
+        getSummarySlonik(pool,cache)
+            .then( r => {
                 console.log('Done');
                 // console.log('R',r.summary.length);
                 res.render("index",{data:r.summary,provCases:r.provinces.provCases,provDeaths:r.provinces.provDeaths,provRecoveries:r.provinces.provRecoveries,graphData:r.graphs***REMOVED***);

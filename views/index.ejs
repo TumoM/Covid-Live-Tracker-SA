@@ -1,7 +1,11 @@
     <%- include("./partials/header") %>
     <main class="main text container">
         <div id="myMainContainer" class="container segment main center">
-
+            <div class="ui top aligned page dimmer">
+                <div class="content">
+                    <%- include("./about") %>
+                </div>
+            </div>
         <!--<div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
@@ -376,16 +380,27 @@
 
         </div>
     </main>
-
-    <%- include("./partials/footer") %>
+    <script src="/build/js/bundle.js"></script>
 
     <script>
         setColours(<%- JSON.stringify(provCases) %>)
         setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
         setTable(<%- JSON.stringify(graphData) %>)
         setGraphs(<%- JSON.stringify(graphData) %>)
-        </script>
-      <script>
+    </script>
+    <script>
+        $('#aboutButton')
+            .click((event)=>{
+                console.log("you clicked me!")
+                $('.page.dimmer:first')
+                    .dimmer('toggle')
+                ;
+               /* $('#myMainContainer > .dimmer')
+                    .dimmer('toggle')
+                ;*/
+            })
+    </script>
+    <script>
         $(document).ready(function() {
             $(".ui.toggle.button.nav").click(function() {
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);
@@ -395,6 +410,9 @@
             });
 
             $(".ui.dropdown").dropdown();
+
+
+
         });
     </script>
     <script>
@@ -435,5 +453,4 @@
         });
 
     </script>
-
-    </script>
+    <%- include("./partials/footer") %>

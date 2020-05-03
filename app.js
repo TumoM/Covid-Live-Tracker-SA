@@ -40,7 +40,7 @@ const ttl = 60 * 60 * 1; // cache for 1 Hour
 //     useClones: false,
 // });
 const cache = new NodeCache({
-    checkperiod: 600,
+    checkperiod: 60,
     maxKeys: 10000,
     stdTTL: ttl,
     useClones: false,
@@ -123,6 +123,7 @@ app.use(function(req,res, next) {
 
 console.log("DELETING OLD CACHE")
 cache.del("data");
+cache.flushAll();
 
 app.use("/",indexRoutes);
 app.use("/about",aboutRoutes);

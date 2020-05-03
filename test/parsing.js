@@ -1,91 +1,91 @@
-async function main() {
-    const dotenv = require('dotenv');
-    dotenv.config();
-    var cloudscraper = require('cloudscraper');
-    const {Builder, By, Key, until, Driver***REMOVED*** = require('selenium-webdriver');
-    const chrome = require('selenium-webdriver/chrome');
-    const chromedriver = require('chromedriver');
-    chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
-    const HTMLParser = require('node-html-parser'),
-        rp = require('request-promise'),
-        Province = require("../models/provinceModel"),
-        Death = require("../models/deathModel"),
-        Day = require("../models/dayModel");
-    // DbSetup = require("../test/db24");
-    const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
+const dotenv = require('dotenv');
+dotenv.config();
+var cloudscraper = require('cloudscraper');
+const {Builder, By, Key, until, Driver***REMOVED*** = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+const chromedriver = require('chromedriver');
+chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
+const HTMLParser = require('node-html-parser'),
+    rp = require('request-promise'),
+    Province = require("../models/provinceModel"),
+    Death = require("../models/deathModel"),
+    Day = require("../models/dayModel");
+// DbSetup = require("../test/db24");
+const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
 // const url = "http://sacoronavirus.co.za/?s=update";
 // const url = "https://www.nicd.ac.za/media/alerts/";
 // const url = "https://sacoronavirus.co.za/page/2/?s=update";
 // const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\//
-    const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid[-|_](?:19)?.*\d{2***REMOVED***/i
-    const regex = RegExp('.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\/', 'g');
+const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid[-|_](?:19)?.*\d{2***REMOVED***/i
+const regex = RegExp('.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\/', 'g');
 
 
-    let connection;
-    console.log("Host: ", process.env.AWS_HOST)
-    if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
-        connection = process.env.DATABASE_URL
-  ***REMOVED*** else {
-        connection = {
-            host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
-            user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
-            password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
-            database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
-      ***REMOVED***;
+let connection;
+console.log("Host: ", process.env.AWS_HOST)
+if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
+    connection = process.env.DATABASE_URL
+***REMOVED*** else {
+    connection = {
+        host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
+        user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
+        password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
+        database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
+  ***REMOVED***;
+***REMOVED***
+
+console.log("Connection:", connection)
+const knex = require('knex')({
+        client: 'pg',
+        acquireConnectionTimeout: 10000,
+        pool: {
+            "min": 2,
+            "max": 50,
+            idleTimeoutMillis: 10000,
+            createTimeoutMillis: 10000,
+            acquireTimeoutMillis: 10000,
+ ***REMOVED*****REMOVED***
+        connection
   ***REMOVED***
+)
 
-    console.log("Connection:", connection)
-    const knex = require('knex')({
-            client: 'pg',
-            acquireConnectionTimeout: 10000,
-            pool: {
-                "min": 2,
-                "max": 50,
-                idleTimeoutMillis: 10000,
-                createTimeoutMillis: 10000,
-                acquireTimeoutMillis: 10000,
-***REMOVED*****REMOVED*****REMOVED***
-            connection
-      ***REMOVED***
-    )
+const PROVINCES = { // Name, [cases, deadArr]
+    "GAUTENG": Province,
+    "WESTERN CAPE": Province,
+    "KWAZULU–NATAL": Province,
+    "FREE STATE": Province,
+    "EASTERN CAPE": Province,
+    "LIMPOPO": Province,
+    "MPUMALANGA": Province,
+    "NORTH WEST": Province,
+    "NORTHERN CAPE": Province,
+    "UNALLOCATED": Province
+***REMOVED***
+let provincesList = []
 
-    const PROVINCES = { // Name, [cases, deadArr]
-        "GAUTENG": Province,
-        "WESTERN CAPE": Province,
-        "KWAZULU–NATAL": Province,
-        "FREE STATE": Province,
-        "EASTERN CAPE": Province,
-        "LIMPOPO": Province,
-        "MPUMALANGA": Province,
-        "NORTH WEST": Province,
-        "NORTHERN CAPE": Province,
-        "UNALLOCATED": Province
-  ***REMOVED***
-    let provincesList = []
-
-    let options = new chrome.Options();
+let options = new chrome.Options();
 //Below arguments are critical for Heroku deployment
-    options.addArguments("--headless");
-    options.addArguments("--disable-gpu");
-    options.addArguments("--no-sandbox");
+options.addArguments("--headless");
+options.addArguments("--disable-gpu");
+options.addArguments("--no-sandbox");
 
-    function parseNumber(number) {
-        let testInt = "";
-        console.log("FUNC NUMBER:", number)
-        let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
-        testArray.forEach(digit => {
-            testInt += digit
-      ***REMOVED***)
-        testInt = parseInt(testInt);
-        return testInt
-  ***REMOVED***
+function parseNumber(number) {
+    let testInt = "";
+    console.log("FUNC NUMBER:", number)
+    let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
+    testArray.forEach(digit => {
+        testInt += digit
+  ***REMOVED***)
+    testInt = parseInt(testInt);
+    return testInt
+***REMOVED***
 
-
-    let ps = [];
-    let driver = new Builder()
+async function main() {
+        let driver = new Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
         .build();
+
+    let valid = false;
 
     // Navigate to Url
     await driver.get(url);
@@ -130,8 +130,9 @@ async function main() {
           ***REMOVED***
       ***REMOVED***
         console.log('Quitting Driver.')
-        await driver.close();
         await driver.quit();
+        console.log('Driver Quit')
+
         console.log('Returning Promise.')
         return Promise.resolve(htmls);
   ***REMOVED***
@@ -163,8 +164,9 @@ async function main() {
                             console.log("Skipping:", d, "\n")
                             loop = false;
 
-                      ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
-                            console.log("Date maybe valid:", d, "\n")
+                      ***REMOVED***
+                        else if (rows.length > 0 && rows[0].maybeValid) {
+                            console.log("\nDate maybe valid:", d)
 
                             // Maybe the format is all wrong. Parse another site/source?
                             // Make soup.
@@ -192,15 +194,22 @@ async function main() {
                                 if (value.length > 0) {
                                     console.log("Updated TTs1:", value)
                                     loop = false;
+                                    valid = true
                                     return true
                               ***REMOVED*** else {
                                     console.log("TotalTests not updated?");
                                     loop = false;
+                                    valid = true
                                     return false
                               ***REMOVED***
                           ***REMOVED***
+                            else {
+                                loop = false
+                                valid = true
+                          ***REMOVED***
                             // Pull off data for update (Total tests)
-                      ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                      ***REMOVED***
+                        else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
                             console.log("Parsing 1 time:", d.toLocaleDateString(), "\n")
                             const rootChild = HTMLParser.parse(htmls[i]);
                             // pull out the two tables 1st
@@ -371,7 +380,7 @@ async function main() {
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
-    if (fullLoop === links2.length-1) {
+    if (fullLoop === links2.length-1 || valid) {
         return Promise.resolve(true);
   ***REMOVED***
     return Promise.resolve(false);

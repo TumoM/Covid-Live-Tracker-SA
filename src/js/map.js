@@ -1,30 +1,4 @@
-
-/*var data1 = [
-    [],
-    ['ZA-NW', 'ZA-EC', 'ZA-FS'],
-    ['ZA-MP', 'ZA-NC', 'ZA-LP'],
-    ['ZA-WC'],
-    ['ZA-GT', 'ZA-NL']
-];
-
-
-
-
-
-const dummyData2 = [{
-    'ZA-NW': 19,
-    'ZA-EC': 88,
-    'ZA-FS': 96,
-    'ZA-MP': 21,
-    'ZA-NC': 16,
-    'ZA-LP': 23,
-    'ZA-WC': 587,
-    'ZA-GT': 865,
-    'ZA-NL': 443,
-    'ZA-UN': 15
-***REMOVED***]*/
-
-const provinceList = {
+var provinceList = {
     "NORTH WEST": 'ZA-NW',
     "EASTERN CAPE": 'ZA-EC',
     "FREE TATE": 'ZA-FS',
@@ -40,19 +14,22 @@ const provinceList = {
 var tooltip
 var tooltipText
 var tooltipRects
-let width = 415;
-let legendTitle = $('#legTitle')[0];
-const xPen = 92,
-    yPen = 220;
-let legendSet=false;
-let colourVal=1;
+var width = 415;
+var legendTitle = $('#legTitle')[0];
+var xPen = 92;
+var yPen = 220;
+var legendSet=false;
+var colourVal=1;
 
-let provCase = {***REMOVED***
-let provDeath = {***REMOVED***
-let provRecoveries = {***REMOVED***
-let cardList = []
+var provCase = {***REMOVED***;
+var provDeath = {***REMOVED***;
+var provRecoveries = {***REMOVED***;
+var cardList = [];
 
-
+(function main() {
+    console.log('In Main')
+    cardList=[]
+***REMOVED***)()
 
 ***REMOVED***
 ***REMOVED*** @param {string***REMOVED*** name
@@ -108,14 +85,12 @@ x = $('.lightBack').attr('x');
 y = $('.lightBack').attr('y');
 $('.lightBack').attr({'x':x-xPen,'y':y-yPen***REMOVED***)
 
-
-
 function showTooltip(evt) {
     var CTM = svg.getScreenCTM();
     var x = 10;
     var y = 390;
     let id = evt.target.getAttributeNS(null, "id");
-    
+
     tooltipText.firstChild.data = evt.target.getAttributeNS(null, "title");
     tooltip.setAttributeNS(null, "transform", "translate(" + x + " " + y + ")");
     var length = tooltipText.getComputedTextLength();
@@ -187,7 +162,9 @@ function legendSetup(max,min,interval) {
   ***REMOVED***
 ***REMOVED***
 // colourCountries(data1)
-function setColours(dummyData,colour=1) {
+
+function setColours(dummyData,colour=1,) {
+    colourVal = colour;
     // Vars
     let max = 0,
         min = Infinity,
@@ -233,7 +210,6 @@ function setColours(dummyData,colour=1) {
       ***REMOVED***
   ***REMOVED***)
     console.log("ANSWERS:",answers)
-    colourVal = colour
     colourCountries(answers,colour)
     legendSetup(max,min,interval)
 ***REMOVED***
@@ -361,6 +337,7 @@ $(document).ready(()=>{
 
 
       ***REMOVED***)
+
     $('#filterC')
         .click((event)=>{
             console.log("you clicked me to filter!")

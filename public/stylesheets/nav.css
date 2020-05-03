@@ -83,7 +83,7 @@
 }
 
 /* Position the close button (top right corner) */
-.overlay .closebtn {
+.overlay .closebtnNavOverlay {
   position: absolute;
   top: 20px;
   right: 45px;

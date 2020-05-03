@@ -58,28 +58,48 @@
                 <a href="#myMapHeading" data-section="#myMap" class="item fluid">Map</a>
                 <a href="#myGraphsHeading" data-section="#myGraphs" class="item  fluid">Graphs</a>
                 <a href="#myTableHeading" data-section="#myTable" class="item ">Historical</a>
-                <a href="#" class="item ">About</a>
+                <a href="#" class="item aboutButton" id="aboutButton">About</a>
             </div>
         </nav>
     </div>
-    <div class="ui mobile only padded grid">
-        <div class="ui borderless huge fluid fixed menu">
+    <!-- The overlay -->
+        <div id="myNavOverlay" class="overlay">
+            <!-- Button to close the overlay navigation -->
+            <a href="javascript:void(0)" class="closebtnNavOverlay">&times;</a>
+
+            <!-- Overlay content -->
+            <div class="overlay-content">
+                <h1><a href="/" class="header item">Rona Tracker SA</a></h1>
+                <hr style="width: 70%"/>
+                <a href="/" class="item active close">Home</a>
+                <a href="#myStatsHeading" class="item close">Stats</a>
+                <a href="#myMap" class="item close">Map</a>
+                <a href="#myGraphs" class="item  close">Graphs</a>
+                <a href="#myTable" class="item  close">Historical</a>
+                <a href="javascript:void(0)" class="item aboutButton">About</a>
+            </div>
+
+        </div>
+        <!-- Use any element to open/show the overlay navigation menu -->
+
+    <div class="ui mobile only padded grid overlay">
+        <div id="mobileOpenNav" class="ui borderless huge fluid fixed menu">
             <a href="/" class="header item">Rona Tracker SA</a>
             <div class="right menu">
                 <div class="item">
-                    <button class="ui icon toggle basic button nav">
+                    <button id="menuToggler" class="ui icon basic button nav">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
-            <div class="ui vertical borderless fluid menu">
+            <!--<div class="ui vertical borderless fluid menu">
                 <a href="/" class="item active close">Home</a>
                 <a href="#myStatsHeading" class="item close">Stats</a>
                 <a href="#myMap" class="item close">Map</a>
                 <a href="#myGraphs" class="item  close">Graphs</a>
                 <a href="#myTable" class="item  close">Historical</a>
                 <a href="#" class="item ">About</a>
-            </div>
+            </div>-->
         </div>
     </div>
 </header>

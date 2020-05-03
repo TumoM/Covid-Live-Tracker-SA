@@ -146,9 +146,9 @@ tspan{
 ***REMOVED***
 
 
-/*.toggle.button{
+.toggle.button{
 	height: min-content;
-***REMOVED****/
+***REMOVED***
 //
 //#hideIcon{
 //	width: 100%;
@@ -172,6 +172,7 @@ tspan{
 	overflow-y: scroll;
 	height: 100%;
 	transition: all 1s linear;
+	padding: 0px !important;
 	&.scroll-pane
 	{
 		overflow-x: visible;
@@ -185,12 +186,19 @@ tspan{
 		transition: all 1s linear;
 
 	***REMOVED***
+	.jspHorizontalBar {
+		background: none;
+		display: none;
+	***REMOVED***
 
 ***REMOVED***
 @media only screen and (max-width: 767px) {
 	[class*="mobile hidden"],
 	[class*="or lower hidden"] {
 		display: none !important;
+	***REMOVED***
+	.ui.cards > .card {
+		width: 85%;
 	***REMOVED***
 ***REMOVED***
 
@@ -205,8 +213,15 @@ tspan{
 	.jspVerticalBar .jspArrow {
 		height: 0;
 	***REMOVED***
+	.jspVerticalBar{
+		background: none;
+	***REMOVED***
+	.jspDrag{
+		background: rgba(190,190,190,.90);;
+	***REMOVED***
 	.jspTrack {
 		border-radius: 25px;
+		background: none;
 	***REMOVED***
 ***REMOVED***
 

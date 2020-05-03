@@ -1,16 +1,3 @@
-
-let dummyData = [
-    {id:1, name:"Billy Bob", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1***REMOVED***,
-    {id:2, name:"Mary May", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true***REMOVED***,
-    {id:3, name:"Christine Lobowski", age:"42", height:0, col:"green", dob:"22/05/1982", cheese:"true"***REMOVED***,
-    {id:4, name:"Brendon Philips", age:"125", gender:"male", height:1, col:"orange", dob:"01/08/1980"***REMOVED***,
-    {id:5, name:"Margret Marmajuke", age:"16", gender:"female", height:5, col:"yellow", dob:"31/01/1999"***REMOVED***,
-    {id:6, name:"Billy Bob", age:"12", gender:"male", height:1, col:"red", dob:"", cheese:1***REMOVED***,
-    {id:7, name:"Mary May", age:"1", gender:"female", height:2, col:"blue", dob:"14/05/1982", cheese:true***REMOVED***,
-    {id:8, name:"Christine Lobowski", age:"42", height:0, col:"green", dob:"22/05/1982", cheese:"true"***REMOVED***,
-    {id:9, name:"Brendon Philips", age:"125", gender:"male", height:1, col:"orange", dob:"01/08/1980"***REMOVED***,
-    {id:10, name:"Margret Marmajuke", age:"16", gender:"female", height:5, col:"yellow", dob:"31/01/1999"***REMOVED***,
-];
 //define custom mutator
 var dateMutator = function(value, data, type, params, component){
     //value - original value of the cell
@@ -18,10 +5,10 @@ var dateMutator = function(value, data, type, params, component){
     //type - the type of mutation occurring  (data|edit)
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
-    let date =new Date(value)
+    let date =moment(value).format('DD/MM/YYYY')
     // ToDo Return date, currently giving the wrong
     // return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***` //return the new value for the cell data.
-    return date; //return the new value for the cell data.
+    return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***`; //return the new value for the cell data.
 ***REMOVED***
 
 var dateFormatter = function(cell, formatterParams){

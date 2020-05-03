@@ -20,6 +20,7 @@ const Sentry = require('@sentry/node');
 const bodyParser  = require("body-parser");
 const path = require('path');
 const indexRoutes = require("./routes/index");
+const aboutRoutes = require("./routes/about");
 const parsing = require("./test/parsing");
 const parsing24 = require("./test/news24Parser");
 const NodeCache = require('node-cache');
@@ -39,7 +40,7 @@ const ttl = 60***REMOVED*** 60***REMOVED*** 1; // cache for 1 Hour
 //     useClones: false,
 // ***REMOVED***);
 const cache = new NodeCache({
-    checkperiod: 600,
+    checkperiod: 60,
     maxKeys: 10000,
     stdTTL: ttl,
     useClones: false,
@@ -56,7 +57,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(bodyParser.json());
-
 
 let connection;
 if (process.env.DBMODE && process.env.DBMODE === "herokuDB"){
@@ -121,7 +121,12 @@ app.use(function(req,res, next) {
     next();
 ***REMOVED***);
 
+console.log("DELETING OLD CACHE")
+cache.del("data");
+cache.flushAll();
+
 app.use("/",indexRoutes);
+app.use("/about",aboutRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt',(req,res) =>{
     res.sendFile("loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt");
@@ -197,6 +202,10 @@ app.listen(port, function () {
     console.log(`Rona-Tracker Server running on ${port***REMOVED***`);
 ***REMOVED***)
 
+process.on('exit', (code) => {
+    console.log(`About to exit with code: ${code***REMOVED***`);
+***REMOVED***);
+
 let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
     const d = moment();
     const daddy24 = this
@@ -206,7 +215,7 @@ let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOV
         if (res === true){
             console.log('Stopping Cron 2?')
             daddy24.stop();
-            console.log('')
+            console.log('Done Cron 2')
 
       ***REMOVED***
         else{
@@ -214,19 +223,28 @@ let job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOV
       ***REMOVED***
   ***REMOVED***)
 ***REMOVED***)
-const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', function() {
-    let job1 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function() {
+const mainJob = new CronJob('0***REMOVED***/30 17-23***REMOVED******REMOVED******REMOVED***', function() {
+    const d2 = moment();
+
+    let job1 = new CronJob('0***REMOVED***/2 19-23***REMOVED******REMOVED******REMOVED***', async function() {
         const d = moment();
         const daddy = this
         console.log('CronJob 1 - Calling Parsing:', d.toString());
-        await parsing().then((res)=>{
+        await parsing()
+            .then(async (res)=>{
                 console.log('Res',res)
                 if (res === true){
                     console.log('Stopping Cron 1?')
                     daddy.stop();
-                    console.log('')
+                    console.log('Done Cron 1')
+                    console.log('Staring Job 2')
                     job2.start()
-                    parsing24();
+                    let res = await parsing24()
+                    if (res === true) {
+                        console.log('Stopping Job 2')
+                        job2.stop()
+                        console.log('Stopped Job 2')
+                  ***REMOVED***
               ***REMOVED***
                 else{
                     console.log('Continue with Cron')
@@ -235,6 +253,6 @@ const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED*****
         )
   ***REMOVED***);
     job1.start();
-    console.log('Job 1 Set in Job');
+    console.log('Job 1 Set at:',d2.toString());
 ***REMOVED***,()=>console.log("Done Setting Jobs."),true,'Africa/Johannesburg');
 

@@ -69,7 +69,7 @@ gulp.task('pack-js', function () {
       'assets/js/vendor/hammer*.js',
       'assets/js/vendor/chart.min.js',
       'assets/js/vendor/chartjs-plugin-zoom.min.js',
-      'assets/js/vendor/jquery.jscrollpane.min.js*.js',
+      'assets/js/vendor/jquery.jscrollpane.min.js',
       'assets/js/vendor/*.js', 'assets/js/*.js'])
       .pipe(concat('bundle.js'))
       .pipe(uglify())

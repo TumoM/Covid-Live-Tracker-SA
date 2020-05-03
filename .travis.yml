@@ -1,16 +1,17 @@
 language: node_js
 node_js:
-- 13
+  - 13
+
 branches:
   only:
   - master
   - working
 before_script:
-- npm install -g gulp-cli
+  - npm install -g gulp-cli
 script:
-- gulp clean
-- gulp pack
-- npm run start
+  - gulp clean
+  - gulp pack
+
 deploy:
   provider: heroku
   api_key:

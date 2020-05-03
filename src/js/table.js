@@ -5,17 +5,17 @@ var dateMutator = function(value, data, type, params, component){
     //type - the type of mutation occurring  (data|edit)
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
-    let date =moment(value).format('DD/MM/YYYY')
     // ToDo Return date, currently giving the wrong
     // return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***` //return the new value for the cell data.
-    return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***`; //return the new value for the cell data.
+    return new Date(value); //return the new value for the cell data.
 ***REMOVED***
 
 var dateFormatter = function(cell, formatterParams){
     var value = cell.getValue();
 
     if(value){
-        value = moment(value).format("MMM DD, YYYY");
+        value = moment(value).format('DD/MM/YYYY');
+        // value = moment(value).format("MMM DD, YYYY");
   ***REMOVED***
 
     return value;
@@ -57,7 +57,7 @@ function setTable(data){
             format:"YYYY/MM/DD",
             alignEmptyValues:"bottom",
   ***REMOVED***mutator: dateMutator, formatter:"datetime", formatterParams:{
-                    outputFormat:"MMM DD, YYYY",
+                    outputFormat:"DD/MM/YYYY",
                     invalidPlaceholder:"(invalid date)"
               ***REMOVED***
 ***REMOVED*****REMOVED*****REMOVED***

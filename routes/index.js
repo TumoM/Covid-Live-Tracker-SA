@@ -102,7 +102,8 @@ const getSummarySlonik = async (pool,cache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    value.updateTime = moment(value.updateTime).format("dddd, MMMM do YYYY, HH:mm:ssA (zz)");
+                    // value.updateTime = moment(value.updateTime).format("dddd, MMMM do YYYY, HH:mm:ssA (zz)");
+                    value.updateTime = (new Date(value.updateTime)).toString();
 
                     // 2 - getProvinces()
                     mysql = sql`-- @cache-ttl 600 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`

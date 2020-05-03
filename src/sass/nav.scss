@@ -39,29 +39,6 @@
 
 
 
-
-
-
-
-
-
-
-
-  /* The Overlay (background)***REMOVED***/
-  .overlay {
-    /* Height & width depends on how you want to reveal the overlay (see JS below)***REMOVED***/
-    height: 100%;
-    width: 0;
-    position: fixed; /* Stay in place***REMOVED***/
-    z-index: 1; /* Sit on top***REMOVED***/
-    left: 0;
-    top: 0;
-    background-color: rgb(0,0,0); /* Black fallback color***REMOVED***/
-    background-color: rgba(0,0,0, 0.9); /* Black w/opacity***REMOVED***/
-    overflow-x: hidden; /* Disable horizontal scroll***REMOVED***/
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal)***REMOVED***/
-***REMOVED***
-
   /* Position the content inside the overlay***REMOVED***/
   .overlay-content {
     position: relative;
@@ -69,38 +46,65 @@
     width: 100%; /* 100% width***REMOVED***/
     text-align: center; /* Centered text/links***REMOVED***/
     margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens***REMOVED***/
+    z-index: 2; /* Sit on top***REMOVED***/
 ***REMOVED***
 
   /* The navigation links inside the overlay***REMOVED***/
-  .overlay a {
-    padding: 8px;
-    text-decoration: none;
-    font-size: 36px;
-    color: #818181;
-    display: block; /* Display block instead of inline***REMOVED***/
-    transition: 0.3s; /* Transition effects on hover (color)***REMOVED***/
-***REMOVED***
+  .overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below)***REMOVED***/
+    height: 0;
+    width: 100%;
+    position: fixed; /* Stay in place***REMOVED***/
+    z-index: 1; /* Sit on top***REMOVED***/
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color***REMOVED***/
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity***REMOVED***/
+    /* overflow-x: hidden; !* Disable horizontal scroll***REMOVED***!*/
+    overflow-y: hidden;
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal)***REMOVED***/
 
-  /* When you mouse over the navigation links, change their color***REMOVED***/
-  .overlay a:hover, .overlay a:focus {
-    color: #f1f1f1;
-***REMOVED***
+    a {
+      padding: 4px 0px;
+      text-decoration: none;
+      font-size: 36px;
+      color: #818181;
+      display: block; /* Display block instead of inline***REMOVED***/
+      transition: 0.3s; /* Transition effects on hover (color)***REMOVED***/
+  ***REMOVED***
 
-  /* Position the close button (top right corner)***REMOVED***/
-  .overlay .closebtn {
-    position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-***REMOVED***
+    a.close {
+      margin: 1rem auto;
+  ***REMOVED***
 
-  /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap***REMOVED***/
-  @media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px***REMOVED***
-    .overlay .closebtn {
-      font-size: 40px;
-      top: 15px;
-      right: 35px;
+    /* Position the close button (top right corner)***REMOVED***/
+    .closebtnNavOverlay {
+      position: absolute;
+      top: 8%;
+      right: 3%;
+      font-size: 60px;
+  ***REMOVED***
+
+    /* When you mouse over the navigation links, change their color***REMOVED***/
+    a:hover, a:focus {
+      color: #f1f1f1;
   ***REMOVED***
 ***REMOVED***
 
+
+    /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap***REMOVED***/
+    @media screen and (max-height: 750px) {
+      .overlay a {font-size: 2rem***REMOVED***
+      .overlay a.header {font-size: 2.4rem***REMOVED***
+      .overlay .closebtnNavOverlay {
+        font-size: 3.3rem;
+        top: 11%;
+        right: 7%;
+    ***REMOVED***
+  ***REMOVED***
+
+#myMainContainer{
+  ui.dimmer{
+    background-color:rgba(0,0,0,.95)
+***REMOVED***
+***REMOVED***

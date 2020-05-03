@@ -1,12 +1,21 @@
 language: node_js
 node_js:
-  - 13
+- 13
+branches:
+  only:
+  - master
+  - working
+before_script:
+- npm install -g gulp-cli
+script:
+- gulp clean
+- gulp pack
+- npm run start
 deploy:
   provider: heroku
   api_key:
-    secure: "5acedee3-6965-486c-a0a0-d8b381a55108"
+    secure: RFaoGVielzk/jBKINwlRK7TLNfI02WiLGhBYJ4hkXZncnUsmaDHCz3zBx89w0qYWw6bHNopE+qsdzHCK1baeINIEdBwOGVThOaLCo725jlzwB8T12i4jvnvY9QIQ0MYaATjeVvMlHS3cNNYywh1/Vkwb3OlnfSTurV/zRvFplIbeesjFfoYjq0Z3OwhZBKT+cC2qbRoFjviqhobmFK1EIA0FpHmRrGq4+91IX0bTN5lmnC422K/o71VsVAEky7w5NMYhyIX26DXDer2VV3jCyHRfqZiaDRwk0E1s/ltsybb8KOFMd2jH7c0MauSWldPpDp8Or2h4KqTq7+HIdXzk6Z4/e31ycbi4wH/FBeUp+4TuZoAC+9HJlPwa0ZeSHB5C07okEAqgl8rbH1AINXS1qW4+g0ntRjN4T5bxBBdo6Xg26m78BCgoHTdbUchhLeJgPxV28JwWh9SeXjz10hyRfCg7ojxhVUyfW5oNVWAiXserHJg1G/AN68f4s2OPG25WI1gx4LF/ogLqe9075QOIKMWCf0Vuj1CUIxhbe816Za4N/pUij+Iji7TOPoaSziKLTlGmArfoCtBzM+5nuDYDY89L1m6HvUmhIlS9b/LJXYUYSAyAPmKDbaEhZqcc6vWDw01Q5DcEpLU5NWIBEQpjxr3A4jSDGd8fI/GTe2bPgjo=
+  app: Covid-Live-Tracker-SA
+  on:
+    repo: TumoM/Covid-Live-Tracker-SA
 
-
-before_script:
-  - npm install -g gulp-cli
-script: gulp pack

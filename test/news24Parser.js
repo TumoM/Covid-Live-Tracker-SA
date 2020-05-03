@@ -348,89 +348,90 @@ async function main() {
         console.log("Error Bro", e);
         return Promise.resolve(false);
     }
-}
-
-function getNumber(line) {
-    let intString = "";
-    let total = line.match(/\d?[\d+\s?]*\d+/)[0].split(" ")
-    total.forEach(digit => {
-        intString += digit
-    })
-    return (+intString)
-}
-
-async function updateDaysGood(itemData) {
-    console.log('Updating Day Function:')
-
-    let dateData = {
-        totalCases,
-        totalDeaths,
-        totalRecoveries,
-        maybeValid: true,
-        parsed: true
+    function getNumber(line) {
+        let intString = "";
+        let total = line.match(/\d?[\d+\s?]*\d+/)[0].split(" ")
+        total.forEach(digit => {
+            intString += digit
+        })
+        return (+intString)
     }
-    console.log("Date:", itemData.provDate)
-    let rows = await knex('dates')
-        .select()
-        .where({date: itemData.provDate})
-    // console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
-    console.log("date in func", itemData.provDate)
-    if (rows && rows.length === 0) {
-        dateData.date = itemData.provDate;
-        let id = await knex("dates").insert(dateData).returning('date');
-        if (id && id.length > 0) {
-            console.log("Inserted into Dates Table")
-            let prevVals = await knex.raw('WITH preTable AS (\n' +
-                '   SELECT\n' +
-                '      date,\n' +
-                '      "totalCases",\n' +
-                '      "totalDeaths",\n' +
-                '        "totalRecoveries",\n' +
-                '      LAG("totalCases",1)\n' +
-                '          OVER (\n' +
-                '            ORDER BY date\n' +
-                '            ) prevCases,\n' +
-                '      LAG("totalDeaths",1)\n' +
-                '          OVER (\n' +
-                '            ORDER BY date\n' +
-                '            ) prevDeaths,\n' +
-                '          LAG("totalRecoveries",1)\n' +
-                '            OVER(\n' +
-                '                ORDER BY date\n' +
-                '                ) prevRecoveries\n' +
-                '   FROM dates\n' +
-                '   ORDER BY date\n' +
-                ')\n' +
-                'select\n' +
-                '       date,\n' +
-                '       prevRecoveries as "prevRecoveries",\n' +
-                '    ("totalCases"-prevCases) as "dailyNew",\n' +
-                '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
-                'from preTable\n' +
-                'order by date desc\n' +
-                'limit 1;')
-            let val = await knex('dates').update({
-                dailyNew: prevVals.rows[0].dailyNew,
-                dailyDeaths: prevVals.rows[0].dailyDeaths,
-                totalRecoveries: prevVals.rows[0].prevRecoveries
-            }).where('date', '=', itemData.provDate);
-            if (!val || val === 0){
-                log('WHAAAAAT?', reason)
+
+    async function updateDaysGood(itemData) {
+        console.log('Updating Day Function:')
+
+        let dateData = {
+            totalCases,
+            totalDeaths,
+            totalRecoveries,
+            maybeValid: true,
+            parsed: true
+        }
+        console.log("Date:", itemData.provDate)
+        let rows = await knex('dates')
+            .select()
+            .where({date: itemData.provDate})
+        // console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
+        console.log("date in func", itemData.provDate)
+        if (rows && rows.length === 0) {
+            dateData.date = itemData.provDate;
+            let id = await knex("dates").insert(dateData).returning('date');
+            if (id && id.length > 0) {
+                console.log("Inserted into Dates Table")
+                let prevVals = await knex.raw('WITH preTable AS (\n' +
+                    '   SELECT\n' +
+                    '      date,\n' +
+                    '      "totalCases",\n' +
+                    '      "totalDeaths",\n' +
+                    '        "totalRecoveries",\n' +
+                    '      LAG("totalCases",1)\n' +
+                    '          OVER (\n' +
+                    '            ORDER BY date\n' +
+                    '            ) prevCases,\n' +
+                    '      LAG("totalDeaths",1)\n' +
+                    '          OVER (\n' +
+                    '            ORDER BY date\n' +
+                    '            ) prevDeaths,\n' +
+                    '          LAG("totalRecoveries",1)\n' +
+                    '            OVER(\n' +
+                    '                ORDER BY date\n' +
+                    '                ) prevRecoveries\n' +
+                    '   FROM dates\n' +
+                    '   ORDER BY date\n' +
+                    ')\n' +
+                    'select\n' +
+                    '       date,\n' +
+                    '       prevRecoveries as "prevRecoveries",\n' +
+                    '    ("totalCases"-prevCases) as "dailyNew",\n' +
+                    '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
+                    'from preTable\n' +
+                    'order by date desc\n' +
+                    'limit 1;')
+                let val = await knex('dates').update({
+                    dailyNew: prevVals.rows[0].dailyNew,
+                    dailyDeaths: prevVals.rows[0].dailyDeaths,
+                    totalRecoveries: prevVals.rows[0].prevRecoveries
+                }).where('date', '=', itemData.provDate);
+                if (!val || val === 0){
+                    log('WHAAAAAT?', reason)
+                }
+            }
+        }
+        else {
+            let id = await knex("dates ")
+                .update(dateData)
+                .where('date', "=", itemData.provDate)
+            if (id && id > 0){
+                console.log("Updated Dates Table")
+            }
+            else{
+                console.log("Attempted duplicate update?", err)
             }
         }
     }
-    else {
-        let id = await knex("dates ")
-            .update(dateData)
-            .where('date', "=", itemData.provDate)
-        if (id && id > 0){
-            console.log("Updated Dates Table")
-        }
-        else{
-            console.log("Attempted duplicate update?", err)
-        }
-    }
 }
+
+
 
 
 /*

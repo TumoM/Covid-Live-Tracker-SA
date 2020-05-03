@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const numeral = require('numeral');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const sql = require('slonik').sql;
 // const sql = slonik.sql;
 
@@ -27,6 +27,9 @@ const hashQuery = (query) => {
 const unhashQuery = (query) => {
     return JSON.parse(query);
 };
+
+moment.tz.setDefault("Africa/Johannesburg")
+
 router.get("/", async function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
@@ -54,8 +57,13 @@ const getSummarySlonik = async (pool,cache) => {
 
     if (responseCache) {
         console.log("CACHE FOUND")
-        console.log("But ignoring")
-        // return Promise.resolve(unhashQuery(responseCache));
+        // console.log("But ignoring")
+        if (responseCache !== null){
+            return Promise.resolve(unhashQuery(responseCache));
+        }
+        else{
+            console.log("cache was null, ignoring.")
+            }
     }
 
     {
@@ -94,7 +102,8 @@ const getSummarySlonik = async (pool,cache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    value.updateTime = moment(value.updateTime).toDate();
+                    // value.updateTime = moment(value.updateTime).format("dddd, MMMM do YYYY, HH:mm:ssA (zz)");
+                    value.updateTime = (new Date(value.updateTime)).toString();
 
                     // 2 - getProvinces()
                     mysql = sql`-- @cache-ttl 600 \n select "provinceName", "provDate", "caseCount", "deathCount", "recovered" from "provinceDays" order by "provDate" desc limit 10`

@@ -1,18 +1,18 @@
 language: node_js
 node_js:
-  - 13
+- 13
 branches:
   only:
-    - master
-    - working
+  - master
+  - working
 before_script:
-  - npm install -g gulp-cli
+- npm install -g gulp-cli
 script:
-  - gulp clean
-  - gulp pack
+- gulp clean
+- gulp pack
 deploy:
   provider: heroku
   api_key:
-    secure: muDX0M9CxEWBvWP77q4dBIOtOU0n0D1+hqtDXhz5K19QwshS4kloMEBvHmonnd1OKf+gcJxEkXHpNDoDw9exRly4j9nIym8vP+eWLBWMBCqBY6CiBoyuBrdRw/CImLQgSaGBVJ35FtjMSAKhbeRG9V+xP+6SmFzs/HV5tSQCNy9Teb+yDNpmJuVEZQ8MC/FcqgfsP6B7gIwGsDTOxO9MdqkAI/u3wPvUcxwJBvJNUPhJYrbPWAatpj6efdqSMSr7I0pMJrwwAfk95SpxxOBPS7uGrNhbsFALTLR3CbYfcpJOZ/7CKbBkLt41NrGGol4pTAtW+m93FDZzHW5+TGXKmIThRFpxCvPrRcAPUy7W1sbDczytlCJ58sJLIoHztcMMHajUBkVOCUA3jB4W0M/WuPSFz0JzYJtmtUPxi510KEaVvskWFq3HR+db81k4QHhoy7Tx2I25gh7/E7CVzZYN8zq5F0IOIe8JoPKTmORUDHB/vVf9F1KCA3lnZGqdOjuiCvyVtiwlL+9de3vCBkKYL2dMIDGae9nzftM4by2ND+Sjvck+dRWv2aCWqjTnoetg1oMjH4XG9aMlTiS0qaxjNiVLGB9L5RQHLQNn6+RQPe+gg7VIKy1lxyjXkKEvLmwc0J9Pbg9Vh2qwtUKV6UUBaDUyt0yZV37OQBPO/sfY9ss=
+    secure: TgE0gTwTFCxS512m6KierwRhgPDBP6dNgEFgf/No9fmUcplneFnasaHjh9YEkVUJUWuZEvoicbZdPXVcHOKEKvb9vzT4CacjaJoaJ2fGNxDTCTJqQjtSYgWr+mFhfc2p7Rds0emlevv7qI4DGzHip4y31YFeOuS9eiPvGZiReTDwzgu9VQ7TVaxz50J/wPzseSZjzX6CyTqTYqGtNqrE0hFZj0hzLy70ogmXg+VOIlsnzbX/SfDdWBNM+LJEn9YjYfDBhjftuOlETLmkBPod9zMbQZ8h0aT+pell4cmClOKFm8Rb+/GMMdQ2zcC71LD44X8bdXwMAUnYD9lkuKwDgwJTeuj3ski6esz8KKYA7+HMCWBAzHgKByy+/SsGR7dghffA5kKJp422MfXzXkkDI5/PAI3WFdkBegIvgnK8crYz5mic9lMNgDzBJ857+LxBq03DPOFCVcGiFTggEvGaWA42uWDe2atNOtZqnrg8EioeSDLeHD134TViQkTzhUxf9rWxYC2FN2kdZn+T3Vb5EvChj9wmhv9XJ+KtkA4Pozmce+y3DHl5RvzQOCvhriI8Zvs4Zz08ko05FZMNs49z7q3tWcfBp4buZxf3bk/6Mvmp8ht8p0pYqWKyzirJ/u0BNRoAshf+Q1ICB/dnIWR6ryEIR5PF1uS8UGdG6iZyehs=
   on:
     repo: TumoM/Covid-Live-Tracker-SA

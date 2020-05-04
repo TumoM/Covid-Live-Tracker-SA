@@ -35,7 +35,6 @@ router.get("/", function (req, res) {
     const cache = res.locals.cache;
     const pool = res.locals.pool;
     if (pool){
-        console.log("Pool Present")
         // TODO Load data for the day.
         getSummarySlonik(pool,cache)
             .then( r => {
@@ -70,7 +69,6 @@ const getSummarySlonik = async (pool,cache) => {
         let value, value2, value3, value4;
         let provCases = {***REMOVED***, provDeaths = {***REMOVED***, provRecoveries = {***REMOVED***;
         const result = await pool.connect(async (connection) => {
-            console.log("Got result?")
             let mysql;
 
             // Start Transaction
@@ -79,7 +77,7 @@ const getSummarySlonik = async (pool,cache) => {
                 mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalTests", "totalRecoveries", "dailyNew", "dailyDeaths", "updateTime" from "dates" where "totalCases" is not null and "totalDeaths" is not null order by "date" desc limit(1)`;
                 console.log("Transaction 1");
                 value = await transactionConnection.maybeOne(mysql); // Transaction call 1 (Get latest row)
-                console.log("Done 1")
+                // console.log("Done 1")
                 if (value) {
                     if (!value.totalTests) {
                         mysql = sql`-- @cache-ttl 600 \n SELECT "date", "totalTests" FROM "dates" WHERE "totalTests" is not null Order By "date" desc limit 1`;

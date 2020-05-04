@@ -248,9 +248,9 @@ async function main() {
                                   ***REMOVED***)
                               ***REMOVED******REMOVED***/ // Should we pass the tables here? Only gives cases per province.
 
-                                const date = rootChild.text.match(/\d{2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0];
+                                const date = rootChild.text.match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0];
                                 const cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
-                                const tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
+                                const tests = rootChild.text.match(/(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
                                 let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./);
                                 let recoveries = rootChild.text.match(/recoveries.*?[\d*\s?]\./);
                                 let totalDeaths = null;
@@ -385,11 +385,11 @@ async function main() {
 ***REMOVED***
 
 
-/* main().then((res)=>{
+ main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
   ***REMOVED***
-)***REMOVED***/
+)
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

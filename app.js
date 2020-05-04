@@ -201,7 +201,7 @@ process.on('exit', (code) => {
     console.log(`About to exit with code: ${code***REMOVED***`);
 ***REMOVED***);
 
-const job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REMOVED***', async function () {
+const job2 = new CronJob('0***REMOVED***/5 19-23***REMOVED******REMOVED******REMOVED***', async function () {
     const d = moment();
     const daddy24 = this;
     console.log('CronJob 2 - Calling Parsing24:', d.toString());
@@ -216,10 +216,10 @@ const job2 = new CronJob('0***REMOVED***/3 19-23***REMOVED******REMOVED******REM
       ***REMOVED***
   ***REMOVED***);
 ***REMOVED***);
-const mainJob = new CronJob('0***REMOVED***/30 17-23***REMOVED******REMOVED******REMOVED***', (() => {
+const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', (() => {
     const d2 = moment();
 
-    const job1 = new CronJob('0***REMOVED***/2 19-23***REMOVED******REMOVED******REMOVED***', async function () {
+    const job1 = new CronJob('0***REMOVED***/5 19-23***REMOVED******REMOVED******REMOVED***', async function () {
         const d = moment();
         const daddy = this;
         console.log('CronJob 1 - Calling Parsing:', d.toString());

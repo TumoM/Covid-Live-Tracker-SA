@@ -1,29 +1,32 @@
 const dotenv = require('dotenv');
+
 dotenv.config();
-var cloudscraper = require('cloudscraper');
-const {Builder, By, Key, until, Driver***REMOVED*** = require('selenium-webdriver');
+const cloudscraper = require('cloudscraper');
+const { Builder, By, Key, until, Driver ***REMOVED*** = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const chromedriver = require('chromedriver');
+
 chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
-const HTMLParser = require('node-html-parser'),
-    rp = require('request-promise'),
-    Province = require("../models/provinceModel"),
-    Death = require("../models/deathModel"),
-    Day = require("../models/dayModel");
+
+const HTMLParser = require('node-html-parser');
+    const rp = require('request-promise');
+    const Province = require('../models/provinceModel');
+    const Death = require('../models/deathModel');
+    const Day = require('../models/dayModel');
 // DbSetup = require("../test/db24");
-const url = "https://sacoronavirus.co.za/category/press-releases-and-notices/";
+const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
 // const url = "http://sacoronavirus.co.za/?s=update";
 // const url = "https://www.nicd.ac.za/media/alerts/";
 // const url = "https://sacoronavirus.co.za/page/2/?s=update";
 // const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\//
-const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid[-|_](?:19)?.*\d{2***REMOVED***/i
+const linkRegex = /.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid[-|_](?:19)?.*\d{2***REMOVED***/i;
 const regex = RegExp('.*\d{4***REMOVED***\/\d{2***REMOVED***\/\d{2***REMOVED***\/update-.*covid-.*20\d{2***REMOVED***\/', 'g');
 
 
 let connection;
-console.log("Host: ", process.env.AWS_HOST)
-if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
-    connection = process.env.DATABASE_URL
+console.log('Host: ', process.env.AWS_HOST);
+if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
+    connection = process.env.DATABASE_URL;
 ***REMOVED*** else {
     connection = {
         host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
@@ -33,54 +36,54 @@ if (process.env.DBMODE && process.env.DBMODE === "herokuDB") {
   ***REMOVED***;
 ***REMOVED***
 
-console.log("Connection:", connection)
+console.log('Connection:', connection);
 const knex = require('knex')({
-        client: 'pg',
-        acquireConnectionTimeout: 10000,
-        pool: {
-            "min": 2,
-            "max": 50,
-            idleTimeoutMillis: 10000,
-            createTimeoutMillis: 10000,
-            acquireTimeoutMillis: 10000,
- ***REMOVED*****REMOVED***
-        connection
-  ***REMOVED***
-)
+      client: 'pg',
+      acquireConnectionTimeout: 10000,
+      pool: {
+          min: 2,
+          max: 50,
+          idleTimeoutMillis: 10000,
+          createTimeoutMillis: 10000,
+          acquireTimeoutMillis: 10000,
+    ***REMOVED***
+      connection
+***REMOVED***
+);
 
 const PROVINCES = { // Name, [cases, deadArr]
-    "GAUTENG": Province,
-    "WESTERN CAPE": Province,
-    "KWAZULU–NATAL": Province,
-    "FREE STATE": Province,
-    "EASTERN CAPE": Province,
-    "LIMPOPO": Province,
-    "MPUMALANGA": Province,
-    "NORTH WEST": Province,
-    "NORTHERN CAPE": Province,
-    "UNALLOCATED": Province
-***REMOVED***
-let provincesList = []
+    GAUTENG: Province,
+    'WESTERN CAPE': Province,
+    'KWAZULU–NATAL': Province,
+    'FREE STATE': Province,
+    'EASTERN CAPE': Province,
+    LIMPOPO: Province,
+    MPUMALANGA: Province,
+    'NORTH WEST': Province,
+    'NORTHERN CAPE': Province,
+    UNALLOCATED: Province
+***REMOVED***;
+const provincesList = [];
 
-let options = new chrome.Options();
-//Below arguments are critical for Heroku deployment
-options.addArguments("--headless");
-options.addArguments("--disable-gpu");
-options.addArguments("--no-sandbox");
+const options = new chrome.Options();
+// Below arguments are critical for Heroku deployment
+options.addArguments('--headless');
+options.addArguments('--disable-gpu');
+options.addArguments('--no-sandbox');
 
 function parseNumber(number) {
-    let testInt = "";
-    console.log("FUNC NUMBER:", number)
-    let testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(" ");
-    testArray.forEach(digit => {
-        testInt += digit
-  ***REMOVED***)
+    let testInt = '';
+    console.log('FUNC NUMBER:', number);
+    const testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(' ');
+    testArray.forEach((digit) => {
+        testInt += digit;
+  ***REMOVED***);
     testInt = parseInt(testInt);
-    return testInt
+    return testInt;
 ***REMOVED***
 
 async function main() {
-        let driver = new Builder()
+        const driver = new Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
         .build();
@@ -90,130 +93,127 @@ async function main() {
     // Navigate to Url
     await driver.get(url);
     await driver.wait(until.elementsLocated(By.css('.entry-title.fusion-post-title a')));
-    let html = await driver.getPageSource();
-    console.log("success!! Page bag secured.");
+    const html = await driver.getPageSource();
+    console.log('success!! Page bag secured.');
     //   console.log(html);
     const root = HTMLParser.parse(html);
 
-    var entries = root.querySelectorAll(".entry-title.fusion-post-title a");
-    var links = [];
-    let links2 = []
+    const entries = root.querySelectorAll('.entry-title.fusion-post-title a');
+    const links = [];
+    const links2 = [];
     let htmls = [];
 
-    console.log('Filtering url')
-    await entries.forEach(entry => {
-        if (entry.getAttribute("href").match(linkRegex)) {
-            links2.push(entry.getAttribute("href").match(linkRegex)[0])
-  ***REMOVED******REMOVED***)
+    console.log('Filtering url');
+    await entries.forEach((entry) => {
+        if (entry.getAttribute('href').match(linkRegex)) {
+            links2.push(entry.getAttribute('href').match(linkRegex)[0]);
+  ***REMOVED***
+***REMOVED***);
 
-    console.log('Links 2\n ',links2);
-    let getHtml = async (links)=>{
+    console.log('Links 2\n ', links2);
+    const getHtml = async (links) => {
         htmls = [];
-        console.log('Building (Headless) Driver')
-        let driver = new Builder()
+        console.log('Building (Headless) Driver');
+        const driver = new Builder()
             .forBrowser('chrome')
             .setChromeOptions(options)
             .build();
-        console.log('Starting Driver loop')
-        for (let i = 0;i<links.length;i++){
+        console.log('Starting Driver loop');
+        for (let i = 0; i < links.length; i++) {
             let loop = true;
             while (loop) {
-                await driver.get(links[i])
-                await driver.wait(until.elementLocated(By.css('.post-content')), 10***REMOVED*** 1000)
-                const element = await driver.findElement(By.css('article'))
+                await driver.get(links[i]);
+                await driver.wait(until.elementLocated(By.css('.post-content')), 10***REMOVED*** 1000);
+                const element = await driver.findElement(By.css('article'));
                 const html = await element.getAttribute('innerHTML');
-                htmls.push(html)
-               /* console.log('R2', html.match(/\d{2***REMOVED***(?:\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])*/
-                if (html){
+                htmls.push(html);
+               /* console.log('R2', html.match(/\d{2***REMOVED***(?:\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])***REMOVED***/
+                if (html) {
                     loop = false;
               ***REMOVED***
           ***REMOVED***
       ***REMOVED***
-        console.log('Quitting Driver.')
+        console.log('Quitting Driver.');
         await driver.quit();
-        console.log('Driver Quit')
+        console.log('Driver Quit');
 
-        console.log('Returning Promise.')
+        console.log('Returning Promise.');
         return Promise.resolve(htmls);
-  ***REMOVED***
-    htmls = await getHtml(links2)
+  ***REMOVED***;
+    htmls = await getHtml(links2);
 
-    /*console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
+    /* console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
     console.log("HTMLS DATE 1",htmls[1].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])
-    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])*/
+    console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0])***REMOVED***/
 
-    let fullLoop = 0
+    let fullLoop = 0;
     for (let i = 0; i < links2.length; i++) {
         let loop = true;
         fullLoop = i;
-        while (loop){
+        while (loop) {
             {
-                let DATE = htmls[i].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0]
+                const DATE = htmls[i].match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0];
                 console.log(DATE); // date
-                let totalCase = 0;
-                let totalDeath = 0;
-                let tempDate = DATE.split(" ");
+                const totalCase = 0;
+                const totalDeath = 0;
+                const tempDate = DATE.split(' ');
                 const d = new Date(`${tempDate[0].split(/\D+/)[0]***REMOVED***-${tempDate[1]***REMOVED***-${tempDate[2]***REMOVED***`);
-                let parsedDate = d.toLocaleDateString().split("/")
-                parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`
+                let parsedDate = d.toLocaleDateString().split('/');
+                parsedDate = `${parsedDate[2]***REMOVED***-${parsedDate[0]***REMOVED***-${parsedDate[1]***REMOVED***`;
                 let rows = await knex('dates')
-                    .where({date: d***REMOVED***)
+                    .where({ date: d ***REMOVED***);
                         let totalTests = 0;
-                        console.log("Row Count:", rows.length);
+                        console.log('Row Count:', rows.length);
                         if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
-                            console.log("Skipping:", d, "\n")
+                            console.log('Skipping:', d, '\n');
                             loop = false;
-
-                      ***REMOVED***
-                        else if (rows.length > 0 && rows[0].maybeValid) {
-                            console.log("\nDate maybe valid:", d)
+                      ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
+                            console.log('\nDate maybe valid:', d);
 
                             // Maybe the format is all wrong. Parse another site/source?
                             // Make soup.
-                            const paragraphs = HTMLParser.parse(htmls[i])
+                            const paragraphs = HTMLParser.parse(htmls[i]);
                             let testPar = paragraphs.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
                             if (testPar) {
                                 totalTests = testPar.match(/\s((\d+\s+)*\d+)/);
                           ***REMOVED*** else {
-                                testPar = paragraphs.text.match(/total number of.*tests.*\s\d+[\.|\n]/i)
+                                testPar = paragraphs.text.match(/total number of.*tests.*\s\d+[\.|\n]/i);
                                 totalTests = testPar[0].match(/\s((\d+\s+)*\d+)/);
                           ***REMOVED***
                             if (totalTests) {
                                 totalTests = parseNumber(totalTests[0].trim());
                           ***REMOVED***
-                            console.log("Value:", totalTests);
+                            console.log('Value:', totalTests);
                             rows = await knex('dates').select('totalTests')
                                 .whereNull('totalTests')
-                                .andWhere({date: parsedDate***REMOVED***)
+                                .andWhere({ date: parsedDate ***REMOVED***);
                             if (rows.length > 0) {
-                                let value = await knex('dates').update({
+                                const value = await knex('dates').update({
                                     totalTests,
                                     maybeValid: true
-                              ***REMOVED***).where({date: parsedDate***REMOVED***)
-                                    .returning('date')
+                              ***REMOVED***).where({ date: parsedDate ***REMOVED***)
+                                    .returning('date');
                                 if (value.length > 0) {
-                                    console.log("Updated TTs1:", value)
+                                    console.log('Updated TTs1:', value);
                                     loop = false;
-                                    valid = true
-                                    return true
-                              ***REMOVED*** else {
-                                    console.log("TotalTests not updated?");
-                                    loop = false;
-                                    valid = true
-                                    return false
+                                    valid = true;
+                                    return true;
                               ***REMOVED***
+                                    console.log('TotalTests not updated?');
+                                    loop = false;
+                                    valid = true;
+                                    return false;
                           ***REMOVED***
-                            else {
-                                loop = false
-                                valid = true
-                          ***REMOVED***
+
+                                loop = false;
+                                valid = true;
+
                             // Pull off data for update (Total tests)
-                      ***REMOVED***
-                        else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
-                            console.log("Parsing 1 time:", d.toLocaleDateString(), "\n")
+                      ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                            console.log('Parsing 1 time:', d.toLocaleDateString(), '\n');
                             const rootChild = HTMLParser.parse(htmls[i]);
                             // pull out the two tables 1st
-                            const tables1 = rootChild.querySelector("table");
+                            const tables1 = rootChild.querySelector('table');
                             // const [table1] = tables;
                             try {
                                /* if (tables1){
@@ -246,36 +246,34 @@ async function main() {
 
                                         // console.log(name,"-",count);
                                   ***REMOVED***)
-                              ***REMOVED****/ // Should we pass the tables here? Only gives cases per province.
+                              ***REMOVED******REMOVED***/ // Should we pass the tables here? Only gives cases per province.
 
-                                let date = rootChild.text.match(/\d{2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0]
-                                let cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
-                                let tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
-                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./)
-                                let recoveries = rootChild.text.match(/recoveries.*?[\d*\s?]\./)
+                                const date = rootChild.text.match(/\d{2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0];
+                                const cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                const tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
+                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./);
+                                let recoveries = rootChild.text.match(/recoveries.*?[\d*\s?]\./);
                                 let totalDeaths = null;
-                                if (!deaths){
-                                    deaths = null
-                              ***REMOVED***
-                                else{
-                                    deaths = deaths[0]
+                                if (!deaths) {
+                                    deaths = null;
+                              ***REMOVED*** else {
+                                    deaths = deaths[0];
                                     totalDeaths = deaths.trim().match(/\s((\d+\s+)*\d+)/);
                                     if (totalDeaths) {
                                         totalDeaths = parseNumber(totalDeaths[0].trim());
                                   ***REMOVED***
                               ***REMOVED***
                                 let totalRecoveries = null;
-                                if (!recoveries){
-                                    totalRecoveries = null
-                              ***REMOVED***
-                                else{
-                                    recoveries = recoveries[0]
+                                if (!recoveries) {
+                                    totalRecoveries = null;
+                              ***REMOVED*** else {
+                                    recoveries = recoveries[0];
                                     totalRecoveries = recoveries.trim().match(/\s((\d+\s+)*\d+)/);
                                     if (totalRecoveries) {
                                         totalRecoveries = parseNumber(totalRecoveries[0].trim());
                                   ***REMOVED***
                               ***REMOVED***
-                                console.log("TestPar", tests);
+                                console.log('TestPar', tests);
                                 let totalTests = tests.match(/\s((\d+\s+)*\d+)/)[0];
 
                                 if (totalTests) {
@@ -289,10 +287,10 @@ async function main() {
                               ***REMOVED***
 
 
-                                console.log("Total Tests:", totalTests);
-                                console.log("Total Cases:", totalCases);
-                                console.log("Total Deaths:", totalDeaths);
-                                console.log("Total Recoveries:", totalRecoveries);
+                                console.log('Total Tests:', totalTests);
+                                console.log('Total Cases:', totalCases);
+                                console.log('Total Deaths:', totalDeaths);
+                                console.log('Total Recoveries:', totalRecoveries);
 
                                 let data = {
                                     date: parsedDate,
@@ -301,50 +299,50 @@ async function main() {
                                     totalCases,
                                     totalDeaths,
                                     maybeValid: true
-                              ***REMOVED***
-                                console.log(data)
-                                let rows = await knex('dates').select('totalTests')
+                              ***REMOVED***;
+                                console.log(data);
+                                const rows = await knex('dates').select('totalTests')
                                     .whereNull('totalTests')
-                                    .andWhere({date: parsedDate***REMOVED***)
-                                        console.log(rows.length)
-                                        let value = await knex('dates').update({
+                                    .andWhere({ date: parsedDate ***REMOVED***);
+                                        console.log(rows.length);
+                                        const value = await knex('dates').update({
                                             totalTests,
                                             maybeValid: true
-                                      ***REMOVED***).where({date: parsedDate***REMOVED***)
-                                                console.log("Updated TTs2:", value)
+                                      ***REMOVED***).where({ date: parsedDate ***REMOVED***);
+                                                console.log('Updated TTs2:', value);
                                             if (value === 0) {
-                                                await knex('dates').insert(data)
-                                                    console.log("Inserted my man")
-                                                    let prevVals = await knex.raw('WITH preTable AS (\n' +
-                                                        '   SELECT\n' +
-                                                        '      date,\n' +
-                                                        '      "totalCases",\n' +
-                                                        '      "totalDeaths",\n' +
-                                                        '        "totalRecoveries",\n' +
-                                                        '      LAG("totalCases",1)\n' +
-                                                        '          OVER (\n' +
-                                                        '            ORDER BY date\n' +
-                                                        '            ) prevCases,\n' +
-                                                        '      LAG("totalDeaths",1)\n' +
-                                                        '          OVER (\n' +
-                                                        '            ORDER BY date\n' +
-                                                        '            ) prevDeaths,\n' +
-                                                        '          LAG("totalRecoveries",1)\n' +
-                                                        '            OVER(\n' +
-                                                        '                ORDER BY date\n' +
-                                                        '                ) prevRecoveries\n' +
-                                                        '   FROM dates\n' +
-                                                        '   ORDER BY date\n' +
-                                                        ')\n' +
-                                                        'select\n' +
-                                                        '       date,\n' +
-                                                        '       prevDeaths as "prevDeaths",\n' +
-                                                        '       prevRecoveries as "prevRecoveries",\n' +
-                                                        '    ("totalCases"-prevCases) as "dailyNew",\n' +
-                                                        '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n' +
-                                                        'from preTable\n' +
-                                                        'order by date desc\n' +
-                                                        'limit 1;')
+                                                await knex('dates').insert(data);
+                                                    console.log('Inserted my man');
+                                                    const prevVals = await knex.raw('WITH preTable AS (\n'
+                                                        + '   SELECT\n'
+                                                        + '      date,\n'
+                                                        + '      "totalCases",\n'
+                                                        + '      "totalDeaths",\n'
+                                                        + '        "totalRecoveries",\n'
+                                                        + '      LAG("totalCases",1)\n'
+                                                        + '          OVER (\n'
+                                                        + '            ORDER BY date\n'
+                                                        + '            ) prevCases,\n'
+                                                        + '      LAG("totalDeaths",1)\n'
+                                                        + '          OVER (\n'
+                                                        + '            ORDER BY date\n'
+                                                        + '            ) prevDeaths,\n'
+                                                        + '          LAG("totalRecoveries",1)\n'
+                                                        + '            OVER(\n'
+                                                        + '                ORDER BY date\n'
+                                                        + '                ) prevRecoveries\n'
+                                                        + '   FROM dates\n'
+                                                        + '   ORDER BY date\n'
+                                                        + ')\n'
+                                                        + 'select\n'
+                                                        + '       date,\n'
+                                                        + '       prevDeaths as "prevDeaths",\n'
+                                                        + '       prevRecoveries as "prevRecoveries",\n'
+                                                        + '    ("totalCases"-prevCases) as "dailyNew",\n'
+                                                        + '    ("totalDeaths"-prevDeaths) as "dailyDeaths"\n'
+                                                        + 'from preTable\n'
+                                                        + 'order by date desc\n'
+                                                        + 'limit 1;');
 
                                                     data.totalDeaths = !data.totalDeaths ? prevVals.rows[0].prevDeaths : data.totalDeaths;
                                                     prevVals.rows[0].dailyDeaths = !prevVals.rows[0].dailyDeaths ? 0 : prevVals.rows[0].dailyDeaths;
@@ -355,45 +353,43 @@ async function main() {
                                                         dailyDeaths: prevVals.rows[0].dailyDeaths,
                                                         totalRecoveries: totalRecoveries || prevVals.rows[0].prevRecoveries,
                                                         ...data
-                                                  ***REMOVED***
-                                                    await knex('dates').update(data).where('date', '=', parsedDate)
-                                                    loop=false;
+                                                  ***REMOVED***;
+                                                    await knex('dates').update(data).where('date', '=', parsedDate);
+                                                    loop = false;
                                               ***REMOVED***
                               ***REMOVED*** catch (e) {
-                                console.log("SOME ERROR:", e)
+                                console.log('SOME ERROR:', e);
                                 loop = false;
                                 // No table found error
-                                knex("dates ").insert({
+                                knex('dates ').insert({
                                     date: parsedDate,
                                     parsed: false,
                                     maybeValid: true,
                                     error: true
                               ***REMOVED***)
-                                    .then(id => {
-                                        //console.log(id)
+                                    .then((id) => {
+                                        // console.log(id)
                                   ***REMOVED***)
-                                    .catch(err => {
-                                        console.log("Ignoring duplicates 1", err)
-                                  ***REMOVED***)
+                                    .catch((err) => {
+                                        console.log('Ignoring duplicates 1', err);
+                                  ***REMOVED***);
                               ***REMOVED***
                           ***REMOVED***
                       ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
-    if (fullLoop === links2.length-1 || valid) {
+    if (fullLoop === links2.length - 1 || valid) {
         return Promise.resolve(true);
   ***REMOVED***
     return Promise.resolve(false);
-
-
 ***REMOVED***
 
 
-/*main().then((res)=>{
+/* main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
   ***REMOVED***
-)*/
+)***REMOVED***/
 
-module.exports = main
+module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

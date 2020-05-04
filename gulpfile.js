@@ -13,6 +13,7 @@ const pfm = require('postcss-font-magician');
 var postcss = require('gulp-postcss')
 var pipeline = require('readable-stream').pipeline;
 let babel = require('gulp-babel');
+const eslint = require('gulp-eslint')
 var browserSync = require('browser-sync').create();
 const series =gulp.series, parallel =gulp.parallel, watch =gulp.watch;
 
@@ -115,6 +116,25 @@ gulp.task('browserSync', function(cd) {
   ***REMOVED***)
     cd();
 ***REMOVED***)
+
+// The lint task
+gulp.task('lint', function() {
+  return gulp
+    // Define the source files
+    .src(['src/js/*.js'])
+    .pipe(eslint({***REMOVED***))
+    // Output the results in the console
+    .pipe(eslint.format());
+***REMOVED***);
+// The lint task
+gulp.task('lintF', function() {
+  return gulp
+    // Define the source files
+    .src(['src/js/*.js'])
+    .pipe(eslint({fix:true***REMOVED***))
+    // Output the results in the console
+    .pipe(eslint.format());
+***REMOVED***);
 
 gulp.task('pack', parallel(['pack-js', 'pack-css']));
 gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','browserSync','watch'));

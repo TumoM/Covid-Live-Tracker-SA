@@ -104,7 +104,19 @@
     }
 
 #myMainContainer{
-  ui.dimmer{
+  .ui.dimmer, .dimmable.dimmed{
     background-color:rgba(0,0,0,.95)
+  }
+
+  .ui.dimmer > .content {
+    width: 80%;
+    margin: auto auto;
+    font-size: 1.7rem;
+    @media only screen and (max-width: 767px) {
+      font-size: 1.3rem;
+    }
+  p {
+    color: black;
+  }
   }
 }

@@ -97,12 +97,11 @@ gulp.task('reload', function (done) {
 
 gulp.task('watch', ()=>{
     console.log("Watching SASS")
-    watch('src/sass/**/*.scss',{ ignoreInitial: true }, series("sass","pack-css","reload"));
+    watch('src/sass/**/*.scss',{ ignoreInitial: true }, series("sass","pack-css"));
     // Or a composed task
     console.log("Watching JS")
-    watch('src/js/*.js',{ ignoreInitial: true }, series("js","pack-js","reload"));
+    watch('src/js/*.js',{ ignoreInitial: true }, series("js","pack-js"));
     console.log("Watching EJS")
-    watch(['views/**/*.ejs'],{ ignoreInitial: true }, series("reload"));
     // watch("js/*.js", ['js-watch']);
 })
 
@@ -137,7 +136,7 @@ gulp.task('lintF', function() {
 });
 
 gulp.task('pack', parallel(['pack-js', 'pack-css']));
-gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','browserSync','watch'));
+gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
 
 // The `clean` function is not exported so it can be considered a private task.
 // It can still be used within the `series()` composition.

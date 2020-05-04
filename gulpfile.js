@@ -100,9 +100,9 @@ gulp.task('watch', ()=>{
     watch('src/sass/**/*.scss',{ ignoreInitial: true }, series("sass","pack-css"));
     // Or a composed task
     console.log("Watching JS")
-    watch('src/js/*.js',{ ignoreInitial: true }, series("js","pack-js"));
+    watch(['src/js/*.js',"views/**/*.ejs"],{ ignoreInitial: true }, series("js","pack-js"));
     console.log("Watching EJS")
-    // watch("js/*.js", ['js-watch']);
+    // watch("views/**/*.ejs", series("pack"));
 })
 
 gulp.task('browserSync', function(cd) {

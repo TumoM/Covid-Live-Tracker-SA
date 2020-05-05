@@ -13,6 +13,9 @@ $grey  :#A0A0A0;
 $black :#000000;
 
 #myStats{
+  .ui.sub.header {
+    text-transform: none;
+  }
   .statIcon{
     margin: 1.5rem 1rem;
   }

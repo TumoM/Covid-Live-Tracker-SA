@@ -1,4 +1,6 @@
 const dotenv = require('dotenv');
+var each = require('async-each');
+var async = require('async');
 
 dotenv.config();
 const cloudscraper = require('cloudscraper');
@@ -9,10 +11,7 @@ const chromedriver = require('chromedriver');
 chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
-    const rp = require('request-promise');
-    const Province = require('../models/provinceModel');
-    const Death = require('../models/deathModel');
-    const Day = require('../models/dayModel');
+const Province = require('../models/provinceModel');
 // DbSetup = require("../test/db24");
 const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
 // const url = "http://sacoronavirus.co.za/?s=update";
@@ -111,51 +110,78 @@ async function main() {
 });
 
     console.log('Links 2\n ', links2);
+    htmls = [];
+    
     const getHtml = async (links) => {
-        htmls = [];
-        console.log('Building (Headless) Driver');
-        const driver = new Builder()
-            .forBrowser('chrome')
-            .setChromeOptions(options)
-            .build();
-        console.log('Starting Driver loop');
-        for (let i = 0; i < links.length; i++) {
-            let loop = true;
+        console.log('starting')
+        let loop = true;
+    };
+    // htmls = await getHtml(links2);
+    let drivers = [];
+    let index = -1;
+    
+    htmls = await async.concatSeries(links2, async function(link) {
+         // Perform operation on file here.
+        console.log('Processing link: ' + link);
+        let loop = true;
+        index += 1;
+          let i = index;
+          try{
+            
+            let counter = 0;
+            let html
             while (loop) {
-                await driver.get(links[i]);
+                await driver.get(link);
                 await driver.wait(until.elementLocated(By.css('.post-content')), 10 * 1000);
                 const element = await driver.findElement(By.css('article'));
-                const html = await element.getAttribute('innerHTML');
-                htmls.push(html);
-               /* console.log('R2', html.match(/\d{2}(?:\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]) */
+                 html = await element.getAttribute('innerHTML');
+                // htmls.push(html);
+                /* console.log('R2', html.match(/\d{2}(?:\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]) */
                 if (html) {
                     loop = false;
                 }
+                counter += 1;
             }
+            return html;
         }
-        console.log('Quitting Driver.');
-        await driver.quit();
-        console.log('Driver Quit');
-
-        console.log('Returning Promise.');
-        return Promise.resolve(htmls);
-    };
-    htmls = await getHtml(links2);
+        catch (e){
+            console.log(e)
+            return 'Some Error Occurred: '+e;
+        }
+    }/*, function(err) {
+        // if any of the file processing produced an error, err would equal that error
+        if( err ) {
+            // One of the iterations produced an error.
+            // All processing will now stop.
+            console.log('Link failed to process');
+        } else {
+            console.log('All links have been processed successfully');
+            console.log('done')
+            
+            console.log('Returning Promise.');
+            loop = false;
+            return Promise.resolve(htmls);
+        }
+    }*/)
+      .then(res=>{
+            driver.quit();
+            return res;
+    }
+    );
 
     /* console.log("HTMLS DATE 0",htmls[0].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
     console.log("HTMLS DATE 1",htmls[1].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0])
     console.log("HTMLS DATE 2",htmls[2].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0]) */
 
     let fullLoop = 0;
-    for (let i = 0; i < links2.length; i++) {
+    for (let i = 0; i < htmls.length; i++) {
         let loop = true;
         fullLoop = i;
         while (loop) {
             {
+                // console.log('HTMLS',htmls);
                 const DATE = htmls[i].match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
                 console.log(DATE); // date
-                const totalCase = 0;
-                const totalDeath = 0;
                 const tempDate = DATE.split(' ');
                 const d = new Date(`${tempDate[0].split(/\D+/)[0]}-${tempDate[1]}-${tempDate[2]}`);
                 let parsedDate = d.toLocaleDateString().split('/');
@@ -248,11 +274,11 @@ async function main() {
                                     })
                                 } */ // Should we pass the tables here? Only gives cases per province.
 
-                                const date = rootChild.text.match(/\d{2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
+                                const date = rootChild.text.match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
                                 const cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
-                                const tests = rootChild.text.match(/Tests.*?conducted.*?\d[\s?\d]+/i || /total.*((\d\s?)|(tests))/i)[0];
-                                let deaths = rootChild.text.match(/death[s]?[^\.].*?\d[\s?\d\s]*.*?\./);
-                                let recoveries = rootChild.text.match(/recoveries.*?[\d*\s?]\./);
+                                const tests = rootChild.text.match(/(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
+                                let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/);
+                                let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+)/);
                                 let totalDeaths = null;
                                 if (!deaths) {
                                     deaths = null;
@@ -385,11 +411,11 @@ async function main() {
 }
 
 
-/* main().then((res)=>{
+ main().then((res)=>{
     console.log('Res',res)
         process.exit(0)
     }
-) */
+)
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

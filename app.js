@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const dotenv = require('dotenv');
 const compression = require('compression');
@@ -75,11 +76,8 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
 console.log('Connection:', connection);
 const knex = require('knex')({
         client: 'pg',
-        debug: true,
-        asyncStackTraces: true,
-        acquireConnectionTimeout: 10000,
-        pool: {
-            min: 2,
+        debug: true,   acquireConnectionTimeout: 10000,
+        pool: {         min: 2,
             max: 50,
             idleTimeoutMillis: 10000,
             createTimeoutMillis: 10000,

@@ -164,8 +164,8 @@ async function main() {
         }
     }*/)
       .then(res=>{
-          return res;
-          driver.quit();
+            driver.quit();
+            return res;
     }
     );
 

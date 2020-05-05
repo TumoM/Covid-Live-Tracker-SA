@@ -2,13 +2,13 @@ const provinceList = {
 	'NORTH WEST': 'ZA-NW',
 	'EASTERN CAPE': 'ZA-EC',
 	'FREE TATE': 'ZA-FS',
-	MPUMALANGA: 'ZA-MP',
+	'MPUMALANGA': 'ZA-MP',
 	'NORTHERN CAPE': 'ZA-NC',
-	LIMPOPO: 'ZA-LP',
+	'LIMPOPO': 'ZA-LP',
 	'WESTERN CAPE': 'ZA-WC',
-	GAUTENG: 'ZA-GT',
+	'GAUTENG': 'ZA-GT',
 	'KWAZULU-NATAL': 'ZA-NL',
-	UNALLOCATED: 'ZA-UN',
+	'UNALLOCATED': 'ZA-UN',
 };
 
 let tooltip;

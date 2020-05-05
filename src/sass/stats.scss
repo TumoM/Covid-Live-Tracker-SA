@@ -1,0 +1,73 @@
+$red   : #8b0000;
+$orange: #ff9800; //c63200
+$yellow: #d2b300;
+$olive :#32CD32;
+$green :#016936;
+$teal  :#008080;
+$blue  : #065fa3;
+$violet:#EE82EE;
+$purple:#B413EC;
+$pink  :#FF1493;
+$brown : #b30542;
+$grey  :#A0A0A0;
+$black :#000000;
+
+#myStats{
+  .statIcon{
+    margin: 1.5rem 1rem;
+  }
+  .ui.card{
+    height: 90%;
+    margin: 1rem;
+  }
+  .grid.two.column.row{
+    padding-top:0;
+  }
+  #statTotalCases{
+    i,.value{
+      color: $orange;
+    }
+  }
+  #statNewCases{
+    i,.value{
+      color: $yellow;
+    }
+  }
+  #statTotalDeaths{
+    i,.value{
+      color: $red;
+    }
+  }
+  #statNewDeaths{
+    i,.value{
+      color: $brown;
+    }
+  }
+  #statTotalRecoveries{
+    i,.value{
+      color: $blue;
+    }
+  }
+  #statTotalTests{
+    i,.value{
+      color: $green;
+    }
+  }
+  .statistics{
+    &.red{
+      color: $red;
+    }
+    &.orange{
+      color: $orange;
+    }
+    &.blue{
+      color: $blue;
+    }
+    &.green{
+      color: $green;
+    }
+    &.orange{
+      color: $orange;
+    }
+  }
+}

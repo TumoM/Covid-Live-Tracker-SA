@@ -172,6 +172,7 @@ tspan{
 	overflow-y: scroll;
 	height: 100%;
 	transition: all 1s linear;
+	padding: 0px !important;
 	&.scroll-pane
 	{
 		overflow-x: visible;
@@ -185,9 +186,26 @@ tspan{
 		transition: all 1s linear;
 
 	}
+	.jspHorizontalBar {
+		background: none;
+		display: none;
+	}
+
+}
+@media only screen and (max-width: 767px) {
+	[class*="mobile hidden"],
+	[class*="or lower hidden"] {
+		display: none !important;
+	}
+	.ui.cards > .card {
+		width: 85%;
+	}
 }
 
 #mapContainer{
+	#hideIcon {
+		transition: all 1s linear;
+	}
 	.jspDrag{
 		border-radius: 25px;
 	}
@@ -195,10 +213,23 @@ tspan{
 	.jspVerticalBar .jspArrow {
 		height: 0;
 	}
+	.jspVerticalBar{
+		background: none;
+	}
+	.jspDrag{
+		background: rgba(190,190,190,.90);;
+	}
 	.jspTrack {
 		border-radius: 25px;
+		background: none;
 	}
 }
 
+#filterColumn{
+	.filter{
+		margin-right: 3.5rem !important;
+	}
+
+}
 
 

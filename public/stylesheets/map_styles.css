@@ -125,10 +125,9 @@ tspan.legend {
   margin: 0 auto;
 }
 
-.toggle.button {
-  height: min-content;
-}
-
+/*.toggle.button{
+	height: min-content;
+}*/
 #svgColumn {
   transition: all 1s linear;
 }
@@ -153,6 +152,15 @@ tspan.legend {
   transition: all 1s linear;
 }
 
+@media only screen and (max-width: 767px) {
+  [class*="mobile hidden"],
+[class*="or lower hidden"] {
+    display: none !important;
+  }
+}
+#mapContainer #hideIcon {
+  transition: all 1s linear;
+}
 #mapContainer .jspDrag {
   border-radius: 25px;
 }
@@ -161,6 +169,10 @@ tspan.legend {
 }
 #mapContainer .jspTrack {
   border-radius: 25px;
+}
+
+#filterColumn .filter {
+  margin-right: 3.5rem !important;
 }
 
 /*# sourceMappingURL=map_styles.css.map */

@@ -1,0 +1,12 @@
+{
+  "asi": true,
+  "sub": true,
+  "eqnull": true,
+
+  "jquery": true,
+  "browser": true,
+  "node": true,
+  "-W014": true,
+
+  "esversion": 9
+}

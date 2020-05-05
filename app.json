@@ -1,0 +1,20 @@
+{
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+  ***REMOVED***
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+  ***REMOVED***
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+  ***REMOVED***
+    {
+      "url": "heroku/nodejs"
+  ***REMOVED***
+  ],
+  "image": "heroku/nodejs",
+  "stack": "heroku-18"
+***REMOVED***

@@ -102,9 +102,9 @@ const getSummarySlonik = async (pool,cache) => {
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
                     console.log('1',moment(value.updateTime).tz('Africa/Johannesburg').format("LLLL"));
-                    console.log('2',moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM do YYYY, HH:mm:ssA (zz)"));
+                    console.log('2',moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)"));
                     console.log('3',moment(value.updateTime).tz('Africa/Johannesburg').toString());
-                    value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').toString()
+                    value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)");
                     // value.updateTime = (new Date(value.updateTime)).toString();
 
                     // 2 - getProvinces()

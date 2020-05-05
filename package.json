@@ -29,6 +29,8 @@
   "homepage": "https://github.com/TumoM/Covid-Live-Tracker-SA#readme",
   "dependencies": {
     "@sentry/node": "^5.15.5",
+    "async": "^3.2.0",
+    "async-each": "^1.0.3",
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.3",
     "chromedriver": "^81.0.0",
@@ -44,6 +46,7 @@
     "gulp-print": "^5.0.0",
     "jssoup": "0.0.11",
     "knex": "^0.20.13",
+    "moment": "^2.25.1",
     "moment-timezone": "^0.5.28",
     "node-cache": "^5.1.0",
     "node-html-parser": "^1.2.14",

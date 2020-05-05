@@ -7,8 +7,8 @@ cache:
     - node_modules
 branches:
   only:
-  - master
-  - working
+    - master
+    - working
 before_script:
   - npm install -g gulp-cli
 script:

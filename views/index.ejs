@@ -380,7 +380,7 @@
 
         </div>
     </main>
-    <script src="/build/js/bundle.js"></script>
+    <script  src="/build/js/bundle.js"></script>
 
     <script>
         setColours(<%- JSON.stringify(provCases) %>)
@@ -460,14 +460,14 @@
         // });
         // Only not doing it here to keep this Pen dependency-free.
 
-        window.addEventListener("scroll", event => {
+       /* window.addEventListener("scroll", event => {
             let fromTop = window.scrollY+110;
 
             mainNavLinks.forEach(link => {
                 let section = document.querySelector(link.dataset.section);
-                /*  console.log('fromTop:',fromTop)
+                /!*  console.log('fromTop:',fromTop)
                   console.log('section offset:',section.offsetTop)
-                  console.log('section height:',section.offsetHeight)*/
+                  console.log('section height:',section.offsetHeight)*!/
                 // console.log('fromTop:',fromTop)
                 if (
                     section.offsetTop <= fromTop &&
@@ -478,7 +478,7 @@
                     link.classList.remove("active");
                 }
             });
-        });
+        });*/
 
     </script>
     <%- include("./partials/footer") %>

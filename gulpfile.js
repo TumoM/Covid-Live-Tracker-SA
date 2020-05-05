@@ -14,8 +14,14 @@ var postcss = require('gulp-postcss')
 var pipeline = require('readable-stream').pipeline;
 let babel = require('gulp-babel');
 const eslint = require('gulp-eslint')
+var purify = require('gulp-purifycss');
 var browserSync = require('browser-sync').create();
+const combineSelectors = require('postcss-combine-duplicated-selectors');
+const combineMedia = require('postcss-combine-media-query');
+const cssnano = require('cssnano')
 const series =gulp.series, parallel =gulp.parallel, watch =gulp.watch;
+const advanced = require('cssnano-preset-advanced')
+const purgecss = require('gulp-purgecss')
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
@@ -80,9 +86,22 @@ gulp.task('pack-js', function () {
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
-      .pipe(postcss([pfm()]))
+      .pipe(purify(['assets/*.js', 'views/**/*.ejs', 'views/**/*.html','public/build/js/*.js'],{ info: false}))
       .pipe(concat('stylesheet.css'))
-      .pipe(cleanCss())
+      .pipe(postcss([
+        pfm(),
+        autoprefixer(),
+        combineMedia(),
+        combineSelectors({removeDuplicatedProperties: true}),
+        cssnano({
+          preset: ['default', {
+            discardComments: {
+              removeAll: true,
+            },
+          }]
+        }),
+      ]))
+      // .pipe(purgecss({content: ['assets/js/*.js, views/**/*.ejs, views/*.html,public/build/js/*.js'] }))
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('public/build/css'))
       .pipe(browserSync.stream());

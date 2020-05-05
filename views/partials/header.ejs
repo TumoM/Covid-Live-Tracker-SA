@@ -2,41 +2,104 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165331532-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);***REMOVED***
+        gtag('js', new Date());
+
+        gtag('config', 'UA-165331532-1');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="/assets/semantic/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/tabulator/dist/css/tabulator.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/tabulator/dist/css/semantic-ui/tabulator_semantic-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/map_styles.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/index_styles.css">
-    <!-- styles needed by jScrollPane -->
-    <link type="text/css" href="/stylesheets/jquery.jscrollpane.css" rel="stylesheet" media="all" />
-
+    <link rel="stylesheet" type="text/css" href="/build/css/stylesheet.css">
 
     <title>Covid-19 Live Tracker: SA</title>
+    <script type="text/javascript">
+        !function(a,b,c,d,e,f,g,h){a.RaygunObject=e,a[e]=a[e]||function(){
+            (a[e].o=a[e].o||[]).push(arguments)***REMOVED***,f=b.createElement(c),g=b.getElementsByTagName(c)[0],
+            f.async=1,f.src=d,g.parentNode.insertBefore(f,g),h=a.onerror,a.onerror=function(b,c,d,f,g){
+            h&&h(b,c,d,f,g),g||(g=new Error(b)),a[e].q=a[e].q||[],a[e].q.push({
+                e:g***REMOVED***)***REMOVED******REMOVED***(window,document,"script","//cdn.raygun.io/raygun4js/raygun.min.js","rg4js");
+    </script>
+    <script type="text/javascript">
+        (function(f,a){if(!a.__SV){var b=window;try{var d,m,j,k=b.location,c=k.hash;d=function(a,b){return(m=a.match(RegExp(b+"=([^&]*)")))?m[1]:null***REMOVED***;c&&d(c,"state")&&(j=JSON.parse(decodeURIComponent(d(c,"state"))),"mpeditor"===j.action&&(b.sessionStorage.setItem("_mpcehash",c),history.replaceState(j.desiredHash||"",f.title,k.pathname+k.search)))***REMOVED***catch(n){***REMOVED***var l,h;window.freshpaint=a;a._i=[];a.init=function(b,d,g){function c(b,i){var a=i.split(".");2==a.length&&(b=b[a[0]],i=a[1]);b[i]=function(){b.push([i].concat(Array.prototype.slice.call(arguments,
+            0)))***REMOVED******REMOVED***var e=a;"undefined"!==typeof g?e=a[g]=[]:g="freshpaint";e.people=e.people||[];e.toString=function(b){var a="freshpaint";"freshpaint"!==g&&(a+="."+g);b||(a+=" (stub)");return a***REMOVED***;e.people.toString=function(){return e.toString(1)+".people (stub)"***REMOVED***;l="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove people group page alias ready".split(" ");
+            for(h=0;h<l.length;h++)c(e,l[h]);var f="set set_once union unset remove delete".split(" ");e.get_group=function(){function a(c){b[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));e.push([d,call2])***REMOVED******REMOVED***for(var b={***REMOVED***,d=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<f.length;c++)a(f[c]);return b***REMOVED***;a._i.push([b,d,g])***REMOVED***;a.__SV=1.4;b=f.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof FRESHPAINT_CUSTOM_LIB_URL?
+            FRESHPAINT_CUSTOM_LIB_URL:"//perfalytics.com/static/js/freshpaint.js";d=f.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d)***REMOVED******REMOVED***)(document,window.freshpaint||[]);
+        freshpaint.init("f9d66754-f0f3-40b5-b7e8-e531577d0b3a");
+        freshpaint.page();
+    </script>
+    <script src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous">
+    </script>
+    <script>
+        Sentry.init({ dsn: 'https://58ae4a8b4ff545d0bb1449730d6b2762@o386838.ingest.sentry.io/5221539' ***REMOVED***);
+    </script>
 </head>
+<script>
 
+</script>
+<style>
+    html {
+        scroll-behavior: smooth;
+  ***REMOVED***
+</style>
 
 <body>
-    <header class="top fixed">
-        <nav class="ui secondary pointing menu ">
-            <a href="/" class="item active">
-                Home
-            </a><a href="#myStats" class="item">
-                Stats
-            </a>
-            <a href="#myMap" class="item">
-                Map
-            </a>
-            <a href="#myGraphs" class="item ">
-                Graphs
-            </a>
-            <a href="#myTable" class="item ">
-                Historical
-            </a>
-            <a href="#" class="item ">
-                About
-            </a>
+<header class="" id="myNav">
+    <div class="ui tablet computer only padded grid">
+        <nav class="ui fixed fluid huge menu" style="overflow: hidden;">
+            <div class="ui container centered grid">
+                <a href="/" class="header item">Rona Tracker SA</a>
+                <a href="/" data-section="#myNav" class="active item fluid">Home</a>
+                <a href="#myStatsHeading" data-section="#myStats" class="item fluid">Stats</a>
+                <a href="#myMapHeading" data-section="#myMap" class="item fluid">Map</a>
+                <a href="#myGraphsHeading" data-section="#myGraphs" class="item  fluid">Graphs</a>
+                <a href="#myTableHeading" data-section="#myTable" class="item ">Historical</a>
+                <a href="#" class="item aboutButton" id="aboutButton">About</a>
+            </div>
         </nav>
-    </header>
+    </div>
+    <!-- The overlay -->
+        <div id="myNavOverlay" class="overlay">
+            <!-- Button to close the overlay navigation -->
+            <a href="javascript:void(0)" class="closebtnNavOverlay">&times;</a>
+
+            <!-- Overlay content -->
+            <div class="overlay-content">
+                <h1><a href="/" class="header item">Rona Tracker SA</a></h1>
+                <hr style="width: 70%"/>
+                <a href="/" class="item active close">Home</a>
+                <a href="#myStatsHeading" class="item close">Stats</a>
+                <a href="#myMap" class="item close">Map</a>
+                <a href="#myGraphs" class="item  close">Graphs</a>
+                <a href="#myTable" class="item  close">Historical</a>
+                <a href="javascript:void(0)" class="item aboutButton">About</a>
+            </div>
+
+        </div>
+        <!-- Use any element to open/show the overlay navigation menu -->
+
+    <div class="ui mobile only padded grid overlay">
+        <div id="mobileOpenNav" class="ui borderless huge fluid fixed menu">
+            <a href="/" class="header item">Rona Tracker SA</a>
+            <div class="right menu">
+                <div class="item">
+                    <button id="menuToggler" class="ui icon basic button nav">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!--<div class="ui vertical borderless fluid menu">
+                <a href="/" class="item active close">Home</a>
+                <a href="#myStatsHeading" class="item close">Stats</a>
+                <a href="#myMap" class="item close">Map</a>
+                <a href="#myGraphs" class="item  close">Graphs</a>
+                <a href="#myTable" class="item  close">Historical</a>
+                <a href="#" class="item ">About</a>
+            </div>-->
+        </div>
+    </div>
+</header>

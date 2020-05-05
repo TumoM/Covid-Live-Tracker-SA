@@ -1,0 +1,106 @@
+@charset "UTF-8";
+.ui.borderless.menu {
+  background-color: #f8f8f8;
+  box-shadow: none;
+  flex-wrap: wrap;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+***REMOVED***
+.ui.borderless.menu .header.item {
+  font-size: 18px;
+  font-weight: 400;
+***REMOVED***
+.ui.mobile.only.grid .ui.menu .ui.vertical.menu {
+  display: none;
+***REMOVED***
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon {
+  float: unset;
+***REMOVED***
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon:before {
+  content: "";
+***REMOVED***
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+  position: static;
+  width: 100%;
+  background-color: unset;
+  border: none;
+  box-shadow: none;
+***REMOVED***
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+  margin-top: 6px;
+***REMOVED***
+
+/* The Overlay (background)***REMOVED***/
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below)***REMOVED***/
+  height: 100%;
+  width: 0;
+  position: fixed;
+  /* Stay in place***REMOVED***/
+  z-index: 1;
+  /* Sit on top***REMOVED***/
+  left: 0;
+  top: 0;
+  background-color: black;
+  /* Black fallback color***REMOVED***/
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/opacity***REMOVED***/
+  overflow-x: hidden;
+  /* Disable horizontal scroll***REMOVED***/
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal)***REMOVED***/
+***REMOVED***
+
+/* Position the content inside the overlay***REMOVED***/
+.overlay-content {
+  position: relative;
+  top: 25%;
+  /* 25% from the top***REMOVED***/
+  width: 100%;
+  /* 100% width***REMOVED***/
+  text-align: center;
+  /* Centered text/links***REMOVED***/
+  margin-top: 30px;
+  /* 30px top margin to avoid conflict with the close button on smaller screens***REMOVED***/
+***REMOVED***
+
+/* The navigation links inside the overlay***REMOVED***/
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  /* Display block instead of inline***REMOVED***/
+  transition: 0.3s;
+  /* Transition effects on hover (color)***REMOVED***/
+***REMOVED***
+
+/* When you mouse over the navigation links, change their color***REMOVED***/
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+***REMOVED***
+
+/* Position the close button (top right corner)***REMOVED***/
+.overlay .closebtnNavOverlay {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+***REMOVED***
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap***REMOVED***/
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+***REMOVED***
+
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+***REMOVED***
+***REMOVED***
+
+/*# sourceMappingURL=nav.css.map***REMOVED***/

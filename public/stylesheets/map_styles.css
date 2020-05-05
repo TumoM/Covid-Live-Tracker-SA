@@ -125,10 +125,9 @@ tspan.legend {
   margin: 0 auto;
 ***REMOVED***
 
-.toggle.button {
-  height: min-content;
-***REMOVED***
-
+/*.toggle.button{
+	height: min-content;
+***REMOVED****/
 #svgColumn {
   transition: all 1s linear;
 ***REMOVED***
@@ -153,6 +152,15 @@ tspan.legend {
   transition: all 1s linear;
 ***REMOVED***
 
+@media only screen and (max-width: 767px) {
+  [class*="mobile hidden"],
+[class*="or lower hidden"] {
+    display: none !important;
+***REMOVED***
+***REMOVED***
+#mapContainer #hideIcon {
+  transition: all 1s linear;
+***REMOVED***
 #mapContainer .jspDrag {
   border-radius: 25px;
 ***REMOVED***
@@ -161,6 +169,10 @@ tspan.legend {
 ***REMOVED***
 #mapContainer .jspTrack {
   border-radius: 25px;
+***REMOVED***
+
+#filterColumn .filter {
+  margin-right: 3.5rem !important;
 ***REMOVED***
 
 /*# sourceMappingURL=map_styles.css.map***REMOVED***/

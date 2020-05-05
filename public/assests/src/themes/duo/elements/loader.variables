@@ -1,6 +1,0 @@
-***REMOVED********************************
-             Loader
-*******************************/
-
-@shapeBorderColor: @primaryColor @primaryColor @secondaryColor @secondaryColor;
-@invertedShapeBorderColor: @lightPrimaryColor @lightPrimaryColor @lightSecondaryColor @lightSecondaryColor;

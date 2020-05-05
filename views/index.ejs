@@ -1,51 +1,129 @@
     <%- include("./partials/header") %>
-    <div class="pusher">
-    <div class="container segment main center">
-        <div id="myTitle" class="">
+    <main class="main text container">
+        <div id="myMainContainer" class="container segment main center">
+            <div class="ui top aligned page dimmer">
+                <div class="ui padded segment section container content">
+                    <%- include("./about") %>
+                </div>
+            </div>
+        <!--<div id="myTitle" class="">
             <h1 id="t1" class="ui header">
                 Covid-19 Tracker SA
             </h1>
-        </div>
+        </div>-->
         <div class="ui section divider"></div>
 
         <%# Stats %>
-        <h2 class="ui header block top attached">Summary Statistics</h2>
-        <section id="myStats" class="ui segment padded section expand raised attached grid">
-            <div class="column">
-                <div class="ui statistics">
-                    <div class="orange statistic">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Cases:</h2>
-                        </div>
-                        <div class="ui large value">
-                            <%= data.totalCases %>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic bold red">
-                        <div class="large label">
-                            <h2 class="ui huge header">Covid-19 Deaths:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalDeaths%>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="statistic blue">
-                        <div class="">
-                            <h2 class="ui huge header">Covid-19 Recoveries:</h2>
-                        </div>
-                        <div class="value">
-                            <%=data.totalRecoveries%>
+        <h2 id="myStatsHeading" class="ui header block top attached">Summary Statistics</h2>
+        <section id="myStats" class="ui segment padded section expand raised attached middle aligned">
+            <h2 class="ui sub header grey text">Updated: <%= data.updateTime%></h2>
+            <br/>
+            <div class="ui centered grid">
+                <div class="grid two column row">
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statTotalCases" class="ui orange card ">
+                            <div class="image">
+                                <i class="fas fa-diagnoses fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.totalCases %>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="statistic green">
-                        <div class="label">
-                            <h2 class="ui huge header">Covid-19 Tests:</h2>
+                    <div class="five wide tablet eight wide computer">
+                        <div id="statNewCases"class="ui yellow card ">
+                            <div class="image">
+                                <i class="fas fa-search-plus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Cases:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic orange bold">
+                                    <div class="ui large value">
+                                        <%= data.dailyNew %>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="value">
-                            <%=data.totalTests%>
+                    </div>
+                </div>
+                <div class="grid two column row">
+                    <div id="statTotalDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui red card">
+                                    <div class="image">
+                                        <i class="fas fa-heart-broken fa-7x statIcon"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="ui huge header">Total Deaths:</div>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="ui statistic red bold">
+                                            <div class="value">
+                                                <%=data.totalDeaths%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                    <div id="statNewDeaths" class="five wide tablet eight wide computer">
+                        <div class="ui pink card">
+                            <div class="image">
+                                <i class="fas fa-search-minus fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">New Deaths:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic red bold">
+                                    <div class="value">
+                                        <%=data.dailyDeaths%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="frid two column row">
+                    <div id="statTotalRecoveries"class="five wide tablet eight wide computer">
+                        <div class="ui blue card">
+                            <div class="image">
+                                <i class="fas fa-heartbeat fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Recoveries:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic blue bold">
+                                    <div class="value">
+                                        <%=data.totalRecoveries%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="statTotalTests"class="five wide tablet eight wide computer">
+                        <div class="ui green card">
+                            <div class="image">
+                                <i class="fas fa-bong fa-7x statIcon"></i>
+                            </div>
+                            <div class="content">
+                                <div class="ui huge header">Total Tests:</div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui statistic green bold">
+                                    <div class="value">
+                                        <%=data.totalTests%>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,14 +132,14 @@
         <div class="ui section divider"></div>
 
         <%# Map %>
-        <h2 class="ui header block top attached">Provincial Map</h2>
-        <section id="myMap" class="ui segment section expand raised attached grid">
+        <h2 id="myMapHeading" class="ui header block top attached">Provincial Map</h2>
+        <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
                     <div class="ui cards">
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng
                                 </div>
                             </div>
@@ -75,7 +153,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -89,7 +167,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -103,7 +181,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -117,7 +195,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -131,7 +209,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -145,7 +223,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -159,7 +237,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -173,7 +251,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -187,7 +265,7 @@
                         </div>
                         <div class="card">
                             <div class="main content">
-                                <div class="header">
+                                <div class="ui header">
                                     Guteng2
                                 </div>
                             </div>
@@ -201,76 +279,80 @@
                         </div>
                     </div>
                 </div>
-    <!--            <div class="ui secondary labeled icon toggle butto">-->
-                    <div class="ui toggle icon button" >
-                        <i id="hideIcon" class="left long arrow icon"></i>
-                    </div>
+                <div class="ui circular toggle icon button mobile hidden map" >
+                    <i id="hideIcon" class="fa fa-arrow-circle-left fa-lg"></i>
+                </div>
                 <div id="svgColumn" class="ten wide column">
                     <%- include("./map/mapFile") %>
                 </div>
 
-                <div class="one wide column left aligned">
-                    <div id="filterC" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter C
+                <div class="one wide column tablet only one wide column computer only">
+                    <div class="ui grid center aligned">
+                        <h3 class="ui heading">Filters:</h3>
+                        <button id="filterC" class="ui button left floated filter">Cases</button>
+                        <div class="ui divider"></div>
+                        <button id="filterD" class="ui button left floated filter">Deaths</button>
+                        <div class="ui divider"></div>
+                        <button id="filterR" class="ui button left floated filter">Recoveries</button>
                     </div>
-                    <br>
-                    <div id="filterD" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter D
-                    </div>
-                    <br>
-                    <div id="filterR" class="ui secondary labeled icon button">
-                        <i class="left arrow icon"></i>
-                        Filter R
+                </div>
+                <div id="filterColumn" class="sixteen wide mobile only column">
+                    <div class="equal width grid">
+                        <h3 class="ui heading">Filters:</h3>
+                        <div class="ui row">
+                            <button id="filterC2" class="ui button column">Cases</button>
+                            <button id="filterD2" class="ui button column">Deaths</button>
+                            <button id="filterR2" class="ui button column">Recoveries</button></div>
                     </div>
                 </div>
             </div>
+
         </section>
         <div class="ui section divider"></div>
 
         <%# Graphs %>
-        <h2 class="ui header block top attached">Graphs</h2>
-        <section id="myGraphs" class="ui segment padded section expand raised attached grid center aligned fluid stackable">
-                <button id="toggleScale">Toggle Scale Type</button>
-                <div class ="row ">
-                    <div class="eight wide column">
-                        <canvas id="chart1" class="column"></canvas>
-
+        <h2 id="myGraphsHeading" class="ui header block top attached">Graphs</h2>
+        <section id="myGraphs" class="ui segment section expand raised attached two column centered grid">
+            <div class ="centered row ">
+                <button id="toggleScaleCases" class="ui button">Toggle Scale Type</button>
+            </div>
+                <div class ="centered row ">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
+                            <canvas id="chart1" class="chart "></canvas>
                     </div>
-                    <div class="eight wide column">
-                        <canvas id="chart2" class="column"></canvas>
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
+                            <canvas id="chart2" class="chart "></canvas>
+
                     </div>
                 </div>
-                <div class ="row">
-                    <div class="eight wide column">
-                        <canvas id="chart3" class="column"></canvas>
+            <button id="toggleScaleDeaths" class="ui button">Toggle Scale Type</button>
+            <div class ="centered row">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
+                            <canvas id="chart3" class="chart "></canvas>
 
                     </div>
-                    <div class="eight wide column">
-                        <canvas id="chart4" class="column"></canvas>
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
+                            <canvas id="chart4" class="chart "></canvas>
+
                     </div>
                 </div>
-                <div class ="row">
-                    <div class="eight wide column">
-                        <canvas id="chart5" class="column"></canvas>
+                <div class ="centered row">
+                    <div class="sixteen wide mobile eight wide tablet eight wide computer column chart-container">
+                            <canvas id="chart5" class="chart "></canvas>
 
-                    </div>
-                    <div class="eight wide column">
-                        <canvas id="chart6" class="column"></canvas>
                     </div>
                 </div>
-
         </section>
         <div class="ui section divider"></div>
 
         <%# Table %>
-        <h2 class="ui header block top attached">Table</h2>
-        <section id="myTable" class="ui segment padded section expand raised attached fluid grid">
+        <h2 id="myTableHeading" class="ui header block top attached">Table</h2>
+        <section id="myTable" class="ui segment section expand raised attached fluid grid">
             <div class="ui column">
                 <div class="">
-                    <select id="sort-field">
-                        <option value="date" selected>Date</option>
+                    <select id="sort-field" class="ui dropdown">
+                        <option value="" selected>Filter Table</option>
+                        <option value="date">Date</option>
                         <option value="totalCases">Cases</option>
                         <option value="totalDeaths">Deaths</option>
                         <option value="totalRecoveries">Recoveries</option>
@@ -280,28 +362,121 @@
                         <option value="dailyDeaths">Daily Deaths</option>
                     </select>
 
-                    <select id="sort-direction">
-                        <option value="asc" selected>asc</option>
+
+                    <select id="sort-direction" class="ui dropdown">
+                        <option value="" selected>Sort Direction</option>
+                        <option value="asc">asc</option>
                         <option value="desc">desc</option>
                     </select>
-                    <button id="sort-trigger">Trigger Sort</button>
-                    <button id="sort-reset">Reset Table</button>
+                    <br/>
+                    <button class="ui button"  id="sort-trigger">Sort Table</button>
+                    <button  class="ui button" id="sort-reset">Reset Table</button>
                 </div>
                 <div class="ui container divider"></div>
-
                 <div class="sixteen wide column" id="example-table"></div>
             </div>
         </section>
         <div class="ui section divider"></div>
 
         </div>
-    </div>
-
-    <%- include("./partials/footer") %>
+    </main>
+    <script src="/build/js/bundle.js"></script>
 
     <script>
         setColours(<%- JSON.stringify(provCases) %>)
         setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
-        setGraphs(<%- JSON.stringify(graphData) %>)
         setTable(<%- JSON.stringify(graphData) %>)
+        setGraphs(<%- JSON.stringify(graphData) %>)
     </script>
+    <script>
+        $('.aboutButton')
+            .click((event)=>{
+                console.log("you clicked me!")
+
+                $('.page.dimmer:first')
+                    .dimmer('toggle')
+                ;
+
+               /* $('#myMainContainer > .dimmer')
+                    .dimmer('toggle')
+                ;*/
+          ***REMOVED***)
+        $('#menuToggler')
+            .click((event)=>{
+                console.log("you clicked me 2!")
+                if( document.getElementById("myNavOverlay").classList.toString() === "overlay"){ // Not Open
+                    console.log("Not Open! opening")
+                    document.getElementById("myNavOverlay").style.height = "100%";
+                    document.getElementById("myNavOverlay").classList.add('open');
+              ***REMOVED***
+                else{
+                    console.log("Already Open! closing")
+                    document.getElementById("myNavOverlay").style.height = "0%";
+                    document.getElementById("myNavOverlay").classList.remove('open');
+              ***REMOVED***
+
+                console.log('Class List',document.getElementById("myNavOverlay").classList);
+          ***REMOVED***)
+        $('.closebtnNavOverlay')
+            .click((event)=>{
+                console.log("you clicked me 3!")
+                if( document.getElementById("myNavOverlay").classList.toString() === "overlay open"){ // Not Open
+                    document.getElementById("myNavOverlay").style.height = "0%";
+                    document.getElementById("myNavOverlay").classList.remove('open');
+              ***REMOVED***
+          ***REMOVED***)
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(".ui.toggle.button.nav").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+          ***REMOVED***);
+            $("#myNav .item.close").click(function() {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+          ***REMOVED***);
+
+            $(".ui.dropdown").dropdown();
+
+
+
+      ***REMOVED***);
+    </script>
+    <script>
+        let mainNavLinks = document.querySelectorAll("nav a.item.fluid");
+        console.log(mainNavLinks)
+        let mainSections = document.querySelectorAll("main section");
+
+        let lastId;
+        let cur = [];
+
+        // This should probably be throttled.
+        // Especially because it triggers during smooth scrolling.
+        // https://lodash.com/docs/4.17.10#throttle
+        // You could do like...
+        // window.addEventListener("scroll", () => {
+        //    _.throttle(doThatStuff, 100);
+        // ***REMOVED***);
+        // Only not doing it here to keep this Pen dependency-free.
+
+        window.addEventListener("scroll", event => {
+            let fromTop = window.scrollY+110;
+
+            mainNavLinks.forEach(link => {
+                let section = document.querySelector(link.dataset.section);
+                /*  console.log('fromTop:',fromTop)
+                  console.log('section offset:',section.offsetTop)
+                  console.log('section height:',section.offsetHeight)*/
+                // console.log('fromTop:',fromTop)
+                if (
+                    section.offsetTop <= fromTop &&
+                    section.offsetTop + section.offsetHeight > fromTop
+                ) {
+                    link.classList.add("active");
+              ***REMOVED*** else {
+                    link.classList.remove("active");
+              ***REMOVED***
+          ***REMOVED***);
+      ***REMOVED***);
+
+    </script>
+    <%- include("./partials/footer") %>

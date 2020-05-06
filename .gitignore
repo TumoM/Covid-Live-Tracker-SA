@@ -27,3 +27,4 @@ npm-debug.log
 /test/.env
 /public/assests
 newrelic_agent.log
+newrelic_agent.log

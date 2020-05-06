@@ -15,9 +15,6 @@
       "url": "heroku/nodejs"
   ***REMOVED***
   ],
-  "scripts": {
-    "build": "npm run build"
-***REMOVED***
   "image": "heroku/nodejs",
   "stack": "heroku-18"
 ***REMOVED***

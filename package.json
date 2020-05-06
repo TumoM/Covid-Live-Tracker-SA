@@ -12,7 +12,7 @@
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
     "reinstal": "rmdir /S /Q node_modules & npm i",
-    "build": "gulp build",
+    "build": "gulp build"
 ***REMOVED***
   "repository": {
     "type": "git",

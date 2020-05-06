@@ -136,7 +136,7 @@
         <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
-                    <div class="ui cards">
+                    <div class="ui cards scroll-pane">
                         <% provincesCurrent.forEach((province) => { %>
                             <%- include('partials/card', {province}); %>
                         <% }); %>

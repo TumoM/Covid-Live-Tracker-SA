@@ -26,4 +26,6 @@ npm-debug.log
 /*.env
 /test/.env
 /public/assests
+/public/build
 newrelic_agent.log
+assets/**/*

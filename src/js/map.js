@@ -1,30 +1,31 @@
-const provinceList = {
-	'NORTH WEST': 'ZA-NW',
-	'EASTERN CAPE': 'ZA-EC',
-	'FREE TATE': 'ZA-FS',
-	'MPUMALANGA': 'ZA-MP',
-	'NORTHERN CAPE': 'ZA-NC',
-	'LIMPOPO': 'ZA-LP',
-	'WESTERN CAPE': 'ZA-WC',
-	'GAUTENG': 'ZA-GT',
-	'KWAZULU-NATAL': 'ZA-NL',
-	'UNALLOCATED': 'ZA-UN',
-};
+var provinceList = {
+    "NORTH WEST": 'ZA-NW',
+    "EASTERN CAPE": 'ZA-EC',
+    "FREE TATE": 'ZA-FS',
+    "MPUMALANGA": 'ZA-MP',
+    "NORTHERN CAPE": 'ZA-NC',
+    "LIMPOPO": 'ZA-LP',
+    "WESTERN CAPE": 'ZA-WC',
+    "GAUTENG": 'ZA-GT',
+    "KWAZULU-NATAL": 'ZA-NL',
+    "UNALLOCATED": 'ZA-UN'
+}
 
-let tooltip;
-let tooltipText;
-let tooltipRects;
-const width = 415;
-const legendTitle = $('#legTitle')[0];
-const xPen = 92;
-const yPen = 220;
-let legendSet = false;
-let colourVal = 1;
+var tooltip
+var tooltipText
+var tooltipRects
+var width = 415;
+var legendTitle = $('#legTitle')[0];
+var xPen = 92;
+var yPen = 220;
+var legendSet=false;
+var colourVal=1;
 
-let provCase = {};
-let provDeath = {};
-let provRecoveries = {};
-let cardList = [];
+var provCase = {};
+var provDeath = {};
+var provActive = {};
+var provRecoveries = {};
+var cardList = [];
 
 (function main() {
 	console.log('In Main');
@@ -179,67 +180,69 @@ function legendSetup(max, min, interval) {
 		legendSet = true;
 	}
 }
-
 // colourCountries(data1)
 
-function setColours(dummyData, colour = 1) {
-	colourVal = colour;
-	// Vars
-	let max = 0;
-	let min = Infinity;
-	let range = 0;
-	let interval = 0;
-	const answers = [
-		[],
-		[],
-		[],
-		[],
-		[],
-	];
-	
-	// Get Range
-	Object.keys(dummyData)
-		.forEach((k) => {
-			if (dummyData[k] !== null) {
-				min = Math.min(min, dummyData[k]);
-				max = Math.max(max, dummyData[k]);
-			}
-		});
-	max = Math.round(Math.ceil(max / 10)) * 10;
-	min = Math.round(Math.floor(min / 10)) * 10;
-	range = max - min;
-	// Divide into 4 or 5
-	interval = range / 4;
-	
-	// foreach loop.
-	Object.keys(dummyData)
-		.forEach((prov) => {
-			if (prov !== 'ZA-UN') {
-				const val = dummyData[prov];
-				if ((max - interval < val) && (val <= max)) {
-					answers[4].push(prov);
-				} else if (max - (interval * 2) <= val) {
-					answers[3].push(prov);
-				} else if (max - (interval * 3) <= val) {
-					answers[2].push(prov);
-				} else if (max - (interval * 4) < val) {
-					answers[1].push(prov);
-				} else {
-					answers[0].push(prov);
-				}
-			}
-		});
-	console.log('ANSWERS:', answers);
-	colourCountries(answers, colour);
-	legendSetup(max, min, interval);
+function setColours(dummyData,colour=1,) {
+    colourVal = colour;
+    // Vars
+    console.log('Setting Vars');
+    let max = 0,
+        min = Infinity,
+        range = 0,
+        interval = 0;
+    let answers = [
+        [],
+        [],
+        [],
+        [],
+        []
+    ];
+    
+    console.log('Setting Range');
+    // Get Range
+    Object.keys(dummyData).forEach((k) => {
+        if (dummyData[k] !== null) {
+            min = Math.min(min, dummyData[k]);
+            max = Math.max(max, dummyData[k]);
+        }
+    });
+    max = Math.round(Math.ceil(max / 10)) * 10;
+    min = Math.round(Math.floor(min / 10)) * 10;
+    range = max - min
+    // Divide into 4 or 5
+    interval = range / 4;
+    
+    console.log('For Each Loop');
+    // foreach loop.
+    Object.keys(dummyData).forEach(prov => {
+        if (prov !== 'ZA-UN') {
+            let val = dummyData[prov];
+            if ((max - interval < val) && (val <= max)) {
+                answers[4].push(prov)
+            } else if (max - (interval * 2) <= val) {
+                answers[3].push(prov)
+            } else if (max - (interval * 3) <= val) {
+                answers[2].push(prov)
+            } else if (max - (interval * 4) < val) {
+                answers[1].push(prov)
+            }
+            else {
+                answers[0].push(prov)
+            }
+        }
+    })
+    console.log("ANSWERS:",answers)
+    colourCountries(answers,colour)
+    legendSetup(max,min,interval)
 }
 
-function setProvs(cases, deaths, recoveries) {
-	provCase = cases;
-	provDeath = deaths;
-	provRecoveries = recoveries;
-	console.log('Recovs 1:', recoveries);
-	setupSideBCards();
+function setProvs(cases,deaths,recoveries, active) {
+    provCase = cases;
+    provDeath = deaths;
+    provRecoveries = recoveries;
+    provActive = active
+    console.log("Recovs 1:",recoveries)
+    setupSideBCards()
 }
 
 function CommaFormatted(amount) {
@@ -291,42 +294,37 @@ function compareValues(key, order = 'desc') {
 		);
 	};
 }
+function setupSideBCards(){
+    let province;
 
-function setupSideBCards() {
-	let province;
-	
-	for (const [nameFull, id] of Object.entries(provinceList)) {
-		province = {
-			name: nameFull,
-			cases: provCase[id],
-			deaths: provDeath[id],
-			recoveries: provRecoveries[id],
-		};
-		cardList.push(province);
-	}
-	populateSideCards(cardList.sort(compareValues('cases')));
+    for (const [nameFull, id] of Object.entries(provinceList)) {
+        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id],active:provActive[id]}
+        cardList.push(province);
+    }
+    // populateSideCards(cardList.sort(compareValues('cases')))
 }
 
 /**
  * @param {Array} cardList
  */
-function populateSideCards(cardList) {
-	// console.log("Card List:",cardList)
-	let counter = 0;
-	const cards = $('#mapContainer .card');
-	let figures;
-	
-	console.log('Cards', cards);
-	cardList.forEach((item) => {
-		console.log('Counter', counter);
-		// the html block containing the spans and br tags
-		figures = cards[counter].children[1].children[0].children;
-		cards[counter].firstElementChild.firstElementChild.innerText = item.name; // sets Card Heading.
-		figures[0].innerText = CommaFormatted(item.cases);
-		figures[2].innerText = CommaFormatted(item.deaths);
-		figures[4].innerText = CommaFormatted(item.recoveries);
-		counter++;
-	});
+function populateSideCards(cardList){
+    // console.log("Card List:",cardList)
+    let counter = 0;
+    let cards = $("#mapContainer .card");
+    let figures;
+
+    console.log('Cards',cards)
+    cardList.forEach(item=>{
+        console.log('Counter',counter)
+        // the html block containing the spans and br tags
+        figures = cards[counter].children[1].children[0].children;
+        cards[counter].firstElementChild.firstElementChild.innerText=item.name // sets Card Heading.
+        figures[0].innerText=CommaFormatted(item.cases);
+        figures[2].innerText=CommaFormatted(item.deaths);
+        figures[4].innerText=CommaFormatted(item.recoveries);
+        figures[6].innerText=CommaFormatted(item.recoveries);
+        counter++
+    })
 }
 
 console.log('MAX HEIGHT:', $('#svg-1')
@@ -341,82 +339,99 @@ $('#provStatsContainer')
 		.css('padding-top')) * 2);
 
 // Resets the container height as the window size changes. i.e when svg-1 and padding changes.
-$(window)
-	.resize(() => {
-		$('#provStatsContainer')
-			.css('max-height', $('#svg-1')
-				.height() + parseInt($('#svgColumn')
-				.css('padding-top')) * 2);
-	});
-$(document)
-	.ready(() => {
-		$(() => {
-			$('.scroll-pane')
-				.jScrollPane(
-					{
-						showArrows: true,
-						resizeSensor: true,
-					},
-				);
-		});
-		$('.toggle.button.map')
-			.click((event) => {
-				console.log('you clicked me!');
-				// $("#provStatsContainer").transition('slide right')
-				$('#svgColumn')
-					.toggleClass('ten wide');
-				$('#svgColumn')
-					.toggleClass('fourteen wide svgFocus');
-				$('#provStatsContainer')
-					.toggleClass('sidebarHidden');
-				
-				$('#hideIcon')
-					.toggleClass('fa-rotate-180');
-			});
-		
-		$('#filterC')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provCase, 1);
-				populateSideCards(cardList.sort(compareValues('cases')));
-			});
-		$('#filterD')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provDeath, 2);
-				populateSideCards(cardList.sort(compareValues('deaths')));
-			});
-		$('#filterR')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provRecoveries, 3);
-				populateSideCards(cardList.sort(compareValues('recoveries')));
-			});
-		$('#filterC2')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provCase, 1);
-				populateSideCards(cardList.sort(compareValues('cases')));
-			});
-		$('#filterD2')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provDeath, 2);
-				populateSideCards(cardList.sort(compareValues('deaths')));
-			});
-		$('#filterR2')
-			.click((event) => {
-				console.log('you clicked me to filter!');
-				// $("#provStatsContainer").transition('slide right')
-				setColours(provRecoveries, 3);
-				populateSideCards(cardList.sort(compareValues('recoveries')));
-			});
-	});
+$(window).resize(()=>{
+    $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
+})
+$(document).ready(()=>{
+    $(function()
+    {
+        $('.scroll-pane').jScrollPane(
+            {
+                showArrows: true,
+                resizeSensor: true
+            }
+        );
+    });
+    $('.toggle.button.map')
+        .click((event)=>{
+            console.log("you clicked me!")
+            // $("#provStatsContainer").transition('slide right')
+            $("#svgColumn").toggleClass("ten wide");
+            $("#svgColumn").toggleClass("fourteen wide svgFocus");
+            $("#provStatsContainer").toggleClass("sidebarHidden");
+
+            $("#hideIcon").toggleClass("fa-rotate-180");
+
+
+
+        })
+
+    $('#filterC')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provCase,1)
+            populateSideCards(cardList.sort(compareValues('cases')))
+
+
+        })
+    $('#filterD')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provDeath,2)
+            populateSideCards(cardList.sort(compareValues('deaths')))
+
+
+
+        })
+    $('#filterR')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('recoveries')))
+
+
+        })
+    $('#filterA')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('active')))
+
+
+        })
+    $('#filterC2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provCase,1)
+            populateSideCards(cardList.sort(compareValues('cases')))
+
+
+        })
+    $('#filterD2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provDeath,2)
+            populateSideCards(cardList.sort(compareValues('deaths')))
+
+
+
+        })
+    $('#filterR2')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('recoveries')))
+
+
+        })
+})
 
 //
 // setColours(dummyData)

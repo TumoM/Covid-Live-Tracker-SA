@@ -37,26 +37,27 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('clean',()=>{
-    return gulp.src('public/build/**/*', {read: false})
+    return gulp.src(['public/build/**/*','assets/css/*.css','assets/css/*.css.map','assets/js/*.js'], {read: false})
         .pipe(clean());
 })
 // Compile SASS --> CSS, the minify CSS
 gulp.task('sass', function () {
-  /*return gulp.src(['src/sass/!*.scss', 'src/sass/!**!/!*.scss'])
-      .pipe(sass({outputStyle: 'compressed'}))
-      .pipe(gulp.dest('assets/css'));*/
   return gulp.src(['src/sass/*.scss', 'src/sass/**/*.scss'])
       // Compile SASS files
       .pipe(sass({
-        outputStyle: 'nested',
-        precision: 10,
-        includePaths: ['.'],
+        outputStyle: 'compressed',
+        precision: 2,
+        sourceMap: true,
+        outfile:'assets/css',
+        includePaths: ['./','src/sass/font_awsome'],
         onError: console.error.bind(console, 'Sass error:')
       }))
       // Auto-prefix css styles for cross browser compatibility
       // Output
+      .pipe(sourcemaps.init())
       .pipe(postcss([ autoprefixer() ]))
-      .pipe(cleanCss())
+      
+      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('assets/css'));
 });
 
@@ -86,7 +87,8 @@ gulp.task('pack-js', function () {
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
-      .pipe(purify(['assets/*.js', 'views/**/*.ejs', 'views/**/*.html','public/build/js/*.js'],{ info: false}))
+
+      .pipe(purify(['assets/**/*.js', 'views/**/*.ejs', 'views/**/*.html','public/build/js/*.js'],{ info: true,rejected:true}))
       .pipe(concat('stylesheet.css'))
       .pipe(postcss([
         pfm(),
@@ -94,14 +96,14 @@ gulp.task('pack-css', function () {
         combineMedia(),
         combineSelectors({removeDuplicatedProperties: true}),
         cssnano({
-          preset: ['default', {
+          preset: ['advanced', {
+
             discardComments: {
               removeAll: true,
             },
           }]
         }),
       ]))
-      // .pipe(purgecss({content: ['assets/js/*.js, views/**/*.ejs, views/*.html,public/build/js/*.js'] }))
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('public/build/css'))
       .pipe(browserSync.stream());
@@ -156,6 +158,7 @@ gulp.task('lintF', function() {
 
 gulp.task('pack', parallel(['pack-js', 'pack-css']));
 gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
+gulp.task('build', series('clean',parallel(['sass', 'js']),'pack'));
 
 // The `clean` function is not exported so it can be considered a private task.
 // It can still be used within the `series()` composition.

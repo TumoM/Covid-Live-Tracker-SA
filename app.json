@@ -16,7 +16,7 @@
     }
   ],
   "scripts": {
-    "postdeploy": "npm run heroku-postbuild"
+    "build": "npm run build"
   },
   "image": "heroku/nodejs",
   "stack": "heroku-18"

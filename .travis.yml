@@ -9,6 +9,7 @@ branches:
   only:
     - master
     - working
+    - recover
 before_script:
   - npm install -g gulp-cli
 script:

@@ -4,7 +4,7 @@
   "description": "A live tracker that aggregates Covid-19 data in South Africa (SA), on a total and Provincial basis. The tracker provides Stats, Graphs, and Interactive Map to display information about the infection.",
   "main": "app.js",
   "engines": {
-    "node": "12.x"
+    "node": "13.x"
 ***REMOVED***
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,8 +12,7 @@
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
     "reinstal": "rmdir /S /Q node_modules & npm i",
-    "build": "gulp default",
-    "heroku-postbuild": "gulp build"
+    "build": "gulp build"
 ***REMOVED***
   "repository": {
     "type": "git",

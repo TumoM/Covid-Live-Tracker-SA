@@ -136,7 +136,7 @@
         <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
-                    <div class="ui cards">
+                    <div class="ui cards scroll-hide">
                         <% provincesCurrent.forEach((province) => { %>
                             <%- include('partials/card', {province***REMOVED***); %>
                         <% ***REMOVED***); %>
@@ -252,10 +252,10 @@
 	  ***REMOVED***
 
         ready(() => {
+	        setTable(<%- JSON.stringify(graphData) %>)
 	        $('#mainBundle').attr('rel','stylesheet')
 	        setColours(<%- JSON.stringify(provincesHistorical.provCases) %>)
 	        setProvs(<%- JSON.stringify(provincesHistorical.provCases) %>,<%- JSON.stringify(provincesHistorical.provDeaths) %>,<%- JSON.stringify(provincesHistorical.provRecoveries) %>,<%- JSON.stringify(provincesHistorical.provActive) %>)
-	        setTable(<%- JSON.stringify(graphData) %>)
 	        setGraphs(<%- JSON.stringify(graphData) %>)
       ***REMOVED***);
     </script>

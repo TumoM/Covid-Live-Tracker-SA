@@ -16,7 +16,7 @@
   ***REMOVED***
   ],
   "scripts": {
-    "postdeploy": "npm run heroku-postbuild"
+    "build": "npm run build"
 ***REMOVED***
   "image": "heroku/nodejs",
   "stack": "heroku-18"

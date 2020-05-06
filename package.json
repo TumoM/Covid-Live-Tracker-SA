@@ -12,8 +12,8 @@
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
     "reinstal": "rmdir /S /Q node_modules & npm i",
-    "build": "gulp default",
-    "heroku-postbuild": "gulp"
+    "build": "gulp build",
+    "heroku-postbuild": "gulp build"
 ***REMOVED***
   "repository": {
     "type": "git",

@@ -87,7 +87,7 @@ gulp.task('pack-js', function () {
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css***REMOVED***/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
-      .pipe(purify(['assets***REMOVED***/*.js', 'views***REMOVED***/*.ejs', 'views***REMOVED***/*.html','public/build/js/*.js'],{ info: true,rejected:false***REMOVED***))
+      .pipe(purify(['assets***REMOVED***/*.js', 'views***REMOVED***/*.ejs', 'views***REMOVED***/*.html','public/build***REMOVED***/*.js'],{ info: true,rejected:false***REMOVED***))
       .pipe(concat('stylesheet.css'))
       .pipe(postcss([
         pfm(),

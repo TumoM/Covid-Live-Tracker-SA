@@ -14,8 +14,14 @@ var postcss = require('gulp-postcss')
 var pipeline = require('readable-stream').pipeline;
 let babel = require('gulp-babel');
 const eslint = require('gulp-eslint')
+var purify = require('gulp-purifycss');
 var browserSync = require('browser-sync').create();
+const combineSelectors = require('postcss-combine-duplicated-selectors');
+const combineMedia = require('postcss-combine-media-query');
+const cssnano = require('cssnano')
 const series =gulp.series, parallel =gulp.parallel, watch =gulp.watch;
+const advanced = require('cssnano-preset-advanced')
+const purgecss = require('gulp-purgecss')
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
@@ -31,26 +37,27 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('clean',()=>{
-    return gulp.src('public/build***REMOVED***/*', {read: false***REMOVED***)
+    return gulp.src(['public/build***REMOVED***/*','assets/css/*.css','assets/css/*.css.map','assets/js/*.js'], {read: false***REMOVED***)
         .pipe(clean());
 ***REMOVED***)
 // Compile SASS --> CSS, the minify CSS
 gulp.task('sass', function () {
-  /*return gulp.src(['src/sass/!*.scss', 'src/sass/!**!/!*.scss'])
-      .pipe(sass({outputStyle: 'compressed'***REMOVED***))
-      .pipe(gulp.dest('assets/css'));*/
   return gulp.src(['src/sass/*.scss', 'src/sass***REMOVED***/*.scss'])
       // Compile SASS files
       .pipe(sass({
-        outputStyle: 'nested',
-        precision: 10,
-        includePaths: ['.'],
+        outputStyle: 'compressed',
+        precision: 2,
+        sourceMap: true,
+        outfile:'assets/css',
+        includePaths: ['./','src/sass/font_awsome'],
         onError: console.error.bind(console, 'Sass error:')
     ***REMOVED***))
       // Auto-prefix css styles for cross browser compatibility
       // Output
+      .pipe(sourcemaps.init())
       .pipe(postcss([ autoprefixer() ]))
-      .pipe(cleanCss())
+      
+      .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('assets/css'));
 ***REMOVED***);
 
@@ -80,9 +87,21 @@ gulp.task('pack-js', function () {
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css***REMOVED***/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
-      .pipe(postcss([pfm()]))
+      .pipe(purify(['assets***REMOVED***/*.js', 'views***REMOVED***/*.ejs', 'views***REMOVED***/*.html','public/build/js/*.js'],{ info: true,rejected:true***REMOVED***))
       .pipe(concat('stylesheet.css'))
-      .pipe(cleanCss())
+      .pipe(postcss([
+        pfm(),
+        autoprefixer(),
+        combineMedia(),
+        combineSelectors({removeDuplicatedProperties: true***REMOVED***),
+        cssnano({
+          preset: ['advanced', {
+            discardComments: {
+              removeAll: true,
+***REMOVED*****REMOVED*****REMOVED***
+        ***REMOVED***]
+      ***REMOVED***),
+  ***REMOVED***))
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest('public/build/css'))
       .pipe(browserSync.stream());

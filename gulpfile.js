@@ -162,7 +162,7 @@ gulp.task('lintF', function() {
     .pipe(eslint.format());
 ***REMOVED***);
 
-gulp.task('pack', parallel(['pack-js', 'pack-css']));
+gulp.task('pack', series('pack-js', 'pack-css'));
 gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
 gulp.task('build', series('clean',parallel(['sass', 'js']),'pack'));
 

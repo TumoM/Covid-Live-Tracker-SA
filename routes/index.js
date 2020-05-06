@@ -35,40 +35,54 @@ router.get("/", function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
-    if (pool){
+    const responseCache = cache.get("data");
+    
+    if (pool) {
         // TODO Load data for the day.
-        getSummarySlonik(pool,cache)
-            .then( r => {
-                console.log('Done');
-                // console.log('R',r.summary.length);
-                res.render("index",{data:r.summary,provCases:r.provinces.provCases,provDeaths:r.provinces.provDeaths,provRecoveries:r.provinces.provRecoveries,graphData:r.graphs});
-                /*await pool.end(); // ??*/
-            });
+        if (responseCache) {
+            console.log("CACHE FOUND")
+            res.render("index", unhashQuery(responseCache));
+            return true;
+        } else {
+            console.log("cache was null, ignoring.")
+        }
+        getSummarySlonik(pool, responseCache)
+          .then(responseData => {
+              console.log('Done');
+              // console.log('R',r.summary.length);
+              // res.render("index", { data: responseData.summary,  graphData: responseData.graphs });
+              let returnObj = {
+                  data:responseData.summary,
+                  provincesCurrent: responseData.allProvinces,
+                  provincesHistorical:{
+                      provCases:responseData.provinces.provCases,
+                      provDeaths:responseData.provinces.provDeaths,
+                      provRecoveries:responseData.provinces.provRecoveries
+                  },
+                  graphData:responseData.graphs
+              }
+              console.log("SETTING CACHE")
+              cache.set("data", hashQuery(returnObj));
+              res.render("index",returnObj);
+              return true;
+    
+              /*await pool.end(); // ??*/
+          });
         // If valid cache.
 
     }
     else{
-        console.log("No Knex?")
+        console.log("No Pool?")
     }
 })
-const getSummarySlonik = async (pool,cache) => {
+const getSummarySlonik = async (pool,responseCache) => {
     console.log("In Main.")
-    const responseCache = cache.get("data");
-
-    if (responseCache) {
-        console.log("CACHE FOUND")
-        // console.log("But ignoring")
-        if (responseCache !== null){
-            return Promise.resolve(unhashQuery(responseCache));
-        }
-        else{
-            console.log("cache was null, ignoring.")
-            }
-    }
+    
 
     {
-        let value, value2, value3, value4;
-        let provCases = {}, provDeaths = {}, provRecoveries = {};
+        let value, value2, value3, graphs;
+        let provCases = {}, provDeaths = {}, provRecoveries = {}, provActive = {},provName={};
+        let allProvinces = []
         const result = await pool.connect(async (connection) => {
             let mysql;
 
@@ -101,9 +115,6 @@ const getSummarySlonik = async (pool,cache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    console.log('1',moment(value.updateTime).tz('Africa/Johannesburg').format("LLLL"));
-                    console.log('2',moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)"));
-                    console.log('3',moment(value.updateTime).tz('Africa/Johannesburg').toString());
                     value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)");
                     // value.updateTime = (new Date(value.updateTime)).toString();
 
@@ -113,34 +124,70 @@ const getSummarySlonik = async (pool,cache) => {
                     value3 = await transactionConnection.many(mysql)
                     if (value3 && value3.length > 0) {
                         value3.forEach(province => {
+                            provName[provinceList[province.provinceName.toUpperCase()]] = province.provinceName.toUpperCase()
                             provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                             provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                             provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
+                            provActive[provinceList[province.provinceName.toUpperCase()]] = (province.caseCount-province.deathCount-province.recovered)
+                            
+                            allProvinces.push({provName:province.provinceName.toUpperCase(),
+                                provCases:province.caseCount,
+                                provDeaths:province.deathCount,
+                                provActive:province.caseCount-province.deathCOunt-province.recovered,
+                                provRecoveries:province.recovered
+                            })
                             // console.log("Province:",province)
                         })
                         console.log('Done 3')
                     }
                     mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
                     console.log("Transaction 4");
-                    value4 = await transactionConnection.many(mysql)
-                    if (value4 && value4.length > 0) {
+                    graphs = await transactionConnection.many(mysql)
+                    if (graphs && graphs.length > 0) {
                         console.log('Done 4')
                     }
 
                 }
                 // End Transaction
                 console.log('Returning Value of:', value)
-                return {'summary': value, 'provinces': {provCases, provDeaths, provRecoveries}, 'graphs': value4};
+                let provinces = {provName, provCases, provDeaths, provRecoveries,provActive}
+                console.log('Returning Provinces: of:', provinces)
+    
+                
+                return {
+                    'summary': value,
+                    allProvinces,
+                    provinces,
+                    graphs
+                };
             })
         })
         if (result) {
-            console.log("SETTING CACHE")
-            cache.set("data", hashQuery(result));
+            
             return Promise.resolve(result)
         } else {
             return Promise.reject("Something went down: " + result)
         }
     }
 }
-
+function CommaFormatted(amount) {
+    const delimiter = ','; // replace comma if desired
+    let i = parseInt(amount);
+    if (isNaN(i)) { return 'N/A'; }
+    let minus = '';
+    if (i < 0) { minus = '-'; }
+    i = Math.abs(i);
+    let n = String(i);
+    const a = [];
+    while (n.length > 3) {
+        const nn = n.substr(n.length - 3);
+        a.unshift(nn);
+        n = n.substr(0, n.length - 3);
+    }
+    if (n.length > 0) { a.unshift(n); }
+    n = a.join(delimiter);
+    amount = n;
+    amount = minus + amount;
+    return amount;
+}
 module.exports = router;

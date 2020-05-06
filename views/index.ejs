@@ -136,7 +136,7 @@
         <section  id="myMap"class="ui segment section expand raised attached grid">
             <div class="ui three column grid row stackable" id="mapContainer">
                 <div class="four wide column scroll-pane" id="provStatsContainer">
-                    <div class="ui cards">
+                    <!--<div class="ui cards">
                         <div class="card">
                             <div class="main content">
                                 <div class="ui header">
@@ -277,6 +277,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>-->
+                    <div class="ui cards">
+                        <% provincesCurrent.forEach((province) => { %>
+                            <%- include('partials/card', {province***REMOVED***); %>
+                        <% ***REMOVED***); %>
                     </div>
                 </div>
                 <div class="ui circular toggle icon button mobile hidden map" >
@@ -383,10 +388,18 @@
     <script src="/build/js/bundle.js"></script>
 
     <script>
-        setColours(<%- JSON.stringify(provCases) %>)
-        setProvs(<%- JSON.stringify(provCases) %>,<%- JSON.stringify(provDeaths) %>,<%- JSON.stringify(provRecoveries) %>)
-        setTable(<%- JSON.stringify(graphData) %>)
-        setGraphs(<%- JSON.stringify(graphData) %>)
+	    var ready = (callback) => {
+		    if (document.readyState != "loading") callback();
+		    else document.addEventListener("DOMContentLoaded", callback);
+	  ***REMOVED***
+
+        ready(() => {
+	        $('#mainBundle').attr('rel','stylesheet')
+	        setColours(<%- JSON.stringify(provincesHistorical.provCases) %>)
+	        setProvs(<%- JSON.stringify(provincesHistorical.provCases) %>,<%- JSON.stringify(provincesHistorical.provDeaths) %>,<%- JSON.stringify(provincesHistorical.provRecoveries) %>)
+	        setTable(<%- JSON.stringify(graphData) %>)
+	        setGraphs(<%- JSON.stringify(graphData) %>)
+      ***REMOVED***);
     </script>
     <script>
         $('.aboutButton')

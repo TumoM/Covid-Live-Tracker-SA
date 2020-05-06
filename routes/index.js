@@ -35,40 +35,54 @@ router.get("/", function (req, res) {
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
-    if (pool){
+    const responseCache = cache.get("data");
+    
+    if (pool) {
         // TODO Load data for the day.
-        getSummarySlonik(pool,cache)
-            .then( r => {
-                console.log('Done');
-                // console.log('R',r.summary.length);
-                res.render("index",{data:r.summary,provCases:r.provinces.provCases,provDeaths:r.provinces.provDeaths,provRecoveries:r.provinces.provRecoveries,graphData:r.graphs***REMOVED***);
-                /*await pool.end(); // ??*/
-          ***REMOVED***);
+        if (responseCache) {
+            console.log("CACHE FOUND")
+            res.render("index", unhashQuery(responseCache));
+            return true;
+      ***REMOVED*** else {
+            console.log("cache was null, ignoring.")
+      ***REMOVED***
+        getSummarySlonik(pool, responseCache)
+          .then(responseData => {
+              console.log('Done');
+              // console.log('R',r.summary.length);
+              // res.render("index", { data: responseData.summary,  graphData: responseData.graphs ***REMOVED***);
+              let returnObj = {
+                  data:responseData.summary,
+                  provincesCurrent: responseData.allProvinces,
+                  provincesHistorical:{
+                      provCases:responseData.provinces.provCases,
+                      provDeaths:responseData.provinces.provDeaths,
+                      provRecoveries:responseData.provinces.provRecoveries
+      ***REMOVED*****REMOVED*****REMOVED***
+                  graphData:responseData.graphs
+            ***REMOVED***
+              console.log("SETTING CACHE")
+              cache.set("data", hashQuery(returnObj));
+              res.render("index",returnObj);
+              return true;
+    
+              /*await pool.end(); // ??*/
+        ***REMOVED***);
         // If valid cache.
 
   ***REMOVED***
     else{
-        console.log("No Knex?")
+        console.log("No Pool?")
   ***REMOVED***
 ***REMOVED***)
-const getSummarySlonik = async (pool,cache) => {
+const getSummarySlonik = async (pool,responseCache) => {
     console.log("In Main.")
-    const responseCache = cache.get("data");
-
-    if (responseCache) {
-        console.log("CACHE FOUND")
-        // console.log("But ignoring")
-        if (responseCache !== null){
-            return Promise.resolve(unhashQuery(responseCache));
-      ***REMOVED***
-        else{
-            console.log("cache was null, ignoring.")
-          ***REMOVED***
-  ***REMOVED***
+    
 
     {
-        let value, value2, value3, value4;
-        let provCases = {***REMOVED***, provDeaths = {***REMOVED***, provRecoveries = {***REMOVED***;
+        let value, value2, value3, graphs;
+        let provCases = {***REMOVED***, provDeaths = {***REMOVED***, provRecoveries = {***REMOVED***, provActive = {***REMOVED***,provName={***REMOVED***;
+        let allProvinces = []
         const result = await pool.connect(async (connection) => {
             let mysql;
 
@@ -101,9 +115,6 @@ const getSummarySlonik = async (pool,cache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    console.log('1',moment(value.updateTime).tz('Africa/Johannesburg').format("LLLL"));
-                    console.log('2',moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)"));
-                    console.log('3',moment(value.updateTime).tz('Africa/Johannesburg').toString());
                     value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)");
                     // value.updateTime = (new Date(value.updateTime)).toString();
 
@@ -113,34 +124,70 @@ const getSummarySlonik = async (pool,cache) => {
                     value3 = await transactionConnection.many(mysql)
                     if (value3 && value3.length > 0) {
                         value3.forEach(province => {
+                            provName[provinceList[province.provinceName.toUpperCase()]] = province.provinceName.toUpperCase()
                             provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                             provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                             provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
+                            provActive[provinceList[province.provinceName.toUpperCase()]] = (province.caseCount-province.deathCount-province.recovered)
+                            
+                            allProvinces.push({provName:province.provinceName.toUpperCase(),
+                                provCases:province.caseCount,
+                                provDeaths:province.deathCount,
+                                provActive:province.caseCount-province.deathCOunt-province.recovered,
+                                provRecoveries:province.recovered
+                          ***REMOVED***)
                             // console.log("Province:",province)
                       ***REMOVED***)
                         console.log('Done 3')
                   ***REMOVED***
                     mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
                     console.log("Transaction 4");
-                    value4 = await transactionConnection.many(mysql)
-                    if (value4 && value4.length > 0) {
+                    graphs = await transactionConnection.many(mysql)
+                    if (graphs && graphs.length > 0) {
                         console.log('Done 4')
                   ***REMOVED***
 
               ***REMOVED***
                 // End Transaction
                 console.log('Returning Value of:', value)
-                return {'summary': value, 'provinces': {provCases, provDeaths, provRecoveries***REMOVED***, 'graphs': value4***REMOVED***;
+                let provinces = {provName, provCases, provDeaths, provRecoveries,provActive***REMOVED***
+                console.log('Returning Provinces: of:', provinces)
+    
+                
+                return {
+                    'summary': value,
+                    allProvinces,
+                    provinces,
+                    graphs
+              ***REMOVED***;
           ***REMOVED***)
       ***REMOVED***)
         if (result) {
-            console.log("SETTING CACHE")
-            cache.set("data", hashQuery(result));
+            
             return Promise.resolve(result)
       ***REMOVED*** else {
             return Promise.reject("Something went down: " + result)
       ***REMOVED***
   ***REMOVED***
 ***REMOVED***
-
+function CommaFormatted(amount) {
+    const delimiter = ','; // replace comma if desired
+    let i = parseInt(amount);
+    if (isNaN(i)) { return 'N/A'; ***REMOVED***
+    let minus = '';
+    if (i < 0) { minus = '-'; ***REMOVED***
+    i = Math.abs(i);
+    let n = String(i);
+    const a = [];
+    while (n.length > 3) {
+        const nn = n.substr(n.length - 3);
+        a.unshift(nn);
+        n = n.substr(0, n.length - 3);
+  ***REMOVED***
+    if (n.length > 0) { a.unshift(n); ***REMOVED***
+    n = a.join(delimiter);
+    amount = n;
+    amount = minus + amount;
+    return amount;
+***REMOVED***
 module.exports = router;

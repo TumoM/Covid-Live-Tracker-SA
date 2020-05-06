@@ -1,1 +1,0 @@
-{"version":3,"sources":["graphs.css"],"names":[],"mappings":"AAAA,iBAAiB,iBAAiB,CAAC,gBAAgB,CAAC,0BAA0B,CAAC,yBAAyB","file":"graphs.css","sourcesContent":[".chart-container{position:relative;min-height:200px;padding-right:0 !important;padding-left:0 !important}\n"]}

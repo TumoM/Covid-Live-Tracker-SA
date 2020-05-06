@@ -15,9 +15,6 @@
       "url": "heroku/nodejs"
     }
   ],
-  "scripts": {
-    "build": "npm run build"
-  },
   "image": "heroku/nodejs",
   "stack": "heroku-18"
 }

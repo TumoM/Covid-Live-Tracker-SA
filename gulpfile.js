@@ -94,6 +94,7 @@ gulp.task('pack-css', function () {
         'views/**/*.ejs',
         'views/**/*.html',
         'public/build/**/*.js',
+        'public/**/*.js',
         'test/**/*.js'],
         { info: true,rejected:true}))
       .pipe(concat('stylesheet.css'))

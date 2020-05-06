@@ -7,6 +7,13 @@ $font:    Helvetica, sans-serif;
     width: 99%;
     padding: 0 2%;
     margin: 0 auto;
+    margin-top: 6%;
+    @media only screen and (max-width: 767px) {
+        .container.segment.main{
+            margin-top: 20%;
+
+        }
+    }
 }
 
 .ui{

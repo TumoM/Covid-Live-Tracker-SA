@@ -51,13 +51,15 @@ router.get("/", function (req, res) {
               console.log('Done');
               // console.log('R',r.summary.length);
               // res.render("index", { data: responseData.summary,  graphData: responseData.graphs });
+              
               let returnObj = {
                   data:responseData.summary,
                   provincesCurrent: responseData.allProvinces,
                   provincesHistorical:{
                       provCases:responseData.provinces.provCases,
                       provDeaths:responseData.provinces.provDeaths,
-                      provRecoveries:responseData.provinces.provRecoveries
+                      provRecoveries:responseData.provinces.provRecoveries,
+                      provActive:responseData.provinces.provActive
                   },
                   graphData:responseData.graphs
               }
@@ -124,16 +126,17 @@ const getSummarySlonik = async (pool,responseCache) => {
                     value3 = await transactionConnection.many(mysql)
                     if (value3 && value3.length > 0) {
                         value3.forEach(province => {
+                            let active = CommaFormatted(province.caseCount-(province.deathCount+province.recovered));
                             provName[provinceList[province.provinceName.toUpperCase()]] = province.provinceName.toUpperCase()
                             provCases[provinceList[province.provinceName.toUpperCase()]] = province.caseCount
                             provDeaths[provinceList[province.provinceName.toUpperCase()]] = province.deathCount
                             provRecoveries[provinceList[province.provinceName.toUpperCase()]] = province.recovered
-                            provActive[provinceList[province.provinceName.toUpperCase()]] = (province.caseCount-province.deathCount-province.recovered)
-                            
+                            provActive[provinceList[province.provinceName.toUpperCase()]] = (active)
+                            console.log(province.provinceName.toUpperCase(),':',active);
                             allProvinces.push({provName:province.provinceName.toUpperCase(),
                                 provCases:province.caseCount,
                                 provDeaths:province.deathCount,
-                                provActive:province.caseCount-province.deathCOunt-province.recovered,
+                                provActive:active,
                                 provRecoveries:province.recovered
                             })
                             // console.log("Province:",province)
@@ -149,6 +152,7 @@ const getSummarySlonik = async (pool,responseCache) => {
 
                 }
                 // End Transaction
+                allProvinces.sort(compareValues('provCases'));
                 console.log('Returning Value of:', value)
                 let provinces = {provName, provCases, provDeaths, provRecoveries,provActive}
                 console.log('Returning Provinces: of:', provinces)
@@ -170,6 +174,37 @@ const getSummarySlonik = async (pool,responseCache) => {
         }
     }
 }
+
+function compareValues(key, order = 'desc') {
+    return function innerSort(a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // property doesn't exist on either object
+            return 0;
+        }
+        
+        const varA = (typeof a[key] === 'string')
+          ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+          ? b[key].toUpperCase() : b[key];
+        
+        let comparison = 0;
+        try{
+            if ( varA >  varB) {
+                comparison = 1;
+            } else if (varA < varB) {
+                comparison = -1;
+            }
+        }catch (e) {
+            console.log("Error",e);
+            console.log("-",varA)
+        }
+        return (
+          (order === 'desc') ? (comparison * -1) : comparison
+        );
+    };
+}
+
+
 function CommaFormatted(amount) {
     const delimiter = ','; // replace comma if desired
     let i = parseInt(amount);

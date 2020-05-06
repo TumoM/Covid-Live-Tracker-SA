@@ -36,6 +36,9 @@ const AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
+let whitelist = [
+   'tabulator', 'striped',  'tabulator-tableHolder',  'tabulator-table',  'tabulator-row:nth-child(2n)'
+]
 gulp.task('clean',()=>{
     return gulp.src(['public/build/**/*','assets/css/*.css','assets/css/*.css.map','assets/js/*.js'], {read: false})
         .pipe(clean());
@@ -87,16 +90,16 @@ gulp.task('pack-js', function () {
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
-      .pipe(purify([
-        'src/js/*.js',
-        'assets/!**!/!*.js',
-        'views/!**!/!*.ejs',
-        'views/!**!/!*.html',
-        'public/build/!**!/!*.js',
-        'public/!**!/!*.js',
-        'test/!**/!*.js'],
-        { info: true,rejected:true}))
       .pipe(concat('stylesheet.css'))
+    .pipe(purify([
+        'src/js/*.js',
+        'assets/**/*.js',
+        'views/**/*.ejs',
+        'views/**/*.html',
+        'public/build/**/*.js',
+        'public/**/*.js',
+        'test/**/*.js'],
+        { info: true,rejected:true, whitelist}))
       .pipe(postcss([
         pfm(),
         autoprefixer(),

@@ -83,7 +83,7 @@ flex-wrap: wrap;
 #svg-1
 {
 	// margin-top:3rem;
-	width: 50%; 
+	width: 50%;
 	overflow: visible
 }
 
@@ -185,6 +185,9 @@ tspan{
 		//display: none;
 		transition: all 1s linear;
 
+	}
+	.scroll-hide{
+		overflow-y: auto;
 	}
 	.jspHorizontalBar {
 		background: none;

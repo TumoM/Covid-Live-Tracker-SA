@@ -1,0 +1,31 @@
+linter:
+  misspell:
+    exclude:
+      - vendor
+      - assets
+      - "**/*.min.js"
+      - public/bundle/**/*
+    targets:
+      - src/js/*.js
+      - src/sass/*.scss
+      - test/**/*.js
+      - app.js
+      - views/
+      - another_target_directory/foo.rb
+      - bar.rb
+    locale: UK
+    ignore: center,behavior
+
+
+  rubocop:
+    config: "lint_yml/.myrubocop.yml"
+
+  eslint:
+    root_dir: "frontend"
+    npm_install: false
+    config: "frontend/.eslintrc"
+    ext: "js,jsx"
+
+  stylelint:
+    root_dir: "app/assets/stylesheets"
+    glob: "**/*.{css,scss}"

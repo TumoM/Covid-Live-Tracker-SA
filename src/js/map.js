@@ -23,6 +23,7 @@ var colourVal=1;
 
 var provCase = {***REMOVED***;
 var provDeath = {***REMOVED***;
+var provActive = {***REMOVED***;
 var provRecoveries = {***REMOVED***;
 var cardList = [];
 
@@ -166,6 +167,7 @@ function legendSetup(max,min,interval) {
 function setColours(dummyData,colour=1,) {
     colourVal = colour;
     // Vars
+    console.log('Setting Vars');
     let max = 0,
         min = Infinity,
         range = 0,
@@ -177,7 +179,8 @@ function setColours(dummyData,colour=1,) {
         [],
         []
 ***REMOVED***;
-
+    
+    console.log('Setting Range');
     // Get Range
     Object.keys(dummyData).forEach((k) => {
         if (dummyData[k] !== null) {
@@ -190,7 +193,8 @@ function setColours(dummyData,colour=1,) {
     range = max - min
     // Divide into 4 or 5
     interval = range / 4;
-
+    
+    console.log('For Each Loop');
     // foreach loop.
     Object.keys(dummyData).forEach(prov => {
         if (prov !== 'ZA-UN') {
@@ -214,10 +218,11 @@ function setColours(dummyData,colour=1,) {
     legendSetup(max,min,interval)
 ***REMOVED***
 
-function setProvs(cases,deaths,recoveries  ) {
+function setProvs(cases,deaths,recoveries, active) {
     provCase = cases;
     provDeath = deaths;
     provRecoveries = recoveries;
+    provActive = active
     console.log("Recovs 1:",recoveries)
     setupSideBCards()
 ***REMOVED***
@@ -276,10 +281,10 @@ function setupSideBCards(){
     let province;
 
     for (const [nameFull, id] of Object.entries(provinceList)) {
-        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id]***REMOVED***
+        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id],active:provActive[id]***REMOVED***
         cardList.push(province);
   ***REMOVED***
-    populateSideCards(cardList.sort(compareValues('cases')))
+    // populateSideCards(cardList.sort(compareValues('cases')))
 
 ***REMOVED***
 
@@ -301,6 +306,7 @@ function populateSideCards(cardList){
         figures[0].innerText=CommaFormatted(item.cases);
         figures[2].innerText=CommaFormatted(item.deaths);
         figures[4].innerText=CommaFormatted(item.recoveries);
+        figures[6].innerText=CommaFormatted(item.recoveries);
         counter++
   ***REMOVED***)
 ***REMOVED***
@@ -363,6 +369,15 @@ $(document).ready(()=>{
             // $("#provStatsContainer").transition('slide right')
             setColours(provRecoveries,3)
             populateSideCards(cardList.sort(compareValues('recoveries')))
+
+
+      ***REMOVED***)
+    $('#filterA')
+        .click((event)=>{
+            console.log("you clicked me to filter!")
+            // $("#provStatsContainer").transition('slide right')
+            setColours(provRecoveries,3)
+            populateSideCards(cardList.sort(compareValues('active')))
 
 
       ***REMOVED***)

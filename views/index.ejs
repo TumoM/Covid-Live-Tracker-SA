@@ -243,7 +243,7 @@
 
         </div>
     </main>
-    <script src="/build/js/bundle.js"></script>
+    <script  src="/build/js/bundle.js"></script>
 
     <script>
 	    var ready = (callback) => {
@@ -260,44 +260,44 @@
       ***REMOVED***);
     </script>
     <script>
-        $('.aboutButton')
-            .click((event)=>{
-                console.log("you clicked me!")
-
-                $('.page.dimmer:first')
-                    .dimmer('toggle')
-                ;
-
-               /* $('#myMainContainer > .dimmer')
-                    .dimmer('toggle')
-                ;*/
-          ***REMOVED***)
-        $('#menuToggler')
-            .click((event)=>{
-                console.log("you clicked me 2!")
-                if( document.getElementById("myNavOverlay").classList.toString() === "overlay"){ // Not Open
-                    console.log("Not Open! opening")
-                    document.getElementById("myNavOverlay").style.height = "100%";
-                    document.getElementById("myNavOverlay").classList.add('open');
-              ***REMOVED***
-                else{
-                    console.log("Already Open! closing")
-                    document.getElementById("myNavOverlay").style.height = "0%";
-                    document.getElementById("myNavOverlay").classList.remove('open');
-              ***REMOVED***
-
-                console.log('Class List',document.getElementById("myNavOverlay").classList);
-          ***REMOVED***)
-        $('.closebtnNavOverlay')
-            .click((event)=>{
-                console.log("you clicked me 3!")
-                if( document.getElementById("myNavOverlay").classList.toString() === "overlay open"){ // Not Open
-                    document.getElementById("myNavOverlay").style.height = "0%";
-                    document.getElementById("myNavOverlay").classList.remove('open');
-              ***REMOVED***
-          ***REMOVED***)
     </script>
     <script>
+	    $('.aboutButton')
+		    .click((event)=>{
+			    console.log("you clicked me!")
+
+			    $('.page.dimmer:first')
+				    .dimmer('toggle')
+			    ;
+
+            /* $('#myMainContainer > .dimmer')
+             .dimmer('toggle')
+             ;*/
+		  ***REMOVED***)
+	    $('#menuToggler')
+		    .click((event)=>{
+			    console.log("you clicked me 2!")
+			    if( document.getElementById("myNavOverlay").classList.toString() === "overlay"){ // Not Open
+				    console.log("Not Open! opening")
+				    document.getElementById("myNavOverlay").style.height = "100%";
+				    document.getElementById("myNavOverlay").classList.add('open');
+			  ***REMOVED***
+			    else{
+				    console.log("Already Open! closing")
+				    document.getElementById("myNavOverlay").style.height = "0%";
+				    document.getElementById("myNavOverlay").classList.remove('open');
+			  ***REMOVED***
+
+			    console.log('Class List',document.getElementById("myNavOverlay").classList);
+		  ***REMOVED***)
+	    $('.closebtnNavOverlay')
+		    .click((event)=>{
+			    console.log("you clicked me 3!")
+			    if( document.getElementById("myNavOverlay").classList.toString() === "overlay open"){ // Not Open
+				    document.getElementById("myNavOverlay").style.height = "0%";
+				    document.getElementById("myNavOverlay").classList.remove('open');
+			  ***REMOVED***
+		  ***REMOVED***)
         $(document).ready(function() {
             $(".ui.toggle.button.nav").click(function() {
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);
@@ -307,6 +307,8 @@
           ***REMOVED***);
 
             $(".ui.dropdown").dropdown();
+
+            $('#mainBundle').attr('rel','stylesheet')
 
 
 
@@ -329,14 +331,14 @@
         // ***REMOVED***);
         // Only not doing it here to keep this Pen dependency-free.
 
-        window.addEventListener("scroll", event => {
+       /* window.addEventListener("scroll", event => {
             let fromTop = window.scrollY+110;
 
             mainNavLinks.forEach(link => {
                 let section = document.querySelector(link.dataset.section);
-                /*  console.log('fromTop:',fromTop)
+                /!*  console.log('fromTop:',fromTop)
                   console.log('section offset:',section.offsetTop)
-                  console.log('section height:',section.offsetHeight)*/
+                  console.log('section height:',section.offsetHeight)*!/
                 // console.log('fromTop:',fromTop)
                 if (
                     section.offsetTop <= fromTop &&
@@ -347,7 +349,7 @@
                     link.classList.remove("active");
               ***REMOVED***
           ***REMOVED***);
-      ***REMOVED***);
+      ***REMOVED***);*/
 
     </script>
     <%- include("./partials/footer") %>

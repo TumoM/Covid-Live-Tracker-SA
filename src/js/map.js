@@ -28,139 +28,157 @@ var provRecoveries = {};
 var cardList = [];
 
 (function main() {
-    console.log('In Main')
-    cardList=[]
-})()
+	console.log('In Main');
+	cardList = [];
+}());
 
 /**
  * @param {string} name
  */
 function displayName(name) {
-    document.getElementById('country-name').firstChild.data = name;
+	document.getElementById('country-name').firstChild.data = name;
 }
 
 
 (function () {
-    tooltip = document.getElementById('country-name');
-    tooltipText = tooltip.getElementsByTagName('text')[0];
-    tooltipRects = tooltip.getElementsByTagName('rect');
+	tooltip = document.getElementById('country-name');
+	tooltipText = tooltip.getElementsByTagName('text')[0];
+	tooltipRects = tooltip.getElementsByTagName('rect');
+	
+	for (let i = 0; i < tooltipRects.length; i++) {
+		tooltipRects[i].setAttributeNS(null, 'width', width);
+	}
+}());
 
-    for (var i = 0; i < tooltipRects.length; i++) {
-        tooltipRects[i].setAttributeNS(null, "width", width);
-    }
+const svg = document.getElementById('svg-1');
 
-})();
-
-var svg = document.getElementById('svg-1');
-
-var triggers = document.getElementsByClassName('tooltip-trigger');
-for (var i = 0; i < triggers.length; i++) {
-    triggers[i].addEventListener('mousemove', showTooltip);
-    triggers[i].addEventListener('mouseout', hideTooltip);
+let triggers = document.getElementsByClassName('tooltip-trigger');
+for (let i = 0; i < triggers.length; i++) {
+	triggers[i].addEventListener('mousemove', showTooltip);
+	triggers[i].addEventListener('mouseout', hideTooltip);
 }
 
-let x, y;
+let x;
+let
+	y;
 
 // Setup Legend
 triggers = document.getElementsByClassName('keyText');
-Object.values(triggers).forEach((text) =>{
-    x = text.getAttribute('x');
-    y = text.getAttribute('y');
-    text.setAttribute('x',x-xPen);
-    text.setAttribute('y',y-yPen);
-})
+Object.values(triggers)
+	.forEach((text) => {
+		x = text.getAttribute('x');
+		y = text.getAttribute('y');
+		text.setAttribute('x', x - xPen);
+		text.setAttribute('y', y - yPen);
+	});
 
 triggers = document.getElementsByClassName('key legend');
-Object.values(triggers).forEach((text) =>{
-    x = text.getAttribute('x');
-    y = text.getAttribute('y');
-    text.setAttribute('x',x-xPen);
-    text.setAttribute('y',y-yPen);
-})
+Object.values(triggers)
+	.forEach((text) => {
+		x = text.getAttribute('x');
+		y = text.getAttribute('y');
+		text.setAttribute('x', x - xPen);
+		text.setAttribute('y', y - yPen);
+	});
 
-x = $('#legTitle').attr('x');
-y = $('#legTitle').attr('y');
-$('#legTitle').attr({'x':-x-xPen,'y':y-yPen})
+x = $('#legTitle')
+	.attr('x');
+y = $('#legTitle')
+	.attr('y');
+$('#legTitle')
+	.attr({
+		x: -x - xPen,
+		y: y - yPen,
+	});
 
-x = $('.lightBack').attr('x');
-y = $('.lightBack').attr('y');
-$('.lightBack').attr({'x':x-xPen,'y':y-yPen})
+x = $('.lightBack')
+	.attr('x');
+y = $('.lightBack')
+	.attr('y');
+$('.lightBack')
+	.attr({
+		x: x - xPen,
+		y: y - yPen,
+	});
 
 function showTooltip(evt) {
-    var CTM = svg.getScreenCTM();
-    var x = 10;
-    var y = 390;
-    let id = evt.target.getAttributeNS(null, "id");
-
-    tooltipText.firstChild.data = evt.target.getAttributeNS(null, "title");
-    tooltip.setAttributeNS(null, "transform", "translate(" + x + " " + y + ")");
-    var length = tooltipText.getComputedTextLength();
-    tooltipText.setAttributeNS(null,"x",(width-length)/2);
-    $("#casesTooltip").text(CommaFormatted(provCase[id]))
-    $("#deathsTooltip").text(CommaFormatted(provDeath[id]))
-    $("#recoveryTooltip").text(CommaFormatted(provRecoveries[id]))
-    tooltip.style.opacity=1;
-    // tooltip.setAttributeNS(null, "visibility", "visible");
-
-
+	const CTM = svg.getScreenCTM();
+	const x = 10;
+	const y = 390;
+	const id = evt.target.getAttributeNS(null, 'id');
+	
+	tooltipText.firstChild.data = evt.target.getAttributeNS(null, 'title');
+	tooltip.setAttributeNS(null, 'transform', `translate(${x} ${y})`);
+	const length = tooltipText.getComputedTextLength();
+	tooltipText.setAttributeNS(null, 'x', (width - length) / 2);
+	$('#casesTooltip')
+		.text(CommaFormatted(provCase[id]));
+	$('#deathsTooltip')
+		.text(CommaFormatted(provDeath[id]));
+	$('#recoveryTooltip')
+		.text(CommaFormatted(provRecoveries[id]));
+	tooltip.style.opacity = 1;
+	// tooltip.setAttributeNS(null, "visibility", "visible");
 }
 
 function hideTooltip() {
-    // TODO Un-hide
-    tooltip.style.opacity=0;
-    // tooltip.setAttributeNS(null, "visibility", "hidden");
-
+	// TODO Un-hide
+	tooltip.style.opacity = 0;
+	// tooltip.setAttributeNS(null, "visibility", "hidden");
 }
 
 /**
  * @param {string} name
  * @param {number|string} colour
  */
-function colourCountry(name, colour,colourTag) {
-    var country = document.getElementById(name);
-    //country.className += ' colour' + colour;
-    $("#"+name).removeClass()
-    $("#"+name).addClass("land tooltip-trigger valid")
-    country.classList.add('colour' + colourTag+""+colour)
+function colourCountry(name, colour, colourTag) {
+	const country = document.getElementById(name);
+	// country.className += ' colour' + colour;
+	$(`#${name}`)
+		.removeClass();
+	$(`#${name}`)
+		.addClass('land tooltip-trigger valid');
+	country.classList.add(`colour${colourTag}${colour}`);
 }
 
 
 /**
  * @param {[][]} data
  */
-function colourCountries(data,colourTag=1) {
-    for (var colour = 0; colour < data.length; colour++) {
-        for (var country = 0; country < data[colour].length; country++) {
-            colourCountry(data[colour][country], colour,colourTag);
-        }
-    }
+function colourCountries(data, colourTag = 1) {
+	for (let colour = 0; colour < data.length; colour++) {
+		for (let country = 0; country < data[colour].length; country++) {
+			colourCountry(data[colour][country], colour, colourTag);
+		}
+	}
 }
 
-function legendSetup(max,min,interval) {
-    // setup text labels
-    interval = Math.round(interval)
-    let legendTexts = $('.keyText')
-    let legendCol = $('.key.legend')
-    legendCol.removeClass()
-    legendCol.addClass("key legend")
-    for (let i = 0; i < 5; i++) {
-        legendCol[i].classList.add('colour' + colourVal+""+i);
-    }
-    legendTexts[0].textContent=`0 to ${CommaFormatted(min)}`
-    legendTexts[1].textContent=`${CommaFormatted(min+1)} to ${CommaFormatted(min+interval)}`
-    legendTexts[2].textContent=`${CommaFormatted(max-interval*3+1)} to ${CommaFormatted(max-interval*2)}`
-    legendTexts[3].textContent=`${CommaFormatted(max-interval*2+1)} to ${CommaFormatted(max-interval)}`
-    legendTexts[4].textContent=`${CommaFormatted(max-interval+1)} to ${CommaFormatted(max)}`
-    // setup width
-    console.log("Legend Set:",legendSet)
-    if (!legendSet) {
-        let width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
-        console.log("WIDTH:",width)
-        $('.lightBack').width("55%")
-        let length = legendTitle.getComputedTextLength()
-        legendTitle.setAttributeNS(null, "x", (width - length) / 2 - xPen);
-        legendSet = true;
-    }
+function legendSetup(max, min, interval) {
+	// setup text labels
+	interval = Math.round(interval);
+	const legendTexts = $('.keyText');
+	const legendCol = $('.key.legend');
+	legendCol.removeClass();
+	legendCol.addClass('key legend');
+	for (let i = 0; i < 5; i++) {
+		legendCol[i].classList.add(`colour${colourVal}${i}`);
+	}
+	legendTexts[0].textContent = `0 to ${CommaFormatted(min)}`;
+	legendTexts[1].textContent = `${CommaFormatted(min + 1)} to ${CommaFormatted(min + interval)}`;
+	legendTexts[2].textContent = `${CommaFormatted(max - interval * 3 + 1)} to ${CommaFormatted(max - interval * 2)}`;
+	legendTexts[3].textContent = `${CommaFormatted(max - interval * 2 + 1)} to ${CommaFormatted(max - interval)}`;
+	legendTexts[4].textContent = `${CommaFormatted(max - interval + 1)} to ${CommaFormatted(max)}`;
+	// setup width
+	console.log('Legend Set:', legendSet);
+	if (!legendSet) {
+		const width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
+		console.log('WIDTH:', width);
+		$('.lightBack')
+			.width('55%');
+		const length = legendTitle.getComputedTextLength();
+		legendTitle.setAttributeNS(null, 'x', (width - length) / 2 - xPen);
+		legendSet = true;
+	}
 }
 // colourCountries(data1)
 
@@ -228,55 +246,54 @@ function setProvs(cases,deaths,recoveries, active) {
 }
 
 function CommaFormatted(amount) {
-    var delimiter = ","; // replace comma if desired
-    var i = parseInt(amount);
-    if(isNaN(i)) { return 'N/A'; }
-    var minus = '';
-    if(i < 0) { minus = '-'; }
-    i = Math.abs(i);
-    var n = new String(i);
-    var a = [];
-    while(n.length > 3) {
-        var nn = n.substr(n.length-3);
-        a.unshift(nn);
-        n = n.substr(0,n.length-3);
-    }
-    if(n.length > 0) { a.unshift(n); }
-    n = a.join(delimiter);
-    amount = n;
-    amount = minus + amount;
-    return amount;
+	const delimiter = ','; // replace comma if desired
+	let i = parseInt(amount);
+	if (isNaN(i)) { return 'N/A'; }
+	let minus = '';
+	if (i < 0) { minus = '-'; }
+	i = Math.abs(i);
+	let n = String(i);
+	const a = [];
+	while (n.length > 3) {
+		const nn = n.substr(n.length - 3);
+		a.unshift(nn);
+		n = n.substr(0, n.length - 3);
+	}
+	if (n.length > 0) { a.unshift(n); }
+	n = a.join(delimiter);
+	amount = n;
+	amount = minus + amount;
+	return amount;
 }
 
 function compareValues(key, order = 'desc') {
-    return function innerSort(a, b) {
-        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-            // property doesn't exist on either object
-            return 0;
-        }
-
-        const varA = (typeof a[key] === 'string')
-            ? a[key].toUpperCase() : a[key];
-        const varB = (typeof b[key] === 'string')
-            ? b[key].toUpperCase() : b[key];
-
-        let comparison = 0;
-        try{
-        if ( varA >  varB) {
-            comparison = 1;
-        } else if (varA < varB) {
-            comparison = -1;
-        }
-        }catch (e) {
-            console.log("Error",e);
-            console.log("-",varA)
-        }
-        return (
-            (order === 'desc') ? (comparison * -1) : comparison
-        );
-    };
+	return function innerSort(a, b) {
+		if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+			// property doesn't exist on either object
+			return 0;
+		}
+		
+		const varA = (typeof a[key] === 'string')
+			? a[key].toUpperCase() : a[key];
+		const varB = (typeof b[key] === 'string')
+			? b[key].toUpperCase() : b[key];
+		
+		let comparison = 0;
+		try {
+			if (varA > varB) {
+				comparison = 1;
+			} else if (varA < varB) {
+				comparison = -1;
+			}
+		} catch (e) {
+			console.log('Error', e);
+			console.log('-', varA);
+		}
+		return (
+			(order === 'desc') ? (comparison * -1) : comparison
+		);
+	};
 }
-
 function setupSideBCards(){
     let province;
 
@@ -285,7 +302,6 @@ function setupSideBCards(){
         cardList.push(province);
     }
     // populateSideCards(cardList.sort(compareValues('cases')))
-
 }
 
 /**
@@ -311,10 +327,16 @@ function populateSideCards(cardList){
     })
 }
 
-console.log("MAX HEIGHT:",$("#svg-1").height() + Number($("#svgColumn").css('padding-top').split(/\D/)[0])  )
+console.log('MAX HEIGHT:', $('#svg-1')
+	.height() + Number($('#svgColumn')
+	.css('padding-top')
+	.split(/\D/)[0]));
 
 // Sets the height of the left sidebar using the svg + padding on top and bot.
-$("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
+$('#provStatsContainer')
+	.css('max-height', $('#svg-1')
+		.height() + parseInt($('#svgColumn')
+		.css('padding-top')) * 2);
 
 // Resets the container height as the window size changes. i.e when svg-1 and padding changes.
 $(window).resize(()=>{

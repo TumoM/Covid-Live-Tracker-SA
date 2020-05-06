@@ -137,6 +137,7 @@ gulp.task('lintF', function() {
 
 gulp.task('pack', parallel(['pack-js', 'pack-css']));
 gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
+gulp.task('build', series('clean',parallel(['sass', 'js']),'pack'));
 
 // The `clean` function is not exported so it can be considered a private task.
 // It can still be used within the `series()` composition.

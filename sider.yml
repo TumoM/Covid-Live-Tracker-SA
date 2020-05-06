@@ -3,8 +3,7 @@ linter:
     exclude:
       - vendor
       - assets
-      - "**/*.min.js"
-      - public/bundle***REMOVED***/*
+      - public/bundle***REMOVED***/
     targets:
       - src/js/*.js
       - src/sass/*.scss

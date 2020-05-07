@@ -52,6 +52,7 @@ function shouldCompress(req, res) {
   ***REMOVED***
 
     // fallback to standard filter function
+    return false;
     return compression.filter(req, res);
 ***REMOVED***
 app.use(compression({ filter: shouldCompress ***REMOVED***));
@@ -199,7 +200,7 @@ process.on('exit', (code) => {
     console.log(`About to exit with code: ${code***REMOVED***`);
 ***REMOVED***);
 
-const job2 = new CronJob('0***REMOVED***/5 19-23***REMOVED******REMOVED******REMOVED***', async function () {
+const job2 = new CronJob('0***REMOVED***/5 12-23***REMOVED******REMOVED******REMOVED***', async function () {
     const d = moment();
     const daddy24 = this;
     console.log('CronJob 2 - Calling Parsing24:', d.toString());

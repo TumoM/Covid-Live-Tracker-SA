@@ -89,6 +89,7 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify-es": "^2.0.0",
+    "lodash-cli": "^4.17.5",
     "postcss-combine-duplicated-selectors": "^8.1.0",
     "postcss-combine-media-query": "^1.0.1",
     "postcss-font-magician": "^2.3.1",

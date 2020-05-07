@@ -99,7 +99,7 @@ gulp.task('pack-css', function () {
         'public/build***REMOVED***/*.js',
         'public***REMOVED***/*.js',
         'test***REMOVED***/*.js'],
-        { info: true,rejected:true, whitelist***REMOVED***))
+        { info: true,rejected:false, whitelist***REMOVED***))
       .pipe(postcss([
         pfm(),
         autoprefixer(),

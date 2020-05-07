@@ -205,8 +205,9 @@ async function main() {
                     recoverCount = recoverCount.split(')')[0]
                     recoveryDate=date
                     provinceName = provinceName.trim();
+                    recoverCount = parseNumber(recoverCount)
                     const tempProvince = new Province(provinceName)
-                    tempProvince.recoveries = getNumber(recoverCount.split('.')[0]);
+                    // tempProvince.recoveries = getNumber(recoverCount.split('.')[0]);
                     tempProvince.date = recoveryDate;
                     currentProvincesRecovery[provinceName] = tempProvince;
 
@@ -223,7 +224,7 @@ async function main() {
 
                     let rows = await knex(tableName).select().where({provDate: itemData.provDate, provinceName***REMOVED***);
                     if (rows.length === 1) { // Update the recoveries column
-                        console.log("Error inserting Province Recovered, attempting to Update")
+                        console.log("Found a record, updating.")
                         let row = await knex(tableName)
                             .update({recovered: itemData.recovered***REMOVED***)
                             .where('provinceName', '=', itemData.provinceName)
@@ -305,7 +306,7 @@ async function main() {
                                 .where('date', '=', itemData.provDate)
                             if (value && value > 0) {
                                 console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`)
-                                console.log("Value", value)
+                                // console.log("Value", value)
                                 dateData.date = itemData.provDate;
                           ***REMOVED***
                             else {
@@ -442,5 +443,16 @@ main()
   ***REMOVED***)
     .catch(err=> console.log('Your Err',err));
 */
+
+function parseNumber(number) {
+    let testInt = '';
+    console.log('FUNC NUMBER:', number);
+    const testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(' ');
+    testArray.forEach((digit) => {
+        testInt += digit;
+  ***REMOVED***);
+    testInt = parseInt(testInt);
+    return testInt;
+***REMOVED***
 
 module.exports = main

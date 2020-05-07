@@ -31,7 +31,7 @@ const unhashQuery = (query) => {
 moment.tz.setDefault("Africa/Johannesburg")
 
 router.get("/", function (req, res) {
-    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.setHeader('Cache-Control', 'public, max-age=8640');
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;

@@ -252,11 +252,12 @@
 	    }
 
         ready(() => {
-	        setTable(<%- JSON.stringify(graphData) %>)
 	        $('#mainBundle').attr('rel','stylesheet')
-	        setColours(<%- JSON.stringify(provincesHistorical.provCases) %>)
 	        setProvs(<%- JSON.stringify(provincesHistorical.provCases) %>,<%- JSON.stringify(provincesHistorical.provDeaths) %>,<%- JSON.stringify(provincesHistorical.provRecoveries) %>,<%- JSON.stringify(provincesHistorical.provActive) %>)
+	        setColours(<%- JSON.stringify(provincesHistorical.provCases) %>)
 	        setGraphs(<%- JSON.stringify(graphData) %>)
+	        setTable(<%- JSON.stringify(graphData) %>)
+
         });
     </script>
     <script>

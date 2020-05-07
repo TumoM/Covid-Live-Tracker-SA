@@ -247,6 +247,9 @@ function setProvs(cases,deaths,recoveries, active) {
 
 function CommaFormatted(amount) {
 	const delimiter = ','; // replace comma if desired
+	if (typeof amount === 'string' && amount.includes(delimiter) && !amount.includes(" ")){
+		return(amount);
+	}
 	let i = parseInt(amount);
 	if (isNaN(i)) { return 'N/A'; }
 	let minus = '';

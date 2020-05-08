@@ -100,5 +100,5 @@ function DbSetup() {
   });
   console.log("DB SETUP: COMPLETE");
 }
-DbSetup();
+// DbSetup();
 

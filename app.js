@@ -52,7 +52,6 @@ function shouldCompress(req, res) {
     }
 
     // fallback to standard filter function
-    return false;
     return compression.filter(req, res);
 }
 app.use(compression({ filter: shouldCompress }));
@@ -128,6 +127,7 @@ app.use((req, res, next) => {
 console.log('DELETING OLD CACHE');
 cache.del('data');
 cache.flushAll();
+app.set('etag', 'strong');
 
 app.use('/', indexRoutes);
 app.use('/about', aboutRoutes);
@@ -214,7 +214,8 @@ const job2 = new CronJob('0 */5 12-23 * * *', async function () {
             console.log('Continue with Cron 2');
         }
     });
-});
+},cache.flushAll()
+);
 const mainJob = new CronJob('0 */15 17-23 * * *', (() => {
     const d2 = moment();
 
@@ -230,6 +231,7 @@ const mainJob = new CronJob('0 */15 17-23 * * *', (() => {
                     daddy.stop();
                     console.log('Done Cron 1');
                     console.log('Staring Job 2');
+                    cache.flushAll()
                     job2.start();
                     const res = await parsing24();
                     if (res === true) {

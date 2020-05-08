@@ -3,6 +3,7 @@ var router = express.Router();
 const numeral = require('numeral');
 const moment = require('moment-timezone');
 const sql = require('slonik').sql;
+var etag = require('etag')
 // const sql = slonik.sql;
 
 
@@ -31,7 +32,7 @@ const unhashQuery = (query) => {
 moment.tz.setDefault("Africa/Johannesburg")
 
 router.get("/", function (req, res) {
-    res.setHeader('Cache-Control', 'public, max-age=8640');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
@@ -41,6 +42,7 @@ router.get("/", function (req, res) {
         // TODO Load data for the day.
         if (responseCache) {
             console.log("CACHE FOUND")
+            res.setHeader('ETag', etag(responseCache))
             res.render("index", unhashQuery(responseCache));
             return true;
         } else {
@@ -64,6 +66,7 @@ router.get("/", function (req, res) {
                   graphData:responseData.graphs
               }
               console.log("SETTING CACHE")
+              res.setHeader('ETag', etag(hashQuery(returnObj)))
               cache.set("data", hashQuery(returnObj));
               res.render("index",returnObj);
               return true;

@@ -1,6 +1,7 @@
 require('newrelic');
 const express = require('express');
 const dotenv = require('dotenv');
+
 const compression = require('compression');
 
 const app = express();

@@ -136,6 +136,9 @@ app.use('/about', aboutRoutes);
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt', (req, res) => {
     res.sendFile('loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt');
 ***REMOVED***);
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile('sitemap.xml');
+***REMOVED***);
 
 // Government Notification
 app.get('/governmentCheck/:type?', async (req, res) => res.status(200).json({ message: 'Get Working' ***REMOVED***));

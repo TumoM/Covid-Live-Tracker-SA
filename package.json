@@ -41,6 +41,7 @@
     "cron.js": "^1.0.2",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
+    "etag": "^1.8.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "fomantic-ui": "^2.8.4",

@@ -52,7 +52,6 @@ function shouldCompress(req, res) {
   ***REMOVED***
 
     // fallback to standard filter function
-    return false;
     return compression.filter(req, res);
 ***REMOVED***
 app.use(compression({ filter: shouldCompress ***REMOVED***));
@@ -128,6 +127,7 @@ app.use((req, res, next) => {
 console.log('DELETING OLD CACHE');
 cache.del('data');
 cache.flushAll();
+app.set('etag', 'strong');
 
 app.use('/', indexRoutes);
 app.use('/about', aboutRoutes);
@@ -214,7 +214,8 @@ const job2 = new CronJob('0***REMOVED***/5 12-23***REMOVED******REMOVED******REM
             console.log('Continue with Cron 2');
       ***REMOVED***
   ***REMOVED***);
-***REMOVED***);
+***REMOVED***,cache.flushAll()
+);
 const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', (() => {
     const d2 = moment();
 
@@ -230,6 +231,7 @@ const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED*****
                     daddy.stop();
                     console.log('Done Cron 1');
                     console.log('Staring Job 2');
+                    cache.flushAll()
                     job2.start();
                     const res = await parsing24();
                     if (res === true) {

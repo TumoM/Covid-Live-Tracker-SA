@@ -1,6 +1,7 @@
 require('newrelic');
 const express = require('express');
 const dotenv = require('dotenv');
+
 const compression = require('compression');
 
 const app = express();
@@ -52,7 +53,6 @@ function shouldCompress(req, res) {
   ***REMOVED***
 
     // fallback to standard filter function
-    return false;
     return compression.filter(req, res);
 ***REMOVED***
 app.use(compression({ filter: shouldCompress ***REMOVED***));
@@ -74,7 +74,7 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
   ***REMOVED***;
 ***REMOVED***
 
-console.log('Connection:', connection);
+// console.log('Connection:', connection);
 const knex = require('knex')({
         client: 'pg',
         debug: true,   acquireConnectionTimeout: 10000,
@@ -93,6 +93,8 @@ const parsing24 = require('./test/news24Parser');
 const parsing = require('./test/parsing');
 const aboutRoutes = require('./routes/about');
 const indexRoutes = require('./routes/index');
+const twitterRoutes = require('./routes/twitter');
+const webhookRoutes = require('./routes/webhooks');
 const CacheService = require('./models/cacheModel');
 
 const { createQueryCacheInterceptor ***REMOVED*** = siqc;
@@ -128,12 +130,18 @@ app.use((req, res, next) => {
 console.log('DELETING OLD CACHE');
 cache.del('data');
 cache.flushAll();
+app.set('etag', 'strong');
 
 app.use('/', indexRoutes);
 app.use('/about', aboutRoutes);
+// app.use('/twitter', twitterRoutes);
+app.use('/webhooks', webhookRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt', (req, res) => {
     res.sendFile('loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt');
+***REMOVED***);
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile('sitemap.xml');
 ***REMOVED***);
 
 // Government Notification
@@ -214,7 +222,8 @@ const job2 = new CronJob('0***REMOVED***/5 12-23***REMOVED******REMOVED******REM
             console.log('Continue with Cron 2');
       ***REMOVED***
   ***REMOVED***);
-***REMOVED***);
+***REMOVED***,cache.flushAll()
+);
 const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED******REMOVED***', (() => {
     const d2 = moment();
 
@@ -230,6 +239,7 @@ const mainJob = new CronJob('0***REMOVED***/15 17-23***REMOVED******REMOVED*****
                     daddy.stop();
                     console.log('Done Cron 1');
                     console.log('Staring Job 2');
+                    cache.flushAll()
                     job2.start();
                     const res = await parsing24();
                     if (res === true) {

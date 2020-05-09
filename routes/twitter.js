@@ -101,7 +101,7 @@ exports.newStream = function(userId,keywords){
 	//
 	//  filter the twitter public stream by the word 'mango'.
 	//
-	let params = { follow:userId,track: keywords };
+	let params = { follow:userId,track: keywords};
 	console.log('params:',params);
 	var stream = T.stream('statuses/filter', params)
 	stream.on('connected', function (response) {
@@ -110,6 +110,8 @@ exports.newStream = function(userId,keywords){
 	
 	stream.on('tweet', function (tweet) {
 		let text = tweet.text;
+		// console.log(tweet);
+		// console.log(tweet.retweeted_status.extended_tweet.full_text);
 		let found = text.match(/today[\s\S]*?number[\s\S]*?covid.*?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || false; // The text is valid?
 		console.log("\nNEW TWEET - Text Match:",found);
 		console.log(text,'\n-',tweet.created_at)
@@ -120,6 +122,7 @@ exports.newStream = function(userId,keywords){
 			console.log('We found it boys?',text);
 			console.log('########################################');
 		}
+		// console.log(tweet);
 	})
 	stream.on('error', function (error) {
 		console.log("\nNEW TWEET ERROR",error);

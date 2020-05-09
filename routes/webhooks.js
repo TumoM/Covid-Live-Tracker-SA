@@ -97,7 +97,7 @@ router.post("/stream",function (req,res) {
 		.newStream(id,keywords)
 		.then(response => {
 			// console.log('Res',response);
-			res.status(200).json({res:response})
+			res.status(200).json({message:"Stream Started."})
 		})
 		.catch(error => {
 			console.log(error.message);

@@ -85,7 +85,6 @@
 
 			var debounced_version = _.debounce(function(){
 							// Get container scroll position
-							console.log("Scroll",$(this).scrollTop())
 							var fromTop = $(this).scrollTop()+topMenuHeight;
 
 							// Get id of current scroll item
@@ -99,16 +98,15 @@
 
 							if (lastId !== id) {
 								lastId = id;
-								console.log('MyID:',id)
 								// Set/remove active class
 								menuItems.removeClass("active");
 								menuItems
 									.parent()
 									.end().filter(`[data-section="#${id}"]`).addClass("active");
 							}
-							$(window).scroll();
 						}, 100,{leading: true});
 			$(window).on('scroll', debounced_version);
+			$(window).scroll();
 
 			$('.aboutButton')
 				.click((event)=>{

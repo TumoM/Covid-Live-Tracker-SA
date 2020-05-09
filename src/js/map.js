@@ -169,10 +169,8 @@ function legendSetup(max, min, interval) {
 	legendTexts[3].textContent = `${CommaFormatted(max - interval * 2 + 1)} to ${CommaFormatted(max - interval)}`;
 	legendTexts[4].textContent = `${CommaFormatted(max - interval + 1)} to ${CommaFormatted(max)}`;
 	// setup width
-	console.log('Legend Set:', legendSet);
 	if (!legendSet) {
 		const width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
-		console.log('WIDTH:', width);
 		$('.lightBack')
 			.width('55%');
 		const length = legendTitle.getComputedTextLength();
@@ -212,7 +210,6 @@ function setColours(dummyData,colour=1,) {
     // Divide into 4 or 5
     interval = range / 4;
     
-    console.log('For Each Loop');
     // foreach loop.
     Object.keys(dummyData).forEach(prov => {
         if (prov !== 'ZA-UN') {
@@ -231,7 +228,6 @@ function setColours(dummyData,colour=1,) {
             }
         }
     })
-    console.log("ANSWERS:",answers)
     colourCountries(answers,colour)
     legendSetup(max,min,interval)
 }
@@ -241,7 +237,6 @@ function setProvs(cases,deaths,recoveries, active) {
     provDeath = deaths;
     provRecoveries = recoveries;
     provActive = active
-    console.log("Recovs 1:",recoveries)
     setupSideBCards()
 }
 
@@ -329,11 +324,6 @@ function populateSideCards(cardList){
         counter++
     })
 }
-
-console.log('MAX HEIGHT:', $('#svg-1')
-	.height() + Number($('#svgColumn')
-	.css('padding-top')
-	.split(/\D/)[0]));
 
 // Sets the height of the left sidebar using the svg + padding on top and bot.
 $('#provStatsContainer')

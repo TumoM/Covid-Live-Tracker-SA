@@ -93,6 +93,8 @@ const parsing24 = require('./test/news24Parser');
 const parsing = require('./test/parsing');
 const aboutRoutes = require('./routes/about');
 const indexRoutes = require('./routes/index');
+const twitterRoutes = require('./routes/twitter');
+const webhookRoutes = require('./routes/webhooks');
 const CacheService = require('./models/cacheModel');
 
 const { createQueryCacheInterceptor ***REMOVED*** = siqc;
@@ -132,6 +134,8 @@ app.set('etag', 'strong');
 
 app.use('/', indexRoutes);
 app.use('/about', aboutRoutes);
+// app.use('/twitter', twitterRoutes);
+app.use('/webhooks', webhookRoutes);
 
 app.get('/loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt', (req, res) => {
     res.sendFile('loaderio-7d6b780c491333bbfc06f6c5bdc20309.txt');

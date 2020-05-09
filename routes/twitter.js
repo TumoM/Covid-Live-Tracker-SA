@@ -1,5 +1,6 @@
 require("dotenv").config();
 const request = require("request-promise");
+var Twit = require('twit')
 
 const TWITTER_API_URL = process.env.TWITTER_API_URL;
 	const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
@@ -15,13 +16,18 @@ const oauth = {
 	token: TWITTER_ACCESS_TOKEN,
 	token_secret: TWITTER_ACCESS_TOKEN_SECRET
 };
+var T = new Twit({
+	consumer_key:         TWITTER_CONSUMER_KEY,
+	consumer_secret:      TWITTER_CONSUMER_SECRET,
+	access_token:         TWITTER_ACCESS_TOKEN,
+	access_token_secret:  TWITTER_ACCESS_TOKEN_SECRET,
+	timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+	strictSSL:            false,     // optional - requires SSL certificates to be valid.
+})
 
 const authorizationHeaders = {
 	authorization: `Bearer ${TWITTER_BEARER_TOKEN}`
 };
-
-console.log('OA:',oauth);
-console.log('Bearer Header?:',authorizationHeaders);
 
 exports.getBearerToken = function() {
 	let user = process.env.TWITTER_CONSUMER_KEY;
@@ -91,3 +97,33 @@ exports.deleteSubscription = function(userId) {
 	});
 };
 
+exports.newStream = function(userId,keywords){
+	//
+	//  filter the twitter public stream by the word 'mango'.
+	//
+	let params = { follow:userId,track: keywords };
+	console.log('params:',params);
+	var stream = T.stream('statuses/filter', params)
+	stream.on('connected', function (response) {
+		console.log('Twitter stream connected:');
+	})
+	
+	stream.on('tweet', function (tweet) {
+		let text = tweet.text;
+		let found = text.match(/today[\s\S]*?number[\s\S]*?covid.*?19[\s\S]*?cases[\s\S]*?\d[\s?\d]*/i) || false; // The text is valid?
+		console.log("\nNEW TWEET - Text Match:",found);
+		console.log(text,'\n-',tweet.created_at)
+		console.log('-',tweet.user.name,'- User Name Match:',tweet.user.name ==="Dr Zweli Mkhize", // User Names Match?
+			'\n-',tweet.user.screen_name,'- Screen Name Match:',tweet.user.screen_name==="DrZweliMkhize") // Screen Names Match?
+		if (tweet.user.screen_name==="DrZweliMkhize" || tweet.id==="844486678324658176"){ // Check the Username or UserId to make sure.
+			console.log('########################################');
+			console.log('We found it boys?',text);
+			console.log('########################################');
+		}
+	})
+	stream.on('error', function (error) {
+		console.log("\nNEW TWEET ERROR",error);
+
+	})
+	return Promise.resolve(stream);
+}

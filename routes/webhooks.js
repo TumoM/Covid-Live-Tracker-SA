@@ -3,6 +3,7 @@ var router = express.Router();
 const crypto = require("crypto");
 const twitter = require("./twitter");
 
+
 function createCrcResponseToken(crcToken) {
 	const hmac = crypto
 		.createHmac("sha256", process.env.TWITTER_CONSUMER_SECRET)
@@ -81,6 +82,21 @@ router.post("/new",function (req,res) {
 		.createWebhook(req.body.url)
 		.then(response => {
 			console.log('Res',response);
+			res.status(200).json({res:response})
+		})
+		.catch(error => {
+			console.log(error.message);
+			res.status(400).json(error)
+		});
+})
+router.post("/stream",function (req,res) {
+	console.log('Adding new stream');
+	let id = req.body.id;
+	let keywords = req.body.keywords
+	twitter
+		.newStream(id,keywords)
+		.then(response => {
+			// console.log('Res',response);
 			res.status(200).json({res:response})
 		})
 		.catch(error => {

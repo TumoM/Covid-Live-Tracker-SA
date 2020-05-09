@@ -74,7 +74,7 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
   ***REMOVED***;
 ***REMOVED***
 
-console.log('Connection:', connection);
+// console.log('Connection:', connection);
 const knex = require('knex')({
         client: 'pg',
         debug: true,   acquireConnectionTimeout: 10000,

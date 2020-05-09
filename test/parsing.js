@@ -51,16 +51,16 @@ const knex = require('knex')({
 );
 
 const PROVINCES = { // Name, [cases, deadArr]
-    GAUTENG: Province,
+    'GAUTENG': Province,
     'WESTERN CAPE': Province,
     'KWAZULU–NATAL': Province,
     'FREE STATE': Province,
     'EASTERN CAPE': Province,
-    LIMPOPO: Province,
-    MPUMALANGA: Province,
+    'LIMPOPO': Province,
+    'MPUMALANGA': Province,
     'NORTH WEST': Province,
     'NORTHERN CAPE': Province,
-    UNALLOCATED: Province
+    'UNALLOCATED': Province
 };
 const provincesList = [];
 
@@ -193,7 +193,8 @@ async function main() {
                         if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
                             console.log('Skipping:', d, '\n');
                             loop = false;
-                        } else if (rows.length > 0 && rows[0].maybeValid) {
+                        }
+                        else if (rows.length > 0 && rows[0].maybeValid) {
                             console.log('\nDate maybe valid:', d);
 
                             // Maybe the format is all wrong. Parse another site/source?
@@ -235,7 +236,8 @@ async function main() {
                                 valid = true;
 
                             // Pull off data for update (Total tests)
-                        } else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                        }
+                        else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
                             console.log('Parsing 1 time:', d.toLocaleDateString(), '\n');
                             const rootChild = HTMLParser.parse(htmls[i]);
                             // pull out the two tables 1st
@@ -275,10 +277,11 @@ async function main() {
                                 } */ // Should we pass the tables here? Only gives cases per province.
 
                                 const date = rootChild.text.match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
-                                const cases = rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                const cases = rootChild.text.match((/total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d]+/i))[0] ||
+                                  rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
                                 const tests = rootChild.text.match(/(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
-                                let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/);
-                                let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+)/);
+                                let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/i);
+                                let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+|total\s{0,10}recoveries.*?\d[\s\d]+(?=[\s.]))/i);
                                 let totalDeaths = null;
                                 if (!deaths) {
                                     deaths = null;
@@ -411,12 +414,12 @@ async function main() {
 }
 
 
-/* main().then((res)=>{
+ main().then((res)=>{
     console.log('Res',res)
      return res
         process.exit(0)
     }
-)*/
+)
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

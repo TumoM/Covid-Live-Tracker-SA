@@ -1,4 +1,3 @@
-require('newrelic');
 const express = require('express');
 const dotenv = require('dotenv');
 
@@ -89,8 +88,8 @@ const knex = require('knex')({
 );
 const slonik = require('slonik');
 const siqc = require('slonik-interceptor-query-cache');
-const parsing24 = require('./test/news24Parser');
-const parsing = require('./test/parsing');
+const parsing24 = require('./helpers/news24Parser');
+const parsing = require('./helpers/parsing');
 const aboutRoutes = require('./routes/about');
 const indexRoutes = require('./routes/index');
 const twitterRoutes = require('./routes/twitter');

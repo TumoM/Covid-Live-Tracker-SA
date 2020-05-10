@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
-var each = require('async-each');
-var async = require('async');
+const each = require('async-each');
+const async = require('async');
 
 dotenv.config();
 const cloudscraper = require('cloudscraper');
@@ -12,7 +12,7 @@ chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
 const Province = require('../models/provinceModel');
-// DbSetup = require("../test/db24");
+// DbSetup = require("../helpers/db24");
 const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
 // const url = "http://sacoronavirus.co.za/?s=update";
 // const url = "https://www.nicd.ac.za/media/alerts/";
@@ -51,16 +51,16 @@ const knex = require('knex')({
 );
 
 const PROVINCES = { // Name, [cases, deadArr]
-    'GAUTENG': Province,
+    GAUTENG: Province,
     'WESTERN CAPE': Province,
     'KWAZULU–NATAL': Province,
     'FREE STATE': Province,
     'EASTERN CAPE': Province,
-    'LIMPOPO': Province,
-    'MPUMALANGA': Province,
+    LIMPOPO: Province,
+    MPUMALANGA: Province,
     'NORTH WEST': Province,
     'NORTHERN CAPE': Province,
-    'UNALLOCATED': Province
+    UNALLOCATED: Province
 ***REMOVED***;
 const provincesList = [];
 
@@ -111,25 +111,24 @@ async function main() {
 
     console.log('Links 2\n ', links2);
     htmls = [];
-    
+
     const getHtml = async (links) => {
-        console.log('starting')
-        let loop = true;
+        console.log('starting');
+        const loop = true;
   ***REMOVED***;
     // htmls = await getHtml(links2);
-    let drivers = [];
+    const drivers = [];
     let index = -1;
-    
-    htmls = await async.concatSeries(links2, async function(link) {
+
+    htmls = await async.concatSeries(links2, async (link) => {
          // Perform operation on file here.
-        console.log('Processing link: ' + link);
+        console.log(`Processing link: ${link***REMOVED***`);
         let loop = true;
         index += 1;
-          let i = index;
-          try{
-            
+          const i = index;
+          try {
             let counter = 0;
-            let html
+            let html;
             while (loop) {
                 await driver.get(link);
                 await driver.wait(until.elementLocated(By.css('.post-content')), 10***REMOVED*** 1000);
@@ -143,12 +142,11 @@ async function main() {
                 counter += 1;
           ***REMOVED***
             return html;
+      ***REMOVED*** catch (e) {
+            console.log(e);
+            return `Some Error Occurred: ${e***REMOVED***`;
       ***REMOVED***
-        catch (e){
-            console.log(e)
-            return 'Some Error Occurred: '+e;
-      ***REMOVED***
-  ***REMOVED***/*, function(err) {
+  ***REMOVED***/* , function(err) {
         // if any of the file processing produced an error, err would equal that error
         if( err ) {
             // One of the iterations produced an error.
@@ -157,13 +155,13 @@ async function main() {
       ***REMOVED*** else {
             console.log('All links have been processed successfully');
             console.log('done')
-            
+
             console.log('Returning Promise.');
             loop = false;
             return Promise.resolve(htmls);
       ***REMOVED***
-  ***REMOVED****/)
-      .then(res=>{
+  ***REMOVED******REMOVED***/)
+      .then((res) => {
             driver.quit();
             return res;
   ***REMOVED***
@@ -193,8 +191,7 @@ async function main() {
                         if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
                             console.log('Skipping:', d, '\n');
                             loop = false;
-                      ***REMOVED***
-                        else if (rows.length > 0 && rows[0].maybeValid) {
+                      ***REMOVED*** else if (rows.length > 0 && rows[0].maybeValid) {
                             console.log('\nDate maybe valid:', d);
 
                             // Maybe the format is all wrong. Parse another site/source?
@@ -236,8 +233,7 @@ async function main() {
                                 valid = true;
 
                             // Pull off data for update (Total tests)
-                      ***REMOVED***
-                        else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
+                      ***REMOVED*** else if ((rows.length === 0) || (rows.length > 0 && !rows[0].parsed)) {
                             console.log('Parsing 1 time:', d.toLocaleDateString(), '\n');
                             const rootChild = HTMLParser.parse(htmls[i]);
                             // pull out the two tables 1st
@@ -277,8 +273,8 @@ async function main() {
                               ***REMOVED******REMOVED***/ // Should we pass the tables here? Only gives cases per province.
 
                                 const date = rootChild.text.match(/\d{1,2***REMOVED***(\w{2***REMOVED***)?\s\w{3,9***REMOVED***\s20(\d{2***REMOVED***)?/i)[0];
-                                const cases = rootChild.text.match((/total\s{0,10***REMOVED***(?=number)(?=.*confirmed cases).*?\d[\s?\d]+/i))[0] ||
-                                  rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                const cases = rootChild.text.match((/total\s{0,10***REMOVED***(?=number)(?=.*confirmed cases).*?\d[\s?\d]+/i))[0]
+                                  || rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
                                 const tests = rootChild.text.match(/(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
                                 let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20***REMOVED***?related deaths.*?\d[\s\d]+/i);
                                 let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30***REMOVED***?\d[\s\d]+|total\s{0,10***REMOVED***recoveries.*?\d[\s\d]+(?=[\s.]))/i);
@@ -414,12 +410,12 @@ async function main() {
 ***REMOVED***
 
 
- main().then((res)=>{
+/* main().then((res)=>{
     console.log('Res',res)
      return res
         process.exit(0)
   ***REMOVED***
-)
+)***REMOVED***/
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

@@ -11,7 +11,7 @@ module.exports = {
    "es6": true,
    "jquery": true
  ***REMOVED***,
- "extends": ["airbnb-base"],
+ "extends": "airbnb-base",
  "rules": {
    "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")],
    "arrow-parens": ["error", "always"],
@@ -34,9 +34,23 @@ module.exports = {
    ],
    'prefer-destructuring': 'warn',
    'no-await-in-loop': 'warn',
+   'no-shadow':'warn',
+   'no-plusplus':'warn',
+   'no-nested-ternary':'warn',
+   'radix':'warn',
+   'no-tabs':'warn',
+   'consistent-return':'warn',
+   'brace-style':'warn',
+   'prefer-const':'warn',
+   'no-undef':'warn',
+   'import/order':'warn',
+   'no-lone-blocks':'warn',
+   'no-unused-vars':'warn',
+   'global-require':'warn',
+   'no-use-before-define':'warn',
    'no-useless-escape': 'warn',
    "max-len": [
-     "error",
+     "warn",
      {
        "code": 125,
        "ignoreUrls": true,

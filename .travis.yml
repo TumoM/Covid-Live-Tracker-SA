@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 13
+  - stable
 dist: trusty
 cache:
   directories:
@@ -10,11 +10,19 @@ branches:
     - master
     - working
     - recover
+
 before_script:
   - npm install -g gulp-cli
+
+install:
+  - npm install -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
+  - npm install puppeteer
+  - npm install -g codecov
+  - npm install -g jest
+  - npm install
 script:
-  - gulp clean
-  - gulp pack
+  - npm run test
+  - codecov
 deploy:
   provider: heroku
   api_key:
@@ -22,3 +30,16 @@ deploy:
   app: covid-tracker-sa
   on:
     repo: TumoM/Covid-Live-Tracker-SA
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Hinting Tests"
+      script: npm run hint
+    - script: npm run lint
+      name: "Linting Tests"
+    - script: npm run test
+      name: "Unit Tests"
+    - script: npm run test:e2e
+      name: "Integration Tests"
+    - stage: "Build"
+      script: npm run build

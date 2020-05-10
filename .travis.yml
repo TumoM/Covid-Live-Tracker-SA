@@ -10,12 +10,15 @@ branches:
     - master
     - working
     - recover
-install:
-  - install -g codecov
-  - npm install -g jest
+
 before_script:
   - npm install -g gulp-cli
   - npm install jest-puppeteer
+
+install:
+  - install -g codecov
+  - npm install -g jest
+
 script:
   - npm run test
   - codecov

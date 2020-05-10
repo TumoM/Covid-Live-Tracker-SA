@@ -16,10 +16,10 @@ before_script:
 
 install:
   - npm install -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
-  - npm install -D puppeteer
+  - npm install puppeteer
   - npm install -g codecov
   - npm install -g jest
-
+  - npm install
 script:
   - npm run test
   - codecov

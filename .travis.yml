@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 13
+  - stable
 dist: trusty
 cache:
   directories:
@@ -12,10 +12,13 @@ branches:
     - recover
 before_script:
   - npm install -g gulp-cli
+  - #  - puppeter
+
 
 install:
   - npm install -g codecov
   - npm install -g jest
+  - jest-puppeteer
 script:
 
   - npm run test
@@ -30,8 +33,10 @@ deploy:
 jobs:
   include:
     - stage: "Tests"
+      name: "Hinting Tests"
+      script: npm run hint
+    - script: npm run lint
       name: "Linting Tests"
-      script: npm run lint
     - script: npm run test
       name: "Unit Tests"
     - script: npm run test:e2e

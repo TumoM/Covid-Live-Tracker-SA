@@ -15,8 +15,8 @@ before_script:
   - npm install -g gulp-cli
 
 install:
-  - npm install -g jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
-  - npm install -g puppeteer
+  - npm install -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
+  - npm install -D puppeteer
   - npm install -g codecov
   - npm install -g jest
 

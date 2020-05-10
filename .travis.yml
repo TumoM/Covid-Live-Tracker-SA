@@ -16,7 +16,7 @@ before_script:
   - npm install jest-puppeteer
 
 install:
-  - install -g codecov
+  - npm install -g codecov
   - npm install -g jest
 
 script:

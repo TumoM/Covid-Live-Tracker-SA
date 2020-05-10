@@ -12,9 +12,13 @@ branches:
     - recover
 before_script:
   - npm install -g gulp-cli
+
+install:
+  - npm install -g codecov
 script:
-  - gulp clean
-  - gulp pack
+
+  - npm run test
+  - codecov
 deploy:
   provider: heroku
   api_key:
@@ -22,3 +26,14 @@ deploy:
   app: covid-tracker-sa
   on:
     repo: TumoM/Covid-Live-Tracker-SA
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Linting Tests"
+      script: npm run lint
+    - script: npm run test
+      name: "Unit Tests"
+    - script: npm run test:e2e
+      name: "Integration Tests"
+    - stage: "Build"
+      script: npm run build

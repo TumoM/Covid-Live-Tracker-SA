@@ -7,7 +7,7 @@ linter:
     targets:
       - src/js/*.js
       - src/sass/*.scss
-      - test***REMOVED***/*.js
+      - helpers***REMOVED***/*.js
       - app.js
       - views/
       - another_target_directory/foo.rb

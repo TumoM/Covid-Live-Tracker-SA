@@ -1,3 +1,4 @@
 public/**/*
-/**/*min*.js
+/**/*min*
 assets/**/*.js
+src/semantic

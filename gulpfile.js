@@ -78,8 +78,7 @@ gulp.task('pack-css', function () {
         'views/**/*.ejs',
         'views/**/*.html',
         'public/build/**/*.js',
-        'public/**/*.js',
-        'test/**/*.js'],
+        'helpers/**/*.js'],
         { info: true,rejected:false, whitelist}))
       .pipe(postcss([
         pfm(),

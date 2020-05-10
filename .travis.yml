@@ -13,9 +13,9 @@ branches:
 
 before_script:
   - npm install -g gulp-cli
-  - npm install jest-puppeteer
 
 install:
+  - npm install -g jest-puppeteer
   - npm install -g codecov
   - npm install -g jest
 

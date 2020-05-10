@@ -125,7 +125,7 @@ Format.prototype.sanitizeHTML = function(value){
 ***REMOVED***;
 
 Format.prototype.emptyToSpace = function(value){
-	return value === null || typeof value === "undefined" ? "&nbsp;" : value;
+	return value === null || typeof value === "undefined" || value === "" ? "&nbsp;" : value;
 ***REMOVED***;
 
 //get formatter for cell

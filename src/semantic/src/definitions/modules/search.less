@@ -1,0 +1,445 @@
+/*!
+***REMOVED*** # Fomantic-UI - Search
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'module';
+@element : 'search';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+             Search
+*******************************/
+
+.ui.search {
+  position: relative;
+***REMOVED***
+
+.ui.search > .prompt {
+  margin: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+
+  text-shadow: none;
+  font-style: normal;
+  font-weight: @normal;
+
+  line-height: @promptLineHeight;
+  padding: @promptPadding;
+  font-size: @promptFontSize;
+
+  background: @promptBackground;
+  border: @promptBorder;
+  color: @promptColor;
+  box-shadow: @promptBoxShadow;
+  transition: @promptTransition;
+***REMOVED***
+
+.ui.search .prompt {
+  border-radius: @promptBorderRadius;
+***REMOVED***
+
+
+/*--------------
+     Icon
+---------------*/
+
+.ui.search .prompt ~ .search.icon {
+  cursor: pointer;
+***REMOVED***
+
+/*--------------
+    Results
+---------------*/
+
+.ui.search > .results {
+  display: none;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform-origin: center top;
+  white-space: normal;
+  text-align: left;
+  text-transform: none;
+
+  background: @resultsBackground;
+
+  margin-top: @resultsDistance;
+  width: @resultsWidth;
+
+  border-radius: @resultsBorderRadius;
+  box-shadow: @resultsBoxShadow;
+  border: @resultsBorder;
+  z-index: @resultsZIndex;
+***REMOVED***
+.ui.search > .results > :first-child {
+  border-radius: @resultsBorderRadius @resultsBorderRadius 0 0;
+***REMOVED***
+.ui.search > .results > :last-child {
+  border-radius: 0 0 @resultsBorderRadius @resultsBorderRadius;
+***REMOVED***
+
+/*--------------
+    Result
+---------------*/
+
+.ui.search > .results .result {
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  font-size: @resultFontSize;
+  padding: @resultPadding;
+  color: @resultTextColor;
+  line-height: @resultLineHeight;
+  border-bottom: @resultDivider;
+***REMOVED***
+.ui.search > .results .result:last-child {
+  border-bottom: @resultLastDivider !important;
+***REMOVED***
+
+/* Image***REMOVED***/
+.ui.search > .results .result .image {
+  float: @resultImageFloat;
+  overflow: hidden;
+  background: @resultImageBackground;
+  width: @resultImageWidth;
+  height: @resultImageHeight;
+  border-radius: @resultImageBorderRadius;
+***REMOVED***
+.ui.search > .results .result .image img {
+  display: block;
+  width: auto;
+  height: 100%;
+***REMOVED***
+
+/*--------------
+      Info
+---------------*/
+
+.ui.search > .results .result .image + .content {
+  margin: @resultImageMargin;
+***REMOVED***
+
+.ui.search > .results .result .title {
+  margin: @resultTitleMargin;
+  font-family: @resultTitleFont;
+  font-weight: @resultTitleFontWeight;
+  font-size: @resultTitleFontSize;
+  color: @resultTitleColor;
+***REMOVED***
+.ui.search > .results .result .description {
+  margin-top: @resultDescriptionDistance;
+  font-size: @resultDescriptionFontSize;
+  color: @resultDescriptionColor;
+***REMOVED***
+.ui.search > .results .result .price {
+  float: @resultPriceFloat;
+  color: @resultPriceColor;
+***REMOVED***
+
+/*--------------
+    Message
+---------------*/
+
+.ui.search > .results > .message {
+  padding: @messageVerticalPadding @messageHorizontalPadding;
+***REMOVED***
+.ui.search > .results > .message .header {
+  font-family: @headerFont;
+  font-size: @messageHeaderFontSize;
+  font-weight: @messageHeaderFontWeight;
+  color: @messageHeaderColor;
+***REMOVED***
+.ui.search > .results > .message .description {
+  margin-top: @messageDescriptionDistance;
+  font-size: @messageDescriptionFontSize;
+  color: @messageDescriptionColor;
+***REMOVED***
+
+/* View All Results***REMOVED***/
+.ui.search > .results > .action {
+  display: block;
+  border-top: @actionBorder;
+  background: @actionBackground;
+  padding: @actionPadding;
+  color: @actionColor;
+  font-weight: @actionFontWeight;
+  text-align: @actionAlign;
+***REMOVED***
+
+
+***REMOVED********************************
+            States
+*******************************/
+
+/*--------------------
+       Focus
+---------------------*/
+
+.ui.search > .prompt:focus {
+  border-color: @promptFocusBorderColor;
+  background: @promptFocusBackground;
+  color: @promptFocusColor;
+***REMOVED***
+
+& when (@variationSearchLoading) {
+  /*--------------------
+         Loading
+  ---------------------*/
+
+  .ui.loading.search .input > i.icon:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+
+    margin: @loaderMargin;
+    width: @loaderSize;
+    height: @loaderSize;
+
+    border-radius: @circularRadius;
+    border: @loaderLineWidth solid @loaderFillColor;
+***REMOVED***
+  .ui.loading.search .input > i.icon:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+
+    margin: @loaderMargin;
+    width: @loaderSize;
+    height: @loaderSize;
+
+    animation: loader @loaderSpeed infinite linear;
+    border: @loaderLineWidth solid @loaderLineColor;
+    border-radius: @circularRadius;
+
+    box-shadow: 0 0 0 1px transparent;
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+      Hover
+---------------*/
+
+.ui.search > .results .result:hover,
+.ui.category.search > .results .category .result:hover {
+  background: @resultHoverBackground;
+***REMOVED***
+.ui.search .action:hover:not(div) {
+  background: @actionHoverBackground;
+***REMOVED***
+
+/*--------------
+      Active
+---------------*/
+& when (@variationSearchCategory) {
+  .ui.category.search > .results .category.active {
+    background: @categoryActiveBackground;
+***REMOVED***
+  .ui.category.search > .results .category.active > .name {
+    color: @categoryNameActiveColor;
+***REMOVED***
+***REMOVED***
+
+.ui.search > .results .result.active,
+.ui.category.search > .results .category .result.active {
+  position: relative;
+  border-left-color: @resultActiveBorderLeft;
+  background: @resultActiveBackground;
+  box-shadow: @resultActiveBoxShadow;
+***REMOVED***
+.ui.search > .results .result.active .title {
+  color: @resultActiveTitleColor;
+***REMOVED***
+.ui.search > .results .result.active .description {
+  color: @resultActiveDescriptionColor;
+***REMOVED***
+
+& when (@variationSearchDisabled) {
+  /*--------------------
+          Disabled
+  ----------------------*/
+
+  /* Disabled***REMOVED***/
+  .ui.disabled.search {
+    cursor: default;
+    pointer-events: none;
+    opacity: @disabledOpacity;
+***REMOVED***
+***REMOVED***
+
+
+***REMOVED********************************
+           Types
+*******************************/
+
+& when (@variationSearchSelection) {
+  /*--------------
+      Selection
+  ---------------*/
+
+  .ui.search.selection .prompt {
+    border-radius: @selectionPromptBorderRadius;
+***REMOVED***
+
+  /* Remove input***REMOVED***/
+  .ui.search.selection > .icon.input > .remove.icon {
+    pointer-events: none;
+    position: absolute;
+    left: auto;
+    opacity: 0;
+    color: @selectionCloseIconColor;
+    top: @selectionCloseTop;
+    right: @selectionCloseRight;
+    transition: @selectionCloseTransition;
+***REMOVED***
+  .ui.search.selection > .icon.input > .active.remove.icon {
+    cursor: pointer;
+    opacity: @selectionCloseIconOpacity;
+    pointer-events: auto;
+***REMOVED***
+  .ui.search.selection > .icon.input:not([class*="left icon"]) > .icon ~ .remove.icon {
+    right: @selectionCloseIconInputRight;
+***REMOVED***
+  .ui.search.selection > .icon.input > .remove.icon:hover {
+    opacity: @selectionCloseIconHoverOpacity;
+    color: @selectionCloseIconHoverColor;
+***REMOVED***
+***REMOVED***
+
+& when (@variationSearchCategory) {
+  /*--------------
+      Category
+  ---------------*/
+
+  .ui.category.search .results {
+    width: @categoryResultsWidth;
+***REMOVED***
+
+  .ui.category.search .results.animating,
+  .ui.category.search .results.visible {
+    display: table;
+***REMOVED***
+
+  /* Category***REMOVED***/
+  .ui.category.search > .results .category {
+    display: table-row;
+    background: @categoryBackground;
+    box-shadow: @categoryBoxShadow;
+    transition: @categoryTransition;
+***REMOVED***
+
+  /* Last Category***REMOVED***/
+  .ui.category.search > .results .category:last-child {
+    border-bottom: none;
+***REMOVED***
+
+  /* First / Last***REMOVED***/
+  .ui.category.search > .results .category:first-child .name + .result {
+    border-radius: 0 @resultsBorderRadius 0 0;
+***REMOVED***
+  .ui.category.search > .results .category:last-child .result:last-child {
+    border-radius: 0 0 @resultsBorderRadius 0;
+***REMOVED***
+
+  /* Category Result Name***REMOVED***/
+  .ui.category.search > .results .category > .name {
+    display: table-cell;
+    text-overflow: ellipsis;
+    width: @categoryNameWidth;
+    white-space: @categoryNameWhitespace;
+    background: @categoryNameBackground;
+    font-family: @categoryNameFont;
+    font-size: @categoryNameFontSize;
+    padding: @categoryNamePadding;
+    font-weight: @categoryNameFontWeight;
+    color: @categoryNameColor;
+    border-bottom: @categoryDivider;
+***REMOVED***
+
+  /* Category Result***REMOVED***/
+  .ui.category.search > .results .category .results {
+    display: table-cell;
+    background: @categoryResultBackground;
+    border-left: @categoryResultLeftBorder;
+    border-bottom: @categoryDivider;
+***REMOVED***
+  .ui.category.search > .results .category .result {
+    border-bottom: @categoryResultDivider;
+    transition: @categoryResultTransition;
+    padding: @categoryResultPadding;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+           Variations
+*******************************/
+
+& when (@variationSearchAligned) {
+  /*-------------------
+       Left / Right
+  --------------------*/
+
+  .ui[class*="left aligned"].search > .results {
+    right: auto;
+    left: 0;
+***REMOVED***
+  .ui[class*="right aligned"].search > .results {
+    right: 0;
+    left: auto;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+    Fluid
+---------------*/
+
+& when (@variationSearchFluid) {
+  .ui.fluid.search .results {
+    width: 100%;
+***REMOVED***
+***REMOVED***
+
+
+/*--------------
+      Sizes
+---------------*/
+
+.ui.search {
+  font-size: @relativeMedium;
+***REMOVED***
+& when not (@variationFeedSizes = false) {
+  each(@variationFeedSizes, {
+    @s: @{value***REMOVED***SearchSize;
+    .ui.@{value***REMOVED***.search  {
+      font-size: @@s;
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+/*--------------
+      Mobile
+---------------*/
+
+@media only screen and (max-width: @largestMobileScreen) {
+  .ui.search .results {
+    max-width: @mobileMaxWidth;
+***REMOVED***
+***REMOVED***
+
+.loadUIOverrides();

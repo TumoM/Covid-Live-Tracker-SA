@@ -574,7 +574,7 @@ Row.prototype.updateData = function(updatedData){
 
 		//Partial reinitialization if visible
 		if(visible){
-			this.normalizeHeight();
+			this.normalizeHeight(true);
 
 			if(this.table.options.rowFormatter){
 				this.table.options.rowFormatter(this.getComponent());
@@ -746,6 +746,13 @@ Row.prototype.deleteActual = function(blockRedraw){
 	//deselect row if it is selected
 	if(this.table.modExists("selectRow")){
 		this.table.modules.selectRow._deselectRow(this, true);
+	***REMOVED***
+
+	//cancel edit if row is currently being edited
+	if(this.table.modExists("edit")){
+		if(this.table.modules.edit.currentCell.row === this){
+			this.table.modules.edit.cancelEdit();
+		***REMOVED***
 	***REMOVED***
 
 	// if(this.table.options.dataTree && this.table.modExists("dataTree")){

@@ -203,8 +203,8 @@ $footerActiveColor:$pagination-active-color !default; //footer bottom active tex
 
 				input{
 					&::-ms-clear {
-					  width : 0;
-					  height: 0;
+						width : 0;
+						height: 0;
 					***REMOVED***
 				***REMOVED***
 			***REMOVED***
@@ -607,30 +607,42 @@ $footerActiveColor:$pagination-active-color !default; //footer bottom active tex
 
 		.tabulator-row{
 			border-color: $table-dark-border-color;
+			background-color: $table-dark-bg;
+			color: $table-dark-color;
 
 			&:hover{
-				background-color: $table-dark-hover-bg !important;
+				background-color: $table-dark-border-color;
+
+				.tabulator-cell{
+					background-color: $table-dark-hover-bg;
+				***REMOVED***
+			***REMOVED***
+
+			&.tabulator-selected{
+				background-color:$rowSelectedBackground;
 			***REMOVED***
 		***REMOVED***
 	***REMOVED***
 
 	&.table-striped{
-		.tabulator-row{
-			&:nth-child(even){
-				background-color: $rowAltBackgroundColor;
+		&:not(.table-dark){
+			.tabulator-row{
+				&:nth-child(even){
+					background-color: $rowAltBackgroundColor;
 
-				&.tabulator-selected{
-					background-color:$rowSelectedBackground;
-				***REMOVED***
+					&.tabulator-selected{
+						background-color:$rowSelectedBackground;
+					***REMOVED***
 
-				&.tabulator-selectable:hover{
-					background-color:$rowHoverBackground;
-					cursor: pointer;
-				***REMOVED***
+					&.tabulator-selectable:hover{
+						background-color:$rowHoverBackground;
+						cursor: pointer;
+					***REMOVED***
 
-				&.tabulator-selected:hover{
-					background-color:$rowSelectedBackgroundHover;
-					cursor: pointer;
+					&.tabulator-selected:hover{
+						background-color:$rowSelectedBackgroundHover;
+						cursor: pointer;
+					***REMOVED***
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***
@@ -638,7 +650,9 @@ $footerActiveColor:$pagination-active-color !default; //footer bottom active tex
 		&.table-dark{
 			.tabulator-row{
 				&:nth-child(even){
-					background-color: $table-dark-accent-bg;
+					.tabulator-cell{
+						background-color: $table-dark-accent-bg;
+					***REMOVED***
 				***REMOVED***
 			***REMOVED***
 		***REMOVED***

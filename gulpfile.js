@@ -2,17 +2,11 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var clean = require('gulp-clean');
-// var autoprefixer = require('gulp-autoprefixer');
 var autoprefixer = require('autoprefixer');
-// var uglify = require('gulp-uglify');
 let uglify = require('gulp-uglify-es').default;
-let rename = require("gulp-rename");
-var cleanCss = require('gulp-clean-css');
 var sourcemaps = require('gulp-sourcemaps')
 const pfm = require('postcss-font-magician');
 var postcss = require('gulp-postcss')
-var pipeline = require('readable-stream').pipeline;
-let babel = require('gulp-babel');
 const eslint = require('gulp-eslint')
 var purify = require('gulp-purifycss');
 var browserSync = require('browser-sync').create();
@@ -20,21 +14,7 @@ const combineSelectors = require('postcss-combine-duplicated-selectors');
 const combineMedia = require('postcss-combine-media-query');
 const cssnano = require('cssnano')
 const series =gulp.series, parallel =gulp.parallel, watch =gulp.watch;
-const advanced = require('cssnano-preset-advanced')
-const purgecss = require('gulp-purgecss')
 
-// Set the browser that you want to support
-const AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
 
 let whitelist = [
    'tabulator', 'striped',  'tabulator-tableHolder',  'tabulator-table',  'tabulator-row:nth-child(2n)'
@@ -74,21 +54,22 @@ gulp.task('js', function () {
 gulp.task('pack-js', function () {
   return gulp.src(['assets/js/vendor/jquery.min.js',
       'assets/js/vendor/jquery*.js',
-      'assets/js/vendor/semantic.min*.js',
+      'assets/js/vendor/semantic*.js',
       'assets/js/vendor/moment*.js',
       'assets/js/vendor/numerals*.js',
       'assets/js/vendor/hammer*.js',
       'assets/js/vendor/chart.min.js',
       'assets/js/vendor/chartjs-plugin-zoom.min.js',
       'assets/js/vendor/jquery.jscrollpane.min.js',
-      'assets/js/vendor/*.js', 'assets/js/*.js'])
+      'assets/js/vendor/tabulator*.js',
+      'assets/js/vendor/*.js', 'assets/js***REMOVED***/*.js'])
       .pipe(concat('bundle.js'))
       .pipe(uglify())
       .pipe(gulp.dest('public/build/js'));
 ***REMOVED***);
 
 gulp.task('pack-css', function () {
-  return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui.min.css','assets/css/vendor/*.css','assets/css***REMOVED***/*.css','assets/css/*.css'])
+  return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui*.css','assets/css/vendor/*.css','assets/css***REMOVED***/*.css','assets/css/*.css'])
       .pipe(sourcemaps.init())
       .pipe(concat('stylesheet.css'))
     .pipe(purify([

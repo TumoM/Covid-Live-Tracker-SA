@@ -1,0 +1,11 @@
+.ui.info.message {
+  background: linear-gradient(#D8EBF8, #D0E3EF);
+***REMOVED***
+.ui.error.message {
+  background: linear-gradient(#F8D8D8, #EFD0D0);
+***REMOVED***
+.ui.warning.message {
+  background: linear-gradient(#FFE3C8, #F5DAC0);
+***REMOVED***
+.ui.success.message {
+***REMOVED***

@@ -1,6 +1,10 @@
 /*=include modules/accessor.js***REMOVED***/
+/*=include modules/ajax.js***REMOVED***/
 /*=include modules/calculation_colums.js***REMOVED***/
+/*=include modules/clipboard.js***REMOVED***/
 /*=include modules/data_tree.js***REMOVED***/
+/*=include modules/download.js***REMOVED***/
+/*=include modules/edit.js***REMOVED***/
 /*=include modules/export.js***REMOVED***/
 /*=include modules/filter.js***REMOVED***/
 /*=include modules/format.js***REMOVED***/

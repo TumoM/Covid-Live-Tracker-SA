@@ -414,12 +414,12 @@ async function main() {
 ***REMOVED***
 
 
-/* main().then((res)=>{
+ main().then((res)=>{
     console.log('Res',res)
      return res
         process.exit(0)
   ***REMOVED***
-)*/
+)
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

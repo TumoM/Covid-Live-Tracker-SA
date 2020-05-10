@@ -1,0 +1,298 @@
+/*!
+***REMOVED*** # Fomantic-UI - Divider
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'element';
+@element : 'divider';
+
+@import (multiple) '../../theme.config';
+
+
+***REMOVED********************************
+            Divider
+*******************************/
+
+.ui.divider {
+  margin: @margin;
+
+  line-height: 1;
+  height: 0;
+
+  font-weight: @fontWeight;
+  text-transform: @textTransform;
+  letter-spacing: @letterSpacing;
+  color: @color;
+
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+***REMOVED***
+
+/*--------------
+      Basic
+---------------*/
+
+.ui.divider:not(.vertical):not(.horizontal) {
+  border-top: @shadowWidth solid @shadowColor;
+  border-bottom: @highlightWidth solid @highlightColor;
+***REMOVED***
+
+/*--------------
+    Coupling
+---------------*/
+
+/* Allow divider between each column row***REMOVED***/
+.ui.grid > .column + .divider,
+.ui.grid > .row > .column + .divider {
+  left: auto;
+***REMOVED***
+
+& when (@variationDividerHorizontal) {
+  /*--------------
+     Horizontal
+  ---------------*/
+
+  .ui.horizontal.divider {
+    display: table;
+    white-space: nowrap;
+
+    height: auto;
+    margin: @horizontalMargin;
+    line-height: 1;
+    text-align: center;
+***REMOVED***
+
+  .ui.horizontal.divider:before,
+  .ui.horizontal.divider:after {
+    content: '';
+    display: table-cell;
+    position: relative;
+    top: 50%;
+    width: 50%;
+    background-repeat: no-repeat;
+***REMOVED***
+
+  .ui.horizontal.divider:before {
+    background-position: right @horizontalDividerMargin top 50%;
+***REMOVED***
+  .ui.horizontal.divider:after {
+    background-position: left @horizontalDividerMargin top 50%;
+***REMOVED***
+***REMOVED***
+
+& when (@variationDividerVertical) {
+  /*--------------
+      Vertical
+  ---------------*/
+
+  .ui.vertical.divider {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: 50%;
+
+    line-height: 0;
+    text-align: center;
+    transform: translateX(-50%);
+***REMOVED***
+
+  .ui.vertical.divider:before,
+  .ui.vertical.divider:after {
+    position: absolute;
+    left: 50%;
+    content: '';
+    z-index: 3;
+
+    border-left: @shadowWidth solid @shadowColor;
+    border-right: @highlightWidth solid @highlightColor;
+
+    width: 0;
+    height: @verticalDividerHeight;
+***REMOVED***
+
+  .ui.vertical.divider:before {
+    top: -100%;
+***REMOVED***
+  .ui.vertical.divider:after {
+    top: auto;
+    bottom: 0;
+***REMOVED***
+
+  /* Inside grid***REMOVED***/
+  @media only screen and (max-width : @largestMobileScreen) {
+
+    .ui.stackable.grid .ui.vertical.divider,
+    .ui.grid .stackable.row .ui.vertical.divider {
+      display: table;
+      white-space: nowrap;
+      height: auto;
+      margin: @horizontalMargin;
+      overflow: hidden;
+      line-height: 1;
+      text-align: center;
+      position: static;
+      top: 0;
+      left: 0;
+      transform: none;
+  ***REMOVED***
+
+    .ui.stackable.grid .ui.vertical.divider:before,
+    .ui.grid .stackable.row .ui.vertical.divider:before,
+    .ui.stackable.grid .ui.vertical.divider:after,
+    .ui.grid .stackable.row .ui.vertical.divider:after {
+      left: 0;
+      border-left: none;
+      border-right: none;
+      content: '';
+      display: table-cell;
+      position: relative;
+      top: 50%;
+      width: 50%;
+      background-repeat: no-repeat;
+  ***REMOVED***
+
+    .ui.stackable.grid .ui.vertical.divider:before,
+    .ui.grid .stackable.row .ui.vertical.divider:before {
+      background-position: right @horizontalDividerMargin top 50%;
+  ***REMOVED***
+    .ui.stackable.grid .ui.vertical.divider:after,
+    .ui.grid .stackable.row .ui.vertical.divider:after {
+      background-position: left @horizontalDividerMargin top 50%;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+& when (@variationDividerIcon) {
+  /*--------------
+        Icon
+  ---------------*/
+
+  .ui.divider > .icon {
+    margin: @dividerIconMargin;
+    font-size: @dividerIconSize;
+    height: 1em;
+    vertical-align: middle;
+***REMOVED***
+***REMOVED***
+
+& when (@variationDividerHorizontal) {
+  /*--------------
+       Header
+  ---------------*/
+  .ui.horizontal.divider[class*="left aligned"] {
+    &:before {
+      display: none;
+  ***REMOVED***
+    &:after {
+      width: 100%;
+  ***REMOVED***
+***REMOVED***
+  .ui.horizontal.divider[class*="right aligned"] {
+    &:before {
+      width: 100%;
+  ***REMOVED***
+    &:after {
+      display: none;
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+          Variations
+*******************************/
+
+& when (@variationDividerHidden) {
+  /*--------------
+      Hidden
+  ---------------*/
+
+  .ui.hidden.divider {
+    border-color: transparent !important;
+***REMOVED***
+
+  .ui.hidden.divider:before,
+  .ui.hidden.divider:after {
+    display: none;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+    Inverted
+---------------*/
+& when (@variationDividerInverted) {
+  .ui.divider.inverted,
+  .ui.vertical.inverted.divider,
+  .ui.horizontal.inverted.divider {
+    color: @invertedTextColor;
+***REMOVED***
+  .ui.divider.inverted,
+  .ui.divider.inverted:after,
+  .ui.divider.inverted:before {
+    border-top-color: @invertedShadowColor !important;
+    border-left-color: @invertedShadowColor !important;
+    border-bottom-color: @invertedHighlightColor !important;
+    border-right-color: @invertedHighlightColor !important;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+    Fitted
+---------------*/
+& when (@variationDividerFitted) {
+  .ui.fitted.divider {
+    margin: 0;
+***REMOVED***
+***REMOVED***
+
+& when (@variationDividerClearing) {
+  /*--------------
+      Clearing
+  ---------------*/
+
+  .ui.clearing.divider {
+    clear: both;
+***REMOVED***
+***REMOVED***
+
+& when (@variationDividerSection) {
+  /*--------------
+      Section
+  ---------------*/
+
+  .ui.section.divider {
+    margin-top: @sectionMargin;
+    margin-bottom: @sectionMargin;
+***REMOVED***
+***REMOVED***
+
+/*--------------
+     Sizes
+---------------*/
+
+.ui.divider {
+  font-size: @medium;
+***REMOVED***
+& when not (@variationDividerSizes = false) {
+  each(@variationDividerSizes, {
+    @s: @@value;
+    .ui.@{value***REMOVED***.divider {
+      font-size: @s;
+  ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+.loadUIOverrides();

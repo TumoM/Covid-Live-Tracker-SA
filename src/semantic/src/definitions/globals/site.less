@@ -1,0 +1,207 @@
+/*!
+***REMOVED*** # Fomantic-UI - Site
+***REMOVED*** http://github.com/fomantic/Fomantic-UI/
+***REMOVED***
+***REMOVED***
+***REMOVED*** Released under the MIT license
+***REMOVED*** http://opensource.org/licenses/MIT
+***REMOVED***
+***REMOVED***/
+
+
+***REMOVED********************************
+            Theme
+*******************************/
+
+@type    : 'global';
+@element : 'site';
+
+@import (multiple) '../../theme.config';
+
+***REMOVED********************************
+             Page
+*******************************/
+
+.loadFonts();
+
+html,
+body {
+  height: 100%;
+***REMOVED***
+
+html {
+  font-size: @emSize;
+***REMOVED***
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: @pageOverflowX;
+  min-width: @pageMinWidth;
+  background: @pageBackground;
+  font-family: @pageFont;
+  font-size: @fontSize;
+  line-height: @lineHeight;
+  color: @textColor;
+***REMOVED***
+
+***REMOVED********************************
+             Headers
+*******************************/
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: @headerFont;
+  line-height: @headerLineHeight;
+  margin: @headerMargin;
+  font-weight: @headerFontWeight;
+  padding: 0;
+***REMOVED***
+
+h1 {
+  min-height: 1rem;
+  font-size: @h1;
+***REMOVED***
+h2 {
+  font-size: @h2;
+***REMOVED***
+h3 {
+  font-size: @h3;
+***REMOVED***
+h4 {
+  font-size: @h4;
+***REMOVED***
+h5 {
+  font-size: @h5;
+***REMOVED***
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child {
+  margin-top: 0;
+***REMOVED***
+
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child {
+  margin-bottom: 0;
+***REMOVED***
+
+
+***REMOVED********************************
+             Text
+*******************************/
+
+p {
+  margin: @paragraphMargin;
+  line-height: @paragraphLineHeight;
+***REMOVED***
+p:first-child {
+  margin-top: 0;
+***REMOVED***
+p:last-child {
+  margin-bottom: 0;
+***REMOVED***
+
+/*-------------------
+        Links
+--------------------*/
+
+a {
+  color: @linkColor;
+  text-decoration: @linkUnderline;
+***REMOVED***
+a:hover {
+  color: @linkHoverColor;
+  text-decoration: @linkHoverUnderline;
+***REMOVED***
+
+
+***REMOVED********************************
+         Scrollbars
+*******************************/
+
+.addScrollbars() when (@useCustomScrollbars) {
+
+  /* Force Simple Scrollbars***REMOVED***/
+  body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: @customScrollbarWidth;
+    height: @customScrollbarHeight;
+***REMOVED***
+  body ::-webkit-scrollbar-track {
+    background: @trackBackground;
+    border-radius: @trackBorderRadius;
+***REMOVED***
+  body ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: @thumbBorderRadius;
+    background: @thumbBackground;
+    transition: @thumbTransition;
+***REMOVED***
+  body ::-webkit-scrollbar-thumb:window-inactive {
+    background: @thumbInactiveBackground;
+***REMOVED***
+  body ::-webkit-scrollbar-thumb:hover {
+    background: @thumbHoverBackground;
+***REMOVED***
+
+  /* Inverted UI***REMOVED***/
+  body .ui.inverted:not(.dimmer)::-webkit-scrollbar-track {
+    background: @trackInvertedBackground;
+***REMOVED***
+  body .ui.inverted:not(.dimmer)::-webkit-scrollbar-thumb {
+    background: @thumbInvertedBackground;
+***REMOVED***
+  body .ui.inverted:not(.dimmer)::-webkit-scrollbar-thumb:window-inactive {
+    background: @thumbInvertedInactiveBackground;
+***REMOVED***
+  body .ui.inverted:not(.dimmer)::-webkit-scrollbar-thumb:hover {
+    background: @thumbInvertedHoverBackground;
+***REMOVED***
+***REMOVED***
+
+***REMOVED********************************
+          Highlighting
+*******************************/
+
+/* Site***REMOVED***/
+::-webkit-selection {
+  background-color: @highlightBackground;
+  color: @highlightColor;
+***REMOVED***
+::-moz-selection {
+  background-color: @highlightBackground;
+  color: @highlightColor;
+***REMOVED***
+::selection {
+  background-color: @highlightBackground;
+  color: @highlightColor;
+***REMOVED***
+
+/* Form***REMOVED***/
+textarea::-webkit-selection,
+input::-webkit-selection {
+  background-color: @inputHighlightBackground;
+  color: @inputHighlightColor;
+***REMOVED***
+textarea::-moz-selection,
+input::-moz-selection {
+  background-color: @inputHighlightBackground;
+  color: @inputHighlightColor;
+***REMOVED***
+textarea::selection,
+input::selection {
+  background-color: @inputHighlightBackground;
+  color: @inputHighlightColor;
+***REMOVED***
+
+.addScrollbars();
+.loadUIOverrides();

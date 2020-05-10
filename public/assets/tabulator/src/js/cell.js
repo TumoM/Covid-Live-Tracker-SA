@@ -209,21 +209,29 @@ Cell.prototype._bindClickEvents = function(cellEvents){
 			***REMOVED***
 		***REMOVED***);
 	***REMOVED***else{
-		// element.addEventListener("dblclick", function(e){
-			// e.preventDefault();
-			// try{
-			// 	if (document.selection) { // IE
-			// 		var range = document.body.createTextRange();
-			// 		range.moveToElementText(self.element);
-			// 		range.select();
-			// 	***REMOVED*** else if (window.getSelection) {
-			// 		var range = document.createRange();
-			// 		range.selectNode(self.element);
-			// 		window.getSelection().removeAllRanges();
-			// 		window.getSelection().addRange(range);
-			// 	***REMOVED***
-			// ***REMOVED***catch(e){***REMOVED***
-		// ***REMOVED***);
+		element.addEventListener("dblclick", function(e){
+
+			if(self.table.modExists("edit")){
+				if (self.table.modules.edit.currentCell === self){
+					return; //prevent instant selection of editor content
+				***REMOVED***
+			***REMOVED***
+
+			e.preventDefault();
+
+			try{
+				if (document.selection) { // IE
+					var range = document.body.createTextRange();
+					range.moveToElementText(self.element);
+					range.select();
+				***REMOVED*** else if (window.getSelection) {
+					var range = document.createRange();
+					range.selectNode(self.element);
+					window.getSelection().removeAllRanges();
+					window.getSelection().addRange(range);
+				***REMOVED***
+			***REMOVED***catch(e){***REMOVED***
+		***REMOVED***);
 	***REMOVED***
 
 	if (cellEvents.cellContext || this.table.options.cellContext){

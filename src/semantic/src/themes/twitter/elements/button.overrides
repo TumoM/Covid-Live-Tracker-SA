@@ -1,0 +1,13 @@
+***REMOVED********************************
+           Overrides
+*******************************/
+
+.ui.primary.button {
+  box-shadow:
+    0px 0px 0px 1px #3B88C3 inset,
+    0 2px 0 rgba(255, 255, 255, 0.15) inset
+  ;
+***REMOVED***
+.ui.primary.button > .icon {
+  color: #FFFFFF;
+***REMOVED***

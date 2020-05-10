@@ -106,7 +106,7 @@ ColumnComponent.prototype.reloadHeaderFilter = function(){
 
 ColumnComponent.prototype.getHeaderFilterValue = function(){
 	if(this._column.table.modExists("filter", true)){
-		this._column.table.modules.filter.getHeaderFilterValue(this._column);
+		return this._column.table.modules.filter.getHeaderFilterValue(this._column);
 	***REMOVED***
 ***REMOVED***;
 
@@ -1147,6 +1147,13 @@ Column.prototype.delete = function(){
 			this.columns.forEach(function(column){
 				column.delete();
 			***REMOVED***);
+		***REMOVED***
+
+		//cancel edit if column is currently being edited
+		if(this.table.modExists("edit")){
+			if(this.table.modules.edit.currentCell.column === this){
+				this.table.modules.edit.cancelEdit();
+			***REMOVED***
 		***REMOVED***
 
 		var cellCount = this.cells.length;

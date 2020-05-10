@@ -10,17 +10,13 @@ branches:
     - master
     - working
     - recover
-before_script:
-  - npm install -g gulp-cli
-  - #  - puppeter
-
-
 install:
-  - npm install -g codecov
+  - install -g codecov
   - npm install -g jest
   - npm i jest-puppeteer
+before_script:
+  - npm install -g gulp-cli
 script:
-
   - npm run test
   - codecov
 deploy:

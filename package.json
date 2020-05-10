@@ -10,7 +10,7 @@
     "hint": "jshint helpers",
     "lint": "eslint helpers",
     "lint:fix": "eslint --fix helpers",
-    "test": "jest",
+    "test": "jest && codecov",
     "test:e2e": "jest -c jest-e2e.config.js",
     "start": "nodemon app.js",
     "sass": "sass --watch src/sass:public/stylesheets",

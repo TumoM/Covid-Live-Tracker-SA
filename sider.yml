@@ -11,7 +11,6 @@ linter:
       - app.js
       - views/
       - testing/
-      -
     locale: UK
     ignore: center,behavior
 

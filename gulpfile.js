@@ -70,21 +70,19 @@ gulp.task('pack-js', function () {
 
 gulp.task('pack-css', function () {
   return gulp.src(['assets/css/vendor/semantic*.css','assets/css/vendor/tabulator_semantic-ui*.css','assets/css/vendor/*.css','assets/css/**/*.css','assets/css/*.css'])
-      .pipe(sourcemaps.init())
-      .pipe(concat('stylesheet.css'))
-    .pipe(purify([
+      .pipe(purify([
         'src/js/*.js',
         'assets/**/*.js',
         'views/**/*.ejs',
-        'views/**/*.html',
-        'public/build/**/*.js',
         'helpers/**/*.js'],
-        { info: true,rejected:false, whitelist}))
+      { info: true,rejected:false, whitelist}))
+    .pipe(sourcemaps.init())
+    .pipe(concat('stylesheet.css'))
       .pipe(postcss([
-        pfm(),
-        autoprefixer(),
+        // pfm(),
         combineMedia(),
         combineSelectors({removeDuplicatedProperties: true}),
+        autoprefixer(),
         cssnano({
           preset: ['advanced', {
             discardComments: {
@@ -145,7 +143,7 @@ gulp.task('lintF', function() {
     .pipe(eslint.format());
 });
 
-gulp.task('pack', series('pack-js', 'pack-css'));
+gulp.task('pack', parallel(['pack-js', 'pack-css']));
 gulp.task('default', series('clean',parallel(['sass', 'js']),'pack','watch'));
 gulp.task('build', series('clean',parallel(['sass', 'js']),'pack'));
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-
+let ejs = require('ejs')
 const compression = require('compression');
 
 const app = express();
@@ -16,10 +16,6 @@ const https = require('https');
 http.globalAgent.maxSockets = Infinity;
 https.globalAgent.maxSockets = Infinity;
 
-Sentry.init({ dsn: 'https://58ae4a8b4ff545d0bb1449730d6b2762@o386838.ingest.sentry.io/5221539' });
-
-// The request handler must be the first middleware on the app
-app.use(Sentry.Handlers.requestHandler());
 dotenv.config();
 
 const ttl = 60 * 60 * 1; // cache for 1 Hour
@@ -31,11 +27,10 @@ const ttl = 60 * 60 * 1; // cache for 1 Hour
 // });
 const cache = new NodeCache({
     checkperiod: 60,
-    maxKeys: 10000,
+    maxKeys: 200,
     stdTTL: ttl,
     useClones: false,
 });
-cache.set('data', null);
 const port = process.env.PORT || 5000;
 
 // Setup Express/App
@@ -44,7 +39,7 @@ app.set('view cache', true);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
+ejs.cache = cache;
 function shouldCompress(req, res) {
     if (req.headers['x-no-compression']) {
         // don't compress responses with this request header
@@ -123,6 +118,7 @@ app.use((req, res, next) => {
     res.locals.cache = cache;
     res.locals.pool = pool;
     res.locals.sql = sql;
+    res.locals.ejs = ejs;
     next();
 });
 

@@ -10,15 +10,15 @@
     <div class="footer-left">
 
         <p class="footer-links">
-            <a href="/" data-section="#myNav" class="active item fluid">Home</a>
+            <a href="/" data-section="#myHome" class="active item fluid homeNavButton">Home</a>
             ·
-            <a href="#myStatsHeading" data-section="#myStats" class="item fluid">Stats</a>
+            <a href="#myStatsHeading" data-section="#myStats" class="item fluid statsNavButton">Stats</a>
             ·
-            <a href="#myMapHeading" data-section="#myMap" class="item fluid">Map</a>
+            <a href="#myMapHeading" data-section="#myMap" class="item fluid mapNavButton">Map</a>
             ·
-            <a href="#myGraphsHeading" data-section="#myGraphs" class="item  fluid">Graphs</a>
+            <a href="#myGraphsHeading" data-section="#myGraphs" class="item fluid graphNavButton">Graphs</a>
             ·
-            <a href="#myTableHeading" data-section="#myTable" class="item ">Historical</a>
+            <a href="#myTableHeading" data-section="#myTable" class="item fluid tableNavButton">Historical</a>
             ·
             <a href="javascript:void(0)" class="item aboutButton" id="aboutButton">About</a>
         </p>
@@ -56,8 +56,8 @@
 		$('#mainBundle').attr('rel','stylesheet')
 			// Cache selectors
 			var lastId,
-				topMenu = $("#myNav"),
-				topMenuHeight = topMenu.outerHeight()+1,
+				topMenu = $("nav"),
+				topMenuHeight = topMenu.outerHeight(),
 				// All list items
 				menuItems = topMenu.find("a.item.fluid"),
 				// Anchors corresponding to menu items
@@ -76,7 +76,7 @@
             // so we can get a fancy scroll animation
             menuItems.click(function(e){
                 var href = $(this).attr("data-section"),
-                    offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+                    offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight;
                 $('html, body').stop().animate({
                     scrollTop: offsetTop
                 }, 850);
@@ -85,7 +85,7 @@
 
 			var debounced_version = _.debounce(function(){
 							// Get container scroll position
-							var fromTop = $(this).scrollTop()+topMenuHeight;
+							var fromTop = $(this).scrollTop()-topMenuHeight;
 
 							// Get id of current scroll item
 							var cur = scrollItems.map(function(){
@@ -98,21 +98,34 @@
 
 							if (lastId !== id) {
 								lastId = id;
+                                console.log('ID:',id)
+                                let myId = id.split('my')[1]||'Home';
+                                id = id?id:'myHome'
+                                // myId = myId.length>0?myId:'Home'
+                                console.log('My ID:',myId)
 								// Set/remove active class
 								menuItems.removeClass("active");
 								menuItems
 									.parent()
 									.end().filter(`[data-section="#${id}"]`).addClass("active");
+                                gtag('config', 'UA-0000000-1', {
+                                    'page_title' : `${myId}`,
+                                    'page_path': `/${myId.toLowerCase()}`
+                                });
 							}
-						}, 100,{leading: true});
+						}, 200,{leading: true});
 			$(window).on('scroll', debounced_version);
 			$(window).scroll();
 
 			$('.aboutButton')
 				.click((event)=>{
 					console.log("you clicked me!")
+                    gtag('config', 'UA-0000000-1', {
+                        'page_title' : 'About',
+                        'page_path': '/about'
+                    });
 
-					$('.page.dimmer:first')
+                    $('.page.dimmer:first')
 						.dimmer('toggle')
 					;
 

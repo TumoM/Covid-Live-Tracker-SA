@@ -4,6 +4,7 @@ const numeral = require('numeral');
 const moment = require('moment-timezone');
 const sql = require('slonik').sql;
 var etag = require('etag')
+const minify = require('html-minifier').minify;
 // const sql = slonik.sql;
 
 
@@ -29,13 +30,29 @@ const unhashQuery = (query) => {
     return JSON.parse(query);
 };
 
+const minifyOptions = {
+    caseSensitive:true,
+    html5:true,
+    customAttrSurround:true,
+    customEventAttributes:true,
+    collapseWhitespace:true,
+    conservativeCollapse:true,
+    minifyJS:true,
+    preserveLineBreaks:true,
+    preventAttributesEscaping:true,
+    removeComments:true,
+    removeEmptyElements: true,
+    processScripts:['*']
+}
+
 moment.tz.setDefault("Africa/Johannesburg")
 
 router.get("/", function (req, res) {
-    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.setHeader('Cache-Control', 'public, max-age=1');
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
+    const ejs = res.locals.ejs;
     const responseCache = cache.get("data");
     
     if (pool) {
@@ -65,14 +82,25 @@ router.get("/", function (req, res) {
                   },
                   graphData:responseData.graphs
               }
-              console.log("SETTING CACHE")
               res.setHeader('ETag', etag(hashQuery(returnObj)))
-              cache.set("data", hashQuery(returnObj));
-              res.render("index",returnObj);
-              return true;
+              ejs.renderFile('views/index.ejs',returnObj, {cache:true }, function(err, html){
+                  if (err){
+                      console.error("YOYOYO",err);
+                      res.status(400).json({message:err}).send()
+                      return false
+                  }else{
+                      res.send(html);
+                      console.log("SETTING CACHE")
+                      cache.set("data", hashQuery(returnObj));
+                      return true;
+                  }
+                 
+    
+              })
+              })
     
               /*await pool.end(); // ??*/
-          });
+          
         // If valid cache.
 
     }
@@ -120,7 +148,7 @@ const getSummarySlonik = async (pool,responseCache) => {
                     value.totalTests = numeral(value.totalTests).format('0,0');
                     value.dailyNew = numeral(value.dailyNew).format('0,0');
                     value.dailyDeaths = numeral(value.dailyDeaths).format('0,0');
-                    value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA ([GMT]Z)");
+                    value.updateTime = moment(value.updateTime).tz('Africa/Johannesburg').format("dddd, MMMM Do YYYY, HH:mm:ssA");
                     // value.updateTime = (new Date(value.updateTime)).toString();
 
                     // 2 - getProvinces()

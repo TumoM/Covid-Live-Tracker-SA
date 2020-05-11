@@ -415,12 +415,11 @@ async function main() {
      return res
         process.exit(0)
   ***REMOVED***
-)*/
-function bootstrap(){
-    main().then((res)=>{
-        console.log('Res',res)
-        return res
-        process.exit(0)
+)***REMOVED***/
+function bootstrap() {
+    main().then((res) => {
+        console.log('Res', res);
+        return res;
   ***REMOVED***);
 ***REMOVED***
 // bootstrap()

@@ -427,13 +427,13 @@ main()
     .catch(err=> console.log('Your Err',err));
 */
 
-function bootstrap(){
+function bootstrap() {
     main()
-      .then(result=>{
-          console.log("main result:",result);
-          process.exit(0)
+      .then((result) => {
+          console.log('main result:', result);
+          process.exit(0);
     ***REMOVED***)
-      .catch(err=> console.log('Your Err',err));
+      .catch((err) => console.log('Your Err', err));
 ***REMOVED***
 
 // bootstrap()

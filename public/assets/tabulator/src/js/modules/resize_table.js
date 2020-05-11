@@ -29,24 +29,31 @@ ResizeTable.prototype.initialize = function(row){
 		this.autoResize = true;
 
 		this.observer = new ResizeObserver((entry) => {
-			if(!table.browserMobile || (table.browserMobile &&!table.modules.edit.currentCell)){
-
-				var nodeHeight = Math.floor(entry[0].contentRect.height);
-				var nodeWidth = Math.floor(entry[0].contentRect.width);
-
-				if(this.tableHeight != nodeHeight || this.tableWidth != nodeWidth){
-					this.tableHeight = nodeHeight;
-					this.tableWidth = nodeWidth;
-
-					if(table.element.parentNode){
-						this.containerHeight = table.element.parentNode.clientHeight;
-						this.containerWidth = table.element.parentNode.clientWidth;
-					***REMOVED***
-
-					table.redraw();
+			window.requestAnimationFrame(() => {
+				if (!Array.isArray(entry) || !entry.length) {
+					return;
 				***REMOVED***
-
-			***REMOVED***
+			
+				if(!table.browserMobile || (table.browserMobile &&!table.modules.edit.currentCell)){
+					
+					var nodeHeight = Math.floor(entry[0].contentRect.height);
+					var nodeWidth = Math.floor(entry[0].contentRect.width);
+					
+					if(this.tableHeight != nodeHeight || this.tableWidth != nodeWidth){
+						this.tableHeight = nodeHeight;
+						this.tableWidth = nodeWidth;
+						
+						if(table.element.parentNode){
+							this.containerHeight = table.element.parentNode.clientHeight;
+							this.containerWidth = table.element.parentNode.clientWidth;
+						***REMOVED***
+						
+						table.redraw();
+					***REMOVED***
+					
+				***REMOVED***
+				
+			***REMOVED***);
 		***REMOVED***);
 
 		this.observer.observe(table.element);

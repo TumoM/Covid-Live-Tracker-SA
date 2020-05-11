@@ -32,12 +32,13 @@ var numberFormat = function(value, data, type, params, component){
 
     return value === null?null:numeral(value).format('0,0'); //return the new value for the cell data.
 ***REMOVED***
-
+let table;
 function setTable(data){
     var fieldEl = document.getElementById("sort-field");
     var dirEl = document.getElementById("sort-direction");
 
-    var table = new Tabulator("#example-table", {
+    table = new Tabulator("#example-table", {
+        autoResize:true,
         index:"date", //set the index field to the "age" field.
         layout:"fitColumns",
         responsiveLayout:"hide",

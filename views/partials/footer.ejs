@@ -6,9 +6,7 @@
         <a href="mailto:tumomasire@gmail.com"><i class="fas fa-envelope-square"></i></a>
 
     </div>
-
     <div class="footer-left">
-
         <p class="footer-links">
             <a href="/" data-section="#myNav" class="active item fluid">Home</a>
             ·
@@ -53,7 +51,7 @@
 	***REMOVED***
 
 	ready(() => {
-		$('#mainBundle').attr('rel','stylesheet')
+		// $('#mainBundle').attr('rel','stylesheet')
 			// Cache selectors
 			var lastId,
 				topMenu = $("#myNav"),
@@ -83,7 +81,7 @@
                 e.preventDefault();
           ***REMOVED***);
 
-			var debounced_version = _.debounce(function(){
+			var debounced_Scroll = _.debounce(function(){
 							// Get container scroll position
 							var fromTop = $(this).scrollTop()+topMenuHeight;
 
@@ -105,9 +103,14 @@
 									.end().filter(`[data-section="#${id***REMOVED***"]`).addClass("active");
 							***REMOVED***
 						***REMOVED***, 100,{leading: true***REMOVED***);
-			$(window).on('scroll', debounced_version);
+			var debounced_Resize = _.debounce(function(){
+							console.log('Bounced Resize now taking affect')
+							table.redraw()
+						***REMOVED***, 500,{leading: false***REMOVED***);
+			$(window).on('scroll', debounced_Scroll);
 			$(window).scroll();
-
+			// $(window).on('resize',debounced_Resize);
+			table.redraw() // Redraw the table for initial setup.
 			$('.aboutButton')
 				.click((event)=>{
 					console.log("you clicked me!")
@@ -154,7 +157,6 @@
 
 				$(".ui.dropdown").dropdown();
 
-				$('#mainBundle').attr('rel','stylesheet')
 
 
 

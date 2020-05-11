@@ -173,21 +173,16 @@ gulp.task('jquery', function(){
   ***REMOVED***);
 
 
-gulp.task('scripts', function() {
-    gulp.start('tabulator');
-    gulp.start('core');
-    gulp.start('modules');
-    gulp.start('jquery');
-  ***REMOVED***);
+gulp.task('scripts', function(cb) {
+    return gulp.series('tabulator');
+    
+***REMOVED***);
 
 gulp.task('clean', function() {
     return del(['dist/css', 'dist/js']);
   ***REMOVED***);
 
-
-gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts');
-  ***REMOVED***);
+gulp.task('default', gulp.series('clean',gulp.parallel(['styles', 'tabulator'])) );
 
 
 gulp.task('watch', function() {

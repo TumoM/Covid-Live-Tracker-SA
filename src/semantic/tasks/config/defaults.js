@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
           Default Paths
 *******************************/
 
@@ -21,7 +21,7 @@ module.exports = {
     config   : 'semantic.json',
     site     : 'src/site',
     theme    : 'src/theme.config'
-***REMOVED***
+  },
 
   // folder paths
   paths: {
@@ -30,15 +30,15 @@ module.exports = {
       definitions : 'src/definitions/',
       site        : 'src/site/',
       themes      : 'src/themes/'
-  ***REMOVED***
+    },
     output: {
       packaged     : 'dist/',
       uncompressed : 'dist/components/',
       compressed   : 'dist/components/',
       themes       : 'dist/themes/'
-  ***REMOVED***
+    },
     clean : 'dist/'
-***REMOVED***
+  },
 
   // components to include in package
   components: [
@@ -118,6 +118,6 @@ module.exports = {
   globs      : {
     ignored    : '!(*.min|*.map|*.rtl)',
     ignoredRTL : '!(*.min|*.map)'
-***REMOVED***
+  }
 
-***REMOVED***;
+};

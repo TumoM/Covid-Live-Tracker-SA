@@ -13,9 +13,9 @@
     color:  #8f9296;
     font-size: 14px;
     margin: 0;
-***REMOVED***
+  }
 
-  /* Footer links***REMOVED***/
+  /* Footer links */
 
   p.footer-links{
     font-size:18px;
@@ -29,8 +29,8 @@
       line-height: 1.8;
       text-decoration: none;
       color:  inherit;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   .footer-right{
     float: right;
@@ -39,7 +39,7 @@
 
     i{
       line-height: unset;
-  ***REMOVED***
+    }
 
     a{
       display: inline-block;
@@ -54,27 +54,27 @@
       line-height: 35px;
 
       margin-left: 3px;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  /* If you don't want the footer to be responsive, remove these media queries***REMOVED***/
+  /* If you don't want the footer to be responsive, remove these media queries */
 
   @media (max-width: 600px) {
 
     .footer-left,
     .footer-right{
       text-align: center;
-  ***REMOVED***
+    }
 
     .footer-right{
       float: none;
       margin: 0 auto 20px;
-  ***REMOVED***
+    }
 
     .footer-left p.footer-links{
       line-height: 1.8;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 

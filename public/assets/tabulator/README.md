@@ -40,7 +40,7 @@ Create an element to hold the table
 
 Turn the element into a tabulator with some simple javascript
 ```js
-var table = new Tabulator("#example-table", {***REMOVED***);
+var table = new Tabulator("#example-table", {});
 ```
 
 

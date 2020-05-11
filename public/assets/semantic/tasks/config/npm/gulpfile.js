@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***           Set-up
-***REMOVED*********************************/
+/*******************************
+ *           Set-up
+ *******************************/
 
 var
   gulp   = require('gulp'),
@@ -10,9 +10,9 @@ var
 ;
 
 
-***REMOVED********************************
-***REMOVED***            Tasks
-***REMOVED*********************************/
+/*******************************
+ *            Tasks
+ *******************************/
 
 require('./tasks/collections/build')(gulp);
 require('./tasks/collections/install')(gulp);
@@ -31,4 +31,4 @@ require('./tasks/collections/docs')(gulp);
 
 if (config.rtl) {
   require('./tasks/collections/rtl')(gulp);
-***REMOVED***
+}

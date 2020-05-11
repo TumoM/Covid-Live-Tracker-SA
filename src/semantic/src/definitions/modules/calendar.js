@@ -1,20 +1,20 @@
 /*!
-***REMOVED*** # Fomantic-UI - Calendar
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Calendar
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 ;(function ($, window, document, undefined) {
 
-***REMOVED***;
+'use strict';
 
 $.isFunction = $.isFunction || function(obj) {
   return typeof obj === "function" && typeof obj.nodeType !== "number";
-***REMOVED***;
+};
 
 window = (typeof window != 'undefined' && window.Math == Math)
   ? window
@@ -37,20 +37,20 @@ $.fn.calendar = function(parameters) {
     queryArguments = [].slice.call(arguments, 1),
     returnedValue,
     timeGapTable = {
-      '5': {'row': 4, 'column': 3 ***REMOVED***,
-      '10': {'row': 3, 'column': 2 ***REMOVED***,
-      '15': {'row': 2, 'column': 2 ***REMOVED***,
-      '20': {'row': 3, 'column': 1 ***REMOVED***,
-      '30': {'row': 2, 'column': 1 ***REMOVED***
-  ***REMOVED***
+      '5': {'row': 4, 'column': 3 },
+      '10': {'row': 3, 'column': 2 },
+      '15': {'row': 2, 'column': 2 },
+      '20': {'row': 3, 'column': 1 },
+      '30': {'row': 2, 'column': 1 }
+    }
   ;
 
   $allModules
     .each(function () {
       var
         settings = ( $.isPlainObject(parameters) )
-          ? $.extend(true, {***REMOVED***, $.fn.calendar.settings, parameters)
-          : $.extend({***REMOVED***, $.fn.calendar.settings),
+          ? $.extend(true, {}, $.fn.calendar.settings, parameters)
+          : $.extend({}, $.fn.calendar.settings),
 
         className = settings.className,
         namespace = settings.namespace,
@@ -93,51 +93,51 @@ $.fn.calendar = function(parameters) {
 
           module.bind.events();
           module.instantiate();
- ***REMOVED*****REMOVED***
+        },
 
         instantiate: function () {
           module.verbose('Storing instance of calendar');
           instance = module;
           $module.data(moduleNamespace, instance);
- ***REMOVED*****REMOVED***
+        },
 
         destroy: function () {
           module.verbose('Destroying previous calendar for', element);
           $module.removeData(moduleNamespace);
           module.unbind.events();
- ***REMOVED*****REMOVED***
+        },
 
         setup: {
           config: function () {
             if (module.get.minDate() !== null) {
               module.set.minDate($module.data(metadata.minDate));
-          ***REMOVED***
+            }
             if (module.get.maxDate() !== null) {
               module.set.maxDate($module.data(metadata.maxDate));
-          ***REMOVED***
+            }
             module.setting('type', module.get.type());
-   ***REMOVED*****REMOVED***
+          },
           popup: function () {
             if (settings.inline) {
               return;
-          ***REMOVED***
+            }
             if (!$activator.length) {
               $activator = $module.children().first();
               if (!$activator.length) {
                 return;
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
             if ($.fn.popup === undefined) {
               module.error(error.popup);
               return;
-          ***REMOVED***
+            }
             if (!$container.length) {
               //prepend the popup element to the activator's parent so that it has less chance of messing with
               //the styling (eg input action button needs to be the last child to have correct border radius)
               var $activatorParent = $activator.parent(),
                   domPositionFunction = $activatorParent.closest(selector.append).length !== 0 ? 'appendTo' : 'prependTo';
               $container = $('<div/>').addClass(className.popup)[domPositionFunction]($activatorParent);
-          ***REMOVED***
+            }
             $container.addClass(className.calendar);
             var onVisible = settings.onVisible;
             var onHidden = settings.onHidden;
@@ -147,20 +147,20 @@ $.fn.calendar = function(parameters) {
               onVisible = function () {
                 module.focus();
                 return settings.onVisible.apply($container, arguments);
-            ***REMOVED***;
+              };
               onHidden = function () {
                 module.blur();
                 return settings.onHidden.apply($container, arguments);
-            ***REMOVED***;
-          ***REMOVED***
+              };
+            }
             var onShow = function () {
               //reset the focus date onShow
               module.set.focusDate(module.get.date());
               module.set.mode(settings.startMode);
               return settings.onShow.apply($container, arguments);
-          ***REMOVED***;
+            };
             var on = settings.on || ($input.length ? 'focus' : 'click');
-            var options = $.extend({***REMOVED***, settings.popupOptions, {
+            var options = $.extend({}, settings.popupOptions, {
               popup: $container,
               on: on,
               hoverable: on === 'hover',
@@ -168,35 +168,35 @@ $.fn.calendar = function(parameters) {
               onVisible: onVisible,
               onHide: settings.onHide,
               onHidden: onHidden
-          ***REMOVED***);
+            });
             module.popup(options);
-   ***REMOVED*****REMOVED***
+          },
           inline: function () {
             if ($activator.length && !settings.inline) {
               return;
-          ***REMOVED***
+            }
             $container = $('<div/>').addClass(className.calendar).appendTo($module);
             if (!$input.length) {
               $container.attr('tabindex', '0');
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           input: function () {
             if (settings.touchReadonly && $input.length && isTouch) {
               $input.prop('readonly', true);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           date: function () {
             var date;
             if (settings.initialDate) {
               date = parser.date(settings.initialDate, settings);
-          ***REMOVED*** else if ($module.data(metadata.date) !== undefined) {
+            } else if ($module.data(metadata.date) !== undefined) {
               date = parser.date($module.data(metadata.date), settings);
-          ***REMOVED*** else if ($input.length) {
+            } else if ($input.length) {
               date = parser.date($input.val(), settings);
-          ***REMOVED***
+            }
             module.set.date(date, settings.formatInput, false);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         create: {
           calendar: function () {
@@ -212,7 +212,7 @@ $.fn.calendar = function(parameters) {
             if (!focusDate) {
               focusDate = display;
               module.set.focusDate(focusDate, false, false);
-          ***REMOVED***
+            }
 
             var isYear = mode === 'year';
             var isMonth = mode === 'month';
@@ -239,20 +239,20 @@ $.fn.calendar = function(parameters) {
             container.empty();
             if (pages > 1) {
               pageGrid = $('<div/>').addClass(className.grid).appendTo(container);
-          ***REMOVED***
+            }
 
             for (p = 0; p < pages; p++) {
               if (pages > 1) {
                 var pageColumn = $('<div/>').addClass(className.column).appendTo(pageGrid);
                 container = pageColumn;
-            ***REMOVED***
+              }
 
               var month = startMonth + p;
               var firstMonthDayColumn = (new Date(year, month, 1).getDay() - settings.firstDayOfWeek % 7 + 7) % 7;
               if (!settings.constantHeight && isDay) {
                 var requiredCells = new Date(year, month + 1, 0).getDate() + firstMonthDayColumn;
                 rows = Math.ceil(requiredCells / 7);
-            ***REMOVED***
+              }
 
               var yearChange = isYear ? 10 : isMonth ? 1 : 0;
               var monthChange = isDay ? 1 : 0;
@@ -261,15 +261,15 @@ $.fn.calendar = function(parameters) {
               var prevDate = new Date(year - yearChange, month - monthChange, prevNextDay - dayChange, hour);
               var nextDate = new Date(year + yearChange, month + monthChange, prevNextDay + dayChange, hour);
 
-              var prevLast = isYear ? new Date(Math.ceil(year / 10)***REMOVED*** 10 - 9, 0, 0) :
+              var prevLast = isYear ? new Date(Math.ceil(year / 10) * 10 - 9, 0, 0) :
                 isMonth ? new Date(year, 0, 0) : isDay ? new Date(year, month, 0) : new Date(year, month, day, -1);
-              var nextFirst = isYear ? new Date(Math.ceil(year / 10)***REMOVED*** 10 + 1, 0, 1) :
+              var nextFirst = isYear ? new Date(Math.ceil(year / 10) * 10 + 1, 0, 1) :
                 isMonth ? new Date(year + 1, 0, 1) : isDay ? new Date(year, month + 1, 1) : new Date(year, month, day + 1);
 
               var tempMode = mode;
               if (isDay && settings.showWeekNumbers){
                 tempMode += ' andweek';
-            ***REMOVED***
+              }
               var table = $('<table/>').addClass(className.table).addClass(tempMode).appendTo(container);
               var textColumns = columns;
               //no header for time-only mode
@@ -292,14 +292,14 @@ $.fn.calendar = function(parameters) {
                   prev.data(metadata.focusDate, prevDate);
                   prev.toggleClass(className.disabledCell, !module.helper.isDateInRange(prevLast, mode));
                   $('<i/>').addClass(className.prevIcon).appendTo(prev);
-              ***REMOVED***
+                }
 
                 if (p === pages - 1) {
                   var next = $('<span/>').addClass(className.next).appendTo(cell);
                   next.data(metadata.focusDate, nextDate);
                   next.toggleClass(className.disabledCell, !module.helper.isDateInRange(nextFirst, mode));
                   $('<i/>').addClass(className.nextIcon).appendTo(next);
-              ***REMOVED***
+                }
                 if (isDay) {
                   row = $('<tr/>').appendTo(thead);
                   if(settings.showWeekNumbers) {
@@ -307,27 +307,27 @@ $.fn.calendar = function(parameters) {
                       cell.text(settings.text.weekNo);
                       cell.addClass(className.weekCell);
                       textColumns--;
-                ***REMOVED***
+                  }
                   for (i = 0; i < textColumns; i++) {
                     cell = $('<th/>').appendTo(row);
                     cell.text(formatter.dayColumnHeader((i + settings.firstDayOfWeek) % 7, settings));
-                ***REMOVED***
-              ***REMOVED***
-            ***REMOVED***
+                  }
+                }
+              }
 
               var tbody = $('<tbody/>').appendTo(table);
-              i = isYear ? Math.ceil(year / 10)***REMOVED*** 10 - 9 : isDay ? 1 - firstMonthDayColumn : 0;
+              i = isYear ? Math.ceil(year / 10) * 10 - 9 : isDay ? 1 - firstMonthDayColumn : 0;
               for (r = 0; r < rows; r++) {
                 row = $('<tr/>').appendTo(tbody);
                 if(isDay && settings.showWeekNumbers){
                     cell = $('<th/>').appendTo(row);
                     cell.text(module.get.weekOfYear(year,month,i+1-settings.firstDayOfWeek));
                     cell.addClass(className.weekCell);
-              ***REMOVED***
+                }
                 for (c = 0; c < textColumns; c++, i++) {
                   var cellDate = isYear ? new Date(i, month, 1, hour, minute) :
                     isMonth ? new Date(year, i, 1, hour, minute) : isDay ? new Date(year, month, i, hour, minute) :
-                      isHour ? new Date(year, month, day, i) : new Date(year, month, day, hour, i***REMOVED*** settings.minTimeGap);
+                      isHour ? new Date(year, month, day, i) : new Date(year, month, day, hour, i * settings.minTimeGap);
                   var cellText = isYear ? i :
                     isMonth ? settings.text.monthsShort[i] : isDay ? cellDate.getDate() :
                       formatter.time(cellDate, settings, true);
@@ -341,17 +341,17 @@ $.fn.calendar = function(parameters) {
                     if (disabledDate !== null && disabledDate[metadata.message]) {
                       cell.attr("data-tooltip", disabledDate[metadata.message]);
                       cell.attr("data-position", tooltipPosition);
-                  ***REMOVED***
-                ***REMOVED*** else {
+                    }
+                  } else {
                     var eventDate = module.helper.findDayAsObject(cellDate, mode, settings.eventDates);
                     if (eventDate !== null) {
                       cell.addClass(eventDate[metadata.class] || settings.eventClass);
                       if (eventDate[metadata.message]) {
                         cell.attr("data-tooltip", eventDate[metadata.message]);
                         cell.attr("data-position", tooltipPosition);
-                    ***REMOVED***
-                  ***REMOVED***
-                ***REMOVED***
+                      }
+                    }
+                  }
                   var active = module.helper.dateEqual(cellDate, date, mode);
                   var isToday = module.helper.dateEqual(cellDate, today, mode);
                   cell.toggleClass(className.adjacentCell, adjacent);
@@ -359,7 +359,7 @@ $.fn.calendar = function(parameters) {
                   cell.toggleClass(className.activeCell, active && !adjacent);
                   if (!isHour && !isMinute) {
                     cell.toggleClass(className.todayCell, !adjacent && isToday);
-                ***REMOVED***
+                  }
 
                   // Allow for external modifications of each cell
                   var cellOptions = {
@@ -368,28 +368,28 @@ $.fn.calendar = function(parameters) {
                     disabled: disabled,
                     active: active,
                     today: isToday
-                ***REMOVED***;
+                  };
                   formatter.cell(cell, cellDate, cellOptions);
 
                   if (module.helper.dateEqual(cellDate, focusDate, mode)) {
                     //ensure that the focus date is exactly equal to the cell date
                     //so that, if selected, the correct value is set
                     module.set.focusDate(cellDate, false, false);
-                ***REMOVED***
-              ***REMOVED***
-            ***REMOVED***
+                  }
+                }
+              }
 
               if (settings.today) {
                 var todayRow = $('<tr/>').appendTo(tbody);
                 var todayButton = $('<td/>').attr('colspan', '' + columns).addClass(className.today).appendTo(todayRow);
                 todayButton.text(formatter.today(settings));
                 todayButton.data(metadata.date, today);
-            ***REMOVED***
+              }
 
               module.update.focus(false, table);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         update: {
           focus: function (updateRange, container) {
@@ -406,7 +406,7 @@ $.fn.calendar = function(parameters) {
               var cellDate = cell.data(metadata.date);
               if (!cellDate) {
                 return;
-            ***REMOVED***
+              }
               var disabled = cell.hasClass(className.disabledCell);
               var active = cell.hasClass(className.activeCell);
               var adjacent = cell.hasClass(className.adjacentCell);
@@ -418,15 +418,15 @@ $.fn.calendar = function(parameters) {
 
               if (module.helper.isTodayButton(cell)) {
                 return;
-            ***REMOVED***
+              }
               cell.toggleClass(className.rangeCell, inRange && !active && !disabled);
-          ***REMOVED***);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            });
+          }
+        },
 
         refresh: function () {
           module.create.calendar();
- ***REMOVED*****REMOVED***
+        },
 
         bind: {
           events: function () {
@@ -442,11 +442,11 @@ $.fn.calendar = function(parameters) {
               $input.on('blur' + eventNamespace, module.event.inputBlur);
               $input.on('click' + eventNamespace, module.event.inputClick);
               $input.on('keydown' + eventNamespace, module.event.keydown);
-          ***REMOVED*** else {
+            } else {
               $container.on('keydown' + eventNamespace, module.event.keydown);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         unbind: {
           events: function () {
@@ -454,9 +454,9 @@ $.fn.calendar = function(parameters) {
             $container.off(eventNamespace);
             if ($input.length) {
               $input.off(eventNamespace);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         event: {
           mouseover: function (event) {
@@ -465,20 +465,20 @@ $.fn.calendar = function(parameters) {
             var mousedown = event.buttons === 1;
             if (date) {
               module.set.focusDate(date, false, true, mousedown);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           mousedown: function (event) {
             if ($input.length) {
               //prevent the mousedown on the calendar causing the input to lose focus
               event.preventDefault();
-          ***REMOVED***
+            }
             isTouchDown = event.type.indexOf('touch') >= 0;
             var target = $(event.target);
             var date = target.data(metadata.date);
             if (date) {
               module.set.focusDate(date, false, true, true);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           mouseup: function (event) {
             //ensure input has focus so that it receives keydown events for calendar navigation
             module.focus();
@@ -488,32 +488,32 @@ $.fn.calendar = function(parameters) {
             var target = $(event.target);
             if (target.hasClass("disabled")) {
               return;
-          ***REMOVED***
+            }
             var parent = target.parent();
             if (parent.data(metadata.date) || parent.data(metadata.focusDate) || parent.data(metadata.mode)) {
               //clicked on a child element, switch to parent (used when clicking directly on prev/next <i> icon element)
               target = parent;
-          ***REMOVED***
+            }
             var date = target.data(metadata.date);
             var focusDate = target.data(metadata.focusDate);
             var mode = target.data(metadata.mode);
             if (date && settings.onSelect.call(element, date, module.get.mode()) !== false) {
               var forceSet = target.hasClass(className.today);
               module.selectDate(date, forceSet);
-          ***REMOVED***
+            }
             else if (focusDate) {
               module.set.focusDate(focusDate);
-          ***REMOVED***
+            }
             else if (mode) {
               module.set.mode(mode);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           keydown: function (event) {
             var keyCode = event.which;
             if (keyCode === 27 || keyCode === 9) {
               //esc || tab
               module.popup('hide');
-          ***REMOVED***
+            }
 
             if (module.popup('is visible')) {
               if (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40) {
@@ -521,7 +521,7 @@ $.fn.calendar = function(parameters) {
                 var mode = module.get.mode();
                 var bigIncrement = mode === 'day' ? 7 : mode === 'hour' ? 4 : mode === 'minute' ? timeGap['column'] : 3;
                 var increment = keyCode === 37 ? -1 : keyCode === 38 ? -bigIncrement : keyCode == 39 ? 1 : bigIncrement;
-                increment***REMOVED***= mode === 'minute' ? settings.minTimeGap : 1;
+                increment *= mode === 'minute' ? settings.minTimeGap : 1;
                 var focusDate = module.get.focusDate() || module.get.date() || new Date();
                 var year = focusDate.getFullYear() + (mode === 'year' ? increment : 0);
                 var month = focusDate.getMonth() + (mode === 'month' ? increment : 0);
@@ -531,145 +531,145 @@ $.fn.calendar = function(parameters) {
                 var newFocusDate = new Date(year, month, day, hour, minute);
                 if (settings.type === 'time') {
                   newFocusDate = module.helper.mergeDateTime(focusDate, newFocusDate);
-              ***REMOVED***
+                }
                 if (module.helper.isDateInRange(newFocusDate, mode)) {
                   module.set.focusDate(newFocusDate);
-              ***REMOVED***
-            ***REMOVED*** else if (keyCode === 13) {
+                }
+              } else if (keyCode === 13) {
                 //enter
                 var mode = module.get.mode();
                 var date = module.get.focusDate();
                 if (date && !settings.isDisabled(date, mode) && !module.helper.isDisabled(date, mode) && module.helper.isEnabled(date, mode)) {
                   module.selectDate(date);
-              ***REMOVED***
+                }
                 //disable form submission:
                 event.preventDefault();
                 event.stopPropagation();
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
 
             if (keyCode === 38 || keyCode === 40) {
               //arrow-up || arrow-down
               event.preventDefault(); //don't scroll
               module.popup('show');
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           inputChange: function () {
             var val = $input.val();
             var date = parser.date(val, settings);
             module.set.date(date, false);
-   ***REMOVED*****REMOVED***
+          },
           inputFocus: function () {
             $container.addClass(className.active);
-   ***REMOVED*****REMOVED***
+          },
           inputBlur: function () {
             $container.removeClass(className.active);
             if (settings.formatInput) {
               var date = module.get.date();
               var text = formatter.datetime(date, settings);
               $input.val(text);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           inputClick: function () {
             module.popup('show');
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         get: {
           weekOfYear: function(weekYear,weekMonth,weekDay) {
               // adapted from http://www.merlyn.demon.co.uk/weekcalc.htm
               var ms1d = 864e5, // milliseconds in a day
-                  ms7d = 7***REMOVED*** ms1d; // milliseconds in a week
+                  ms7d = 7 * ms1d; // milliseconds in a week
 
               return function() { // return a closure so constants get calculated only once
                   var DC3 = Date.UTC(weekYear, weekMonth, weekDay + 3) / ms1d, // an Absolute Day Number
                       AWN = Math.floor(DC3 / 7), // an Absolute Week Number
-                      Wyr = new Date(AWN***REMOVED*** ms7d).getUTCFullYear();
+                      Wyr = new Date(AWN * ms7d).getUTCFullYear();
 
                   return AWN - Math.floor(Date.UTC(Wyr, 0, 7) / ms7d) + 1;
-            ***REMOVED***();
-   ***REMOVED*****REMOVED***
+              }();
+          },
           date: function () {
             return module.helper.sanitiseDate($module.data(metadata.date)) || null;
-   ***REMOVED*****REMOVED***
+          },
           inputDate: function() {
             return $input.val();
-   ***REMOVED*****REMOVED***
+          },
           focusDate: function () {
             return $module.data(metadata.focusDate) || null;
-   ***REMOVED*****REMOVED***
+          },
           startDate: function () {
             var startModule = module.get.calendarModule(settings.startCalendar);
             return (startModule ? startModule.get.date() : $module.data(metadata.startDate)) || null;
-   ***REMOVED*****REMOVED***
+          },
           endDate: function () {
             var endModule = module.get.calendarModule(settings.endCalendar);
             return (endModule ? endModule.get.date() : $module.data(metadata.endDate)) || null;
-   ***REMOVED*****REMOVED***
+          },
           minDate: function() {
             return $module.data(metadata.minDate) || null;
-   ***REMOVED*****REMOVED***
+          },
           maxDate: function() {
             return $module.data(metadata.maxDate) || null;
-   ***REMOVED*****REMOVED***
+          },
           monthOffset: function () {
             return $module.data(metadata.monthOffset) || 0;
-   ***REMOVED*****REMOVED***
+          },
           mode: function () {
             //only returns valid modes for the current settings
             var mode = $module.data(metadata.mode) || settings.startMode;
             var validModes = module.get.validModes();
             if ($.inArray(mode, validModes) >= 0) {
               return mode;
-          ***REMOVED***
+            }
             return settings.type === 'time' ? 'hour' :
               settings.type === 'month' ? 'month' :
                 settings.type === 'year' ? 'year' : 'day';
-   ***REMOVED*****REMOVED***
+          },
           type: function() {
             return $module.data(metadata.type) || settings.type;
-   ***REMOVED*****REMOVED***
+          },
           validModes: function () {
             var validModes = [];
             if (settings.type !== 'time') {
               if (!settings.disableYear || settings.type === 'year') {
                 validModes.push('year');
-            ***REMOVED***
+              }
               if (!(settings.disableMonth || settings.type === 'year') || settings.type === 'month') {
                 validModes.push('month');
-            ***REMOVED***
+              }
               if (settings.type.indexOf('date') >= 0) {
                 validModes.push('day');
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
             if (settings.type.indexOf('time') >= 0) {
               validModes.push('hour');
               if (!settings.disableMinute) {
                 validModes.push('minute');
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
             return validModes;
-   ***REMOVED*****REMOVED***
+          },
           isTouch: function () {
             try {
               document.createEvent('TouchEvent');
               return true;
-          ***REMOVED***
+            }
             catch (e) {
               return false;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           calendarModule: function (selector) {
             if (!selector) {
               return null;
-          ***REMOVED***
+            }
             if (!(selector instanceof $)) {
               selector = $(selector).first();
-          ***REMOVED***
+            }
             //assume range related calendars are using the same namespace
             return selector.data(moduleNamespace);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         set: {
           date: function (date, updateInput, fireChange) {
@@ -683,45 +683,45 @@ $.fn.calendar = function(parameters) {
 
             if (fireChange && settings.onBeforeChange.call(element, date, text, mode) === false) {
               return false;
-          ***REMOVED***
+            }
 
             module.set.focusDate(date);
 
             if (settings.isDisabled(date, mode)) {
               return false;
-          ***REMOVED***
+            }
 
             var endDate = module.get.endDate();
             if (!!endDate && !!date && date > endDate) {
               //selected date is greater than end date in range, so clear end date
               module.set.endDate(undefined);
-          ***REMOVED***
+            }
             module.set.dataKeyValue(metadata.date, date);
 
             if (updateInput && $input.length) {
               $input.val(text);
-          ***REMOVED***
+            }
 
             if (fireChange) {
               settings.onChange.call(element, date, text, mode);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           startDate: function (date, refreshCalendar) {
             date = module.helper.sanitiseDate(date);
             var startModule = module.get.calendarModule(settings.startCalendar);
             if (startModule) {
               startModule.set.date(date);
-          ***REMOVED***
+            }
             module.set.dataKeyValue(metadata.startDate, date, refreshCalendar);
-   ***REMOVED*****REMOVED***
+          },
           endDate: function (date, refreshCalendar) {
             date = module.helper.sanitiseDate(date);
             var endModule = module.get.calendarModule(settings.endCalendar);
             if (endModule) {
               endModule.set.date(date);
-          ***REMOVED***
+            }
             module.set.dataKeyValue(metadata.endDate, date, refreshCalendar);
-   ***REMOVED*****REMOVED***
+          },
           focusDate: function (date, refreshCalendar, updateFocus, updateRange) {
             date = module.helper.sanitiseDate(date);
             date = module.helper.dateInRange(date);
@@ -729,60 +729,60 @@ $.fn.calendar = function(parameters) {
             var oldFocusDate = module.get.focusDate();
             if (isDay && date && oldFocusDate) {
               var yearDelta = date.getFullYear() - oldFocusDate.getFullYear();
-              var monthDelta = yearDelta***REMOVED*** 12 + date.getMonth() - oldFocusDate.getMonth();
+              var monthDelta = yearDelta * 12 + date.getMonth() - oldFocusDate.getMonth();
               if (monthDelta) {
                 var monthOffset = module.get.monthOffset() - monthDelta;
                 module.set.monthOffset(monthOffset, false);
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
             var changed = module.set.dataKeyValue(metadata.focusDate, date, refreshCalendar);
             updateFocus = (updateFocus !== false && changed && refreshCalendar === false) || focusDateUsedForRange != updateRange;
             focusDateUsedForRange = updateRange;
             if (updateFocus) {
               module.update.focus(updateRange);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           minDate: function (date) {
             date = module.helper.sanitiseDate(date);
             if (settings.maxDate !== null && settings.maxDate <= date) {
               module.verbose('Unable to set minDate variable bigger that maxDate variable', date, settings.maxDate);
-          ***REMOVED*** else {
+            } else {
               module.setting('minDate', date);
               module.set.dataKeyValue(metadata.minDate, date);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           maxDate: function (date) {
             date = module.helper.sanitiseDate(date);
             if (settings.minDate !== null && settings.minDate >= date) {
               module.verbose('Unable to set maxDate variable lower that minDate variable', date, settings.minDate);
-          ***REMOVED*** else {
+            } else {
               module.setting('maxDate', date);
               module.set.dataKeyValue(metadata.maxDate, date);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           monthOffset: function (monthOffset, refreshCalendar) {
             var multiMonth = Math.max(settings.multiMonth, 1);
             monthOffset = Math.max(1 - multiMonth, Math.min(0, monthOffset));
             module.set.dataKeyValue(metadata.monthOffset, monthOffset, refreshCalendar);
-   ***REMOVED*****REMOVED***
+          },
           mode: function (mode, refreshCalendar) {
             module.set.dataKeyValue(metadata.mode, mode, refreshCalendar);
-   ***REMOVED*****REMOVED***
+          },
           dataKeyValue: function (key, value, refreshCalendar) {
             var oldValue = $module.data(key);
             var equal = oldValue === value || (oldValue <= value && oldValue >= value); //equality test for dates and string objects
             if (value) {
               $module.data(key, value);
-          ***REMOVED*** else {
+            } else {
               $module.removeData(key);
-          ***REMOVED***
+            }
             refreshCalendar = refreshCalendar !== false && !equal;
             if (refreshCalendar) {
               module.refresh();
-          ***REMOVED***
+            }
             return !equal;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         selectDate: function (date, forceSet) {
           module.verbose('New date selection', date);
@@ -801,102 +801,102 @@ $.fn.calendar = function(parameters) {
               if (endModule) {
                 endModule.popup('show');
                 endModule.focus();
-            ***REMOVED***
-          ***REMOVED***
-        ***REMOVED*** else {
+              }
+            }
+          } else {
             var newMode = mode === 'year' ? (!settings.disableMonth ? 'month' : 'day') :
               mode === 'month' ? 'day' : mode === 'day' ? 'hour' : 'minute';
             module.set.mode(newMode);
             if (mode === 'hour' || (mode === 'day' && module.get.date())) {
               //the user has chosen enough to consider a valid date/time has been chosen
               module.set.date(date);
-          ***REMOVED*** else {
+            } else {
               module.set.focusDate(date);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         changeDate: function (date) {
           module.set.date(date);
- ***REMOVED*****REMOVED***
+        },
 
         clear: function () {
           module.set.date(undefined);
- ***REMOVED*****REMOVED***
+        },
 
         popup: function () {
           return $activator.popup.apply($activator, arguments);
- ***REMOVED*****REMOVED***
+        },
 
         focus: function () {
           if ($input.length) {
             $input.focus();
-        ***REMOVED*** else {
+          } else {
             $container.focus();
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         blur: function () {
           if ($input.length) {
             $input.blur();
-        ***REMOVED*** else {
+          } else {
             $container.blur();
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         helper: {
           isDisabled: function(date, mode) {
             return (mode === 'day' || mode === 'month' || mode === 'year') && ((settings.disabledDaysOfWeek.indexOf(date.getDay()) !== -1) || settings.disabledDates.some(function(d){
               if(typeof d === 'string') {
                 d = module.helper.sanitiseDate(d);
-            ***REMOVED***
+              }
               if (d instanceof Date) {
                 return module.helper.dateEqual(date, d, mode);
-            ***REMOVED***
+              }
               if (d !== null && typeof d === 'object') {
                 if (d[metadata.year]) {
                   if (typeof d[metadata.year] === 'number') {
                     return date.getFullYear() == d[metadata.year];
-                ***REMOVED*** else if (Array.isArray(d[metadata.year])) {
+                  } else if (Array.isArray(d[metadata.year])) {
                     return d[metadata.year].indexOf(date.getFullYear()) > -1;
-                ***REMOVED***
-              ***REMOVED*** else if (d[metadata.month]) {
+                  }
+                } else if (d[metadata.month]) {
                   if (typeof d[metadata.month] === 'number') {
                     return date.getMonth() == d[metadata.month];
-                ***REMOVED*** else if (Array.isArray(d[metadata.month])) {
+                  } else if (Array.isArray(d[metadata.month])) {
                     return d[metadata.month].indexOf(date.getMonth()) > -1;
-                ***REMOVED*** else if (d[metadata.month] instanceof Date) {
+                  } else if (d[metadata.month] instanceof Date) {
                     var sdate = module.helper.sanitiseDate(d[metadata.month]);
                     return (date.getMonth() == sdate.getMonth()) && (date.getFullYear() == sdate.getFullYear())
-                ***REMOVED***
-              ***REMOVED*** else if (d[metadata.date] && mode === 'day') {
+                  }
+                } else if (d[metadata.date] && mode === 'day') {
                   if (d[metadata.date] instanceof Date) {
                     return module.helper.dateEqual(date, module.helper.sanitiseDate(d[metadata.date]), mode);
-                ***REMOVED*** else if (Array.isArray(d[metadata.date])) {
+                  } else if (Array.isArray(d[metadata.date])) {
                     return d[metadata.date].some(function(idate) {
                       return module.helper.dateEqual(date, idate, mode);
-                  ***REMOVED***);
-                ***REMOVED***
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***));
-   ***REMOVED*****REMOVED***
+                    });
+                  }
+                }
+              }
+            }));
+          },
           isEnabled: function(date, mode) {
             if (mode === 'day') {
               return settings.enabledDates.length === 0 || settings.enabledDates.some(function(d){
                 if(typeof d === 'string') {
                   d = module.helper.sanitiseDate(d);
-              ***REMOVED***
+                }
                 if (d instanceof Date) {
                   return module.helper.dateEqual(date, d, mode);
-              ***REMOVED***
+                }
                 if (d !== null && typeof d === 'object' && d[metadata.date]) {
                   return module.helper.dateEqual(date, module.helper.sanitiseDate(d[metadata.date]), mode);
-              ***REMOVED***
-            ***REMOVED***);
-          ***REMOVED*** else {
+                }
+              });
+            } else {
               return true;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           findDayAsObject: function(date, mode, dates) {
             if (mode === 'day' || mode === 'month' || mode === 'year') {
               var d;
@@ -904,60 +904,60 @@ $.fn.calendar = function(parameters) {
                 d = dates[i];
                 if(typeof d === 'string') {
                   d = module.helper.sanitiseDate(d);
-              ***REMOVED***
+                }
                 if (d instanceof Date && module.helper.dateEqual(date, d, mode)) {
-                  var dateObject = {***REMOVED***;
+                  var dateObject = {};
                   dateObject[metadata.date] = d;
                   return dateObject;
-              ***REMOVED***
+                }
                 else if (d !== null && typeof d === 'object') {
                   if (d[metadata.year]) {
                     if (typeof d[metadata.year] === 'number' && date.getFullYear() == d[metadata.year]) {
                       return d;
-                  ***REMOVED*** else if (Array.isArray(d[metadata.year])) {
+                    } else if (Array.isArray(d[metadata.year])) {
                       if (d[metadata.year].indexOf(date.getFullYear()) > -1) {
                         return d;
-                    ***REMOVED***
-                  ***REMOVED***
-                ***REMOVED*** else if (d[metadata.month]) {
+                      }
+                    }
+                  } else if (d[metadata.month]) {
                     if (typeof d[metadata.month] === 'number' && date.getMonth() == d[metadata.month]) {
                       return d;
-                  ***REMOVED*** else if (Array.isArray(d[metadata.month])) {
+                    } else if (Array.isArray(d[metadata.month])) {
                       if (d[metadata.month].indexOf(date.getMonth()) > -1) {
                         return d;
-                    ***REMOVED***
-                  ***REMOVED*** else if (d[metadata.month] instanceof Date) {
+                      }
+                    } else if (d[metadata.month] instanceof Date) {
                       var sdate = module.helper.sanitiseDate(d[metadata.month]);
                       if ((date.getMonth() == sdate.getMonth()) && (date.getFullYear() == sdate.getFullYear())) {
                         return d;
-                    ***REMOVED***
-                  ***REMOVED***
-                ***REMOVED*** else if (d[metadata.date] && mode === 'day') {
+                      }
+                    }
+                  } else if (d[metadata.date] && mode === 'day') {
                     if (d[metadata.date] instanceof Date && module.helper.dateEqual(date, module.helper.sanitiseDate(d[metadata.date]), mode)) {
                       return d;
-                  ***REMOVED*** else if (Array.isArray(d[metadata.date])) {
-                      if(d[metadata.date].some(function(idate) { return module.helper.dateEqual(date, idate, mode); ***REMOVED***)) {
+                    } else if (Array.isArray(d[metadata.date])) {
+                      if(d[metadata.date].some(function(idate) { return module.helper.dateEqual(date, idate, mode); })) {
                         return d;
-                    ***REMOVED***
-                  ***REMOVED***
-                ***REMOVED***
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
+                      }
+                    }
+                  }
+                }
+              }
+            }
             return null;
-   ***REMOVED*****REMOVED***
+          },
           sanitiseDate: function (date) {
             if (!date) {
               return undefined;
-          ***REMOVED***
+            }
             if (!(date instanceof Date)) {
               date = parser.date('' + date, settings);
-          ***REMOVED***
+            }
             if (!date || date === null || isNaN(date.getTime())) {
               return undefined;
-          ***REMOVED***
+            }
             return date;
-   ***REMOVED*****REMOVED***
+          },
           dateDiff: function (date1, date2, mode) {
             mode = mode || 'day';
             var isTimeOnly = settings.type === 'time';
@@ -971,36 +971,36 @@ $.fn.calendar = function(parameters) {
               isTimeOnly ? 0 : isYear ? 0 : date1.getMonth(),
               isTimeOnly ? 1 : isYearOrMonth ? 1 : date1.getDate(),
               !isHourOrMinute ? 0 : date1.getHours(),
-              !isMinute ? 0 : settings.minTimeGap***REMOVED*** Math.floor(date1.getMinutes() / settings.minTimeGap));
+              !isMinute ? 0 : settings.minTimeGap * Math.floor(date1.getMinutes() / settings.minTimeGap));
             date2 = new Date(
               isTimeOnly ? 2000 : date2.getFullYear(),
               isTimeOnly ? 0 : isYear ? 0 : date2.getMonth(),
               isTimeOnly ? 1 : isYearOrMonth ? 1 : date2.getDate(),
               !isHourOrMinute ? 0 : date2.getHours(),
-              !isMinute ? 0 : settings.minTimeGap***REMOVED*** Math.floor(date2.getMinutes() / settings.minTimeGap));
+              !isMinute ? 0 : settings.minTimeGap * Math.floor(date2.getMinutes() / settings.minTimeGap));
             return date2.getTime() - date1.getTime();
-   ***REMOVED*****REMOVED***
+          },
           dateEqual: function (date1, date2, mode) {
             return !!date1 && !!date2 && module.helper.dateDiff(date1, date2, mode) === 0;
-   ***REMOVED*****REMOVED***
+          },
           isDateInRange: function (date, mode, minDate, maxDate) {
             if (!minDate && !maxDate) {
               var startDate = module.get.startDate();
               minDate = startDate && settings.minDate ? new Date(Math.max(startDate, settings.minDate)) : startDate || settings.minDate;
               maxDate = settings.maxDate;
-          ***REMOVED***
-            minDate = minDate && new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), minDate.getHours(), settings.minTimeGap***REMOVED*** Math.ceil(minDate.getMinutes() / settings.minTimeGap));
+            }
+            minDate = minDate && new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), minDate.getHours(), settings.minTimeGap * Math.ceil(minDate.getMinutes() / settings.minTimeGap));
             return !(!date ||
             (minDate && module.helper.dateDiff(date, minDate, mode) > 0) ||
             (maxDate && module.helper.dateDiff(maxDate, date, mode) > 0));
-   ***REMOVED*****REMOVED***
+          },
           dateInRange: function (date, minDate, maxDate) {
             if (!minDate && !maxDate) {
               var startDate = module.get.startDate();
               minDate = startDate && settings.minDate ? new Date(Math.max(startDate, settings.minDate)) : startDate || settings.minDate;
               maxDate = settings.maxDate;
-          ***REMOVED***
-            minDate = minDate && new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), minDate.getHours(), settings.minTimeGap***REMOVED*** Math.ceil(minDate.getMinutes() / settings.minTimeGap));
+            }
+            minDate = minDate && new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate(), minDate.getHours(), settings.minTimeGap * Math.ceil(minDate.getMinutes() / settings.minTimeGap));
             var isTimeOnly = settings.type === 'time';
             return !date ? date :
               (minDate && module.helper.dateDiff(date, minDate, 'minute') > 0) ?
@@ -1008,72 +1008,72 @@ $.fn.calendar = function(parameters) {
                 (maxDate && module.helper.dateDiff(maxDate, date, 'minute') > 0) ?
                   (isTimeOnly ? module.helper.mergeDateTime(date, maxDate) : maxDate) :
                   date;
-   ***REMOVED*****REMOVED***
+          },
           mergeDateTime: function (date, time) {
             return (!date || !time) ? time :
               new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
-   ***REMOVED*****REMOVED***
+          },
           isTodayButton: function(element) {
             return element.text() === settings.text.today;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         setting: function (name, value) {
           module.debug('Changing setting', name, value);
           if ($.isPlainObject(name)) {
             $.extend(true, settings, name);
-        ***REMOVED***
+          }
           else if (value !== undefined) {
             if ($.isPlainObject(settings[name])) {
               $.extend(true, settings[name], value);
-          ***REMOVED***
+            }
             else {
               settings[name] = value;
-          ***REMOVED***
-        ***REMOVED***
+            }
+          }
           else {
             return settings[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         internal: function (name, value) {
           if( $.isPlainObject(name) ) {
             $.extend(true, module, name);
-        ***REMOVED***
+          }
           else if(value !== undefined) {
             module[name] = value;
-        ***REMOVED***
+          }
           else {
             return module[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         debug: function () {
           if (!settings.silent && settings.debug) {
             if (settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.debug.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         verbose: function () {
           if (!settings.silent && settings.verbose && settings.debug) {
             if (settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.verbose.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         error: function () {
           if (!settings.silent) {
             module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
             module.error.apply(console, arguments);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         performance: {
           log: function (message) {
             var
@@ -1091,11 +1091,11 @@ $.fn.calendar = function(parameters) {
                 'Arguments': [].slice.call(message, 1) || '',
                 'Element': element,
                 'Execution Time': executionTime
-            ***REMOVED***);
-          ***REMOVED***
+              });
+            }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
-   ***REMOVED*****REMOVED***
+          },
           display: function () {
             var
               title = settings.name + ':',
@@ -1105,26 +1105,26 @@ $.fn.calendar = function(parameters) {
             clearTimeout(module.performance.timer);
             $.each(performance, function (index, data) {
               totalTime += data['Execution Time'];
-          ***REMOVED***);
+            });
             title += ' ' + totalTime + 'ms';
             if (moduleSelector) {
               title += ' \'' + moduleSelector + '\'';
-          ***REMOVED***
+            }
             if ((console.group !== undefined || console.table !== undefined) && performance.length > 0) {
               console.groupCollapsed(title);
               if (console.table) {
                 console.table(performance);
-            ***REMOVED***
+              }
               else {
                 $.each(performance, function (index, data) {
                   console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
-              ***REMOVED***);
-            ***REMOVED***
+                });
+              }
               console.groupEnd();
-          ***REMOVED***
+            }
             performance = [];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         invoke: function (query, passedArguments, context) {
           var
             object = instance,
@@ -1144,62 +1144,62 @@ $.fn.calendar = function(parameters) {
                 ;
               if ($.isPlainObject(object[camelCaseValue]) && (depth != maxDepth)) {
                 object = object[camelCaseValue];
-            ***REMOVED***
+              }
               else if (object[camelCaseValue] !== undefined) {
                 found = object[camelCaseValue];
                 return false;
-            ***REMOVED***
+              }
               else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
                 object = object[value];
-            ***REMOVED***
+              }
               else if (object[value] !== undefined) {
                 found = object[value];
                 return false;
-            ***REMOVED***
+              }
               else {
                 module.error(error.method, query);
                 return false;
-            ***REMOVED***
-          ***REMOVED***);
-        ***REMOVED***
+              }
+            });
+          }
           if ($.isFunction(found)) {
             response = found.apply(context, passedArguments);
-        ***REMOVED***
+          }
           else if (found !== undefined) {
             response = found;
-        ***REMOVED***
+          }
           if (Array.isArray(returnedValue)) {
             returnedValue.push(response);
-        ***REMOVED***
+          }
           else if (returnedValue !== undefined) {
             returnedValue = [returnedValue, response];
-        ***REMOVED***
+          }
           else if (response !== undefined) {
             returnedValue = response;
-        ***REMOVED***
+          }
           return found;
-      ***REMOVED***
-    ***REMOVED***;
+        }
+      };
 
       if (methodInvoked) {
         if (instance === undefined) {
           module.initialize();
-      ***REMOVED***
+        }
         module.invoke(query);
-    ***REMOVED***
+      }
       else {
         if (instance !== undefined) {
           instance.invoke('destroy');
-      ***REMOVED***
+        }
         module.initialize();
-    ***REMOVED***
-  ***REMOVED***)
+      }
+    })
   ;
   return (returnedValue !== undefined)
     ? returnedValue
     : this
     ;
-***REMOVED***;
+};
 
 $.fn.calendar.settings = {
 
@@ -1239,7 +1239,7 @@ $.fn.calendar.settings = {
   enabledDates       : [],         // specific day(s) which will be selectable, all other days will be disabled
   eventDates         : [],         // specific day(s) which will be shown in a different color and using tooltips
   centuryBreak       : 60,         // starting short year until 99 where it will be assumed to belong to the last century
-  currentCentury     : 2000,       // century to be added to 2-digit years (00 to {centuryBreak***REMOVED***-1)
+  currentCentury     : 2000,       // century to be added to 2-digit years (00 to {centuryBreak}-1)
   selectAdjacentDays : false,     // The calendar can show dates from adjacent month. These adjacent month dates can also be made selectable.
   // popup options ('popup', 'on', 'hoverable', and show/hide callbacks are overridden)
   popupOptions: {
@@ -1247,7 +1247,7 @@ $.fn.calendar.settings = {
     lastResort: 'bottom left',
     prefer: 'opposite',
     hideOnScroll: false
-***REMOVED***
+  },
 
   text: {
     days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -1258,7 +1258,7 @@ $.fn.calendar.settings = {
     am: 'AM',
     pm: 'PM',
     weekNo: 'Week'
-***REMOVED***
+  },
 
   formatter: {
     header: function (date, mode, settings) {
@@ -1267,86 +1267,86 @@ $.fn.calendar.settings = {
           mode === 'day' ? settings.formatter.dayHeader(date, settings) :
             mode === 'hour' ? settings.formatter.hourHeader(date, settings) :
               settings.formatter.minuteHeader(date, settings);
-  ***REMOVED***
+    },
     yearHeader: function (date, settings) {
-      var decadeYear = Math.ceil(date.getFullYear() / 10)***REMOVED*** 10;
+      var decadeYear = Math.ceil(date.getFullYear() / 10) * 10;
       return (decadeYear - 9) + ' - ' + (decadeYear + 2);
-  ***REMOVED***
+    },
     monthHeader: function (date, settings) {
       return date.getFullYear();
-  ***REMOVED***
+    },
     dayHeader: function (date, settings) {
       var month = settings.text.months[date.getMonth()];
       var year = date.getFullYear();
       return month + ' ' + year;
-  ***REMOVED***
+    },
     hourHeader: function (date, settings) {
       return settings.formatter.date(date, settings);
-  ***REMOVED***
+    },
     minuteHeader: function (date, settings) {
       return settings.formatter.date(date, settings);
-  ***REMOVED***
+    },
     dayColumnHeader: function (day, settings) {
       return settings.text.days[day];
-  ***REMOVED***
+    },
     datetime: function (date, settings) {
       if (!date) {
         return '';
-    ***REMOVED***
+      }
       var day = settings.type === 'time' ? '' : settings.formatter.date(date, settings);
       var time = settings.type.indexOf('time') < 0 ? '' : settings.formatter.time(date, settings, false);
       var separator = settings.type === 'datetime' ? ' ' : '';
       return day + separator + time;
-  ***REMOVED***
+    },
     date: function (date, settings) {
       if (!date) {
         return '';
-    ***REMOVED***
+      }
       var day = date.getDate();
       var month = settings.text.months[date.getMonth()];
       var year = date.getFullYear();
       return settings.type === 'year' ? year :
         settings.type === 'month' ? month + ' ' + year :
         (settings.monthFirst ? month + ' ' + day : day + ' ' + month) + ', ' + year;
-  ***REMOVED***
+    },
     time: function (date, settings, forCalendar) {
       if (!date) {
         return '';
-    ***REMOVED***
+      }
       var hour = date.getHours();
       var minute = date.getMinutes();
       var ampm = '';
       if (settings.ampm) {
         ampm = ' ' + (hour < 12 ? settings.text.am : settings.text.pm);
         hour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-    ***REMOVED***
+      }
       return hour + ':' + (minute < 10 ? '0' : '') + minute + ampm;
-  ***REMOVED***
+    },
     today: function (settings) {
       return settings.type === 'date' ? settings.text.today : settings.text.now;
-  ***REMOVED***
+    },
     cell: function (cell, date, cellOptions) {
-  ***REMOVED***
-***REMOVED***
+    }
+  },
 
   parser: {
     date: function (text, settings) {
       if (text instanceof Date) {
         return text;
-    ***REMOVED***
+      }
       if (!text) {
         return null;
-    ***REMOVED***
+      }
       text = ('' + text).trim().toLowerCase();
       if (text.length === 0) {
         return null;
-    ***REMOVED***
+      }
       // Reverse date and month in some cases
       text = settings.monthFirst ? text : text.replace(/[\/\-\.]/g,'/').replace(/([0-9]+)\/([0-9]+)/,'$2/$1');
       var textDate = new Date(text);
       if(!isNaN(textDate.getDate())) {
         return textDate;
-    ***REMOVED***
+      }
 
       var i, j, k;
       var minute = -1, hour = -1, day = -1, month = -1, year = -1;
@@ -1376,18 +1376,18 @@ $.fn.calendar.settings = {
                 j = parseInt(parts[k]);
                 if (isNaN(j)) {
                   j = 0;
-              ***REMOVED***
+                }
                 if (k === 0) {
                   hour = j % 24;
-              ***REMOVED*** else {
+                } else {
                   minute = j % 60;
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
+                }
+              }
+            }
             numbers.splice(i, 1);
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
+      }
 
       if (!isTimeOnly) {
         //textual month
@@ -1395,35 +1395,35 @@ $.fn.calendar.settings = {
           word = words[i];
           if (word.length <= 0) {
             continue;
-        ***REMOVED***
+          }
           for (j = 0; j < settings.text.months.length; j++) {
             monthString = settings.text.months[j];
             monthString = monthString.substring(0, word.length).toLowerCase();
             if (monthString === word) {
               month = j + 1;
               break;
-          ***REMOVED***
-        ***REMOVED***
+            }
+          }
           if (month >= 0) {
             break;
-        ***REMOVED***
-      ***REMOVED***
+          }
+        }
 
         //year > settings.centuryBreak
         for (i = 0; i < numbers.length; i++) {
           j = parseInt(numbers[i]);
           if (isNaN(j)) {
             continue;
-        ***REMOVED***
+          }
           if (j >= settings.centuryBreak && i === numbers.length-1) {
             if (j <= 99) {
               j += settings.currentCentury - 100;
-          ***REMOVED***
+            }
             year = j;
             numbers.splice(i, 1);
             break;
-        ***REMOVED***
-      ***REMOVED***
+          }
+        }
 
         //numeric month
         if (month < 0) {
@@ -1432,27 +1432,27 @@ $.fn.calendar.settings = {
             j = parseInt(numbers[k]);
             if (isNaN(j)) {
               continue;
-          ***REMOVED***
+            }
             if (1 <= j && j <= 12) {
               month = j;
               numbers.splice(k, 1);
               break;
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        }
 
         //day
         for (i = 0; i < numbers.length; i++) {
           j = parseInt(numbers[i]);
           if (isNaN(j)) {
             continue;
-        ***REMOVED***
+          }
           if (1 <= j && j <= 31) {
             day = j;
             numbers.splice(i, 1);
             break;
-        ***REMOVED***
-      ***REMOVED***
+          }
+        }
 
         //year <= settings.centuryBreak
         if (year < 0) {
@@ -1460,16 +1460,16 @@ $.fn.calendar.settings = {
             j = parseInt(numbers[i]);
             if (isNaN(j)) {
               continue;
-          ***REMOVED***
+            }
             if (j <= 99) {
               j += settings.currentCentury;
-          ***REMOVED***
+            }
             year = j;
             numbers.splice(i, 1);
             break;
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
+      }
 
       if (!isDateOnly) {
         //hour
@@ -1478,14 +1478,14 @@ $.fn.calendar.settings = {
             j = parseInt(numbers[i]);
             if (isNaN(j)) {
               continue;
-          ***REMOVED***
+            }
             if (0 <= j && j <= 23) {
               hour = j;
               numbers.splice(i, 1);
               break;
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        }
 
         //minute
         if (minute < 0) {
@@ -1493,105 +1493,105 @@ $.fn.calendar.settings = {
             j = parseInt(numbers[i]);
             if (isNaN(j)) {
               continue;
-          ***REMOVED***
+            }
             if (0 <= j && j <= 59) {
               minute = j;
               numbers.splice(i, 1);
               break;
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
+      }
 
       if (minute < 0 && hour < 0 && day < 0 && month < 0 && year < 0) {
         return null;
-    ***REMOVED***
+      }
 
       if (minute < 0) {
         minute = 0;
-    ***REMOVED***
+      }
       if (hour < 0) {
         hour = 0;
-    ***REMOVED***
+      }
       if (day < 0) {
         day = 1;
-    ***REMOVED***
+      }
       if (month < 0) {
         month = 1;
-    ***REMOVED***
+      }
       if (year < 0) {
         year = new Date().getFullYear();
-    ***REMOVED***
+      }
 
       if (isAm !== undefined) {
         if (isAm) {
           if (hour === 12) {
             hour = 0;
-        ***REMOVED***
-      ***REMOVED*** else if (hour < 12) {
+          }
+        } else if (hour < 12) {
           hour += 12;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
 
       var date = new Date(year, month - 1, day, hour, minute);
       if (date.getMonth() !== month - 1 || date.getFullYear() !== year) {
         //month or year don't match up, switch to last day of the month
         date = new Date(year, month, 0, hour, minute);
-    ***REMOVED***
+      }
       return isNaN(date.getTime()) ? null : date;
-  ***REMOVED***
-***REMOVED***
+    }
+  },
 
   // callback before date is changed, return false to cancel the change
   onBeforeChange: function (date, text, mode) {
     return true;
-***REMOVED***
+  },
 
   // callback when date changes
   onChange: function (date, text, mode) {
-***REMOVED***
+  },
 
   // callback before show animation, return false to prevent show
   onShow: function () {
-***REMOVED***
+  },
 
   // callback after show animation
   onVisible: function () {
-***REMOVED***
+  },
 
   // callback before hide animation, return false to prevent hide
   onHide: function () {
-***REMOVED***
+  },
 
   // callback after hide animation
   onHidden: function () {
-***REMOVED***
+  },
 
   // callback before item is selected, return false to prevent selection
   onSelect: function (date, mode) {
-***REMOVED***
+  },
 
   // is the given date disabled?
   isDisabled: function (date, mode) {
     return false;
-***REMOVED***
+  },
 
   selector: {
     popup: '.ui.popup',
     input: 'input',
     activator: 'input',
     append: '.inline.field,.inline.fields'
-***REMOVED***
+  },
 
   regExp: {
     dateWords: /[^A-Za-z\u00C0-\u024F]+/g,
     dateNumbers: /[^\d:]+/g
-***REMOVED***
+  },
 
   error: {
     popup: 'UI Popup, a required component is not included in this page',
     method: 'The method you called is not defined.'
-***REMOVED***
+  },
 
   className: {
     calendar: 'calendar',
@@ -1614,7 +1614,7 @@ $.fn.calendar.settings = {
     focusCell: 'focus',
     todayCell: 'today',
     today: 'today link'
-***REMOVED***
+  },
 
   metadata: {
     date: 'date',
@@ -1630,9 +1630,9 @@ $.fn.calendar.settings = {
     class: 'class',
     month: 'month',
     year: 'year'
-***REMOVED***
+  },
 
   eventClass: 'blue'
-***REMOVED***;
+};
 
-***REMOVED***)(jQuery, window, document);
+})(jQuery, window, document);

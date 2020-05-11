@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Popup
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Popup
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
             Popup
 *******************************/
 
@@ -29,7 +29,7 @@
   top: 0;
   right: 0;
 
-  /* Fixes content being squished when inline (moz only)***REMOVED***/
+  /* Fixes content being squished when inline (moz only) */
   min-width: min-content;
   z-index: @zIndex;
 
@@ -45,7 +45,7 @@
 
   border-radius: @borderRadius;
   box-shadow: @boxShadow;
-***REMOVED***
+}
 .ui.popup > .header {
   padding: 0;
 
@@ -53,10 +53,10 @@
   font-size: @headerFontSize;
   line-height: @headerLineHeight;
   font-weight: @headerFontWeight;
-***REMOVED***
+}
 .ui.popup > .header + .content {
   padding-top: @headerDistance;
-***REMOVED***
+}
 
 .ui.popup:before {
   position: absolute;
@@ -69,9 +69,9 @@
 
   z-index: @arrowZIndex;
   box-shadow: @arrowBoxShadow;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             Types
 *******************************/
 
@@ -80,12 +80,12 @@
       Tooltip
   ---------------*/
 
-  /* Content***REMOVED***/
+  /* Content */
   [data-tooltip] {
     position: relative;
-***REMOVED***
+  }
 
-  /* Arrow***REMOVED***/
+  /* Arrow */
   [data-tooltip]:before {
     pointer-events: none;
     position: absolute;
@@ -99,9 +99,9 @@
 
     z-index: @arrowZIndex;
     box-shadow: @tooltipArrowBoxShadow;
-***REMOVED***
+  }
 
-  /* Popup***REMOVED***/
+  /* Popup */
   [data-tooltip]:after {
     pointer-events: none;
     content: attr(data-tooltip);
@@ -125,9 +125,9 @@
     border-radius: @tooltipBorderRadius;
     box-shadow: @tooltipBoxShadow;
     z-index: @tooltipZIndex;
-***REMOVED***
+  }
 
-  /* Default Position (Top Center)***REMOVED***/
+  /* Default Position (Top Center) */
   [data-tooltip]:not([data-position]):before {
     top: auto;
     right: auto;
@@ -136,15 +136,15 @@
     background: @tooltipArrowBottomBackground;
     margin-left: @tooltipArrowHorizontalOffset;
     margin-bottom: -@tooltipArrowVerticalOffset;
-***REMOVED***
+  }
   [data-tooltip]:not([data-position]):after {
     left: 50%;
     transform: translateX(-50%);
     bottom: 100%;
     margin-bottom: @tooltipDistanceAway;
-***REMOVED***
+  }
 
-  /* Animation***REMOVED***/
+  /* Animation */
   [data-tooltip]:before,
   [data-tooltip]:after {
     pointer-events: none;
@@ -154,98 +154,98 @@
             transform @tooltipDuration @tooltipEasing,
             opacity @tooltipDuration @tooltipEasing
     ;
-***REMOVED***
+  }
   [data-tooltip]:before {
     transform: rotate(45deg) scale(0) !important;
     transform-origin: center top;
-***REMOVED***
+  }
   [data-tooltip]:after {
     transform-origin: center bottom;
-***REMOVED***
+  }
   [data-tooltip]:hover:before,
   [data-tooltip]:hover:after {
     visibility: visible;
     pointer-events: auto;
     opacity: 1;
-***REMOVED***
+  }
   [data-tooltip]:hover:before {
     transform: rotate(45deg) scale(1) !important;
-***REMOVED***
+  }
 
-  /* Animation Position***REMOVED***/
+  /* Animation Position */
   [data-tooltip]:after,
   [data-tooltip][data-position="top center"]:after,
   [data-tooltip][data-position="bottom center"]:after {
     transform: translateX(-50%) scale(0) !important;
-***REMOVED***
+  }
   [data-tooltip]:hover:after,
   [data-tooltip][data-position="bottom center"]:hover:after {
     transform: translateX(-50%) scale(1) !important;
-***REMOVED***
+  }
   [data-tooltip][data-position="left center"]:after,
   [data-tooltip][data-position="right center"]:after {
     transform: translateY(-50%) scale(0) !important;
-***REMOVED***
+  }
   [data-tooltip][data-position="left center"]:hover:after,
   [data-tooltip][data-position="right center"]:hover:after {
     transform: translateY(-50%) scale(1) !important;
-***REMOVED***
+  }
   [data-tooltip][data-position="top left"]:after,
   [data-tooltip][data-position="top right"]:after,
   [data-tooltip][data-position="bottom left"]:after,
   [data-tooltip][data-position="bottom right"]:after {
     transform: scale(0) !important;
-***REMOVED***
+  }
   [data-tooltip][data-position="top left"]:hover:after,
   [data-tooltip][data-position="top right"]:hover:after,
   [data-tooltip][data-position="bottom left"]:hover:after,
   [data-tooltip][data-position="bottom right"]:hover:after {
     transform: scale(1) !important;
-***REMOVED***
+  }
   & when (@variationPopupFixed) {
     [data-tooltip][data-variation~="fixed"]:after {
       white-space: normal;
       width: @maxWidth;
-  ***REMOVED***
+    }
     [data-tooltip][data-variation*="wide fixed"]:after {
       width: @wideWidth;
-  ***REMOVED***
+    }
     [data-tooltip][data-variation*="very wide fixed"]:after {
       width: @veryWideWidth;
-  ***REMOVED***
+    }
     @media only screen and (max-width: @largestMobileScreen) {
       [data-tooltip][data-variation~="fixed"]:after {
         width: @maxWidth;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
   & when (@variationPopupInverted) {
     /*--------------
         Inverted
     ---------------*/
 
-    /* Arrow***REMOVED***/
+    /* Arrow */
     [data-tooltip][data-inverted]:before {
       box-shadow: none !important;
-  ***REMOVED***
+    }
 
-    /* Arrow Position***REMOVED***/
+    /* Arrow Position */
     [data-tooltip][data-inverted]:before {
       background: @invertedArrowBottomBackground;
-  ***REMOVED***
+    }
 
-    /* Popup ***REMOVED***/
+    /* Popup  */
     [data-tooltip][data-inverted]:after {
       background: @tooltipInvertedBackground;
       color: @tooltipInvertedColor;
       border: @tooltipInvertedBorder;
       box-shadow: @tooltipInvertedBoxShadow;
-  ***REMOVED***
+    }
     [data-tooltip][data-inverted]:after .header {
       background: @tooltipInvertedHeaderBackground;
       color: @tooltipInvertedHeaderColor;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   & when (@variationPopupPosition) {
     /*--------------
@@ -254,9 +254,9 @@
     & when (@variationPopupTop) {
       [data-position~="top"][data-tooltip]:before {
         background: @arrowBottomBackground;
-    ***REMOVED***
+      }
       & when (@variationPopupCenter) {
-        /* Top Center***REMOVED***/
+        /* Top Center */
         [data-position="top center"][data-tooltip]:after {
           top: auto;
           right: auto;
@@ -264,7 +264,7 @@
           bottom: 100%;
           transform: translateX(-50%);
           margin-bottom: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="top center"][data-tooltip]:before {
           top: auto;
           right: auto;
@@ -273,17 +273,17 @@
           background: @tooltipArrowTopBackground;
           margin-left: @tooltipArrowHorizontalOffset;
           margin-bottom: -@tooltipArrowVerticalOffset;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupLeft) {
-        /* Top Left***REMOVED***/
+        /* Top Left */
         [data-position="top left"][data-tooltip]:after {
           top: auto;
           right: auto;
           left: 0;
           bottom: 100%;
           margin-bottom: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="top left"][data-tooltip]:before {
           top: auto;
           right: auto;
@@ -291,17 +291,17 @@
           left: @arrowDistanceFromEdge;
           margin-left: @tooltipArrowHorizontalOffset;
           margin-bottom: -@tooltipArrowVerticalOffset;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupRight) {
-        /* Top Right***REMOVED***/
+        /* Top Right */
         [data-position="top right"][data-tooltip]:after {
           top: auto;
           left: auto;
           right: 0;
           bottom: 100%;
           margin-bottom: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="top right"][data-tooltip]:before {
           top: auto;
           left: auto;
@@ -309,17 +309,17 @@
           right: @arrowDistanceFromEdge;
           margin-left: @tooltipArrowHorizontalOffset;
           margin-bottom: -@tooltipArrowVerticalOffset;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    }
 
     & when (@variationPopupBottom) {
       [data-position~="bottom"][data-tooltip]:before {
         background: @arrowTopBackground;
         box-shadow: @bottomArrowBoxShadow;
-    ***REMOVED***
+      }
       & when (@variationPopupCenter) {
-        /* Bottom Center***REMOVED***/
+        /* Bottom Center */
         [data-position="bottom center"][data-tooltip]:after {
           bottom: auto;
           right: auto;
@@ -327,7 +327,7 @@
           top: 100%;
           transform: translateX(-50%);
           margin-top: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="bottom center"][data-tooltip]:before {
           bottom: auto;
           right: auto;
@@ -335,15 +335,15 @@
           left: 50%;
           margin-left: @tooltipArrowHorizontalOffset;
           margin-top: -@tooltipArrowVerticalOffset;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupLeft) {
-        /* Bottom Left***REMOVED***/
+        /* Bottom Left */
         [data-position="bottom left"][data-tooltip]:after {
           left: 0;
           top: 100%;
           margin-top: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="bottom left"][data-tooltip]:before {
           bottom: auto;
           right: auto;
@@ -351,15 +351,15 @@
           left: @arrowDistanceFromEdge;
           margin-left: @tooltipArrowHorizontalOffset;
           margin-top: -@tooltipArrowVerticalOffset;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupRight) {
-        /* Bottom Right***REMOVED***/
+        /* Bottom Right */
         [data-position="bottom right"][data-tooltip]:after {
           right: 0;
           top: 100%;
           margin-top: @tooltipDistanceAway;
-      ***REMOVED***
+        }
         [data-position="bottom right"][data-tooltip]:before {
           bottom: auto;
           left: auto;
@@ -367,18 +367,18 @@
           right: @arrowDistanceFromEdge;
           margin-left: @tooltipArrowVerticalOffset;
           margin-top: -@tooltipArrowHorizontalOffset;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    }
     & when (@variationPopupCenter) {
       & when (@variationPopupLeft) {
-        /* Left Center***REMOVED***/
+        /* Left Center */
         [data-position="left center"][data-tooltip]:after {
           right: 100%;
           top: 50%;
           margin-right: @tooltipDistanceAway;
           transform: translateY(-50%);
-      ***REMOVED***
+        }
         [data-position="left center"][data-tooltip]:before {
           right: 100%;
           top: 50%;
@@ -386,16 +386,16 @@
           margin-right: @tooltipArrowHorizontalOffset;
           background: @arrowCenterBackground;
           box-shadow: @leftArrowBoxShadow;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupRight) {
-        /* Right Center***REMOVED***/
+        /* Right Center */
         [data-position="right center"][data-tooltip]:after {
           left: 100%;
           top: 50%;
           margin-left: @tooltipDistanceAway;
           transform: translateY(-50%);
-      ***REMOVED***
+        }
         [data-position="right center"][data-tooltip]:before {
           left: 100%;
           top: 50%;
@@ -403,66 +403,66 @@
           margin-left: -@tooltipArrowVerticalOffset;
           background: @arrowCenterBackground;
           box-shadow: @rightArrowBoxShadow;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    }
 
     & when (@variationPopupInverted) {
-      /* Inverted Arrow Color***REMOVED***/
+      /* Inverted Arrow Color */
       & when (@variationPopupBottom) {
         [data-inverted][data-position~="bottom"][data-tooltip]:before {
           background: @invertedArrowTopBackground;
           box-shadow: @bottomArrowBoxShadow;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupCenter) {
         & when (@variationPopupLeft) {
           [data-inverted][data-position="left center"][data-tooltip]:before {
             background: @invertedArrowCenterBackground;
             box-shadow: @leftArrowBoxShadow;
-        ***REMOVED***
-      ***REMOVED***
+          }
+        }
         & when (@variationPopupRight) {
           [data-inverted][data-position="right center"][data-tooltip]:before {
             background: @invertedArrowCenterBackground;
             box-shadow: @rightArrowBoxShadow;
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
+      }
       & when (@variationPopupTop) {
         [data-inverted][data-position~="top"][data-tooltip]:before {
           background: @invertedArrowBottomBackground;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    }
 
     & when (@variationPopupBottom) {
       [data-position~="bottom"][data-tooltip]:before {
         transform-origin: center bottom;
-    ***REMOVED***
+      }
       [data-position~="bottom"][data-tooltip]:after {
         transform-origin: center top;
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     & when (@variationPopupCenter) {
       & when (@variationPopupLeft) {
         [data-position="left center"][data-tooltip]:before {
           transform-origin: top center;
-      ***REMOVED***
+        }
         [data-position="left center"][data-tooltip]:after {
           transform-origin: right center;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationPopupRight) {
         [data-position="right center"][data-tooltip]:before {
           transform-origin: right center;
-      ***REMOVED***
+        }
         [data-position="right center"][data-tooltip]:after {
           transform-origin: left center;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+      }
+    }
+  }
 
   & when (@variationPopupBasic) {
     /*--------------
@@ -470,9 +470,9 @@
     ---------------*/
     [data-tooltip][data-variation~="basic"]:before {
       display: none;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
      Spacing
@@ -480,66 +480,66 @@
 
 .ui.popup {
   margin: 0;
-***REMOVED***
+}
 
 & when (@variationPopupTop) {
-  /* Extending from Top***REMOVED***/
+  /* Extending from Top */
   .ui.top.popup {
     margin: 0 0 @popupDistanceAway;
-***REMOVED***
+  }
   & when (@variationPopupLeft) {
     .ui.top.left.popup {
       transform-origin: left bottom;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupCenter) {
     .ui.top.center.popup {
       transform-origin: center bottom;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupRight) {
     .ui.top.right.popup {
       transform-origin: right bottom;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationPopupCenter) {
-  /* Extending from Vertical Center***REMOVED***/
+  /* Extending from Vertical Center */
   & when (@variationPopupLeft) {
     .ui.left.center.popup {
       margin: 0 @popupDistanceAway 0 0;
       transform-origin: right 50%;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupRight) {
     .ui.right.center.popup {
       margin: 0 0 0 @popupDistanceAway;
       transform-origin: left 50%;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationPopupBottom) {
-  /* Extending from Bottom***REMOVED***/
+  /* Extending from Bottom */
   .ui.bottom.popup {
     margin: @popupDistanceAway 0 0;
-***REMOVED***
+  }
   & when (@variationPopupLeft) {
     .ui.bottom.left.popup {
       transform-origin: left top;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupCenter) {
     .ui.bottom.center.popup {
       transform-origin: center top;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupRight) {
     .ui.bottom.right.popup {
       transform-origin: right top;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   /*--------------
        Pointer
@@ -553,11 +553,11 @@
     right: auto;
     bottom: auto;
     box-shadow: @bottomArrowBoxShadow;
-***REMOVED***
+  }
 
   .ui.bottom.left.popup {
     margin-left: @boxArrowOffset;
-***REMOVED***
+  }
   /*rtl:rename*/
   .ui.bottom.left.popup:before {
     top: @arrowOffset;
@@ -566,11 +566,11 @@
     bottom: auto;
     margin-left: 0;
     box-shadow: @bottomArrowBoxShadow;
-***REMOVED***
+  }
 
   .ui.bottom.right.popup {
     margin-right: @boxArrowOffset;
-***REMOVED***
+  }
   /*rtl:rename*/
   .ui.bottom.right.popup:before {
     top: @arrowOffset;
@@ -579,8 +579,8 @@
     left: auto;
     margin-left: 0;
     box-shadow: @bottomArrowBoxShadow;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupTop) {
   /*--- Above ---*/
@@ -591,12 +591,12 @@
       bottom: @arrowOffset;
       left: 50%;
       margin-left: @arrowOffset;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupLeft) {
     .ui.top.left.popup {
       margin-left: @boxArrowOffset;
-  ***REMOVED***
+    }
     /*rtl:rename*/
     .ui.top.left.popup:before {
       bottom: @arrowOffset;
@@ -604,12 +604,12 @@
       top: auto;
       right: auto;
       margin-left: 0;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupRight) {
     .ui.top.right.popup {
       margin-right: @boxArrowOffset;
-  ***REMOVED***
+    }
     /*rtl:rename*/
     .ui.top.right.popup:before {
       bottom: @arrowOffset;
@@ -617,9 +617,9 @@
       top: auto;
       left: auto;
       margin-left: 0;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationPopupCenter) {
   /*--- Left Center ---*/
@@ -632,8 +632,8 @@
       left: auto;
       margin-top: @arrowOffset;
       box-shadow: @leftArrowBoxShadow;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupRight) {
     /*--- Right Center  ---*/
     /*rtl:rename*/
@@ -644,61 +644,61 @@
       right: auto;
       margin-top: @arrowOffset;
       box-shadow: @rightArrowBoxShadow;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupLeft) or (@variationPopupRight) {
     .ui.right.center.popup:before,
     .ui.left.center.popup:before {
       background: @arrowCenterBackground;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationPopupBottom) {
-  /* Arrow Color By Location***REMOVED***/
+  /* Arrow Color By Location */
   .ui.bottom.popup:before {
     background: @arrowTopBackground;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupTop) {
   .ui.top.popup:before {
     background: @arrowBottomBackground;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupInverted) {
   & when (@variationPopupBottom) {
-    /* Inverted Arrow Color***REMOVED***/
+    /* Inverted Arrow Color */
     .ui.inverted.bottom.popup:before {
       background: @invertedArrowTopBackground;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupCenter) {
     .ui.inverted.right.center.popup:before,
     .ui.inverted.left.center.popup:before {
       background: @invertedArrowCenterBackground;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationPopupTop) {
     .ui.inverted.top.popup:before {
       background: @invertedArrowBottomBackground;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
             Coupling
 *******************************/
 
-/* Immediate Nested Grid***REMOVED***/
+/* Immediate Nested Grid */
 .ui.popup > .ui.grid:not(.padded) {
   width: @nestedGridWidth;
   margin: @nestedGridMargin;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             States
 *******************************/
 & when (@variationPopupLoading) {
@@ -706,21 +706,21 @@
     display: block;
     visibility: hidden;
     z-index: @loadingZIndex;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .ui.animating.popup,
 .ui.visible.popup {
   display: block;
-***REMOVED***
+}
 
 .ui.visible.popup {
   transform: translateZ(0);
   backface-visibility: hidden;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
             Variations
 *******************************/
 
@@ -731,14 +731,14 @@
 
   .ui.basic.popup:before {
     display: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupFixed) {
   .ui.fixed.popup {
     width: @maxWidth;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupWide) {
   /*--------------
@@ -749,14 +749,14 @@
     max-width: @wideWidth;
     &.fixed when (@variationPopupFixed) {
       width: @wideWidth;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui[class*="very wide"].popup {
     max-width: @veryWideWidth;
     &.fixed when (@variationPopupFixed) {
       width: @veryWideWidth;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   @media only screen and (max-width: @largestMobileScreen) {
     .ui.wide.popup,
@@ -764,10 +764,10 @@
       max-width: @maxWidth;
       &.fixed when (@variationPopupFixed) {
         width:@maxWidth;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}
 
 & when (@variationPopupFluid) {
   /*--------------
@@ -777,30 +777,30 @@
   .ui.fluid.popup {
     width: 100%;
     max-width: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupInverted) {
   /*--------------
        Colors
   ---------------*/
 
-  /* Inverted colors ***REMOVED***/
+  /* Inverted colors  */
   .ui.inverted.popup {
     background: @invertedBackground;
     color: @invertedColor;
     border: @invertedBorder;
     box-shadow: @invertedBoxShadow;
-***REMOVED***
+  }
   .ui.inverted.popup .header {
     background-color: @invertedHeaderBackground;
     color: @invertedHeaderColor;
-***REMOVED***
+  }
   .ui.inverted.popup:before {
     background-color: @invertedArrowColor;
     box-shadow: none !important;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationPopupFlowing) {
   /*--------------
@@ -809,8 +809,8 @@
 
   .ui.flowing.popup {
     max-width: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*--------------
@@ -819,21 +819,21 @@
 
 .ui.popup {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationPopupSizes = false) {
   each(@variationPopupSizes, {
     @s: @@value;
-    .ui.@{value***REMOVED***.popup {
+    .ui.@{value}.popup {
       font-size: @s;
-  ***REMOVED***
+    }
     & when (@variationPopupTooltip) {
-      [data-tooltip][data-variation~="@{value***REMOVED***"]:before,
-      [data-tooltip][data-variation~="@{value***REMOVED***"]:after {
+      [data-tooltip][data-variation~="@{value}"]:before,
+      [data-tooltip][data-variation~="@{value}"]:after {
         font-size: @s;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+      }
+    }
+  })
+}
 
 
 .loadUIOverrides();

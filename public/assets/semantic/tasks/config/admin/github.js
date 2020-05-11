@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
           GitHub Login
 *******************************/
 /*
@@ -20,18 +20,18 @@ var
 
 if(!oAuth) {
   console.error('Must add oauth token for GitHub in tasks/config/admin/oauth.js');
-***REMOVED***
+}
 
 github = new githubAPI({
   version    : '3.0.0',
   debug      : true,
   protocol   : 'https',
   timeout    : 5000
-***REMOVED***);
+});
 
 github.authenticate({
   type: 'oauth',
   token: oAuth.token
-***REMOVED***);
+});
 
 module.exports = github;

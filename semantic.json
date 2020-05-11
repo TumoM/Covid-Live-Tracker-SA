@@ -6,7 +6,7 @@
       "definitions": "src/definitions/",
       "site": "src/site/",
       "themes": "src/themes/"
-  ***REMOVED***
+    },
     "output": {
       "packaged": "dist/",
       "packagedCSS": "../../assets/css/vendor",
@@ -14,11 +14,11 @@
       "uncompressed": "dist/components/",
       "compressed": "dist/components/",
       "themes": "dist/themes/"
-  ***REMOVED***
+    },
     "clean": "dist/"
-***REMOVED***
+  },
   "permission": false,
   "autoInstall": true,
   "rtl": false,
   "version": "2.8.4"
-***REMOVED***
+}

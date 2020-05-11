@@ -2,7 +2,7 @@ var Sort = function(table){
  	this.table = table; //hold Tabulator object
  	this.sortList = []; //holder current sort
  	this.changed = false; //has the sort changed since last render
- ***REMOVED***;
+ };
 
 //initialize column header for sorting
 Sort.prototype.initializeColumn = function(column, content){
@@ -16,22 +16,22 @@ Sort.prototype.initializeColumn = function(column, content){
 		case "string":
 		if(self.sorters[column.definition.sorter]){
 			sorter = self.sorters[column.definition.sorter];
-		***REMOVED***else{
+		}else{
 			console.warn("Sort Error - No such sorter found: ", column.definition.sorter);
-		***REMOVED***
+		}
 		break;
 
 		case "function":
 		sorter = column.definition.sorter;
 		break;
-	***REMOVED***
+	}
 
 	column.modules.sort = {
 		sorter:sorter, dir:"none",
-		params:column.definition.sorterParams || {***REMOVED***,
+		params:column.definition.sorterParams || {},
 		startingDir:column.definition.headerSortStartingDir || "asc",
 		tristate: typeof column.definition.headerSortTristate !== "undefined" ? column.definition.headerSortTristate : this.table.options.headerSortTristate,
-	***REMOVED***;
+	};
 
 	if(typeof column.definition.headerSort === "undefined" ? (this.table.options.headerSort !== false) : column.definition.headerSort !== false){
 
@@ -55,14 +55,14 @@ Sort.prototype.initializeColumn = function(column, content){
 				if(column.modules.sort.tristate){
 					if(column.modules.sort.dir == "none"){
 						dir = column.modules.sort.startingDir;
-					***REMOVED***else{
+					}else{
 						if(column.modules.sort.dir == column.modules.sort.startingDir){
 							dir = column.modules.sort.dir == "asc" ? "desc" : "asc";
-						***REMOVED***else{
+						}else{
 							dir = "none";
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***else{
+						}
+					}
+				}else{
 					switch(column.modules.sort.dir){
 						case "asc":
 						dir = "desc";
@@ -74,8 +74,8 @@ Sort.prototype.initializeColumn = function(column, content){
 
 						default:
 						dir = column.modules.sort.startingDir;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 
 				if (self.table.options.columnHeaderSortMulti && (e.shiftKey || e.ctrlKey)) {
@@ -83,7 +83,7 @@ Sort.prototype.initializeColumn = function(column, content){
 
 					match = sorters.findIndex(function(sorter){
 						return sorter.field === column.getField();
-					***REMOVED***);
+					});
 
 					if(match > -1){
 						sorters[match].dir = dir;
@@ -92,38 +92,38 @@ Sort.prototype.initializeColumn = function(column, content){
 							match = sorters.splice(match, 1)[0];
 							if(dir != "none"){
 								sorters.push(match);
-							***REMOVED***
-						***REMOVED***
-					***REMOVED***else{
+							}
+						}
+					}else{
 						if(dir != "none"){
-							sorters.push({column:column, dir:dir***REMOVED***);
-						***REMOVED***
-					***REMOVED***
+							sorters.push({column:column, dir:dir});
+						}
+					}
 
 					//add to existing sort
 					self.setSort(sorters);
-				***REMOVED***else{
+				}else{
 					if(dir == "none"){
 						self.clear();
-					***REMOVED***else{
+					}else{
 						//sort by column only
 						self.setSort(column, dir);
-					***REMOVED***
+					}
 
-				***REMOVED***
+				}
 
 				self.table.rowManager.sorterRefresh(!self.sortList.length);
-			***REMOVED***
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***;
+			}
+		});
+	}
+};
 
 //check if the sorters have changed since last use
 Sort.prototype.hasChanged = function(){
 	var changed = this.changed;
 	this.changed = false;
 	return changed;
-***REMOVED***;
+};
 
 //return current sorters
 Sort.prototype.getSort = function(){
@@ -132,12 +132,12 @@ Sort.prototype.getSort = function(){
 
 	self.sortList.forEach(function(item){
 		if(item.column){
-			sorters.push({column:item.column.getComponent(), field:item.column.getField(), dir:item.dir***REMOVED***);
-		***REMOVED***
-	***REMOVED***);
+			sorters.push({column:item.column.getComponent(), field:item.column.getField(), dir:item.dir});
+		}
+	});
 
 	return sorters;
-***REMOVED***;
+};
 
 //change sort list and trigger sort
 Sort.prototype.setSort = function(sortList, dir){
@@ -145,8 +145,8 @@ Sort.prototype.setSort = function(sortList, dir){
 	newSortList = [];
 
 	if(!Array.isArray(sortList)){
-		sortList = [{column: sortList, dir:dir***REMOVED***];
-	***REMOVED***
+		sortList = [{column: sortList, dir:dir}];
+	}
 
 	sortList.forEach(function(item){
 		var column;
@@ -157,23 +157,23 @@ Sort.prototype.setSort = function(sortList, dir){
 			item.column = column;
 			newSortList.push(item);
 			self.changed = true;
-		***REMOVED***else{
+		}else{
 			console.warn("Sort Warning - Sort field does not exist and is being ignored: ", item.column);
-		***REMOVED***
+		}
 
-	***REMOVED***);
+	});
 
 	self.sortList = newSortList;
 
 	if(this.table.options.persistence && this.table.modExists("persistence", true) && this.table.modules.persistence.config.sort){
 		this.table.modules.persistence.save("sort");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //clear sorters
 Sort.prototype.clear = function(){
 	this.setSort([]);
-***REMOVED***;
+};
 
 //find appropriate sorter for column
 Sort.prototype.findSorter = function(column){
@@ -201,18 +201,18 @@ Sort.prototype.findSorter = function(column){
 				default:
 				if(!isNaN(value) && value !== ""){
 					sorter = "number";
-				***REMOVED***else{
+				}else{
 					if(value.match(/((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+$/i)){
 						sorter = "alphanum";
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 				break;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	return this.sorters[sorter];
-***REMOVED***;
+};
 
 //work through sort list sorting data
 Sort.prototype.sort = function(data){
@@ -223,7 +223,7 @@ Sort.prototype.sort = function(data){
 
 	if(self.table.options.dataSorting){
 		self.table.options.dataSorting.call(self.table, self.getSort());
-	***REMOVED***
+	}
 
 	self.clearColumnHeaders();
 
@@ -238,32 +238,32 @@ Sort.prototype.sort = function(data){
 				//if no sorter has been defined, take a guess
 				if(!sortObj.sorter){
 					sortObj.sorter = self.findSorter(item.column);
-				***REMOVED***
+				}
 
 				item.params = typeof sortObj.params === "function" ? sortObj.params(item.column.getComponent(), item.dir) : sortObj.params;
 
 				sortListActual.push(item);
-			***REMOVED***
+			}
 
 			self.setColumnHeader(item.column, item.dir);
-		***REMOVED***);
+		});
 
 		//sort data
 		if (sortListActual.length) {
 			self._sortItems(data, sortListActual);
-		***REMOVED***
+		}
 
-	***REMOVED***else{
+	}else{
 		sortList.forEach(function(item, i){
 			self.setColumnHeader(item.column, item.dir);
-		***REMOVED***);
-	***REMOVED***
+		});
+	}
 
 	if(self.table.options.dataSorted){
 		self.table.options.dataSorted.call(self.table, self.getSort(), self.table.rowManager.getComponents("active"));
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 //clear sort arrows on columns
 Sort.prototype.clearColumnHeaders = function(){
@@ -271,15 +271,15 @@ Sort.prototype.clearColumnHeaders = function(){
 		if(column.modules.sort){
 			column.modules.sort.dir = "none";
 			column.getElement().setAttribute("aria-sort", "none");
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 //set the column header sort direction
 Sort.prototype.setColumnHeader = function(column, dir){
 	column.modules.sort.dir = dir;
 	column.getElement().setAttribute("aria-sort", dir);
-***REMOVED***;
+};
 
 //sort each item in sort list
 Sort.prototype._sortItems = function(data, sortList){
@@ -295,12 +295,12 @@ Sort.prototype._sortItems = function(data, sortList){
 
 			if(result !== 0){
 				break;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		return result;
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 //process individual rows for a sort function on active data
 Sort.prototype._sortRow = function(a, b, column, dir, params){
@@ -320,7 +320,7 @@ Sort.prototype._sortRow = function(a, b, column, dir, params){
 	el2Comp = el2.getComponent();
 
 	return column.modules.sort.sorter.call(this, a, b, el1Comp, el2Comp, column.getComponent(), dir, params);
-***REMOVED***;
+};
 
 
 //default data sorters
@@ -339,20 +339,20 @@ Sort.prototype.sorters = {
 		//handle non numeric values
 		if(isNaN(a)){
 			emptyAlign =  isNaN(b) ? 0 : -1;
-		***REMOVED***else if(isNaN(b)){
+		}else if(isNaN(b)){
 			emptyAlign =  1;
-		***REMOVED***else{
+		}else{
 			//compare valid values
 			return a - b;
-		***REMOVED***
+		}
 
 		//fix empty values in position
 		if((alignEmptyValues === "top" && dir === "desc") || (alignEmptyValues === "bottom" && dir === "asc")){
-			emptyAlign***REMOVED***= -1;
-		***REMOVED***
+			emptyAlign *= -1;
+		}
 
 		return emptyAlign;
-	***REMOVED***,
+	},
 
 	//sort strings
 	string:function(a, b, aRow, bRow, column, dir, params){
@@ -363,49 +363,49 @@ Sort.prototype.sorters = {
 		//handle empty values
 		if(!a){
 			emptyAlign =  !b ? 0 : -1;
-		***REMOVED***else if(!b){
+		}else if(!b){
 			emptyAlign =  1;
-		***REMOVED***else{
+		}else{
 			//compare valid values
 			switch(typeof params.locale){
 				case "boolean":
 				if(params.locale){
 					locale = this.table.modules.localize.getLocale();
-				***REMOVED***
+				}
 				break;
 				case "string":
 				locale = params.locale;
 				break;
-			***REMOVED***
+			}
 
 			return String(a).toLowerCase().localeCompare(String(b).toLowerCase(), locale);
-		***REMOVED***
+		}
 
 		//fix empty values in position
 		if((alignEmptyValues === "top" && dir === "desc") || (alignEmptyValues === "bottom" && dir === "asc")){
-			emptyAlign***REMOVED***= -1;
-		***REMOVED***
+			emptyAlign *= -1;
+		}
 
 		return emptyAlign;
-	***REMOVED***,
+	},
 
 	//sort date
 	date:function(a, b, aRow, bRow, column, dir, params){
 		if(!params.format){
 			params.format = "DD/MM/YYYY";
-		***REMOVED***
+		}
 
 		return this.sorters.datetime.call(this, a, b, aRow, bRow, column, dir, params);
-	***REMOVED***,
+	},
 
 	//sort hh:mm formatted times
 	time:function(a, b, aRow, bRow, column, dir, params){
 		if(!params.format){
 			params.format = "hh:mm";
-		***REMOVED***
+		}
 
 		return this.sorters.datetime.call(this, a, b, aRow, bRow, column, dir, params);
-	***REMOVED***,
+	},
 
 	//sort datetime
 	datetime:function(a, b, aRow, bRow, column, dir, params){
@@ -419,24 +419,24 @@ Sort.prototype.sorters = {
 
 			if(!a.isValid()){
 				emptyAlign = !b.isValid() ? 0 : -1;
-			***REMOVED***else if(!b.isValid()){
+			}else if(!b.isValid()){
 				emptyAlign =  1;
-			***REMOVED***else{
+			}else{
 				//compare valid values
 				return a - b;
-			***REMOVED***
+			}
 
 			//fix empty values in position
 			if((alignEmptyValues === "top" && dir === "desc") || (alignEmptyValues === "bottom" && dir === "asc")){
-				emptyAlign***REMOVED***= -1;
-			***REMOVED***
+				emptyAlign *= -1;
+			}
 
 			return emptyAlign;
 
-		***REMOVED***else{
+		}else{
 			console.error("Sort Error - 'datetime' sorter is dependant on moment.js");
-		***REMOVED***
-	***REMOVED***,
+		}
+	},
 
 	//sort booleans
 	boolean:function(a, b, aRow, bRow, column, dir, params){
@@ -444,7 +444,7 @@ Sort.prototype.sorters = {
 		var el2 = b === true || b === "true" || b === "True" || b === 1 ? 1 : 0;
 
 		return el1 - el2;
-	***REMOVED***,
+	},
 
 	//sort if element contains any data
 	array:function(a, b, aRow, bRow, column, dir, params){
@@ -464,7 +464,7 @@ Sort.prototype.sorters = {
 				case "sum":
 				return value.reduce(function(c, d){
 					return c + d;
-				***REMOVED***);
+				});
 				break;
 
 				case "max":
@@ -478,32 +478,32 @@ Sort.prototype.sorters = {
 				case "avg":
 				return value.reduce(function(c, d){
 					return c + d;
-				***REMOVED***) / value.length;
+				}) / value.length;
 				break;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//handle non array values
 		if(!Array.isArray(a)){
 			alignEmptyValues = !Array.isArray(b) ? 0 : -1;
-		***REMOVED***else if(!Array.isArray(b)){
+		}else if(!Array.isArray(b)){
 			alignEmptyValues = 1;
-		***REMOVED***else{
+		}else{
 
 			//compare valid values
 			el1 = a ? calc(a) : 0;
 			el2 = b ? calc(b) : 0;
 
 			return el1 - el2;
-		***REMOVED***
+		}
 
 		//fix empty values in position
 		if((alignEmptyValues === "top" && dir === "desc") || (alignEmptyValues === "bottom" && dir === "asc")){
-			emptyAlign***REMOVED***= -1;
-		***REMOVED***
+			emptyAlign *= -1;
+		}
 
 		return emptyAlign;
-	***REMOVED***,
+	},
 
 
 	//sort if element contains any data
@@ -512,7 +512,7 @@ Sort.prototype.sorters = {
 		var el2 = typeof b == "undefined" ? 0 : 1;
 
 		return el1 - el2;
-	***REMOVED***,
+	},
 
 	//sort alpha numeric strings
 	alphanum:function(as, bs, aRow, bRow, column, dir, params){
@@ -523,9 +523,9 @@ Sort.prototype.sorters = {
 		//handle empty values
 		if(!as && as!== 0){
 			emptyAlign =  !bs && bs!== 0 ? 0 : -1;
-		***REMOVED***else if(!bs && bs!== 0){
+		}else if(!bs && bs!== 0){
 			emptyAlign =  1;
-		***REMOVED***else{
+		}else{
 
 			if(isFinite(as) && isFinite(bs)) return as - bs;
 			a = String(as).toLowerCase();
@@ -543,21 +543,21 @@ Sort.prototype.sorters = {
 						if(a1.charAt(0) === "0") a1 = "." + a1;
 						if(b1.charAt(0) === "0") b1 = "." + b1;
 						return a1 - b1;
-					***REMOVED***
+					}
 					else return a1 > b1 ? 1 : -1;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			return a.length > b.length;
-		***REMOVED***
+		}
 
 		//fix empty values in position
 		if((alignEmptyValues === "top" && dir === "desc") || (alignEmptyValues === "bottom" && dir === "asc")){
-			emptyAlign***REMOVED***= -1;
-		***REMOVED***
+			emptyAlign *= -1;
+		}
 
 		return emptyAlign;
-	***REMOVED***,
-***REMOVED***;
+	},
+};
 
 Tabulator.prototype.registerModule("sort", Sort);

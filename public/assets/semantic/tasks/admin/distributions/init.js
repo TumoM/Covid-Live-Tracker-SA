@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
         Init Dist Repos
 *******************************/
 
@@ -6,9 +6,9 @@
 
  This task pulls the latest version of distribution from GitHub
 
- ***REMOVED*** Creates new repo if doesnt exist (locally & GitHub)
- ***REMOVED*** Adds remote it doesnt exists
- ***REMOVED*** Pulls latest changes from repo
+  * Creates new repo if doesnt exist (locally & GitHub)
+  * Adds remote it doesnt exists
+  * Pulls latest changes from repo
 
 */
 
@@ -51,7 +51,7 @@ module.exports = function(callback) {
   if(!oAuth) {
     console.error('Must add oauth token for GitHub in tasks/config/admin/oauth.js');
     return;
-***REMOVED***
+  }
 
   // Do Git commands synchronously per component, to avoid issues
   stepRepo = function() {
@@ -61,7 +61,7 @@ module.exports = function(callback) {
     if(index >= total) {
       callback();
       return;
-  ***REMOVED***
+    }
 
     var
       component          = release.distributions[index],
@@ -69,9 +69,9 @@ module.exports = function(callback) {
       outputDirectory    = path.resolve(release.outputRoot + lowerCaseComponent),
       repoName           = release.distRepoRoot + component,
 
-      gitOptions         = { cwd: outputDirectory ***REMOVED***,
-      pullOptions        = { args: '-q', cwd: outputDirectory, quiet: true ***REMOVED***,
-      resetOptions       = { args: '-q --hard', cwd: outputDirectory, quiet: true ***REMOVED***,
+      gitOptions         = { cwd: outputDirectory },
+      pullOptions        = { args: '-q', cwd: outputDirectory, quiet: true },
+      resetOptions       = { args: '-q --hard', cwd: outputDirectory, quiet: true },
       gitURL             = 'git@github.com:' + release.org + '/' + repoName + '.git',
       repoURL            = 'https://github.com/' + release.org + '/' + repoName + '/',
       localRepoSetup     = fs.existsSync(path.join(outputDirectory, '.git'))
@@ -82,33 +82,33 @@ module.exports = function(callback) {
     // create folder if doesn't exist
     if( !fs.existsSync(outputDirectory) ) {
       mkdirp.sync(outputDirectory);
-  ***REMOVED***
+    }
 
     // clean folder
     if(release.outputRoot.search('../repos') == 0) {
       console.info('Cleaning dir', outputDirectory);
-      del.sync([outputDirectory + '**/*'], {silent: true, force: true***REMOVED***);
-  ***REMOVED***
+      del.sync([outputDirectory + '**/*'], {silent: true, force: true});
+    }
 
     // set-up local repo
     function setupRepo() {
       if(localRepoSetup) {
         addRemote();
-    ***REMOVED***
+      }
       else {
         initRepo();
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
 
     function initRepo() {
       console.info('Initializing repository for ' + component);
       git.init(gitOptions, function(error) {
         if(error) {
           console.error('Error initializing repo', error);
-      ***REMOVED***
+        }
         addRemote();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     function createRepo() {
       console.info('Creating GitHub repo ' + repoURL);
@@ -116,31 +116,31 @@ module.exports = function(callback) {
         org      : release.org,
         name     : repoName,
         homepage : release.homepage
-    ***REMOVED*** function() {
+      }, function() {
         setupRepo();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     function addRemote() {
       console.info('Adding remote origin as ' + gitURL);
       git.addRemote('origin', gitURL, gitOptions, function(){
         pullFiles();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     function pullFiles() {
       console.info('Pulling ' + component + ' files');
       git.pull('origin', 'master', pullOptions, function(error) {
         resetFiles();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     function resetFiles() {
       console.info('Resetting files to head');
       git.reset('HEAD', resetOptions, function(error) {
         nextRepo();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     function nextRepo() {
       //console.log('Sleeping for 1 second...');
@@ -148,21 +148,21 @@ module.exports = function(callback) {
       global.clearTimeout(timer);
       timer = global.setTimeout(function() {
         stepRepo()
-    ***REMOVED*** 0);
-  ***REMOVED***
+      }, 0);
+    }
 
 
     if(localRepoSetup) {
       pullFiles();
-  ***REMOVED***
+    }
     else {
       setupRepo();
       // createRepo() only use to create remote repo (easier to do manually)
-  ***REMOVED***
+    }
 
-***REMOVED***;
+  };
 
   stepRepo();
 
 
-***REMOVED***;
+};

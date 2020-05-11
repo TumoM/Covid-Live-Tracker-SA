@@ -21,7 +21,7 @@ fs = require('fs');
 
 var version_no = "4.6.2",
 
-version = "/* Tabulator v" + version_no + " (c) Oliver Folkerd***REMOVED***/\n";
+version = "/* Tabulator v" + version_no + " (c) Oliver Folkerd */\n";
 
 var gulp_src = gulp.src;
 gulp.src = function() {
@@ -31,30 +31,30 @@ gulp.src = function() {
         gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
         // emit the end event, to properly end the task
         this.emit('end');
-      ***REMOVED***)
+        })
     );
-***REMOVED***;
+};
 
 //build css
 gulp.task('styles', function() {
-    return gulp.src('src/scss***REMOVED***/tabulator*.scss')
+    return gulp.src('src/scss/**/tabulator*.scss')
     .pipe(sourcemaps.init())
     .pipe(insert.prepend(version + "\n"))
-    .pipe(sass({outputStyle: 'expanded'***REMOVED***).on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer('last 4 version'))
     .pipe(gulp.dest('dist/css'))
-    .pipe(rename({suffix: '.min'***REMOVED***))
-    .pipe(cssnano({zindex: false***REMOVED***))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(cssnano({zindex: false}))
     .pipe(insert.prepend(version))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/css'))
-    .on('end', function(){ gutil.log('Styles task complete'); ***REMOVED***)
-  ***REMOVED***);
+    .on('end', function(){ gutil.log('Styles task complete'); })
+    });
 
 
 //build tabulator
 gulp.task('tabulator', function() {
-    //return gulp.src('src/js***REMOVED***/*.js')
+    //return gulp.src('src/js/**/*.js')
     return gulp.src('src/js/core_modules.js')
     .pipe(insert.prepend(version + "\n"))
     //.pipe(sourcemaps.init())
@@ -67,22 +67,22 @@ gulp.task('tabulator', function() {
         presets: [["env",{
             "targets": {
               "browsers": ["last 4 versions"]
-***REMOVED*****REMOVED*****REMOVED***
+            },
             loose: true,
             modules: false,
- ***REMOVED*****REMOVED*** ], {***REMOVED***]
-    ***REMOVED***))
+        }, ], {  }]
+      }))
     .pipe(concat('tabulator.js'))
     .pipe(gulp.dest('dist/js'))
-    .pipe(rename({suffix: '.min'***REMOVED***))
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(insert.prepend(version))
     // .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist/js'))
-    //.pipe(notify({ message: 'Scripts task complete' ***REMOVED***));
-    .on('end', function(){ gutil.log('Tabulator Complete'); ***REMOVED***)
+    //.pipe(notify({ message: 'Scripts task complete' }));
+    .on('end', function(){ gutil.log('Tabulator Complete'); })
     //.on("error", console.log)
-  ***REMOVED***);
+    });
 
 
 //simplified core js
@@ -94,20 +94,20 @@ gulp.task('core', function() {
         presets: [["env", {
           "targets": {
             "browsers": ["last 4 versions"]
- ***REMOVED*****REMOVED***
+        },
         loose: true,
         modules: false,
-      ***REMOVED***]
-    ***REMOVED***
-      ***REMOVED***))
+        }]
+        ]
+        }))
     .pipe(concat('tabulator_core.js'))
     .pipe(gulp.dest('dist/js'))
-    .pipe(rename({suffix: '.min'***REMOVED***))
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(insert.prepend(version))
     .pipe(gulp.dest('dist/js'))
-    .on('end', function(){ gutil.log('Core complete'); ***REMOVED***)
-  ***REMOVED***);
+    .on('end', function(){ gutil.log('Core complete'); })
+    });
 
 
 
@@ -130,22 +130,22 @@ gulp.task('modules', function(){
                 presets: [["env", {
                   "targets": {
                     "browsers": ["last 4 versions"]
-    ***REMOVED*****REMOVED*****REMOVED***
+                },
                 loose: true,
                 modules: false,
-              ***REMOVED***]
-            ***REMOVED***
-              ***REMOVED***))
+                }]
+                ]
+                }))
             .pipe(concat(file))
             .pipe(gulp.dest('dist/js/modules/'))
-            .pipe(rename({suffix: '.min'***REMOVED***))
+            .pipe(rename({suffix: '.min'}))
             .pipe(uglify())
             .pipe(insert.prepend(version))
             .pipe(gulp.dest('dist/js/modules/'))
-      ***REMOVED***
-      ***REMOVED***);
+        }
+        });
 
-  ***REMOVED***);
+    });
 
 //make jquery wrapper
 gulp.task('jquery', function(){
@@ -156,41 +156,46 @@ gulp.task('jquery', function(){
         presets: [["env", {
           "targets": {
             "browsers": ["last 4 versions"]
- ***REMOVED*****REMOVED***
+        },
         loose: true,
         modules: false,
-      ***REMOVED***]
-    ***REMOVED***
-      ***REMOVED***))
+        }]
+        ]
+        }))
     .pipe(concat('jquery_wrapper.js'))
     .pipe(gulp.dest('dist/js'))
-    .pipe(rename({suffix: '.min'***REMOVED***))
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(insert.prepend(version))
     .pipe(gulp.dest('dist/js'))
-    .on('end', function(){ gutil.log('jQuery wrapper complete'); ***REMOVED***)
+    .on('end', function(){ gutil.log('jQuery wrapper complete'); })
 
-  ***REMOVED***);
+    });
 
 
-gulp.task('scripts', function(cb) {
-    return gulp.series('tabulator');
-    
-***REMOVED***);
+gulp.task('scripts', function() {
+    gulp.start('tabulator');
+    gulp.start('core');
+    gulp.start('modules');
+    gulp.start('jquery');
+    });
 
 gulp.task('clean', function() {
     return del(['dist/css', 'dist/js']);
-  ***REMOVED***);
+    });
 
-gulp.task('default', gulp.series('clean',gulp.parallel(['styles', 'tabulator'])) );
+
+gulp.task('default', ['clean'], function() {
+    gulp.start('styles', 'scripts');
+    });
 
 
 gulp.task('watch', function() {
 
     // Watch .scss files
-    gulp.watch('src/scss***REMOVED***/*.scss', ['styles']);
+    gulp.watch('src/scss/**/*.scss', ['styles']);
 
     // Watch .js files
-    gulp.watch('src/js***REMOVED***/*.js', ['scripts']);
+    gulp.watch('src/js/**/*.js', ['scripts']);
 
-  ***REMOVED***);
+    });

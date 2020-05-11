@@ -16,7 +16,7 @@ var MoveColumns = function(table){
 	this.moveHover = this.moveHover.bind(this);
 	this.endMove = this.endMove.bind(this);
 
-***REMOVED***;
+};
 
 MoveColumns.prototype.createPlaceholderElement = function(){
 	var el = document.createElement("div");
@@ -25,11 +25,11 @@ MoveColumns.prototype.createPlaceholderElement = function(){
 	el.classList.add("tabulator-col-placeholder");
 
 	return el;
-***REMOVED***;
+};
 
 MoveColumns.prototype.initializeColumn = function(column){
 	var self = this,
-	config = {***REMOVED***,
+	config = {},
 	colEl;
 
 	if(!column.modules.frozen){
@@ -42,38 +42,38 @@ MoveColumns.prototype.initializeColumn = function(column){
 					if(self.toCol !== column || !self.toColAfter){
 						colEl.parentNode.insertBefore(self.placeholderElement, colEl.nextSibling);
 						self.moveColumn(column, true);
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					if(self.toCol !== column || self.toColAfter){
 						colEl.parentNode.insertBefore(self.placeholderElement, colEl);
 						self.moveColumn(column, false);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***.bind(self);
+					}
+				}
+			}
+		}.bind(self);
 
 		colEl.addEventListener("mousedown", function(e){
 			self.touchMove = false;
 			if(e.which === 1){
 				self.checkTimeout = setTimeout(function(){
 					self.startMove(e, column);
-				***REMOVED***, self.checkPeriod);
-			***REMOVED***
-		***REMOVED***);
+				}, self.checkPeriod);
+			}
+		});
 
 		colEl.addEventListener("mouseup", function(e){
 			if(e.which === 1){
 				if(self.checkTimeout){
 					clearTimeout(self.checkTimeout);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***);
+				}
+			}
+		});
 
 		self.bindTouchEvents(column);
-	***REMOVED***
+	}
 
 	column.modules.moveColumn = config;
-***REMOVED***;
+};
 
 MoveColumns.prototype.bindTouchEvents = function(column){
 	var self = this,
@@ -95,8 +95,8 @@ MoveColumns.prototype.bindTouchEvents = function(column){
 			startXMove = false;
 
 			self.startMove(e, column);
-		***REMOVED***, self.checkPeriod);
-	***REMOVED***, {passive: true***REMOVED***);
+		}, self.checkPeriod);
+	}, {passive: true});
 
 	colEl.addEventListener("touchmove", function(e){
 		var halfCol, diff, moveToCol;
@@ -106,7 +106,7 @@ MoveColumns.prototype.bindTouchEvents = function(column){
 
 			if(!startXMove){
 				startXMove = e.touches[0].pageX;
-			***REMOVED***
+			}
 
 			diff = e.touches[0].pageX - startXMove;
 
@@ -118,9 +118,9 @@ MoveColumns.prototype.bindTouchEvents = function(column){
 						startXMove = e.touches[0].pageX;
 						moveToCol.getElement().parentNode.insertBefore(self.placeholderElement, moveToCol.getElement().nextSibling);
 						self.moveColumn(moveToCol, true);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				if(prevCol && -diff - prevColWidthLast >  prevColWidth){
 					moveToCol = prevCol;
 
@@ -128,9 +128,9 @@ MoveColumns.prototype.bindTouchEvents = function(column){
 						startXMove = e.touches[0].pageX;
 						moveToCol.getElement().parentNode.insertBefore(self.placeholderElement, moveToCol.getElement());
 						self.moveColumn(moveToCol, false);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			if(moveToCol){
 				currentCol = moveToCol;
@@ -140,19 +140,19 @@ MoveColumns.prototype.bindTouchEvents = function(column){
 				prevCol = moveToCol.prevColumn();
 				prevColWidthLast = prevColWidth;
 				prevColWidth = prevCol ? prevCol.getWidth() / 2 : 0;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***, {passive: true***REMOVED***);
+			}
+		}
+	}, {passive: true});
 
 	colEl.addEventListener("touchend", function(e){
 		if(self.checkTimeout){
 			clearTimeout(self.checkTimeout);
-		***REMOVED***
+		}
 		if(self.moving){
 			self.endMove(e);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveColumns.prototype.startMove = function(e, column){
 	var element = column.getElement();
@@ -183,26 +183,26 @@ MoveColumns.prototype.startMove = function(e, column){
 
 		document.body.addEventListener("mousemove", this.moveHover);
 		document.body.addEventListener("mouseup", this.endMove);
-	***REMOVED***
+	}
 
 	this.moveHover(e);
-***REMOVED***;
+};
 
 MoveColumns.prototype._bindMouseMove = function(){
 	this.table.columnManager.columnsByIndex.forEach(function(column){
 		if(column.modules.moveColumn.mousemove){
 			column.getElement().addEventListener("mousemove", column.modules.moveColumn.mousemove);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveColumns.prototype._unbindMouseMove = function(){
 	this.table.columnManager.columnsByIndex.forEach(function(column){
 		if(column.modules.moveColumn.mousemove){
 			column.getElement().removeEventListener("mousemove", column.modules.moveColumn.mousemove);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveColumns.prototype.moveColumn = function(column, after){
 	var movingCells = this.moving.getCells();
@@ -214,14 +214,14 @@ MoveColumns.prototype.moveColumn = function(column, after){
 		column.getCells().forEach(function(cell, i){
 			var cellEl = cell.getElement();
 			cellEl.parentNode.insertBefore(movingCells[i].getElement(), cellEl.nextSibling);
-		***REMOVED***);
-	***REMOVED***else{
+		});
+	}else{
 		column.getCells().forEach(function(cell, i){
 			var cellEl = cell.getElement();
 			cellEl.parentNode.insertBefore(movingCells[i].getElement(), cellEl);
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***;
+		});
+	}
+};
 
 MoveColumns.prototype.endMove = function(e){
 	if(e.which === 1 || this.touchMove){
@@ -235,7 +235,7 @@ MoveColumns.prototype.endMove = function(e){
 
 		if(this.toCol){
 			this.table.columnManager.moveColumnActual(this.moving, this.toCol, this.toColAfter);
-		***REMOVED***
+		}
 
 		this.moving = false;
 		this.toCol = false;
@@ -244,9 +244,9 @@ MoveColumns.prototype.endMove = function(e){
 		if(!this.touchMove){
 			document.body.removeEventListener("mousemove", this.moveHover);
 			document.body.removeEventListener("mouseup", this.endMove);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 MoveColumns.prototype.moveHover = function(e){
 	var self = this,
@@ -263,9 +263,9 @@ MoveColumns.prototype.moveHover = function(e){
 				scrollPos = Math.max(0,scrollLeft-5);
 				self.table.rowManager.getElement().scrollLeft = scrollPos;
 				self.autoScrollTimeout = false;
-			***REMOVED***, 1);
-		***REMOVED***
-	***REMOVED***
+			}, 1);
+		}
+	}
 
 	if(scrollLeft + columnHolder.clientWidth - xPos < self.autoScrollMargin){
 		if(!self.autoScrollTimeout){
@@ -273,9 +273,9 @@ MoveColumns.prototype.moveHover = function(e){
 				scrollPos = Math.min(columnHolder.clientWidth, scrollLeft+5);
 				self.table.rowManager.getElement().scrollLeft = scrollPos;
 				self.autoScrollTimeout = false;
-			***REMOVED***, 1);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			}, 1);
+		}
+	}
+};
 
 Tabulator.prototype.registerModule("moveColumn", MoveColumns);

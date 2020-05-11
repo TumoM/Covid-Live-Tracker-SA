@@ -1,16 +1,16 @@
 /*
-***REMOVED*** # Fomantic - Menu
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Copyright 2015 Contributor
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic - Menu
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Copyright 2015 Contributor
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Standard
 *******************************/
 
@@ -37,7 +37,7 @@
   box-shadow: @boxShadow;
   border-radius: @borderRadius;
   min-height: @minHeight;
-***REMOVED***
+}
 
 .ui.menu:after {
   content: '';
@@ -45,14 +45,14 @@
   height: 0;
   clear: both;
   visibility: hidden;
-***REMOVED***
+}
 
 .ui.menu:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.menu:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
 /*--------------
@@ -61,11 +61,11 @@
 
 .ui.menu .menu {
   margin: 0;
-***REMOVED***
+}
 
 .ui.menu:not(.vertical) > .menu {
   display: flex;
-***REMOVED***
+}
 
 /*--------------
       Item
@@ -74,7 +74,7 @@
 .ui.menu:not(.vertical) .item {
   display: flex;
   align-items: center;
-***REMOVED***
+}
 
 .ui.menu .item {
   position: relative;
@@ -91,13 +91,13 @@
   color: @itemTextColor;
   font-weight: @itemFontWeight;
   transition: @itemTransition;
-***REMOVED***
+}
 
 .ui.menu > .item:first-child {
   border-radius: @borderRadius 0 0 @borderRadius;
-***REMOVED***
+}
 
-/* Border***REMOVED***/
+/* Border */
 .ui.menu .item:before {
   position: absolute;
   content: '';
@@ -107,24 +107,24 @@
 
   width: @dividerSize;
   background: @dividerBackground;
-***REMOVED***
+}
 
 /*--------------
   Text Content
 ---------------*/
 
-.ui.menu .text.item >***REMOVED***,
+.ui.menu .text.item > *,
 .ui.menu .item > a:not(.ui),
 .ui.menu .item > p:only-child {
   user-select: text;
   line-height: @textLineHeight;
-***REMOVED***
+}
 .ui.menu .item > p:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.menu .item > p:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 /*--------------
       Icons
@@ -134,7 +134,7 @@
   opacity: @iconOpacity;
   float: @iconFloat;
   margin: @iconMargin;
-***REMOVED***
+}
 
 /*--------------
      Button
@@ -147,7 +147,7 @@
   padding-bottom: @buttonVerticalPadding;
   padding-top: @buttonVerticalPadding;
   font-size: @buttonSize;
-***REMOVED***
+}
 
 /*----------------
  Grid / Container
@@ -158,7 +158,7 @@
   display: flex;
   align-items: inherit;
   flex-direction: inherit;
-***REMOVED***
+}
 
 /*--------------
      Inputs
@@ -166,17 +166,17 @@
 
 .ui.menu .item > .input {
   width: 100%;
-***REMOVED***
+}
 .ui.menu:not(.vertical) .item > .input {
   position: relative;
   top: @inputOffset;
   margin: @inputVerticalMargin 0;
-***REMOVED***
+}
 .ui.menu .item > .input input {
   font-size: @inputSize;
   padding-top: @inputVerticalPadding;
   padding-bottom: @inputVerticalPadding;
-***REMOVED***
+}
 
 
 /*--------------
@@ -189,29 +189,29 @@
   background: @headerBackground;
   text-transform: @headerTextTransform;
   font-weight: @headerWeight;
-***REMOVED***
+}
 
 & when (@variationMenuVertical) {
   .ui.vertical.menu .item > .header:not(.ui) {
     margin: @verticalHeaderMargin;
     font-size: @verticalHeaderFontSize;
     font-weight: @verticalHeaderFontWeight;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
     Dropdowns
 ---------------*/
 
 
-/* Dropdown Icon***REMOVED***/
+/* Dropdown Icon */
 .ui.menu .item > i.dropdown.icon {
   padding: 0;
   float: @dropdownIconFloat;
   margin: 0 0 0 @dropdownIconDistance;
-***REMOVED***
+}
 
-/* Menu***REMOVED***/
+/* Menu */
 .ui.menu .dropdown.item .menu {
   min-width: e("calc(100% - 1px)");
   border-radius: 0 0 @dropdownMenuBorderRadius @dropdownMenuBorderRadius;
@@ -219,10 +219,10 @@
   margin: @dropdownMenuDistance 0 0;
   box-shadow: @dropdownMenuBoxShadow;
   flex-direction: column !important;
-***REMOVED***
+}
 
 
-/* Menu Items***REMOVED***/
+/* Menu Items */
 .ui.menu .ui.dropdown .menu > .item {
   margin: 0;
   text-align: left;
@@ -234,88 +234,88 @@
   font-weight: @dropdownItemFontWeight !important;
   box-shadow: @dropdownItemBoxShadow !important;
   transition: @dropdownItemTransition !important;
-***REMOVED***
+}
 .ui.menu .ui.dropdown .menu > .item:hover {
   background: @dropdownHoveredItemBackground !important;
   color: @dropdownHoveredItemColor !important;
-***REMOVED***
+}
 .ui.menu .ui.dropdown .menu > .selected.item {
   background: @dropdownSelectedItemBackground !important;
   color: @dropdownSelectedItemColor !important;
-***REMOVED***
+}
 .ui.menu .ui.dropdown .menu > .active.item {
   background: @dropdownActiveItemBackground !important;
   font-weight: @dropdownActiveItemFontWeight !important;
   color: @dropdownActiveItemColor !important;
-***REMOVED***
+}
 
 .ui.menu .ui.dropdown.item .menu .item:not(.filtered) {
   display: block;
-***REMOVED***
+}
 .ui.menu .ui.dropdown .menu > .item .icon:not(.dropdown) {
   display: inline-block;
   font-size: @dropdownItemIconFontSize !important;
   float: @dropdownItemIconFloat;
   margin: @dropdownItemIconMargin !important;
-***REMOVED***
+}
 
 & when (@variationMenuSecondary) or (@variationMenuText) {
-  /* Secondary***REMOVED***/
+  /* Secondary */
   .ui.secondary.menu .dropdown.item > .menu,
   .ui.text.menu .dropdown.item > .menu {
     border-radius: @dropdownMenuBorderRadius;
     margin-top: @secondaryDropdownMenuDistance;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-/* Pointing***REMOVED***/
+/* Pointing */
 .ui.menu .pointing.dropdown.item .menu {
   margin-top: @pointingDropdownMenuDistance;
-***REMOVED***
+}
 
 & when (@variationMenuInverted) {
-  /* Inverted***REMOVED***/
+  /* Inverted */
   .ui.inverted.menu .search.dropdown.item > .search,
   .ui.inverted.menu .search.dropdown.item > .text {
     color: @invertedSelectionDropdownColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuVertical) {
-  /* Vertical***REMOVED***/
+  /* Vertical */
   .ui.vertical.menu .dropdown.item > .icon {
     float: right;
     content: "\f0da";
     margin-left: 1em;
-***REMOVED***
+  }
   .ui.vertical.menu .dropdown.item .menu {
     left: 100%;
-    /* IE needs 0, all others support max-content to show dropdown icon inline, so keep both settings!***REMOVED***/
+    /* IE needs 0, all others support max-content to show dropdown icon inline, so keep both settings! */
     min-width: 0;
     min-width: max-content;
     margin: 0 0 0 @dropdownMenuDistance;
     box-shadow: @dropdownVerticalMenuBoxShadow;
     border-radius: 0 @dropdownMenuBorderRadius @dropdownMenuBorderRadius @dropdownMenuBorderRadius;
-***REMOVED***
+  }
   .ui.vertical.menu .dropdown.item.upward .menu {
     bottom: 0;
-***REMOVED***
+  }
   .ui.vertical.menu .dropdown.item:not(.upward) .menu {
     top: 0;
-***REMOVED***
+  }
   .ui.vertical.menu .active.dropdown.item {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-***REMOVED***
+  }
   .ui.vertical.menu .dropdown.active.item {
     box-shadow: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-/* Evenly Divided***REMOVED***/
+/* Evenly Divided */
 .ui.item.menu .dropdown .menu .item {
   width: 100%;
-***REMOVED***
+}
 
 /*--------------
      Labels
@@ -324,25 +324,25 @@
 .ui.menu .item > .label:not(.floating) {
   margin-left: @labelTextMargin;
   padding: @labelVerticalPadding @labelHorizontalPadding;
-***REMOVED***
+}
 & when (@variationMenuVertical) {
   .ui.vertical.menu .item > .label {
     margin-top: @labelOffset;
     margin-bottom: @labelOffset;
     padding: @labelVerticalPadding @labelHorizontalPadding;
-***REMOVED***
-***REMOVED***
+  }
+}
 .ui.menu .item > .floating.label {
   padding: @labelVerticalPadding @labelHorizontalPadding;
-***REMOVED***
+}
 .ui.menu .item > .label {
   background: @labelBackground;
   color: @labelTextColor;
-***REMOVED***
+}
 .ui.menu .item > .image.label img {
   margin: @imageLabelImageMargin;
   height: @imageLabelHeight;
-***REMOVED***
+}
 /*--------------
      Images
 ---------------*/
@@ -352,16 +352,16 @@
   vertical-align: middle;
   margin: @imageMargin;
   width: @imageWidth;
-***REMOVED***
+}
 & when (@variationMenuVertical) {
   .ui.vertical.menu .item > img:not(.ui):only-child {
     display: block;
     max-width: 100%;
     width: @verticalImageWidth;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-***REMOVED********************************
+/*******************************
           Coupling
 *******************************/
 
@@ -369,26 +369,26 @@
      List
 ---------------*/
 
-/* Menu divider shouldnt apply***REMOVED***/
+/* Menu divider shouldnt apply */
 .ui.menu .list .item:before {
   background: none !important;
-***REMOVED***
+}
 
 & when (@variationMenuVertical) {
   /*--------------
        Sidebar
   ---------------*/
 
-  /* Show vertical dividers below last***REMOVED***/
+  /* Show vertical dividers below last */
 
   .ui.vertical.sidebar.menu > .item:first-child:before {
     display: block !important;
-***REMOVED***
+  }
   .ui.vertical.sidebar.menu > .item::before {
     top: auto;
     bottom: 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
     Container
@@ -399,20 +399,20 @@
     width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-***REMOVED***
-***REMOVED***
+  }
+}
 @media only screen and (min-width: @tabletBreakpoint) {
   .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless) > .container > .item:not(.right):not(.borderless):first-child {
     border-left: @dividerSize solid @dividerBackground;
-***REMOVED***
+  }
   .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless) > .container > .right.item:not(.borderless):last-child,
   .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless) > .container > .right.menu > .item:not(.borderless):last-child {
     border-right: @dividerSize solid @dividerBackground;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
@@ -428,7 +428,7 @@
   cursor: pointer;
   background: @hoverItemBackground;
   color: @hoverItemTextColor;
-***REMOVED***
+}
 
 
 /*--------------
@@ -440,7 +440,7 @@
 .ui.menu a.item:active {
   background: @pressedItemBackground;
   color: @pressedItemTextColor;
-***REMOVED***
+}
 
 
 /*--------------
@@ -452,10 +452,10 @@
   color: @activeItemTextColor;
   font-weight: @activeItemFontWeight;
   box-shadow: @activeItemBoxShadow;
-***REMOVED***
+}
 .ui.menu .active.item > i.icon {
   opacity: @activeIconOpacity;
-***REMOVED***
+}
 
 /*--------------
   Active Hover
@@ -465,7 +465,7 @@
 .ui.vertical.menu .active.item:hover {
   background-color: @activeHoverItemBackground;
   color: @activeHoverItemColor;
-***REMOVED***
+}
 
 
 /*--------------
@@ -477,10 +477,10 @@
   background-color: transparent;
   color: @disabledTextColor;
   pointer-events: none;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
              Types
 *******************************/
 
@@ -488,44 +488,44 @@
 Floated Menu / Item
 -------------------*/
 
-/* Left Floated***REMOVED***/
+/* Left Floated */
 .ui.menu:not(.vertical) .left.item,
 .ui.menu:not(.vertical) .left.menu {
   display: flex;
   margin-right: auto !important;
-***REMOVED***
-/* Right Floated***REMOVED***/
+}
+/* Right Floated */
 .ui.menu:not(.vertical) .right.item,
 .ui.menu:not(.vertical) .right.menu {
   display: flex;
   margin-left: auto !important;
-***REMOVED***
+}
 
 .ui.menu:not(.vertical) :not(.dropdown) > .left.menu,
 .ui.menu:not(.vertical) :not(.dropdown) > .right.menu {
   display: inherit;
-***REMOVED***
+}
 
-/* Center***REMOVED***/
+/* Center */
 .ui.menu:not(.vertical) .center.item,
 .ui.menu:not(.vertical) .center.menu {
   display: flex;
   margin-left: auto !important;
   margin-right: auto !important;
-***REMOVED***
+}
 
-/* Swapped Borders***REMOVED***/
+/* Swapped Borders */
 .ui.menu .right.item::before,
 .ui.menu .right.menu > .item::before {
   right: auto;
   left: 0;
-***REMOVED***
+}
 
-/* Remove Outer Borders***REMOVED***/
+/* Remove Outer Borders */
 .ui.menu .center.item:last-child::before,
 .ui.menu .center.menu > .item:last-child::before {
   display: none;
-***REMOVED***
+}
 
 & when (@variationMenuVertical) {
   /*--------------
@@ -537,7 +537,7 @@ Floated Menu / Item
     flex-direction: column;
     background: @verticalBackground;
     box-shadow: @verticalBoxShadow;
-***REMOVED***
+  }
 
   /*--- Item ---*/
   .ui.vertical.menu .item {
@@ -545,19 +545,19 @@ Floated Menu / Item
     background: @verticalItemBackground;
     border-top: none;
     border-right: none;
-***REMOVED***
+  }
   .ui.vertical.menu > .item:first-child {
     border-radius: @borderRadius @borderRadius 0 0;
-***REMOVED***
+  }
   .ui.vertical.menu > .item:last-child {
     border-radius: 0 0 @borderRadius @borderRadius;
-***REMOVED***
+  }
 
   /*--- Label ---*/
   .ui.vertical.menu .item > .label {
     float: right;
     text-align: center;
-***REMOVED***
+  }
 
   /*--- Icon ---*/
   .ui.vertical.menu .item > i.icon,
@@ -565,11 +565,11 @@ Floated Menu / Item
     width: @iconWidth;
     float: @verticalIconFloat;
     margin: @verticalIconMargin;
-***REMOVED***
+  }
   .ui.vertical.menu .item > .label + i.icon {
     float: @labelAndIconFloat;
     margin: @labelAndIconMargin;
-***REMOVED***
+  }
 
 
   /*--- Border ---*/
@@ -581,55 +581,55 @@ Floated Menu / Item
     width: 100%;
     height: @dividerSize;
     background: @verticalDividerBackground;
-***REMOVED***
+  }
 
   .ui.vertical.menu .item:first-child:before {
     display: none !important;
-***REMOVED***
+  }
 
 
   /*--- Sub Menu ---*/
   .ui.vertical.menu .item > .menu {
     margin: @subMenuMargin;
-***REMOVED***
+  }
   .ui.vertical.menu .menu .item {
     background: none;
     padding: @subMenuVerticalPadding @subMenuHorizontalPadding;
     font-size: @subMenuFontSize;
     color: @subMenuTextColor;
-***REMOVED***
+  }
   .ui.vertical.menu .item .menu a.item:hover,
   .ui.vertical.menu .item .menu .link.item:hover {
     color: @darkTextColor;
-***REMOVED***
+  }
   .ui.vertical.menu .menu .item:before {
     display: none;
-***REMOVED***
+  }
 
-  /* Vertical Active***REMOVED***/
+  /* Vertical Active */
   .ui.vertical.menu .active.item {
     background: @activeItemBackground;
     border-radius: 0;
     box-shadow: @verticalActiveBoxShadow;
-***REMOVED***
+  }
   .ui.vertical.menu > .active.item:first-child {
     border-radius: @borderRadius @borderRadius 0 0;
-***REMOVED***
+  }
   .ui.vertical.menu > .active.item:last-child {
     border-radius: 0 0 @borderRadius @borderRadius;
-***REMOVED***
+  }
   .ui.vertical.menu > .active.item:only-child {
     border-radius: @borderRadius;
-***REMOVED***
+  }
   .ui.vertical.menu .active.item .menu .active.item {
     border-left: none;
-***REMOVED***
+  }
   .ui.vertical.menu .item .menu .active.item {
     background-color: @subMenuActiveBackground;
     font-weight: @subMenuActiveFontWeight;
     color: @subMenuActiveTextColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuTabular) {
   /*--------------
@@ -642,10 +642,10 @@ Floated Menu / Item
     border: none;
     background: @tabularBackground;
     border-bottom: @tabularBorderWidth solid @tabularBorderColor;
-***REMOVED***
+  }
   .ui.tabular.fluid.menu {
     width: @tabularFluidWidth !important;
-***REMOVED***
+  }
   .ui.tabular.menu .item {
     background: transparent;
     border-bottom: none;
@@ -655,18 +655,18 @@ Floated Menu / Item
     border-top: @tabularOppositeBorderWidth solid transparent;
     padding: @tabularVerticalPadding @tabularHorizontalPadding;
     color: @tabularTextColor;
-***REMOVED***
+  }
   .ui.tabular.menu .item:before {
     display: none;
-***REMOVED***
+  }
 
-  /* Hover***REMOVED***/
+  /* Hover */
   .ui.tabular.menu .item:hover {
     background-color: transparent;
     color: @tabularHoveredTextColor;
-***REMOVED***
+  }
 
-  /* Active***REMOVED***/
+  /* Active */
   .ui.tabular.menu .active.item {
     background: @tabularActiveBackground;
     color: @tabularActiveColor;
@@ -676,9 +676,9 @@ Floated Menu / Item
     margin-bottom: -@tabularBorderWidth;
     box-shadow: @tabularActiveBoxShadow;
     border-radius: @tabularBorderRadius @tabularBorderRadius 0 0 !important;
-***REMOVED***
+  }
 
-  /* Coupling with segment for attachment***REMOVED***/
+  /* Coupling with segment for attachment */
   .ui.tabular.menu + .attached:not(.top).segment,
   .ui.tabular.menu + .attached:not(.top).segment + .attached:not(.top).segment {
     border-top: none;
@@ -686,60 +686,60 @@ Floated Menu / Item
     margin-top: 0;
     margin-right: 0;
     width: 100%;
-***REMOVED***
+  }
   .top.attached.segment + .ui.bottom.tabular.menu {
     position: relative;
     width: @tabularFluidWidth;
     left: -@tabularFluidOffset;
-***REMOVED***
+  }
 
-  /* Bottom Vertical Tabular***REMOVED***/
+  /* Bottom Vertical Tabular */
   .ui.bottom.tabular.menu {
     background: @tabularBackground;
     border-radius: 0;
     box-shadow: none !important;
     border-bottom: none;
     border-top: @tabularBorderWidth solid @tabularBorderColor;
-***REMOVED***
+  }
   .ui.bottom.tabular.menu .item {
     background: none;
     border-left: @tabularBorderWidth solid transparent;
     border-right: @tabularBorderWidth solid transparent;
     border-bottom: @tabularBorderWidth solid transparent;
     border-top: none;
-***REMOVED***
+  }
   .ui.bottom.tabular.menu .active.item {
     background: @tabularActiveBackground;
     color: @tabularActiveColor;
     border-color: @tabularBorderColor;
     margin: -@tabularBorderWidth 0 0 0;
     border-radius: 0 0 @tabularBorderRadius @tabularBorderRadius !important;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
-    /* Vertical Tabular (Left)***REMOVED***/
+    /* Vertical Tabular (Left) */
     .ui.vertical.tabular.menu {
       background: @tabularVerticalBackground;
       border-radius: 0;
       box-shadow: none !important;
       border-bottom: none;
       border-right: @tabularBorderWidth solid @tabularBorderColor;
-  ***REMOVED***
+    }
     .ui.vertical.tabular.menu .item {
       background: none;
       border-left: @tabularBorderWidth solid transparent;
       border-bottom: @tabularBorderWidth solid transparent;
       border-top: @tabularBorderWidth solid transparent;
       border-right: none;
-  ***REMOVED***
+    }
     .ui.vertical.tabular.menu .active.item {
       background: @tabularActiveBackground;
       color: @tabularActiveColor;
       border-color: @tabularBorderColor;
       margin: 0 -@tabularBorderWidth 0 0;
       border-radius: @tabularBorderRadius 0 0 @tabularBorderRadius !important;
-  ***REMOVED***
+    }
 
-    /* Vertical Right Tabular***REMOVED***/
+    /* Vertical Right Tabular */
     .ui.vertical.right.tabular.menu {
       background: @tabularVerticalBackground;
       border-radius: 0;
@@ -747,31 +747,31 @@ Floated Menu / Item
       border-bottom: none;
       border-right: none;
       border-left: @tabularBorderWidth solid @tabularBorderColor;
-  ***REMOVED***
+    }
     .ui.vertical.right.tabular.menu .item {
       background: none;
       border-right: @tabularBorderWidth solid transparent;
       border-bottom: @tabularBorderWidth solid transparent;
       border-top: @tabularBorderWidth solid transparent;
       border-left: none;
-  ***REMOVED***
+    }
     .ui.vertical.right.tabular.menu .active.item {
       background: @tabularActiveBackground;
       color: @tabularActiveColor;
       border-color: @tabularBorderColor;
       margin: 0 0 0 -@tabularBorderWidth;
       border-radius: 0 @tabularBorderRadius @tabularBorderRadius 0 !important;
-  ***REMOVED***
-***REMOVED***
-  /* Dropdown***REMOVED***/
+    }
+  }
+  /* Dropdown */
   .ui.tabular.menu .active.dropdown.item {
     margin-bottom: 0;
     border-left: @tabularBorderWidth solid transparent;
     border-right: @tabularBorderWidth solid transparent;
     border-top: @tabularOppositeBorderWidth solid transparent;
     border-bottom: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 & when (@variationMenuPagination) {
@@ -783,34 +783,34 @@ Floated Menu / Item
     margin: 0;
     display: inline-flex;
     vertical-align: middle;
-***REMOVED***
+  }
   .ui.pagination.menu .item:last-child {
     border-radius: 0 @borderRadius @borderRadius 0;
-***REMOVED***
+  }
   .ui.compact.menu .item:last-child {
     border-radius: 0 @borderRadius @borderRadius 0;
-***REMOVED***
+  }
   .ui.pagination.menu .item:last-child:before {
     display: none;
-***REMOVED***
+  }
 
   .ui.pagination.menu .item {
     min-width: @paginationMinWidth;
     text-align: center;
-***REMOVED***
+  }
   .ui.pagination.menu .icon.item i.icon {
     vertical-align: top;
-***REMOVED***
+  }
 
-  /* Active***REMOVED***/
+  /* Active */
   .ui.pagination.menu .active.item {
     border-top: none;
     padding-top: @itemVerticalPadding;
     background-color: @paginationActiveBackground;
     color: @paginationActiveTextColor;
     box-shadow: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuSecondary) {
   /*--------------
@@ -824,9 +824,9 @@ Floated Menu / Item
     border-radius: 0;
     border: none;
     box-shadow: none;
-***REMOVED***
+  }
 
-  /* Item***REMOVED***/
+  /* Item */
   .ui.secondary.menu .item {
     align-self: center;
     box-shadow: none;
@@ -836,112 +836,112 @@ Floated Menu / Item
     background: @secondaryItemBackground;
     transition: @secondaryItemTransition;
     border-radius: @secondaryItemBorderRadius;
-***REMOVED***
+  }
 
-  /* No Divider***REMOVED***/
+  /* No Divider */
   .ui.secondary.menu .item:before {
     display: none !important;
-***REMOVED***
+  }
 
-  /* Header***REMOVED***/
+  /* Header */
   .ui.secondary.menu .header.item {
     border-radius: 0;
     border-right: @secondaryHeaderBorder;
     background: @secondaryHeaderBackground;
-***REMOVED***
+  }
 
-  /* Image***REMOVED***/
+  /* Image */
   .ui.secondary.menu .item > img:not(.ui) {
     margin: 0;
-***REMOVED***
+  }
 
-  /* Hover***REMOVED***/
+  /* Hover */
   .ui.secondary.menu .dropdown.item:hover,
   .ui.secondary.menu .link.item:hover,
   .ui.secondary.menu a.item:hover {
     background: @secondaryHoverItemBackground;
     color: @secondaryHoverItemColor;
-***REMOVED***
+  }
 
-  /* Active***REMOVED***/
+  /* Active */
   .ui.secondary.menu .active.item {
     box-shadow: none;
     background: @secondaryActiveItemBackground;
     color: @secondaryActiveItemColor;
     border-radius: @secondaryItemBorderRadius;
-***REMOVED***
+  }
 
-  /* Active Hover***REMOVED***/
+  /* Active Hover */
   .ui.secondary.menu .active.item:hover {
     box-shadow: none;
     background: @secondaryActiveHoverItemBackground;
     color: @secondaryActiveHoverItemColor;
-***REMOVED***
+  }
 
   & when (@variationMenuInverted) {
-    /* Inverted***REMOVED***/
+    /* Inverted */
     .ui.secondary.inverted.menu .link.item:not(.disabled),
     .ui.secondary.inverted.menu a.item:not(.disabled) {
       color: @secondaryInvertedColor;
-  ***REMOVED***
+    }
     .ui.secondary.inverted.menu .dropdown.item:hover,
     .ui.secondary.inverted.menu .link.item:hover,
     .ui.secondary.inverted.menu a.item:hover {
       background: @secondaryInvertedHoverBackground;
       color: @secondaryInvertedHoverColor;
-  ***REMOVED***
+    }
     .ui.secondary.inverted.menu .active.item {
       background: @secondaryInvertedActiveBackground;
       color: @secondaryInvertedActiveColor;
-  ***REMOVED***
-***REMOVED***
-  /* Fix item margins***REMOVED***/
+    }
+  }
+  /* Fix item margins */
   .ui.secondary.item.menu {
     margin-left: 0;
     margin-right: 0;
-***REMOVED***
+  }
   .ui.secondary.item.menu .item:last-child {
     margin-right: 0;
-***REMOVED***
+  }
   & when (@variationMenuAttached) {
     .ui.secondary.attached.menu {
       box-shadow: none;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuVertical) {
     /*---------------------
        Secondary Vertical
     -----------------------*/
 
-    /* Sub Menu***REMOVED***/
+    /* Sub Menu */
     .ui.vertical.secondary.menu .item:not(.dropdown) > .menu {
       margin: @secondaryMenuSubMenuMargin;
-  ***REMOVED***
+    }
     .ui.vertical.secondary.menu .item:not(.dropdown) > .menu > .item {
       margin: @secondaryMenuSubMenuItemMargin;
       padding: @secondaryMenuSubMenuItemPadding;
-  ***REMOVED***
+    }
 
 
     .ui.secondary.vertical.menu > .item {
       border: none;
       margin: @secondaryVerticalItemMargin;
       border-radius: @secondaryVerticalItemBorderRadius !important;
-  ***REMOVED***
+    }
     .ui.secondary.vertical.menu > .header.item {
       border-radius: 0;
-  ***REMOVED***
+    }
 
-    /* Sub Menu***REMOVED***/
+    /* Sub Menu */
     .ui.vertical.secondary.menu .item > .menu .item {
       background-color: transparent;
-  ***REMOVED***
+    }
 
-    /* Inverted***REMOVED***/
+    /* Inverted */
     .ui.secondary.inverted.menu {
       background-color: transparent;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   & when (@variationMenuPointing) {
     /*---------------------
@@ -952,7 +952,7 @@ Floated Menu / Item
       margin-left: 0;
       margin-right: 0;
       border-bottom: @secondaryPointingBorderWidth solid @secondaryPointingBorderColor;
-  ***REMOVED***
+    }
 
     .ui.secondary.pointing.menu .item {
       border-bottom-color: transparent;
@@ -964,74 +964,74 @@ Floated Menu / Item
       padding: @secondaryPointingItemVerticalPadding @secondaryPointingItemHorizontalPadding;
       border-bottom-width: @secondaryPointingBorderWidth;
       transition: @secondaryItemTransition;
-  ***REMOVED***
+    }
     .ui.secondary.pointing.menu .ui.dropdown .menu .item {
       border-bottom-width: 0;
-  ***REMOVED***
+    }
 
     .ui.secondary.pointing.menu .item > .label:not(.floating) {
       margin-top: -@labelVerticalPadding;
       margin-bottom: -@labelVerticalPadding;
-  ***REMOVED***
+    }
     .ui.secondary.pointing.menu .item > .circular.label {
       margin-top: -@circularLabelVerticalPadding;
       margin-bottom: -@circularLabelVerticalPadding;
-  ***REMOVED***
+    }
 
-    /* Item Types***REMOVED***/
+    /* Item Types */
     .ui.secondary.pointing.menu .header.item {
       color: @secondaryPointingHeaderColor !important;
-  ***REMOVED***
+    }
     .ui.secondary.pointing.menu .text.item {
       box-shadow: none !important;
-  ***REMOVED***
+    }
     .ui.secondary.pointing.menu .item:after {
       display: none;
-  ***REMOVED***
+    }
 
-    /* Hover***REMOVED***/
+    /* Hover */
     .ui.secondary.pointing.menu .dropdown.item:hover,
     .ui.secondary.pointing.menu .link.item:hover,
     .ui.secondary.pointing.menu a.item:hover {
       background-color: transparent;
       color: @secondaryPointingHoverTextColor;
-  ***REMOVED***
+    }
 
-    /* Pressed***REMOVED***/
+    /* Pressed */
     .ui.secondary.pointing.menu .dropdown.item:active,
     .ui.secondary.pointing.menu .link.item:active,
     .ui.secondary.pointing.menu a.item:active {
       background-color: transparent;
       border-color: @secondaryPointingBorderColor;
-  ***REMOVED***
+    }
 
-    /* Active***REMOVED***/
+    /* Active */
     .ui.secondary.pointing.menu .active.item {
       background-color: transparent;
       box-shadow: none;
       border-color: @secondaryPointingActiveBorderColor;
       font-weight: @secondaryPointingActiveFontWeight;
       color: @secondaryPointingActiveTextColor;
-  ***REMOVED***
+    }
 
-    /* Active Hover***REMOVED***/
+    /* Active Hover */
     .ui.secondary.pointing.menu .active.item:hover {
       border-color: @secondaryPointingActiveHoverBorderColor;
       color: @secondaryPointingActiveHoverTextColor;
-  ***REMOVED***
+    }
 
-    /* Active Dropdown***REMOVED***/
+    /* Active Dropdown */
     .ui.secondary.pointing.menu .active.dropdown.item {
       border-color: @secondaryPointingActiveDropdownBorderColor;
-  ***REMOVED***
+    }
     & when (@variationMenuVertical) {
-      /* Vertical Pointing***REMOVED***/
+      /* Vertical Pointing */
       .ui.secondary.vertical.pointing.menu {
         border-bottom-width: 0;
         border-right-width: @secondaryPointingBorderWidth;
         border-right-style: solid;
         border-right-color: @secondaryPointingBorderColor;
-    ***REMOVED***
+      }
       .ui.secondary.vertical.pointing.menu .item {
         border-bottom: none;
         border-right-style: solid;
@@ -1039,42 +1039,42 @@ Floated Menu / Item
         border-radius: 0 !important;
         margin: @secondaryVerticalPointingItemMargin;
         border-right-width: @secondaryPointingBorderWidth;
-    ***REMOVED***
+      }
 
-      /* Vertical Active***REMOVED***/
+      /* Vertical Active */
       .ui.secondary.vertical.pointing.menu .active.item {
         border-color: @secondaryPointingActiveBorderColor;
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     & when (@variationMenuInverted) {
-      /* Inverted***REMOVED***/
+      /* Inverted */
       .ui.secondary.inverted.pointing.menu {
         border-color: @secondaryPointingInvertedBorderColor;
-    ***REMOVED***
+      }
 
       .ui.secondary.inverted.pointing.menu .item:not(.disabled) {
         color: @secondaryPointingInvertedItemTextColor;
-    ***REMOVED***
+      }
       .ui.secondary.inverted.pointing.menu .header.item {
         color: @secondaryPointingInvertedItemHeaderColor !important;
-    ***REMOVED***
+      }
 
-      /* Hover***REMOVED***/
+      /* Hover */
       .ui.secondary.inverted.pointing.menu .link.item:hover,
       .ui.secondary.inverted.pointing.menu a.item:hover {
         color: @secondaryPointingInvertedItemHoverTextColor;
-    ***REMOVED***
+      }
 
 
-      /* Active***REMOVED***/
+      /* Active */
       .ui.ui.secondary.inverted.pointing.menu .active.item {
         border-color: @secondaryPointingInvertedActiveBorderColor;
         color: @secondaryPointingInvertedActiveColor;
         background-color: transparent;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}
 
 & when (@variationMenuText) {
   /*--------------
@@ -1088,7 +1088,7 @@ Floated Menu / Item
     border: none;
 
     margin: @textMenuMargin;
-***REMOVED***
+  }
   .ui.text.menu .item {
     border-radius: 0;
     box-shadow: none;
@@ -1098,15 +1098,15 @@ Floated Menu / Item
     font-weight: @textMenuItemFontWeight;
     color: @textMenuItemColor;
     transition: @textMenuItemTransition;
-***REMOVED***
+  }
 
-  /* Border***REMOVED***/
+  /* Border */
   .ui.text.menu .item:before,
   .ui.text.menu .menu .item:before {
     display: none !important;
-***REMOVED***
+  }
 
-  /* Header***REMOVED***/
+  /* Header */
   .ui.text.menu .header.item {
     background-color: transparent;
     opacity: 1;
@@ -1114,55 +1114,55 @@ Floated Menu / Item
     font-size: @textMenuHeaderSize;
     text-transform: @textMenuHeaderTextTransform;
     font-weight: @textMenuHeaderFontWeight;
-***REMOVED***
+  }
 
-  /* Image***REMOVED***/
+  /* Image */
   .ui.text.menu .item > img:not(.ui) {
     margin: 0;
-***REMOVED***
+  }
 
   /*--- fluid text ---*/
   .ui.text.item.menu .item {
     margin: 0;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     /*--- vertical text ---*/
     .ui.vertical.text.menu {
       margin: @textVerticalMenuMargin;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu:first-child {
       margin-top: 0;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu:last-child {
       margin-bottom: 0;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu .item {
       margin: @textVerticalMenuItemMargin;
       padding-left: 0;
       padding-right: 0;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu .item > i.icon {
       float: @textVerticalMenuIconFloat;
       margin: @iconMargin;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu .header.item {
       margin: @textVerticalMenuHeaderMargin;
-  ***REMOVED***
+    }
 
-    /* Vertical Sub Menu***REMOVED***/
+    /* Vertical Sub Menu */
     .ui.vertical.text.menu .item:not(.dropdown) > .menu {
       margin: @textMenuSubMenuMargin;
-  ***REMOVED***
+    }
     .ui.vertical.text.menu .item:not(.dropdown) > .menu > .item {
       margin: @textMenuSubMenuItemMargin;
       padding: @textMenuSubMenuItemPadding;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   /*--- hover ---*/
   .ui.text.menu .item:hover {
     opacity: 1;
     background-color: transparent;
-***REMOVED***
+  }
 
   /*--- active ---*/
   .ui.text.menu .active.item {
@@ -1171,121 +1171,121 @@ Floated Menu / Item
     box-shadow: none;
     font-weight: @textMenuActiveItemFontWeight;
     color: @textMenuActiveItemColor;
-***REMOVED***
+  }
 
   /*--- active hover ---*/
   .ui.text.menu .active.item:hover {
     background-color: transparent;
-***REMOVED***
+  }
   & when (@variationMenuPointing) {
-    /* Disable Bariations***REMOVED***/
+    /* Disable Bariations */
     .ui.text.pointing.menu .active.item:after {
       box-shadow: none;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuAttached) {
     .ui.text.attached.menu {
       box-shadow: none;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuInverted) {
-    /* Inverted***REMOVED***/
+    /* Inverted */
     .ui.inverted.text.menu,
     .ui.inverted.text.menu .item,
     .ui.inverted.text.menu .item:hover,
     .ui.inverted.text.menu .active.item {
       background-color: transparent;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuFluid) {
-    /* Fluid***REMOVED***/
+    /* Fluid */
     .ui.fluid.text.menu {
       margin-left: 0;
       margin-right: 0;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
     Icon Only
 ---------------*/
 
-/* Vertical Menu***REMOVED***/
+/* Vertical Menu */
 .ui.vertical.icon.menu {
   display: inline-block;
   width: auto;
-***REMOVED***
+}
 
-/* Item***REMOVED***/
+/* Item */
 .ui.icon.menu .item {
   height: auto;
   text-align: @iconMenuTextAlign;
   color: @iconMenuItemColor;
-***REMOVED***
+}
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.icon.menu .item > .icon:not(.dropdown) {
   margin: 0;
   opacity: 1;
-***REMOVED***
+}
 
-/* Icon Gylph***REMOVED***/
+/* Icon Gylph */
 .ui.icon.menu .icon:before {
   opacity: 1;
-***REMOVED***
+}
 
-/* (x) Item Icon***REMOVED***/
+/* (x) Item Icon */
 .ui.menu .icon.item > .icon {
   width: auto;
   margin: 0 auto;
-***REMOVED***
+}
 
-/* Vertical Icon***REMOVED***/
+/* Vertical Icon */
 .ui.vertical.icon.menu .item > .icon:not(.dropdown) {
   display: block;
   opacity: 1;
   margin: 0 auto;
   float: none;
-***REMOVED***
+}
 
-/* Inverted***REMOVED***/
+/* Inverted */
 .ui.inverted.icon.menu .item {
   color: @iconMenuInvertedItemColor;
-***REMOVED***
+}
 
 & when (@variationMenuLabeled) {
   /*--------------
      Labeled Icon
   ---------------*/
 
-  /* Menu***REMOVED***/
+  /* Menu */
   .ui.labeled.icon.menu {
     text-align: center;
-***REMOVED***
+  }
 
-  /* Item***REMOVED***/
+  /* Item */
   .ui.labeled.icon.menu .item {
     min-width: @labeledIconMinWidth;
     flex-direction: column;
-***REMOVED***
+  }
 
-  /* Icon***REMOVED***/
+  /* Icon */
   .ui.labeled.icon.menu > .item > .icon:not(.dropdown) {
     height: 1em;
     display: block;
     font-size: @labeledIconSize !important;
     margin: 0 auto @labeledIconTextMargin !important;
-***REMOVED***
+  }
   & when (@variationMenuFluid) {
-    /* Fluid***REMOVED***/
+    /* Fluid */
     .ui.fluid.labeled.icon.menu > .item {
       min-width: 0;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -1297,10 +1297,10 @@ Floated Menu / Item
   @media only screen and (max-width: @largestMobileScreen) {
     .ui.stackable.menu {
       flex-direction: column;
-  ***REMOVED***
+    }
     .ui.stackable.menu .item {
       width: 100% !important;
-  ***REMOVED***
+    }
     .ui.stackable.menu .item:before {
       position: absolute;
       content: '';
@@ -1310,29 +1310,29 @@ Floated Menu / Item
       width: 100%;
       height: @dividerSize;
       background: @verticalDividerBackground;
-  ***REMOVED***
+    }
 
     .ui.stackable.menu .left.menu,
     .ui.stackable.menu .left.item {
       margin-right: 0 !important;
-  ***REMOVED***
+    }
     .ui.stackable.menu .right.menu,
     .ui.stackable.menu .right.item {
       margin-left: 0 !important;
-  ***REMOVED***
+    }
     .ui.stackable.menu .center.menu,
     .ui.stackable.menu .center.item {
       margin-left: 0 !important;
       margin-right: 0 !important;
-  ***REMOVED***
+    }
 
     .ui.stackable.menu .right.menu,
     .ui.stackable.menu .center.menu,
     .ui.stackable.menu .left.menu {
       flex-direction: column;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
      Colors
@@ -1343,16 +1343,16 @@ each(@colors, {
   @c: @colors[@@color][color];
 
   & when not (@color=secondary) {
-    .ui.ui.ui.menu .@{color***REMOVED***.active.item,
-    .ui.ui.@{color***REMOVED***.menu .active.item:hover,
-    .ui.ui.@{color***REMOVED***.menu .active.item {
+    .ui.ui.ui.menu .@{color}.active.item,
+    .ui.ui.@{color}.menu .active.item:hover,
+    .ui.ui.@{color}.menu .active.item {
       & when not (@secondaryPointingActiveBorderColor = currentColor) {
         border-color: @c;
-    ***REMOVED***
+      }
       color: @c;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+    }
+  }
+})
 
 & when (@variationMenuInverted) {
   /*--------------
@@ -1363,43 +1363,43 @@ each(@colors, {
     border: @invertedBorder;
     background: @invertedBackground;
     box-shadow: @invertedBoxShadow;
-***REMOVED***
+  }
 
-  /* Menu Item***REMOVED***/
+  /* Menu Item */
   .ui.inverted.menu .item,
   .ui.inverted.menu .item > a:not(.ui) {
     background: @invertedItemBackground;
     color: @invertedItemTextColor;
-***REMOVED***
+  }
   .ui.inverted.menu .item.menu {
     background: @invertedSubMenuBackground;
-***REMOVED***
+  }
 
   /*--- Border ---*/
   .ui.inverted.menu .item:before {
     background: @invertedDividerBackground;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.vertical.inverted.menu .item:before {
       background: @invertedVerticalDividerBackground;
-  ***REMOVED***
-    /* Sub Menu***REMOVED***/
+    }
+    /* Sub Menu */
     .ui.vertical.inverted.menu .menu .item,
     .ui.vertical.inverted.menu .menu .item a:not(.ui) {
       color: @invertedSubMenuColor;
-  ***REMOVED***
-***REMOVED***
-  /* Header***REMOVED***/
+    }
+  }
+  /* Header */
   .ui.inverted.menu .header.item {
     margin: 0;
     background: @invertedHeaderBackground;
     box-shadow: none;
-***REMOVED***
+  }
 
-  /* Disabled***REMOVED***/
+  /* Disabled */
   .ui.ui.inverted.menu .item.disabled {
     color: @invertedDisabledTextColor;
-***REMOVED***
+  }
 
   /*--- Hover ---*/
   .ui.link.inverted.menu .item:hover,
@@ -1408,52 +1408,52 @@ each(@colors, {
   .ui.inverted.menu a.item:hover {
     background: @invertedHoverBackground;
     color: @invertedHoverColor;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.vertical.inverted.menu .item .menu a.item:hover,
     .ui.vertical.inverted.menu .item .menu .link.item:hover {
       background: @invertedSubMenuBackground;
       color: @invertedSubMenuHoverColor;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   /*--- Pressed ---*/
   .ui.inverted.menu a.item:active,
   .ui.inverted.menu .link.item:active{
     background: @invertedMenuPressedBackground;
     color: @invertedMenuPressedColor;
-***REMOVED***
+  }
 
   /*--- Active ---*/
   .ui.inverted.menu .active.item {
     background: @invertedActiveBackground;
     color: @invertedActiveColor !important;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.inverted.vertical.menu .item .menu .active.item {
       background: @invertedSubMenuActiveBackground;
       color: @invertedSubMenuActiveColor;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuPointing) {
     .ui.inverted.pointing.menu .active.item:after {
       background: @invertedArrowActiveColor;
       margin: 0 !important;
       box-shadow: none !important;
       border: none !important;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
   /*--- Active Hover ---*/
   .ui.inverted.menu .active.item:hover {
     background: @invertedActiveHoverBackground;
     color: @invertedActiveHoverColor !important;
-***REMOVED***
+  }
   & when (@variationMenuPointing) {
     .ui.inverted.pointing.menu .active.item:hover:after {
       background: @invertedArrowActiveHoverColor;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationMenuFloated) {
   /*--------------
@@ -1463,16 +1463,16 @@ each(@colors, {
   .ui.floated.menu {
     float: left;
     margin: 0 @floatedDistance 0 0;
-***REMOVED***
+  }
   .ui.floated.menu .item:last-child:before {
     display: none;
-***REMOVED***
+  }
 
   .ui.right.floated.menu {
     float: right;
     margin: 0 0 0 @floatedDistance;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuInverted) {
   /*--------------
@@ -1485,30 +1485,30 @@ each(@colors, {
     @h: @colors[@@color][hover];
 
     & when not (@color=secondary) {
-      .ui.ui.ui.inverted.menu .@{color***REMOVED***.active.item,
-      .ui.ui.inverted.@{color***REMOVED***.menu {
+      .ui.ui.ui.inverted.menu .@{color}.active.item,
+      .ui.ui.inverted.@{color}.menu {
         background-color: @c;
-    ***REMOVED***
-      .ui.inverted.@{color***REMOVED***.menu .item:before {
+      }
+      .ui.inverted.@{color}.menu .item:before {
         background-color: @invertedColoredDividerBackground;
-    ***REMOVED***
-      .ui.ui.inverted.@{color***REMOVED***.menu .active.item {
+      }
+      .ui.ui.inverted.@{color}.menu .active.item {
         background-color: @invertedColoredActiveBackground;
-    ***REMOVED***
+      }
       & when (@variationMenuPointing) {
-        .ui.inverted.pointing.@{color***REMOVED***.menu .active.item {
+        .ui.inverted.pointing.@{color}.menu .active.item {
           background-color: @h;
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***)
+        }
+      }
+    }
+  })
 
   & when (@variationMenuPointing) {
     .ui.ui.ui.inverted.pointing.menu .active.item:after {
       background-color: inherit;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationMenuFitted) {
   /*--------------
@@ -1519,20 +1519,20 @@ each(@colors, {
   .ui.fitted.menu .item .menu .item,
   .ui.menu .fitted.item {
     padding: 0;
-***REMOVED***
+  }
   .ui.horizontally.fitted.menu .item,
   .ui.horizontally.fitted.menu .item .menu .item,
   .ui.menu .horizontally.fitted.item {
     padding-top: @itemVerticalPadding;
     padding-bottom: @itemVerticalPadding;
-***REMOVED***
+  }
   .ui.vertically.fitted.menu .item,
   .ui.vertically.fitted.menu .item .menu .item,
   .ui.menu .vertically.fitted.item {
     padding-left: @itemHorizontalPadding;
     padding-right: @itemHorizontalPadding;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuBorderless) {
   /*--------------
@@ -1543,8 +1543,8 @@ each(@colors, {
   .ui.borderless.menu .item .menu .item:before,
   .ui.menu .borderless.item:before {
     background: none !important;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuCompact) {
   /*-------------------
@@ -1555,29 +1555,29 @@ each(@colors, {
     display: inline-flex;
     margin: 0;
     vertical-align: middle;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.compact.vertical.menu {
-    /* IE hack to make dropdown icons appear inline***REMOVED***/
+    /* IE hack to make dropdown icons appear inline */
       display: -ms-inline-flexbox !important;
       display: inline-block;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui.compact.menu:not(.secondary) .item:last-child {
     border-radius: 0 @borderRadius @borderRadius 0;
-***REMOVED***
+  }
   .ui.compact.menu .item:last-child:before {
     display: none;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.compact.vertical.menu {
       width: auto !important;
-  ***REMOVED***
+    }
     .ui.compact.vertical.menu .item:last-child::before {
       display: block;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationMenuFluid) {
   /*-------------------
@@ -1587,8 +1587,8 @@ each(@colors, {
   .ui.menu.fluid,
   .ui.vertical.menu.fluid {
     width: 100% !important;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*-------------------
@@ -1604,48 +1604,48 @@ each(@colors, {
   margin-right: 0 !important;
   text-align: center;
   justify-content: center;
-***REMOVED***
+}
 .ui.attached.item.menu:not(.tabular) {
   margin: 0 @attachedHorizontalOffset !important;
-***REMOVED***
+}
 
 .ui.item.menu .item:last-child:before {
   display: none;
-***REMOVED***
+}
 
 .ui.menu.two.item .item {
   width: 50%;
-***REMOVED***
+}
 .ui.menu.three.item .item {
   width: 33.333%;
-***REMOVED***
+}
 .ui.menu.four.item .item {
   width: 25%;
-***REMOVED***
+}
 .ui.menu.five.item .item {
   width: 20%;
-***REMOVED***
+}
 .ui.menu.six.item .item {
   width: 16.666%;
-***REMOVED***
+}
 .ui.menu.seven.item .item {
   width: 14.285%;
-***REMOVED***
+}
 .ui.menu.eight.item .item {
   width: 12.500%;
-***REMOVED***
+}
 .ui.menu.nine.item .item {
   width: 11.11%;
-***REMOVED***
+}
 .ui.menu.ten.item .item {
   width: 10.0%;
-***REMOVED***
+}
 .ui.menu.eleven.item .item {
   width: 9.09%;
-***REMOVED***
+}
 .ui.menu.twelve.item .item {
   width: 8.333%;
-***REMOVED***
+}
 
 & when (@variationMenuFixed) {
   /*--------------
@@ -1657,12 +1657,12 @@ each(@colors, {
     z-index: 101;
     margin: 0;
     width: 100%;
-***REMOVED***
+  }
   .ui.menu.fixed,
   .ui.menu.fixed .item:first-child,
   .ui.menu.fixed .item:last-child {
     border-radius: 0 !important;
-***REMOVED***
+  }
 
   .ui.fixed.menu,
   .ui[class*="top fixed"].menu {
@@ -1670,12 +1670,12 @@ each(@colors, {
     left: 0;
     right: auto;
     bottom: auto;
-***REMOVED***
+  }
   .ui[class*="top fixed"].menu {
     border-top: none;
     border-left: none;
     border-right: none;
-***REMOVED***
+  }
   .ui[class*="right fixed"].menu {
     border-top: none;
     border-bottom: none;
@@ -1686,7 +1686,7 @@ each(@colors, {
     bottom: auto;
     width: auto;
     height: 100%;
-***REMOVED***
+  }
   .ui[class*="bottom fixed"].menu {
     border-bottom: none;
     border-left: none;
@@ -1695,7 +1695,7 @@ each(@colors, {
     left: 0;
     top: auto;
     right: auto;
-***REMOVED***
+  }
   .ui[class*="left fixed"].menu {
     border-top: none;
     border-bottom: none;
@@ -1706,13 +1706,13 @@ each(@colors, {
     bottom: auto;
     width: auto;
     height: 100%;
-***REMOVED***
+  }
 
-  /* Coupling with Grid***REMOVED***/
+  /* Coupling with Grid */
   .ui.fixed.menu + .ui.grid {
     padding-top: @fixedPrecedingGridMargin;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMenuPointing) {
   /*-------------------
@@ -1738,7 +1738,7 @@ each(@colors, {
 
     z-index: @arrowZIndex;
     transition: @arrowTransition;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.vertical.pointing.menu .item:after {
       position: absolute;
@@ -1753,65 +1753,65 @@ each(@colors, {
       border: none;
       border-top: @arrowBorder;
       border-right: @arrowBorder;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui.pointing.menu .ui.dropdown .menu .item:after,
   .ui.vertical.pointing.menu .ui.dropdown .menu .item:after {
     display: none;
-***REMOVED***
+  }
 
-  /* Active***REMOVED***/
+  /* Active */
   .ui.pointing.menu .active.item:after {
     visibility: visible;
-***REMOVED***
+  }
   .ui.pointing.menu .active.dropdown.item:after {
     visibility: hidden;
-***REMOVED***
+  }
 
-  /* Don't double up pointers***REMOVED***/
+  /* Don't double up pointers */
   .ui.pointing.menu .dropdown.active.item:after,
   .ui.pointing.menu .active.item .menu .active.item:after {
     display: none;
-***REMOVED***
+  }
 
-  /* Colors***REMOVED***/
+  /* Colors */
   .ui.pointing.menu .active.item:hover:after {
     background-color: @arrowHoverColor;
-***REMOVED***
+  }
   .ui.pointing.menu .active.item:after {
     background-color: @arrowActiveColor;
-***REMOVED***
+  }
   .ui.pointing.menu .active.item:hover:after {
     background-color: @arrowActiveHoverColor;
-***REMOVED***
+  }
   & when (@variationMenuVertical) {
     .ui.vertical.pointing.menu .active.item:hover:after {
       background-color: @arrowVerticalHoverColor;
-  ***REMOVED***
+    }
     .ui.vertical.pointing.menu .active.item:after {
       background-color: @arrowVerticalActiveColor;
-  ***REMOVED***
+    }
     .ui.vertical.pointing.menu .menu .active.item:after {
       background-color: @arrowVerticalSubMenuColor;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 each(@colors, {
   @color: replace(@key, '@', '');
   @c: @colors[@@color][color];
 
-  .ui.inverted.pointing.menu .@{color***REMOVED***.active.item:after {
+  .ui.inverted.pointing.menu .@{color}.active.item:after {
     background-color: @c;
-***REMOVED***
-***REMOVED***)
+  }
+})
 
 & when (@variationMenuAttached) {
   /*--------------
       Attached
   ---------------*/
 
-  /* Middle***REMOVED***/
+  /* Middle */
   .ui.attached.menu {
     top: 0;
     bottom: 0;
@@ -1820,24 +1820,24 @@ each(@colors, {
     width: @attachedWidth;
     max-width: @attachedWidth;
     box-shadow: @attachedBoxShadow;
-***REMOVED***
+  }
   .ui.attached + .ui.attached.menu:not(.top) {
     border-top: none;
-***REMOVED***
+  }
 
-  /* Top***REMOVED***/
+  /* Top */
   .ui[class*="top attached"].menu {
     bottom: 0;
     margin-bottom: 0;
     top: @attachedTopOffset;
     margin-top: @verticalMargin;
     border-radius: @borderRadius @borderRadius 0 0;
-***REMOVED***
+  }
   .ui.menu[class*="top attached"]:first-child {
     margin-top: 0;
-***REMOVED***
+  }
 
-  /* Bottom***REMOVED***/
+  /* Bottom */
   .ui[class*="bottom attached"].menu {
     bottom: 0;
     margin-top: 0;
@@ -1845,36 +1845,36 @@ each(@colors, {
     margin-bottom: @verticalMargin;
     box-shadow: @attachedBottomBoxShadow;
     border-radius: 0 0 @borderRadius @borderRadius;
-***REMOVED***
+  }
   .ui[class*="bottom attached"].menu:last-child {
     margin-bottom: 0;
-***REMOVED***
+  }
 
-  /* Attached Menu Item***REMOVED***/
+  /* Attached Menu Item */
   .ui.top.attached.menu > .item:first-child {
     border-radius: @borderRadius 0 0 0;
-***REMOVED***
+  }
   .ui.bottom.attached.menu > .item:first-child {
     border-radius: 0 0 0 @borderRadius;
-***REMOVED***
+  }
 
-  /* Tabular Attached***REMOVED***/
+  /* Tabular Attached */
   .ui.attached.menu:not(.tabular) {
     border: @attachedBorder;
-***REMOVED***
+  }
   & when (@variationMenuInverted) {
     .ui.attached.inverted.menu {
       border: none;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMenuTabular) {
     .ui.attached.tabular.menu {
       margin-left: 0;
       margin-right: 0;
       width: 100%;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
      Sizes
@@ -1882,24 +1882,24 @@ each(@colors, {
 
 .ui.menu {
   font-size: @medium;
-***REMOVED***
+}
 .ui.vertical.menu {
   width: @mediumWidth;
-***REMOVED***
+}
 & when not (@variationMenuSizes = false) {
   each(@variationMenuSizes, {
-    @w: @{value***REMOVED***Width;
+    @w: @{value}Width;
     @s: @@value;
-    .ui.@{value***REMOVED***.menu,
-    .ui.@{value***REMOVED***.menu .dropdown,
-    .ui.@{value***REMOVED***.menu .dropdown .menu > .item {
+    .ui.@{value}.menu,
+    .ui.@{value}.menu .dropdown,
+    .ui.@{value}.menu .dropdown .menu > .item {
       font-size: @s;
-  ***REMOVED***
-    .ui.@{value***REMOVED***.vertical.menu:not(.icon) {
+    }
+    .ui.@{value}.vertical.menu:not(.icon) {
       width: @@w;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 /*-------------------
   Inverted dropdowns
@@ -1907,32 +1907,32 @@ each(@colors, {
 .ui.menu .ui.inverted.inverted.dropdown.item .menu {
   background: @invertedDropdownBackground;
   box-shadow: @invertedDropdownMenuBoxShadow;
-***REMOVED***
+}
 
 .ui.menu .ui.inverted.dropdown .menu > .item {
   color: @invertedDropdownItemColor !important;
-***REMOVED***
+}
 
 .ui.menu .ui.inverted.dropdown .menu > .active.item {
   background: @invertedDropdownActiveItemBackground !important;
   color: @invertedDropdownActiveItemColor !important;
-***REMOVED***
+}
 
 .ui.menu .ui.inverted.dropdown .menu > .item:hover {
   background: @invertedDropdownHoveredItemBackground !important;
   color: @invertedDropdownHoveredItemColor !important;
-***REMOVED***
+}
 
 .ui.menu .ui.inverted.dropdown .menu > .selected.item {
   background: @invertedDropdownSelectedItemBackground !important;
   color: @invertedDropdownSelectedItemColor !important;
-***REMOVED***
+}
 
 & when (@variationMenuVertical) {
-  /* Vertical***REMOVED***/
+  /* Vertical */
   .ui.vertical.menu .inverted.dropdown.item .menu {
     box-shadow: @invertedDropdownMenuBoxShadow;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

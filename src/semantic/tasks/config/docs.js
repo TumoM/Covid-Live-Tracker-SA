@@ -1,13 +1,13 @@
-***REMOVED********************************
+/*******************************
              Docs
 *******************************/
 
-/* Paths used for "serve-docs" and "build-docs" tasks***REMOVED***/
+/* Paths used for "serve-docs" and "build-docs" tasks */
 module.exports = {
   base: '',
   globs: {
     eco: '**/*.html.eco'
-***REMOVED***
+  },
   paths: {
     clean: '../docs/out/dist/',
     source: {
@@ -15,7 +15,7 @@ module.exports = {
       definitions : 'src/definitions/',
       site        : 'src/site/',
       themes      : 'src/themes/'
-  ***REMOVED***
+    },
     output: {
       examples     : '../docs/out/examples/',
       less         : '../docs/out/src/',
@@ -24,9 +24,9 @@ module.exports = {
       uncompressed : '../docs/out/dist/components/',
       compressed   : '../docs/out/dist/components/',
       themes       : '../docs/out/dist/themes/'
-  ***REMOVED***
+    },
     template: {
       eco: '../docs/server/documents/'
-  ***REMOVED***
-***REMOVED***
-***REMOVED***;
+    },
+  }
+};

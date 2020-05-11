@@ -1,14 +1,14 @@
 
 Package.describe({
-  name    : 'semantic:ui-{component***REMOVED***',
-  summary : 'Semantic UI - {Component***REMOVED***: Single component release',
-  version : '{version***REMOVED***',
-  git     : 'git://github.com/Semantic-Org/UI-{Component***REMOVED***.git',
-***REMOVED***);
+  name    : 'semantic:ui-{component}',
+  summary : 'Semantic UI - {Component}: Single component release',
+  version : '{version}',
+  git     : 'git://github.com/Semantic-Org/UI-{Component}.git',
+});
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
   api.addFiles([
-    {files***REMOVED***
+    {files}
   ], 'client');
-***REMOVED***);
+});

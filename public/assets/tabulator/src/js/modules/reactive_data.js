@@ -2,9 +2,9 @@ var ReactiveData = function(table){
 	this.table = table; //hold Tabulator object
 	this.data = false;
 	this.blocked = false; //block reactivity while performing update
-	this.origFuncs = {***REMOVED***; // hold original data array functions to allow replacement after data is done with
+	this.origFuncs = {}; // hold original data array functions to allow replacement after data is done with
 	this.currentVersion = 0;
-***REMOVED***;
+};
 
 ReactiveData.prototype.watchData = function(data){
 	var self = this,
@@ -30,12 +30,12 @@ ReactiveData.prototype.watchData = function(data){
 			if(!self.blocked && version === self.currentVersion){
 				args.forEach(function (arg){
 					self.table.rowManager.addRowActual(arg, false);
-				***REMOVED***);
-			***REMOVED***
+				});
+			}
 
 			return self.origFuncs.push.apply(data, arguments);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	//override array unshift function
 	self.origFuncs.unshift = data.unshift;
@@ -49,12 +49,12 @@ ReactiveData.prototype.watchData = function(data){
 			if(!self.blocked && version === self.currentVersion){
 				args.forEach(function (arg){
 					self.table.rowManager.addRowActual(arg, true);
-				***REMOVED***);
-			***REMOVED***
+				});
+			}
 
 			return self.origFuncs.unshift.apply(data, arguments);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 
 	//override array shift function
@@ -72,13 +72,13 @@ ReactiveData.prototype.watchData = function(data){
 
 					if(row){
 						row.deleteActual();
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			return self.origFuncs.shift.call(data);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	//override array pop function
 	self.origFuncs.pop = data.pop;
@@ -94,12 +94,12 @@ ReactiveData.prototype.watchData = function(data){
 
 					if(row){
 						row.deleteActual();
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 			return self.origFuncs.pop.call(data);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 
 	//override array splice function
@@ -124,15 +124,15 @@ ReactiveData.prototype.watchData = function(data){
 					if(startRow){
 						newRows.forEach(function(rowData){
 							self.table.rowManager.addRowActual(rowData, true, startRow, true);
-						***REMOVED***);
-					***REMOVED***else{
+						});
+					}else{
 						newRows = newRows.slice().reverse();
 
 						newRows.forEach(function(rowData){
 							self.table.rowManager.addRowActual(rowData, true, false, true);
-						***REMOVED***);
-					***REMOVED***
-				***REMOVED***
+						});
+					}
+				}
 
 				//delete removed rows
 				if(end !== 0){
@@ -143,19 +143,19 @@ ReactiveData.prototype.watchData = function(data){
 
 						if(row){
 							row.deleteActual(i !== oldRows.length - 1);
-						***REMOVED***
-					***REMOVED***);
-				***REMOVED***
+						}
+					});
+				}
 
 				if(newRows || end !== 0){
 					self.table.rowManager.reRenderInPosition();
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			return self.origFuncs.splice.apply(data, arguments);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 ReactiveData.prototype.unwatchData = function(){
 	if(this.data !== false){
@@ -165,10 +165,10 @@ ReactiveData.prototype.unwatchData = function(){
 				configurable:true,
 				writable:true,
 				value: this.origFuncs.key,
-			***REMOVED***);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			});
+		}
+	}
+};
 
 ReactiveData.prototype.watchRow = function(row){
 	var self = this,
@@ -178,10 +178,10 @@ ReactiveData.prototype.watchRow = function(row){
 
 	for(var key in data){
 		this.watchKey(row, data, key);
-	***REMOVED***
+	}
 
 	this.blocked = false;
-***REMOVED***;
+};
 
 ReactiveData.prototype.watchKey = function(row, data, key){
 	var self = this,
@@ -193,25 +193,25 @@ ReactiveData.prototype.watchKey = function(row, data, key){
 		set: function(newValue){
 			value = newValue;
 			if(!self.blocked && version === self.currentVersion){
-				var update = {***REMOVED***;
+				var update = {};
 				update[key] = newValue;
 				row.updateData(update);
-			***REMOVED***
+			}
 
 			if(props.set){
 				props.set(newValue);
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 		get:function(){
 
 			if(props.get){
 				props.get();
-			***REMOVED***
+			}
 
 			return value;
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 ReactiveData.prototype.unwatchRow = function(row){
 	var data = row.getData();
@@ -219,17 +219,17 @@ ReactiveData.prototype.unwatchRow = function(row){
 	for(var key in data){
 		Object.defineProperty(data, key, {
 			value:data[key],
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***;
+		});
+	}
+};
 
 ReactiveData.prototype.block = function(){
 	this.blocked = true;
-***REMOVED***;
+};
 
 ReactiveData.prototype.unblock = function(){
 	this.blocked = false;
-***REMOVED***;
+};
 
 Tabulator.prototype.registerModule("reactiveData", ReactiveData);
 

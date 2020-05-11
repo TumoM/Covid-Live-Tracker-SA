@@ -1,14 +1,14 @@
 var Accessor = function(table){
 	this.table = table; //hold Tabulator object
 	this.allowedTypes = ["", "data", "download", "clipboard", "print", "htmlOutput"] //list of accessor types
-***REMOVED***;
+};
 
 
 //initialize column accessor
 Accessor.prototype.initializeColumn = function(column){
 	var self = this,
 	match = false,
-	config = {***REMOVED***;
+	config = {};
 
 	this.allowedTypes.forEach(function(type){
 		var key = "accessor" + (type.charAt(0).toUpperCase() + type.slice(1)),
@@ -22,16 +22,16 @@ Accessor.prototype.initializeColumn = function(column){
 
 				config[key] = {
 					accessor:accessor,
-					params: column.definition[key + "Params"] || {***REMOVED***,
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+					params: column.definition[key + "Params"] || {},
+				}
+			}
+		}
+	});
 
 	if(match){
 		column.modules.accessor = config;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Accessor.prototype.lookupAccessor = function(value){
 	var accessor = false;
@@ -41,18 +41,18 @@ Accessor.prototype.lookupAccessor = function(value){
 		case "string":
 		if(this.accessors[value]){
 			accessor = this.accessors[value]
-		***REMOVED***else{
+		}else{
 			console.warn("Accessor Error - No such accessor found, ignoring: ", value);
-		***REMOVED***
+		}
 		break;
 
 		case "function":
 		accessor = value;
 		break;
-	***REMOVED***
+	}
 
 	return accessor;
-***REMOVED***;
+};
 
 
 //apply accessor to row
@@ -61,7 +61,7 @@ Accessor.prototype.transformRow = function(dataIn, type){
 	key = "accessor" + (type.charAt(0).toUpperCase() + type.slice(1));
 
 	//clone data object with deep copy to isolate internal data from returned result
-	var data = Tabulator.prototype.helpers.deepClone(dataIn || {***REMOVED***);
+	var data = Tabulator.prototype.helpers.deepClone(dataIn || {});
 
 	self.table.columnManager.traverse(function(column){
 		var value, accessor, params, component;
@@ -77,16 +77,16 @@ Accessor.prototype.transformRow = function(dataIn, type){
 					component = column.getComponent();
 					params = typeof accessor.params === "function" ? accessor.params(value, data, type, component) : accessor.params;
 					column.setFieldValue(data, accessor.accessor(value, data, type, params, component));
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+				}
+			}
+		}
+	});
 
 	return data;
-***REMOVED***,
+},
 
 //default accessors
-Accessor.prototype.accessors = {***REMOVED***;
+Accessor.prototype.accessors = {};
 
 
 

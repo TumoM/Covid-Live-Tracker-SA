@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***     Define RTL Sub-Tasks
-***REMOVED*********************************/
+/*******************************
+ *     Define RTL Sub-Tasks
+ *******************************/
 
 module.exports = function (gulp) {
 
@@ -16,4 +16,4 @@ module.exports = function (gulp) {
   gulp.task('build-rtl', buildRTL);
   gulp.task('build-rtl').description = 'DEPRECATED - use \'build\' instead - Build all files as RTL';
 
-***REMOVED***;
+};

@@ -1,14 +1,14 @@
 /*!
-***REMOVED*** # Fomantic-UI - Message
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Message
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -17,7 +17,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Message
 *******************************/
 
@@ -32,86 +32,86 @@
   transition: @transition;
   border-radius: @borderRadius;
   box-shadow: @boxShadow;
-***REMOVED***
+}
 
 .ui.message:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.message:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
 /*--------------
      Content
 ---------------*/
 
-/* Header***REMOVED***/
+/* Header */
 .ui.message .header {
   display: @headerDisplay;
   font-family: @headerFont;
   font-weight: @headerFontWeight;
   margin: @headerMargin;
-***REMOVED***
+}
 
-/* Default font size***REMOVED***/
+/* Default font size */
 .ui.message .header:not(.ui) {
   font-size: @headerFontSize;
-***REMOVED***
+}
 
-/* Paragraph***REMOVED***/
+/* Paragraph */
 .ui.message p {
   opacity: @messageTextOpacity;
   margin: @messageParagraphMargin 0;
-***REMOVED***
+}
 .ui.message p:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.message p:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 .ui.message .header + p {
   margin-top: @headerParagraphDistance;
-***REMOVED***
+}
 
-/* List***REMOVED***/
+/* List */
 .ui.message .list:not(.ui) {
   text-align: left;
   padding: 0;
   opacity: @listOpacity;
   list-style-position: @listStylePosition;
   margin: @listMargin 0 0;
-***REMOVED***
+}
 .ui.message .list:not(.ui):first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.message .list:not(.ui):last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 .ui.message .list:not(.ui) li {
   position: relative;
   list-style-type: none;
   margin: 0 0 @listItemMargin @listItemIndent;
   padding: 0;
-***REMOVED***
+}
 .ui.message .list:not(.ui) li:before {
   position: absolute;
   content: '•';
   left: -1em;
   height: 100%;
   vertical-align: baseline;
-***REMOVED***
+}
 .ui.message .list:not(.ui) li:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.message > .icon {
   margin-right: @iconDistance;
-***REMOVED***
+}
 
-/* Close Icon***REMOVED***/
+/* Close Icon */
 .ui.message > .close.icon {
   cursor: pointer;
   position: absolute;
@@ -120,28 +120,28 @@
   right: @closeRightDistance;
   opacity: @closeOpacity;
   transition: @closeTransition;
-***REMOVED***
+}
 .ui.message > .close.icon:hover {
   opacity: 1;
-***REMOVED***
+}
 
-/* First / Last Element***REMOVED***/
+/* First / Last Element */
 .ui.message > :first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.message > :last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             Coupling
 *******************************/
 
 .ui.dropdown .menu > .message {
   margin: 0 -@borderWidth;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             States
 *******************************/
 
@@ -151,11 +151,11 @@
 
 .ui.visible.visible.visible.visible.message {
   display: block;
-***REMOVED***
+}
 
 .ui.icon.visible.visible.visible.visible.message {
   display: flex;
-***REMOVED***
+}
 
 /*--------------
      Hidden
@@ -163,10 +163,10 @@
 
 .ui.hidden.hidden.hidden.hidden.message {
   display: none;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
             Variations
 *******************************/
 
@@ -177,12 +177,12 @@
 
   .ui.compact.message {
     display: inline-block;
-***REMOVED***
+  }
   .ui.compact.icon.message {
     display: inline-flex;
     width: auto;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMessageAttached) {
   /*--------------
@@ -195,25 +195,25 @@
     box-shadow: @attachedBoxShadow;
     margin-left: @attachedXOffset;
     margin-right: @attachedXOffset;
-***REMOVED***
+  }
   .ui.attached + .ui.attached.message:not(.top):not(.bottom) {
     margin-top: @attachedYOffset;
     border-radius: 0;
-***REMOVED***
+  }
   .ui.bottom.attached.message {
     margin-top: @attachedYOffset;
     border-radius: 0 0 @borderRadius @borderRadius;
     box-shadow: @attachedBottomBoxShadow;
-***REMOVED***
+  }
   .ui.bottom.attached.message:not(:last-child) {
     margin-bottom: @verticalMargin;
-***REMOVED***
+  }
   & when (@variationMessageIcon) {
     .ui.attached.icon.message {
       width: auto;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationMessageIcon) {
   /*--------------
@@ -224,7 +224,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-***REMOVED***
+  }
   .ui.icon.message > .icon:not(.close) {
     display: block;
     flex: 0 0 auto;
@@ -233,21 +233,21 @@
     vertical-align: @iconVerticalAlign;
     font-size: @iconSize;
     opacity: @iconOpacity;
-***REMOVED***
+  }
   .ui.icon.message > .content {
     display: block;
     flex: 1 1 auto;
     vertical-align: @iconVerticalAlign;
-***REMOVED***
+  }
 
 
   .ui.icon.message .icon:not(.close) + .content {
     padding-left: @iconContentDistance;
-***REMOVED***
+  }
   .ui.icon.message .circular.icon {
     width: 1em;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationMessageFloating) {
   /*--------------
@@ -256,8 +256,8 @@
 
   .ui.floating.message {
     box-shadow: @floatingBoxShadow;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*--------------
@@ -276,45 +276,45 @@
       boxShadow      : @positiveBoxShadow;
       boxFloatShadow : @positiveBoxFloatingShadow;
       text           : @positiveTextColor;
-  ***REMOVED***;
+    };
     @negative: {
       background     : @negativeBackgroundColor;
       header         : @negativeHeaderColor;
       boxShadow      : @negativeBoxShadow;
       boxFloatShadow : @negativeBoxFloatingShadow;
       text           : @negativeTextColor;
-  ***REMOVED***;
+    };
     @info: {
       background     : @infoBackgroundColor;
       header         : @infoHeaderColor;
       boxShadow      : @infoBoxShadow;
       boxFloatShadow : @infoBoxFloatingShadow;
       text           : @infoTextColor;
-  ***REMOVED***;
+    };
     @warning: {
       background     : @warningBackgroundColor;
       header         : @warningHeaderColor;
       boxShadow      : @warningBoxShadow;
       boxFloatShadow : @warningBoxFloatingShadow;
       text           : @warningTextColor;
-  ***REMOVED***;
+    };
     @error: {
       background     : @errorBackgroundColor;
       header         : @errorHeaderColor;
       boxShadow      : @errorBoxShadow;
       boxFloatShadow : @errorBoxFloatingShadow;
       text           : @errorTextColor;
-  ***REMOVED***;
+    };
     @success: {
       background     : @successBackgroundColor;
       header         : @successHeaderColor;
       boxShadow      : @successBoxShadow;
       boxFloatShadow : @successBoxFloatingShadow;
       text           : @successTextColor;
-  ***REMOVED***;
-***REMOVED***
+    };
+  }
 
-  /* Colors***REMOVED***/
+  /* Colors */
 
   each(@consequences, {
     @color: replace(@key, '@', '');
@@ -324,25 +324,25 @@
     @bfs: @consequences[@@color][boxFloatShadow];
     @t: @consequences[@@color][text];
 
-    .ui.@{color***REMOVED***.message {
+    .ui.@{color}.message {
       background-color: @bg;
       color: @t;
-  ***REMOVED***
+    }
 
-    .ui.@{color***REMOVED***.message,
-    .ui.attached.@{color***REMOVED***.message {
+    .ui.@{color}.message,
+    .ui.attached.@{color}.message {
       box-shadow: @bs;
-  ***REMOVED***
+    }
     & when (@variationMessageFloating) {
-      .ui.floating.@{color***REMOVED***.message {
+      .ui.floating.@{color}.message {
         box-shadow: @bfs;
-    ***REMOVED***
-  ***REMOVED***
-    .ui.@{color***REMOVED***.message .header {
+      }
+    }
+    .ui.@{color}.message .header {
       color: @hd;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 each(@colors, {
   @color: replace(@key, '@', '');
@@ -353,47 +353,47 @@ each(@colors, {
   @t: @colors[@@color][text];
   @isVeryDark: @colors[@@color][isVeryDark];
 
-  .ui.@{color***REMOVED***.message {
+  .ui.@{color}.message {
     & when not (@isVeryDark) {
       background-color: @bg;
       color: @t;
-  ***REMOVED***
+    }
     & when (@isVeryDark) {
       background-color: @black;
       color: @invertedTextColor;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  .ui.@{color***REMOVED***.message,
-  .ui.attached.@{color***REMOVED***.message {
+  .ui.@{color}.message,
+  .ui.attached.@{color}.message {
     & when not (@isVeryDark) {
       box-shadow: @bs;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationMessageFloating) {
-    .ui.floating.@{color***REMOVED***.message {
+    .ui.floating.@{color}.message {
       & when not (@isVeryDark) {
         box-shadow: @bfs;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
 
-  .ui.@{color***REMOVED***.message .header {
+  .ui.@{color}.message .header {
     & when not (@isVeryDark) {
       color: @hd;
-  ***REMOVED***
+    }
     & when (@isVeryDark) {
       color: @invertedTextColor;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+    }
+  }
+})
 
 & when (@variationMessageInverted) {
   .ui.inverted.message {
     background-color: @black;
     color: @invertedTextColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
      Sizes
@@ -401,14 +401,14 @@ each(@colors, {
 
 .ui.message {
   font-size: @relativeMedium;
-***REMOVED***
+}
 & when not (@variationMessageSizes = false) {
   each(@variationMessageSizes, {
-    @s: @{value***REMOVED***MessageSize;
-    .ui.@{value***REMOVED***.message {
+    @s: @{value}MessageSize;
+    .ui.@{value}.message {
       font-size: @@s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 .loadUIOverrides();

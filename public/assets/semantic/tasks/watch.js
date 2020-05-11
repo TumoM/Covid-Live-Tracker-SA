@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***          Watch Task
-***REMOVED*********************************/
+/*******************************
+ *          Watch Task
+ *******************************/
 
 var
   gulp       = require('gulp'),
@@ -26,7 +26,7 @@ module.exports = function () {
   if (!install.isSetup()) {
     console.error('Cannot watch files. Run "gulp install" to set-up Semantic');
     return;
-***REMOVED***
+  }
 
   console.clear();
   console.log('Watching source files for changes');
@@ -48,4 +48,4 @@ module.exports = function () {
 
   assets.watch('default', config);
 
-***REMOVED***;
+};

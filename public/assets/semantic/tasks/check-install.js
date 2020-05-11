@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***        Check Install
-***REMOVED*********************************/
+/*******************************
+ *        Check Install
+ *******************************/
 
 var
   // node dependencies
@@ -19,9 +19,9 @@ module.exports = function (callback) {
     if (!isSetup()) {
       console.log('Starting install...');
       install(callback);
-  ***REMOVED*** else {
+    } else {
       watch(callback);
-  ***REMOVED***
-***REMOVED*** 50); // Delay to allow console.clear to remove messages from check event
+    }
+  }, 50); // Delay to allow console.clear to remove messages from check event
 
-***REMOVED***;
+};

@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
           Update Repos
 *******************************/
 
@@ -6,9 +6,9 @@
 
  This task update all SUI individual component repos with new versions of components
 
- ***REMOVED*** Commits changes from create repo
- ***REMOVED*** Pushes changes to GitHub
- ***REMOVED*** Tag new releases if version changed in main repo
+  * Commits changes from create repo
+  * Pushes changes to GitHub
+  * Tag new releases if version changed in main repo
 
 */
 
@@ -49,7 +49,7 @@ module.exports = function(callback) {
   if(!oAuth) {
     console.error('Must add oauth token for GitHub in tasks/config/admin/oauth.js');
     return;
-***REMOVED***
+  }
 
   // Do Git commands synchronously per component, to avoid issues
   stepRepo = function() {
@@ -58,7 +58,7 @@ module.exports = function(callback) {
     if(index >= total) {
       callback();
       return;
-  ***REMOVED***
+    }
 
     var
       component            = release.components[index],
@@ -83,14 +83,14 @@ module.exports = function(callback) {
         ? 'Updated component to version ' + version
         : 'Updated files from main repo',
 
-      gitOptions      = { cwd: outputDirectory ***REMOVED***,
-      commitOptions   = { args: commitArgs, cwd: outputDirectory ***REMOVED***,
-      releaseOptions  = { tag_name: version, owner: release.org, repo: repoName ***REMOVED***,
+      gitOptions      = { cwd: outputDirectory },
+      commitOptions   = { args: commitArgs, cwd: outputDirectory },
+      releaseOptions  = { tag_name: version, owner: release.org, repo: repoName },
 
-      fileModeOptions = { args : 'config core.fileMode false', cwd: outputDirectory ***REMOVED***,
-      usernameOptions = { args : 'config user.name "' + oAuth.name + '"', cwd: outputDirectory ***REMOVED***,
-      emailOptions    = { args : 'config user.email "' + oAuth.email + '"', cwd: outputDirectory ***REMOVED***,
-      versionOptions =  { args : 'rev-parse --verify HEAD', cwd: outputDirectory ***REMOVED***,
+      fileModeOptions = { args : 'config core.fileMode false', cwd: outputDirectory },
+      usernameOptions = { args : 'config user.name "' + oAuth.name + '"', cwd: outputDirectory },
+      emailOptions    = { args : 'config user.email "' + oAuth.email + '"', cwd: outputDirectory },
+      versionOptions =  { args : 'rev-parse --verify HEAD', cwd: outputDirectory },
 
       localRepoSetup  = fs.existsSync(path.join(outputDirectory, '.git')),
       canProceed      = true
@@ -104,10 +104,10 @@ module.exports = function(callback) {
         git.exec(usernameOptions, function () {
           git.exec(emailOptions, function () {
             commitFiles();
-        ***REMOVED***);
-      ***REMOVED***);
-    ***REMOVED***);
-  ***REMOVED***
+          });
+        });
+      });
+    }
 
 
     // standard path
@@ -119,45 +119,45 @@ module.exports = function(callback) {
         .pipe(git.commit(commitMessage, commitOptions))
         .on('error', function(error) {
           // canProceed = false; bug in git commit <https://github.com/stevelacy/gulp-git/issues/49>
-      ***REMOVED***)
+        })
         .on('finish', function(callback) {
           if(canProceed) {
             pushFiles();
-        ***REMOVED***
+          }
           else {
             console.info('Nothing new to commit');
             nextRepo();
-        ***REMOVED***
-      ***REMOVED***)
+          }
+        })
       ;
-  ***REMOVED***
+    }
 
     // push changes to remote
     function pushFiles() {
       console.info('Pushing files for ' + component);
-      git.push('origin', 'master', { args: '', cwd: outputDirectory ***REMOVED***, function(error) {
+      git.push('origin', 'master', { args: '', cwd: outputDirectory }, function(error) {
         console.info('Push completed successfully');
         getSHA();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     // gets SHA of last commit
     function getSHA() {
       git.exec(versionOptions, function(error, version) {
         version = version.trim();
         createRelease(version);
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     // create release on GitHub.com
     function createRelease(version) {
       if(version) {
         releaseOptions.target_commitish = version;
-    ***REMOVED***
+      }
       github.repos.createRelease(releaseOptions, function() {
         nextRepo();
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     // Steps to next repository
     function nextRepo() {
@@ -165,18 +165,18 @@ module.exports = function(callback) {
       // avoid rate throttling
       global.clearTimeout(timer);
       timer = global.setTimeout(stepRepo, 100);
-  ***REMOVED***
+    }
 
 
     if(localRepoSetup) {
       setConfig();
-  ***REMOVED***
+    }
     else {
       console.error('Repository must be setup before running update components');
-  ***REMOVED***
+    }
 
-***REMOVED***;
+  };
 
   stepRepo();
 
-***REMOVED***;
+};

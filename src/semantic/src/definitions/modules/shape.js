@@ -1,20 +1,20 @@
 /*!
-***REMOVED*** # Fomantic-UI - Shape
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Shape
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 ;(function ($, window, document, undefined) {
 
-***REMOVED***;
+'use strict';
 
 $.isFunction = $.isFunction || function(obj) {
   return typeof obj === "function" && typeof obj.nodeType !== "number";
-***REMOVED***;
+};
 
 window = (typeof window != 'undefined' && window.Math == Math)
   ? window
@@ -38,7 +38,7 @@ $.fn.shape = function(parameters) {
       || window.mozRequestAnimationFrame
       || window.webkitRequestAnimationFrame
       || window.msRequestAnimationFrame
-      || function(callback) { setTimeout(callback, 0); ***REMOVED***,
+      || function(callback) { setTimeout(callback, 0); },
 
     returnedValue
   ;
@@ -48,8 +48,8 @@ $.fn.shape = function(parameters) {
       var
         moduleSelector = $allModules.selector || '',
         settings       = ( $.isPlainObject(parameters) )
-          ? $.extend(true, {***REMOVED***, $.fn.shape.settings, parameters)
-          : $.extend({***REMOVED***, $.fn.shape.settings),
+          ? $.extend(true, {}, $.fn.shape.settings, parameters)
+          : $.extend({}, $.fn.shape.settings),
 
         // internal aliases
         namespace     = settings.namespace,
@@ -83,7 +83,7 @@ $.fn.shape = function(parameters) {
           module.verbose('Initializing module for', element);
           module.set.defaultSide();
           module.instantiate();
- ***REMOVED*****REMOVED***
+        },
 
         instantiate: function() {
           module.verbose('Storing instance of module', module);
@@ -91,7 +91,7 @@ $.fn.shape = function(parameters) {
           $module
             .data(moduleNamespace, instance)
           ;
- ***REMOVED*****REMOVED***
+        },
 
         destroy: function() {
           module.verbose('Destroying previous module for', element);
@@ -99,14 +99,14 @@ $.fn.shape = function(parameters) {
             .removeData(moduleNamespace)
             .off(eventNamespace)
           ;
- ***REMOVED*****REMOVED***
+        },
 
         refresh: function() {
           module.verbose('Refreshing selector cache for', element);
           $module = $(element);
           $sides  = $(this).find(selector.sides);
           $side   = $(this).find(selector.side);
- ***REMOVED*****REMOVED***
+        },
 
         repaint: function() {
           module.verbose('Forcing repaint event');
@@ -114,7 +114,7 @@ $.fn.shape = function(parameters) {
             shape          = $sides[0] || document.createElement('div'),
             fakeAssignment = shape.offsetWidth
           ;
- ***REMOVED*****REMOVED***
+        },
 
         animate: function(propertyObject, callback) {
           module.verbose('Animating box with properties', propertyObject);
@@ -122,10 +122,10 @@ $.fn.shape = function(parameters) {
             module.verbose('Executing animation callback');
             if(event !== undefined) {
               event.stopPropagation();
-          ***REMOVED***
+            }
             module.reset();
             module.set.active();
-        ***REMOVED***;
+          };
           settings.beforeChange.call($nextSide[0]);
           if(module.get.transitionEvent()) {
             module.verbose('Starting CSS animation');
@@ -144,12 +144,12 @@ $.fn.shape = function(parameters) {
               $activeSide
                 .addClass(className.hidden)
               ;
-          ***REMOVED***);
-        ***REMOVED***
+            });
+          }
           else {
             callback();
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         queue: function(method) {
           module.debug('Queueing animation of', method);
@@ -158,10 +158,10 @@ $.fn.shape = function(parameters) {
               module.debug('Executing queued animation');
               setTimeout(function(){
                 $module.shape(method);
-  ***REMOVED*****REMOVED*****REMOVED*** 0);
-          ***REMOVED***)
+              }, 0);
+            })
           ;
- ***REMOVED*****REMOVED***
+        },
 
         reset: function() {
           module.verbose('Animating states reset');
@@ -185,19 +185,19 @@ $.fn.shape = function(parameters) {
             .attr('style', '')
             .removeAttr('style')
           ;
- ***REMOVED*****REMOVED***
+        },
 
         is: {
           complete: function() {
             return ($side.filter('.' + className.active)[0] == $nextSide[0]);
-   ***REMOVED*****REMOVED***
+          },
           animating: function() {
             return $module.hasClass(className.animating);
-   ***REMOVED*****REMOVED***
+          },
           hidden: function() {
             return $module.closest(':hidden').length > 0;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         set: {
 
@@ -210,7 +210,7 @@ $.fn.shape = function(parameters) {
             nextIndex = false;
             module.verbose('Active side set to', $activeSide);
             module.verbose('Next side set to', $nextSide);
-   ***REMOVED*****REMOVED***
+          },
 
           duration: function(duration) {
             duration = duration || settings.duration;
@@ -227,10 +227,10 @@ $.fn.shape = function(parameters) {
                   '-ms-transition-duration': duration,
                   '-o-transition-duration': duration,
                   'transition-duration': duration
-              ***REMOVED***)
+                })
               ;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
 
           currentStageSize: function() {
             var
@@ -242,9 +242,9 @@ $.fn.shape = function(parameters) {
               .css({
                 width: width,
                 height: height
-            ***REMOVED***)
+              })
             ;
-   ***REMOVED*****REMOVED***
+          },
 
           stageSize: function() {
             var
@@ -274,12 +274,12 @@ $.fn.shape = function(parameters) {
             if(settings.width !== 'auto') {
               $module.css('width', newWidth + settings.jitter);
               module.verbose('Specifying width during animation', newWidth);
-          ***REMOVED***
+            }
             if(settings.height !== 'auto') {
               $module.css('height', newHeight + settings.jitter);
               module.verbose('Specifying height during animation', newHeight);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
 
           nextSide: function(selector) {
             nextIndex = selector;
@@ -288,9 +288,9 @@ $.fn.shape = function(parameters) {
             if($nextSide.length === 0) {
               module.set.defaultSide();
               module.error(error.side);
-          ***REMOVED***
+            }
             module.verbose('Next side manually set to', $nextSide);
-   ***REMOVED*****REMOVED***
+          },
 
           active: function() {
             module.verbose('Setting new side to active', $nextSide);
@@ -302,19 +302,19 @@ $.fn.shape = function(parameters) {
             ;
             settings.onChange.call($nextSide[0]);
             module.set.defaultSide();
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         flip: {
           to: function(type,stage){
             if(module.is.hidden()) {
               module.debug('Module not visible', $nextSide);
               return;
-          ***REMOVED***
+            }
             if(module.is.complete() && !module.is.animating() && !settings.allowRepeats) {
               module.debug('Side already visible', $nextSide);
               return;
-          ***REMOVED***
+            }
             var
               transform = module.get.transform[type]()
             ;
@@ -323,37 +323,37 @@ $.fn.shape = function(parameters) {
               module.set.stageSize();
               module.stage[stage]();
               module.animate(transform);
-          ***REMOVED***
+            }
             else {
               module.queue('flip '+type);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
 
           up: function() {
             module.flip.to('up','above');
-   ***REMOVED*****REMOVED***
+          },
 
           down: function() {
             module.flip.to('down','below');
-   ***REMOVED*****REMOVED***
+          },
 
           left: function() {
             module.flip.to('left','left');
-   ***REMOVED*****REMOVED***
+          },
 
           right: function() {
             module.flip.to('right','right');
-   ***REMOVED*****REMOVED***
+          },
 
           over: function() {
             module.flip.to('over','behind');
-   ***REMOVED*****REMOVED***
+          },
 
           back: function() {
             module.flip.to('back','behind');
-        ***REMOVED***
+          }
 
- ***REMOVED*****REMOVED***
+        },
 
         get: {
 
@@ -365,19 +365,19 @@ $.fn.shape = function(parameters) {
               ;
               return {
                 transform: 'translateY(' + translateY + 'px) translateZ(-'+ translateZ + 'px) rotateX(-90deg)'
-            ***REMOVED***;
-***REMOVED*****REMOVED*****REMOVED***
+              };
+            },
 
             down: function() {
               var
                 translate = {
                   z: $activeSide.outerHeight(true) / 2
-              ***REMOVED***
+                }
               ;
               return {
                 transform: 'translateY(-' + translate.z + 'px) translateZ(-'+ translate.z + 'px) rotateX(90deg)'
-            ***REMOVED***;
-***REMOVED*****REMOVED*****REMOVED***
+              };
+            },
 
             left: function() {
               var
@@ -386,42 +386,42 @@ $.fn.shape = function(parameters) {
               ;
               return {
                 transform: 'translateX(' + translateX + 'px) translateZ(-' + translateZ + 'px) rotateY(90deg)'
-            ***REMOVED***;
-***REMOVED*****REMOVED*****REMOVED***
+              };
+            },
 
             right: function() {
               var
                 translate = {
                   z : $activeSide.outerWidth(true) / 2
-              ***REMOVED***
+                }
               ;
               return {
                 transform: 'translateX(-' + translate.z + 'px) translateZ(-' + translate.z + 'px) rotateY(-90deg)'
-            ***REMOVED***;
-***REMOVED*****REMOVED*****REMOVED***
+              };
+            },
 
             over: function() {
               var
                 translate = {
                   x : -(($activeSide.outerWidth(true) - $nextSide.outerWidth(true)) / 2)
-              ***REMOVED***
+                }
               ;
               return {
                 transform: 'translateX(' + translate.x + 'px) rotateY(180deg)'
-            ***REMOVED***;
-***REMOVED*****REMOVED*****REMOVED***
+              };
+            },
 
             back: function() {
               var
                 translate = {
                   x : -(($activeSide.outerWidth(true) - $nextSide.outerWidth(true)) / 2)
-              ***REMOVED***
+                }
               ;
               return {
                 transform: 'translateX(' + translate.x + 'px) rotateY(-180deg)'
-            ***REMOVED***;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+              };
+            }
+          },
 
           transitionEvent: function() {
             var
@@ -431,24 +431,24 @@ $.fn.shape = function(parameters) {
                 'OTransition'      :'oTransitionEnd',
                 'MozTransition'    :'transitionend',
                 'WebkitTransition' :'webkitTransitionEnd'
-  ***REMOVED*****REMOVED*****REMOVED***
+              },
               transition
             ;
             for(transition in transitions){
               if( element.style[transition] !== undefined ){
                 return transitions[transition];
-            ***REMOVED***
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+              }
+            }
+          },
 
           nextSide: function() {
             return ( $activeSide.next(selector.side).length > 0 )
               ? $activeSide.next(selector.side)
               : $side.first()
             ;
-        ***REMOVED***
+          }
 
- ***REMOVED*****REMOVED***
+        },
 
         stage: {
 
@@ -459,23 +459,23 @@ $.fn.shape = function(parameters) {
                 depth  : {
                   active : ($nextSide.outerHeight(true) / 2),
                   next   : ($activeSide.outerHeight(true) / 2)
-              ***REMOVED***
-            ***REMOVED***
+                }
+              }
             ;
             module.verbose('Setting the initial animation position as above', $nextSide, box);
             $activeSide
               .css({
                 'transform' : 'rotateX(0deg)'
-            ***REMOVED***)
+              })
             ;
             $nextSide
               .addClass(className.animating)
               .css({
                 'top'       : box.origin + 'px',
                 'transform' : 'rotateX(90deg) translateZ(' + box.depth.next + 'px) translateY(-' + box.depth.active + 'px)'
-            ***REMOVED***)
+              })
             ;
-   ***REMOVED*****REMOVED***
+          },
 
           below: function() {
             var
@@ -484,167 +484,167 @@ $.fn.shape = function(parameters) {
                 depth  : {
                   active : ($nextSide.outerHeight(true) / 2),
                   next   : ($activeSide.outerHeight(true) / 2)
-              ***REMOVED***
-            ***REMOVED***
+                }
+              }
             ;
             module.verbose('Setting the initial animation position as below', $nextSide, box);
             $activeSide
               .css({
                 'transform' : 'rotateX(0deg)'
-            ***REMOVED***)
+              })
             ;
             $nextSide
               .addClass(className.animating)
               .css({
                 'top'       : box.origin + 'px',
                 'transform' : 'rotateX(-90deg) translateZ(' + box.depth.next + 'px) translateY(' + box.depth.active + 'px)'
-            ***REMOVED***)
+              })
             ;
-   ***REMOVED*****REMOVED***
+          },
 
           left: function() {
             var
               height = {
                 active : $activeSide.outerWidth(true),
                 next   : $nextSide.outerWidth(true)
-  ***REMOVED*****REMOVED*****REMOVED***
+              },
               box = {
                 origin : ( ( height.active - height.next ) / 2),
                 depth  : {
                   active : (height.next / 2),
                   next   : (height.active / 2)
-              ***REMOVED***
-            ***REMOVED***
+                }
+              }
             ;
             module.verbose('Setting the initial animation position as left', $nextSide, box);
             $activeSide
               .css({
                 'transform' : 'rotateY(0deg)'
-            ***REMOVED***)
+              })
             ;
             $nextSide
               .addClass(className.animating)
               .css({
                 'left'      : box.origin + 'px',
                 'transform' : 'rotateY(-90deg) translateZ(' + box.depth.next + 'px) translateX(-' + box.depth.active + 'px)'
-            ***REMOVED***)
+              })
             ;
-   ***REMOVED*****REMOVED***
+          },
 
           right: function() {
             var
               height = {
                 active : $activeSide.outerWidth(true),
                 next   : $nextSide.outerWidth(true)
-  ***REMOVED*****REMOVED*****REMOVED***
+              },
               box = {
                 origin : ( ( height.active - height.next ) / 2),
                 depth  : {
                   active : (height.next / 2),
                   next   : (height.active / 2)
-              ***REMOVED***
-            ***REMOVED***
+                }
+              }
             ;
             module.verbose('Setting the initial animation position as right', $nextSide, box);
             $activeSide
               .css({
                 'transform' : 'rotateY(0deg)'
-            ***REMOVED***)
+              })
             ;
             $nextSide
               .addClass(className.animating)
               .css({
                 'left'      : box.origin + 'px',
                 'transform' : 'rotateY(90deg) translateZ(' + box.depth.next + 'px) translateX(' + box.depth.active + 'px)'
-            ***REMOVED***)
+              })
             ;
-   ***REMOVED*****REMOVED***
+          },
 
           behind: function() {
             var
               height = {
                 active : $activeSide.outerWidth(true),
                 next   : $nextSide.outerWidth(true)
-  ***REMOVED*****REMOVED*****REMOVED***
+              },
               box = {
                 origin : ( ( height.active - height.next ) / 2),
                 depth  : {
                   active : (height.next / 2),
                   next   : (height.active / 2)
-              ***REMOVED***
-            ***REMOVED***
+                }
+              }
             ;
             module.verbose('Setting the initial animation position as behind', $nextSide, box);
             $activeSide
               .css({
                 'transform' : 'rotateY(0deg)'
-            ***REMOVED***)
+              })
             ;
             $nextSide
               .addClass(className.animating)
               .css({
                 'left'      : box.origin + 'px',
                 'transform' : 'rotateY(-180deg)'
-            ***REMOVED***)
+              })
             ;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         setting: function(name, value) {
           module.debug('Changing setting', name, value);
           if( $.isPlainObject(name) ) {
             $.extend(true, settings, name);
-        ***REMOVED***
+          }
           else if(value !== undefined) {
             if($.isPlainObject(settings[name])) {
               $.extend(true, settings[name], value);
-          ***REMOVED***
+            }
             else {
               settings[name] = value;
-          ***REMOVED***
-        ***REMOVED***
+            }
+          }
           else {
             return settings[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         internal: function(name, value) {
           if( $.isPlainObject(name) ) {
             $.extend(true, module, name);
-        ***REMOVED***
+          }
           else if(value !== undefined) {
             module[name] = value;
-        ***REMOVED***
+          }
           else {
             return module[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         debug: function() {
           if(!settings.silent && settings.debug) {
             if(settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.debug.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         verbose: function() {
           if(!settings.silent && settings.verbose && settings.debug) {
             if(settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.verbose.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         error: function() {
           if(!settings.silent) {
             module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
             module.error.apply(console, arguments);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         performance: {
           log: function(message) {
             var
@@ -662,11 +662,11 @@ $.fn.shape = function(parameters) {
                 'Arguments'      : [].slice.call(message, 1) || '',
                 'Element'        : element,
                 'Execution Time' : executionTime
-            ***REMOVED***);
-          ***REMOVED***
+              });
+            }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
-   ***REMOVED*****REMOVED***
+          },
           display: function() {
             var
               title = settings.name + ':',
@@ -676,29 +676,29 @@ $.fn.shape = function(parameters) {
             clearTimeout(module.performance.timer);
             $.each(performance, function(index, data) {
               totalTime += data['Execution Time'];
-          ***REMOVED***);
+            });
             title += ' ' + totalTime + 'ms';
             if(moduleSelector) {
               title += ' \'' + moduleSelector + '\'';
-          ***REMOVED***
+            }
             if($allModules.length > 1) {
               title += ' ' + '(' + $allModules.length + ')';
-          ***REMOVED***
+            }
             if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
               console.groupCollapsed(title);
               if(console.table) {
                 console.table(performance);
-            ***REMOVED***
+              }
               else {
                 $.each(performance, function(index, data) {
                   console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-              ***REMOVED***);
-            ***REMOVED***
+                });
+              }
               console.groupEnd();
-          ***REMOVED***
+            }
             performance = [];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         invoke: function(query, passedArguments, context) {
           var
             object = instance,
@@ -718,70 +718,70 @@ $.fn.shape = function(parameters) {
               ;
               if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
                 object = object[camelCaseValue];
-            ***REMOVED***
+              }
               else if( object[camelCaseValue] !== undefined ) {
                 found = object[camelCaseValue];
                 return false;
-            ***REMOVED***
+              }
               else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
                 object = object[value];
-            ***REMOVED***
+              }
               else if( object[value] !== undefined ) {
                 found = object[value];
                 return false;
-            ***REMOVED***
+              }
               else {
                 return false;
-            ***REMOVED***
-          ***REMOVED***);
-        ***REMOVED***
+              }
+            });
+          }
           if ( $.isFunction( found ) ) {
             response = found.apply(context, passedArguments);
-        ***REMOVED***
+          }
           else if(found !== undefined) {
             response = found;
-        ***REMOVED***
+          }
           if(Array.isArray(returnedValue)) {
             returnedValue.push(response);
-        ***REMOVED***
+          }
           else if(returnedValue !== undefined) {
             returnedValue = [returnedValue, response];
-        ***REMOVED***
+          }
           else if(response !== undefined) {
             returnedValue = response;
-        ***REMOVED***
+          }
           return found;
-      ***REMOVED***
-    ***REMOVED***;
+        }
+      };
 
       if(methodInvoked) {
         if(instance === undefined) {
           module.initialize();
-      ***REMOVED***
+        }
         var $inputs = $module.find('input');
         if( $inputs.length > 0) {
           $inputs.blur();
           setTimeout(function(){
             module.invoke(query);
-   ***REMOVED*****REMOVED*** 150);
-      ***REMOVED*** else {
+          }, 150);
+        } else {
           module.invoke(query);
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       else {
         if(instance !== undefined) {
           instance.invoke('destroy');
-      ***REMOVED***
+        }
         module.initialize();
-    ***REMOVED***
-  ***REMOVED***)
+      }
+    })
   ;
 
   return (returnedValue !== undefined)
     ? returnedValue
     : this
   ;
-***REMOVED***;
+};
 
 $.fn.shape.settings = {
 
@@ -813,8 +813,8 @@ $.fn.shape.settings = {
   height: 'initial',
 
   // callback occurs on side change
-  beforeChange : function() {***REMOVED***,
-  onChange     : function() {***REMOVED***,
+  beforeChange : function() {},
+  onChange     : function() {},
 
   // allow animation to same side
   allowRepeats: false,
@@ -826,7 +826,7 @@ $.fn.shape.settings = {
   error: {
     side   : 'You tried to switch to a side that does not exist.',
     method : 'The method you called is not defined'
-***REMOVED***
+  },
 
   // classnames used
   className   : {
@@ -834,15 +834,15 @@ $.fn.shape.settings = {
     hidden    : 'hidden',
     loading   : 'loading',
     active    : 'active'
-***REMOVED***
+  },
 
   // selectors used
   selector    : {
     sides : '.sides',
     side  : '.side'
-***REMOVED***
+  }
 
-***REMOVED***;
+};
 
 
-***REMOVED***)( jQuery, window, document );
+})( jQuery, window, document );

@@ -5,10 +5,10 @@ function run() {
 		.getBearerToken()
 		.then(response => {
 			console.log(response);
-		***REMOVED***)
+		})
 		.catch(error => {
 			console.log(error.message);
-		***REMOVED***);
-***REMOVED***
+		});
+}
 
 run();

@@ -47,7 +47,7 @@ var RowManager = function(table){
 	this.redrawBlock = false; //prevent redraws to allow multiple data manipulations becore continuing
 	this.redrawBlockRestoreConfig = false; //store latest redraw function calls for when redraw is needed
 	this.redrawBlockRederInPosition = false; //store latest redraw function calls for when redraw is needed
-***REMOVED***;
+};
 
 //////////////// Setup Functions /////////////////
 
@@ -58,7 +58,7 @@ RowManager.prototype.createHolderElement = function (){
 	el.setAttribute("tabindex", 0);
 
 	return el;
-***REMOVED***;
+};
 
 RowManager.prototype.createTableElement = function (){
 	var el = document.createElement("div");
@@ -66,32 +66,32 @@ RowManager.prototype.createTableElement = function (){
 	el.classList.add("tabulator-table");
 
 	return el;
-***REMOVED***;
+};
 
 //return containing element
 RowManager.prototype.getElement = function(){
 	return this.element;
-***REMOVED***;
+};
 
 //return table element
 RowManager.prototype.getTableElement = function(){
 	return this.tableElement;
-***REMOVED***;
+};
 
 //return position of row in table
 RowManager.prototype.getRowPosition = function(row, active){
 	if(active){
 		return this.activeRows.indexOf(row);
-	***REMOVED***else{
+	}else{
 		return this.rows.indexOf(row);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 //link to column manager
 RowManager.prototype.setColumnManager = function(manager){
 	this.columnManager = manager;
-***REMOVED***;
+};
 
 RowManager.prototype.initialize = function(){
 	var self = this;
@@ -113,17 +113,17 @@ RowManager.prototype.initialize = function(){
 
 			if(self.table.options.groupBy){
 				self.table.modules.groupRows.scrollHeaders(left);
-			***REMOVED***
+			}
 
 			if(self.table.modExists("columnCalcs")){
 				self.table.modules.columnCalcs.scrollHorizontal(left);
-			***REMOVED***
+			}
 
 			self.table.options.scrollHorizontal(left);
-		***REMOVED***
+		}
 
 		self.scrollLeft = left;
-	***REMOVED***);
+	});
 
 	//handle virtual dom scrolling
 	if(this.renderMode === "virtual"){
@@ -139,16 +139,16 @@ RowManager.prototype.initialize = function(){
 
 				if(self.table.options.ajaxProgressiveLoad == "scroll"){
 					self.table.modules.ajax.nextPage(self.element.scrollHeight - self.element.clientHeight - top);
-				***REMOVED***
+				}
 
 				self.table.options.scrollVertical(top);
-			***REMOVED***else{
+			}else{
 				self.scrollTop = top;
-			***REMOVED***
+			}
 
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***;
+		});
+	}
+};
 
 
 ////////////////// Row Manipulation //////////////////
@@ -161,50 +161,50 @@ RowManager.prototype.findRow = function(subject){
 		if(subject instanceof Row){
 			//subject is row element
 			return subject;
-		***REMOVED***else if(subject instanceof RowComponent){
+		}else if(subject instanceof RowComponent){
 			//subject is public row component
 			return subject._getSelf() || false;
-		***REMOVED***else if(typeof HTMLElement !== "undefined" && subject instanceof HTMLElement){
+		}else if(typeof HTMLElement !== "undefined" && subject instanceof HTMLElement){
 			//subject is a HTML element of the row
 			let match = self.rows.find(function(row){
 				return row.element === subject;
-			***REMOVED***);
+			});
 
 			return match || false;
-		***REMOVED***
+		}
 
-	***REMOVED***else if(typeof subject == "undefined" || subject === null){
+	}else if(typeof subject == "undefined" || subject === null){
 		return false;
-	***REMOVED***else{
+	}else{
 		//subject should be treated as the index of the row
 		let match = self.rows.find(function(row){
 			return row.data[self.table.options.index] == subject;
-		***REMOVED***);
+		});
 
 		return match || false;
-	***REMOVED***
+	}
 
 	//catch all for any other type of input
 
 	return false;
-***REMOVED***;
+};
 
 
 RowManager.prototype.getRowFromDataObject = function(data){
 	var match = this.rows.find(function(row){
 		return row.data === data;
-	***REMOVED***);
+	});
 
 	return match || false;
-***REMOVED***;
+};
 
 RowManager.prototype.getRowFromPosition = function(position, active){
 	if(active){
 		return this.activeRows[position];
-	***REMOVED***else{
+	}else{
 		return this.rows[position];
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 	var rowIndex = this.getDisplayRows().indexOf(row),
@@ -217,11 +217,11 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 
 			if(typeof position === "undefined"){
 				position = this.table.options.scrollToRowPosition;
-			***REMOVED***
+			}
 
 			if(typeof ifVisible === "undefined"){
 				ifVisible = this.table.options.scrollToRowIfVisible;
-			***REMOVED***
+			}
 
 
 			if(position === "nearest"){
@@ -233,8 +233,8 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 					case"virtual":
 					position = Math.abs(this.vDomTop - rowIndex) > Math.abs(this.vDomBottom - rowIndex) ? "bottom" : "top";
 					break;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			//check row visibility
 			if(!ifVisible){
@@ -243,9 +243,9 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 
 					if(offset > 0 && offset < this.element.clientHeight - rowEl.offsetHeight){
 						return false;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			//scroll to row
 			switch(this.renderMode){
@@ -255,7 +255,7 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 				case"virtual":
 				this._virtualRenderFill(rowIndex, true);
 				break;
-			***REMOVED***
+			}
 
 			//align to correct position
 			switch(position){
@@ -264,9 +264,9 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 
 				if(this.element.scrollHeight - this.element.scrollTop == this.element.clientHeight){
 					this.element.scrollTop = this.element.scrollTop + (rowEl.offsetTop - this.element.scrollTop) - ((this.element.scrollHeight - rowEl.offsetTop) / 2);
-				***REMOVED***else{
+				}else{
 					this.element.scrollTop = this.element.scrollTop - (this.element.clientHeight / 2);
-				***REMOVED***
+				}
 
 				break;
 
@@ -274,21 +274,21 @@ RowManager.prototype.scrollToRow = function(row, position, ifVisible){
 
 				if(this.element.scrollHeight - this.element.scrollTop == this.element.clientHeight){
 					this.element.scrollTop = this.element.scrollTop - (this.element.scrollHeight - rowEl.offsetTop) + rowEl.offsetHeight;
-				***REMOVED***else{
+				}else{
 					this.element.scrollTop = this.element.scrollTop - this.element.clientHeight + rowEl.offsetHeight;
-				***REMOVED***
+				}
 
 				break;
-			***REMOVED***
+			}
 
 			resolve();
 
-		***REMOVED***else{
+		}else{
 			console.warn("Scroll Error - Row not visible");
 			reject("Scroll Error - Row not visible");
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 
 ////////////////// Data Handling //////////////////
@@ -300,22 +300,22 @@ RowManager.prototype.setData = function(data, renderInPosition, columnsChanged){
 		if(renderInPosition && this.getDisplayRows().length){
 			if(self.table.options.pagination){
 				self._setDataActual(data, true);
-			***REMOVED***else{
+			}else{
 				this.reRenderInPosition(function(){
 					self._setDataActual(data);
-				***REMOVED***);
-			***REMOVED***
-		***REMOVED***else{
+				});
+			}
+		}else{
 			if(this.table.options.autoColumns && columnsChanged){
 				this.table.columnManager.generateColumnsFromRowData(data);
-			***REMOVED***
+			}
 			this.resetScroll();
 			this._setDataActual(data);
-		***REMOVED***
+		}
 
 		resolve();
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 RowManager.prototype._setDataActual = function(data, renderInPosition){
 	var self = this;
@@ -326,47 +326,47 @@ RowManager.prototype._setDataActual = function(data, renderInPosition){
 
 	if(this.table.options.history && this.table.modExists("history")){
 		this.table.modules.history.clear();
-	***REMOVED***
+	}
 
 	if(Array.isArray(data)){
 
 		if(this.table.modExists("selectRow")){
 			this.table.modules.selectRow.clearSelectionData();
-		***REMOVED***
+		}
 
 		if(this.table.options.reactiveData && this.table.modExists("reactiveData", true)){
 			this.table.modules.reactiveData.watchData(data);
-		***REMOVED***
+		}
 
 		data.forEach(function(def, i){
 			if(def && typeof def === "object"){
 				var row = new Row(def, self);
 				self.rows.push(row);
-			***REMOVED***else{
+			}else{
 				console.warn("Data Loading Warning - Invalid row data detected and ignored, expecting object but received:", def);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		self.table.options.dataLoaded.call(this.table, data);
 
 		self.refreshActiveData(false, false, renderInPosition);
 
-	***REMOVED***else{
+	}else{
 		console.error("Data Loading Error - Unable to process data due to invalid data type \nExpecting: array \nReceived: ", typeof data, "\nData:     ", data);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype._wipeElements = function(){
 	this.rows.forEach(function(row){
 		row.wipe();
-	***REMOVED***);
+	});
 
 	if(this.table.options.groupBy && this.table.modExists("groupRows")){
 		this.table.modules.groupRows.wipe();
-	***REMOVED***
+	}
 
 	this.rows = [];
-***REMOVED***;
+};
 
 RowManager.prototype.deleteRow = function(row, blockRedraw){
 	var allIndex = this.rows.indexOf(row),
@@ -374,11 +374,11 @@ RowManager.prototype.deleteRow = function(row, blockRedraw){
 
 	if(activeIndex > -1){
 		this.activeRows.splice(activeIndex, 1);
-	***REMOVED***
+	}
 
 	if(allIndex > -1){
 		this.rows.splice(allIndex, 1);
-	***REMOVED***
+	}
 
 	this.setActiveRows(this.activeRows);
 
@@ -387,12 +387,12 @@ RowManager.prototype.deleteRow = function(row, blockRedraw){
 
 		if(displayIndex > -1){
 			rows.splice(displayIndex, 1);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	if(!blockRedraw){
 		this.reRenderInPosition();
-	***REMOVED***
+	}
 
 	this.regenerateRowNumbers();
 
@@ -402,26 +402,26 @@ RowManager.prototype.deleteRow = function(row, blockRedraw){
 
 	if(this.table.options.groupBy && this.table.modExists("groupRows")){
 		this.table.modules.groupRows.updateGroupRows(true);
-	***REMOVED***else if(this.table.options.pagination && this.table.modExists("page")){
+	}else if(this.table.options.pagination && this.table.modExists("page")){
 		this.refreshActiveData(false, false, true);
-	***REMOVED***else{
+	}else{
 		if(this.table.options.pagination && this.table.modExists("page")){
 			this.refreshActiveData("page");
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
-***REMOVED***;
+};
 
 RowManager.prototype.addRow = function(data, pos, index, blockRedraw){
 
 	var row = this.addRowActual(data, pos, index, blockRedraw);
 
 	if(this.table.options.history && this.table.modExists("history")){
-		this.table.modules.history.action("rowAdd", row, {data:data, pos:pos, index:index***REMOVED***);
-	***REMOVED***
+		this.table.modules.history.action("rowAdd", row, {data:data, pos:pos, index:index});
+	}
 
 	return row;
-***REMOVED***;
+};
 
 //add multiple rows
 RowManager.prototype.addRows = function(data, pos, index){
@@ -434,56 +434,56 @@ RowManager.prototype.addRows = function(data, pos, index){
 
 		if(!Array.isArray(data)){
 			data = [data];
-		***REMOVED***
+		}
 
 		length = data.length - 1;
 
 		if((typeof index == "undefined" && pos) || (typeof index !== "undefined" && !pos)){
 			data.reverse();
-		***REMOVED***
+		}
 
 		data.forEach(function(item, i){
 			var row = self.addRow(item, pos, index, true);
 			rows.push(row);
-		***REMOVED***);
+		});
 
 		if(this.table.options.groupBy && this.table.modExists("groupRows")){
 			this.table.modules.groupRows.updateGroupRows(true);
-		***REMOVED***else if(this.table.options.pagination && this.table.modExists("page")){
+		}else if(this.table.options.pagination && this.table.modExists("page")){
 			this.refreshActiveData(false, false, true);
-		***REMOVED***else{
+		}else{
 			this.reRenderInPosition();
-		***REMOVED***
+		}
 
 		//recalc column calculations if present
 		if(this.table.modExists("columnCalcs")){
 			this.table.modules.columnCalcs.recalc(this.table.rowManager.activeRows);
-		***REMOVED***
+		}
 
 		this.regenerateRowNumbers();
 		resolve(rows);
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 RowManager.prototype.findAddRowPos = function(pos){
 	if(typeof pos === "undefined"){
 		pos = this.table.options.addRowPos;
-	***REMOVED***
+	}
 
 	if(pos === "pos"){
 		pos = true;
-	***REMOVED***
+	}
 
 	if(pos === "bottom"){
 		pos = false;
-	***REMOVED***
+	}
 
 	return pos;
-***REMOVED***;
+};
 
 
 RowManager.prototype.addRowActual = function(data, pos, index, blockRedraw){
-	var row = data instanceof Row ? data : new Row(data || {***REMOVED***, this),
+	var row = data instanceof Row ? data : new Row(data || {}, this),
 	top = this.findAddRowPos(pos),
 	allIndex = -1,
 	activeIndex, dispRows;
@@ -494,23 +494,23 @@ RowManager.prototype.addRowActual = function(data, pos, index, blockRedraw){
 		if(top){
 			if(dispRows.length){
 				index = dispRows[0];
-			***REMOVED***else{
+			}else{
 				if(this.activeRows.length){
 					index = this.activeRows[this.activeRows.length-1];
 					top = false;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***else{
+				}
+			}
+		}else{
 			if(dispRows.length){
 				index = dispRows[dispRows.length - 1];
 				top = dispRows.length < this.table.modules.page.getPageSize() ? false : true;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	if(typeof index !== "undefined"){
 		index = this.findRow(index);
-	***REMOVED***
+	}
 
 	if(this.table.options.groupBy && this.table.modExists("groupRows")){
 		this.table.modules.groupRows.assignRowToGroup(row);
@@ -524,22 +524,22 @@ RowManager.prototype.addRowActual = function(data, pos, index, blockRedraw){
 					if(groupRows[0] !== row){
 						index = groupRows[0];
 						this._moveRowInArray(row.getGroup().rows, row, index, !top);
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					if(groupRows[groupRows.length -1] !== row){
 						index = groupRows[groupRows.length -1];
 						this._moveRowInArray(row.getGroup().rows, row, index, !top);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				this._moveRowInArray(row.getGroup().rows, row, index, !top);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	if(index){
 		allIndex = this.rows.indexOf(index);
-	***REMOVED***
+	}
 
 	if(index && allIndex > -1){
 		activeIndex = this.activeRows.indexOf(index);
@@ -549,34 +549,34 @@ RowManager.prototype.addRowActual = function(data, pos, index, blockRedraw){
 
 			if(displayIndex > -1){
 				rows.splice((top ? displayIndex : displayIndex + 1), 0, row);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		if(activeIndex > -1){
 			this.activeRows.splice((top ? activeIndex : activeIndex + 1), 0, row);
-		***REMOVED***
+		}
 
 		this.rows.splice((top ? allIndex : allIndex + 1), 0, row);
 
-	***REMOVED***else{
+	}else{
 
 		if(top){
 
 			this.displayRowIterator(function(rows){
 				rows.unshift(row);
-			***REMOVED***);
+			});
 
 			this.activeRows.unshift(row);
 			this.rows.unshift(row);
-		***REMOVED***else{
+		}else{
 			this.displayRowIterator(function(rows){
 				rows.push(row);
-			***REMOVED***);
+			});
 
 			this.activeRows.push(row);
 			this.rows.push(row);
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	this.setActiveRows(this.activeRows);
 
@@ -586,22 +586,22 @@ RowManager.prototype.addRowActual = function(data, pos, index, blockRedraw){
 
 	if(!blockRedraw){
 		this.reRenderInPosition();
-	***REMOVED***
+	}
 
 	return row;
-***REMOVED***;
+};
 
 RowManager.prototype.moveRow = function(from, to, after){
 	if(this.table.options.history && this.table.modExists("history")){
-		this.table.modules.history.action("rowMove", from, {posFrom:this.getRowPosition(from), posTo:this.getRowPosition(to), to:to, after:after***REMOVED***);
-	***REMOVED***
+		this.table.modules.history.action("rowMove", from, {posFrom:this.getRowPosition(from), posTo:this.getRowPosition(to), to:to, after:after});
+	}
 
 	this.moveRowActual(from, to, after);
 
 	this.regenerateRowNumbers();
 
 	this.table.options.rowMoved.call(this.table, from.getComponent());
-***REMOVED***;
+};
 
 
 RowManager.prototype.moveRowActual = function(from, to, after){
@@ -611,7 +611,7 @@ RowManager.prototype.moveRowActual = function(from, to, after){
 
 	this.displayRowIterator(function(rows){
 		self._moveRowInArray(rows, from, to, after);
-	***REMOVED***);
+	});
 
 	if(this.table.options.groupBy && this.table.modExists("groupRows")){
 		var toGroup = to.getGroup();
@@ -619,15 +619,15 @@ RowManager.prototype.moveRowActual = function(from, to, after){
 
 		if(toGroup === fromGroup){
 			this._moveRowInArray(toGroup.rows, from, to, after);
-		***REMOVED***else{
+		}else{
 			if(fromGroup){
 				fromGroup.removeRow(from);
-			***REMOVED***
+			}
 
 			toGroup.insertRow(from, to, after);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 
 RowManager.prototype._moveRowInArray = function(rows, from, to, after){
@@ -647,14 +647,14 @@ RowManager.prototype._moveRowInArray = function(rows, from, to, after){
 
 				if(after){
 					rows.splice(toIndex+1, 0, from);
-				***REMOVED***else{
+				}else{
 					rows.splice(toIndex, 0, from);
-				***REMOVED***
+				}
 
-			***REMOVED***else{
+			}else{
 				rows.splice(fromIndex, 0, from);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//restyle rows
 		if(rows === this.getDisplayRows()){
@@ -665,25 +665,25 @@ RowManager.prototype._moveRowInArray = function(rows, from, to, after){
 			for(let i = start; i <= end; i++){
 				if(rows[i]){
 					this.styleRow(rows[i], i);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+				}
+			}
+		}
+	}
+};
 
 RowManager.prototype.clearData = function(){
 	this.setData([]);
-***REMOVED***;
+};
 
 RowManager.prototype.getRowIndex = function(row){
 	return this.findRowIndex(row, this.rows);
-***REMOVED***;
+};
 
 
 RowManager.prototype.getDisplayRowIndex = function(row){
 	var index = this.getDisplayRows().indexOf(row);
 	return index > -1 ? index : false;
-***REMOVED***;
+};
 
 RowManager.prototype.nextDisplayRow = function(row, rowOnly){
 	var index = this.getDisplayRowIndex(row),
@@ -692,14 +692,14 @@ RowManager.prototype.nextDisplayRow = function(row, rowOnly){
 
 	if(index !== false && index < this.displayRowsCount -1){
 		nextRow = this.getDisplayRows()[index+1];
-	***REMOVED***
+	}
 
 	if(nextRow && (!(nextRow instanceof Row) || nextRow.type != "row")){
 		return this.nextDisplayRow(nextRow, rowOnly);
-	***REMOVED***
+	}
 
 	return nextRow;
-***REMOVED***;
+};
 
 RowManager.prototype.prevDisplayRow = function(row, rowOnly){
 	var index = this.getDisplayRowIndex(row),
@@ -707,14 +707,14 @@ RowManager.prototype.prevDisplayRow = function(row, rowOnly){
 
 	if(index){
 		prevRow = this.getDisplayRows()[index-1];
-	***REMOVED***
+	}
 
 	if(prevRow && (!(prevRow instanceof Row) || prevRow.type != "row")){
 		return this.prevDisplayRow(prevRow, rowOnly);
-	***REMOVED***
+	}
 
 	return prevRow;
-***REMOVED***;
+};
 
 RowManager.prototype.findRowIndex = function(row, list){
 	var rowIndex;
@@ -726,11 +726,11 @@ RowManager.prototype.findRowIndex = function(row, list){
 
 		if(rowIndex > -1){
 			return rowIndex;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	return false;
-***REMOVED***;
+};
 
 
 RowManager.prototype.getData = function(active, transform){
@@ -740,11 +740,11 @@ RowManager.prototype.getData = function(active, transform){
 	rows.forEach(function(row){
 		if(row.type == "row"){
 			output.push(row.getData(transform || "data"));
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	return output;
-***REMOVED***;
+};
 
 RowManager.prototype.getComponents = function(active){
 	var	output = [],
@@ -752,21 +752,21 @@ RowManager.prototype.getComponents = function(active){
 
 	rows.forEach(function(row){
 		output.push(row.getComponent());
-	***REMOVED***);
+	});
 
 	return output;
-***REMOVED***;
+};
 
 RowManager.prototype.getDataCount = function(active){
 	var rows = this.getRows(active);
 
 	return rows.length;
-***REMOVED***;
+};
 
 RowManager.prototype._genRemoteRequest = function(){
 	var table = this.table,
 	options = table.options,
-	params = {***REMOVED***;
+	params = {};
 
 	if(table.modExists("page")){
 		//set sort data if defined
@@ -775,29 +775,29 @@ RowManager.prototype._genRemoteRequest = function(){
 
 			sorters.forEach(function(item){
 				delete item.column;
-			***REMOVED***);
+			});
 
 			params[this.table.modules.page.paginationDataSentNames.sorters] = sorters;
-		***REMOVED***
+		}
 
 		//set filter data if defined
 		if(options.ajaxFiltering){
 			let filters = this.table.modules.filter.getFilters(true, true);
 
 			params[this.table.modules.page.paginationDataSentNames.filters] = filters;
-		***REMOVED***
+		}
 
 
 		this.table.modules.ajax.setParams(params, true);
-	***REMOVED***
+	}
 
 	table.modules.ajax.sendRequest()
 	.then((data)=>{
 		this._setDataActual(data, true);
-	***REMOVED***)
-	.catch((e)=>{***REMOVED***);
+	})
+	.catch((e)=>{});
 
-***REMOVED***;
+};
 
 //choose the path to refresh data after a filter update
 RowManager.prototype.filterRefresh = function(){
@@ -809,19 +809,19 @@ RowManager.prototype.filterRefresh = function(){
 	if(options.ajaxFiltering){
 		if(options.pagination == "remote" && table.modExists("page")){
 			table.modules.page.reset(true);
-			table.modules.page.setPage(1).then(()=>{***REMOVED***).catch(()=>{***REMOVED***);
-		***REMOVED***else if(options.ajaxProgressiveLoad){
-			table.modules.ajax.loadData().then(()=>{***REMOVED***).catch(()=>{***REMOVED***);
-		***REMOVED***else{
+			table.modules.page.setPage(1).then(()=>{}).catch(()=>{});
+		}else if(options.ajaxProgressiveLoad){
+			table.modules.ajax.loadData().then(()=>{}).catch(()=>{});
+		}else{
 			//assume data is url, make ajax call to url to get data
 			this._genRemoteRequest();
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.refreshActiveData("filter");
-	***REMOVED***
+	}
 
 	this.scrollHorizontal(left);
-***REMOVED***;
+};
 
 //choose the path to refresh data after a sorter update
 RowManager.prototype.sorterRefresh = function(loadOrignalData){
@@ -832,19 +832,19 @@ RowManager.prototype.sorterRefresh = function(loadOrignalData){
 	if(options.ajaxSorting){
 		if((options.pagination == "remote" || options.progressiveLoad) && table.modExists("page")){
 			table.modules.page.reset(true);
-			table.modules.page.setPage(1).then(()=>{***REMOVED***).catch(()=>{***REMOVED***);
-		***REMOVED***else if(options.ajaxProgressiveLoad){
-			table.modules.ajax.loadData().then(()=>{***REMOVED***).catch(()=>{***REMOVED***);
-		***REMOVED***else{
+			table.modules.page.setPage(1).then(()=>{}).catch(()=>{});
+		}else if(options.ajaxProgressiveLoad){
+			table.modules.ajax.loadData().then(()=>{}).catch(()=>{});
+		}else{
 			//assume data is url, make ajax call to url to get data
 			this._genRemoteRequest();
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.refreshActiveData(loadOrignalData ? "filter" : "sort");
-	***REMOVED***
+	}
 
 	this.scrollHorizontal(left);
-***REMOVED***;
+};
 
 RowManager.prototype.scrollHorizontal = function(left){
 	this.scrollLeft = left;
@@ -852,12 +852,12 @@ RowManager.prototype.scrollHorizontal = function(left){
 
 	if(this.table.options.groupBy){
 		this.table.modules.groupRows.scrollHeaders(left);
-	***REMOVED***
+	}
 
 	if(this.table.modExists("columnCalcs")){
 		this.table.modules.columnCalcs.scrollHorizontal(left);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //set active data set
 RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosition){
@@ -873,23 +873,23 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 				stage: stage,
 				skipStage: skipStage,
 				renderInPosition: renderInPosition,
-			***REMOVED***;
-		***REMOVED***
+			};
+		}
 
 		return;
-	***REMOVED***else{
+	}else{
 
 		if(self.table.modExists("edit")){
 			self.table.modules.edit.cancelEdit();
-		***REMOVED***
+		}
 
 		if(!stage){
 			stage = "all";
-		***REMOVED***
+		}
 
 		if(table.options.selectable && !table.options.selectablePersistence && table.modExists("selectRow")){
 			table.modules.selectRow.deselectRows();
-		***REMOVED***
+		}
 
 		//cascade through data refresh stages
 		switch(stage){
@@ -899,21 +899,21 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 			if(!skipStage){
 				if(table.modExists("filter")){
 					self.setActiveRows(table.modules.filter.filter(self.rows));
-				***REMOVED***else{
+				}else{
 					self.setActiveRows(self.rows.slice(0));
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
+			}
 
 			case "sort":
 			if(!skipStage){
 				if(table.modExists("sort")){
 					table.modules.sort.sort(this.activeRows);
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
+			}
 
 			//regenerate row numbers for row number formatter if in use
 			this.regenerateRowNumbers();
@@ -928,7 +928,7 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 					if(table.modules.frozenRows.isFrozen()){
 						if(!table.modules.frozenRows.getDisplayIndex()){
 							table.modules.frozenRows.setDisplayIndex(this.getNextDisplayIndex());
-						***REMOVED***
+						}
 
 						displayIndex = table.modules.frozenRows.getDisplayIndex();
 
@@ -936,12 +936,12 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 
 						if(displayIndex !== true){
 							table.modules.frozenRows.setDisplayIndex(displayIndex);
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+						}
+					}
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
+			}
 
 			case "group":
 			if(!skipStage){
@@ -949,7 +949,7 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 
 					if(!table.modules.groupRows.getDisplayIndex()){
 						table.modules.groupRows.setDisplayIndex(this.getNextDisplayIndex());
-					***REMOVED***
+					}
 
 					displayIndex = table.modules.groupRows.getDisplayIndex();
 
@@ -957,11 +957,11 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 
 					if(displayIndex !== true){
 						table.modules.groupRows.setDisplayIndex(displayIndex);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
+			}
 
 
 
@@ -971,7 +971,7 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 				if(table.options.dataTree && table.modExists("dataTree")){
 					if(!table.modules.dataTree.getDisplayIndex()){
 						table.modules.dataTree.setDisplayIndex(this.getNextDisplayIndex());
-					***REMOVED***
+					}
 
 					displayIndex = table.modules.dataTree.getDisplayIndex();
 
@@ -979,17 +979,17 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 
 					if(displayIndex !== true){
 						table.modules.dataTree.setDisplayIndex(displayIndex);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
+			}
 
 			if(table.options.pagination && table.modExists("page") && !renderInPosition){
 				if(table.modules.page.getMode() == "local"){
 					table.modules.page.reset();
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			case "page":
 			if(!skipStage){
@@ -997,43 +997,43 @@ RowManager.prototype.refreshActiveData = function(stage, skipStage, renderInPosi
 
 					if(!table.modules.page.getDisplayIndex()){
 						table.modules.page.setDisplayIndex(this.getNextDisplayIndex());
-					***REMOVED***
+					}
 
 					displayIndex = table.modules.page.getDisplayIndex();
 
 					if(table.modules.page.getMode() == "local"){
 						table.modules.page.setMaxRows(this.getDisplayRows(displayIndex - 1).length);
-					***REMOVED***
+					}
 
 
 					displayIndex = self.setDisplayRows(table.modules.page.getRows(this.getDisplayRows(displayIndex - 1)), displayIndex);
 
 					if(displayIndex !== true){
 						table.modules.page.setDisplayIndex(displayIndex);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				skipStage = false;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 
 		if(Tabulator.prototype.helpers.elVisible(self.element)){
 			if(renderInPosition){
 				self.reRenderInPosition();
-			***REMOVED***else{
+			}else{
 				self.renderTable();
 				if(table.options.layoutColumnsOnNewData){
 					self.table.columnManager.redraw(true);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		if(table.modExists("columnCalcs")){
 			table.modules.columnCalcs.recalc(this.activeRows);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 //regenerate row numbers for row number formatter if in use
 RowManager.prototype.regenerateRowNumbers = function(){
@@ -1043,15 +1043,15 @@ RowManager.prototype.regenerateRowNumbers = function(){
 
 			if(cell){
 				cell._generateContents();
-			***REMOVED***
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***;
+			}
+		});
+	}
+};
 
 RowManager.prototype.setActiveRows = function(activeRows){
 	this.activeRows = activeRows;
 	this.activeRowsCount = this.activeRows.length;
-***REMOVED***;
+};
 
 //reset display rows array
 RowManager.prototype.resetDisplayRows = function(){
@@ -1063,21 +1063,21 @@ RowManager.prototype.resetDisplayRows = function(){
 
 	if(this.table.modExists("frozenRows")){
 		this.table.modules.frozenRows.setDisplayIndex(0);
-	***REMOVED***
+	}
 
 	if(this.table.options.groupBy && this.table.modExists("groupRows")){
 		this.table.modules.groupRows.setDisplayIndex(0);
-	***REMOVED***
+	}
 
 	if(this.table.options.pagination && this.table.modExists("page")){
 		this.table.modules.page.setDisplayIndex(0);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 RowManager.prototype.getNextDisplayIndex = function(){
 	return this.displayRows.length;
-***REMOVED***;
+};
 
 //set display row pipeline data
 RowManager.prototype.setDisplayRows = function(displayRows, index){
@@ -1087,26 +1087,26 @@ RowManager.prototype.setDisplayRows = function(displayRows, index){
 	if(index && typeof this.displayRows[index] != "undefined"){
 		this.displayRows[index] = displayRows;
 		output = true;
-	***REMOVED***else{
+	}else{
 		this.displayRows.push(displayRows)
 		output = index = this.displayRows.length -1;
-	***REMOVED***
+	}
 
 	if(index == this.displayRows.length -1){
 		this.displayRowsCount = this.displayRows[this.displayRows.length -1].length;
-	***REMOVED***
+	}
 
 	return output;
-***REMOVED***;
+};
 
 RowManager.prototype.getDisplayRows = function(index){
 	if(typeof index == "undefined"){
 		return this.displayRows.length ? this.displayRows[this.displayRows.length -1] : [];
-	***REMOVED***else{
+	}else{
 		return this.displayRows[index] || [];
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 
 RowManager.prototype.getVisibleRows = function(viewable){
@@ -1125,31 +1125,31 @@ RowManager.prototype.getVisibleRows = function(viewable){
 				if(!topFound){
 					if((topEdge - rows[i].getElement().offsetTop) >= 0){
 						topRow = i;
-					***REMOVED***else{
+					}else{
 						topFound = true;
 
 						if(bottomEdge - rows[i].getElement().offsetTop >= 0){
 							bottomRow = i;
-						***REMOVED***else{
+						}else{
 							break;
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***else{
+						}
+					}
+				}else{
 					if(bottomEdge - rows[i].getElement().offsetTop >= 0){
 						bottomRow = i;
-					***REMOVED***else{
+					}else{
 						break;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***else{
+					}
+				}
+			}
+		}
+	}else{
 		topRow = this.vDomTop;
 		bottomRow = this.vDomBottom;
-	***REMOVED***
+	}
 
 	return rows.slice(topRow, bottomRow + 1);
-***REMOVED***;
+};
 
 
 //repeat action accross display rows
@@ -1157,7 +1157,7 @@ RowManager.prototype.displayRowIterator = function(callback){
 	this.displayRows.forEach(callback);
 
 	this.displayRowsCount = this.displayRows[this.displayRows.length -1].length;
-***REMOVED***;
+};
 
 //return only actual rows (not group headers etc)
 RowManager.prototype.getRows = function(active){
@@ -1178,10 +1178,10 @@ RowManager.prototype.getRows = function(active){
 
 		default:
 		rows = this.rows;
-	***REMOVED***
+	}
 
 	return rows;
-***REMOVED***;
+};
 
 ///////////////// Table Rendering /////////////////
 
@@ -1192,10 +1192,10 @@ RowManager.prototype.reRenderInPosition = function(callback){
 		if(this.redrawBlock){
 			if(callback){
 				callback();
-			***REMOVED***else{
+			}else{
 				this.redrawBlockRederInPosition = true;
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			var scrollTop = this.element.scrollTop;
 			var topRow = false;
 			var topOffset = false;
@@ -1212,28 +1212,28 @@ RowManager.prototype.reRenderInPosition = function(callback){
 					if(topOffset === false || Math.abs(diff) < topOffset){
 						topOffset = diff;
 						topRow = i;
-					***REMOVED***else{
+					}else{
 						break;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			if(callback){
 				callback();
-			***REMOVED***
+			}
 
 			this._virtualRenderFill((topRow === false ? this.displayRowsCount - 1 : topRow), true, topOffset || 0);
 
 			this.scrollHorizontal(left);
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.renderTable();
 
 		if(callback){
 			callback();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 RowManager.prototype.setRenderMode = function(){
 
@@ -1243,18 +1243,18 @@ RowManager.prototype.setRenderMode = function(){
 
 		if((this.table.element.clientHeight || this.table.options.height)){
 			this.fixedHeight = true;
-		***REMOVED***else{
+		}else{
 			this.fixedHeight = false;
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.renderMode = "classic";
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 RowManager.prototype.getRenderMode = function(){
 	return this.renderMode;
-***REMOVED***;
+};
 
 RowManager.prototype.renderTable = function(){
 
@@ -1270,20 +1270,20 @@ RowManager.prototype.renderTable = function(){
 		case "virtual":
 		this._virtualRenderFill();
 		break;
-	***REMOVED***
+	}
 
 	if(this.firstRender){
 		if(this.displayRowsCount){
 			this.firstRender = false;
 			this.table.modules.layout.layout();
-		***REMOVED***else{
+		}else{
 			this.renderEmptyScroll();
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	if(this.table.modExists("frozenColumns")){
 		this.table.modules.frozenColumns.layout();
-	***REMOVED***
+	}
 
 
 	if(!this.displayRowsCount){
@@ -1293,11 +1293,11 @@ RowManager.prototype.renderTable = function(){
 
 			this.getElement().appendChild(this.table.options.placeholder);
 			this.table.options.placeholder.style.width = this.table.columnManager.getWidth() + "px";
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	this.table.options.renderComplete.call(this.table);
-***REMOVED***;
+};
 
 //simple render on heightless table
 RowManager.prototype._simpleRender = function(){
@@ -1305,10 +1305,10 @@ RowManager.prototype._simpleRender = function(){
 
 	if(this.displayRowsCount){
 		this.checkClassicModeGroupHeaderWidth();
-	***REMOVED***else{
+	}else{
 		this.renderEmptyScroll();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype.checkClassicModeGroupHeaderWidth = function(){
 	var self = this,
@@ -1322,33 +1322,33 @@ RowManager.prototype.checkClassicModeGroupHeaderWidth = function(){
 
 		if(row.type !== "group"){
 			onlyGroupHeaders = false;
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	if(onlyGroupHeaders){
 		element.style.minWidth = self.table.columnManager.getWidth() + "px";
-	***REMOVED***else{
+	}else{
 		element.style.minWidth = "";
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //show scrollbars on empty table div
 RowManager.prototype.renderEmptyScroll = function(){
 	if(this.table.options.placeholder){
 		this.tableElement.style.display = "none";
-	***REMOVED***else{
+	}else{
 		this.tableElement.style.minWidth = this.table.columnManager.getWidth() + "px";
 		this.tableElement.style.minHeight = "1px";
 		this.tableElement.style.visibility = "hidden";
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype._clearVirtualDom = function(){
 	var element = this.tableElement;
 
 	if(this.table.options.placeholder && this.table.options.placeholder.parentNode){
 		this.table.options.placeholder.parentNode.removeChild(this.table.options.placeholder);
-	***REMOVED***
+	}
 
 	// element.children.detach();
 	while(element.firstChild) element.removeChild(element.firstChild);
@@ -1366,7 +1366,7 @@ RowManager.prototype._clearVirtualDom = function(){
 	this.vDomBottom = 0;
 	this.vDomTopPad = 0;
 	this.vDomBottomPad = 0;
-***REMOVED***;
+};
 
 RowManager.prototype.styleRow = function(row, index){
 	var rowEl = row.getElement();
@@ -1374,11 +1374,11 @@ RowManager.prototype.styleRow = function(row, index){
 	if(index % 2){
 		rowEl.classList.add("tabulator-row-even");
 		rowEl.classList.remove("tabulator-row-odd");
-	***REMOVED***else{
+	}else{
 		rowEl.classList.add("tabulator-row-odd");
 		rowEl.classList.remove("tabulator-row-even");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //full virtual render
 RowManager.prototype._virtualRenderFill = function(position, forceMove, offset){
@@ -1398,24 +1398,24 @@ RowManager.prototype._virtualRenderFill = function(position, forceMove, offset){
 
 	if(!position){
 		self._clearVirtualDom();
-	***REMOVED***else{
+	}else{
 		while(element.firstChild) element.removeChild(element.firstChild);
 
 		//check if position is too close to bottom of table
-		let heightOccupied  = (self.displayRowsCount - position + 1)***REMOVED*** self.vDomRowHeight;
+		let heightOccupied  = (self.displayRowsCount - position + 1) * self.vDomRowHeight;
 
 		if(heightOccupied  < self.height){
 			position -= Math.ceil((self.height - heightOccupied ) / self.vDomRowHeight);
 
 			if(position < 0){
 				position = 0;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//calculate initial pad
 		topPad = Math.min(Math.max(Math.floor(self.vDomWindowBuffer / self.vDomRowHeight),  self.vDomWindowMinMarginRows), position);
 		position -= topPad;
-	***REMOVED***
+	}
 
 	if(self.displayRowsCount && Tabulator.prototype.helpers.elVisible(self.element)){
 
@@ -1433,58 +1433,58 @@ RowManager.prototype._virtualRenderFill = function(position, forceMove, offset){
 			element.appendChild(row.getElement());
 			if(!row.initialized){
 				row.initialize(true);
-			***REMOVED***else{
+			}else{
 				if(!row.heightInitialized){
 					row.normalizeHeight(true);
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			rowHeight = row.getHeight();
 
 			if(i < topPad){
 				topPadHeight += rowHeight;
-			***REMOVED***else{
+			}else{
 				rowsHeight += rowHeight;
-			***REMOVED***
+			}
 
 
 			if(rowHeight > this.vDomWindowBuffer){
-				this.vDomWindowBuffer = rowHeight***REMOVED*** 2;
-			***REMOVED***
+				this.vDomWindowBuffer = rowHeight * 2;
+			}
 
 			if(row.type !== "group"){
 				onlyGroupHeaders = false;
-			***REMOVED***
+			}
 
 			self.vDomBottom ++;
 			i++;
-		***REMOVED***
+		}
 
 		if(!position){
 			this.vDomTopPad = 0;
 			//adjust rowheight to match average of rendered elements
 			self.vDomRowHeight = Math.floor((rowsHeight + topPadHeight) / i);
-			self.vDomBottomPad = self.vDomRowHeight***REMOVED*** (self.displayRowsCount - self.vDomBottom -1);
+			self.vDomBottomPad = self.vDomRowHeight * (self.displayRowsCount - self.vDomBottom -1);
 
 			self.vDomScrollHeight = topPadHeight + rowsHeight + self.vDomBottomPad - self.height;
-		***REMOVED***else{
-			self.vDomTopPad = !forceMove ? self.scrollTop - topPadHeight : (self.vDomRowHeight***REMOVED*** this.vDomTop) + offset;
+		}else{
+			self.vDomTopPad = !forceMove ? self.scrollTop - topPadHeight : (self.vDomRowHeight * this.vDomTop) + offset;
 			self.vDomBottomPad = self.vDomBottom == self.displayRowsCount-1 ? 0 : Math.max(self.vDomScrollHeight - self.vDomTopPad - rowsHeight - topPadHeight, 0);
-		***REMOVED***
+		}
 
 		element.style.paddingTop = self.vDomTopPad + "px";
 		element.style.paddingBottom = self.vDomBottomPad + "px";
 
 		if(forceMove){
 			this.scrollTop = self.vDomTopPad + (topPadHeight) + offset - (this.element.scrollWidth > this.element.clientWidth ? this.element.offsetHeight - this.element.clientHeight : 0);
-		***REMOVED***
+		}
 
 		this.scrollTop = Math.min(this.scrollTop, this.element.scrollHeight - this.height);
 
 		//adjust for horizontal scrollbar if present (and not at top of table)
 		if(this.element.scrollWidth > this.element.offsetWidth && forceMove){
 			this.scrollTop += this.element.offsetHeight - this.element.clientHeight;
-		***REMOVED***
+		}
 
 		this.vDomScrollPosTop = this.scrollTop;
 		this.vDomScrollPosBottom = this.scrollTop;
@@ -1496,48 +1496,48 @@ RowManager.prototype._virtualRenderFill = function(position, forceMove, offset){
 		if(self.table.options.groupBy){
 			if(self.table.modules.layout.getMode() != "fitDataFill" && self.displayRowsCount == self.table.modules.groupRows.countGroups()){
 				self.tableElement.style.minWidth = self.table.columnManager.getWidth();
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
-	***REMOVED***else{
+	}else{
 		this.renderEmptyScroll();
-	***REMOVED***
+	}
 
 	if(!this.fixedHeight){
 		this.adjustTableSize();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //handle vertical scrolling
 RowManager.prototype.scrollVertical = function(dir){
 	var topDiff = this.scrollTop - this.vDomScrollPosTop;
 	var bottomDiff = this.scrollTop - this.vDomScrollPosBottom;
-	var margin = this.vDomWindowBuffer***REMOVED*** 2;
+	var margin = this.vDomWindowBuffer * 2;
 
 	if(-topDiff > margin || bottomDiff > margin){
 		//if big scroll redraw table;
 		var left = this.scrollLeft;
-		this._virtualRenderFill(Math.floor((this.element.scrollTop / this.element.scrollHeight)***REMOVED*** this.displayRowsCount));
+		this._virtualRenderFill(Math.floor((this.element.scrollTop / this.element.scrollHeight) * this.displayRowsCount));
 		this.scrollHorizontal(left);
-	***REMOVED***else{
+	}else{
 
 		if(dir){
 			//scrolling up
 			if(topDiff < 0){
 
 				this._addTopRow(-topDiff);
-			***REMOVED***
+			}
 
 			if(bottomDiff < 0){
 
 				//hide bottom row if needed
 				if(this.vDomScrollHeight - this.scrollTop > this.vDomWindowBuffer){
 					this._removeBottomRow(-bottomDiff);
-				***REMOVED***else{
+				}else{
 					this.vDomScrollPosBottom = this.scrollTop;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***else{
+				}
+			}
+		}else{
 			//scrolling down
 			if(topDiff >= 0){
 
@@ -1545,18 +1545,18 @@ RowManager.prototype.scrollVertical = function(dir){
 				if(this.scrollTop > this.vDomWindowBuffer){
 
 					this._removeTopRow(topDiff);
-				***REMOVED***else{
+				}else{
 					this.vDomScrollPosTop = this.scrollTop;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			if(bottomDiff >= 0){
 
 				this._addBottomRow(bottomDiff);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			}
+		}
+	}
+};
 
 RowManager.prototype._addTopRow = function(topDiff, i=0){
 	var table = this.tableElement,
@@ -1576,40 +1576,40 @@ RowManager.prototype._addTopRow = function(topDiff, i=0){
 
 				if(!topRow.heightInitialized){
 					topRow.clearCellHeight();
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			topRow.initialize();
 
 			this.vDomTopPad -= topRowHeight;
 
 			if(this.vDomTopPad < 0){
-				this.vDomTopPad = index***REMOVED*** this.vDomRowHeight;
-			***REMOVED***
+				this.vDomTopPad = index * this.vDomRowHeight;
+			}
 
 			if(!index){
 				this.vDomTopPad = 0;
-			***REMOVED***
+			}
 
 			table.style.paddingTop = this.vDomTopPad + "px";
 			this.vDomScrollPosTop -= topRowHeight;
 			this.vDomTop--;
-		***REMOVED***
+		}
 
 		topDiff = -(this.scrollTop - this.vDomScrollPosTop);
 
 		if(topRow.getHeight() > this.vDomWindowBuffer){
-			this.vDomWindowBuffer = topRow.getHeight()***REMOVED*** 2;
-		***REMOVED***
+			this.vDomWindowBuffer = topRow.getHeight() * 2;
+		}
 
 		if(i < this.vDomMaxRenderChain && this.vDomTop && topDiff >= (rows[this.vDomTop -1].getHeight() || this.vDomRowHeight)){
 			this._addTopRow(topDiff, i+1);
-		***REMOVED***else{
+		}else{
 			this._quickNormalizeRowHeight(this.vDomTopNewRows);
-		***REMOVED***
+		}
 
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 RowManager.prototype._removeTopRow = function(topDiff){
 	var table = this.tableElement,
@@ -1629,9 +1629,9 @@ RowManager.prototype._removeTopRow = function(topDiff){
 		topDiff = this.scrollTop - this.vDomScrollPosTop;
 
 		this._removeTopRow(topDiff);
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 RowManager.prototype._addBottomRow = function(bottomDiff, i=0){
 	var table = this.tableElement,
@@ -1652,8 +1652,8 @@ RowManager.prototype._addBottomRow = function(bottomDiff, i=0){
 
 				if(!bottomRow.heightInitialized){
 					bottomRow.clearCellHeight();
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			bottomRow.initialize();
 
@@ -1661,26 +1661,26 @@ RowManager.prototype._addBottomRow = function(bottomDiff, i=0){
 
 			if(this.vDomBottomPad < 0 || index == this.displayRowsCount -1){
 				this.vDomBottomPad = 0;
-			***REMOVED***
+			}
 
 			table.style.paddingBottom = this.vDomBottomPad + "px";
 			this.vDomScrollPosBottom += bottomRowHeight;
 			this.vDomBottom++;
-		***REMOVED***
+		}
 
 		bottomDiff = this.scrollTop - this.vDomScrollPosBottom;
 
 		if(bottomRow.getHeight() > this.vDomWindowBuffer){
-			this.vDomWindowBuffer = bottomRow.getHeight()***REMOVED*** 2;
-		***REMOVED***
+			this.vDomWindowBuffer = bottomRow.getHeight() * 2;
+		}
 
 		if(i < this.vDomMaxRenderChain && this.vDomBottom < this.displayRowsCount -1 && bottomDiff >= (rows[this.vDomBottom + 1].getHeight() || this.vDomRowHeight)){
 			this._addBottomRow(bottomDiff, i+1);
-		***REMOVED***else{
+		}else{
 			this._quickNormalizeRowHeight(this.vDomBottomNewRows);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 RowManager.prototype._removeBottomRow = function(bottomDiff){
 	var table = this.tableElement,
@@ -1693,13 +1693,13 @@ RowManager.prototype._removeBottomRow = function(bottomDiff){
 
 		if(rowEl.parentNode){
 			rowEl.parentNode.removeChild(rowEl);
-		***REMOVED***
+		}
 
 		this.vDomBottomPad += bottomRowHeight;
 
 		if(this.vDomBottomPad < 0){
 			this.vDomBottomPad = 0;
-		***REMOVED***
+		}
 
 		table.style.paddingBottom = this.vDomBottomPad + "px";
 		this.vDomScrollPosBottom -= bottomRowHeight;
@@ -1708,27 +1708,27 @@ RowManager.prototype._removeBottomRow = function(bottomDiff){
 		bottomDiff = -(this.scrollTop - this.vDomScrollPosBottom);
 
 		this._removeBottomRow(bottomDiff);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype._quickNormalizeRowHeight = function(rows){
 	rows.forEach(function(row){
 		row.calcHeight();
-	***REMOVED***);
+	});
 
 	rows.forEach(function(row){
 		row.setCellHeight();
-	***REMOVED***);
+	});
 
 	rows.length = 0;
-***REMOVED***;
+};
 
 //normalize height of active rows
 RowManager.prototype.normalizeHeight = function(){
 	this.activeRows.forEach(function(row){
 		row.normalizeHeight();
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 //adjust the height of the table holder to fit in the Tabulator element
 RowManager.prototype.adjustTableSize = function(){
@@ -1742,11 +1742,11 @@ RowManager.prototype.adjustTableSize = function(){
 			this.element.style.minHeight = "calc(100% - " + otherHeight + "px)";
 			this.element.style.height = "calc(100% - " + otherHeight + "px)";
 			this.element.style.maxHeight = "calc(100% - " + otherHeight + "px)";
-		***REMOVED***else{
+		}else{
 			this.element.style.height = "";
 			this.element.style.height = (this.table.element.clientHeight - otherHeight) + "px";
 			this.element.scrollTop = this.scrollTop;
-		***REMOVED***
+		}
 
 		this.height = this.element.clientHeight;
 		this.vDomWindowBuffer = this.table.options.virtualDomBuffer || this.height;
@@ -1757,24 +1757,24 @@ RowManager.prototype.adjustTableSize = function(){
 
 			if((modExists && !this.table.modules.resizeTable.autoResize) || !modExists){
 				this.redraw();
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //renitialize all rows
 RowManager.prototype.reinitialize = function(){
 	this.rows.forEach(function(row){
 		row.reinitialize();
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 //prevent table from being redrawn
 RowManager.prototype.blockRedraw = function (){
 	this.redrawBlock = true;
 	this.redrawBlockRestoreConfig = false;
-***REMOVED***;
+};
 
 //restore table redrawing
 RowManager.prototype.restoreRedraw = function (){
@@ -1785,15 +1785,15 @@ RowManager.prototype.restoreRedraw = function (){
 		this.refreshActiveData(this.redrawBlockRestoreConfig.stage, this.redrawBlockRestoreConfig.skipStage, this.redrawBlockRestoreConfig.renderInPosition)
 
 		this.redrawBlockRestoreConfig = false;
-	***REMOVED***else{
+	}else{
 		if(this.redrawBlockRederInPosition){
 			this.reRenderInPosition();
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	this.redrawBlockRederInPosition = false;
 
-***REMOVED***;
+};
 
 //redraw table
 RowManager.prototype.redraw = function (force){
@@ -1809,25 +1809,25 @@ RowManager.prototype.redraw = function (force){
 
 			if(this.table.options.groupBy){
 				this.refreshActiveData("group", false, false);
-			***REMOVED***else{
+			}else{
 				this._simpleRender();
-			***REMOVED***
+			}
 
-		***REMOVED***else{
+		}else{
 			this.reRenderInPosition();
 			this.scrollHorizontal(left);
-		***REMOVED***
+		}
 
 		if(!this.displayRowsCount){
 			if(this.table.options.placeholder){
 				this.getElement().appendChild(this.table.options.placeholder);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
-	***REMOVED***else{
+	}else{
 		this.renderTable();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 RowManager.prototype.resetScroll = function(){
 	this.element.scrollLeft = 0;
@@ -1837,7 +1837,7 @@ RowManager.prototype.resetScroll = function(){
 		var event = document.createEvent("Event");
 		event.initEvent("scroll", false, true);
 		this.element.dispatchEvent(event);
-	***REMOVED***else{
+	}else{
 		this.element.dispatchEvent(new Event('scroll'));
-	***REMOVED***
-***REMOVED***;
+	}
+};

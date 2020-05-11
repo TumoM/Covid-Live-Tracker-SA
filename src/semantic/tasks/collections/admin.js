@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***    Admin Task Collection
-***REMOVED*********************************/
+/*******************************
+ *    Admin Task Collection
+ *******************************/
 
 /*
   This are tasks to be run by project maintainers
@@ -9,9 +9,9 @@
   - Modifying package files
 */
 
-***REMOVED********************************
-***REMOVED***            Tasks
-***REMOVED*********************************/
+/*******************************
+ *            Tasks
+ *******************************/
 
 
 module.exports = function (gulp) {
@@ -31,7 +31,7 @@ module.exports = function (gulp) {
     register            = require('../admin/register')
   ;
 
-  /* Release***REMOVED***/
+  /* Release */
   gulp.task('init distributions', initDistributions);
   gulp.task('init distributions').description = 'Grabs each component from GitHub';
 
@@ -44,14 +44,14 @@ module.exports = function (gulp) {
   gulp.task('create components', createComponents);
   gulp.task('create components').description = 'Updates files in each repo';
 
-  /* Publish***REMOVED***/
+  /* Publish */
   gulp.task('update distributions', updateDistributions);
   gulp.task('update distributions').description = 'Commits component updates from create to GitHub';
 
   gulp.task('update components', updateComponents);
   gulp.task('update components').description = 'Commits component updates from create to GitHub';
 
-  /* Tasks***REMOVED***/
+  /* Tasks */
   gulp.task('release', release);
   gulp.task('release').description = 'Stages changes in GitHub repos for all distributions';
 
@@ -61,4 +61,4 @@ module.exports = function (gulp) {
   gulp.task('register', register);
   gulp.task('register').description = 'Registers all packages with NPM';
 
-***REMOVED***;
+};

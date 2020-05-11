@@ -24,11 +24,11 @@ module.exports = {
   log: {
     created: function(file) {
       return 'Created: ' + file;
-  ***REMOVED***
+    },
     modified: function(file) {
       return 'Modified: ' + file;
-  ***REMOVED***
-***REMOVED***
+    }
+  },
 
   filenames: {
     concatenatedCSS            : 'semantic.css',
@@ -37,7 +37,7 @@ module.exports = {
     concatenatedMinifiedJS     : 'semantic.min.js',
     concatenatedRTLCSS         : 'semantic.rtl.css',
     concatenatedMinifiedRTLCSS : 'semantic.rtl.min.css'
-***REMOVED***
+  },
 
   regExp: {
 
@@ -47,51 +47,51 @@ module.exports = {
       variables : {
         in  : /(\/\*[\s\S]+?\*\/+)[\s\S]+?\/\* End Config \*\//,
         out : '$1',
-    ***REMOVED***
+      },
 
       // add version to first comment
       license: {
         in  : /(^\/\*[\s\S]+)(# Semantic UI )([\s\S]+?\*\/)/,
         out : '$1$2' + release.version + ' $3'
-    ***REMOVED***
+      },
 
       // adds uniform spacing around comments
       large: {
         in  : /(\/\*\*\*\*[\s\S]+?\*\/)/mg,
         out : '\n\n$1\n'
-    ***REMOVED***
+      },
       small: {
         in  : /(\/\*---[\s\S]+?\*\/)/mg,
         out : '\n$1\n'
-    ***REMOVED***
+      },
       tiny: {
         in  : /(\/\* [\s\S]+? \*\/)/mg,
         out : '\n$1'
-    ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     theme: /.*(\/|\\)themes(\/|\\).*?(?=(\/|\\))/mg
 
-***REMOVED***
+  },
 
   settings: {
 
-    /* Remove Files in Clean***REMOVED***/
+    /* Remove Files in Clean */
     del: {
       silent : true
-  ***REMOVED***
+    },
 
     concatCSS: {
       rebaseUrls: false
-  ***REMOVED***
+    },
 
-    /* Comment Banners***REMOVED***/
+    /* Comment Banners */
     header: {
       title      : release.title,
       version    : release.version,
       repository : release.repository,
       url        : release.url
-  ***REMOVED***
+    },
 
     plumber: {
       less: {
@@ -101,7 +101,7 @@ module.exports = {
               variable : /@(\S.*?)\s/,
               theme    : /themes[\/\\]+(.*?)[\/\\].*/,
               element  : /[\/\\]([^\/\\*]*)\.overrides/
-***REMOVED*****REMOVED*****REMOVED***
+            },
             theme,
             element
           ;
@@ -110,68 +110,68 @@ module.exports = {
               element = regExp.variable.exec(error.message)[1];
               if (element) {
                 console.error('Missing theme.config value for ', element);
-            ***REMOVED***
+              }
               console.error('Most likely new UI was added in an update. You will need to add missing elements from theme.config.example');
-          ***REMOVED*** else if (error.line == 73) {
+            } else if (error.line == 73) {
               element = regExp.element.exec(error.message)[1];
               theme   = regExp.theme.exec(error.message)[1];
               console.error(theme + ' is not an available theme for ' + element);
-          ***REMOVED*** else {
+            } else {
               console.error(error);
-          ***REMOVED***
-        ***REMOVED***
+            }
+          }
           else {
             throw new Error(error);
-        ***REMOVED***
+          }
           this.emit('end');
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
 
-    /* What Browsers to Prefix***REMOVED***/
+    /* What Browsers to Prefix */
     prefix: {
       overrideBrowserslist
-  ***REMOVED***
+    },
 
-    /* File Renames***REMOVED***/
+    /* File Renames */
     rename: {
-      minJS     : { extname : '.min.js' ***REMOVED***,
-      minCSS    : { extname : '.min.css' ***REMOVED***,
-      rtlCSS    : { extname : '.rtl.css' ***REMOVED***,
-      rtlMinCSS : { extname : '.rtl.min.css' ***REMOVED***
-  ***REMOVED***
+      minJS     : { extname : '.min.js' },
+      minCSS    : { extname : '.min.css' },
+      rtlCSS    : { extname : '.rtl.css' },
+      rtlMinCSS : { extname : '.rtl.min.css' }
+    },
 
-    /* Minified CSS Concat***REMOVED***/
+    /* Minified CSS Concat */
     minify: {
       processImport       : false,
       restructuring       : false,
       keepSpecialComments : 1,
       roundingPrecision   : -1,
-  ***REMOVED***
+    },
 
-    /* Minified JS Settings***REMOVED***/
+    /* Minified JS Settings */
     uglify: {
       mangle   : true,
       output: {
         comments: 'some'
-    ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
-    /* Minified Concat CSS Settings***REMOVED***/
+    /* Minified Concat CSS Settings */
     concatMinify: {
       processImport       : false,
       restructuring       : false,
       keepSpecialComments : false,
       roundingPrecision   : -1,
-  ***REMOVED***
+    },
 
-    /* Minified Concat JS***REMOVED***/
+    /* Minified Concat JS */
     concatUglify: {
       mangle   : true,
       output: {
         comments: 'some'
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
 
-***REMOVED***
-***REMOVED***;
+  }
+};

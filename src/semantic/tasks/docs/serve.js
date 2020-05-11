@@ -1,6 +1,6 @@
-***REMOVED********************************
+/*******************************
  Serve Docs
-***REMOVED*********************************/
+ *******************************/
 var
   gulp        = require('gulp'),
 
@@ -39,19 +39,19 @@ module.exports = function () {
   ---------------*/
 
   gulp
-    .watch(['src***REMOVED***/*.*'])
+    .watch(['src/**/*.*'])
     .on('all', function (event, path) {
       // We don't handle deleted files yet
       if (event === 'unlink' || event === 'unlinkDir') {
         return;
-    ***REMOVED***
+      }
       return gulp.src(path, {
         base: 'src/'
-    ***REMOVED***)
+      })
         .pipe(gulp.dest(config.paths.output.less))
         .pipe(print(log.created))
         ;
-  ***REMOVED***)
+    })
   ;
 
   /*--------------
@@ -59,19 +59,19 @@ module.exports = function () {
   ---------------*/
 
   gulp
-    .watch(['examples***REMOVED***/*.*'])
+    .watch(['examples/**/*.*'])
     .on('all', function (event, path) {
       // We don't handle deleted files yet
       if (event === 'unlink' || event === 'unlinkDir') {
         return;
-    ***REMOVED***
+      }
       return gulp.src(path, {
         base: 'examples/'
-    ***REMOVED***)
+      })
         .pipe(gulp.dest(config.paths.output.examples))
         .pipe(print(log.created))
         ;
-  ***REMOVED***)
+    })
   ;
 
   /*--------------
@@ -92,4 +92,4 @@ module.exports = function () {
 
   assets.watch('docs', config);
 
-***REMOVED***;
+};

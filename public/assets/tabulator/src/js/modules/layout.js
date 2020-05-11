@@ -1,29 +1,29 @@
 var Layout = function(table){
 	this.table = table;
 	this.mode = null;
-***REMOVED***;
+};
 
 //initialize layout system
 Layout.prototype.initialize = function(layout){
 
 	if(this.modes[layout]){
 		this.mode = layout;
-	***REMOVED***else{
+	}else{
 		console.warn("Layout Error - invalid mode set, defaulting to 'fitData' : " + layout);
 		this.mode = 'fitData';
-	***REMOVED***
+	}
 
 	this.table.element.setAttribute("tabulator-layout", this.mode);
-***REMOVED***;
+};
 
 Layout.prototype.getMode = function(){
 	return this.mode;
-***REMOVED***;
+};
 
 //trigger table layout
 Layout.prototype.layout = function(){
 	this.modes[this.mode].call(this, this.table.columnManager.columnsByIndex);
-***REMOVED***;
+};
 
 //layout render functions
 Layout.prototype.modes = {
@@ -32,23 +32,23 @@ Layout.prototype.modes = {
 	"fitData": function(columns){
 		columns.forEach(function(column){
 			column.reinitializeWidth();
-		***REMOVED***);
+		});
 
 		if(this.table.options.responsiveLayout && this.table.modExists("responsiveLayout", true)){
 			this.table.modules.responsiveLayout.update();
-		***REMOVED***
-	***REMOVED***,
+		}
+	},
 
 	//resize columns to fit data the contain and stretch row to fill table
 	"fitDataFill": function(columns){
 		columns.forEach(function(column){
 			column.reinitializeWidth();
-		***REMOVED***);
+		});
 
 		if(this.table.options.responsiveLayout && this.table.modExists("responsiveLayout", true)){
 			this.table.modules.responsiveLayout.update();
-		***REMOVED***
-	***REMOVED***,
+		}
+	},
 
 	//resize columns to fit data the contain and stretch last column to fill table
 	"fitDataStretch": function(columns){
@@ -60,16 +60,16 @@ Layout.prototype.modes = {
 		columns.forEach((column, i) => {
 			if(!column.widthFixed){
 				column.reinitializeWidth();
-			***REMOVED***
+			}
 
 			if(this.table.options.responsiveLayout ? column.modules.responsive.visible : column.visible){
 				lastCol = column;
-			***REMOVED***
+			}
 
 			if(column.visible){
 				colsWidth += column.getWidth();
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		if(lastCol){
 			gap = tableWidth - colsWidth + lastCol.getWidth();
@@ -77,19 +77,19 @@ Layout.prototype.modes = {
 			if(this.table.options.responsiveLayout && this.table.modExists("responsiveLayout", true)){
 				lastCol.setWidth(0);
 				this.table.modules.responsiveLayout.update();
-			***REMOVED***
+			}
 
 			if(gap > 0){
 				lastCol.setWidth(gap);
-			***REMOVED***else{
+			}else{
 				lastCol.reinitializeWidth();
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			if(this.table.options.responsiveLayout && this.table.modExists("responsiveLayout", true)){
 				this.table.modules.responsiveLayout.update();
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
+			}
+		}
+	},
 
 	//resize columns to fit
 	"fitColumns": function(columns){
@@ -111,16 +111,16 @@ Layout.prototype.modes = {
 
 			if(typeof(width) == "string"){
 				if(width.indexOf("%") > -1){
-					colWidth = (totalWidth / 100)***REMOVED*** parseInt(width);
-				***REMOVED***else{
+					colWidth = (totalWidth / 100) * parseInt(width);
+				}else{
 					colWidth = parseInt(width);
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				colWidth = width;
-			***REMOVED***
+			}
 
 			return colWidth;
-		***REMOVED***
+		}
 
 		//ensure columns resize to take up the correct amount of space
 		function scaleColumns(columns, freeSpace, colWidth, shrinkCols){
@@ -134,56 +134,56 @@ Layout.prototype.modes = {
 			undersizeCols = [];
 
 			function calcGrow(col){
-				return (colWidth***REMOVED*** (col.column.definition.widthGrow || 1));
-			***REMOVED***
+				return (colWidth * (col.column.definition.widthGrow || 1));
+			}
 
 			function calcShrink(col){
-				return  (calcWidth(col.width) - (colWidth***REMOVED*** (col.column.definition.widthShrink || 0)))
-			***REMOVED***
+				return  (calcWidth(col.width) - (colWidth * (col.column.definition.widthShrink || 0)))
+			}
 
 			columns.forEach(function(col, i){
 				var width = shrinkCols ? calcShrink(col) : calcGrow(col);
 				if(col.column.minWidth >= width){
 					oversizeCols.push(col);
-				***REMOVED***else{
+				}else{
 					undersizeCols.push(col);
 					changeUnits += shrinkCols ? (col.column.definition.widthShrink || 1) : (col.column.definition.widthGrow || 1);
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			if(oversizeCols.length){
 				oversizeCols.forEach(function(col){
 					oversizeSpace += shrinkCols ?  col.width - col.column.minWidth : col.column.minWidth;
 					col.width = col.column.minWidth;
-				***REMOVED***);
+				});
 
 				remainingSpace = freeSpace - oversizeSpace;
 
 				nextColWidth = changeUnits ? Math.floor(remainingSpace/changeUnits) : remainingSpace;
 
-				gap = remainingSpace - (nextColWidth***REMOVED*** changeUnits);
+				gap = remainingSpace - (nextColWidth * changeUnits);
 
 				gap += scaleColumns(undersizeCols, remainingSpace, nextColWidth, shrinkCols);
-			***REMOVED***else{
-				gap = changeUnits ? freeSpace - (Math.floor(freeSpace/changeUnits)***REMOVED*** changeUnits) : freeSpace;
+			}else{
+				gap = changeUnits ? freeSpace - (Math.floor(freeSpace/changeUnits) * changeUnits) : freeSpace;
 
 				undersizeCols.forEach(function(column){
 					column.width = shrinkCols ? calcShrink(column) : calcGrow(column);
-				***REMOVED***);
-			***REMOVED***
+				});
+			}
 
 			return gap;
-		***REMOVED***
+		}
 
 
 		if(this.table.options.responsiveLayout && this.table.modExists("responsiveLayout", true)){
 			this.table.modules.responsiveLayout.update();
-		***REMOVED***
+		}
 
 		//adjust for vertical scrollbar if present
 		if(this.table.rowManager.element.scrollHeight > this.table.rowManager.element.clientHeight){
 			totalWidth -= this.table.rowManager.element.offsetWidth - this.table.rowManager.element.clientWidth;
-		***REMOVED***
+		}
 
 		columns.forEach(function(column){
 			var width, minWidth, colWidth;
@@ -203,19 +203,19 @@ Layout.prototype.modes = {
 						fixedShrinkColumns.push({
 							column:column,
 							width:colWidth > minWidth ? colWidth : minWidth
-						***REMOVED***);
+						});
 						flexShrinkUnits += column.definition.widthShrink;
-					***REMOVED***
+					}
 
-				***REMOVED***else{
+				}else{
 					flexColumns.push({
 						column:column,
 						width:0,
-					***REMOVED***);
+					});
 					flexGrowUnits += column.definition.widthGrow || 1;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***);
+				}
+			}
+		});
 
 
 		//calculate available space
@@ -230,12 +230,12 @@ Layout.prototype.modes = {
 		//increase width of last column to account for rounding errors
 		if(flexColumns.length && gapFill > 0){
 			flexColumns[flexColumns.length-1].width += + gapFill;
-		***REMOVED***
+		}
 
 		//caculate space for columns to be shrunk into
 		flexColumns.forEach(function(col){
 			flexWidth -= col.width;
-		***REMOVED***)
+		})
 
 		overflowWidth = Math.abs(gapFill) + flexWidth;
 
@@ -243,24 +243,24 @@ Layout.prototype.modes = {
 		//shrink oversize columns if there is no available space
 		if(overflowWidth > 0 && flexShrinkUnits){
 			gapFill = scaleColumns(fixedShrinkColumns, overflowWidth, Math.floor(overflowWidth / flexShrinkUnits), true);
-		***REMOVED***
+		}
 
 		//decrease width of last column to account for rounding errors
 		if(fixedShrinkColumns.length){
 			fixedShrinkColumns[fixedShrinkColumns.length-1].width -= gapFill;
-		***REMOVED***
+		}
 
 
 		flexColumns.forEach(function(col){
 			col.column.setWidth(col.width);
-		***REMOVED***);
+		});
 
 		fixedShrinkColumns.forEach(function(col){
 			col.column.setWidth(col.width);
-		***REMOVED***);
+		});
 
-	***REMOVED***,
-***REMOVED***;
+	},
+};
 
 
 Tabulator.prototype.registerModule("layout", Layout);

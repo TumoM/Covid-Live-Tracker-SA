@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
          Release Config
 *******************************/
 
@@ -10,26 +10,26 @@ var
 ;
 
 
-***REMOVED********************************
+/*******************************
          Derived Values
 *******************************/
 
 try {
   config = requireDotFile('semantic.json');
-***REMOVED***
-catch(error) {***REMOVED***
+}
+catch(error) {}
 
 
 try {
   npmPackage = require('../../../package.json');
-***REMOVED***
+}
 catch(error) {
   // generate fake package
   npmPackage = {
     name: 'Unknown',
     version: 'x.x'
-***REMOVED***;
-***REMOVED***
+  };
+}
 
 // looks for version in config or package.json (whichever is available)
 version = (npmPackage && npmPackage.version !== undefined && npmPackage.name == 'fomantic-ui')
@@ -38,7 +38,7 @@ version = (npmPackage && npmPackage.version !== undefined && npmPackage.name == 
 ;
 
 
-***REMOVED********************************
+/*******************************
              Export
 *******************************/
 
@@ -50,16 +50,16 @@ module.exports = {
 
   banner: ''
     + ' /*' + '\n'
-    + '***REMOVED*** # <%= title %> - <%= version %>' + '\n'
-    + '***REMOVED*** <%= repository %>' + '\n'
-    + '***REMOVED*** <%= url %>' + '\n'
-    + '***REMOVED***' + '\n'
-    + '***REMOVED*** Copyright 2014 Contributors' + '\n'
-    + '***REMOVED*** Released under the MIT license' + '\n'
-    + '***REMOVED*** http://opensource.org/licenses/MIT' + '\n'
-    + '***REMOVED***' + '\n'
-    + '***REMOVED***/' + '\n',
+    + ' * # <%= title %> - <%= version %>' + '\n'
+    + ' * <%= repository %>' + '\n'
+    + ' * <%= url %>' + '\n'
+    + ' *' + '\n'
+    + ' * Copyright 2014 Contributors' + '\n'
+    + ' * Released under the MIT license' + '\n'
+    + ' * http://opensource.org/licenses/MIT' + '\n'
+    + ' *' + '\n'
+    + ' */' + '\n',
 
   version    : version
 
-***REMOVED***;
+};

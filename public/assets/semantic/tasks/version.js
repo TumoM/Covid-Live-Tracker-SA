@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
           Version Task
 *******************************/
 
@@ -9,4 +9,4 @@ var
 module.exports = function(callback) {
   console.log(release.title + ' ' + release.version);
   callback();
-***REMOVED***;
+};

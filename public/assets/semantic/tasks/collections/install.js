@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***   Define Install Sub-Tasks
-***REMOVED*********************************/
+/*******************************
+ *   Define Install Sub-Tasks
+ *******************************/
 
 /*
   Lets you serve files to a local documentation instance
@@ -20,4 +20,4 @@ module.exports = function (gulp) {
   gulp.task('check-install', checkInstall);
   gulp.task('check-install').description = 'Displays current version of Semantic';
 
-***REMOVED***;
+};

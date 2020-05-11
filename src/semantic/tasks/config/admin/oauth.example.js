@@ -8,4 +8,4 @@ module.exports = {
   username : 'github-username',
   name     : 'Your Name',
   email    : 'user@email.com'
-***REMOVED***;
+};

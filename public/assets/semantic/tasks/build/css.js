@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***          Build Task
-***REMOVED*********************************/
+/*******************************
+ *          Build Task
+ *******************************/
 
 const
   gulp         = require('gulp'),
@@ -43,24 +43,24 @@ const
   settings     = tasks.settings
 ;
 
-***REMOVED***
-***REMOVED*** Builds the css
-***REMOVED*** @param src
-***REMOVED*** @param type
-***REMOVED*** @param compress
-***REMOVED*** @param config
-***REMOVED*** @param opts
-***REMOVED*** @return {****REMOVED***
-***REMOVED***/
+/**
+ * Builds the css
+ * @param src
+ * @param type
+ * @param compress
+ * @param config
+ * @param opts
+ * @return {*}
+ */
 function build(src, type, compress, config, opts) {
   let fileExtension;
   if (type === 'rtl' && compress) {
     fileExtension = settings.rename.rtlMinCSS;
-***REMOVED*** else if (type === 'rtl') {
+  } else if (type === 'rtl') {
     fileExtension = settings.rename.rtlCSS;
-***REMOVED*** else if (compress) {
+  } else if (compress) {
     fileExtension = settings.rename.minCSS;
-***REMOVED***
+  }
 
   return gulp.src(src, opts)
     .pipe(plumber(settings.plumber.less))
@@ -81,13 +81,13 @@ function build(src, type, compress, config, opts) {
     .pipe(gulp.dest(compress ? config.paths.output.compressed : config.paths.output.uncompressed))
     .pipe(print(log.created))
     ;
-***REMOVED***
+}
 
-***REMOVED***
-***REMOVED*** Packages the css files in dist
-***REMOVED*** @param {string***REMOVED*** type - type of the css processing (none, rtl, docs)
-***REMOVED*** @param {boolean***REMOVED*** compress - should the output be compressed
-***REMOVED***/
+/**
+ * Packages the css files in dist
+ * @param {string} type - type of the css processing (none, rtl, docs)
+ * @param {boolean} compress - should the output be compressed
+ */
 function pack(type, compress) {
   const output       = type === 'docs' ? docsConfig.paths.output : config.paths.output;
   const ignoredGlobs = type === 'rtl' ? globs.ignoredRTL + '.rtl.css' : globs.ignored + '.css';
@@ -95,11 +95,11 @@ function pack(type, compress) {
   let concatenatedCSS;
   if (type === 'rtl') {
     concatenatedCSS = compress ? filenames.concatenatedMinifiedRTLCSS : filenames.concatenatedRTLCSS;
-***REMOVED*** else {
+  } else {
     concatenatedCSS = compress ? filenames.concatenatedMinifiedCSS : filenames.concatenatedCSS;
-***REMOVED***
+  }
 
-  return gulp.src(output.uncompressed + '***REMOVED***/' + globs.components + ignoredGlobs)
+  return gulp.src(output.uncompressed + '/**/' + globs.components + ignoredGlobs)
     .pipe(plumber())
     .pipe(dedupe())
     .pipe(replace(assets.uncompressed, assets.packaged))
@@ -110,22 +110,22 @@ function pack(type, compress) {
     .pipe(gulp.dest(output.packaged))
     .pipe(print(log.created))
     ;
-***REMOVED***
+}
 
 function buildCSS(src, type, config, opts, callback) {
   if (!install.isSetup()) {
     console.error('Cannot build CSS files. Run "gulp install" to set-up Semantic');
     callback();
     return;
-***REMOVED***
+  }
 
   if (callback === undefined) {
     callback = opts;
     opts     = config;
     config   = type;
     type     = src;
-    src      = config.paths.source.definitions + '***REMOVED***/' + config.globs.components + '.less';
-***REMOVED***
+    src      = config.paths.source.definitions + '/**/' + config.globs.components + '.less';
+  }
 /*
   const buildUncompressed       = () => build(src, type, false, config, opts);
   buildUncompressed.displayName = 'Building uncompressed CSS';
@@ -144,39 +144,39 @@ function buildCSS(src, type, config, opts, callback) {
     // gulp.series(buildUncompressed, packUncompressed),
     gulp.series(buildCompressed, packCompressed)
   )(callback);
-***REMOVED***
+}
 
 function rtlAndNormal(src, callback) {
   if (callback === undefined) {
     callback = src;
-    src      = config.paths.source.definitions + '***REMOVED***/' + config.globs.components + '.less';
-***REMOVED***
+    src      = config.paths.source.definitions + '/**/' + config.globs.components + '.less';
+  }
 
-  const rtl       = (callback) => buildCSS(src, 'rtl', config, {***REMOVED***, callback);
+  const rtl       = (callback) => buildCSS(src, 'rtl', config, {}, callback);
   rtl.displayName = "CSS Right-To-Left";
-  const css       = (callback) => buildCSS(src, 'default', config, {***REMOVED***, callback);
+  const css       = (callback) => buildCSS(src, 'default', config, {}, callback);
   css.displayName = "CSS";
 
   if (config.rtl === true || config.rtl === 'Yes') {
     rtl(callback);
-***REMOVED*** else if (config.rtl === 'both') {
+  } else if (config.rtl === 'both') {
     gulp.series(rtl, css)(callback);
-***REMOVED*** else {
+  } else {
     css(callback);
-***REMOVED***
-***REMOVED***
+  }
+}
 
 function docs(src, callback) {
   if (callback === undefined) {
     callback = src;
-    src      = config.paths.source.definitions + '***REMOVED***/' + config.globs.components + '.less';
-***REMOVED***
+    src      = config.paths.source.definitions + '/**/' + config.globs.components + '.less';
+  }
 
-  const func       = (callback) => buildCSS(src, 'docs', config, {***REMOVED***, callback);
+  const func       = (callback) => buildCSS(src, 'docs', config, {}, callback);
   func.displayName = "CSS Docs";
 
   func(callback);
-***REMOVED***
+}
 
 // Default tasks
 module.exports = rtlAndNormal;
@@ -184,38 +184,38 @@ module.exports = rtlAndNormal;
 // We keep the changed files in an array to call build with all of them at the same time
 let timeout, files = [];
 
-***REMOVED***
-***REMOVED*** Watch changes in CSS files and call the correct build pipe
-***REMOVED*** @param type
-***REMOVED*** @param config
-***REMOVED***/
+/**
+ * Watch changes in CSS files and call the correct build pipe
+ * @param type
+ * @param config
+ */
 module.exports.watch = function (type, config) {
   const method = type === 'docs' ? docs : rtlAndNormal;
 
   // Watch theme.config file
   gulp.watch([
     normalize(config.paths.source.config),
-    normalize(config.paths.source.site + '***REMOVED***/site.variables'),
-    normalize(config.paths.source.themes + '***REMOVED***/site.variables')
+    normalize(config.paths.source.site + '/**/site.variables'),
+    normalize(config.paths.source.themes + '/**/site.variables')
   ])
     .on('all', function () {
       // Clear timeout and reset files
       timeout && clearTimeout(timeout);
       files = [];
       return gulp.series(method)();
-  ***REMOVED***);
+    });
 
   // Watch any less / overrides / variables files
   gulp.watch([
-    normalize(config.paths.source.definitions + '***REMOVED***/*.less'),
-    normalize(config.paths.source.site + '***REMOVED***/*.{overrides,variables***REMOVED***'),
-    normalize(config.paths.source.themes + '***REMOVED***/*.{overrides,variables***REMOVED***')
+    normalize(config.paths.source.definitions + '/**/*.less'),
+    normalize(config.paths.source.site + '/**/*.{overrides,variables}'),
+    normalize(config.paths.source.themes + '/**/*.{overrides,variables}')
   ])
     .on('all', function (event, path) {
       // We don't handle deleted files yet
       if (event === 'unlink' || event === 'unlinkDir') {
         return;
-    ***REMOVED***
+      }
 
       // Clear timeout
       timeout && clearTimeout(timeout);
@@ -224,23 +224,23 @@ module.exports.watch = function (type, config) {
       let lessPath;
       if(path.indexOf('site.variables') !== -1)  {
         return;
-    ***REMOVED*** else if (path.indexOf(config.paths.source.themes) !== -1) {
+      } else if (path.indexOf(config.paths.source.themes) !== -1) {
         console.log('Change detected in packaged theme');
         lessPath = replaceExt(path, '.less');
         lessPath = lessPath.replace(tasks.regExp.theme, config.paths.source.definitions);
-    ***REMOVED*** else if (path.indexOf(config.paths.source.site) !== -1) {
+      } else if (path.indexOf(config.paths.source.site) !== -1) {
         console.log('Change detected in site theme');
         lessPath = replaceExt(path, '.less');
         lessPath = lessPath.replace(config.paths.source.site, config.paths.source.definitions);
-    ***REMOVED*** else {
+      } else {
         console.log('Change detected in definition');
         lessPath = path;
-    ***REMOVED***
+      }
 
       // Add file to internal changed files array
       if (!files.includes(lessPath)) {
         files.push(lessPath);
-    ***REMOVED***
+      }
 
       // Update timeout
       timeout = setTimeout(() => {
@@ -250,9 +250,9 @@ module.exports.watch = function (type, config) {
         gulp.series((callback) => method(buildFiles, callback))();
         // Reset internal changed files array
         files = [];
-    ***REMOVED*** 1000);
-  ***REMOVED***);
-***REMOVED***;
+      }, 1000);
+    });
+};
 
 // Expose build css method
 module.exports.buildCSS = buildCSS;

@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
           Clean Task
 *******************************/
 
@@ -11,4 +11,4 @@ var
 // cleans distribution files
 module.exports = function() {
   return del([config.paths.clean], tasks.settings.del);
-***REMOVED***;
+};

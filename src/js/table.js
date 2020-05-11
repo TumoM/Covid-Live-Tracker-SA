@@ -6,9 +6,9 @@ var dateMutator = function(value, data, type, params, component){
     //params - the mutatorParams object from the column definition
     //component - when the "type" argument is "edit", this contains the cell component for the edited cell, otherwise it is the column component for the column
     // ToDo Return date, currently giving the wrong
-    // return `${date.getFullYear()***REMOVED***-${date.getMonth()***REMOVED***-${date.getDay()***REMOVED***` //return the new value for the cell data.
+    // return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}` //return the new value for the cell data.
     return new Date(value); //return the new value for the cell data.
-***REMOVED***
+}
 
 var dateFormatter = function(cell, formatterParams){
     var value = cell.getValue();
@@ -16,10 +16,10 @@ var dateFormatter = function(cell, formatterParams){
     if(value){
         value = moment(value).format('DD/MM/YYYY');
         // value = moment(value).format("MMM DD, YYYY");
-  ***REMOVED***
+    }
 
     return value;
-***REMOVED***
+}
 
 var numberFormat = function(value, data, type, params, component){
     //value - original value of the cell
@@ -31,14 +31,13 @@ var numberFormat = function(value, data, type, params, component){
     // console.log(component)
 
     return value === null?null:numeral(value).format('0,0'); //return the new value for the cell data.
-***REMOVED***
-let table;
+}
+
 function setTable(data){
     var fieldEl = document.getElementById("sort-field");
     var dirEl = document.getElementById("sort-direction");
 
-    table = new Tabulator("#example-table", {
-        autoResize:true,
+    var table = new Tabulator("#example-table", {
         index:"date", //set the index field to the "age" field.
         layout:"fitColumns",
         responsiveLayout:"hide",
@@ -49,24 +48,24 @@ function setTable(data){
         paginationSize:30,
         paginationSizeSelector:[10,20,30,50,100,200,500],
         initialSort:[
-            {column:"date", dir:"desc"***REMOVED***, //sort by this first
-            // {column:"height", dir:"desc"***REMOVED***, //then sort by this second
-    ***REMOVED***,
+            {column:"date", dir:"desc"}, //sort by this first
+            // {column:"height", dir:"desc"}, //then sort by this second
+        ],
         resizableColumns: false,
         columns:[
             {title:"Date", field:"date",headerSortTristate:true,sorter:"datetime", sorterParams:{
             format:"YYYY/MM/DD",
             alignEmptyValues:"bottom",
-  ***REMOVED***mutator: dateMutator, formatter:"datetime", formatterParams:{
+    },mutator: dateMutator, formatter:"datetime", formatterParams:{
                     outputFormat:"DD/MM/YYYY",
                     invalidPlaceholder:"(invalid date)"
-              ***REMOVED***
-***REMOVED*****REMOVED*****REMOVED***
-            {title:"Total Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Active Cases", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Total Tests", field:"totalTests",sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",***REMOVED***,formatter:function(cell, formatterParams, onRendered)
+                }
+            },
+            {title:"Total Cases", field:"totalCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Deaths", field:"totalDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Recoveries", field:"totalRecoveries",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Active Cases", field:"activeCases",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Total Tests", field:"totalTests",sorter:'number', headerSortStartingDir:"desc",headerSortTristate:true, sorterParams:{alignEmptyValues:"bottom",},formatter:function(cell, formatterParams, onRendered)
                 {
                     //cell - the cell component
                     //formatterParams - parameters set for the column
@@ -76,26 +75,26 @@ function setTable(data){
                     let x = cell.getValue()
                     if (!x){
                         x = "N/A";
-                  ***REMOVED***
+                    }
                     return x
-    ***REMOVED*****REMOVED*****REMOVED***headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Daily Cases", field:"dailyNew",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-            {title:"Daily Deaths", field:"dailyDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat***REMOVED***,
-    ***REMOVED***,
-  ***REMOVED***);
+                },headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Daily Cases", field:"dailyNew",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+            {title:"Daily Deaths", field:"dailyDeaths",sorter:'number',headerSortStartingDir:"desc",headerSortTristate:true, mutator: numberFormat},
+        ],
+    });
 
     table.setData(data)
         .then(function(){
             //Trigger sort when "Trigger Sort" button is clicked
             document.getElementById("sort-trigger").addEventListener("click", function(){
                 table.setSort(fieldEl.options[fieldEl.selectedIndex].value, dirEl.options[dirEl.selectedIndex].value);
-          ***REMOVED***);
+            });
             document.getElementById("sort-reset").addEventListener("click", function(){
                 table.clearSort();
                 table.setSort('date','desc');
-          ***REMOVED***);
-      ***REMOVED***)
+            });
+        })
         .catch(function(error){
             //handle error loading data
-      ***REMOVED***);
-***REMOVED***
+        });
+}

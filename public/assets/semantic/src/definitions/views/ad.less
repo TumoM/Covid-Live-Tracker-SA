@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Ad
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Copyright 2013 Contributors
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Ad
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Copyright 2013 Contributors
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,7 +18,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
          Advertisement
 *******************************/
 
@@ -26,88 +26,88 @@
   display: block;
   overflow: @overflow;
   margin: @margin;
-***REMOVED***
+}
 
 .ui.ad:first-child {
   margin: 0;
-***REMOVED***
+}
 
 .ui.ad:last-child {
   margin: 0;
-***REMOVED***
+}
 
 .ui.ad iframe {
   margin: 0;
   padding: 0;
   border: none;
   overflow: hidden;
-***REMOVED***
+}
 
 /*--------------
      Common
 ---------------*/
 & when (@variationAdLeaderboard) {
-  /* Leaderboard***REMOVED***/
+  /* Leaderboard */
   .ui.leaderboard.ad {
     width: 728px;
     height: 90px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdRectangle) {
-  /* Medium Rectangle***REMOVED***/
+  /* Medium Rectangle */
   .ui[class*="medium rectangle"].ad {
     width: 300px;
     height: 250px;
-***REMOVED***
+  }
 
-  /* Large Rectangle***REMOVED***/
+  /* Large Rectangle */
   .ui[class*="large rectangle"].ad {
     width: 336px;
     height: 280px;
-***REMOVED***
-  /* Half Page***REMOVED***/
+  }
+  /* Half Page */
   .ui[class*="half page"].ad {
     width: 300px;
     height: 600px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdSquare) {
   /*--------------
        Square
   ---------------*/
 
-  /* Square***REMOVED***/
+  /* Square */
   .ui.square.ad {
     width: 250px;
     height: 250px;
-***REMOVED***
+  }
 
-  /* Small Square***REMOVED***/
+  /* Small Square */
   .ui[class*="small square"].ad {
     width: 200px;
     height: 200px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdRectangle) {
   /*--------------
       Rectangle
   ---------------*/
 
-  /* Small Rectangle***REMOVED***/
+  /* Small Rectangle */
   .ui[class*="small rectangle"].ad {
     width: 180px;
     height: 150px;
-***REMOVED***
+  }
 
-  /* Vertical Rectangle***REMOVED***/
+  /* Vertical Rectangle */
   .ui[class*="vertical rectangle"].ad {
     width: 240px;
     height: 400px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdButton) {
   /*--------------
@@ -117,146 +117,146 @@
   .ui.button.ad {
     width: 120px;
     height: 90px;
-***REMOVED***
+  }
   & when (@variationAdSquare) {
     .ui[class*="square button"].ad {
       width: 125px;
       height: 125px;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui[class*="small button"].ad {
     width: 120px;
     height: 60px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdSkyscraper) {
   /*--------------
      Skyscrapers
   ---------------*/
 
-  /* Skyscraper***REMOVED***/
+  /* Skyscraper */
   .ui.skyscraper.ad {
     width: 120px;
     height: 600px;
-***REMOVED***
+  }
 
-  /* Wide Skyscraper***REMOVED***/
+  /* Wide Skyscraper */
   .ui[class*="wide skyscraper"].ad {
     width: 160px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdBanner) {
   /*--------------
        Banners
   ---------------*/
 
-  /* Banner***REMOVED***/
+  /* Banner */
   .ui.banner.ad {
     width: 468px;
     height: 60px;
-***REMOVED***
+  }
 
-  /* Vertical Banner***REMOVED***/
+  /* Vertical Banner */
   .ui[class*="vertical banner"].ad {
     width: 120px;
     height: 240px;
-***REMOVED***
+  }
 
-  /* Top Banner***REMOVED***/
+  /* Top Banner */
   .ui[class*="top banner"].ad {
     width: 930px;
     height: 180px;
-***REMOVED***
+  }
 
-  /* Half Banner***REMOVED***/
+  /* Half Banner */
   .ui[class*="half banner"].ad {
     width: 234px;
     height: 60px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
     Boards
 ---------------*/
 & when (@variationAdLeaderboard) {
-  /* Leaderboard***REMOVED***/
+  /* Leaderboard */
   .ui[class*="large leaderboard"].ad {
     width: 970px;
     height: 90px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdBillboard) {
-  /* Billboard***REMOVED***/
+  /* Billboard */
   .ui.billboard.ad {
     width: 970px;
     height: 250px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdPanorama) {
   /*--------------
       Panorama
   ---------------*/
 
-  /* Panorama***REMOVED***/
+  /* Panorama */
   .ui.panorama.ad {
     width: 980px;
     height: 120px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdNetboard) {
   /*--------------
        Netboard
   ---------------*/
 
-  /* Netboard***REMOVED***/
+  /* Netboard */
   .ui.netboard.ad {
     width: 580px;
     height: 400px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationAdMobile) {
   /*--------------
        Mobile
   ---------------*/
   & when (@variationAdBanner) {
-    /* Large Mobile Banner***REMOVED***/
+    /* Large Mobile Banner */
     .ui[class*="large mobile banner"].ad {
       width: 320px;
       height: 100px;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationAdLeaderboard) {
-    /* Mobile Leaderboard***REMOVED***/
+    /* Mobile Leaderboard */
     .ui[class*="mobile leaderboard"].ad {
       width: 320px;
       height: 50px;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-***REMOVED********************************
+/*******************************
              Types
 *******************************/
 
-  /* Mobile Sizes***REMOVED***/
+  /* Mobile Sizes */
   .ui.mobile.ad {
     display: none;
-***REMOVED***
+  }
 
   @media only screen and (max-width : @largestMobileScreen) {
     .ui.mobile.ad {
       display: block;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -264,13 +264,13 @@
   .ui.centered.ad {
     margin-left: auto;
     margin-right: auto;
-***REMOVED***
-***REMOVED***
+  }
+}
 & when (@variationAdTest) {
   .ui.test.ad {
     position: relative;
     background: @testBackground;
-***REMOVED***
+  }
   .ui.test.ad:after {
     position: absolute;
     top: 50%;
@@ -283,15 +283,15 @@
     color: @testColor;
     font-size: @testFontSize;
     font-weight: @testFontWeight;
-***REMOVED***
+  }
   & when (@variationAdMobile) {
     .ui.mobile.test.ad:after {
       font-size: @testMobileFontSize;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui.test.ad[data-text]:after {
     content: attr(data-text);
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

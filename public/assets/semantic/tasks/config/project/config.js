@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
             Set-up
 *******************************/
 
@@ -11,7 +11,7 @@ var
 ;
 
 
-***REMOVED********************************
+/*******************************
             Exports
 *******************************/
 
@@ -29,16 +29,16 @@ module.exports = {
           // found file
           configPath = path.normalize(directory);
           return;
-      ***REMOVED***
+        }
         else {
           // reached file system root, let's stop
           if(nextDirectory == directory) {
             return;
-        ***REMOVED***
+          }
           // otherwise recurse
           walk(nextDirectory, file);
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
     ;
 
     // start walk from outside require-dot-files directory
@@ -46,12 +46,12 @@ module.exports = {
     directory = directory || path.join(__dirname, path.sep, '..');
     walk(directory);
     return configPath || '';
-***REMOVED***
+  },
 
   // adds additional derived values to a config object
   addDerivedValues: function(config) {
 
-    config = config || extend(false, {***REMOVED***, defaults);
+    config = config || extend(false, {}, defaults);
 
     /*--------------
        File Paths
@@ -59,8 +59,8 @@ module.exports = {
 
     var
       configPath = this.getPath(),
-      sourcePaths = {***REMOVED***,
-      outputPaths = {***REMOVED***,
+      sourcePaths = {},
+      outputPaths = {},
       folder
     ;
 
@@ -68,13 +68,13 @@ module.exports = {
     for(folder in config.paths.source) {
       if(config.paths.source.hasOwnProperty(folder)) {
         sourcePaths[folder] = path.resolve(path.join(configPath, config.base, config.paths.source[folder]));
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     for(folder in config.paths.output) {
       if(config.paths.output.hasOwnProperty(folder)) {
         outputPaths[folder] = path.resolve(path.join(configPath, config.base, config.paths.output[folder]));
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
 
     // set config paths to full paths
     config.paths.source = sourcePaths;
@@ -95,7 +95,7 @@ module.exports = {
       uncompressed : './' + path.relative(config.paths.output.uncompressed, config.paths.output.themes).replace(/\\/g, '/'),
       compressed   : './' + path.relative(config.paths.output.compressed, config.paths.output.themes).replace(/\\/g, '/'),
       packaged     : './' + path.relative(config.paths.output.packaged, config.paths.output.themes).replace(/\\/g, '/')
-  ***REMOVED***;
+    };
 
     /*--------------
        Permission
@@ -104,40 +104,40 @@ module.exports = {
     if(config.permission) {
       config.hasPermissions = true;
       config.parsedPermissions = typeof config.permission === 'string' ? parseInt(config.permission, 8) : config.permission;
-  ***REMOVED***
+    }
     else {
       // pass blank object to avoid causing errors
-      config.permission     = {***REMOVED***;
+      config.permission     = {};
       config.hasPermissions = false;
-      config.parsedPermissions = {***REMOVED***;
-  ***REMOVED***
+      config.parsedPermissions = {};
+    }
 
     /*--------------
          Globs
     ---------------*/
 
     if(!config.globs) {
-      config.globs = {***REMOVED***;
-  ***REMOVED***
+      config.globs = {};
+    }
 
     // remove duplicates from component array
     if(config.components instanceof Array) {
       config.components = config.components.filter(function(component, index) {
         return config.components.indexOf(component) == index;
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
     // takes component object and creates file glob matching selected components
     config.globs.components = (typeof config.components == 'object')
       ? (config.components.length > 1)
-        ? '{' + config.components.join(',') + '***REMOVED***'
+        ? '{' + config.components.join(',') + '}'
         : config.components[0]
-      : '{' + defaults.components.join(',') + '***REMOVED***'
+      : '{' + defaults.components.join(',') + '}'
     ;
 
     return config;
 
-***REMOVED***
+  }
 
-***REMOVED***;
+};
 

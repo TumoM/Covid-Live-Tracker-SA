@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Image
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Image
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
              Image
 *******************************/
 
@@ -29,48 +29,48 @@
   vertical-align: middle;
   max-width: 100%;
   background-color: @placeholderColor;
-***REMOVED***
+}
 
 img.ui.image {
   display: block;
-***REMOVED***
+}
 
 .ui.image svg,
 .ui.image img {
   display: block;
   max-width: 100%;
   height: auto;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
             States
 *******************************/
 
 .ui.hidden.images,
 .ui.ui.hidden.image {
   display: none;
-***REMOVED***
+}
 .ui.hidden.transition.images,
 .ui.hidden.transition.image {
   display: block;
   visibility: hidden;
-***REMOVED***
+}
 .ui.images > .hidden.transition {
   display: inline-block;
   visibility: hidden;
-***REMOVED***
+}
 
 & when (@variationImageDisabled) {
   .ui.disabled.images,
   .ui.disabled.image {
     cursor: default;
     opacity: @disabledOpacity;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
           Variations
 *******************************/
 
@@ -83,8 +83,8 @@ img.ui.image {
   .ui.inline.image svg,
   .ui.inline.image img {
     display: inline-block;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageAligned) {
   /*------------------
@@ -97,22 +97,22 @@ img.ui.image {
   .ui.top.aligned.image img {
     display: inline-block;
     vertical-align: top;
-***REMOVED***
+  }
   .ui.middle.aligned.images .image,
   .ui.middle.aligned.image,
   .ui.middle.aligned.image svg,
   .ui.middle.aligned.image img {
     display: inline-block;
     vertical-align: middle;
-***REMOVED***
+  }
   .ui.bottom.aligned.images .image,
   .ui.bottom.aligned.image,
   .ui.bottom.aligned.image svg,
   .ui.bottom.aligned.image img {
     display: inline-block;
     vertical-align: bottom;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageRounded) {
   /*--------------
@@ -121,11 +121,11 @@ img.ui.image {
 
   .ui.rounded.images .image,
   .ui.rounded.image,
-  .ui.rounded.images .image >***REMOVED***,
-  .ui.rounded.image >***REMOVED*** {
+  .ui.rounded.images .image > *,
+  .ui.rounded.image > * {
     border-radius: @roundedBorderRadius;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageBordered) {
   /*--------------
@@ -139,8 +139,8 @@ img.ui.image {
   .ui.bordered.image svg,
   img.ui.bordered.image {
     border: @imageBorder;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageCircular) {
   /*--------------
@@ -150,17 +150,17 @@ img.ui.image {
   .ui.circular.images,
   .ui.circular.image {
     overflow: hidden;
-***REMOVED***
+  }
 
   .ui.circular.images .image,
   .ui.circular.image,
-  .ui.circular.images .image >***REMOVED***,
-  .ui.circular.image >***REMOVED*** {
+  .ui.circular.images .image > *,
+  .ui.circular.image > * {
     -webkit-border-radius: @circularRadius;
     -moz-border-radius: @circularRadius;
     border-radius: @circularRadius;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageFluid) {
   /*--------------
@@ -176,8 +176,8 @@ img.ui.image {
     display: block;
     width: 100%;
     height: auto;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageAvatar) {
   /*--------------
@@ -199,8 +199,8 @@ img.ui.image {
     -webkit-border-radius: @circularRadius;
     -moz-border-radius: @circularRadius;
     border-radius: @circularRadius;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageSpaced) {
   /*-------------------
@@ -211,18 +211,18 @@ img.ui.image {
     display: inline-block !important;
     margin-left: @spacedDistance;
     margin-right: @spacedDistance;
-***REMOVED***
+  }
 
   .ui[class*="left spaced"].image {
     margin-left: @spacedDistance;
     margin-right: 0;
-***REMOVED***
+  }
 
   .ui[class*="right spaced"].image {
     margin-left: 0;
     margin-right: @spacedDistance;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageFloated) {
   /*-------------------
@@ -234,28 +234,28 @@ img.ui.image {
     float: left;
     margin-right: @floatedHorizontalMargin;
     margin-bottom: @floatedVerticalMargin;
-***REMOVED***
+  }
   .ui.right.floated.images,
   .ui.right.floated.image {
     float: right;
     margin-right: 0;
     margin-bottom: @floatedVerticalMargin;
     margin-left: @floatedHorizontalMargin;
-***REMOVED***
+  }
 
   .ui.floated.images:last-child,
   .ui.floated.image:last-child {
     margin-bottom: 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationImageCentered) {
   .ui.centered.images,
   .ui.centered.image {
     margin-left: auto;
     margin-right: auto;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
      Sizes
@@ -268,38 +268,38 @@ img.ui.image {
   width: @mediumWidth;
   height: auto;
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationImageSizes = false) {
   each(@variationImageSizes, {
-    @w: @{value***REMOVED***Width;
+    @w: @{value}Width;
     @s: @@value;
-    .ui.@{value***REMOVED***.images .image,
-    .ui.@{value***REMOVED***.images img,
-    .ui.@{value***REMOVED***.images svg,
-    .ui.@{value***REMOVED***.image {
+    .ui.@{value}.images .image,
+    .ui.@{value}.images img,
+    .ui.@{value}.images svg,
+    .ui.@{value}.image {
       width: @@w;
       height: auto;
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 & when (@variationImageGroups) {
- ***REMOVED*****REMOVED********************************
+  /*******************************
                 Groups
- ***REMOVED*********************************/
+  *******************************/
 
   .ui.images {
     font-size: 0;
     margin: 0 -@imageHorizontalMargin 0;
-***REMOVED***
+  }
 
   .ui.images .image,
   .ui.images > img,
   .ui.images > svg {
     display: inline-block;
     margin: 0 @imageHorizontalMargin @imageVerticalMargin;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

@@ -2,7 +2,7 @@ var HtmlTableImport = function(table){
 	this.table = table; //hold Tabulator object
 	this.fieldIndex = [];
 	this.hasIndex = false;
-***REMOVED***;
+};
 
 HtmlTableImport.prototype.parseTable = function(){
 	var self = this,
@@ -25,32 +25,32 @@ HtmlTableImport.prototype.parseTable = function(){
 
 	if(headers.length){
 		self._extractHeaders(headers, rows);
-	***REMOVED***else{
+	}else{
 		self._generateBlankHeaders(headers, rows);
-	***REMOVED***
+	}
 
 
 	//iterate through table rows and build data set
 	for(var index = 0; index < rows.length; index++){
 		var row = rows[index],
 		cells = row.getElementsByTagName("td"),
-		item = {***REMOVED***;
+		item = {};
 
 		//create index if the dont exist in table
 		if(!self.hasIndex){
 			item[options.index] = index;
-		***REMOVED***
+		}
 
 		for(var i = 0; i < cells.length; i++){
 			var cell = cells[i];
 			if(typeof this.fieldIndex[i] !== "undefined"){
 				item[this.fieldIndex[i]] = cell.innerHTML;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//add row data to item
 		data.push(item);
-	***REMOVED***
+	}
 
 	//create new element
 	var newElement = document.createElement("div");
@@ -63,8 +63,8 @@ HtmlTableImport.prototype.parseTable = function(){
 	for(var i in attributes){
 		if(typeof attributes[i] == "object"){
 			newElement.setAttribute(attributes[i].name, attributes[i].value);
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	// replace table with div element
 	element.parentNode.replaceChild(newElement, element);
@@ -76,17 +76,17 @@ HtmlTableImport.prototype.parseTable = function(){
 	// // newElement.tabulator(options);
 
 	this.table.element = newElement;
-***REMOVED***;
+};
 
 //extract tabulator attribute options
 HtmlTableImport.prototype._extractOptions = function(element, options, defaultOptions){
 	var attributes = element.attributes;
 	var optionsArr = defaultOptions ? Object.assign([], defaultOptions) : Object.keys(options);
-	var optionsList = {***REMOVED***;
+	var optionsList = {};
 
 	optionsArr.forEach(function(item){
 		optionsList[item.toLowerCase()] = item;
-	***REMOVED***);
+	});
 
 	for(var index in attributes){
 		var attrib = attributes[index];
@@ -97,32 +97,32 @@ HtmlTableImport.prototype._extractOptions = function(element, options, defaultOp
 
 			if(typeof optionsList[name] !== "undefined"){
 				options[optionsList[name]] = this._attribValue(attrib.value);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			}
+		}
+	}
+};
 
 //get value of attribute
 HtmlTableImport.prototype._attribValue = function(value){
 	if(value === "true"){
 		return true;
-	***REMOVED***
+	}
 
 	if(value === "false"){
 		return false;
-	***REMOVED***
+	}
 
 	return value;
-***REMOVED***;
+};
 
 //find column if it has already been defined
 HtmlTableImport.prototype._findCol = function(title){
 	var match = this.table.options.columns.find(function(column){
 		return column.title === title;
-	***REMOVED***);
+	});
 
 	return match || false;
-***REMOVED***;
+};
 
 //extract column from headers
 HtmlTableImport.prototype._extractHeaders = function(headers, rows){
@@ -134,19 +134,19 @@ HtmlTableImport.prototype._extractHeaders = function(headers, rows){
 
 		if(col){
 			exists = true;
-		***REMOVED***else{
-			col = {title:header.textContent.trim()***REMOVED***;
-		***REMOVED***
+		}else{
+			col = {title:header.textContent.trim()};
+		}
 
 		if(!col.field) {
 			col.field = header.textContent.trim().toLowerCase().replace(" ", "_");
-		***REMOVED***
+		}
 
 		width = header.getAttribute("width");
 
 		if(width && !col.width)	{
 			col.width = width;
-		***REMOVED***
+		}
 
 		//check for tablator inline options
 		attributes = header.attributes;
@@ -158,20 +158,20 @@ HtmlTableImport.prototype._extractHeaders = function(headers, rows){
 
 		if(col.field == this.table.options.index){
 			this.hasIndex = true;
-		***REMOVED***
+		}
 
 		if(!exists){
 			this.table.options.columns.push(col);
-		***REMOVED***
+		}
 
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //generate blank headers
 HtmlTableImport.prototype._generateBlankHeaders = function(headers, rows){
 	for(var index = 0; index < headers.length; index++){
 		var header = headers[index],
-		col = {title:"", field:"col" + index***REMOVED***;
+		col = {title:"", field:"col" + index};
 
 		this.fieldIndex[index] = col.field;
 
@@ -179,10 +179,10 @@ HtmlTableImport.prototype._generateBlankHeaders = function(headers, rows){
 
 		if(width){
 			col.width = width;
-		***REMOVED***
+		}
 
 		this.table.options.columns.push(col);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Tabulator.prototype.registerModule("htmlTableImport", HtmlTableImport);

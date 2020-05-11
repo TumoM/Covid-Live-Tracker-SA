@@ -1,4 +1,4 @@
-/* eslint-disable***REMOVED***/
+/* eslint-disable */
 var jumpToCode = (function init() {
     // Classes of code we would like to highlight in the file view
     var missingCoverageClasses = ['.cbranch-no', '.cstat-no', '.fstat-no'];
@@ -26,7 +26,7 @@ var jumpToCode = (function init() {
             .item(currentIndex)
             .classList.remove('highlighted');
         missingCoverageElements.item(index).classList.add('highlighted');
-  ***REMOVED***
+    }
 
     function makeCurrent(index) {
         toggleClass(index);
@@ -35,19 +35,19 @@ var jumpToCode = (function init() {
             behavior: 'smooth',
             block: 'center',
             inline: 'center'
-      ***REMOVED***);
-  ***REMOVED***
+        });
+    }
 
     function goToPrevious() {
         var nextIndex = 0;
         if (typeof currentIndex !== 'number' || currentIndex === 0) {
             nextIndex = missingCoverageElements.length - 1;
-      ***REMOVED*** else if (missingCoverageElements.length > 1) {
+        } else if (missingCoverageElements.length > 1) {
             nextIndex = currentIndex - 1;
-      ***REMOVED***
+        }
 
         makeCurrent(nextIndex);
-  ***REMOVED***
+    }
 
     function goToNext() {
         var nextIndex = 0;
@@ -57,10 +57,10 @@ var jumpToCode = (function init() {
             currentIndex < missingCoverageElements.length - 1
         ) {
             nextIndex = currentIndex + 1;
-      ***REMOVED***
+        }
 
         makeCurrent(nextIndex);
-  ***REMOVED***
+    }
 
     return function jump(event) {
         switch (event.which) {
@@ -73,7 +73,7 @@ var jumpToCode = (function init() {
             case 80: // p
                 goToPrevious();
                 break;
-      ***REMOVED***
-  ***REMOVED***;
-***REMOVED***)();
+        }
+    };
+})();
 window.addEventListener('keydown', jumpToCode);

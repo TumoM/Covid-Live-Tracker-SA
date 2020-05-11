@@ -60,13 +60,13 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		.tabulator-tableHolder{
 			.tabulator-table{
 				min-width:100%;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	&.tabulator-block-select{
 		user-select: none;
-	***REMOVED***
+	}
 
 	//column header containing element
 	.tabulator-header{
@@ -90,7 +90,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		&.tabulator-header-hidden{
 			display:none;
-		***REMOVED***
+		}
 
 		//individual column header element
 		.tabulator-col{
@@ -108,7 +108,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				// border:1px solid  $headerSeperatorColor;
 				background:darken($headerBackgroundColor, 10%);
 				pointer-events: none;
-			***REMOVED***
+			}
 
 			//hold content of column header
 			.tabulator-col-content{
@@ -123,8 +123,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					&:hover{
 						cursor: pointer;
 						opacity: .6;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//hold title of column header
 				.tabulator-col-title{
@@ -146,8 +146,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 						padding:1px;
 
 						background: #fff;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//column sorter arrow
 				.tabulator-arrow{
@@ -160,9 +160,9 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					border-left: 6px solid transparent;
 					border-right: 6px solid transparent;
 					border-bottom: 6px solid $sortArrowInactive;
-				***REMOVED***
+				}
 
-			***REMOVED***
+			}
 
 			//complex header column group
 			&.tabulator-col-group{
@@ -176,15 +176,15 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					overflow: hidden;
 
 					margin-right:-1px;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			//hide left resize handle on first column
 			&:first-child{
 				.tabulator-col-resize-handle.prev{
 					display: none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			//header filter containing element
 			.tabulator-header-filter{
@@ -197,54 +197,54 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				//styling adjustment for inbuilt editors
 				textarea{
 					height:auto !important;
-				***REMOVED***
+				}
 
 				svg{
 					margin-top: 3px;
-				***REMOVED***
+				}
 
 				input{
 					&::-ms-clear {
 						width : 0;
 						height: 0;
-					***REMOVED***
+					}
 
 					border:$button-border-width solid $button-border-color;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			//styling child elements for sortable columns
 			&.tabulator-sortable{
 				.tabulator-col-title{
 					padding-right:25px;
-				***REMOVED***
+				}
 
 				&:hover{
 					cursor:pointer;
 					background-color:darken($headerBackgroundColor, 10%);
-				***REMOVED***
+				}
 
 				&[aria-sort="none"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowInactive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="asc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowActive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="desc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: 6px solid $sortArrowActive;
 						border-bottom: none;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 
 			&.tabulator-col-vertical{
@@ -256,35 +256,35 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 						display:flex;
 						align-items:center;
 						justify-content:center;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-col-vertical-flip{
 					.tabulator-col-title{
 						transform: rotate(180deg);
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-sortable{
 					.tabulator-col-title{
 						padding-right:0;
 						padding-top:20px;
-					***REMOVED***
+					}
 
 					&.tabulator-col-vertical-flip{
 						.tabulator-col-title{
 							padding-right:0;
 							padding-bottom:20px;
-						***REMOVED***
+						}
 
-					***REMOVED***
+					}
 
 					.tabulator-arrow{
 						right:calc(50% - 6px);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
 		.tabulator-frozen{
 			display: inline-block;
@@ -296,12 +296,12 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 			&.tabulator-frozen-left{
 				border-right:2px solid $rowBorderColor;
-			***REMOVED***
+			}
 
 			&.tabulator-frozen-right{
 				border-left:2px solid $rowBorderColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 
 		.tabulator-calcs-holder{
@@ -315,27 +315,27 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
+				}
 
 				.tabulator-cell{
 					border-bottom-width:0;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			border:$table-cell-border;
 			border-width:$table-foot-cell-border-width;
 
 			overflow: hidden;
-		***REMOVED***
+		}
 
 		.tabulator-frozen-rows-holder{
 			min-width:600%;
 
 			&:empty{
 				display: none;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	//scrolling element to hold table
 	.tabulator-tableHolder{
@@ -347,7 +347,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		&:focus{
 			outline: none;
-		***REMOVED***
+		}
 
 		//default placeholder element
 		.tabulator-placeholder{
@@ -358,7 +358,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			&[tabulator-render-mode="virtual"]{
 				min-height:100%;
 				min-width:100%;
-			***REMOVED***
+			}
 
 			width:100%;
 
@@ -371,8 +371,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				color:#ccc;
 				font-weight: bold;
 				font-size: 20px;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//element to hold table rows
 		.tabulator-table{
@@ -392,21 +392,21 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					&.tabulator-calcs-top{
 						border:$table-cell-border;
 						border-width:$table-head-cell-border-width;
-					***REMOVED***
+					}
 
 					&.tabulator-calcs-bottom{
 						border:$table-cell-border;
 						border-width:$table-foot-cell-border-width;
-					***REMOVED***
+					}
 
 					.tabulator-cell{
 						border-bottom-width:0;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 
 
@@ -446,25 +446,25 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
+				}
 
 				.tabulator-cell{
 					border-bottom-width:0;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			&:only-child{
 				margin-bottom:-5px;
 				border-bottom:none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-paginator{
 			color: $footerTextColor;
 			font-family:inherit;
 			font-weight:inherit;
 			font-size:inherit;
-		***REMOVED***
+		}
 
 		//pagination container element
 		.tabulator-page-size{
@@ -475,11 +475,11 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 			border:1px solid $footerBorderColor;
 			border-radius:3px;
-		***REMOVED***
+		}
 
 		.tabulator-pages{
 			margin:0 7px;
-		***REMOVED***
+		}
 
 		//pagination button
 		.tabulator-page{
@@ -500,11 +500,11 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				border-color:$button-active-border-color;
 				color:$button-active-color;
 				font-weight:bold;
-			***REMOVED***
+			}
 
 			&:disabled{
 				opacity:.5;
-			***REMOVED***
+			}
 
 			&:not(.disabled){
 				&:hover{
@@ -512,10 +512,10 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					border-color:$button-hover-border-color;
 					// background:rgba(0,0,0,.2);
 					// color:#fff;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+				}
+			}
+		}
+	}
 
 	//column resize handles
 	.tabulator-col-resize-handle{
@@ -528,12 +528,12 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		&.prev{
 			left:0;
 			right:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ew-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 
 	//holding div that contains loader and covers tabulator element to prevent interaction
@@ -568,15 +568,15 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			&.tabulator-loading{
 				border:4px solid #333;
 				color:#000;
-			***REMOVED***
+			}
 
 			//error message
 			&.tabulator-error{
 				border:4px solid #D00;
 				color:#590000;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 
 	//Bulma theming classes
@@ -585,9 +585,9 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		.tabulator-row{
 			&:nth-child(even){
 				background-color: $rowAltBackgroundColor;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	&.is-bordered{
 		border:$table-cell-border;
@@ -595,71 +595,71 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		.tabulator-header{
 			.tabulator-col{
 				border-right:$table-cell-border;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-tableHolder{
 			.tabulator-table{
 				.tabulator-row{
 					.tabulator-cell{
 						border-right:$table-cell-border;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 	&.is-narrow{
 		.tabulator-header{
 			.tabulator-col{
 				.tabulator-col-content{
 					padding: 0.25em 0.5em
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		.tabulator-tableHolder{
 			.tabulator-table{
 				.tabulator-row{
 					.tabulator-cell{
 						padding: 0.25em 0.5em
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+					}
+				}
+			}
+		}
+	}
+}
 
 //row element
 .tabulator-row{
 	position: relative;
 	box-sizing: border-box;
-	min-height:14px + ($headerMargin***REMOVED*** 2);
+	min-height:14px + ($headerMargin * 2);
 	background-color: $rowBackgroundColor;
 
 
 	// &.tabulator-row-even{
 	// 	background-color: $rowAltBackgroundColor;
-	// ***REMOVED***
+	// }
 
 	&.tabulator-selectable:hover{
 		background-color:$rowHoverBackground;
 		cursor: pointer;
-	***REMOVED***
+	}
 
 	&.tabulator-selected{
 		background-color:$rowSelectedBackground;
-	***REMOVED***
+	}
 
 	&.tabulator-selected:hover{
 		background-color:darken($rowSelectedBackground, 10%);
 		cursor: pointer;
-	***REMOVED***
+	}
 
 	&.tabulator-row-moving{
 		border:1px solid #000;
 		background:#fff;
-	***REMOVED***
+	}
 
 	&.tabulator-moving{
 		position: absolute;
@@ -669,7 +669,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		pointer-events: none;
 		z-index:15;
-	***REMOVED***
+	}
 
 	//row resize handles
 	.tabulator-row-resize-handle{
@@ -682,12 +682,12 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		&.prev{
 			top:0;
 			bottom:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ns-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-frozen{
 		display: inline-block;
@@ -699,12 +699,12 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		&.tabulator-frozen-left{
 			border-right:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		&.tabulator-frozen-right{
 			border-left:2px solid $rowBorderColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-responsive-collapse{
 		box-sizing:border-box;
@@ -716,7 +716,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		&:empty{
 			display:none;
-		***REMOVED***
+		}
 
 		table{
 			font-size:$textSize;
@@ -727,11 +727,11 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 					&:first-of-type{
 						padding-right:10px;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 	//cell element
 	.tabulator-cell{
@@ -755,8 +755,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			input, select{
 				border:1px;
 				background:transparent;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		&.tabulator-validation-fail{
 			border:1px solid $errorColor;
@@ -765,15 +765,15 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				background:transparent;
 
 				color: $errorColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//hide left resize handle on first column
 		&:first-child{
 			.tabulator-col-resize-handle.prev{
 				display: none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//movable row handle
 		&.tabulator-row-handle{
@@ -796,9 +796,9 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					height:3px;
 					margin-top:2px;
 					background:#666;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		.tabulator-data-tree-branch{
 			display:inline-block;
@@ -814,7 +814,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 			border-left:2px solid $rowBorderColor;
 			border-bottom:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control{
 
@@ -837,7 +837,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			&:hover{
 				cursor:pointer;
 				background:rgba(0, 0, 0, .2);
-			***REMOVED***
+			}
 
 			.tabulator-data-tree-control-collapse{
 				display:inline-block;
@@ -858,8 +858,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-data-tree-control-expand{
 				display:inline-block;
@@ -880,10 +880,10 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
-		***REMOVED***
+		}
 
 		.tabulator-responsive-collapse-toggle{
 			display: inline-flex;
@@ -907,22 +907,22 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 			&:hover{
 				opacity:.7;
-			***REMOVED***
+			}
 
 			&.open{
 				.tabulator-responsive-collapse-toggle-close{
 					display:initial;
-				***REMOVED***
+				}
 
 				.tabulator-responsive-collapse-toggle-open{
 					display:none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-responsive-collapse-toggle-close{
 				display:none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-traffic-light{
 			display: inline-block;
@@ -930,8 +930,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			width:14px;
 
 			border-radius:14px;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//row grouping element
 	&.tabulator-group{
@@ -950,7 +950,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		&:hover{
 			cursor:pointer;
 			background-color:rgba(0,0,0,.1);
-		***REMOVED***
+		}
 
 		&.tabulator-group-visible{
 
@@ -960,33 +960,33 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 				border-right: 6px solid transparent;
 				border-top: 6px solid $sortArrowActive;
 				border-bottom: 0;
-			***REMOVED***
+			}
 
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-1{
 			padding-left:30px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-2{
 			padding-left:50px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-3{
 			padding-left:70px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-4{
 			padding-left:90px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-5{
 			padding-left:110px;
-		***REMOVED***
+		}
 
 		.tabulator-group-toggle{
 			display: inline-block;
-		***REMOVED***
+		}
 
 		//sorting arrow
 		.tabulator-arrow{
@@ -999,15 +999,15 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 			border-right: 0;
 			border-left: 6px solid $sortArrowActive;
 			vertical-align:middle;
-		***REMOVED***
+		}
 
 		span{
 			margin-left:10px;
 			color:#d00;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
-***REMOVED***
+}
 
 .tabulator-menu{
 	position: absolute;
@@ -1033,18 +1033,18 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		&.tabulator-menu-item-disabled{
 			opacity: .5;
-		***REMOVED***
+		}
 
 		&:not(.tabulator-menu-item-disabled):hover{
 			cursor: pointer;
 			background: $rowAltBackgroundColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-menu-separator{
 		border-top:1px solid $rowBorderColor;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 .tabulator-edit-select-list{
 	position: absolute;
@@ -1071,22 +1071,22 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		&.active{
 			color:$rowBackgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:pointer;
 
 			color:$rowBackgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-edit-select-list-notice{
 		padding:4px;
 
 		color:$rowTextColor;
 		text-align: center;
-	***REMOVED***
+	}
 
 	.tabulator-edit-select-list-group{
 		border-bottom:1px solid $rowBorderColor;
@@ -1096,8 +1096,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 		color:$rowTextColor;
 		font-weight:bold;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 // Table print styling
 
@@ -1109,11 +1109,11 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 	right:0;
 
 	z-index: 10000;
-***REMOVED***
+}
 
 body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 	display:none !important;
-***REMOVED***
+}
 
 .tabulator-print-table{
 	border-collapse: collapse;
@@ -1132,7 +1132,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 
 		border-left:2px solid $rowBorderColor;
 		border-bottom:2px solid $rowBorderColor;
-	***REMOVED***
+	}
 
 	.tabulator-data-tree-control{
 
@@ -1155,7 +1155,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 		&:hover{
 			cursor:pointer;
 			background:rgba(0, 0, 0, .2);
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control-collapse{
 			display:inline-block;
@@ -1176,8 +1176,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-data-tree-control-expand{
 			display:inline-block;
@@ -1198,8 +1198,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+			}
+		}
+	}
+}
 

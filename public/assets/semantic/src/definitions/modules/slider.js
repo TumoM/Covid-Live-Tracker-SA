@@ -1,12 +1,12 @@
 /*!
-***REMOVED*** # Fomantic-UI - Slider
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Slider
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -54,8 +54,8 @@ $.fn.slider = function(parameters) {
 
       var
         settings        = ( $.isPlainObject(parameters) )
-          ? $.extend(true, {***REMOVED***, $.fn.slider.settings, parameters)
-          : $.extend({***REMOVED***, $.fn.slider.settings),
+          ? $.extend(true, {}, $.fn.slider.settings, parameters)
+          : $.extend({}, $.fn.slider.settings),
 
         className       = settings.className,
         metadata        = settings.metadata,
@@ -109,14 +109,14 @@ $.fn.slider = function(parameters) {
 
           if(!module.is.disabled()) {
             module.bind.events();
-        ***REMOVED***
+          }
 
           module.read.metadata();
           module.read.settings();
 
           initialLoad = false;
           module.instantiate();
- ***REMOVED*****REMOVED***
+        },
 
         instantiate: function() {
           module.verbose('Storing instance of slider', module);
@@ -124,7 +124,7 @@ $.fn.slider = function(parameters) {
           $module
             .data(moduleNamespace, module)
           ;
- ***REMOVED*****REMOVED***
+        },
 
         destroy: function() {
           module.verbose('Destroying previous slider for', $module);
@@ -133,55 +133,55 @@ $.fn.slider = function(parameters) {
           module.unbind.slidingEvents();
           $module.removeData(moduleNamespace);
           instance = undefined;
- ***REMOVED*****REMOVED***
+        },
 
         setup: {
           layout: function() {
             if( $module.attr('tabindex') === undefined) {
               $module.attr('tabindex', 0);
-          ***REMOVED***
+            }
             if($module.find('.inner').length == 0) {
               $module.append("<div class='inner'>"
                              + "<div class='track'></div>"
                              + "<div class='track-fill'></div>"
                              + "<div class='thumb'></div>"
                              + "</div>");
-          ***REMOVED***
+            }
             precision = module.get.precision();
             $thumb = $module.find('.thumb:not(.second)');
             $currThumb = $thumb;
             if(module.is.range()) {
               if($module.find('.thumb.second').length == 0) {
                 $module.find('.inner').append("<div class='thumb second'></div>");
-            ***REMOVED***
+              }
               $secondThumb = $module.find('.thumb.second');
-          ***REMOVED***
+            }
             $track = $module.find('.track');
             $trackFill = $module.find('.track-fill');
             offset = $thumb.width() / 2;
-   ***REMOVED*****REMOVED***
+          },
           labels: function() {
             if(module.is.labeled()) {
               $labels = $module.find('.labels:not(.auto)');
               if($labels.length != 0) {
                 module.setup.customLabel();
-            ***REMOVED*** else {
+              } else {
                 module.setup.autoLabel();
-            ***REMOVED***
+              }
 
               if (settings.showLabelTicks) {
                 $module.addClass(className.ticked)
-            ***REMOVED***
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+              }
+            }
+          },
           testOutTouch: function() {
             try {
              document.createEvent('TouchEvent');
              return true;
-          ***REMOVED*** catch (e) {
+            } catch (e) {
              return false;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           customLabel: function() {
             var
               $children   = $labels.find('.label'),
@@ -198,21 +198,21 @@ $.fn.slider = function(parameters) {
               if(attrValue) {
                 attrValue = attrValue > max ? max : attrValue < min ? min : attrValue;
                 ratio = (attrValue - min) / (max - min);
-            ***REMOVED*** else {
+              } else {
                 ratio = (index + 1) / (numChildren + 1);
-            ***REMOVED***
+              }
               module.update.labelPosition(ratio, $(this));
-          ***REMOVED***);
-   ***REMOVED*****REMOVED***
+            });
+          },
           autoLabel: function() {
             if(module.get.step() != 0) {
               $labels = $module.find('.labels');
               if($labels.length != 0) {
                 $labels.empty();
-            ***REMOVED***
+              }
               else {
                 $labels = $module.append('<ul class="auto labels"></ul>').find('.labels');
-            ***REMOVED***
+              }
               for(var i = 0, len = module.get.numLabels(); i <= len; i++) {
                 var
                   labelText = module.get.label(i),
@@ -226,11 +226,11 @@ $.fn.slider = function(parameters) {
                 if($label) {
                   module.update.labelPosition(ratio, $label);
                   $labels.append($label);
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+                }
+              }
+            }
+          }
+        },
 
         bind: {
           events: function() {
@@ -239,58 +239,58 @@ $.fn.slider = function(parameters) {
             module.bind.mouseEvents();
             if(module.is.touch()) {
               module.bind.touchEvents();
-          ***REMOVED***
+            }
             if (settings.autoAdjustLabels) {
               module.bind.windowEvents();
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           keyboardEvents: function() {
             module.verbose('Binding keyboard events');
             $module.on('keydown' + eventNamespace, module.event.keydown);
-   ***REMOVED*****REMOVED***
+          },
           globalKeyboardEvents: function() {
             $(document).on('keydown' + eventNamespace + documentEventID, module.event.activateFocus);
-   ***REMOVED*****REMOVED***
+          },
           mouseEvents: function() {
             module.verbose('Binding mouse events');
             $module.find('.track, .thumb, .inner').on('mousedown' + eventNamespace, function(event) {
               event.stopImmediatePropagation();
               event.preventDefault();
               module.event.down(event);
-          ***REMOVED***);
+            });
             $module.on('mousedown' + eventNamespace, module.event.down);
             $module.on('mouseenter' + eventNamespace, function(event) {
               isHover = true;
-          ***REMOVED***);
+            });
             $module.on('mouseleave' + eventNamespace, function(event) {
               isHover = false;
-          ***REMOVED***);
-   ***REMOVED*****REMOVED***
+            });
+          },
           touchEvents: function() {
             module.verbose('Binding touch events');
             $module.find('.track, .thumb, .inner').on('touchstart' + eventNamespace, function(event) {
               event.stopImmediatePropagation();
               event.preventDefault();
               module.event.down(event);
-          ***REMOVED***);
+            });
             $module.on('touchstart' + eventNamespace, module.event.down);
-   ***REMOVED*****REMOVED***
+          },
           slidingEvents: function() {
             // these don't need the identifier because we only ever want one of them to be registered with document
             module.verbose('Binding page wide events while handle is being draged');
             if(module.is.touch()) {
               $(document).on('touchmove' + eventNamespace, module.event.move);
               $(document).on('touchend' + eventNamespace, module.event.up);
-          ***REMOVED***
+            }
             else {
               $(document).on('mousemove' + eventNamespace, module.event.move);
               $(document).on('mouseup' + eventNamespace, module.event.up);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           windowEvents: function() {
             $window.on('resize' + eventNamespace, module.event.resize);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         unbind: {
           events: function() {
@@ -304,17 +304,17 @@ $.fn.slider = function(parameters) {
             $module.off('focusout' + eventNamespace);
             $(document).off('keydown' + eventNamespace + documentEventID, module.event.activateFocus);
             $window.off('resize' + eventNamespace);
-   ***REMOVED*****REMOVED***
+          },
           slidingEvents: function() {
             if(module.is.touch()) {
               $(document).off('touchmove' + eventNamespace);
               $(document).off('touchend' + eventNamespace);
-          ***REMOVED*** else {
+            } else {
               $(document).off('mousemove' + eventNamespace);
               $(document).off('mouseup' + eventNamespace);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          },
+        },
 
         event: {
           down: function(event) {
@@ -328,14 +328,14 @@ $.fn.slider = function(parameters) {
               if(settings.preventCrossover && module.is.range() && module.thumbVal === module.secondThumbVal) {
                 initialPosition = newPos;
                 $currThumb = undefined;
-            ***REMOVED*** else {
+              } else {
                 $currThumb = module.determine.closestThumb(newPos);
-            ***REMOVED***
-          ***REMOVED***
+              }
+            }
             if(!module.is.disabled()) {
               module.bind.slidingEvents();
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           move: function(event) {
             event.preventDefault();
             var value = module.determine.valueFromEvent(event);
@@ -345,7 +345,7 @@ $.fn.slider = function(parameters) {
                 newPos = module.determine.pos(eventPos)
               ;
               $currThumb = initialPosition > newPos ? $thumb : $secondThumb;
-          ***REMOVED***
+            }
             if(module.get.step() == 0 || module.is.smooth()) {
               var
                 thumbVal = module.thumbVal,
@@ -356,37 +356,37 @@ $.fn.slider = function(parameters) {
                 if(settings.preventCrossover && module.is.range()) {
                   value = Math.min(secondThumbVal, value);
                   thumbSmoothVal = Math.min(secondThumbVal, thumbSmoothVal);
-              ***REMOVED***
+                }
                 thumbVal = value;
-            ***REMOVED*** else {
+              } else {
                 if(settings.preventCrossover && module.is.range()) {
                   value = Math.max(thumbVal, value);
                   thumbSmoothVal = Math.max(thumbVal, thumbSmoothVal);
-              ***REMOVED***
+                }
                 secondThumbVal = value;
-            ***REMOVED***
+              }
               value = Math.abs(thumbVal - (secondThumbVal || 0));
               module.update.position(thumbSmoothVal);
               settings.onMove.call(element, value, thumbVal, secondThumbVal);
-          ***REMOVED*** else {
+            } else {
               module.update.value(value, function(value, thumbVal, secondThumbVal) {
                 settings.onMove.call(element, value, thumbVal, secondThumbVal);
-            ***REMOVED***);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+              });
+            }
+          },
           up: function(event) {
             event.preventDefault();
             var value = module.determine.valueFromEvent(event);
             module.set.value(value);
             module.unbind.slidingEvents();
-   ***REMOVED*****REMOVED***
+          },
           keydown: function(event, first) {
             if(settings.preventCrossover && module.is.range() && module.thumbVal === module.secondThumbVal) {
               $currThumb = undefined;
-          ***REMOVED***
+            }
             if(module.is.focused()) {
               $(document).trigger(event);
-          ***REMOVED***
+            }
             if(first || module.is.focused()) {
               var step = module.determine.keyMovement(event);
               if(step != NO_STEP) {
@@ -404,34 +404,34 @@ $.fn.slider = function(parameters) {
                   case BIG_BACKSTEP:
                     module.backStep(module.get.multiplier());
                     break;
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+                }
+              }
+            }
+          },
           activateFocus: function(event) {
             if(!module.is.focused() && module.is.hover() && module.determine.keyMovement(event) != NO_STEP) {
               event.preventDefault();
               module.event.keydown(event, true);
               $module.focus();
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           resize: function(_event) {
             // To avoid a useless performance cost, we only call the label refresh when its necessary
             if (gapRatio != module.get.gapRatio()) {
               module.setup.labels();
               gapRatio = module.get.gapRatio();
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         resync: function() {
           module.verbose('Resyncing thumb position based on value');
           if(module.is.range()) {
             module.update.position(module.secondThumbVal, $secondThumb);
-        ***REMOVED***
+          }
           module.update.position(module.thumbVal, $thumb);
           module.setup.labels();
- ***REMOVED*****REMOVED***
+        },
         takeStep: function(multiplier) {
           var
             multiplier = multiplier != undefined ? multiplier : 1,
@@ -440,15 +440,15 @@ $.fn.slider = function(parameters) {
           ;
           module.verbose('Taking a step');
           if(step > 0) {
-            module.set.value(currValue + step***REMOVED*** multiplier);
-        ***REMOVED*** else if (step == 0){
+            module.set.value(currValue + step * multiplier);
+          } else if (step == 0){
             var
               precision = module.get.precision(),
               newValue = currValue + (multiplier/precision)
             ;
-            module.set.value(Math.round(newValue***REMOVED*** precision) / precision);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            module.set.value(Math.round(newValue * precision) / precision);
+          }
+        },
 
         backStep: function(multiplier) {
           var
@@ -458,92 +458,92 @@ $.fn.slider = function(parameters) {
           ;
           module.verbose('Going back a step');
           if(step > 0) {
-            module.set.value(currValue - step***REMOVED*** multiplier);
-        ***REMOVED*** else if (step == 0) {
+            module.set.value(currValue - step * multiplier);
+          } else if (step == 0) {
             var
               precision = module.get.precision(),
               newValue = currValue - (multiplier/precision)
             ;
-            module.set.value(Math.round(newValue***REMOVED*** precision) / precision);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            module.set.value(Math.round(newValue * precision) / precision);
+          }
+        },
 
         is: {
           range: function() {
             return $module.hasClass(settings.className.range);
-   ***REMOVED*****REMOVED***
+          },
           hover: function() {
             return isHover;
-   ***REMOVED*****REMOVED***
+          },
           focused: function() {
             return $module.is(':focus');
-   ***REMOVED*****REMOVED***
+          },
           disabled: function() {
             return $module.hasClass(settings.className.disabled);
-   ***REMOVED*****REMOVED***
+          },
           labeled: function() {
             return $module.hasClass(settings.className.labeled);
-   ***REMOVED*****REMOVED***
+          },
           reversed: function() {
             return $module.hasClass(settings.className.reversed);
-   ***REMOVED*****REMOVED***
+          },
           vertical: function() {
             return $module.hasClass(settings.className.vertical);
-   ***REMOVED*****REMOVED***
+          },
           smooth: function() {
             return settings.smooth || $module.hasClass(settings.className.smooth);
-   ***REMOVED*****REMOVED***
+          },
           touch: function() {
             return isTouch;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         get: {
           trackOffset: function() {
             if (module.is.vertical()) {
               return $track.offset().top;
-          ***REMOVED*** else {
+            } else {
               return $track.offset().left;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           trackLength: function() {
             if (module.is.vertical()) {
               return $track.height();
-          ***REMOVED*** else {
+            } else {
               return $track.width();
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           trackLeft: function() {
             if (module.is.vertical()) {
               return $track.position().top;
-          ***REMOVED*** else {
+            } else {
               return $track.position().left;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           trackStartPos: function() {
             return module.is.reversed() ? module.get.trackLeft() + module.get.trackLength() : module.get.trackLeft();
-   ***REMOVED*****REMOVED***
+          },
           trackEndPos: function() {
             return module.is.reversed() ? module.get.trackLeft() : module.get.trackLeft() + module.get.trackLength();
-   ***REMOVED*****REMOVED***
+          },
           trackStartMargin: function () {
             var margin;
             if (module.is.vertical()) {
               margin = module.is.reversed() ? $module.css('padding-bottom') : $module.css('padding-top');
-          ***REMOVED*** else {
+            } else {
               margin = module.is.reversed() ? $module.css('padding-right') : $module.css('padding-left');
-          ***REMOVED***
+            }
             return margin || '0px';
-   ***REMOVED*****REMOVED***
+          },
           trackEndMargin: function () {
             var margin;
             if (module.is.vertical()) {
               margin = module.is.reversed() ? $module.css('padding-top') : $module.css('padding-bottom');
-          ***REMOVED*** else {
+            } else {
               margin = module.is.reversed() ? $module.css('padding-left') : $module.css('padding-right');
-          ***REMOVED***
+            }
             return margin || '0px';
-   ***REMOVED*****REMOVED***
+          },
           precision: function() {
             var
               decimalPlaces,
@@ -553,90 +553,90 @@ $.fn.slider = function(parameters) {
               var split = String(step).split('.');
               if(split.length == 2) {
                 decimalPlaces = split[1].length;
-            ***REMOVED*** else {
+              } else {
                 decimalPlaces = 0;
-            ***REMOVED***
-          ***REMOVED*** else {
+              }
+            } else {
               decimalPlaces = settings.decimalPlaces;
-          ***REMOVED***
+            }
             var precision = Math.pow(10, decimalPlaces);
             module.debug('Precision determined', precision);
             return precision;
-   ***REMOVED*****REMOVED***
+          },
           min: function() {
             return settings.min;
-   ***REMOVED*****REMOVED***
+          },
           max: function() {
             var step = module.get.step(),
                 min = module.get.min(),
                 quotient = step === 0 ? 0 : Math.floor((settings.max - min) / step),
                 remainder = step === 0 ? 0 : (settings.max - min) % step;
-            return remainder === 0 ? settings.max : min + quotient***REMOVED*** step;
-   ***REMOVED*****REMOVED***
+            return remainder === 0 ? settings.max : min + quotient * step;
+          },
           step: function() {
             return settings.step;
-   ***REMOVED*****REMOVED***
+          },
           numLabels: function() {
             var value = Math.round((module.get.max() - module.get.min()) / module.get.step());
             module.debug('Determined that there should be ' + value + ' labels');
             return value;
-   ***REMOVED*****REMOVED***
+          },
           labelType: function() {
             return settings.labelType;
-   ***REMOVED*****REMOVED***
+          },
           label: function(value) {
             if(interpretLabel) {
               return interpretLabel(value);
-          ***REMOVED***
+            }
 
             switch (settings.labelType) {
               case settings.labelTypes.number:
-                return Math.round(((value***REMOVED*** module.get.step()) + module.get.min())***REMOVED*** precision ) / precision;
+                return Math.round(((value * module.get.step()) + module.get.min()) * precision ) / precision;
               case settings.labelTypes.letter:
                 return alphabet[(value) % 26];
               default:
                 return value;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           value: function() {
             return value;
-   ***REMOVED*****REMOVED***
+          },
           currentThumbValue: function() {
             return $currThumb !== undefined && $currThumb.hasClass('second') ? module.secondThumbVal : module.thumbVal;
-   ***REMOVED*****REMOVED***
+          },
           thumbValue: function(which) {
             switch(which) {
               case 'second':
                 if(module.is.range()) {
                   return module.secondThumbVal;
-              ***REMOVED***
+                }
                 else {
                   module.error(error.notrange);
                   break;
-              ***REMOVED***
+                }
               case 'first':
               default:
                 return module.thumbVal;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           multiplier: function() {
             return settings.pageMultiplier;
-   ***REMOVED*****REMOVED***
+          },
           thumbPosition: function(which) {
             switch(which) {
               case 'second':
                 if(module.is.range()) {
                   return secondPos;
-              ***REMOVED***
+                }
                 else {
                   module.error(error.notrange);
                   break;
-              ***REMOVED***
+                }
               case 'first':
               default:
                 return position;
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           gapRatio: function() {
             var gapRatio = 1;
             
@@ -651,17 +651,17 @@ $.fn.slider = function(parameters) {
               // we divide the number of labels at each iteration
               // and apply only if the modulo of the operation is an odd number.
               if(trackLength>0){
-                while ((trackLength / numLabels)***REMOVED*** gapCounter < settings.labelDistance) {
+                while ((trackLength / numLabels) * gapCounter < settings.labelDistance) {
                   if( !(numLabels % gapCounter) ) {
                     gapRatio = gapCounter;
-                ***REMOVED***
+                  }
                   gapCounter += 1;
-              ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
+                }
+              }
+            }
             return gapRatio;
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         determine: {
           pos: function(pagePos) {
@@ -671,7 +671,7 @@ $.fn.slider = function(parameters) {
               :
               pagePos - module.get.trackOffset() - module.get.trackStartPos()
             ;
-   ***REMOVED*****REMOVED***
+          },
           closestThumb: function(eventPos) {
             var
               thumbPos = parseFloat(module.determine.thumbPos($thumb)),
@@ -681,9 +681,9 @@ $.fn.slider = function(parameters) {
             ;
             if(thumbDelta === secondThumbDelta && module.get.thumbValue() === module.get.min()) {
               return $secondThumb;
-          ***REMOVED***
+            }
             return thumbDelta <= secondThumbDelta ? $thumb : $secondThumb;
-   ***REMOVED*****REMOVED***
+          },
           closestThumbPos: function(eventPos) {
             var
               thumbPos = parseFloat(module.determine.thumbPos($thumb)),
@@ -692,7 +692,7 @@ $.fn.slider = function(parameters) {
               secondThumbDelta = Math.abs(eventPos - secondThumbPos)
             ;
             return thumbDelta <= secondThumbDelta ? thumbPos : secondThumbPos;
-   ***REMOVED*****REMOVED***
+          },
           thumbPos: function($element) {
             var pos =
               module.is.vertical()
@@ -702,7 +702,7 @@ $.fn.slider = function(parameters) {
               module.is.reversed() ? $element.css('right') : $element.css('left')
             ;
             return pos;
-   ***REMOVED*****REMOVED***
+          },
           positionFromValue: function(value) {
             var
               min = module.get.min(),
@@ -710,20 +710,20 @@ $.fn.slider = function(parameters) {
               value = value > max ? max : value < min ? min : value,
               trackLength = module.get.trackLength(),
               ratio = (value - min) / (max - min),
-              position = Math.round(ratio***REMOVED*** trackLength)
+              position = Math.round(ratio * trackLength)
             ;
             module.verbose('Determined position: ' + position + ' from value: ' + value);
             return position;
-   ***REMOVED*****REMOVED***
+          },
           positionFromRatio: function(ratio) {
             var
               trackLength = module.get.trackLength(),
               step = module.get.step(),
-              position = Math.round(ratio***REMOVED*** trackLength),
-              adjustedPos = (step == 0) ? position : Math.round(position / step)***REMOVED*** step
+              position = Math.round(ratio * trackLength),
+              adjustedPos = (step == 0) ? position : Math.round(position / step) * step
             ;
             return adjustedPos;
-   ***REMOVED*****REMOVED***
+          },
           valueFromEvent: function(event) {
             var
               eventPos = module.determine.eventPos(event),
@@ -732,13 +732,13 @@ $.fn.slider = function(parameters) {
             ;
             if(eventPos < module.get.trackOffset()) {
               value = module.is.reversed() ? module.get.max() : module.get.min();
-          ***REMOVED*** else if(eventPos > module.get.trackOffset() + module.get.trackLength()) {
+            } else if(eventPos > module.get.trackOffset() + module.get.trackLength()) {
               value = module.is.reversed() ? module.get.min() : module.get.max();
-          ***REMOVED*** else {
+            } else {
               value = module.determine.value(newPos);
-          ***REMOVED***
+            }
             return value;
-   ***REMOVED*****REMOVED***
+          },
           smoothValueFromEvent: function(event) {
             var
               min = module.get.min(),
@@ -753,10 +753,10 @@ $.fn.slider = function(parameters) {
             ratio = newPos / trackLength;
             if (module.is.reversed()) {
               ratio = 1 - ratio;
-          ***REMOVED***
-            value = ratio***REMOVED*** (max - min) + min;
+            }
+            value = ratio * (max - min) + min;
             return value;
-   ***REMOVED*****REMOVED***
+          },
           eventPos: function(event) {
             if(module.is.touch()) {
               var
@@ -766,13 +766,13 @@ $.fn.slider = function(parameters) {
                 touchX = touches[0].pageX
               ;
               return module.is.vertical() ? touchY : touchX;
-          ***REMOVED***
+            }
             var
               clickY = event.pageY || event.originalEvent.pageY,
               clickX = event.pageX || event.originalEvent.pageX
             ;
             return module.is.vertical() ? clickY : clickX;
-   ***REMOVED*****REMOVED***
+          },
           value: function(position) {
             var
               startPos = module.is.reversed() ? module.get.trackEndPos() : module.get.trackStartPos(),
@@ -780,19 +780,19 @@ $.fn.slider = function(parameters) {
               ratio = (position - startPos) / (endPos - startPos),
               range = module.get.max() - module.get.min(),
               step = module.get.step(),
-              value = (ratio***REMOVED*** range),
-              difference = (step == 0) ? value : Math.round(value / step)***REMOVED*** step
+              value = (ratio * range),
+              difference = (step == 0) ? value : Math.round(value / step) * step
             ;
             module.verbose('Determined value based upon position: ' + position + ' as: ' + value);
             if(value != difference) {
               module.verbose('Rounding value to closest step: ' + difference);
-          ***REMOVED***
+            }
             // Use precision to avoid ugly Javascript floating point rounding issues
-            // (like 35***REMOVED*** .01 = 0.35000000000000003)
-            difference = Math.round(difference***REMOVED*** precision) / precision;
+            // (like 35 * .01 = 0.35000000000000003)
+            difference = Math.round(difference * precision) / precision;
             module.verbose('Cutting off additional decimal places');
             return difference + module.get.min();
-   ***REMOVED*****REMOVED***
+          },
           keyMovement: function(event) {
             var
               key = event.which,
@@ -826,17 +826,17 @@ $.fn.slider = function(parameters) {
             ;
             if(key == downArrow || key == leftArrow) {
               return SINGLE_BACKSTEP;
-          ***REMOVED*** else if(key == upArrow || key == rightArrow) {
+            } else if(key == upArrow || key == rightArrow) {
               return SINGLE_STEP;
-          ***REMOVED*** else if (key == keys.pageDown) {
+            } else if (key == keys.pageDown) {
               return BIG_BACKSTEP;
-          ***REMOVED*** else if (key == keys.pageUp) {
+            } else if (key == keys.pageUp) {
               return BIG_STEP;
-          ***REMOVED*** else {
+            } else {
               return NO_STEP;
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
 
         handleNewValuePosition: function(val) {
           var
@@ -846,12 +846,12 @@ $.fn.slider = function(parameters) {
           ;
           if (val <= min) {
             val = min;
-        ***REMOVED*** else if (val >= max) {
+          } else if (val >= max) {
             val = max;
-        ***REMOVED***
+          }
           newPos = module.determine.positionFromValue(val);
           return newPos;
- ***REMOVED*****REMOVED***
+        },
 
         set: {
           value: function(newValue) {
@@ -859,9 +859,9 @@ $.fn.slider = function(parameters) {
               if (!initialLoad || settings.fireOnInit){
                 settings.onChange.call(element, value, thumbVal, secondThumbVal);
                 settings.onMove.call(element, value, thumbVal, secondThumbVal);
-            ***REMOVED***
-          ***REMOVED***);
-   ***REMOVED*****REMOVED***
+              }
+            });
+          },
           rangeValue: function(first, second) {
             if(module.is.range()) {
               var
@@ -870,14 +870,14 @@ $.fn.slider = function(parameters) {
               ;
               if (first <= min) {
                 first = min;
-            ***REMOVED*** else if(first >= max){
+              } else if(first >= max){
                 first = max;
-            ***REMOVED***
+              }
               if (second <= min) {
                 second = min;
-            ***REMOVED*** else if(second >= max){
+              } else if(second >= max){
                 second = max;
-            ***REMOVED***
+              }
               module.thumbVal = first;
               module.secondThumbVal = second;
               value = Math.abs(module.thumbVal - module.secondThumbVal);
@@ -886,11 +886,11 @@ $.fn.slider = function(parameters) {
               if (!initialLoad || settings.fireOnInit) {
                 settings.onChange.call(element, value, module.thumbVal, module.secondThumbVal);
                 settings.onMove.call(element, value, module.thumbVal, module.secondThumbVal);
-            ***REMOVED***
-          ***REMOVED*** else {
+              }
+            } else {
               module.error(error.notrange);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           position: function(position, which) {
             var thumbVal = module.determine.value(position);
             switch (which) {
@@ -901,11 +901,11 @@ $.fn.slider = function(parameters) {
               default:
                 module.thumbVal = thumbVal;
                 module.update.position(thumbVal, $thumb);
-          ***REMOVED***
+            }
             value = Math.abs(module.thumbVal - (module.secondThumbVal || 0));
             module.set.value(value);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         update: {
           value: function(newValue, callback) {
@@ -915,35 +915,35 @@ $.fn.slider = function(parameters) {
             ;
             if (newValue <= min) {
               newValue = min;
-          ***REMOVED*** else if(newValue >= max){
+            } else if(newValue >= max){
               newValue = max;
-          ***REMOVED***
+            }
             if(!module.is.range()) {
               value = newValue;
               module.thumbVal = value;
-          ***REMOVED*** else {
+            } else {
               if($currThumb === undefined) {
                 $currThumb = newValue <= module.get.currentThumbValue() ? $thumb : $secondThumb;
-            ***REMOVED***
+              }
               if(!$currThumb.hasClass('second')) {
                 if(settings.preventCrossover && module.is.range()) {
                   newValue = Math.min(module.secondThumbVal, newValue);
-              ***REMOVED***
+                }
                 module.thumbVal = newValue;
-            ***REMOVED*** else {
+              } else {
                 if(settings.preventCrossover && module.is.range()) {
                   newValue = Math.max(module.thumbVal, newValue);
-              ***REMOVED***
+                }
                 module.secondThumbVal = newValue;
-            ***REMOVED***
+              }
               value = Math.abs(module.thumbVal - module.secondThumbVal);
-          ***REMOVED***
+            }
             module.update.position(newValue);
             module.debug('Setting slider value to ' + value);
             if(typeof callback === 'function') {
               callback(value, module.thumbVal, module.secondThumbVal);
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+            }
+          },
           position: function(newValue, $element) {
             var
               newPos = module.handleNewValuePosition(newValue),
@@ -955,46 +955,46 @@ $.fn.slider = function(parameters) {
               if(!$targetThumb.hasClass('second')) {
                 position = newPos;
                 thumbVal = newValue;
-            ***REMOVED*** else {
+              } else {
                 secondPos = newPos;
                 secondThumbVal = newValue;
-            ***REMOVED***
-          ***REMOVED*** else {
+              }
+            } else {
               position = newPos;
               thumbVal = newValue;
-          ***REMOVED***
+            }
             var
               trackPosValue,
               thumbPosValue,
               min = module.get.min(),
               max = module.get.max(),
-              thumbPosPercent = 100***REMOVED*** (newValue - min) / (max - min),
-              trackStartPosPercent = 100***REMOVED*** (Math.min(thumbVal, secondThumbVal) - min) / (max - min),
-              trackEndPosPercent = 100***REMOVED*** (1 - (Math.max(thumbVal, secondThumbVal) - min) / (max - min))
+              thumbPosPercent = 100 * (newValue - min) / (max - min),
+              trackStartPosPercent = 100 * (Math.min(thumbVal, secondThumbVal) - min) / (max - min),
+              trackEndPosPercent = 100 * (1 - (Math.max(thumbVal, secondThumbVal) - min) / (max - min))
             ;
             if (module.is.vertical()) {
               if (module.is.reversed()) {
-                thumbPosValue = {bottom: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', top: 'auto'***REMOVED***;
-                trackPosValue = {bottom: trackStartPosPercent + '%', top: trackEndPosPercent + '%'***REMOVED***;
-            ***REMOVED***
+                thumbPosValue = {bottom: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', top: 'auto'};
+                trackPosValue = {bottom: trackStartPosPercent + '%', top: trackEndPosPercent + '%'};
+              }
               else {
-                thumbPosValue = {top: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', bottom: 'auto'***REMOVED***;
-                trackPosValue = {top: trackStartPosPercent + '%', bottom: trackEndPosPercent + '%'***REMOVED***;
-            ***REMOVED***
-          ***REMOVED*** else {
+                thumbPosValue = {top: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', bottom: 'auto'};
+                trackPosValue = {top: trackStartPosPercent + '%', bottom: trackEndPosPercent + '%'};
+              }
+            } else {
               if (module.is.reversed()) {
-                thumbPosValue = {right: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', left: 'auto'***REMOVED***;
-                trackPosValue = {right: trackStartPosPercent + '%', left: trackEndPosPercent + '%'***REMOVED***;
-            ***REMOVED***
+                thumbPosValue = {right: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', left: 'auto'};
+                trackPosValue = {right: trackStartPosPercent + '%', left: trackEndPosPercent + '%'};
+              }
               else {
-                thumbPosValue = {left: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', right: 'auto'***REMOVED***;
-                trackPosValue = {left: trackStartPosPercent + '%', right: trackEndPosPercent + '%'***REMOVED***;
-            ***REMOVED***
-          ***REMOVED***
+                thumbPosValue = {left: 'calc(' + thumbPosPercent + '% - ' + offset + 'px)', right: 'auto'};
+                trackPosValue = {left: trackStartPosPercent + '%', right: trackEndPosPercent + '%'};
+              }
+            }
             $targetThumb.css(thumbPosValue);
             $trackFill.css(trackPosValue);
             module.debug('Setting slider position to ' + newPos);
-   ***REMOVED*****REMOVED***
+          },
           labelPosition: function (ratio, $label) {
             var
               startMargin = module.get.trackStartMargin(),
@@ -1007,19 +1007,19 @@ $.fn.slider = function(parameters) {
                   module.is.reversed() ? 'right' : 'left',
               startMarginMod = module.is.reversed() && !module.is.vertical() ? ' - ' : ' + '
             ;
-            var position = '(100% - ' + startMargin + ' - ' + endMargin + ')***REMOVED*** ' + ratio;
+            var position = '(100% - ' + startMargin + ' - ' + endMargin + ') * ' + ratio;
             $label.css(posDir, 'calc(' + position + startMarginMod + startMargin + ')');
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         goto: {
           max: function() {
             module.set.value(module.get.max());
-   ***REMOVED*****REMOVED***
+          },
           min: function() {
             module.set.value(module.get.min());
-   ***REMOVED*****REMOVED***
- ***REMOVED*****REMOVED***
+          },
+        },
 
         read: {
           metadata: function() {
@@ -1027,87 +1027,87 @@ $.fn.slider = function(parameters) {
               data = {
                 thumbVal        : $module.data(metadata.thumbVal),
                 secondThumbVal  : $module.data(metadata.secondThumbVal)
-            ***REMOVED***
+              }
             ;
             if(data.thumbVal) {
               if(module.is.range() && data.secondThumbVal) {
                 module.debug('Current value set from metadata', data.thumbVal, data.secondThumbVal);
                 module.set.rangeValue(data.thumbVal, data.secondThumbVal);
-            ***REMOVED*** else {
+              } else {
                 module.debug('Current value set from metadata', data.thumbVal);
                 module.set.value(data.thumbVal);
-            ***REMOVED***
-          ***REMOVED***
-   ***REMOVED*****REMOVED***
+              }
+            }
+          },
           settings: function() {
             if(settings.start !== false) {
               if(module.is.range()) {
                 module.debug('Start position set from settings', settings.start, settings.end);
                 module.set.rangeValue(settings.start, settings.end);
-            ***REMOVED*** else {
+              } else {
                 module.debug('Start position set from settings', settings.start);
                 module.set.value(settings.start);
-            ***REMOVED***
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+              }
+            }
+          }
+        },
 
         setting: function(name, value) {
           module.debug('Changing setting', name, value);
           if( $.isPlainObject(name) ) {
             $.extend(true, settings, name);
-        ***REMOVED***
+          }
           else if(value !== undefined) {
             if($.isPlainObject(settings[name])) {
               $.extend(true, settings[name], value);
-          ***REMOVED***
+            }
             else {
               settings[name] = value;
-          ***REMOVED***
-        ***REMOVED***
+            }
+          }
           else {
             return settings[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         internal: function(name, value) {
           if( $.isPlainObject(name) ) {
             $.extend(true, module, name);
-        ***REMOVED***
+          }
           else if(value !== undefined) {
             module[name] = value;
-        ***REMOVED***
+          }
           else {
             return module[name];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         debug: function() {
           if(!settings.silent && settings.debug) {
             if(settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.debug.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         verbose: function() {
           if(!settings.silent && settings.verbose && settings.debug) {
             if(settings.performance) {
               module.performance.log(arguments);
-          ***REMOVED***
+            }
             else {
               module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
               module.verbose.apply(console, arguments);
-          ***REMOVED***
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            }
+          }
+        },
         error: function() {
           if(!settings.silent) {
             module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
             module.error.apply(console, arguments);
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         performance: {
           log: function(message) {
@@ -1126,11 +1126,11 @@ $.fn.slider = function(parameters) {
                 'Arguments'      : [].slice.call(message, 1) || '',
                 'Element'        : element,
                 'Execution Time' : executionTime
-            ***REMOVED***);
-          ***REMOVED***
+              });
+            }
             clearTimeout(module.performance.timer);
             module.performance.timer = setTimeout(module.performance.display, 500);
-   ***REMOVED*****REMOVED***
+          },
           display: function() {
             var
               title = settings.name + ':',
@@ -1140,26 +1140,26 @@ $.fn.slider = function(parameters) {
             clearTimeout(module.performance.timer);
             $.each(performance, function(index, data) {
               totalTime += data['Execution Time'];
-          ***REMOVED***);
+            });
             title += ' ' + totalTime + 'ms';
             if(moduleSelector) {
               title += ' \'' + moduleSelector + '\'';
-          ***REMOVED***
+            }
             if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
               console.groupCollapsed(title);
               if(console.table) {
                 console.table(performance);
-            ***REMOVED***
+              }
               else {
                 $.each(performance, function(index, data) {
                   console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-              ***REMOVED***);
-            ***REMOVED***
+                });
+              }
               console.groupEnd();
-          ***REMOVED***
+            }
             performance = [];
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
 
         invoke: function(query, passedArguments, context) {
           var
@@ -1180,56 +1180,56 @@ $.fn.slider = function(parameters) {
               ;
               if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
                 object = object[camelCaseValue];
-            ***REMOVED***
+              }
               else if( object[camelCaseValue] !== undefined ) {
                 found = object[camelCaseValue];
                 return false;
-            ***REMOVED***
+              }
               else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
                 object = object[value];
-            ***REMOVED***
+              }
               else if( object[value] !== undefined ) {
                 found = object[value];
                 return false;
-            ***REMOVED***
+              }
               else {
                 module.error(error.method, query);
                 return false;
-            ***REMOVED***
-          ***REMOVED***);
-        ***REMOVED***
+              }
+            });
+          }
           if ( $.isFunction( found ) ) {
             response = found.apply(context, passedArguments);
-        ***REMOVED***
+          }
           else if(found !== undefined) {
             response = found;
-        ***REMOVED***
+          }
           if($.isArray(returnedValue)) {
             returnedValue.push(response);
-        ***REMOVED***
+          }
           else if(returnedValue !== undefined) {
             returnedValue = [returnedValue, response];
-        ***REMOVED***
+          }
           else if(response !== undefined) {
             returnedValue = response;
-        ***REMOVED***
+          }
           return found;
-      ***REMOVED***
-    ***REMOVED***;
+        }
+      };
 
       if(methodInvoked) {
         if(instance === undefined) {
           module.initialize();
-      ***REMOVED***
+        }
         module.invoke(query);
-    ***REMOVED***
+      }
       else {
         if(instance !== undefined) {
           instance.invoke('destroy');
-      ***REMOVED***
+        }
         module.initialize();
-    ***REMOVED***
-  ***REMOVED***)
+      }
+    })
   ;
 
   return (returnedValue !== undefined)
@@ -1237,7 +1237,7 @@ $.fn.slider = function(parameters) {
     : this
   ;
 
-***REMOVED***;
+};
 
 $.fn.slider.settings = {
 
@@ -1252,12 +1252,12 @@ $.fn.slider.settings = {
   error    : {
     method    : 'The method you called is not defined.',
     notrange : 'This slider is not a range slider'
-***REMOVED***
+  },
 
   metadata: {
     thumbVal        : 'thumbVal',
     secondThumbVal  : 'secondThumbVal'
-***REMOVED***
+  },
 
   min              : 0,
   max              : 20,
@@ -1280,7 +1280,7 @@ $.fn.slider.settings = {
 
   selector: {
 
-***REMOVED***
+  },
 
   className     : {
     reversed : 'reversed',
@@ -1290,7 +1290,7 @@ $.fn.slider.settings = {
     vertical : 'vertical',
     range    : 'range',
     smooth   : 'smooth'
-***REMOVED***
+  },
 
   keys : {
     pageUp     : 33,
@@ -1299,16 +1299,16 @@ $.fn.slider.settings = {
     upArrow    : 38,
     rightArrow : 39,
     downArrow  : 40
-***REMOVED***
+  },
 
   labelTypes    : {
     number  : 'number',
     letter  : 'letter'
-***REMOVED***
+  },
 
-  onChange : function(value, thumbVal, secondThumbVal){***REMOVED***,
-  onMove   : function(value, thumbVal, secondThumbVal){***REMOVED***,
-***REMOVED***;
+  onChange : function(value, thumbVal, secondThumbVal){},
+  onMove   : function(value, thumbVal, secondThumbVal){},
+};
 
 
-***REMOVED***)( jQuery, window, document );
+})( jQuery, window, document );

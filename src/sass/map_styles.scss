@@ -16,19 +16,19 @@
 //$colour33: #2016b8;
 //$colour34: #001683;
 
-$colour10: #dbcdcd;	// Main Primary color***REMOVED***/
+$colour10: #dbcdcd;	// Main Primary color */
 $colour11: #ecafaf; // AA3939
 $colour12: #AA3939;
 $colour13: #9f0000;
 $colour14: #550000;
 
-$colour30: #c8c5fd;	// Main Secondary color (1)***REMOVED***/
+$colour30: #c8c5fd;	// Main Secondary color (1) */
 $colour31: #7597fd;
 $colour32: #4a4efd;
 $colour33: #2016b8;
 $colour34: #000081;
 
-$colour20: #D4EE9F;	// Main Secondary color (2)***REMOVED***/
+$colour20: #D4EE9F;	// Main Secondary color (2) */
 $colour21: #A5C663;
 $colour22: #7B9F35;
 $colour23: #567714;
@@ -38,12 +38,12 @@ $colour24: #354F00;
 %equal-heights {
 display: flex;
 flex-wrap: wrap;
-***REMOVED***
+}
 
 .contentContainer{
     width: 80%;
     margin: 0 auto;
-***REMOVED***
+}
 
 .land {
 	fill: #cbd9db;
@@ -54,66 +54,66 @@ flex-wrap: wrap;
 		transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 		&:hover{
 			opacity: 0.7;
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
-/* chloropleth map***REMOVED***/
+/* chloropleth map */
 // Cases
-.colour10 {fill: $colour10;***REMOVED***
-.colour11 {fill: $colour11;***REMOVED***
-.colour12 {fill: $colour12;***REMOVED***
-.colour13 {fill: $colour13;***REMOVED***
-.colour14 {fill: $colour14;***REMOVED***
+.colour10 {fill: $colour10;}
+.colour11 {fill: $colour11;}
+.colour12 {fill: $colour12;}
+.colour13 {fill: $colour13;}
+.colour14 {fill: $colour14;}
 
 // Deaths
-.colour20 {fill: $colour20;***REMOVED***
-.colour21 {fill: $colour21;***REMOVED***
-.colour22 {fill: $colour22;***REMOVED***
-.colour23 {fill: $colour23;***REMOVED***
-.colour24 {fill: $colour24;***REMOVED***
+.colour20 {fill: $colour20;}
+.colour21 {fill: $colour21;}
+.colour22 {fill: $colour22;}
+.colour23 {fill: $colour23;}
+.colour24 {fill: $colour24;}
 
 // Recovered
-.colour30 {fill: $colour30;***REMOVED***
-.colour31 {fill: $colour31;***REMOVED***
-.colour32 {fill: $colour32;***REMOVED***
-.colour33 {fill: $colour33;***REMOVED***
-.colour34 {fill: $colour34;***REMOVED***
+.colour30 {fill: $colour30;}
+.colour31 {fill: $colour31;}
+.colour32 {fill: $colour32;}
+.colour33 {fill: $colour33;}
+.colour34 {fill: $colour34;}
 
 #svg-1
 {
 	// margin-top:3rem;
 	width: 50%;
 	overflow: visible
-***REMOVED***
+}
 
 #country-name {
 	// dominant-baseline: hanging;
 	transition: opacity 0.4s cubic-bezier(0.47, 0, 0.745, 0.715);
 	opacity: 0;
-***REMOVED***
+}
 
 .lightBack{
 	fill: rgba(190, 190, 190, 0.31);
 	stroke: #0000007a;
 
-***REMOVED***
+}
 
 #tooltipBackground{
 	@extend .lightBack;
-***REMOVED***
+}
 
 tspan{
 	&.legend{
 		dominant-baseline: unset
-	***REMOVED***
-***REMOVED***
+	}
+}
 #mapContainer{
 	//padding-bottom: 0.1rem;
 	//padding-top: 0;
 	padding: 0 0 0.1rem;
 	overflow: hidden;
-***REMOVED***
+}
 
 
 .ui{
@@ -125,35 +125,35 @@ tspan{
 			width:100%;
 			&:last-of-type{
 				margin-bottom: 1.5rem;
-			***REMOVED***
+			}
 			&:first-of-type{
 				margin-top: 1.5rem;
-			***REMOVED***
+			}
 			>.main.content{
 				padding-top: 0.5rem;
 				padding-bottom: 0.3rem;
-			***REMOVED***
+			}
 			>.extra.content{
 			    padding: 0.3rem 0;
 				>.description{
 					width: 70%;
 					text-align: left;
 					margin: 0 auto;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+				}
+			}
+		}
+	}
+}
 
 
 .toggle.button{
 	height: min-content;
-***REMOVED***
+}
 //
 //#hideIcon{
 //	width: 100%;
 //	margin: 0 auto;
-//***REMOVED***
+//}
 
 #svgColumn {
 	//transition: padding-left 0.2s ease-in;
@@ -163,8 +163,8 @@ tspan{
 		padding-left: 22em;
 		transition: all 1s linear;
 
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 #provStatsContainer{
 	margin-bottom: 0;
@@ -177,7 +177,7 @@ tspan{
 	{
 		overflow-x: visible;
 		overflow-y: auto;
-	***REMOVED***
+	}
 	&.sidebarHidden{
 		//display: none !important;
 		//left: -30% !important;
@@ -185,54 +185,54 @@ tspan{
 		//display: none;
 		transition: all 1s linear;
 
-	***REMOVED***
+	}
 	.scroll-hide{
 		overflow-y: auto;
-	***REMOVED***
+	}
 	.jspHorizontalBar {
 		background: none;
 		display: none;
-	***REMOVED***
+	}
 
-***REMOVED***
+}
 @media only screen and (max-width: 767px) {
 	[class*="mobile hidden"],
 	[class*="or lower hidden"] {
 		display: none !important;
-	***REMOVED***
+	}
 	.ui.cards > .card {
 		width: 85%;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 #mapContainer{
 	#hideIcon {
 		transition: all 1s linear;
-	***REMOVED***
+	}
 	.jspDrag{
 		border-radius: 25px;
-	***REMOVED***
+	}
 
 	.jspVerticalBar .jspArrow {
 		height: 0;
-	***REMOVED***
+	}
 	.jspVerticalBar{
 		background: none;
-	***REMOVED***
+	}
 	.jspDrag{
 		background: rgba(190,190,190,.90);;
-	***REMOVED***
+	}
 	.jspTrack {
 		border-radius: 25px;
 		background: none;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 #filterColumn{
 	.filter{
 		margin-right: 3.5rem !important;
-	***REMOVED***
+	}
 
-***REMOVED***
+}
 
 

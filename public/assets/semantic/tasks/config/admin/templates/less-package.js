@@ -5,9 +5,9 @@ var
 Package.describe({
   name    : 'semantic:ui',
   summary : 'Semantic UI - LESS Release of Semantic UI',
-  version : '{version***REMOVED***',
+  version : '{version}',
   git     : 'git://github.com/Semantic-Org/Semantic-UI-LESS.git',
-***REMOVED***);
+});
 
 Package.onUse(function(api) {
 
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('less', 'client');
 
   api.addFiles([
-    {files***REMOVED***
+    {files}
   ], 'client');
 
-***REMOVED***);
+});

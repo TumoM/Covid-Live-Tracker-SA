@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Step
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Step
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
              Step
 *******************************/
 
@@ -22,7 +22,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Plural
 *******************************/
 
@@ -36,23 +36,23 @@
   line-height: @lineHeight;
   border-radius: @stepsBorderRadius;
   border: @stepsBorder;
-***REMOVED***
+}
 .ui.steps:not(.unstackable) {
   flex-wrap: wrap;
-***REMOVED***
+}
 
-/* First Steps***REMOVED***/
+/* First Steps */
 .ui.steps:first-child {
   margin-top: 0;
-***REMOVED***
+}
 
-/* Last Steps***REMOVED***/
+/* Last Steps */
 .ui.steps:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Singular
 *******************************/
 
@@ -75,9 +75,9 @@
   border: @border;
   border-right: @divider;
   transition: @transition;
-***REMOVED***
+}
 
-/* Arrow***REMOVED***/
+/* Arrow */
 .ui.steps .step:after {
   display: none;
   position: absolute;
@@ -95,79 +95,79 @@
 
   transition: @transition;
   transform: translateY(-50%) translateX(50%) rotate(-45deg);
-***REMOVED***
+}
 
-/* First Step***REMOVED***/
+/* First Step */
 .ui.steps .step:first-child {
   padding-left: @horizontalPadding;
   border-radius: @stepsBorderRadius 0 0 @stepsBorderRadius;
-***REMOVED***
+}
 
-/* Last Step***REMOVED***/
+/* Last Step */
 .ui.steps .step:last-child {
   border-radius: 0 @stepsBorderRadius @stepsBorderRadius 0;
   border-right: none;
   margin-right: 0;
-***REMOVED***
+}
 
-/* Only Step***REMOVED***/
+/* Only Step */
 .ui.steps .step:only-child {
   border-radius: @stepsBorderRadius;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
             Content
 *******************************/
 
-/* Title***REMOVED***/
+/* Title */
 .ui.steps .step .title {
   font-family: @titleFontFamily;
   font-size: @titleFontSize;
   font-weight: @titleFontWeight;
-***REMOVED***
+}
 .ui.steps .step > .title {
   width: 100%;
-***REMOVED***
+}
 
-/* Description***REMOVED***/
+/* Description */
 .ui.steps .step .description {
   font-weight: @descriptionFontWeight;
   font-size: @descriptionFontSize;
   color: @descriptionColor;
-***REMOVED***
+}
 .ui.steps .step > .description {
   width: 100%;
-***REMOVED***
+}
 .ui.steps .step .title ~ .description {
   margin-top: @descriptionDistance;
-***REMOVED***
+}
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.steps .step > .icon {
   line-height: 1;
   font-size: @iconSize;
   margin: 0 @iconDistance 0 0;
-***REMOVED***
+}
 .ui.steps .step > .icon,
 .ui.steps .step > .icon ~ .content {
   display: block;
   flex: 0 1 auto;
   align-self: @iconAlign;
-***REMOVED***
+}
 
-/* Horizontal Icon***REMOVED***/
+/* Horizontal Icon */
 .ui.steps:not(.vertical) .step > .icon {
   width: auto;
-***REMOVED***
+}
 
-/* Link***REMOVED***/
+/* Link */
 .ui.steps .link.step,
 .ui.steps a.step {
   cursor: pointer;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             Types
 *******************************/
 
@@ -178,7 +178,7 @@
 
   .ui.ordered.steps {
     counter-reset: ordered;
-***REMOVED***
+  }
   .ui.ordered.steps .step:before {
     display: block;
     position: static;
@@ -190,13 +190,13 @@
     counter-increment: ordered;
     font-family: @orderedFontFamily;
     font-weight: @orderedFontWeight;
-***REMOVED***
+  }
 
-  .ui.ordered.steps .step >***REMOVED*** {
+  .ui.ordered.steps .step > * {
     display: block;
     align-self: @iconAlign;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationStepVertical) {
   /*--------------
@@ -207,59 +207,59 @@
     display: inline-flex;
     flex-direction: column;
     overflow: visible;
-***REMOVED***
+  }
   .ui.vertical.steps .step {
     justify-content: flex-start;
     border-radius: @borderRadius;
     padding: @verticalPadding @horizontalPadding;
     border-right: none;
     border-bottom: @verticalDivider;
-***REMOVED***
+  }
   .ui.vertical.steps .step:first-child {
     padding: @verticalPadding @horizontalPadding;
     border-radius: @stepsBorderRadius @stepsBorderRadius 0 0;
-***REMOVED***
+  }
   .ui.vertical.steps .step:last-child {
     border-bottom: none;
     border-radius: 0 0 @stepsBorderRadius @stepsBorderRadius;
-***REMOVED***
+  }
   .ui.vertical.steps .step:only-child {
     border-radius: @stepsBorderRadius;
-***REMOVED***
+  }
 
 
-  /* Arrow***REMOVED***/
+  /* Arrow */
   .ui.vertical.steps .step:after {
     top: @verticalArrowTopOffset;
     right: @verticalArrowRightOffset;
     border-width: @verticalArrowBorderWidth;
     display: @verticalArrowDisplay;
-***REMOVED***
+  }
 
   .ui.vertical.steps .active.step:after {
     display: @verticalActiveArrowDisplay;
-***REMOVED***
+  }
   .ui.vertical.steps .step:last-child:after {
     display: @verticalLastArrowDisplay;
-***REMOVED***
+  }
   .ui.vertical.steps .active.step:last-child:after {
     display: @verticalActiveLastArrowDisplay;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*---------------
     Responsive
 ----------------*/
 
-/* Mobile (Default)***REMOVED***/
+/* Mobile (Default) */
 @media only screen and (max-width: (@largestMobileScreen)) {
 
   .ui.steps:not(.unstackable) {
     display: inline-flex;
     overflow: visible;
     flex-direction: column;
-***REMOVED***
+  }
   .ui.steps:not(.unstackable) .step {
     width: 100% !important;
     flex-direction: column;
@@ -267,92 +267,92 @@
     padding: @verticalPadding @horizontalPadding;
     border-right: none;
     border-bottom: @stepsBorder;
-***REMOVED***
+  }
   .ui.steps:not(.unstackable) .step:first-child {
     padding: @verticalPadding @horizontalPadding;
     border-radius: @stepsBorderRadius @stepsBorderRadius 0 0;
-***REMOVED***
+  }
   .ui.steps:not(.unstackable) .step:last-child {
     border-radius: 0 0 @stepsBorderRadius @stepsBorderRadius;
     border-bottom: none;
-***REMOVED***
+  }
 
-  /* Arrow***REMOVED***/
+  /* Arrow */
   .ui.steps:not(.unstackable) .step:after {
     top: unset;
     bottom: -@arrowSize;
     right: 50%;
     transform: translateY(-50%) translateX(50%) rotate(45deg);
-***REMOVED***
+  }
   .ui.vertical.steps .active.step:last-child:after {
     display: none;
-***REMOVED***
-  /* Content***REMOVED***/
+  }
+  /* Content */
   .ui.steps:not(.unstackable) .step .content {
     text-align: center;
-***REMOVED***
+  }
 
-  /* Icon***REMOVED***/
+  /* Icon */
   .ui.steps:not(.unstackable) .step > .icon,
   .ui.ordered.steps:not(.unstackable) .step:before {
     margin: 0 0 @mobileIconDistance 0;
-***REMOVED***
+  }
 
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
-/* Link Hover***REMOVED***/
+/* Link Hover */
 .ui.steps .link.step:hover::after,
 .ui.steps .link.step:hover,
 .ui.steps a.step:hover::after,
 .ui.steps a.step:hover {
   background: @hoverBackground;
   color: @hoverColor;
-***REMOVED***
+}
 
-/* Link Down***REMOVED***/
+/* Link Down */
 .ui.steps .link.step:active::after,
 .ui.steps .link.step:active,
 .ui.steps a.step:active::after,
 .ui.steps a.step:active {
   background: @downBackground;
   color: @downColor;
-***REMOVED***
+}
 
-/* Active***REMOVED***/
+/* Active */
 .ui.steps .step.active {
   cursor: auto;
   background: @activeBackground;
-***REMOVED***
+}
 .ui.steps .step.active:after {
   background: @activeBackground;
-***REMOVED***
+}
 .ui.steps .step.active .title {
   color: @activeColor;
-***REMOVED***
+}
 .ui.ordered.steps .step.active:before,
 .ui.steps .active.step .icon {
   color: @activeIconColor;
-***REMOVED***
+}
 
-/* Active Arrow***REMOVED***/
+/* Active Arrow */
 .ui.steps .step:after {
   display: @arrowDisplay;
-***REMOVED***
+}
 .ui.steps .active.step:after {
   display: @activeArrowDisplay;
-***REMOVED***
+}
 .ui.steps .step:last-child:after {
   display: @lastArrowDisplay;
-***REMOVED***
+}
 .ui.steps .active.step:last-child:after {
   display: @activeLastArrowDisplay;
-***REMOVED***
+}
 
-/* Active Hover***REMOVED***/
+/* Active Hover */
 .ui.steps .link.active.step:hover::after,
 .ui.steps .link.active.step:hover,
 .ui.steps a.active.step:hover::after,
@@ -360,33 +360,33 @@
   cursor: pointer;
   background: @activeHoverBackground;
   color: @activeHoverColor;
-***REMOVED***
+}
 
-/* Completed***REMOVED***/
+/* Completed */
 .ui.steps .step.completed > .icon:before,
 .ui.ordered.steps .step.completed:before {
   color: @completedColor;
-***REMOVED***
+}
 
 & when (@variationStepDisabled) {
-  /* Disabled***REMOVED***/
+  /* Disabled */
   .ui.steps .disabled.step {
     cursor: auto;
     background: @disabledBackground;
     pointer-events: none;
-***REMOVED***
+  }
   .ui.steps .disabled.step,
   .ui.steps .disabled.step .title,
   .ui.steps .disabled.step .description {
     color: @disabledColor;
-***REMOVED***
+  }
   .ui.steps .disabled.step:after {
     background: @disabledBackground;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -395,97 +395,97 @@
      Stackable
   ---------------*/
 
-  /* Tablet Or Below***REMOVED***/
+  /* Tablet Or Below */
   @media only screen and (max-width: @largestTabletScreen) {
 
     .ui[class*="tablet stackable"].steps {
       display: inline-flex;
       overflow: visible;
       flex-direction: column;
-  ***REMOVED***
+    }
 
-    /* Steps***REMOVED***/
+    /* Steps */
     .ui[class*="tablet stackable"].steps .step {
       flex-direction: column;
       border-radius: @borderRadius;
       padding: @verticalPadding @horizontalPadding;
       border-right: none;
       border-bottom: @stepsBorder;
-  ***REMOVED***
+    }
     .ui[class*="tablet stackable"].steps .step:first-child {
       padding: @verticalPadding @horizontalPadding;
       border-radius: @stepsBorderRadius @stepsBorderRadius 0 0;
-  ***REMOVED***
+    }
     .ui[class*="tablet stackable"].steps .step:last-child {
       border-radius: 0 0 @stepsBorderRadius @stepsBorderRadius;
       border-bottom: none;
-  ***REMOVED***
+    }
 
-    /* Arrow***REMOVED***/
+    /* Arrow */
     .ui[class*="tablet stackable"].steps .step:after {
       top: unset;
       bottom: -@arrowSize;
       right: 50%;
       transform: translateY(-50%) translateX(50%) rotate(45deg);
-  ***REMOVED***
+    }
 
-    /* Content***REMOVED***/
+    /* Content */
     .ui[class*="tablet stackable"].steps .step .content {
       text-align: center;
-  ***REMOVED***
+    }
 
-    /* Icon***REMOVED***/
+    /* Icon */
     .ui[class*="tablet stackable"].steps .step > .icon,
     .ui[class*="tablet stackable"].ordered.steps .step:before {
       margin: 0 0 @mobileIconDistance 0;
-  ***REMOVED***
+    }
 
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationStepFluid) {
   /*--------------
         Fluid
   ---------------*/
 
-  /* Fluid***REMOVED***/
+  /* Fluid */
   .ui.fluid.steps {
     display: flex;
     width: 100%;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationStepAttached) {
   /*--------------
       Attached
   ---------------*/
 
-  /* Top***REMOVED***/
+  /* Top */
   .ui.attached.steps {
     width: @attachedWidth !important;
     margin: 0 @attachedHorizontalOffset @attachedVerticalOffset;
     max-width: @attachedWidth;
     border-radius: @stepsBorderRadius @stepsBorderRadius 0 0;
-***REMOVED***
+  }
   .ui.attached.steps .step:first-child {
     border-radius: @stepsBorderRadius 0 0 0;
-***REMOVED***
+  }
   .ui.attached.steps .step:last-child {
     border-radius: 0 @stepsBorderRadius 0 0;
-***REMOVED***
+  }
 
-  /* Bottom***REMOVED***/
+  /* Bottom */
   .ui.bottom.attached.steps {
     margin: @attachedVerticalOffset @attachedHorizontalOffset 0;
     border-radius: 0 0 @stepsBorderRadius @stepsBorderRadius;
-***REMOVED***
+  }
   .ui.bottom.attached.steps .step:first-child {
     border-radius: 0 0 0 @stepsBorderRadius;
-***REMOVED***
+  }
   .ui.bottom.attached.steps .step:last-child {
     border-radius: 0 0 @stepsBorderRadius 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*-------------------
     Evenly Divided
@@ -500,7 +500,7 @@
 .ui.seven.steps,
 .ui.eight.steps {
   width: 100%;
-***REMOVED***
+}
 .ui.one.steps > .step,
 .ui.two.steps > .step,
 .ui.three.steps > .step,
@@ -510,31 +510,31 @@
 .ui.seven.steps > .step,
 .ui.eight.steps > .step {
   flex-wrap: nowrap;
-***REMOVED***
+}
 .ui.one.steps > .step {
   width: 100%;
-***REMOVED***
+}
 .ui.two.steps > .step {
   width: 50%;
-***REMOVED***
+}
 .ui.three.steps > .step {
   width: 33.333%;
-***REMOVED***
+}
 .ui.four.steps > .step {
   width: 25%;
-***REMOVED***
+}
 .ui.five.steps > .step {
   width: 20%;
-***REMOVED***
+}
 .ui.six.steps > .step {
   width: 16.666%;
-***REMOVED***
+}
 .ui.seven.steps > .step {
   width: 14.285%;
-***REMOVED***
+}
 .ui.eight.steps > .step {
   width: 12.500%;
-***REMOVED***
+}
 
 /*-------------------
        Sizes
@@ -543,16 +543,16 @@
 .ui.steps .step,
 .ui.step {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationStepSizes = false) {
   each(@variationStepSizes, {
     @s: @@value;
-    .ui.@{value***REMOVED***.steps .step,
-    .ui.@{value***REMOVED***.step {
+    .ui.@{value}.steps .step,
+    .ui.@{value}.step {
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 & when (@variationStepInverted) {
   /*--------------
@@ -561,64 +561,64 @@
 
   .ui.inverted.steps {
     border: 1px solid @solidWhiteBorderColor;
-***REMOVED***
+  }
 
   .ui.inverted.steps .step {
     color: @invertedTextColor;
     background: @black;
     border-color: @solidWhiteBorderColor;
-***REMOVED***
+  }
 
   .ui.inverted.steps .step:after {
     background-color: @black;
     border-color: @solidWhiteBorderColor;
-***REMOVED***
+  }
 
   .ui.inverted.steps .step .description {
     color: @invertedTextColor;
-***REMOVED***
+  }
 
-  /* Active***REMOVED***/
+  /* Active */
   .ui.inverted.steps .step.active,
   .ui.inverted.steps .step.active:after {
     background: @invertedActiveBackground;
-***REMOVED***
+  }
   .ui.inverted.ordered.steps .step.active:before,
   .ui.inverted.steps .active.step .icon {
     color: @invertedSelectedTextColor;
-***REMOVED***
+  }
 
   & when (@variationStepDisabled) {
-    /* Disabled***REMOVED***/
+    /* Disabled */
     .ui.inverted.steps .disabled.step,
     .ui.inverted.steps .disabled.step:after {
       background: @invertedDisabledBackground;
-  ***REMOVED***
+    }
     .ui.inverted.steps .disabled.step,
     .ui.inverted.steps .disabled.step .title,
     .ui.inverted.steps .disabled.step .description {
       color: @invertedDisabledTextColor;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  /* Link Hover***REMOVED***/
+  /* Link Hover */
   .ui.inverted.steps .link.step:hover::after,
   .ui.inverted.steps .link.step:hover,
   .ui.inverted.steps a.step:hover::after,
   .ui.inverted.steps a.step:hover {
     background: @invertedHoverBackground;
     color: @invertedHoveredTextColor;
-***REMOVED***
+  }
 
-  /* Link Down***REMOVED***/
+  /* Link Down */
   .ui.inverted.steps .link.step:active::after,
   .ui.inverted.steps .link.step:active,
   .ui.inverted.steps a.step:active::after,
   .ui.inverted.steps a.step:active {
     background: @invertedActiveHoverBackground;
     color: @invertedPressedTextColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 .loadUIOverrides();

@@ -1,11 +1,11 @@
-***REMOVED********************************
+/*******************************
           Register PM
 *******************************/
 
 /*
   Task to register component repos with Package Managers
- ***REMOVED*** Registers component with bower
- ***REMOVED*** Registers component with NPM
+  * Registers component with bower
+  * Registers component with NPM
 */
 
 var
@@ -34,22 +34,22 @@ module.exports = function(callback) {
     if(index >= total) {
       callback();
       return;
-  ***REMOVED***
+    }
     var
       repo            = repos[index].toLowerCase(),
       outputDirectory = release.outputRoot + repo + '/',
       exec            = process.exec,
-      execSettings    = {cwd: outputDirectory***REMOVED***,
+      execSettings    = {cwd: outputDirectory},
       updateNPM       = 'npm publish;meteor publish;'
     ;
 
-    /* Register with NPM***REMOVED***/
+    /* Register with NPM */
     exec(updateNPM, execSettings, function(err, stdout, stderr) {
       console.log(err, stdout, stderr);
       stepRepo();
-  ***REMOVED***);
+    });
 
-***REMOVED***;
+  };
   stepRepo();
-***REMOVED***;
+};
 

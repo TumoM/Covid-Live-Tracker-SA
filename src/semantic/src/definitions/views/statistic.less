@@ -1,14 +1,14 @@
 /*!
-***REMOVED*** # Fomantic-UI - Statistic
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Statistic
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -17,54 +17,54 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
            Statistic
 *******************************/
 
-/* Standalone***REMOVED***/
+/* Standalone */
 .ui.statistic {
   display: inline-flex;
   flex-direction: column;
   margin: @margin;
   max-width: @maxWidth;
-***REMOVED***
+}
 
 .ui.statistic + .ui.statistic {
   margin: 0 0 0 @horizontalSpacing;
-***REMOVED***
+}
 
 .ui.statistic:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.statistic:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
 
-***REMOVED********************************
+/*******************************
             Group
 *******************************/
 
-/* Grouped***REMOVED***/
+/* Grouped */
 .ui.statistics {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-***REMOVED***
+}
 .ui.statistics > .statistic {
   display: inline-flex;
   flex: 0 1 auto;
   flex-direction: column;
   margin: @elementMargin;
   max-width: @elementMaxWidth;
-***REMOVED***
+}
 .ui.statistics {
   display: flex;
   margin: @groupMargin;
-***REMOVED***
+}
 
-/* Clearing***REMOVED***/
+/* Clearing */
 .ui.statistics:after {
   display: block;
   content: ' ';
@@ -72,14 +72,14 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 
 .ui.statistics:first-child {
   margin-top: 0;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
             Content
 *******************************/
 
@@ -97,7 +97,7 @@
   color: @valueColor;
   text-transform: @valueTextTransform;
   text-align: @textAlign;
-***REMOVED***
+}
 
 /*--------------
      Label
@@ -111,23 +111,23 @@
   color: @labelColor;
   text-transform: @labelTextTransform;
   text-align: @textAlign;
-***REMOVED***
+}
 
-/* Top Label***REMOVED***/
+/* Top Label */
 .ui.statistics .statistic > .label ~ .value,
 .ui.statistic > .label ~ .value {
   margin-top: @topLabelDistance;
-***REMOVED***
+}
 
-/* Bottom Label***REMOVED***/
+/* Bottom Label */
 .ui.statistics .statistic > .value ~ .label,
 .ui.statistic > .value ~ .label {
   margin-top: @bottomLabelDistance;
-***REMOVED***
+}
 
 
 
-***REMOVED********************************
+/*******************************
              Types
 *******************************/
 
@@ -140,7 +140,7 @@
   opacity: 1;
   width: auto;
   margin: 0;
-***REMOVED***
+}
 
 /*--------------
    Text Value
@@ -152,11 +152,11 @@
   min-height: @textValueMinHeight;
   font-weight: @textValueFontWeight;
   text-align: center;
-***REMOVED***
+}
 .ui.statistics .statistic > .text.value + .label,
 .ui.statistic > .text.value + .label {
   text-align: center;
-***REMOVED***
+}
 
 /*--------------
    Image Value
@@ -166,11 +166,11 @@
 .ui.statistic > .value img {
   max-height: @imageHeight;
   vertical-align: @imageVerticalAlign;
-***REMOVED***
+}
 
 
 
-***REMOVED********************************
+/*******************************
             Variations
 *******************************/
 
@@ -182,83 +182,83 @@
 
 .ui.ten.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.ten.statistics .statistic {
   min-width: @tenColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.nine.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.nine.statistics .statistic {
   min-width: @nineColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.eight.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.eight.statistics .statistic {
   min-width: @eightColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.seven.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.seven.statistics .statistic {
   min-width: @sevenColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.six.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.six.statistics .statistic {
   min-width: @sixColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.five.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.five.statistics .statistic {
   min-width: @fiveColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.four.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.four.statistics .statistic {
   min-width: @fourColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.three.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.three.statistics .statistic {
   min-width: @threeColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.two.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.two.statistics .statistic {
   min-width: @twoColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 .ui.one.statistics {
   margin: @itemGroupMargin;
-***REMOVED***
+}
 .ui.one.statistics .statistic {
   min-width: @oneColumn;
   margin: @itemMargin;
-***REMOVED***
+}
 
 
 
@@ -270,40 +270,40 @@
   .ui.horizontal.statistic {
     flex-direction: row;
     align-items: center;
-***REMOVED***
+  }
   .ui.horizontal.statistics {
     flex-direction: column;
     margin: 0;
     max-width: none;
-***REMOVED***
+  }
   .ui.horizontal.statistics .statistic {
     flex-direction: row;
     align-items: center;
     max-width: none;
     margin: @horizontalGroupElementMargin;
-***REMOVED***
+  }
 
   .ui.horizontal.statistic > .text.value,
   .ui.horizontal.statistics > .statistic > .text.value {
     min-height: 0 !important;
-***REMOVED***
+  }
   .ui.horizontal.statistics .statistic > .value .icon,
   .ui.horizontal.statistic > .value .icon {
     width: @iconWidth;
-***REMOVED***
+  }
 
   .ui.horizontal.statistics .statistic > .value,
   .ui.horizontal.statistic > .value {
     display: inline-block;
     vertical-align: middle;
-***REMOVED***
+  }
   .ui.horizontal.statistics .statistic > .label,
   .ui.horizontal.statistic > .label {
     display: inline-block;
     vertical-align: middle;
     margin: 0 0 0 @horizontalLabelDistance;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationStatisticInverted) {
   /*--------------
@@ -313,12 +313,12 @@
   .ui.inverted.statistics .statistic > .value,
   .ui.inverted.statistic .value {
     color: @invertedValueColor;
-***REMOVED***
+  }
   .ui.inverted.statistics .statistic > .label,
   .ui.inverted.statistic .label {
     color: @invertedLabelColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
      Colors
@@ -329,19 +329,19 @@ each(@colors,{
   @c: @colors[@@color][color];
   @l: @colors[@@color][light];
 
-  .ui.@{color***REMOVED***.statistics .statistic > .value,
-  .ui.statistics .@{color***REMOVED***.statistic > .value,
-  .ui.@{color***REMOVED***.statistic > .value {
+  .ui.@{color}.statistics .statistic > .value,
+  .ui.statistics .@{color}.statistic > .value,
+  .ui.@{color}.statistic > .value {
     color: @c;
-***REMOVED***
+  }
   & when (@variationStatisticInverted) {
-    .ui.inverted.@{color***REMOVED***.statistics .statistic > .value,
-    .ui.statistics .inverted.@{color***REMOVED***.statistic > .value,
-    .ui.inverted.@{color***REMOVED***.statistic > .value {
+    .ui.inverted.@{color}.statistics .statistic > .value,
+    .ui.statistics .inverted.@{color}.statistic > .value,
+    .ui.inverted.@{color}.statistic > .value {
       color: @l;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+    }
+  }
+})
 
 & when (@variationStatisticFloated) {
   /*--------------
@@ -351,15 +351,15 @@ each(@colors,{
   .ui[class*="left floated"].statistic {
     float: left;
     margin: @leftFloatedMargin;
-***REMOVED***
+  }
   .ui[class*="right floated"].statistic {
     float: right;
     margin: @rightFloatedMargin;
-***REMOVED***
+  }
   .ui.floated.statistic:last-child {
     margin-bottom: 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationStatisticStackable) {
   /*--------------
@@ -371,51 +371,51 @@ each(@colors,{
       width: auto;
       margin-left: 0 !important;
       margin-right: 0 !important;
-  ***REMOVED***
+    }
     .ui.stackable.statistics > .statistic {
       width: 100% !important;
       margin: 0 0 !important;
       padding: (@stackableRowSpacing / 2) (@stackableGutter / 2) !important;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
      Sizes
 ---------------*/
 
 
-/* Medium***REMOVED***/
+/* Medium */
 .ui.statistics .statistic > .value,
 .ui.statistic > .value {
   font-size: @valueSize;
-***REMOVED***
+}
 .ui.horizontal.statistics .statistic > .value,
 .ui.horizontal.statistic > .value {
   font-size: @horizontalValueSize;
-***REMOVED***
+}
 .ui.statistics .statistic > .text.value,
 .ui.statistic > .text.value {
   font-size: @textValueSize;
-***REMOVED***
+}
 & when not (@variationStatisticSizes = false) {
   each(@variationStatisticSizes, {
-    @s: @{value***REMOVED***ValueSize;
-    @hs: @{value***REMOVED***HorizontalValueSize;
-    @ts: @{value***REMOVED***TextValueSize;
-    .ui.@{value***REMOVED***.statistics .statistic > .value,
-    .ui.@{value***REMOVED***.statistic > .value {
+    @s: @{value}ValueSize;
+    @hs: @{value}HorizontalValueSize;
+    @ts: @{value}TextValueSize;
+    .ui.@{value}.statistics .statistic > .value,
+    .ui.@{value}.statistic > .value {
       font-size: @@s;
-  ***REMOVED***
-    .ui.@{value***REMOVED***.horizontal.statistics .statistic > .value,
-    .ui.@{value***REMOVED***.horizontal.statistic > .value {
+    }
+    .ui.@{value}.horizontal.statistics .statistic > .value,
+    .ui.@{value}.horizontal.statistic > .value {
       font-size: @@hs;
-  ***REMOVED***
-    .ui.@{value***REMOVED***.statistics .statistic > .text.value,
-    .ui.@{value***REMOVED***.statistic > .text.value {
+    }
+    .ui.@{value}.statistics .statistic > .text.value,
+    .ui.@{value}.statistic > .text.value {
       font-size: @@ts;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 .loadUIOverrides();

@@ -61,13 +61,13 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		.tabulator-tableHolder{
 			.tabulator-table{
 				min-width:100%;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	&.tabulator-block-select{
 		user-select: none;
-	***REMOVED***
+	}
 
 	//column header containing element
 	.tabulator-header{
@@ -96,7 +96,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		&.tabulator-header-hidden{
 			display:none;
-		***REMOVED***
+		}
 
 		//individual column header element
 		.tabulator-col{
@@ -114,7 +114,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				border:1px solid  $headerSeperatorColor;
 				background:darken($headerBackgroundColor, 10%);
 				pointer-events: none;
-			***REMOVED***
+			}
 
 			//hold content of column header
 			.tabulator-col-content{
@@ -129,8 +129,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					&:hover{
 						cursor: pointer;
 						opacity: .6;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//hold title of column header
 				.tabulator-col-title{
@@ -155,8 +155,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 						font-size: 1em;
 						color: $primary;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//column sorter arrow
 				.tabulator-arrow{
@@ -169,9 +169,9 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					border-left: 6px solid transparent;
 					border-right: 6px solid transparent;
 					border-bottom: 6px solid $sortArrowInactive;
-				***REMOVED***
+				}
 
-			***REMOVED***
+			}
 
 			//complex header column group
 			&.tabulator-col-group{
@@ -185,16 +185,16 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					overflow: hidden;
 
 					margin-right:-1px;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 
 			//hide left resize handle on first column
 			&:first-child{
 				.tabulator-col-resize-handle.prev{
 					display: none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 
 			//header filter containing element
@@ -208,53 +208,53 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				//styling adjustment for inbuilt editors
 				textarea{
 					height:auto !important;
-				***REMOVED***
+				}
 
 				svg{
 					margin-top: 3px;
-				***REMOVED***
+				}
 
 				input{
 					&::-ms-clear {
 						width : 0;
 						height: 0;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			//styling child elements for sortable columns
 			&.tabulator-sortable{
 				.tabulator-col-title{
 					padding-right:25px;
-				***REMOVED***
+				}
 
 				&:hover{
 					cursor:pointer;
 					background-color:darken($headerBackgroundColor, 10%);
-				***REMOVED***
+				}
 
 
 				&[aria-sort="none"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowInactive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="asc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowActive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="desc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: 6px solid $sortArrowActive;
 						border-bottom: none;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			&.tabulator-col-vertical{
 				.tabulator-col-content{
@@ -265,36 +265,36 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 						display:flex;
 						align-items:center;
 						justify-content:center;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-col-vertical-flip{
 					.tabulator-col-title{
 						transform: rotate(180deg);
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-sortable{
 					.tabulator-col-title{
 						padding-right:0;
 						padding-top:20px;
-					***REMOVED***
+					}
 
 					&.tabulator-col-vertical-flip{
 						.tabulator-col-title{
 							padding-right:0;
 							padding-bottom:20px;
-						***REMOVED***
+						}
 
-					***REMOVED***
+					}
 
 					.tabulator-arrow{
 						right:calc(50% - 6px);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
-		***REMOVED***
+		}
 
 		.tabulator-frozen{
 			display: inline-block;
@@ -308,12 +308,12 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				padding-left: $handleWidth;
 
 				border-right:2px solid $rowBorderColor;
-			***REMOVED***
+			}
 
 			&.tabulator-frozen-right{
 				border-left:2px solid $rowBorderColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-calcs-holder{
 			box-sizing:border-box;
@@ -330,27 +330,27 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
+				}
 
 				.tabulator-cell{
 					background:none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			border-top:1px solid $rowBorderColor;
 			border-bottom:1px solid $headerBorderColor;
 
 			overflow: hidden;
-		***REMOVED***
+		}
 
 		.tabulator-frozen-rows-holder{
 			min-width:600%;
 
 			&:empty{
 				display: none;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	//scrolling element to hold table
 	.tabulator-tableHolder{
@@ -362,7 +362,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		&:focus{
 			outline: none;
-		***REMOVED***
+		}
 
 		//default placeholder element
 		.tabulator-placeholder{
@@ -373,7 +373,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			&[tabulator-render-mode="virtual"]{
 				min-height:100%;
 				min-width:100%;
-			***REMOVED***
+			}
 
 			width:100%;
 
@@ -386,8 +386,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				color:$primary;
 				font-weight: bold;
 				font-size: 20px;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//element to hold table rows
 		.tabulator-table{
@@ -405,15 +405,15 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 					&.tabulator-calcs-top{
 						border-bottom:2px solid $headerSeperatorColor;
-					***REMOVED***
+					}
 
 					&.tabulator-calcs-bottom{
 						border-top:2px solid $headerSeperatorColor;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 
 	//column resize handles
@@ -427,12 +427,12 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		&.prev{
 			left:0;
 			right:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ew-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 
 	//footer element
@@ -468,16 +468,16 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
+				}
 
 				.tabulator-cell{
 					background:none;
 
 					&:first-child{
 						border-left: $handleWidth solid transparent;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			border-bottom:1px solid $rowBorderColor;
 			border-top:1px solid $rowBorderColor;
@@ -488,8 +488,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				margin-bottom:-5px;
 				border-bottom:none;
 				border-bottom:none !important;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//pagination container element
 		.tabulator-paginator{
@@ -497,7 +497,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			font-family:inherit;
 			font-weight:inherit;
 			font-size:inherit;
-		***REMOVED***
+		}
 
 		//page size select element
 		.tabulator-page-size{
@@ -508,12 +508,12 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 			border:1px solid $footerBorderColor;
 			border-radius:3px;
-		***REMOVED***
+		}
 
 		//pagination container element
 		.tabulator-pages{
 			margin:0 7px;
-		***REMOVED***
+		}
 
 		//pagination button
 		.tabulator-page{
@@ -529,21 +529,21 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 			&.active{
 				color:$footerActiveColor;
-			***REMOVED***
+			}
 
 			&:disabled{
 				opacity:.5;
-			***REMOVED***
+			}
 
 			&:not(.disabled){
 				&:hover{
 					cursor:pointer;
 					background:rgba(0,0,0,.2);
 					color:#fff;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+				}
+			}
+		}
+	}
 
 	//holding div that contains loader and covers tabulator element to prevent interaction
 	.tabulator-loader{
@@ -577,16 +577,16 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			&.tabulator-loading{
 				border:4px solid #333;
 				color:#000;
-			***REMOVED***
+			}
 
 			//error message
 			&.tabulator-error{
 				border:4px solid #D00;
 				color:#590000;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+			}
+		}
+	}
+}
 
 //row element
 .tabulator-row{
@@ -594,7 +594,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 	box-sizing: border-box;
 
 	box-sizing: border-box;
-	min-height:$textSize + ($headerMargin***REMOVED*** 2);
+	min-height:$textSize + ($headerMargin * 2);
 
 	// background-color: $handleColor;
 
@@ -605,8 +605,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 	.tabulator-cell{
 		&:first-child{
 			border-left: $handleWidth solid $handleColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 
 	&:nth-child(even){
@@ -617,30 +617,30 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 			&:first-child{
 				border-left: $handleWidth solid $handleColorAlt;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	&.tabulator-selectable:hover{
 		cursor: pointer;
 
 		.tabulator-cell{
 			background-color:$rowHoverBackground;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	&.tabulator-selected{
 		.tabulator-cell{
 			background-color:$rowSelectedBackground;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	&.tabulator-selected:hover{
 		.tabulator-cell{
 			background-color:$rowSelectedBackgroundHover;
 			cursor: pointer;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	&.tabulator-moving{
 		position: absolute;
@@ -650,7 +650,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		pointer-events: none !important;
 		z-index:15;
-	***REMOVED***
+	}
 
 	//row resize handles
 	.tabulator-row-resize-handle{
@@ -663,12 +663,12 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		&.prev{
 			top:0;
 			bottom:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ns-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-frozen{
 		display: inline-block;
@@ -681,12 +681,12 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		&.tabulator-frozen-left{
 			// padding-left: $handleWidth;
 			border-right:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		&.tabulator-frozen-right{
 			border-left:2px solid $rowBorderColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-responsive-collapse{
 		box-sizing:border-box;
@@ -698,7 +698,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		&:empty{
 			display:none;
-		***REMOVED***
+		}
 
 		table{
 			font-size:$textSize;
@@ -709,11 +709,11 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 					&:first-of-type{
 						padding-right:10px;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 	//cell element
 	.tabulator-cell{
@@ -736,8 +736,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			input, select{
 				border:1px;
 				background:transparent;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		&.tabulator-validation-fail{
 			border:1px solid $errorColor;
@@ -746,15 +746,15 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				background:transparent;
 
 				color: $errorColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//hide left resize handle on first column
 		&:first-child{
 			.tabulator-col-resize-handle.prev{
 				display: none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//movable row handle
 		&.tabulator-row-handle{
@@ -778,9 +778,9 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					height:3px;
 					margin-top:2px;
 					background:#666;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		.tabulator-data-tree-branch{
 			display:inline-block;
@@ -796,7 +796,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 			border-left:2px solid $rowBorderColor;
 			border-bottom:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control{
 
@@ -819,7 +819,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			&:hover{
 				cursor:pointer;
 				background:rgba(0, 0, 0, .2);
-			***REMOVED***
+			}
 
 			.tabulator-data-tree-control-collapse{
 				display:inline-block;
@@ -840,8 +840,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-data-tree-control-expand{
 				display:inline-block;
@@ -862,10 +862,10 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
-		***REMOVED***
+		}
 
 		.tabulator-responsive-collapse-toggle{
 			display: inline-flex;
@@ -889,22 +889,22 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 			&:hover{
 				opacity:.7;
-			***REMOVED***
+			}
 
 			&.open{
 				.tabulator-responsive-collapse-toggle-close{
 					display:initial;
-				***REMOVED***
+				}
 
 				.tabulator-responsive-collapse-toggle-open{
 					display:none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-responsive-collapse-toggle-close{
 				display:none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-traffic-light{
 			display: inline-block;
@@ -912,8 +912,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			width:14px;
 
 			border-radius:14px;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//row grouping element
 	&.tabulator-group{
@@ -933,7 +933,7 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		&:hover{
 			cursor:pointer;
 			background-color:rgba(0,0,0,.1);
-		***REMOVED***
+		}
 
 
 		&.tabulator-group-visible{
@@ -943,32 +943,32 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 				border-right: 6px solid transparent;
 				border-top: 6px solid $sortArrowActive;
 				border-bottom: 0;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		&.tabulator-group-level-1{
 			padding-left:30px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-2{
 			padding-left:50px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-3{
 			padding-left:70px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-4{
 			padding-left:90px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-5{
 			padding-left:110px;
-		***REMOVED***
+		}
 
 		.tabulator-group-toggle{
 			display: inline-block;
-		***REMOVED***
+		}
 
 
 		//sorting arrow
@@ -982,14 +982,14 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 			border-right: 0;
 			border-left: 6px solid $sortArrowActive;
 			vertical-align:middle;
-		***REMOVED***
+		}
 
 		span{
 			margin-left:10px;
 			color:$primary;
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
 .tabulator-menu{
 	position: absolute;
@@ -1015,18 +1015,18 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		&.tabulator-menu-item-disabled{
 			opacity: .5;
-		***REMOVED***
+		}
 
 		&:not(.tabulator-menu-item-disabled):hover{
 			cursor: pointer;
 			background: $rowAltBackgroundColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-menu-separator{
 		border-top:1px solid $rowBorderColor;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 .tabulator-edit-select-list{
 	position: absolute;
@@ -1053,22 +1053,22 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 		&.active{
 			color:$rowBackgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:pointer;
 
 			color:$rowBackgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-edit-select-list-notice{
 		padding:4px;
 
 		color:$rowTextColor;
 		text-align: center;
-	***REMOVED***
+	}
 
 	.tabulator-edit-select-list-group{
 		border-bottom:1px solid $rowBorderColor;
@@ -1078,8 +1078,8 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 
 		color:$rowTextColor;
 		font-weight:bold;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 // Table print styling
 
@@ -1091,11 +1091,11 @@ $handleColorAlt: lighten($primary, 10%) !default; //color for even numbered rows
 	right:0;
 
 	z-index: 10000;
-***REMOVED***
+}
 
 body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 	display:none !important;
-***REMOVED***
+}
 
 .tabulator-print-table{
 	border-collapse: collapse;
@@ -1114,7 +1114,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 
 		border-left:2px solid $rowBorderColor;
 		border-bottom:2px solid $rowBorderColor;
-	***REMOVED***
+	}
 
 	.tabulator-data-tree-control{
 
@@ -1137,7 +1137,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 		&:hover{
 			cursor:pointer;
 			background:rgba(0, 0, 0, .2);
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control-collapse{
 			display:inline-block;
@@ -1158,8 +1158,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-data-tree-control-expand{
 			display:inline-block;
@@ -1180,8 +1180,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+			}
+		}
+	}
+}
 

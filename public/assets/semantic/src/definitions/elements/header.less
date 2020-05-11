@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Header
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Header
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,11 +19,11 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
             Header
 *******************************/
 
-/* Standard***REMOVED***/
+/* Standard */
 .ui.header {
   border: none;
   margin: @margin;
@@ -33,14 +33,14 @@
   line-height: @lineHeight;
   text-transform: @textTransform;
   color: @textColor;
-***REMOVED***
+}
 
 .ui.header:first-child {
   margin-top: @firstMargin;
-***REMOVED***
+}
 .ui.header:last-child {
   margin-bottom: @lastMargin;
-***REMOVED***
+}
 
 & when (@variationHeaderSub) {
   /*--------------
@@ -55,8 +55,8 @@
     font-size: @subHeaderFontSize;
     line-height: @subHeaderLineHeight;
     color: @subHeaderColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
       Icon
@@ -68,14 +68,14 @@
   font-size: @iconSize;
   padding-top: @iconOffset;
   vertical-align: @iconAlignment;
-***REMOVED***
+}
 
-/* With Text Node***REMOVED***/
+/* With Text Node */
 .ui.header .icon:only-child {
   display: inline-block;
   padding: 0;
   margin-right: @iconMargin;
-***REMOVED***
+}
 
 /*-------------------
         Image
@@ -88,11 +88,11 @@
   width: @imageWidth;
   height: @imageHeight;
   vertical-align: @imageAlignment;
-***REMOVED***
+}
 .ui.header > .image:not(.icon):only-child,
 .ui.header > img:only-child {
   margin-right: @imageMargin;
-***REMOVED***
+}
 
 /*--------------
      Content
@@ -101,21 +101,21 @@
 .ui.header .content {
   display: inline-block;
   vertical-align: @contentAlignment;
-***REMOVED***
+}
 
-/* After Image***REMOVED***/
+/* After Image */
 .ui.header > img + .content,
 .ui.header > .image + .content {
   padding-left: @imageMargin;
   vertical-align: @contentImageAlignment;
-***REMOVED***
+}
 
-/* After Icon***REMOVED***/
+/* After Icon */
 .ui.header > .icon + .content {
   padding-left: @iconMargin;
   display: table-cell;
   vertical-align: @contentIconAlignment;
-***REMOVED***
+}
 
 
 /*--------------
@@ -126,16 +126,16 @@
   font-size: @labelSize;
   margin-left: @labelDistance;
   vertical-align: @labelVerticalAlign;
-***REMOVED***
+}
 
-/* Positioning***REMOVED***/
+/* Positioning */
 .ui.header + p {
   margin-top: @nextParagraphDistance;
-***REMOVED***
+}
 
 
 
-***REMOVED********************************
+/*******************************
             Types
 *******************************/
 
@@ -145,18 +145,18 @@
 ---------------*/
 & when not (@variationHeaderTags = false) {
   each(@variationHeaderTags, {
-    @sf: @{value***REMOVED***SubHeaderFontSize;
+    @sf: @{value}SubHeaderFontSize;
     @s: @@value;
-    @{value***REMOVED***.ui.header {
+    @{value}.ui.header {
       font-size: @s;
-  ***REMOVED***
+    }
     & when (@variationHeaderSub) {
-      @{value***REMOVED***.ui.header .sub.header {
+      @{value}.ui.header .sub.header {
         font-size: @@sf;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+      }
+    }
+  })
+}
 
 /*--------------
  Content Heading
@@ -164,25 +164,25 @@
 
 & when not (@variationHeaderSizes = false) {
   each(@variationHeaderSizes, {
-    @sf: @{value***REMOVED***SubHeaderFontSize;
-    @shf: @{value***REMOVED***SubHeadingSize;
-    @s: @{value***REMOVED***FontSize;;
-    .ui.@{value***REMOVED***.header {
+    @sf: @{value}SubHeaderFontSize;
+    @shf: @{value}SubHeadingSize;
+    @s: @{value}FontSize;;
+    .ui.@{value}.header {
       font-size: @@s;
       & when (@@s >= 2) {
         min-height: 1em;
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     & when (@variationHeaderSub) {
-      .ui.@{value***REMOVED***.header .sub.header {
+      .ui.@{value}.header .sub.header {
         font-size: @@sf;
-    ***REMOVED***
-      .ui.@{value***REMOVED***.sub.header {
+      }
+      .ui.@{value}.sub.header {
         font-size: @@shf;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+      }
+    }
+  })
+}
 
 & when (@variationHeaderSub) {
   /*--------------
@@ -196,8 +196,8 @@
     font-size: @subHeadingFontSize;
     text-transform: @subHeadingTextTransform;
     color: @subHeadingColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationHeaderIcon) {
   /*-------------------
@@ -208,18 +208,18 @@
     display: inline-block;
     text-align: center;
     margin: @iconHeaderTopMargin 0 @iconHeaderBottomMargin;
-***REMOVED***
+  }
   .ui.icon.header:after {
     content: '';
     display: block;
     height: 0;
     clear: both;
     visibility: hidden;
-***REMOVED***
+  }
 
   .ui.icon.header:first-child {
     margin-top: @iconHeaderFirstMargin;
-***REMOVED***
+  }
   .ui.icon.header .icon {
     float: none;
     display: block;
@@ -230,43 +230,43 @@
     font-size: @iconHeaderSize;
     margin: 0 auto @iconHeaderMargin;
     opacity: @iconHeaderOpacity;
-***REMOVED***
+  }
   .ui.icon.header .corner.icon {
     font-size: @cornerIconHeaderSize;
-***REMOVED***
+  }
   .ui.icon.header .content {
     display: block;
     padding: 0;
-***REMOVED***
+  }
   .ui.icon.header .circular.icon {
     font-size: @circularHeaderIconSize;
-***REMOVED***
+  }
   .ui.icon.header .square.icon {
     font-size: @squareHeaderIconSize;
-***REMOVED***
+  }
   & when (@variationHeaderBlock) {
     .ui.block.icon.header .icon {
       margin-bottom: 0;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui.icon.header.aligned {
     margin-left: auto;
     margin-right: auto;
     display: block;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-***REMOVED********************************
+/*******************************
             States
 *******************************/
 & when (@variationHeaderDisabled) {
   .ui.disabled.header {
     opacity: @disabledOpacity;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -277,25 +277,25 @@
 
   .ui.inverted.header {
     color: @invertedColor;
-***REMOVED***
+  }
   .ui.inverted.header .sub.header {
     color: @invertedSubHeaderColor;
-***REMOVED***
+  }
   & when (@variationHeaderAttached) {
     .ui.inverted.attached.header {
       background: @invertedAttachedBackground;
       box-shadow: none;
       border-color: transparent;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationHeaderBlock) {
     .ui.inverted.block.header {
       background: @invertedBlockBackground;
       box-shadow: none;
       border-bottom: none;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 
 /*-------------------
@@ -309,29 +309,29 @@ each(@colors, {
   @h: @colors[@@color][hover];
   @lh: @colors[@@color][lightHover];
 
-  .ui.@{color***REMOVED***.header {
+  .ui.@{color}.header {
     color: @c;
-***REMOVED***
-  a.ui.@{color***REMOVED***.header:hover {
+  }
+  a.ui.@{color}.header:hover {
     color: @h;
-***REMOVED***
+  }
   & when (@variationHeaderDividing) {
-    .ui.@{color***REMOVED***.dividing.header {
+    .ui.@{color}.dividing.header {
       border-bottom: @dividedColoredBorderWidth solid @c;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationHeaderInverted) {
-    .ui.inverted.@{color***REMOVED***.header.header.header {
+    .ui.inverted.@{color}.header.header.header {
       color: @l;
-  ***REMOVED***
-    a.ui.inverted.@{color***REMOVED***.header.header.header:hover {
+    }
+    a.ui.inverted.@{color}.header.header.header:hover {
       color: @lh;
-  ***REMOVED***
-    .ui.inverted.@{color***REMOVED***.dividing.header {
+    }
+    .ui.inverted.@{color}.dividing.header {
       border-bottom: @dividedColoredBorderWidth solid @l;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+    }
+  }
+})
 
 & when (@variationHeaderAligned) {
   /*-------------------
@@ -340,26 +340,26 @@ each(@colors, {
 
   .ui.left.aligned.header {
     text-align: left;
-***REMOVED***
+  }
   .ui.right.aligned.header {
     text-align: right;
-***REMOVED***
+  }
   .ui.centered.header,
   .ui.center.aligned.header {
     text-align: center;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationHeaderJustified) {
   .ui.justified.header {
     text-align: justify;
-***REMOVED***
+  }
   .ui.justified.header:after {
     display: inline-block;
     content: '';
     width: 100%;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationHeaderFloated) {
   /*-------------------
@@ -371,13 +371,13 @@ each(@colors, {
     float: left;
     margin-top: 0;
     margin-right: @floatedMargin;
-***REMOVED***
+  }
   .ui[class*="right floated"].header {
     float: right;
     margin-top: 0;
     margin-left: @floatedMargin;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationHeaderFitted) {
   /*-------------------
@@ -386,8 +386,8 @@ each(@colors, {
 
   .ui.fitted.header {
     padding: 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationHeaderDividing) {
   /*-------------------
@@ -397,19 +397,19 @@ each(@colors, {
   .ui.dividing.header {
     padding-bottom: @dividedBorderPadding;
     border-bottom: @dividedBorder;
-***REMOVED***
+  }
   .ui.dividing.header .sub.header {
     padding-bottom: @dividedSubHeaderPadding;
-***REMOVED***
+  }
   .ui.dividing.header .icon {
     margin-bottom: @dividedIconPadding;
-***REMOVED***
+  }
   & when (@variationHeaderInverted) {
     .ui.inverted.dividing.header {
       border-bottom-color: @invertedDividedBorderColor;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationHeaderBlock) {
   /*-------------------
@@ -422,19 +422,19 @@ each(@colors, {
     box-shadow: @blockBoxShadow;
     border: @blockBorder;
     border-radius: @blockBorderRadius;
-***REMOVED***
+  }
   .ui.block.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
     font-size: @mediumBlock;
-***REMOVED***
+  }
   & when not (@variationHeaderSizes = false) {
     each(@variationHeaderSizes, {
-      @s: @{value***REMOVED***Block;
-      .ui.@{value***REMOVED***.block.header {
+      @s: @{value}Block;
+      .ui.@{value}.block.header {
         font-size: @@s;
-    ***REMOVED***
-  ***REMOVED***)
-***REMOVED***
-***REMOVED***
+      }
+    })
+  }
+}
 
 & when (@variationHeaderAttached) {
   /*-------------------
@@ -448,33 +448,33 @@ each(@colors, {
     box-shadow: @attachedBoxShadow;
     border: @attachedBorder;
     border-radius: 0;
-***REMOVED***
+  }
   .ui.attached.block.header {
     background: @blockBackground;
-***REMOVED***
+  }
   .ui.attached:not(.top).header {
     border-top: none;
-***REMOVED***
+  }
   .ui.top.attached.header {
     border-radius: @attachedBorderRadius @attachedBorderRadius 0 0;
-***REMOVED***
+  }
   .ui.bottom.attached.header {
     border-radius: 0 0 @attachedBorderRadius @attachedBorderRadius;
-***REMOVED***
+  }
 
-  /* Attached Sizes***REMOVED***/
+  /* Attached Sizes */
   .ui.attached.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
     font-size: @mediumAttachedSize;
-***REMOVED***
+  }
   & when not (@variationHeaderSizes = false) {
     each(@variationHeaderSizes, {
-      @s: @{value***REMOVED***AttachedSize;
-      .ui.@{value***REMOVED***.attached.header {
+      @s: @{value}AttachedSize;
+      .ui.@{value}.attached.header {
         font-size: @@s;
-    ***REMOVED***
-  ***REMOVED***)
-***REMOVED***
-***REMOVED***
+      }
+    })
+  }
+}
 
 /*-------------------
         Sizing
@@ -482,6 +482,6 @@ each(@colors, {
 
 .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-size: @mediumFontSize;
-***REMOVED***
+}
 
 .loadUIOverrides();

@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Text
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** https://github.com/fomantic/Fomantic-UI/blob/master/LICENSE.md
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Text
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://github.com/fomantic/Fomantic-UI/blob/master/LICENSE.md
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
              Text
 *******************************/
 
@@ -28,33 +28,33 @@ each(@colors, {
   @c: @colors[@@color][color];
   @l: @colors[@@color][light];
 
-  span.ui.@{color***REMOVED***.text {
+  span.ui.@{color}.text {
     color: @c;
-***REMOVED***
+  }
   & when (@variationTextInverted) {
-    span.ui.inverted.@{color***REMOVED***.text {
+    span.ui.inverted.@{color}.text {
       color: @l;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+    }
+  }
+})
 
 & when (@variationTextDisabled) {
   span.ui.disabled.text {
     opacity: @disabledOpacity;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-/* Sizes***REMOVED***/
+/* Sizes */
 span.ui.medium.text {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationTextSizes = false) {
   each(@variationTextSizes, {
     @s: @@value;
-    span.ui.@{value***REMOVED***.text {
+    span.ui.@{value}.text {
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 .loadUIOverrides();

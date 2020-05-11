@@ -1,12 +1,12 @@
-***REMOVED********************************
-***REMOVED***         Release
-***REMOVED*********************************/
+/*******************************
+ *         Release
+ *******************************/
 
 /*
  This task update all SUI individual component repos with new versions of components
 
- ***REMOVED*** Initializes repositories with current versions
- ***REMOVED*** Creates local files at ../distributions/ with each repo for release
+  * Initializes repositories with current versions
+  * Creates local files at ../distributions/ with each repo for release
 
 */
 
@@ -14,7 +14,7 @@ var
   gulp = require('gulp')
 ;
 
-/* Release All***REMOVED***/
+/* Release All */
 module.exports = function (callback) {
 
   gulp.series(
@@ -25,4 +25,4 @@ module.exports = function (callback) {
     'create components', // update each repo
   )(callback);
 
-***REMOVED***;
+};

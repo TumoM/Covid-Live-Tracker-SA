@@ -7,7 +7,7 @@ var ResponsiveLayout = function(table){
 	this.collapseFormatter = [];
 	this.collapseStartOpen = true;
 	this.collapseHandleColumn = false;
-***REMOVED***;
+};
 
 //generate resposive columns list
 ResponsiveLayout.prototype.initialize = function(){
@@ -28,47 +28,47 @@ ResponsiveLayout.prototype.initialize = function(){
 
 				if(!column.visible && self.mode === "collapse"){
 					self.hiddenColumns.push(column);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+				}
+			}
+		}
+	});
 
 	//sort list by responsivity
 	columns = columns.reverse();
 	columns = columns.sort(function(a, b){
 		var diff = b.modules.responsive.order - a.modules.responsive.order;
 		return diff || (b.modules.responsive.index - a.modules.responsive.index);
-	***REMOVED***);
+	});
 
 	this.columns = columns;
 
 	if(this.mode === "collapse"){
 		this.generateCollapsedContent();
-	***REMOVED***
+	}
 
 	//assign collapse column
 	for (let col of this.table.columnManager.columnsByIndex){
 		if(col.definition.formatter == "responsiveCollapse"){
 			this.collapseHandleColumn = col;
 			break;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	if(this.collapseHandleColumn){
 		if(this.hiddenColumns.length){
 			this.collapseHandleColumn.show();
-		***REMOVED***else{
+		}else{
 			this.collapseHandleColumn.hide();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 //define layout information
 ResponsiveLayout.prototype.initializeColumn = function(column){
 	var def = column.getDefinition();
 
-	column.modules.responsive = {order: typeof def.responsive === "undefined" ? 1 : def.responsive, visible:def.visible === false ? false : true***REMOVED***;
-***REMOVED***;
+	column.modules.responsive = {order: typeof def.responsive === "undefined" ? 1 : def.responsive, visible:def.visible === false ? false : true};
+};
 
 ResponsiveLayout.prototype.initializeRow = function(row){
 	var el;
@@ -80,13 +80,13 @@ ResponsiveLayout.prototype.initializeRow = function(row){
 		row.modules.responsiveLayout = {
 			element:el,
 			open:this.collapseStartOpen,
-		***REMOVED***;
+		};
 
 		if(!this.collapseStartOpen){
 			el.style.display = 'none';
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 ResponsiveLayout.prototype.layoutRow = function(row){
 	var rowEl = row.getElement();
@@ -94,8 +94,8 @@ ResponsiveLayout.prototype.layoutRow = function(row){
 	if(row.modules.responsiveLayout){
 		rowEl.appendChild(row.modules.responsiveLayout.element);
 		this.generateCollapsedRowContent(row);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //update column visibility
 ResponsiveLayout.prototype.updateColumnVisibility = function(column, visible){
@@ -103,8 +103,8 @@ ResponsiveLayout.prototype.updateColumnVisibility = function(column, visible){
 	if(column.modules.responsive){
 		column.modules.responsive.visible = visible;
 		this.initialize();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 ResponsiveLayout.prototype.hideColumn = function(column){
 	var colCount = this.hiddenColumns.length;
@@ -117,9 +117,9 @@ ResponsiveLayout.prototype.hideColumn = function(column){
 
 		if(this.collapseHandleColumn && !colCount){
 			this.collapseHandleColumn.show();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 ResponsiveLayout.prototype.showColumn = function(column){
 	var index;
@@ -133,15 +133,15 @@ ResponsiveLayout.prototype.showColumn = function(column){
 
 		if(index > -1){
 			this.hiddenColumns.splice(index, 1);
-		***REMOVED***
+		}
 
 		this.generateCollapsedContent();
 
 		if(this.collapseHandleColumn && !this.hiddenColumns.length){
 			this.collapseHandleColumn.hide();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 //redraw columns to fit space
 ResponsiveLayout.prototype.update = function(){
@@ -161,11 +161,11 @@ ResponsiveLayout.prototype.update = function(){
 			if(column){
 				self.hideColumn(column);
 				self.index ++;
-			***REMOVED***else{
+			}else{
 				working = false;
-			***REMOVED***
+			}
 
-		***REMOVED***else{
+		}else{
 
 			//table has spare space
 			let column = self.columns[self.index -1];
@@ -175,22 +175,22 @@ ResponsiveLayout.prototype.update = function(){
 					if(diff >= column.getWidth()){
 						self.showColumn(column);
 						self.index --;
-					***REMOVED***else{
+					}else{
 						working = false;
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					working = false;
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				working = false;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		if(!self.table.rowManager.activeRowsCount){
 			self.table.rowManager.renderEmptyScroll();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 ResponsiveLayout.prototype.generateCollapsedContent = function(){
 	var self = this,
@@ -198,8 +198,8 @@ ResponsiveLayout.prototype.generateCollapsedContent = function(){
 
 	rows.forEach(function(row){
 		self.generateCollapsedRowContent(row);
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 ResponsiveLayout.prototype.generateCollapsedRowContent = function(row){
 	var el, contents;
@@ -212,9 +212,9 @@ ResponsiveLayout.prototype.generateCollapsedRowContent = function(row){
 		contents = this.collapseFormatter(this.generateCollapsedRowData(row));
 		if(contents){
 			el.appendChild(contents);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 ResponsiveLayout.prototype.generateCollapsedRowData = function(row){
 	var self = this,
@@ -230,39 +230,39 @@ ResponsiveLayout.prototype.generateCollapsedRowData = function(row){
 
 				mockCellComponent = {
 					value:false,
-					data:{***REMOVED***,
+					data:{},
 					getValue:function(){
 						return value;
-					***REMOVED***,
+					},
 					getData:function(){
 						return data;
-					***REMOVED***,
+					},
 					getElement:function(){
 						return document.createElement("div");
-					***REMOVED***,
+					},
 					getRow:function(){
 						return row.getComponent();
-					***REMOVED***,
+					},
 					getColumn:function(){
 						return column.getComponent();
-					***REMOVED***,
-				***REMOVED***;
+					},
+				};
 
 				output.push({
 					title: column.definition.title,
 					value: column.modules.format.formatter.call(self.table.modules.format, mockCellComponent, column.modules.format.params)
-				***REMOVED***);
-			***REMOVED***else{
+				});
+			}else{
 				output.push({
 					title: column.definition.title,
 					value: value
-				***REMOVED***);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+				});
+			}
+		}
+	});
 
 	return output;
-***REMOVED***;
+};
 
 ResponsiveLayout.prototype.formatCollapsedData = function(data){
 	var list = document.createElement("table"),
@@ -274,14 +274,14 @@ ResponsiveLayout.prototype.formatCollapsedData = function(data){
 		if(item.value instanceof Node){
 			div.appendChild(item.value);
 			item.value = div.innerHTML;
-		***REMOVED***
+		}
 
 		listContents += "<tr><td><strong>" + item.title + "</strong></td><td>" + item.value + "</td></tr>";
-	***REMOVED***);
+	});
 
 	list.innerHTML = listContents;
 
 	return Object.keys(data).length ? list : "";
-***REMOVED***;
+};
 
 Tabulator.prototype.registerModule("responsiveLayout", ResponsiveLayout);

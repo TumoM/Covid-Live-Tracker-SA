@@ -10,8 +10,8 @@ function createCrcResponseToken(crcToken) {
 		.update(crcToken)
 		.digest("base64");
 	
-	return `sha256=${hmac***REMOVED***`;
-***REMOVED***
+	return `sha256=${hmac}`;
+}
 
 function getHandler(req, res) {
 	const crcToken = req.query.crc_token;
@@ -19,28 +19,28 @@ function getHandler(req, res) {
 	if (crcToken) {
 		res.status(200).send({
 			response_token: createCrcResponseToken(crcToken)
-		***REMOVED***);
-	***REMOVED*** else {
+		});
+	} else {
 		res.status(400).send({
 			message: "Error: crc_token missing from request."
-		***REMOVED***);
-	***REMOVED***
-***REMOVED***
+		});
+	}
+}
 
 function postHandler(req, res) {
 	const body = req.body;
 	console.log(body);
 	res.status(200).json(body);
-***REMOVED***
+}
 
 
 router.get("/", function (req, res) {
 	getHandler(req, res);
-***REMOVED***)
+})
 
 router.post("/", function (req, res) {
 	postHandler(req, res);
-***REMOVED***)
+})
 
 
 router.delete("/", function (req, res) {
@@ -51,30 +51,30 @@ router.delete("/", function (req, res) {
 				.deleteWebhook(webhookId)
 				.then(response => {
 					console.log("Successfully deleted webhook");
-					res.status(200).json({message:'Successfully deleted webhook'***REMOVED***)
-				***REMOVED***)
+					res.status(200).json({message:'Successfully deleted webhook'})
+				})
 				.catch(error => {
 					console.log(error.message);
-					res.status(404).json({message:'Webook not found.'***REMOVED***)
-				***REMOVED***);
-		***REMOVED***)
+					res.status(404).json({message:'Webook not found.'})
+				});
+		})
 		.catch(error => {
 			console.log(error.message);
-		***REMOVED***);
-***REMOVED***)
+		});
+})
 
 router.get("/list",function (req,res) {
 	twitter
 		.getWebhook()
 		.then(response => {
 			console.log('Res',response);
-			res.status(200).json({res:response***REMOVED***)
-		***REMOVED***)
+			res.status(200).json({res:response})
+		})
 		.catch(error => {
 			console.log(error.message);
 			res.status(400).json(error)
-		***REMOVED***);
-***REMOVED***)
+		});
+})
 
 router.post("/new",function (req,res) {
 	console.log('Adding new hook');
@@ -82,13 +82,13 @@ router.post("/new",function (req,res) {
 		.createWebhook(req.body.url)
 		.then(response => {
 			console.log('Res',response);
-			res.status(200).json({res:response***REMOVED***)
-		***REMOVED***)
+			res.status(200).json({res:response})
+		})
 		.catch(error => {
 			console.log(error.message);
 			res.status(400).json(error)
-		***REMOVED***);
-***REMOVED***)
+		});
+})
 router.post("/stream",function (req,res) {
 	console.log('Adding new stream');
 	let id = req.body.id;
@@ -97,12 +97,12 @@ router.post("/stream",function (req,res) {
 		.newStream(id,keywords)
 		.then(response => {
 			// console.log('Res',response);
-			res.status(200).json({message:"Stream Started."***REMOVED***)
-		***REMOVED***)
+			res.status(200).json({message:"Stream Started."})
+		})
 		.catch(error => {
 			console.log(error.message);
 			res.status(400).json(error)
-		***REMOVED***);
-***REMOVED***)
+		});
+})
 
 module.exports = router;

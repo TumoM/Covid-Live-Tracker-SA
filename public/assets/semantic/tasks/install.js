@@ -1,16 +1,16 @@
-***REMOVED********************************
-***REMOVED***         Install Task
-***REMOVED*********************************/
+/*******************************
+ *         Install Task
+ *******************************/
 
 /*
    Install tasks
 
    For more notes
 
-  ***REMOVED*** Runs automatically after npm update (hooks)
-  ***REMOVED*** (NPM) Install - Will ask for where to put semantic (outside pm folder)
-  ***REMOVED*** (NPM) Upgrade - Will look for semantic install, copy over files and update if new version
-  ***REMOVED*** Standard installer runs asking for paths to site files etc
+   * Runs automatically after npm update (hooks)
+   * (NPM) Install - Will ask for where to put semantic (outside pm folder)
+   * (NPM) Upgrade - Will look for semantic install, copy over files and update if new version
+   * Standard installer runs asking for paths to site files etc
 
 */
 
@@ -70,15 +70,15 @@ module.exports = function (callback) {
   manager = {
     name : 'NPM',
     root : path.normalize(__dirname + '/../')
-***REMOVED***;
- ***REMOVED***/
+  };
+  */
 
 
-  /* Don't do end user config if SUI is a sub-module***REMOVED***/
+  /* Don't do end user config if SUI is a sub-module */
   if (install.isSubModule()) {
     console.info('SUI is a sub-module, skipping end-user install');
     return;
-***REMOVED***
+  }
 
   /*-----------------
       Update SUI
@@ -97,7 +97,7 @@ module.exports = function (callback) {
         site        : path.join(currentConfig.paths.source.site),
         theme       : path.join(currentConfig.paths.source.themes),
         defaultTheme: path.join(currentConfig.paths.source.themes, folders.defaultTheme)
-    ***REMOVED***
+      }
     ;
 
     // duck-type if there is a project installed
@@ -141,7 +141,7 @@ module.exports = function (callback) {
           .pipe(rename(settings.rename.json)) // preserve file extension
           .pipe(jsonEditor({
             version: release.version
-        ***REMOVED***))
+          }))
           .pipe(gulp.dest(manager.root))
         ;
 
@@ -149,18 +149,18 @@ module.exports = function (callback) {
 
         callback();
         return;
-    ***REMOVED*** else {
+      } else {
         console.log('Current version of Semantic UI already installed');
         callback();
         return;
-    ***REMOVED***
+      }
 
-  ***REMOVED*** else {
+    } else {
       console.error('Cannot locate files to update at path: ', updatePaths.definition);
       console.log('Running installer');
-  ***REMOVED***
+    }
 
-***REMOVED***
+  }
 
   /*--------------
    Determine Root
@@ -169,8 +169,8 @@ module.exports = function (callback) {
 // PM that supports Build Tools (NPM Only Now)
   if (manager.name === 'NPM') {
     rootQuestions[0].message = rootQuestions[0].message
-      .replace('{packageMessage***REMOVED***', 'We detected you are using ' + manager.name + ' Nice!')
-      .replace('{root***REMOVED***', manager.root)
+      .replace('{packageMessage}', 'We detected you are using ' + manager.name + ' Nice!')
+      .replace('{root}', manager.root)
     ;
     // set default path to detected PM root
     rootQuestions[0].default = manager.root;
@@ -181,7 +181,7 @@ module.exports = function (callback) {
 
     // omit cleanup questions for managed install
     questions.cleanup = [];
-***REMOVED***
+  }
 
 
   /*--------------
@@ -197,16 +197,16 @@ module.exports = function (callback) {
         install     : 'auto',
         useRoot     : true,
         semanticRoot: currentConfig.base
-    ***REMOVED***;
+      };
       callback();
-  ***REMOVED*** else {
+    } else {
       return inquirer.prompt(questions.setup)
         .then((setupAnswers) => {
           // hoist
           answers = setupAnswers;
-      ***REMOVED***);
-  ***REMOVED***
-***REMOVED***);
+        });
+    }
+  });
 
   gulp.task('create install files', function (callback) {
 
@@ -218,13 +218,13 @@ module.exports = function (callback) {
     if (answers.overwrite !== undefined && answers.overwrite == 'no') {
       callback();
       return;
-  ***REMOVED***
+    }
     console.clear();
     if (install.shouldAutoInstall()) {
       console.log('Auto-Installing (Without User Interaction)');
-  ***REMOVED*** else {
+    } else {
       console.log('Installing');
-  ***REMOVED***
+    }
     console.log('------------------------------');
 
 
@@ -239,7 +239,7 @@ module.exports = function (callback) {
         site             : answers.site || folders.site,
         themeConfig      : files.themeConfig,
         themeConfigFolder: folders.themeConfig
-    ***REMOVED***
+      }
     ;
 
     /*--------------
@@ -255,19 +255,19 @@ module.exports = function (callback) {
           console.log('Unable to proceed, invalid project root');
           callback();
           return;
-      ***REMOVED***
+        }
         manager.root = answers.customRoot;
-    ***REMOVED***
+      }
 
       // special install paths only for PM install
-      installPaths = extend(false, {***REMOVED***, installPaths, {
+      installPaths = extend(false, {}, installPaths, {
         definition  : folders.definitions,
         lessImport  : folders.lessImport,
         tasks       : folders.tasks,
         theme       : folders.themes,
         defaultTheme: path.join(folders.themes, folders.defaultTheme),
         themeImport : folders.themeImport
-    ***REMOVED***);
+      });
 
       // add project root to semantic root
       installFolder = path.join(manager.root, answers.semanticRoot);
@@ -280,8 +280,8 @@ module.exports = function (callback) {
             ? path.normalize(path.join(manager.root, installPaths[destination]))
             : path.normalize(path.join(installFolder, installPaths[destination]))
           ;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
 
       // create project folders
       try {
@@ -289,9 +289,9 @@ module.exports = function (callback) {
         mkdirp.sync(installPaths.definition);
         mkdirp.sync(installPaths.theme);
         mkdirp.sync(installPaths.tasks);
-    ***REMOVED*** catch (error) {
+      } catch (error) {
         console.error('NPM does not have permissions to create folders at your specified path. Adjust your folders permissions and run "npm install" again');
-    ***REMOVED***
+      }
 
       console.log('Installing to \x1b[92m' + answers.semanticRoot + '\x1b[0m');
 
@@ -323,7 +323,7 @@ module.exports = function (callback) {
         .pipe(gulp.dest(installFolder))
       ;
 
-  ***REMOVED***
+    }
 
 
     /*--------------
@@ -333,9 +333,9 @@ module.exports = function (callback) {
     // Copy _site templates folder to destination
     if (fs.existsSync(installPaths.site)) {
       console.info('Site folder exists, merging files (no overwrite)', installPaths.site);
-  ***REMOVED*** else {
+    } else {
       console.info('Creating site theme folder', installPaths.site);
-  ***REMOVED***
+    }
     wrench.copyDirSyncRecursive(source.site, installPaths.site, settings.wrench.merge);
 
     /*--------------
@@ -360,16 +360,16 @@ module.exports = function (callback) {
           .pipe(replace(regExp.siteVariable, siteVariable))
           .pipe(gulp.dest(installPaths.themeConfigFolder))
           ;
-    ***REMOVED*** else {
+      } else {
         console.info('Creating src/theme.config (LESS config)', installPaths.themeConfig);
         return gulp.src(source.themeConfig)
           .pipe(plumber())
-          .pipe(rename({extname: ''***REMOVED***))
+          .pipe(rename({extname: ''}))
           .pipe(replace(regExp.siteVariable, siteVariable))
           .pipe(gulp.dest(installPaths.themeConfigFolder))
           ;
-    ***REMOVED***
-  ***REMOVED***);
+      }
+    });
 
     /*--------------
       Semantic.json
@@ -390,20 +390,20 @@ module.exports = function (callback) {
           .pipe(jsonEditor(jsonConfig))
           .pipe(gulp.dest(installPaths.configFolder))
           ;
-    ***REMOVED*** else {
+      } else {
         console.info('Creating config file (semantic.json)', installPaths.config);
         return gulp.src(source.config)
           .pipe(plumber())
-          .pipe(rename({extname: ''***REMOVED***)) // remove .template from ext
-          .pipe(jsonEditor(jsonConfig, {end_with_newline: true***REMOVED***))
+          .pipe(rename({extname: ''})) // remove .template from ext
+          .pipe(jsonEditor(jsonConfig, {end_with_newline: true}))
           .pipe(gulp.dest(installPaths.configFolder))
           ;
-    ***REMOVED***
+      }
 
-  ***REMOVED***);
+    });
 
     gulp.series('create theme.config', 'create semantic.json')(callback);
-***REMOVED***);
+  });
 
   gulp.task('clean up install', function (callback) {
 
@@ -411,29 +411,29 @@ module.exports = function (callback) {
     if (installFolder && !install.shouldAutoInstall()) {
       console.log('\n Setup Complete! \n Installing Peer Dependencies. \x1b[0;31mPlease refrain from ctrl + c\x1b[0m... \n After completion navigate to \x1b[92m' + answers.semanticRoot + '\x1b[0m and run "\x1b[92mgulp build\x1b[0m" to build');
       callback();
-  ***REMOVED*** else {
+    } else {
       console.log('');
       console.log('');
 
       // If auto-install is switched on, we skip the configuration section and simply build the dependencies
       if (install.shouldAutoInstall()) {
         gulp.series('build')(callback);
-    ***REMOVED*** else {
+      } else {
         // We don't return the inquirer promise on purpose because we handle the callback ourselves
         inquirer.prompt(questions.cleanup)
           .then((answers) => {
             if (answers.cleanup === 'yes') {
               del(install.setupFiles);
-          ***REMOVED***
+            }
             if (answers.build === 'yes') {
               gulp.series('build')(callback);
-          ***REMOVED*** else {
+            } else {
               callback();
-          ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***);
+            }
+          });
+      }
+    }
+  });
 
   gulp.series('run setup', 'create install files', 'clean up install')(callback);
-***REMOVED***;
+};

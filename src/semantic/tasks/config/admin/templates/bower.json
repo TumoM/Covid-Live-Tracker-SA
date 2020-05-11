@@ -5,7 +5,7 @@
   "author": {
     "name" : "Jack Lukic",
     "web"  : "http://www.jacklukic.com"
-***REMOVED***
+  },
   "ignore": [
     "./index.js"
   ],
@@ -26,4 +26,4 @@
     "src",
     "test"
   ]
-***REMOVED***
+}

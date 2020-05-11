@@ -1,14 +1,14 @@
 /*!
-***REMOVED*** # Fomantic-UI - Card
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Card
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -17,7 +17,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Standard
 *******************************/
 
@@ -43,22 +43,22 @@
   transition: @transition;
   z-index: @zIndex;
   word-wrap: break-word;
-***REMOVED***
+}
 .ui.card {
   margin: @margin;
-***REMOVED***
+}
 
 .ui.cards > .card a,
 .ui.card a {
   cursor: pointer;
-***REMOVED***
+}
 
 .ui.card:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.card:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 /*--------------
       Cards
@@ -68,15 +68,15 @@
   display: @groupDisplay;
   margin: @groupMargin;
   flex-wrap: wrap;
-***REMOVED***
+}
 
 .ui.cards > .card {
   display: @groupCardDisplay;
   margin: @groupCardMargin;
   float: @groupCardFloat;
-***REMOVED***
+}
 
-/* Clearing***REMOVED***/
+/* Clearing */
 .ui.cards:after,
 .ui.card:after {
   display: block;
@@ -85,13 +85,13 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 
 
-/* Consecutive Card Groups Preserve Row Spacing***REMOVED***/
+/* Consecutive Card Groups Preserve Row Spacing */
 .ui.cards ~ .ui.cards {
   margin-top: @consecutiveGroupDistance;
-***REMOVED***
+}
 
 
 /*--------------
@@ -102,17 +102,17 @@
 .ui.card > :first-child {
   border-radius: @borderRadius @borderRadius 0 0 !important;
   border-top: none !important;
-***REMOVED***
+}
 
 .ui.cards > .card > :last-child,
 .ui.card > :last-child {
   border-radius: 0 0 @borderRadius @borderRadius !important;
-***REMOVED***
+}
 
 .ui.cards > .card > :only-child,
 .ui.card > :only-child {
   border-radius: @borderRadius !important;
-***REMOVED***
+}
 
 /*--------------
      Images
@@ -125,18 +125,18 @@
   flex: 0 0 auto;
   padding: @imagePadding;
   background: @imageBackground;
-***REMOVED***
+}
 .ui.cards > .card > .image > img,
 .ui.card > .image > img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: inherit;
-***REMOVED***
+}
 .ui.cards > .card > .image:not(.ui) > img,
 .ui.card > .image:not(.ui) > img {
   border: @imageBorder;
-***REMOVED***
+}
 
 /*--------------
      Content
@@ -153,7 +153,7 @@
   box-shadow: @contentBoxShadow;
   font-size: @contentFontSize;
   border-radius: @contentBorderRadius;
-***REMOVED***
+}
 
 .ui.cards > .card > .content:after,
 .ui.card > .content:after {
@@ -163,7 +163,7 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 
 .ui.cards > .card > .content > .header,
 .ui.card > .content > .header {
@@ -171,23 +171,23 @@
   margin: @headerMargin;
   font-family: @headerFont;
   color: @headerColor;
-***REMOVED***
+}
 
-/* Default Header Size***REMOVED***/
+/* Default Header Size */
 .ui.cards > .card > .content > .header:not(.ui),
 .ui.card > .content > .header:not(.ui) {
   font-weight: @headerFontWeight;
   font-size: @headerFontSize;
   margin-top: @headerLineHeightOffset;
   line-height: @headerLineHeight;
-***REMOVED***
+}
 
 .ui.cards > .card > .content > .meta + .description,
 .ui.cards > .card > .content > .header + .description,
 .ui.card > .content > .meta + .description,
 .ui.card > .content > .header + .description  {
   margin-top: @descriptionDistance;
-***REMOVED***
+}
 
 /*----------------
  Floated Content
@@ -196,11 +196,11 @@
 .ui.cards > .card  [class*="left floated"],
 .ui.card [class*="left floated"] {
   float: left;
-***REMOVED***
+}
 .ui.cards > .card [class*="right floated"],
 .ui.card [class*="right floated"] {
   float: right;
-***REMOVED***
+}
 
 /*--------------
      Aligned
@@ -209,15 +209,15 @@
 .ui.cards > .card  [class*="left aligned"],
 .ui.card [class*="left aligned"] {
   text-align: left;
-***REMOVED***
+}
 .ui.cards > .card [class*="center aligned"],
 .ui.card [class*="center aligned"] {
   text-align: center;
-***REMOVED***
+}
 .ui.cards > .card [class*="right aligned"],
 .ui.card [class*="right aligned"] {
   text-align: right;
-***REMOVED***
+}
 
 
 /*--------------
@@ -229,7 +229,7 @@
   display: inline-block;
   vertical-align: @contentImageVerticalAlign;
   width: @contentImageWidth;
-***REMOVED***
+}
 .ui.cards > .card img.avatar,
 .ui.cards > .card .avatar img,
 .ui.card img.avatar,
@@ -237,7 +237,7 @@
   width: @avatarSize;
   height: @avatarSize;
   border-radius: @avatarBorderRadius;
-***REMOVED***
+}
 
 
 /*--------------
@@ -248,7 +248,7 @@
 .ui.card > .content > .description {
   clear: both;
   color: @descriptionColor;
-***REMOVED***
+}
 
 /*--------------
     Paragraph
@@ -257,11 +257,11 @@
 .ui.cards > .card > .content p,
 .ui.card > .content p {
   margin: 0 0 @paragraphDistance;
-***REMOVED***
+}
 .ui.cards > .card > .content p:last-child,
 .ui.card > .content p:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 /*--------------
       Meta
@@ -271,56 +271,56 @@
 .ui.card .meta {
   font-size: @metaFontSize;
   color: @metaColor;
-***REMOVED***
-.ui.cards > .card .meta***REMOVED***,
-.ui.card .meta***REMOVED*** {
+}
+.ui.cards > .card .meta *,
+.ui.card .meta * {
   margin-right: @metaSpacing;
-***REMOVED***
+}
 .ui.cards > .card .meta :last-child,
 .ui.card .meta :last-child {
   margin-right: 0;
-***REMOVED***
+}
 
 .ui.cards > .card .meta [class*="right floated"],
 .ui.card .meta [class*="right floated"] {
   margin-right: 0;
   margin-left: @metaSpacing;
-***REMOVED***
+}
 
 /*--------------
       Links
 ---------------*/
 
-/* Generic***REMOVED***/
+/* Generic */
 .ui.cards > .card > .content a:not(.ui),
 .ui.card > .content a:not(.ui) {
   color: @contentLinkColor;
   transition: @contentLinkTransition;
-***REMOVED***
+}
 .ui.cards > .card > .content a:not(.ui):hover,
 .ui.card > .content a:not(.ui):hover {
   color: @contentLinkHoverColor;
-***REMOVED***
+}
 
-/* Header***REMOVED***/
+/* Header */
 .ui.cards > .card > .content > a.header,
 .ui.card > .content > a.header {
   color: @headerLinkColor;
-***REMOVED***
+}
 .ui.cards > .card > .content > a.header:hover,
 .ui.card > .content > a.header:hover {
   color: @headerLinkHoverColor;
-***REMOVED***
+}
 
-/* Meta***REMOVED***/
+/* Meta */
 .ui.cards > .card .meta > a:not(.ui),
 .ui.card .meta > a:not(.ui) {
   color: @metaLinkColor;
-***REMOVED***
+}
 .ui.cards > .card .meta > a:not(.ui):hover,
 .ui.card .meta > a:not(.ui):hover {
   color: @metaLinkHoverColor;
-***REMOVED***
+}
 
 /*--------------
      Buttons
@@ -334,8 +334,8 @@
   width: @buttonWidth;
   &:last-child {
     margin-bottom: -@borderWidth;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
       Dimmer
@@ -345,49 +345,49 @@
 .ui.card .dimmer {
   background-color: @dimmerColor;
   z-index: @dimmerZIndex;
-***REMOVED***
+}
 
 /*--------------
      Labels
 ---------------*/
 
-/*-----Star-----***REMOVED***/
+/*-----Star----- */
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.cards > .card > .content .star.icon,
 .ui.card > .content .star.icon {
   cursor: pointer;
   opacity: @actionOpacity;
   transition: @actionTransition;
-***REMOVED***
+}
 .ui.cards > .card > .content .star.icon:hover,
 .ui.card > .content .star.icon:hover {
   opacity: @actionHoverOpacity;
   color: @starColor;
-***REMOVED***
+}
 .ui.cards > .card > .content .active.star.icon,
 .ui.card > .content .active.star.icon {
   color: @starActiveColor;
-***REMOVED***
+}
 
-/*-----Like-----***REMOVED***/
+/*-----Like----- */
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.cards > .card > .content .like.icon,
 .ui.card > .content .like.icon {
   cursor: pointer;
   opacity: @actionOpacity;
   transition: @actionTransition;
-***REMOVED***
+}
 .ui.cards > .card > .content .like.icon:hover,
 .ui.card > .content .like.icon:hover {
   opacity: @actionHoverOpacity;
   color: @likeColor;
-***REMOVED***
+}
 .ui.cards > .card > .content .active.like.icon,
 .ui.card > .content .active.like.icon {
   color: @likeActiveColor;
-***REMOVED***
+}
 
 /*----------------
   Extra Content
@@ -409,18 +409,18 @@
   color: @extraColor;
   box-shadow: @extraBoxShadow;
   transition: @extraTransition;
-***REMOVED***
+}
 .ui.cards > .card > .extra a:not(.ui),
 .ui.card > .extra a:not(.ui) {
   color: @extraLinkColor;
-***REMOVED***
+}
 .ui.cards > .card > .extra a:not(.ui):hover,
 .ui.card > .extra a:not(.ui):hover {
   color: @extraLinkHoverColor;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -436,13 +436,13 @@
     min-width: @horizontalMinWidth;
     width: @horizontalWidth;
     max-width: 100%;
-***REMOVED***
+  }
 
   .ui.horizontal.cards > .card > .image,
   .ui.card.horizontal > .image {
     border-radius: @defaultBorderRadius 0 0 @defaultBorderRadius;
     width: @horizontalImageWidth;
-***REMOVED***
+  }
 
   .ui.horizontal.cards > .card > .image > img,
   .ui.card.horizontal > .image > img {
@@ -459,18 +459,18 @@
     width: 100%;
     height: 100%;
     border-radius: @defaultBorderRadius 0 0 @defaultBorderRadius;
-***REMOVED***
+  }
   .ui.horizontal.cards > .card > .image:last-child > img,
   .ui.card.horizontal > .image:last-child > img {
     border-radius: 0 @defaultBorderRadius @defaultBorderRadius 0;
-***REMOVED***
+  }
   .ui.horizontal.cards > .card > .content, .ui.horizontal.card > .content {
     flex-basis: 1px;
-***REMOVED***
+  }
   .ui.horizontal.cards > .card > .extra, .ui.horizontal.card > .extra {
     flex-basis: 100%;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationCardRaised) {
   /*-------------------
@@ -480,16 +480,16 @@
   .ui.raised.cards > .card,
   .ui.raised.card {
     box-shadow: @raisedShadow;
-***REMOVED***
+  }
   & when (@variationCardLink) {
     .ui.raised.cards a.card:hover,
     .ui.link.cards .raised.card:hover,
     a.ui.raised.card:hover,
     .ui.link.raised.card:hover {
       box-shadow: @raisedShadowHover;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationCardCentered) {
   /*-------------------
@@ -498,12 +498,12 @@
 
   .ui.centered.cards {
     justify-content: center;
-***REMOVED***
+  }
   .ui.centered.card {
     margin-left: auto;
     margin-right: auto;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationCardFluid) {
   /*-------------------
@@ -513,8 +513,8 @@
   .ui.fluid.card {
     width: 100%;
     max-width: 9999px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationCardLink) {
   /*-------------------
@@ -526,7 +526,7 @@
   a.ui.card,
   .ui.link.card {
     transform: none;
-***REMOVED***
+  }
 
 
   .ui.cards a.card:hover,
@@ -539,8 +539,8 @@
     border: @linkHoverBorder;
     box-shadow: @linkHoverBoxShadow;
     transform: @linkHoverTransform;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*-------------------
        Colors
@@ -553,9 +553,9 @@ each(@colors,{
   @l: @colors[@@color][light];
   @lh: @colors[@@color][lightHover];
 
-  .ui.@{color***REMOVED***.cards > .card,
-  .ui.cards > .@{color***REMOVED***.card,
-  .ui.@{color***REMOVED***.card {
+  .ui.@{color}.cards > .card,
+  .ui.cards > .@{color}.card,
+  .ui.@{color}.card {
     box-shadow:
             @borderShadow,
             0 @coloredShadowDistance 0 0 @c,
@@ -567,12 +567,12 @@ each(@colors,{
             0 @coloredShadowDistance 0 0 @h,
             @shadowHoverBoxShadow
     ;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationCardInverted) {
-    .ui.inverted.@{color***REMOVED***.cards > .card,
-    .ui.inverted.cards > .@{color***REMOVED***.card,
-    .ui.inverted.@{color***REMOVED***.card {
+    .ui.inverted.@{color}.cards > .card,
+    .ui.inverted.cards > .@{color}.card,
+    .ui.inverted.@{color}.card {
       box-shadow:
               0 @shadowDistance 3px 0 @solidWhiteBorderColor,
               0 @coloredShadowDistance 0 0 @l,
@@ -584,10 +584,10 @@ each(@colors,{
               0 @coloredShadowDistance 0 0 @lh,
               0 0 0 @borderWidth @solidWhiteBorderColor
       ;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+      }
+    }
+  }
+})
 
 /*--------------
    Card Count
@@ -596,278 +596,278 @@ each(@colors,{
 .ui.one.cards {
   margin-left: @oneCardOffset;
   margin-right: @oneCardOffset;
-***REMOVED***
+}
 .ui.one.cards > .card {
   width: @oneCard;
-***REMOVED***
+}
 
 .ui.two.cards {
   margin-left: @twoCardOffset;
   margin-right: @twoCardOffset;
-***REMOVED***
+}
 .ui.two.cards > .card {
   width: @twoCard;
   margin-left: @twoCardSpacing;
   margin-right: @twoCardSpacing;
-***REMOVED***
+}
 
 .ui.three.cards {
   margin-left: @threeCardOffset;
   margin-right: @threeCardOffset;
-***REMOVED***
+}
 .ui.three.cards > .card {
   width: @threeCard;
   margin-left: @threeCardSpacing;
   margin-right: @threeCardSpacing;
-***REMOVED***
+}
 
 .ui.four.cards {
   margin-left: @fourCardOffset;
   margin-right: @fourCardOffset;
-***REMOVED***
+}
 .ui.four.cards > .card {
   width: @fourCard;
   margin-left: @fourCardSpacing;
   margin-right: @fourCardSpacing;
-***REMOVED***
+}
 
 .ui.five.cards {
   margin-left: @fiveCardOffset;
   margin-right: @fiveCardOffset;
-***REMOVED***
+}
 .ui.five.cards > .card {
   width: @fiveCard;
   margin-left: @fiveCardSpacing;
   margin-right: @fiveCardSpacing;
-***REMOVED***
+}
 
 .ui.six.cards {
   margin-left: @sixCardOffset;
   margin-right: @sixCardOffset;
-***REMOVED***
+}
 .ui.six.cards > .card {
   width: @sixCard;
   margin-left: @sixCardSpacing;
   margin-right: @sixCardSpacing;
-***REMOVED***
+}
 
 .ui.seven.cards {
   margin-left: @sevenCardOffset;
   margin-right: @sevenCardOffset;
-***REMOVED***
+}
 .ui.seven.cards > .card {
   width: @sevenCard;
   margin-left: @sevenCardSpacing;
   margin-right: @sevenCardSpacing;
-***REMOVED***
+}
 
 .ui.eight.cards {
   margin-left: @eightCardOffset;
   margin-right: @eightCardOffset;
-***REMOVED***
+}
 .ui.eight.cards > .card {
   width: @eightCard;
   margin-left: @eightCardSpacing;
   margin-right: @eightCardSpacing;
   font-size: 11px;
-***REMOVED***
+}
 
 .ui.nine.cards {
   margin-left: @nineCardOffset;
   margin-right: @nineCardOffset;
-***REMOVED***
+}
 .ui.nine.cards > .card {
   width: @nineCard;
   margin-left: @nineCardSpacing;
   margin-right: @nineCardSpacing;
   font-size: 10px;
-***REMOVED***
+}
 
 .ui.ten.cards {
   margin-left: @tenCardOffset;
   margin-right: @tenCardOffset;
-***REMOVED***
+}
 .ui.ten.cards > .card {
   width: @tenCard;
   margin-left: @tenCardSpacing;
   margin-right: @tenCardSpacing;
-***REMOVED***
+}
 
 & when (@variationCardDoubling) {
   /*-------------------
         Doubling
   --------------------*/
 
-  /* Mobile Only***REMOVED***/
+  /* Mobile Only */
   @media only screen and (max-width : @largestMobileScreen) {
     .ui.two.doubling.cards {
       margin-left: @oneCardOffset;
       margin-right: @oneCardOffset;
-  ***REMOVED***
+    }
     .ui.two.doubling.cards > .card {
       width: @oneCard;
       margin-left: @oneCardSpacing;
       margin-right: @oneCardSpacing;
-  ***REMOVED***
+    }
     .ui.three.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.three.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.four.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.four.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.five.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.five.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.six.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.six.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.seven.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.seven.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.nine.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.nine.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.ten.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.ten.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
 
-  /* Tablet Only***REMOVED***/
+  /* Tablet Only */
   @media only screen and (min-width : @tabletBreakpoint) and (max-width : @largestTabletScreen) {
     .ui.two.doubling.cards {
       margin-left: @oneCardOffset;
       margin-right: @oneCardOffset;
-  ***REMOVED***
+    }
     .ui.two.doubling.cards > .card {
       width: @oneCard;
       margin-left: @oneCardSpacing;
       margin-right: @oneCardSpacing;
-  ***REMOVED***
+    }
     .ui.three.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.three.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.four.doubling.cards {
       margin-left: @twoCardOffset;
       margin-right: @twoCardOffset;
-  ***REMOVED***
+    }
     .ui.four.doubling.cards > .card {
       width: @twoCard;
       margin-left: @twoCardSpacing;
       margin-right: @twoCardSpacing;
-  ***REMOVED***
+    }
     .ui.five.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.five.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.six.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.six.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards {
       margin-left: @threeCardOffset;
       margin-right: @threeCardOffset;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards > .card {
       width: @threeCard;
       margin-left: @threeCardSpacing;
       margin-right: @threeCardSpacing;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards {
       margin-left: @fourCardOffset;
       margin-right: @fourCardOffset;
-  ***REMOVED***
+    }
     .ui.eight.doubling.cards > .card {
       width: @fourCard;
       margin-left: @fourCardSpacing;
       margin-right: @fourCardSpacing;
-  ***REMOVED***
+    }
     .ui.nine.doubling.cards {
       margin-left: @fourCardOffset;
       margin-right: @fourCardOffset;
-  ***REMOVED***
+    }
     .ui.nine.doubling.cards > .card {
       width: @fourCard;
       margin-left: @fourCardSpacing;
       margin-right: @fourCardSpacing;
-  ***REMOVED***
+    }
     .ui.ten.doubling.cards {
       margin-left: @fiveCardOffset;
       margin-right: @fiveCardOffset;
-  ***REMOVED***
+    }
     .ui.ten.doubling.cards > .card {
       width: @fiveCard;
       margin-left: @fiveCardSpacing;
       margin-right: @fiveCardSpacing;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationCardStackable) {
   /*-------------------
@@ -877,19 +877,19 @@ each(@colors,{
   @media only screen and (max-width : @largestMobileScreen) {
     .ui.stackable.cards {
       display: block !important;
-  ***REMOVED***
+    }
     .ui.stackable.cards .card:first-child {
       margin-top: 0 !important;
-  ***REMOVED***
+    }
     .ui.stackable.cards > .card {
       display: block !important;
       height: auto !important;
       margin: @stackableRowSpacing @stackableCardSpacing;
       padding: 0 !important;
       width: @stackableMargin !important;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 /*--------------
       Size
@@ -897,15 +897,15 @@ each(@colors,{
 
 .ui.cards > .card {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationCardSizes = false) {
   each(@variationCardSizes, {
     @s: @@value;
-    .ui.@{value***REMOVED***.cards .card {
+    .ui.@{value}.cards .card {
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 & when (@variationCardInverted) {
   /*-----------------
@@ -916,63 +916,63 @@ each(@colors,{
   .ui.inverted.card {
     background: @invertedBackground;
     box-shadow: @invertedBoxShadow;
-***REMOVED***
+  }
 
-  /* Content***REMOVED***/
+  /* Content */
   .ui.inverted.cards > .card > .content,
   .ui.inverted.card > .content {
     border-top: @invertedContentDivider;
-***REMOVED***
+  }
 
-  /* Header***REMOVED***/
+  /* Header */
   .ui.inverted.cards > .card > .content > .header,
   .ui.inverted.card > .content > .header {
     color: @invertedHeaderColor;
-***REMOVED***
+  }
 
-  /* Description***REMOVED***/
+  /* Description */
   .ui.inverted.cards > .card > .content > .description,
   .ui.inverted.card > .content > .description {
     color: @invertedDescriptionColor;
-***REMOVED***
+  }
 
-  /* Meta***REMOVED***/
+  /* Meta */
   .ui.inverted.cards > .card .meta,
   .ui.inverted.card .meta {
     color: @invertedMetaColor;
-***REMOVED***
+  }
   .ui.inverted.cards > .card .meta > a:not(.ui),
   .ui.inverted.card .meta > a:not(.ui) {
     color: @invertedMetaLinkColor;
-***REMOVED***
+  }
   .ui.inverted.cards > .card .meta > a:not(.ui):hover,
   .ui.inverted.card .meta > a:not(.ui):hover {
     color: @invertedMetaLinkHoverColor;
-***REMOVED***
+  }
 
-  /* Extra***REMOVED***/
+  /* Extra */
   .ui.inverted.cards > .card > .extra,
   .ui.inverted.card > .extra {
     border-top: @invertedExtraDivider !important;
     color: @invertedExtraColor;
-***REMOVED***
+  }
   .ui.inverted.cards > .card > .extra a:not(.ui),
   .ui.inverted.card > .extra a:not(.ui) {
     color: @invertedExtraLinkColor;
-***REMOVED***
+  }
   .ui.inverted.cards > .card > .extra a:not(.ui):hover,
   .ui.inverted.card > .extra a:not(.ui):hover {
     color: @extraLinkHoverColor;
-***REMOVED***
+  }
 
-  /* Link card(s)***REMOVED***/
+  /* Link card(s) */
   .ui.inverted.cards a.card:hover,
   .ui.inverted.link.cards .card:not(.icon):hover,
   a.inverted.ui.card:hover,
   .ui.inverted.link.card:hover {
     background: @invertedLinkHoverBackground;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 .loadUIOverrides();

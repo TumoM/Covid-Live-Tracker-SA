@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
              Set-up
 *******************************/
 
@@ -14,7 +14,7 @@ var
   config          = require('./project/config'),
 
   // Final config object
-  gulpConfig = {***REMOVED***,
+  gulpConfig = {},
 
   // semantic.json settings
   userConfig
@@ -22,27 +22,27 @@ var
 ;
 
 
-***REMOVED********************************
+/*******************************
           User Config
 *******************************/
 
 try {
   // looks for config file across all parent directories
   userConfig = requireDotFile('semantic.json');
-***REMOVED***
+}
 catch(error) {
   if(error.code === 'MODULE_NOT_FOUND') {
     console.error('No semantic.json config found');
-***REMOVED***
-***REMOVED***
+  }
+}
 
 // extend user config with defaults
 gulpConfig = (!userConfig)
-  ? extend(true, {***REMOVED***, defaults)
-  : extend(false, {***REMOVED***, defaults, userConfig)
+  ? extend(true, {}, defaults)
+  : extend(false, {}, defaults, userConfig)
 ;
 
-***REMOVED********************************
+/*******************************
        Add Derived Values
 *******************************/
 
@@ -50,7 +50,7 @@ gulpConfig = (!userConfig)
 config.addDerivedValues(gulpConfig);
 
 
-***REMOVED********************************
+/*******************************
              Export
 *******************************/
 

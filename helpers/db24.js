@@ -6,8 +6,8 @@ function DbSetup() {
       user: 'test_user',
       password: 'temp_pass',
       database: 'covid-tracker-sa2'
-  ***REMOVED***
-***REMOVED***);
+    }
+  });
   knex.schema.hasTable('provinceDays').then((exists) => {
     if (!exists) {
       return knex.schema.createTable('provinceDays', (t) => {
@@ -21,11 +21,11 @@ function DbSetup() {
         t.integer('testCount').defaultTo(null);
         t.unique(['provinceName', 'provDate']);
         console.log('ProvinceDays table CREATED');
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
       console.log('ProvinceDays table exists');
-***REMOVED***);
+  });
 
   knex.schema.hasTable('caseDates').then((exists) => {
     if (!exists) {
@@ -37,11 +37,11 @@ function DbSetup() {
         t.unique(['provinceId', 'caseDate']);
         t.foreign('provinceId').references('id').inTable('provinceDays');
         console.log('caseDates table CREATED');
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
       console.log('caseDates table exists');
-***REMOVED***);
+  });
 
   knex.schema.hasTable('deathDates').then((exists) => {
     if (!exists) {
@@ -55,11 +55,11 @@ function DbSetup() {
         t.unique(['provinceId', 'deathDate']);
         t.foreign('provinceId').references('id').inTable('provinceDays');
         console.log('deathDates table CREATED');
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
       console.log('deathDates table exists');
-***REMOVED***);
+  });
 
   knex.schema.hasTable('deathPersons').then((exists) => {
     if (!exists) {
@@ -73,11 +73,11 @@ function DbSetup() {
         t.unique(['provinceName', 'deathDateId', 'deathDate', 'age', 'sex']);
         t.foreign('deathDateId').references('id').inTable('provinceDays');
         console.log('deathPersons table CREATED');
-    ***REMOVED***);
-  ***REMOVED***
+      });
+    }
 
       console.log('deathPersons table exists');
-***REMOVED***);
+  });
 
   knex.schema.hasTable('dates').then((exists) => {
     if (!exists) {
@@ -92,11 +92,11 @@ function DbSetup() {
         t.boolean('error').defaultTo(false);
 
         console.log('dates table CREATED');
-    ***REMOVED***).then((value) => knex.raw(''`alter table dates\tadd activeCases numeric GENERATED ALWAYS AS (dates."totalCases" - (dates."totalRecoveries" + dates."totalDeaths")) STORED;```));
-  ***REMOVED***
+      }).then((value) => knex.raw(''`alter table dates\tadd activeCases numeric GENERATED ALWAYS AS (dates."totalCases" - (dates."totalRecoveries" + dates."totalDeaths")) STORED;```));
+    }
 
       console.log('dates table exists');
-***REMOVED***);
+  });
   console.log('DB SETUP: COMPLETE');
-***REMOVED***
+}
 // DbSetup();

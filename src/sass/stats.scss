@@ -15,61 +15,62 @@ $black :#000000;
 #myStats{
   .ui.sub.header {
     text-transform: none;
-***REMOVED***
+  }
   .statIcon{
     margin: 1.5rem 1rem;
-***REMOVED***
+  }
   .ui.card{
+    height: 90%;
     margin: 1rem;
-***REMOVED***
+  }
   .grid.two.column.row{
     padding-top:0;
-***REMOVED***
+  }
   #statTotalCases{
     i,.value{
       color: $orange;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   #statNewCases{
     i,.value{
       color: $yellow;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   #statTotalDeaths{
     i,.value{
       color: $red;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   #statNewDeaths{
     i,.value{
       color: $brown;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   #statTotalRecoveries{
     i,.value{
       color: $blue;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   #statTotalTests{
     i,.value{
       color: $green;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .statistics{
     &.red{
       color: $red;
-  ***REMOVED***
+    }
     &.orange{
       color: $orange;
-  ***REMOVED***
+    }
     &.blue{
       color: $blue;
-  ***REMOVED***
+    }
     &.green{
       color: $green;
-  ***REMOVED***
+    }
     &.orange{
       color: $orange;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}

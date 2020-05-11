@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***   Define Various Sub-Tasks
-***REMOVED*********************************/
+/*******************************
+ *   Define Various Sub-Tasks
+ *******************************/
 
 /*
   Lets you serve files to a local documentation instance
@@ -19,4 +19,4 @@ module.exports = function (gulp) {
   gulp.task('version', version);
   gulp.task('version').description = 'Clean dist folder';
 
-***REMOVED***;
+};

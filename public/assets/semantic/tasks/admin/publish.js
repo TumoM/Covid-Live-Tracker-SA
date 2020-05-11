@@ -1,11 +1,11 @@
-***REMOVED********************************
-***REMOVED***         Release All
-***REMOVED*********************************/
+/*******************************
+ *         Release All
+ *******************************/
 
 /*
  This task update all SUI individual component repos with new versions of components
 
- ***REMOVED*** Commits changes from create components to GitHub and Tags
+  * Commits changes from create components to GitHub and Tags
 
 */
 
@@ -13,7 +13,7 @@ var
   gulp = require('gulp')
 ;
 
-/* Release All***REMOVED***/
+/* Release All */
 module.exports = function (callback) {
 
   gulp.series(
@@ -21,4 +21,4 @@ module.exports = function (callback) {
     'update components', // commit components to github
   )(callback);
 
-***REMOVED***;
+};

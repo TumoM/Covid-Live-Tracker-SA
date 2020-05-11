@@ -1,6 +1,6 @@
-***REMOVED********************************
+/*******************************
  Build Docs
-***REMOVED*********************************/
+ *******************************/
 
 var
   gulp        = require('gulp'),
@@ -48,7 +48,7 @@ module.exports = function (callback) {
    ---------------*/
 
   function buildMetaData() {
-    // parse all***REMOVED***.html.eco in docs repo, data will end up in
+    // parse all *.html.eco in docs repo, data will end up in
     // metadata.result object.  Note this assumes that the docs
     // repository is present and in proper directory location as
     // specified by docs.json.
@@ -56,10 +56,10 @@ module.exports = function (callback) {
     return gulp.src(config.paths.template.eco + globs.eco)
       .pipe(map(metadata.parser))
       .on('end', function () {
-        fs.mkdirSync(output.metadata, {recursive: true***REMOVED***);
+        fs.mkdirSync(output.metadata, {recursive: true});
         fs.writeFileSync(output.metadata + '/metadata.json', JSON.stringify(metadata.result, null, 2));
-    ***REMOVED***);
-***REMOVED***
+      });
+  }
 
   /*--------------
     Copy Examples
@@ -68,10 +68,10 @@ module.exports = function (callback) {
   function copyExample() {
     // copy src/ to server
     console.info('Copying examples');
-    return gulp.src('examples***REMOVED***/*.*')
+    return gulp.src('examples/**/*.*')
       .pipe(gulp.dest(output.examples))
       .pipe(print(log.created));
-***REMOVED***
+  }
 
 
   /*--------------
@@ -81,10 +81,10 @@ module.exports = function (callback) {
   function copyLess() {
     // copy src/ to server
     console.info('Copying LESS source');
-    return gulp.src('src***REMOVED***/*.*')
+    return gulp.src('src/**/*.*')
       .pipe(gulp.dest(output.less))
       .pipe(print(log.created));
-***REMOVED***
+  }
 
 
   /*--------------
@@ -97,15 +97,15 @@ module.exports = function (callback) {
     console.error('Cannot build files. Run "gulp install" to set-up Semantic');
     callback();
     return;
-***REMOVED***
+  }
 
   gulp.series(
     buildMetaData,
     copyExample,
     copyLess,
     (callback) => buildJS('docs', config, callback),
-    (callback) => buildCSS('docs', config, {***REMOVED***, callback),
+    (callback) => buildCSS('docs', config, {}, callback),
     (callback) => buildAssets(config, callback)
   )(callback);
 
-***REMOVED***;
+};

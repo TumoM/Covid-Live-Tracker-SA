@@ -3,14 +3,15 @@ linter:
     exclude:
       - vendor
       - assets
-      - public/*
+      - public/bundle/**/
     targets:
       - src/js/*.js
       - src/sass/*.scss
-      - helpers***REMOVED***/*.js
+      - helpers/**/*.js
       - app.js
       - views/
-      - testing/
+      - another_target_directory/foo.rb
+      - bar.rb
     locale: UK
     ignore: center,behavior
 
@@ -26,4 +27,4 @@ linter:
 
   stylelint:
     root_dir: "app/assets/stylesheets"
-    glob: "**/*.{css,scss***REMOVED***"
+    glob: "**/*.{css,scss}"

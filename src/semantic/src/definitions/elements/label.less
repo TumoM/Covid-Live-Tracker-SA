@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Label
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Label
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,7 +18,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Label
 *******************************/
 
@@ -40,89 +40,89 @@
   border: @border;
   border-radius: @borderRadius;
   transition: @transition;
-***REMOVED***
+}
 
 .ui.label:first-child {
   margin-left: 0;
-***REMOVED***
+}
 .ui.label:last-child {
   margin-right: 0;
-***REMOVED***
+}
 
-/* Link***REMOVED***/
+/* Link */
 a.ui.label {
   cursor: pointer;
-***REMOVED***
+}
 
-/* Inside Link***REMOVED***/
+/* Inside Link */
 .ui.label > a {
   cursor: pointer;
   color: inherit;
   opacity: @linkOpacity;
   transition: @linkTransition;
-***REMOVED***
+}
 .ui.label > a:hover {
   opacity: 1;
-***REMOVED***
+}
 
-/* Image***REMOVED***/
+/* Image */
 .ui.label > img {
   width: auto !important;
   vertical-align: middle;
   height: @imageHeight;
-***REMOVED***
+}
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.left.icon.label > .icon,
 .ui.label > .icon {
   width: auto;
   margin: 0 @iconDistance 0 0;
-***REMOVED***
+}
 
-/* Detail***REMOVED***/
+/* Detail */
 .ui.label > .detail {
   display: inline-block;
   vertical-align: top;
   font-weight: @detailFontWeight;
   margin-left: @detailMargin;
   opacity: @detailOpacity;
-***REMOVED***
+}
 .ui.label > .detail .icon {
   margin: 0 @detailIconDistance 0 0;
-***REMOVED***
+}
 
-/* Removable label***REMOVED***/
+/* Removable label */
 .ui.label > .close.icon,
 .ui.label > .delete.icon {
   cursor: pointer;
   font-size: @deleteSize;
   opacity: @deleteOpacity;
   transition: @deleteTransition;
-***REMOVED***
+}
 .ui.label > .close.icon:hover,
 .ui.label > .delete.icon:hover {
   opacity: 1;
-***REMOVED***
+}
 
-/* Backward compatible positioning***REMOVED***/
+/* Backward compatible positioning */
 .ui.label.left.icon > .close.icon,
 .ui.label.left.icon > .delete.icon {
   margin: 0 @deleteMargin 0 0;
-***REMOVED***
+}
 .ui.label:not(.icon) > .close.icon,
 .ui.label:not(.icon) > .delete.icon {
   margin: 0 0 0 @deleteMargin;
-***REMOVED***
+}
 
-/* Label for only an icon***REMOVED***/
+/* Label for only an icon */
 .ui.icon.label > .icon {
   margin: 0 auto;
-***REMOVED***
+}
 
-/* Right Side Icon***REMOVED***/
+/* Right Side Icon */
 .ui.right.icon.label > .icon {
   margin: 0 0 0 @iconDistance;
-***REMOVED***
+}
 
 /*-------------------
        Group
@@ -130,7 +130,7 @@ a.ui.label {
 
 .ui.labels > .label {
   margin: 0 @groupHorizontalMargin @groupVerticalMargin 0;
-***REMOVED***
+}
 
 
 /*-------------------
@@ -139,37 +139,37 @@ a.ui.label {
 
 .ui.header > .ui.label {
   margin-top: @lineHeightOffset;
-***REMOVED***
+}
 
 
-/* Remove border radius on attached segment***REMOVED***/
+/* Remove border radius on attached segment */
 .ui.attached.segment > .ui.top.left.attached.label,
 .ui.bottom.attached.segment > .ui.top.left.attached.label  {
   border-top-left-radius: 0;
-***REMOVED***
+}
 .ui.attached.segment > .ui.top.right.attached.label,
 .ui.bottom.attached.segment > .ui.top.right.attached.label  {
   border-top-right-radius: 0;
-***REMOVED***
+}
 .ui.top.attached.segment > .ui.bottom.left.attached.label  {
   border-bottom-left-radius: 0;
-***REMOVED***
+}
 .ui.top.attached.segment > .ui.bottom.right.attached.label  {
   border-bottom-right-radius: 0;
-***REMOVED***
+}
 
-/* Padding on next content after a label***REMOVED***/
+/* Padding on next content after a label */
 .ui.top.attached.label ~ .ui.bottom.attached.label + :not(.attached),
 .ui.top.attached.label + :not(.attached) {
   margin-top: @attachedSegmentPadding !important;
-***REMOVED***
+}
 .ui.bottom.attached.label ~ :last-child:not(.attached) {
   margin-top:0;
   margin-bottom: @attachedSegmentPadding !important;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
              Types
 *******************************/
 & when (@variationLabelImage) {
@@ -185,7 +185,7 @@ a.ui.label {
     padding: @imageLabelPadding;
     border-radius: @imageLabelBorderRadius;
     box-shadow: @imageLabelBoxShadow;
-***REMOVED***
+  }
 
   .ui.image.label img {
     display: inline-block;
@@ -194,15 +194,15 @@ a.ui.label {
     height: @imageLabelImageHeight;
     margin: @imageLabelImageMargin;
     border-radius: @imageLabelImageBorderRadius;
-***REMOVED***
+  }
 
   .ui.image.label .detail {
     background: @imageLabelDetailBackground;
     margin: @imageLabelDetailMargin;
     padding: @imageLabelDetailPadding;
     border-radius: 0 @imageLabelBorderRadius @imageLabelBorderRadius 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationLabelTag) {
 /*-------------------
@@ -218,7 +218,7 @@ a.ui.label {
 
     border-radius: 0 @borderRadius @borderRadius 0;
     transition: @tagTransition;
-***REMOVED***
+  }
   .ui.tag.labels .label:before,
   .ui.tag.label:before {
       position: absolute;
@@ -234,7 +234,7 @@ a.ui.label {
       width: @tagTriangleSize;
       height: @tagTriangleSize;
       transition: @tagTransition;
-***REMOVED***
+  }
 
 
   .ui.tag.labels .label:after,
@@ -251,7 +251,7 @@ a.ui.label {
 
     box-shadow: @tagCircleBoxShadow;
     border-radius: @circularRadius;
-***REMOVED***
+  }
   & when (@variationLabelBasic) {
     .ui.basic.tag.labels .label:before,
     .ui.basic.tag.label:before {
@@ -259,13 +259,13 @@ a.ui.label {
       border-width: @basicBorderWidth 0 0 @basicBorderWidth;
       border-style: inherit;
       right: @basicBorderFullWidthOffset;
-  ***REMOVED***
+    }
     .ui.basic.tag.labels .label:after,
     .ui.basic.tag.label:after {
       box-shadow: @basicTagCircleBoxShadow;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationLabelCorner) {
 /*-------------------
@@ -286,12 +286,12 @@ a.ui.label {
     height: @cornerTriangleSize;
     z-index: @cornerTriangleZIndex;
     transition: @cornerTriangleTransition;
-***REMOVED***
+  }
 
-  /* Icon Label***REMOVED***/
+  /* Icon Label */
   .ui.corner.label{
     background-color: transparent !important;
-***REMOVED***
+  }
   .ui.corner.label:after {
     position: absolute;
     content: "";
@@ -310,7 +310,7 @@ a.ui.label {
 
     border-right-color: inherit;
     transition: @cornerTriangleTransition;
-***REMOVED***
+  }
 
   .ui.corner.label .icon {
     cursor: inherit;
@@ -320,14 +320,14 @@ a.ui.label {
     right: @cornerIconRightOffset;
     font-size: @cornerIconSize;
     margin: 0;
-***REMOVED***
+  }
 
-  /* Left Corner***REMOVED***/
+  /* Left Corner */
   .ui.left.corner.label,
   .ui.left.corner.label:after {
     right: auto;
     left: 0;
-***REMOVED***
+  }
   .ui.left.corner.label:after {
     border-top: @cornerTriangleSize solid transparent;
     border-right: @cornerTriangleSize solid transparent;
@@ -335,22 +335,22 @@ a.ui.label {
     border-left: 0 solid transparent;
 
     border-top-color: inherit;
-***REMOVED***
+  }
   .ui.left.corner.label .icon {
     left: @cornerIconLeftOffset;
     right: auto;
-***REMOVED***
+  }
 
-  /* Segment***REMOVED***/
+  /* Segment */
   .ui.segment > .ui.corner.label {
     top: -1px;
     right: -1px;
-***REMOVED***
+  }
   .ui.segment > .ui.left.corner.label {
     right: auto;
     left: -1px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationLabelRibbon) {
   /*-------------------
@@ -363,7 +363,7 @@ a.ui.label {
     min-width: max-content;
     border-radius: 0 @borderRadius @borderRadius 0;
     border-color: @ribbonShadowColor;
-***REMOVED***
+  }
 
   .ui.ribbon.label:after {
     position: absolute;
@@ -380,48 +380,48 @@ a.ui.label {
 
     width: 0;
     height: 0;
-***REMOVED***
-  /* Positioning***REMOVED***/
+  }
+  /* Positioning */
   .ui.ribbon.label {
     left: @ribbonOffset;
     margin-right: -@ribbonTriangleSize;
     padding-left: @ribbonDistance;
     padding-right: @ribbonTriangleSize;
-***REMOVED***
+  }
   .ui[class*="right ribbon"].label {
     left: @rightRibbonOffset;
     padding-left: @ribbonTriangleSize;
     padding-right: @ribbonDistance;
-***REMOVED***
+  }
   & when (@variationLabelBasic) {
     .ui.basic.ribbon.label {
       padding-top: @basicRibbonOffset;
       padding-bottom: @basicRibbonOffset;
-  ***REMOVED***
+    }
     .ui.basic.ribbon.label:not([class*="right ribbon"]) {
       padding-left: @basicRibbonTriangleSizeOffset;
       padding-right: @basicRibbonTriangleSize;
-  ***REMOVED***
+    }
     .ui.basic[class*="right ribbon"].label {
       padding-left: @basicRibbonTriangleSize;
       padding-right: @basicRibbonTriangleSizeOffset;
-  ***REMOVED***
+    }
     .ui.basic.ribbon.label::after {
       top: @basicBorderFullWidthOffset;
-  ***REMOVED***
+    }
     .ui.basic.ribbon.label:not([class*="right ribbon"])::after {
       left: @basicBorderWidthOffset;
-  ***REMOVED***
+    }
     .ui.basic[class*="right ribbon"].label::after {
       right: @basicBorderWidthOffset;
-  ***REMOVED***
-***REMOVED***
-  /* Right Ribbon***REMOVED***/
+    }
+  }
+  /* Right Ribbon */
   .ui[class*="right ribbon"].label {
     text-align: left;
     transform: translateX(-100%);
     border-radius: @borderRadius 0 0 @borderRadius;
-***REMOVED***
+  }
   .ui[class*="right ribbon"].label:after {
     left: auto;
     right: 0;
@@ -430,33 +430,33 @@ a.ui.label {
     border-width: @ribbonTriangleSize @ribbonTriangleSize 0 0;
     border-color: transparent;
     border-top-color: inherit;
-***REMOVED***
+  }
 
-  /* Inside Table***REMOVED***/
+  /* Inside Table */
   .ui.image > .ribbon.label,
   .ui.card .image > .ribbon.label {
     position: absolute;
     top: @ribbonImageTopDistance;
-***REMOVED***
+  }
   .ui.card .image > .ui.ribbon.label,
   .ui.image > .ui.ribbon.label {
     left: @ribbonImageOffset;
-***REMOVED***
+  }
   .ui.card .image > .ui[class*="right ribbon"].label,
   .ui.image > .ui[class*="right ribbon"].label {
     left: @rightRibbonImageOffset;
     padding-left: @horizontalPadding;
-***REMOVED***
+  }
 
-  /* Inside Table***REMOVED***/
+  /* Inside Table */
   .ui.table td > .ui.ribbon.label {
     left: @ribbonTableOffset;
-***REMOVED***
+  }
   .ui.table td > .ui[class*="right ribbon"].label {
     left: @rightRibbonTableOffset;
     padding-left: @horizontalPadding;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationLabelAttached) {
   /*-------------------
@@ -474,31 +474,31 @@ a.ui.label {
     padding: @attachedVerticalPadding @attachedHorizontalPadding;
 
     border-radius: @attachedCornerBorderRadius @attachedCornerBorderRadius 0 0;
-***REMOVED***
+  }
   .ui[class*="bottom attached"].label {
     top: auto;
     bottom: 0;
     border-radius: 0 0 @attachedCornerBorderRadius @attachedCornerBorderRadius;
-***REMOVED***
+  }
 
   .ui[class*="top left attached"].label {
     width: auto;
     margin-top: 0 !important;
     border-radius: @attachedCornerBorderRadius 0 @attachedBorderRadius 0;
-***REMOVED***
+  }
 
   .ui[class*="top right attached"].label {
     width: auto;
     left: auto;
     right: 0;
     border-radius: 0 @attachedCornerBorderRadius 0 @attachedBorderRadius;
-***REMOVED***
+  }
   .ui[class*="bottom left attached"].label {
     width: auto;
     top: auto;
     bottom: 0;
     border-radius: 0 @attachedBorderRadius 0 @attachedCornerBorderRadius;
-***REMOVED***
+  }
   .ui[class*="bottom right attached"].label {
     top: auto;
     bottom: 0;
@@ -506,10 +506,10 @@ a.ui.label {
     right: 0;
     width: auto;
     border-radius: @attachedBorderRadius 0 @attachedCornerBorderRadius 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
@@ -519,8 +519,8 @@ a.ui.label {
 & when (@variationLabelDisabled) {
   .ui.label.disabled {
     opacity: 0.5;
-***REMOVED***
-***REMOVED***
+  }
+}
 /*-------------------
         Hover
 --------------------*/
@@ -532,11 +532,11 @@ a.ui.label:hover {
 
   background-image: @labelHoverBackgroundImage;
   color: @labelHoverTextColor;
-***REMOVED***
+}
 .ui.labels a.label:hover:before,
 a.ui.label:hover:before {
   color: @labelHoverTextColor;
-***REMOVED***
+}
 
 /*-------------------
         Active
@@ -548,12 +548,12 @@ a.ui.label:hover:before {
 
   background-image: @labelActiveBackgroundImage;
   color: @labelActiveTextColor;
-***REMOVED***
+}
 .ui.active.label:before {
   background-color: @labelActiveBackgroundColor;
   background-image: @labelActiveBackgroundImage;
   color: @labelActiveTextColor;
-***REMOVED***
+}
 
 /*-------------------
      Active Hover
@@ -566,13 +566,13 @@ a.ui.active.label:hover {
 
   background-image: @labelActiveHoverBackgroundImage;
   color: @labelActiveHoverTextColor;
-***REMOVED***
+}
 .ui.labels a.active.label:hover:before,
 a.ui.active.label:hover:before {
   background-color: @labelActiveHoverBackgroundColor;
   background-image: @labelActiveHoverBackgroundImage;
   color: @labelActiveHoverTextColor;
-***REMOVED***
+}
 
 
 /*-------------------
@@ -582,7 +582,7 @@ a.ui.active.label:hover:before {
 .ui.labels.visible .label,
 .ui.label.visible:not(.dropdown) {
   display: inline-block !important;
-***REMOVED***
+}
 
 /*-------------------
       Hidden
@@ -591,10 +591,10 @@ a.ui.active.label:hover:before {
 .ui.labels.hidden .label,
 .ui.label.hidden {
   display: none !important;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -610,23 +610,23 @@ a.ui.active.label:hover:before {
     border: @basicBorder;
     color: @basicColor;
     box-shadow: @basicBoxShadow;
-***REMOVED***
+  }
 
-  /* Link***REMOVED***/
+  /* Link */
   .ui.basic.labels a.label:hover,
   a.ui.basic.label:hover {
     text-decoration: none;
     background: @basicHoverBackground;
     color: @basicHoverColor;
     box-shadow: @basicHoverBoxShadow;
-***REMOVED***
+  }
   & when (@variationLabelPointing) {
-      /* Pointing***REMOVED***/
+      /* Pointing */
     .ui.basic.pointing.label:before {
       border-color: inherit;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationLabelFluid) {
   /*-------------------
@@ -637,8 +637,8 @@ a.ui.active.label:hover:before {
   .ui.fluid.labels > .label {
     width: 100%;
     box-sizing: border-box;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationLabelInverted) {
   /*-------------------
@@ -649,24 +649,24 @@ a.ui.active.label:hover:before {
   .ui.inverted.label {
     color: @invertedTextColor;
     background-color: @invertedBackgroundColor;
-***REMOVED***
+  }
   .ui.inverted.corner.label {
       border-color: @invertedBackgroundColor;
-***REMOVED***
+  }
   .ui.inverted.corner.label:hover {
       border-color: @backgroundColor;
       transition: none;
-***REMOVED***
+  }
   .ui.inverted.basic.labels .label,
   .ui.inverted.basic.label,
   .ui.inverted.basic.label:hover {
     border-color: @basicInvertedBorderColor;
     background: @black;
-***REMOVED***
+  }
   .ui.inverted.basic.label:hover {
     color: @linkColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*-------------------
        Colors
@@ -684,105 +684,105 @@ each(@colors,{
   @_labelRibbonShadow         : @colors[@@color][ribbon];
   @_labelInvertedRibbonShadow : @colors[@@color][invertedRibbon];
 
-  .ui.@{color***REMOVED***.labels .label,
-  .ui.ui.ui.@{color***REMOVED***.label {
+  .ui.@{color}.labels .label,
+  .ui.ui.ui.@{color}.label {
     background-color: @_labelColor;
     border-color: @_labelColor;
     color: @_labelTextColor;
-***REMOVED***
-  /* Link***REMOVED***/
-  .ui.@{color***REMOVED***.labels a.label:hover,
-  a.ui.ui.ui.@{color***REMOVED***.label:hover{
+  }
+  /* Link */
+  .ui.@{color}.labels a.label:hover,
+  a.ui.ui.ui.@{color}.label:hover{
     background-color: @_labelHover;
     border-color: @_labelHover;
     color: @_labelHoverTextColor;
-***REMOVED***
+  }
   & when (@variationLabelRibbon) {
-    /* Ribbon***REMOVED***/
-    .ui.ui.ui.@{color***REMOVED***.ribbon.label {
+    /* Ribbon */
+    .ui.ui.ui.@{color}.ribbon.label {
       border-color: @_labelRibbonShadow;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationLabelBasic) {
-    /* Basic***REMOVED***/
-    .ui.basic.labels .@{color***REMOVED***.label,
-    .ui.ui.ui.basic.@{color***REMOVED***.label {
+    /* Basic */
+    .ui.basic.labels .@{color}.label,
+    .ui.ui.ui.basic.@{color}.label {
       background: @basicBackground;
       border-color: @_labelColor;
       color: @_labelColor;
-  ***REMOVED***
-    .ui.basic.labels a.@{color***REMOVED***.label:hover,
-    a.ui.ui.ui.basic.@{color***REMOVED***.label:hover {
+    }
+    .ui.basic.labels a.@{color}.label:hover,
+    a.ui.ui.ui.basic.@{color}.label:hover {
       background: @basicBackground;
       border-color: @_labelHover;
       color: @_labelHover;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   & when (@variationLabelInverted) {
-    /* Inverted***REMOVED***/
-    .ui.inverted.labels .@{color***REMOVED***.label,
-    .ui.ui.ui.inverted.@{color***REMOVED***.label {
+    /* Inverted */
+    .ui.inverted.labels .@{color}.label,
+    .ui.ui.ui.inverted.@{color}.label {
       background-color: @_labelInvertedColor;
       border-color: @_labelInvertedColor;
       color: @black;
-  ***REMOVED***
-    /* Inverted Link***REMOVED***/
-    .ui.inverted.labels a.@{color***REMOVED***.label:hover,
-    a.ui.ui.ui.inverted.@{color***REMOVED***.label:hover{
+    }
+    /* Inverted Link */
+    .ui.inverted.labels a.@{color}.label:hover,
+    a.ui.ui.ui.inverted.@{color}.label:hover{
       background-color: @_labelInvertedHover;
       border-color: @_labelInvertedHover;
       & when not (@isDark) {
         color: @black;
-    ***REMOVED***
+      }
       & when (@isDark) {
         color: @_labelTextColor;
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     & when (@variationLabelRibbon) {
-      /* Inverted Ribbon***REMOVED***/
-      .ui.ui.ui.inverted.@{color***REMOVED***.ribbon.label {
+      /* Inverted Ribbon */
+      .ui.ui.ui.inverted.@{color}.ribbon.label {
         border-color: @_labelInvertedRibbonShadow;
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
     & when (@variationLabelBasic) {
-      /* Inverted Basic***REMOVED***/
-      .ui.inverted.basic.labels .@{color***REMOVED***.label,
-      .ui.ui.ui.inverted.basic.@{color***REMOVED***.label {
+      /* Inverted Basic */
+      .ui.inverted.basic.labels .@{color}.label,
+      .ui.ui.ui.inverted.basic.@{color}.label {
         background-color: @invertedBackground;
         border-color: @_labelInvertedColor;
         & when not (@isDark) {
           color: @_labelInvertedColor;
-      ***REMOVED***
+        }
         & when (@isDark) {
           color: @invertedTextColor;
-      ***REMOVED***
-    ***REMOVED***
-      .ui.inverted.basic.labels a.@{color***REMOVED***.label:hover,
-      a.ui.ui.ui.inverted.basic.@{color***REMOVED***.label:hover {
+        }
+      }
+      .ui.inverted.basic.labels a.@{color}.label:hover,
+      a.ui.ui.ui.inverted.basic.@{color}.label:hover {
         border-color: @_labelInvertedHover;
         background-color: @invertedBackground;
         & when not (@isDark) {
           color: @_labelInvertedHover;
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
       & when (@variationLabelTag) {
-        /* Inverted Basic Tags***REMOVED***/
-        .ui.inverted.basic.tag.labels .@{color***REMOVED***.label,
-        .ui.ui.ui.inverted.@{color***REMOVED***.basic.tag.label {
+        /* Inverted Basic Tags */
+        .ui.inverted.basic.tag.labels .@{color}.label,
+        .ui.ui.ui.inverted.@{color}.basic.tag.label {
           border: @invertedBorderSize solid @_labelInvertedColor;
-      ***REMOVED***
-        .ui.inverted.basic.tag.labels .@{color***REMOVED***.label:before,
-        .ui.ui.ui.inverted.@{color***REMOVED***.basic.tag.label:before {
+        }
+        .ui.inverted.basic.tag.labels .@{color}.label:before,
+        .ui.ui.ui.inverted.@{color}.basic.tag.label:before {
           border-color: inherit;
           border-width: @invertedBorderSize 0 0 @invertedBorderSize;
           border-style: inherit;
           background-color: @invertedBackground;
           right: e(%("calc(100%% + %d)", @invertedBorderSize));
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***)
+        }
+      }
+    }
+  }
+})
 
 /*-------------------
      Horizontal
@@ -795,7 +795,7 @@ each(@colors,{
   padding: @horizontalLabelVerticalPadding @horizontalPadding;
   min-width: @horizontalLabelMinWidth;
   text-align: center;
-***REMOVED***
+}
 
 & when (@variationLabelCircular) {
   /*-------------------
@@ -812,7 +812,7 @@ each(@colors,{
     line-height: 1em;
     text-align: center;
     border-radius: @circularRadius;
-***REMOVED***
+  }
   .ui.empty.circular.labels .label,
   .ui.empty.circular.label {
     min-width: 0;
@@ -821,8 +821,8 @@ each(@colors,{
     width: @emptyCircleSize;
     height: @emptyCircleSize;
     vertical-align: baseline;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationLabelPointing) {
   /*-------------------
@@ -831,11 +831,11 @@ each(@colors,{
 
   .ui.pointing.label {
     position: relative;
-***REMOVED***
+  }
 
   .ui.attached.pointing.label {
     position: absolute;
-***REMOVED***
+  }
 
   .ui.pointing.label:before {
     background-color: inherit;
@@ -843,8 +843,8 @@ each(@colors,{
     border-width: 0;
     border-style: solid;
     border-color: @pointingBorderColor;
-***REMOVED***
-  /* Arrow***REMOVED***/
+  }
+  /* Arrow */
   .ui.pointing.label:before {
     position: absolute;
     content: '';
@@ -855,26 +855,26 @@ each(@colors,{
     width: @pointingTriangleSize;
     height: @pointingTriangleSize;
     transition: @pointingTriangleTransition;
-***REMOVED***
+  }
 
   /*--- Above ---*/
   .ui.pointing.label,
   .ui[class*="pointing above"].label {
     margin-top: @pointingVerticalDistance;
-***REMOVED***
+  }
   .ui.pointing.label:before,
   .ui[class*="pointing above"].label:before {
     border-width: @borderWidth 0 0 @borderWidth;
     transform: translateX(-50%) translateY(-50%) rotate(45deg);
     top: 0;
     left: 50%;
-***REMOVED***
+  }
   /*--- Below ---*/
   .ui[class*="bottom pointing"].label,
   .ui[class*="pointing below"].label {
     margin-top: 0;
     margin-bottom: @pointingVerticalDistance;
-***REMOVED***
+  }
   .ui[class*="bottom pointing"].label:before,
   .ui[class*="pointing below"].label:before {
     border-width: 0 @borderWidth @borderWidth 0;
@@ -883,12 +883,12 @@ each(@colors,{
     transform: translateX(-50%) translateY(-50%) rotate(45deg);
     top: 100%;
     left: 50%;
-***REMOVED***
+  }
   /*--- Left ---*/
   .ui[class*="left pointing"].label {
     margin-top: 0;
     margin-left: @pointingHorizontalDistance;
-***REMOVED***
+  }
   .ui[class*="left pointing"].label:before {
     border-width: 0 0 @borderWidth @borderWidth;
     transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -896,12 +896,12 @@ each(@colors,{
     right: auto;
     top: 50%;
     left: 0;
-***REMOVED***
+  }
   /*--- Right ---*/
   .ui[class*="right pointing"].label {
     margin-top: 0;
     margin-right: @pointingHorizontalDistance;
-***REMOVED***
+  }
   .ui[class*="right pointing"].label:before {
     border-width: @borderWidth @borderWidth 0 0;
     transform: translateX(50%) translateY(-50%) rotate(45deg);
@@ -909,34 +909,34 @@ each(@colors,{
     right: 0;
     bottom: auto;
     left: auto;
-***REMOVED***
+  }
   & when (@variationLabelBasic) {
-    /* Basic Pointing***REMOVED***/
+    /* Basic Pointing */
 
     /*--- Above ---*/
     .ui.basic.pointing.label:before,
     .ui.basic[class*="pointing above"].label:before {
       margin-top: @basicPointingTriangleOffset;
-  ***REMOVED***
+    }
     /*--- Below ---*/
     .ui.basic[class*="bottom pointing"].label:before,
     .ui.basic[class*="pointing below"].label:before {
       bottom: auto;
       top: 100%;
       margin-top: -@basicPointingTriangleOffset;
-  ***REMOVED***
+    }
     /*--- Left ---*/
     .ui.basic[class*="left pointing"].label:before {
       top: 50%;
       left: @basicPointingTriangleOffset;
-  ***REMOVED***
+    }
     /*--- Right ---*/
     .ui.basic[class*="right pointing"].label:before {
       top: 50%;
       right: @basicPointingTriangleOffset;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationLabelFloating) {
   /*------------------
@@ -950,23 +950,23 @@ each(@colors,{
     right: 0;
     white-space: nowrap;
     transform: translateX(50%);
-***REMOVED***
+  }
   .ui.right.aligned.floating.label {
     transform: translateX(@floatingAlignOffset);
-***REMOVED***
+  }
   .ui.left.floating.label {
     left:0;
     right:auto;
     transform: translateX(-50%);
-***REMOVED***
+  }
   .ui.left.aligned.floating.label {
     transform: translateX(-@floatingAlignOffset);
-***REMOVED***
+  }
   .ui.bottom.floating.label {
     top: auto;
     bottom: @floatingBottomOffset;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*-------------------
         Sizes
@@ -975,15 +975,15 @@ each(@colors,{
 .ui.labels .label,
 .ui.label {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationLabelSizes = false) {
   each(@variationLabelSizes, {
     @s: @@value;
-    .ui.@{value***REMOVED***.labels .label,
-    .ui.@{value***REMOVED***.label {
+    .ui.@{value}.labels .label,
+    .ui.@{value}.label {
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 .loadUIOverrides();

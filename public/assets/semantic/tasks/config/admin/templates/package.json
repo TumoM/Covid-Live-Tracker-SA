@@ -9,9 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/Semantic-Org/Semantic-UI.git"
-***REMOVED***
+  },
   "bugs": {
     "url": "https://github.com/Semantic-Org/Semantic-UI/issues"
-***REMOVED***
-  "devDependencies": {***REMOVED***
-***REMOVED***
+  },
+  "devDependencies": {}
+}

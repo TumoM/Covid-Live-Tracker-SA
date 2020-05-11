@@ -5,7 +5,7 @@ var ResizeColumns = function(table){
 	this.startWidth = false;
 	this.handle = null;
 	this.prevHandle = null;
-***REMOVED***;
+};
 
 ResizeColumns.prototype.initializeColumn = function(type, column, element){
 	var self = this,
@@ -15,8 +15,8 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 	//set column resize mode
 	if(type === "header"){
 		variableHeight = column.definition.formatter == "textarea" || column.definition.variableHeight;
-		column.modules.resize = {variableHeight:variableHeight***REMOVED***;
-	***REMOVED***
+		column.modules.resize = {variableHeight:variableHeight};
+	}
 
 	if(mode === true || mode == type){
 
@@ -29,7 +29,7 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 
 		handle.addEventListener("click", function(e){
 			e.stopPropagation();
-		***REMOVED***);
+		});
 
 		var handleDown = function(e){
 			var nearestColumn = column.getLastColumn();
@@ -37,11 +37,11 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 			if(nearestColumn && self._checkResizability(nearestColumn)){
 				self.startColumn = column;
 				self._mouseDown(e, nearestColumn, handle);
-			***REMOVED***
-		***REMOVED***;
+			}
+		};
 
 		handle.addEventListener("mousedown", handleDown);
-		handle.addEventListener("touchstart", handleDown, {passive: true***REMOVED***);
+		handle.addEventListener("touchstart", handleDown, {passive: true});
 
 		//reszie column on  double click
 		handle.addEventListener("dblclick", function(e){
@@ -50,13 +50,13 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 			if(col && self._checkResizability(col)){
 				e.stopPropagation();
 				col.reinitializeWidth(true);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 
 		prevHandle.addEventListener("click", function(e){
 			e.stopPropagation();
-		***REMOVED***);
+		});
 
 		var prevHandleDown = function(e){
 			var nearestColumn, colIndex, prevColumn;
@@ -70,12 +70,12 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 				if(prevColumn && self._checkResizability(prevColumn)){
 					self.startColumn = column;
 					self._mouseDown(e, prevColumn, prevHandle);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***;
+				}
+			}
+		};
 
 		prevHandle.addEventListener("mousedown", prevHandleDown);
-		prevHandle.addEventListener("touchstart", prevHandleDown, {passive: true***REMOVED***);
+		prevHandle.addEventListener("touchstart", prevHandleDown, {passive: true});
 
 		//resize column on double click
 		prevHandle.addEventListener("dblclick", function(e){
@@ -90,19 +90,19 @@ ResizeColumns.prototype.initializeColumn = function(type, column, element){
 				if(prevColumn && self._checkResizability(prevColumn)){
 					e.stopPropagation();
 					prevColumn.reinitializeWidth(true);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***);
+				}
+			}
+		});
 
 		element.appendChild(handle);
 		element.appendChild(prevHandle);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 ResizeColumns.prototype._checkResizability = function(column){
 	return typeof column.definition.resizable != "undefined" ? column.definition.resizable : this.table.options.resizableColumns;
-***REMOVED***;
+};
 
 ResizeColumns.prototype._mouseDown = function(e, column, handle){
 	var self = this;
@@ -116,19 +116,19 @@ ResizeColumns.prototype._mouseDown = function(e, column, handle){
 
 		if(!self.table.browserSlow && column.modules.resize && column.modules.resize.variableHeight){
 			column.checkCellHeights();
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	function mouseUp(e){
 
 		//block editor from taking action while resizing is taking place
 		if(self.startColumn.modules.edit){
 			self.startColumn.modules.edit.blocked = false;
-		***REMOVED***
+		}
 
 		if(self.table.browserSlow && column.modules.resize && column.modules.resize.variableHeight){
 			column.checkCellHeights();
-		***REMOVED***
+		}
 
 		document.body.removeEventListener("mouseup", mouseUp);
 		document.body.removeEventListener("mousemove", mouseMove);
@@ -140,25 +140,25 @@ ResizeColumns.prototype._mouseDown = function(e, column, handle){
 
 		if(self.table.options.persistence && self.table.modExists("persistence", true) && self.table.modules.persistence.config.columns){
 			self.table.modules.persistence.save("columns");
-		***REMOVED***
+		}
 
 		self.table.options.columnResized.call(self.table, column.getComponent());
-	***REMOVED***
+	}
 
 	e.stopPropagation(); //prevent resize from interfereing with movable columns
 
 	//block editor from taking action while resizing is taking place
 	if(self.startColumn.modules.edit){
 		self.startColumn.modules.edit.blocked = true;
-	***REMOVED***
+	}
 
 	self.startX = typeof e.screenX === "undefined" ? e.touches[0].screenX : e.screenX;
 	self.startWidth = column.getWidth();
 
 	document.body.addEventListener("mousemove", mouseMove);
 	document.body.addEventListener("mouseup", mouseUp);
-	handle.addEventListener("touchmove", mouseMove, {passive: true***REMOVED***);
+	handle.addEventListener("touchmove", mouseMove, {passive: true});
 	handle.addEventListener("touchend", mouseUp);
-***REMOVED***;
+};
 
 Tabulator.prototype.registerModule("resizeColumns", ResizeColumns);

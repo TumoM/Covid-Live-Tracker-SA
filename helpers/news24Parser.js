@@ -14,14 +14,14 @@ async function main() {
     let connection;
     if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
         connection = process.env.DATABASE_URL;
-  ***REMOVED*** else {
+    } else {
         connection = {
             host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
             user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
             password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
             database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
-      ***REMOVED***;
-  ***REMOVED***
+        };
+    }
 
     console.log('Connection:', connection);
     const knex = require('knex')({
@@ -35,9 +35,9 @@ async function main() {
                 idleTimeoutMillis: 10000,
                 createTimeoutMillis: 10000,
                 acquireTimeoutMillis: 10000,
-***REMOVED*****REMOVED*****REMOVED***
+            },
             connection
-      ***REMOVED***
+        }
     );
 
 
@@ -52,7 +52,7 @@ async function main() {
         'NORTH WEST': new Province('NORTH WEST'),
         'NORTHERN CAPE': new Province('NORTHERN CAPE'),
         UNALLOCATED: new Province('UNALLOCATED')
-  ***REMOVED***;
+    };
     const provincesList = [
         'Gauteng',
         'Western Cape',
@@ -64,7 +64,7 @@ async function main() {
         'North West',
         'Northern Cape',
         'Unallocated'
-***REMOVED***;
+    ];
     let totalCases = 0;
         let totalDeaths = 0;
         let totalRecoveries = 0;
@@ -77,8 +77,8 @@ async function main() {
         const status = await rp(url);
         const html = status;
         // success!
-        const currentProvincesRecovery = { ...PROVINCES ***REMOVED***;
-        const currentProvincesCasesDeaths = { ...PROVINCES ***REMOVED***;
+        const currentProvincesRecovery = { ...PROVINCES };
+        const currentProvincesCasesDeaths = { ...PROVINCES };
 
         // #######################################################################################
         const headHtml = html.match(/<h6.*block datestamp[\s\S]*<\/hgroup>/m); // The Header with total Cases and Deaths.
@@ -91,23 +91,23 @@ async function main() {
         const templines = soupHead.prettify().trim().split(/<\/?\w*\s?\d?[\s\S]?>\n/);
         date = templines[0].split('Updated')[1].trim();
         let parsed = false;
-        const rows = await knex('dates').where({ date ***REMOVED***);
+        const rows = await knex('dates').where({ date });
 
         console.log('Row Count:', rows.length);
         if (rows.length > 0 && rows[0].parsed && !rows[0].maybeValid) {
             parsed = true;
             console.log('Skipping');
-      ***REMOVED***
+        }
             // else if (rows.length > 0 && rows[0].maybeValid) {
             //     // Maybe the format is all wrong. Parse another site/source?
-        // ***REMOVED***
+        // }
         else if ((rows.length === 0) || rows[0].maybeValid || (rows.length > 0 && !rows[0].error)) {
             [totalCases, totalDeaths] = (templines[5].trim().split('.'));
 
             totalCases = getNumber(totalCases);
             totalDeaths = getNumber(totalDeaths);
 
-            console.log(`${date***REMOVED***: Cases:${totalCases***REMOVED***, Deaths:${totalDeaths***REMOVED***`);
+            console.log(`${date}: Cases:${totalCases}, Deaths:${totalDeaths}`);
             // #######################################################################################
 
             // TODO 1: Parse info on Recoveries by Province
@@ -116,20 +116,20 @@ async function main() {
             recoveryDate = recoveriesLines[0].match(/\d+.*!/)[0];
 */
             totalRecoveries = getNumber(recoveriesLines[0]);
-            console.log(`Total Recovery:${totalRecoveries***REMOVED***\n`);
+            console.log(`Total Recovery:${totalRecoveries}\n`);
 
             const provinceRecoveries = soupBody.text.match(/provincial breakdown.*?:.*?\./)[0].split(':')[1].split(',');
             const provinceRecoveries2 = [];
             provinceRecoveries.forEach((value) => {
                 provinceRecoveries2.push(value.split('(')[0].trim());
-          ***REMOVED***);
+            });
             // provinceRecoveries[provinceRecoveries.length - 1].length === 0 ? provinceRecoveries.pop() : provinceRecoveries // Removes trailing blank index.
             // Loop over list of prov names, insert missing names in provinceRecoveries
             provincesList.forEach((value) => { // Adds any missing provinces not mentioned as having any recoveries, and sets them to 0.
                 if (!(provinceRecoveries2.includes(value))) {
-                    provinceRecoveries.push(`${value***REMOVED*** (0`);
-              ***REMOVED***
-          ***REMOVED***);
+                    provinceRecoveries.push(`${value} (0`);
+                }
+            });
 
             // Parse info on New Cases by Province
             console.log('\nCase Counts:');
@@ -156,46 +156,46 @@ async function main() {
 let deathInt = '';
                         caseCount.split(/\s/).forEach((digit) => {
                             caseInt += digit;
-                      ***REMOVED***);
+                        });
                         caseInt = parseInt(caseInt);
                         if (deathCount.length > 0) {
                             deathCount.split(/\s/).forEach((digit) => {
                                 deathInt += digit;
-                          ***REMOVED***);
+                            });
                             deathInt = parseInt(deathInt);
-                      ***REMOVED*** else {
+                        } else {
                             deathInt = 0;
-                      ***REMOVED***
+                        }
                         const tempProv = new Province(provinceName, caseInt);
                         tempProv.deaths = deathInt;
                         tempProv.date = date;
-                        // console.log(`${provinceName***REMOVED*** - Cases: ${tempProv.cases***REMOVED***, Dead: ${tempProv.deaths***REMOVED***`)
+                        // console.log(`${provinceName} - Cases: ${tempProv.cases}, Dead: ${tempProv.deaths}`)
                         currentProvincesCasesDeaths[provinceName] = tempProv;
 
                         // Build object to upload to ProvinceDays using insertIgnore funct below
                         const tableName = 'provinceDays';
                         const dateFormatted = new Date(date);
                         const newTemp = dateFormatted.toLocaleDateString().split('/'); // TODO What's up bro?, lol check this.
-                        const provDate = `${newTemp[2]***REMOVED***-${newTemp[0]***REMOVED***-${newTemp[1]***REMOVED***`;
+                        const provDate = `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`;
                         const itemData = {
                             provinceName,
                             provDate,
                             caseCount: caseInt,
                             deathCount: deathInt
-                      ***REMOVED***;
-                        const rows = await knex(tableName).where({ provDate, provinceName ***REMOVED***);
+                        };
+                        const rows = await knex(tableName).where({ provDate, provinceName });
                         if (rows.length === 0) {
                             await knex(tableName).insert(itemData);
-                      ***REMOVED***
+                        }
                         // console.log("Already in.")
                         if (index === 9) {
                             await updateDaysGood(itemData);
-                      ***REMOVED***
-                  ***REMOVED***
-              ***REMOVED***
-          ***REMOVED***
+                        }
+                    }
+                }
+            }
 
-            console.log(`Recovery Counts (${recoveryDate***REMOVED***):`);
+            console.log(`Recovery Counts (${recoveryDate}):`);
             count = 0;
             console.log('Starting the parsing of province Recoveries.');
             for (let index = 0; index < provinceRecoveries.length; index++) {
@@ -213,42 +213,42 @@ provinceName;
                     tempProvince.date = recoveryDate;
                     currentProvincesRecovery[provinceName] = tempProvince;
 
-                    console.log(`${provinceName***REMOVED***: ${recoverCount***REMOVED***`);
+                    console.log(`${provinceName}: ${recoverCount}`);
                     const tableName = 'provinceDays';
                     const tempDate = recoveryDate.split(' ');
                     const dateFormatted = new Date(recoveryDate);
                     const newTemp = dateFormatted.toLocaleDateString().split('/');
                     const itemData = {
                         provinceName,
-                        provDate: `${newTemp[2]***REMOVED***-${newTemp[0]***REMOVED***-${newTemp[1]***REMOVED***`,
+                        provDate: `${newTemp[2]}-${newTemp[0]}-${newTemp[1]}`,
                         recovered: recoverCount
-                  ***REMOVED***;
+                    };
 
-                    const rows = await knex(tableName).select().where({ provDate: itemData.provDate, provinceName ***REMOVED***);
+                    const rows = await knex(tableName).select().where({ provDate: itemData.provDate, provinceName });
                     if (rows.length === 1) { // Update the recoveries column
                         console.log('Found a record, updating.');
                         const row = await knex(tableName)
-                            .update({ recovered: itemData.recovered ***REMOVED***)
+                            .update({ recovered: itemData.recovered })
                             .where('provinceName', '=', itemData.provinceName)
                             .andWhere('provDate', '=', itemData.provDate);
                         if (row && row > 0) {
                             console.log('Province Recoveries Updated');
                             loop = false;
-                      ***REMOVED*** else {
+                        } else {
                             console.log('Error Updating Province Recovered', reason1);
-                      ***REMOVED***
+                        }
                         count += 1;
                         if (count === 9) {
                             const dateData = {
                                 totalRecoveries,
                                 maybeValid: false,
                                 parsed: true
-                          ***REMOVED***;
+                            };
                             const value = await knex('dates')
                                 .update(dateData)
                                 .where('date', '=', itemData.provDate);
                             if (value && value > 0) {
-                                console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`);
+                                console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`);
                                 console.log('Value', value);
                                 dateData.date = itemData.provDate;
                                 if (value === 0) {
@@ -259,91 +259,91 @@ provinceName;
                                     if (!value) {
                                         console.log('Error on Recovery Dates Insert', reason);
                                         loop = false;
-                                  ***REMOVED*** else {
+                                    } else {
                                         console.log('Inserted.');
                                         loop = false;
-                                  ***REMOVED***
-                              ***REMOVED***
-                          ***REMOVED*** else {
+                                    }
+                                }
+                            } else {
                                 console.log('Should we do something here?, Recoveries already set?');
-                          ***REMOVED***
+                            }
                             loop = false;
-                      ***REMOVED***
+                        }
                         loop = false;
-                  ***REMOVED*** else { // Inserting a fresh record mate.
+                    } else { // Inserting a fresh record mate.
                         let valid = true;
                         let day; let month; let
 year;
                         [day, month, year] = (new Date(date).toLocaleDateString().split('/', 3));
-                        const value = await knex(tableName).update({ recovered: itemData.recovered ***REMOVED***)
-                            .where({ provDate: recoveryDate, provinceName: itemData.provinceName ***REMOVED***)
+                        const value = await knex(tableName).update({ recovered: itemData.recovered })
+                            .where({ provDate: recoveryDate, provinceName: itemData.provinceName })
                             .orWhere({
                                 provDate: ([year, day, month].join('-')),
                                 provinceName: itemData.provinceName
-                          ***REMOVED***);
+                            });
                         if (value && value > 0) {
                             console.log('Recovered for single province Updated');
-                      ***REMOVED*** else {
+                        } else {
                             console.log('Error Updating Province Recovered', reason);
                             valid = false;
-                      ***REMOVED***
+                        }
                         count += 1;
                         if (count === 9) {
                             const dateData = {
                                 totalRecoveries,
                                 maybeValid: false,
                                 parsed: true
-                          ***REMOVED***;
+                            };
 
                             const value = await knex('dates')
                                 .update(dateData)
                                 .where('date', '=', itemData.provDate);
                             if (value && value > 0) {
-                                console.log(`Updated Recovery for: ${itemData.provDate***REMOVED***, while parsing for Date: ${date***REMOVED***`);
+                                console.log(`Updated Recovery for: ${itemData.provDate}, while parsing for Date: ${date}`);
                                 // console.log("Value", value)
                                 dateData.date = itemData.provDate;
-                          ***REMOVED*** else {
+                            } else {
                                 console.log('Error doing things G.');
                                 /* dateData.parsed = true;
                                 knex('dates')
                                     .insert(dateData)
                                     .then(value1 => {
                                         console.log("Value1", value1)
-                                  ***REMOVED***)
+                                    })
                                     .catch(reason => {
                                         console.log("Error on Recovery Dates Insert")
-                                  ***REMOVED***)***REMOVED***/
-                          ***REMOVED***
+                                    }) */
+                            }
                             loop = false;
-                      ***REMOVED***
+                        }
                         loop = false;
-                  ***REMOVED***
-              ***REMOVED***
-          ***REMOVED***
-            /* await provinceRecoveries.map(async line => )***REMOVED***/
+                    }
+                }
+            }
+            /* await provinceRecoveries.map(async line => ) */
             console.log('Ending the parsing of province Recoveries.');
-      ***REMOVED***
+        }
         console.log('Swag 2');
         // return 200
         // process.exit(200);
         console.log('Done map?');
         if ((count && count === 9) || parsed) {
             return Promise.resolve(true);
-      ***REMOVED***
+        }
 
             return Promise.resolve(false);
-  ***REMOVED*** catch (e) {
+    } catch (e) {
         console.log('Error Bro', e);
         return Promise.resolve(false);
-  ***REMOVED***
+    }
     function getNumber(line) {
         let intString = '';
         const total = line.match(/\d?[\d+\s?]*\d+/)[0].split(' ');
         total.forEach((digit) => {
             intString += digit;
-      ***REMOVED***);
+        });
         return (+intString);
-  ***REMOVED***
+    }
 
     async function updateDaysGood(itemData) {
         console.log('Updating Day Function:');
@@ -354,12 +354,12 @@ year;
             totalRecoveries,
             maybeValid: true,
             parsed: true
-      ***REMOVED***;
+        };
         console.log('Date:', itemData.provDate);
         const rows = await knex('dates')
             .select()
-            .where({ date: itemData.provDate ***REMOVED***);
-        // console.log(`Working with Row Length ${rows.length***REMOVED***, with Data:\n${JSON.stringify(rows,null,2)***REMOVED***`)
+            .where({ date: itemData.provDate });
+        // console.log(`Working with Row Length ${rows.length}, with Data:\n${JSON.stringify(rows,null,2)}`)
         console.log('date in func', itemData.provDate);
         if (rows && rows.length === 0) {
             dateData.date = itemData.provDate;
@@ -399,43 +399,33 @@ year;
                     dailyNew: prevVals.rows[0].dailyNew,
                     dailyDeaths: prevVals.rows[0].dailyDeaths,
                     totalRecoveries: prevVals.rows[0].prevRecoveries
-              ***REMOVED***).where('date', '=', itemData.provDate);
+                }).where('date', '=', itemData.provDate);
                 if (!val || val === 0) {
                     log('WHAAAAAT?', reason);
-              ***REMOVED***
-          ***REMOVED***
-      ***REMOVED*** else {
+                }
+            }
+        } else {
             const id = await knex('dates ')
                 .update(dateData)
                 .where('date', '=', itemData.provDate);
             if (id && id > 0) {
                 console.log('Updated Dates Table');
-          ***REMOVED*** else {
+            } else {
                 console.log('Attempted duplicate update?', err);
-          ***REMOVED***
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+            }
+        }
+    }
+}
+
 
 /*
-
 main()
     .then(result=>{
         console.log("main result:",result);
         process.exit(0)
-  ***REMOVED***)
+    })
     .catch(err=> console.log('Your Err',err));
 */
-function bootstrap() {
-    main()
-      .then((result) => {
-          console.log('main result:', result);
-          process.exit(0);
-    ***REMOVED***)
-      .catch((err) => console.log('Your Err', err));
-***REMOVED***
-
-// bootstrap()
 
 function parseNumber(number) {
     let testInt = '';
@@ -443,9 +433,9 @@ function parseNumber(number) {
     const testArray = number.match(/\s?((\d+\s+)*\d+)/)[0].trim().split(' ');
     testArray.forEach((digit) => {
         testInt += digit;
-  ***REMOVED***);
+    });
     testInt = parseInt(testInt);
     return testInt;
-***REMOVED***
+}
 
 module.exports = main;

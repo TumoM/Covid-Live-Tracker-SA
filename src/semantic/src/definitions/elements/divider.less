@@ -1,14 +1,14 @@
 /*!
-***REMOVED*** # Fomantic-UI - Divider
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Divider
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,7 +18,7 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
             Divider
 *******************************/
 
@@ -35,7 +35,7 @@
 
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-***REMOVED***
+}
 
 /*--------------
       Basic
@@ -44,17 +44,17 @@
 .ui.divider:not(.vertical):not(.horizontal) {
   border-top: @shadowWidth solid @shadowColor;
   border-bottom: @highlightWidth solid @highlightColor;
-***REMOVED***
+}
 
 /*--------------
     Coupling
 ---------------*/
 
-/* Allow divider between each column row***REMOVED***/
+/* Allow divider between each column row */
 .ui.grid > .column + .divider,
 .ui.grid > .row > .column + .divider {
   left: auto;
-***REMOVED***
+}
 
 & when (@variationDividerHorizontal) {
   /*--------------
@@ -69,7 +69,7 @@
     margin: @horizontalMargin;
     line-height: 1;
     text-align: center;
-***REMOVED***
+  }
 
   .ui.horizontal.divider:before,
   .ui.horizontal.divider:after {
@@ -79,15 +79,15 @@
     top: 50%;
     width: 50%;
     background-repeat: no-repeat;
-***REMOVED***
+  }
 
   .ui.horizontal.divider:before {
     background-position: right @horizontalDividerMargin top 50%;
-***REMOVED***
+  }
   .ui.horizontal.divider:after {
     background-position: left @horizontalDividerMargin top 50%;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationDividerVertical) {
   /*--------------
@@ -108,7 +108,7 @@
     line-height: 0;
     text-align: center;
     transform: translateX(-50%);
-***REMOVED***
+  }
 
   .ui.vertical.divider:before,
   .ui.vertical.divider:after {
@@ -122,17 +122,17 @@
 
     width: 0;
     height: @verticalDividerHeight;
-***REMOVED***
+  }
 
   .ui.vertical.divider:before {
     top: -100%;
-***REMOVED***
+  }
   .ui.vertical.divider:after {
     top: auto;
     bottom: 0;
-***REMOVED***
+  }
 
-  /* Inside grid***REMOVED***/
+  /* Inside grid */
   @media only screen and (max-width : @largestMobileScreen) {
 
     .ui.stackable.grid .ui.vertical.divider,
@@ -148,7 +148,7 @@
       top: 0;
       left: 0;
       transform: none;
-  ***REMOVED***
+    }
 
     .ui.stackable.grid .ui.vertical.divider:before,
     .ui.grid .stackable.row .ui.vertical.divider:before,
@@ -163,18 +163,18 @@
       top: 50%;
       width: 50%;
       background-repeat: no-repeat;
-  ***REMOVED***
+    }
 
     .ui.stackable.grid .ui.vertical.divider:before,
     .ui.grid .stackable.row .ui.vertical.divider:before {
       background-position: right @horizontalDividerMargin top 50%;
-  ***REMOVED***
+    }
     .ui.stackable.grid .ui.vertical.divider:after,
     .ui.grid .stackable.row .ui.vertical.divider:after {
       background-position: left @horizontalDividerMargin top 50%;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationDividerIcon) {
   /*--------------
@@ -186,8 +186,8 @@
     font-size: @dividerIconSize;
     height: 1em;
     vertical-align: middle;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationDividerHorizontal) {
   /*--------------
@@ -196,22 +196,22 @@
   .ui.horizontal.divider[class*="left aligned"] {
     &:before {
       display: none;
-  ***REMOVED***
+    }
     &:after {
       width: 100%;
-  ***REMOVED***
-***REMOVED***
+    }
+  }
   .ui.horizontal.divider[class*="right aligned"] {
     &:before {
       width: 100%;
-  ***REMOVED***
+    }
     &:after {
       display: none;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
-***REMOVED********************************
+/*******************************
           Variations
 *******************************/
 
@@ -222,13 +222,13 @@
 
   .ui.hidden.divider {
     border-color: transparent !important;
-***REMOVED***
+  }
 
   .ui.hidden.divider:before,
   .ui.hidden.divider:after {
     display: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
     Inverted
@@ -238,7 +238,7 @@
   .ui.vertical.inverted.divider,
   .ui.horizontal.inverted.divider {
     color: @invertedTextColor;
-***REMOVED***
+  }
   .ui.divider.inverted,
   .ui.divider.inverted:after,
   .ui.divider.inverted:before {
@@ -246,8 +246,8 @@
     border-left-color: @invertedShadowColor !important;
     border-bottom-color: @invertedHighlightColor !important;
     border-right-color: @invertedHighlightColor !important;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
     Fitted
@@ -255,8 +255,8 @@
 & when (@variationDividerFitted) {
   .ui.fitted.divider {
     margin: 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationDividerClearing) {
   /*--------------
@@ -265,8 +265,8 @@
 
   .ui.clearing.divider {
     clear: both;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationDividerSection) {
   /*--------------
@@ -276,8 +276,8 @@
   .ui.section.divider {
     margin-top: @sectionMargin;
     margin-bottom: @sectionMargin;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 /*--------------
      Sizes
@@ -285,14 +285,14 @@
 
 .ui.divider {
   font-size: @medium;
-***REMOVED***
+}
 & when not (@variationDividerSizes = false) {
   each(@variationDividerSizes, {
     @s: @@value;
-    .ui.@{value***REMOVED***.divider {
+    .ui.@{value}.divider {
       font-size: @s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 .loadUIOverrides();

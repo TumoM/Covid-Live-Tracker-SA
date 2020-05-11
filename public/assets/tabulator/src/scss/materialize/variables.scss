@@ -57,11 +57,11 @@ $colors: (
     $curr_color: map-get($colors, $color);
     @if map-has-key($curr_color, $type) {
       @return map-get($curr_color, $type);
-  ***REMOVED***
-***REMOVED***
-  @warn "Unknown `#{$color***REMOVED***` - `#{$type***REMOVED***` in $colors.";
+    }
+  }
+  @warn "Unknown `#{$color}` - `#{$type}` in $colors.";
   @return null;
-***REMOVED***
+}
 
 $table-border-color: rgba(0,0,0,.12) !default;
 $table-striped-color: rgba(242, 242, 242, 0.5) !default;

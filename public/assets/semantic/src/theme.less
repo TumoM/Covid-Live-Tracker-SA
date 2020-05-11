@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
         Import Directives
 *******************************/
 
@@ -12,47 +12,47 @@
    Site Variables
 ---------------------*/
 
-/* Default site.variables***REMOVED***/
-@import "@{themesFolder***REMOVED***/default/globals/site.variables";
+/* Default site.variables */
+@import "@{themesFolder}/default/globals/site.variables";
 
-/* Packaged site.variables***REMOVED***/
-@import (optional) "@{themesFolder***REMOVED***/@{site***REMOVED***/globals/site.variables";
+/* Packaged site.variables */
+@import (optional) "@{themesFolder}/@{site}/globals/site.variables";
 
-/* Component's site.variables***REMOVED***/
+/* Component's site.variables */
 & when not (@theme = 'default') {
-  @import (optional) "@{themesFolder***REMOVED***/@{theme***REMOVED***/globals/site.variables";
-***REMOVED***
+  @import (optional) "@{themesFolder}/@{theme}/globals/site.variables";
+}
 
-/* Site theme site.variables***REMOVED***/
-@import (optional) "@{siteFolder***REMOVED***/globals/site.variables";
+/* Site theme site.variables */
+@import (optional) "@{siteFolder}/globals/site.variables";
 
 
 /*-------------------
  Component Variables
 ---------------------*/
 
-/* Default***REMOVED***/
-@import "@{themesFolder***REMOVED***/default/@{type***REMOVED***s/@{element***REMOVED***.variables";
+/* Default */
+@import "@{themesFolder}/default/@{type}s/@{element}.variables";
 
-/* Packaged Theme***REMOVED***/
-@import (optional) "@{themesFolder***REMOVED***/@{theme***REMOVED***/@{type***REMOVED***s/@{element***REMOVED***.variables";
+/* Packaged Theme */
+@import (optional) "@{themesFolder}/@{theme}/@{type}s/@{element}.variables";
 
-/* Site Theme***REMOVED***/
-@import (optional) "@{siteFolder***REMOVED***/@{type***REMOVED***s/@{element***REMOVED***.variables";
+/* Site Theme */
+@import (optional) "@{siteFolder}/@{type}s/@{element}.variables";
 
 
 /*-------------------------
     Central Color Map
 -------------------------*/
 
-/* Default***REMOVED***/
-@import "@{themesFolder***REMOVED***/default/globals/colors.less";
+/* Default */
+@import "@{themesFolder}/default/globals/colors.less";
 
-/* Site Theme***REMOVED***/
-@import (optional) "@{themesFolder***REMOVED***/@{site***REMOVED***/globals/colors.less";
+/* Site Theme */
+@import (optional) "@{themesFolder}/@{site}/globals/colors.less";
 
 
-***REMOVED********************************
+/*******************************
              Mix-ins
 *******************************/
 
@@ -61,8 +61,8 @@
 -------------------*/
 
 .loadFonts() when (@importGoogleFonts) {
-  @import (css) url('@{googleProtocol***REMOVED***fonts.googleapis.com/css?family=@{googleFontRequest***REMOVED***');
-***REMOVED***
+  @import (css) url('@{googleProtocol}fonts.googleapis.com/css?family=@{googleFontRequest}');
+}
 
 /*------------------
      Overrides
@@ -70,8 +70,8 @@
 
 .loadUIOverrides() {
   & when not (@theme = 'default') {
-    @import (optional) "@{themesFolder***REMOVED***/default/@{type***REMOVED***s/@{element***REMOVED***.overrides";
-***REMOVED***
-  @import (optional) "@{themesFolder***REMOVED***/@{theme***REMOVED***/@{type***REMOVED***s/@{element***REMOVED***.overrides";
-  @import (optional) "@{siteFolder***REMOVED***/@{type***REMOVED***s/@{element***REMOVED***.overrides";
-***REMOVED***
+    @import (optional) "@{themesFolder}/default/@{type}s/@{element}.overrides";
+  }
+  @import (optional) "@{themesFolder}/@{theme}/@{type}s/@{element}.overrides";
+  @import (optional) "@{siteFolder}/@{type}s/@{element}.overrides";
+}

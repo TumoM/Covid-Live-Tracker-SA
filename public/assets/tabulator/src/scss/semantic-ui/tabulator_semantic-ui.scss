@@ -60,13 +60,13 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		.tabulator-tableHolder{
 			.tabulator-table{
 				min-width:100%;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	&.tabulator-block-select{
 		user-select: none;
-	***REMOVED***
+	}
 
 	//column header containing element
 	.tabulator-header{
@@ -95,7 +95,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&.tabulator-header-hidden{
 			display:none;
-		***REMOVED***
+		}
 
 		//individual column header element
 		.tabulator-col{
@@ -114,7 +114,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				border:1px solid  $headerSeperatorColor;
 				background:darken($headerBackgroundColor, 10%);
 				pointer-events: none;
-			***REMOVED***
+			}
 
 			//hold content of column header
 			.tabulator-col-content{
@@ -129,8 +129,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						cursor: pointer;
 						opacity: .6;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//hold title of column header
 				.tabulator-col-title{
@@ -152,8 +152,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 						padding:1px;
 
 						background: #fff;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				//column sorter arrow
 				.tabulator-arrow{
@@ -166,9 +166,9 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					border-left: 6px solid transparent;
 					border-right: 6px solid transparent;
 					border-bottom: 6px solid $sortArrowInactive;
-				***REMOVED***
+				}
 
-			***REMOVED***
+			}
 
 			//complex header column group
 			&.tabulator-col-group{
@@ -182,16 +182,16 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					overflow: hidden;
 
 					margin-right:-1px;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 
 			//hide left resize handle on first column
 			&:first-child{
 				.tabulator-col-resize-handle.prev{
 					display: none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			//header filter containing element
 			.tabulator-header-filter{
@@ -204,53 +204,53 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				//styling adjustment for inbuilt editors
 				textarea{
 					height:auto !important;
-				***REMOVED***
+				}
 
 				svg{
 					margin-top: 3px;
-				***REMOVED***
+				}
 
 				input{
 					&::-ms-clear {
 					  width : 0;
 					  height: 0;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 
 			//styling child elements for sortable columns
 			&.tabulator-sortable{
 				.tabulator-col-title{
 					padding-right:25px;
-				***REMOVED***
+				}
 
 				&:hover{
 					cursor:pointer;
 					background-color:darken($headerBackgroundColor, 10%);
-				***REMOVED***
+				}
 
 				&[aria-sort="none"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowInactive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="asc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: none;
 						border-bottom: 6px solid $sortArrowActive;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&[aria-sort="desc"]{
 					.tabulator-col-content .tabulator-arrow{
 						border-top: 6px solid $sortArrowActive;
 						border-bottom: none;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			&.tabulator-col-vertical{
 				.tabulator-col-content{
@@ -261,36 +261,36 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 						display:flex;
 						align-items:center;
 						justify-content:center;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-col-vertical-flip{
 					.tabulator-col-title{
 						transform: rotate(180deg);
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.tabulator-sortable{
 					.tabulator-col-title{
 						padding-right:0;
 						padding-top:20px;
-					***REMOVED***
+					}
 
 					&.tabulator-col-vertical-flip{
 						.tabulator-col-title{
 							padding-right:0;
 							padding-bottom:20px;
-						***REMOVED***
+						}
 
-					***REMOVED***
+					}
 
 					.tabulator-arrow{
 						right:calc(50% - 6px);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
-		***REMOVED***
+		}
 
 		.tabulator-frozen{
 			display: inline-block;
@@ -302,12 +302,12 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			&.tabulator-frozen-left{
 				border-right:2px solid $rowBorderColor;
-			***REMOVED***
+			}
 
 			&.tabulator-frozen-right{
 				border-left:2px solid $rowBorderColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 
 		.tabulator-calcs-holder{
@@ -321,23 +321,23 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			border-top:1px solid $rowBorderColor;
 			border-bottom:1px solid $headerBorderColor;
 
 			overflow: hidden;
-		***REMOVED***
+		}
 
 		.tabulator-frozen-rows-holder{
 			min-width:600%;
 
 			&:empty{
 				display: none;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 
 
@@ -351,7 +351,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&:focus{
 			outline: none;
-		***REMOVED***
+		}
 
 		//default placeholder element
 		.tabulator-placeholder{
@@ -362,7 +362,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			&[tabulator-render-mode="virtual"]{
 				min-height:100%;
 				min-width:100%;
-			***REMOVED***
+			}
 
 			width:100%;
 
@@ -375,8 +375,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				color:#000;
 				font-weight: bold;
 				font-size: 20px;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//element to hold table rows
 		.tabulator-table{
@@ -393,15 +393,15 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 					&.tabulator-calcs-top{
 						border-bottom:2px solid $rowBorderColor;
-					***REMOVED***
+					}
 
 					&.tabulator-calcs-bottom{
 						border-top:2px solid $rowBorderColor;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 
 	//column resize handles
@@ -415,12 +415,12 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		&.prev{
 			left:0;
 			right:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ew-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 
 	//footer element
@@ -463,8 +463,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 				.tabulator-col-resize-handle{
 					display: none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			border-bottom:1px solid $rowBorderColor;
 			border-top:1px solid $rowBorderColor;
@@ -474,8 +474,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			&:only-child{
 				margin-bottom:-$footerVerticalPadding;
 				border-bottom:none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//pagination container element
 		.tabulator-paginator{
@@ -483,7 +483,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			font-family:inherit;
 			font-weight:inherit;
 			font-size:inherit;
-		***REMOVED***
+		}
 
 		//page size select element
 		.tabulator-page-size{
@@ -494,12 +494,12 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			border:1px solid $footerBorderColor;
 			border-radius:3px;
-		***REMOVED***
+		}
 
 		//pagination container element
 		.tabulator-pages{
 			margin:0 7px;
-		***REMOVED***
+		}
 
 		//pagination button
 		.tabulator-page{
@@ -515,21 +515,21 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			&.active{
 				color:$footerActiveColor;
-			***REMOVED***
+			}
 
 			&:disabled{
 				opacity:.5;
-			***REMOVED***
+			}
 
 			&:not(.disabled){
 				&:hover{
 					cursor:pointer;
 					background:rgba(0,0,0,.2);
 					color:#fff;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+				}
+			}
+		}
+	}
 
 	//holding div that contains loader and covers tabulator element to prevent interaction
 	.tabulator-loader{
@@ -563,15 +563,15 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			&.tabulator-loading{
 				border:4px solid #333;
 				color:#000;
-			***REMOVED***
+			}
 
 			//error message
 			&.tabulator-error{
 				border:4px solid #D00;
 				color:#590000;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 
 	//Semantic-ui theming classes
@@ -587,8 +587,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						background: $positiveBackgroundHover !important;
 						color: $positiveColorHover !important;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.negative, .tabulator-cell.negative{
 					box-shadow: $negativeBoxShadow;
@@ -598,8 +598,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						background: $negativeBackgroundHover !important;
 						color: $negativeColorHover !important;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.error, .tabulator-cell.error{
 					box-shadow: $errorBoxShadow;
@@ -609,8 +609,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						background: $errorBackgroundHover !important;
 						color: $errorColorHover !important;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.warning, .tabulator-cell.warning{
 					box-shadow: $warningBoxShadow;
@@ -620,8 +620,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						background: $warningBackgroundHover !important;
 						color: $warningColorHover !important;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.active, .tabulator-cell.active{
 					box-shadow: $activeBoxShadow;
@@ -631,16 +631,16 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					&:hover{
 						background: $positiveBackgroundHover !important;
 						color: $positiveColorHover !important;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				&.active, &.disabled:hover, .tabulator-cell.active{
 					pointer-events: none;
 					color: $disabledTextColor;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+				}
+			}
+		}
+	}
 
 
 	&.inverted{
@@ -656,8 +656,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			.tabulator-col{
 				border-color: $invertedCellBorderColor !important;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-tableHolder{
 			.tabulator-table{
@@ -667,15 +667,15 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 					.tabulator-cell{
 						border-color: $invertedCellBorderColor !important;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
 		.tabulator-footer{
 			background: $definitionPageBackground;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	&.striped{
 		.tabulator-tableHolder{
@@ -683,11 +683,11 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				.tabulator-row{
 					&:nth-child(even){
 						background-color: $basicTableStripedBackground !important;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 	&.celled{
 		border:1px solid $borderColor;
@@ -695,20 +695,20 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		.tabulator-header{
 			.tabulator-col{
 				border-right:$cellBorder;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-tableHolder{
 			.tabulator-table{
 				.tabulator-row{
 					.tabulator-cell{
 						border-right:$cellBorder;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
-	***REMOVED***
+	}
 
 
 	&[class*="single line"]{
@@ -717,129 +717,129 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				.tabulator-row{
 					.tabulator-cell{
 						border-right:none;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 	//coloured table varients
-	/* Red***REMOVED***/
+	/* Red */
 	&.red {
 		border-top: $coloredBorderSize solid $red;
-	***REMOVED***
+	}
 	&.inverted.red {
 		background-color: $red !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Orange***REMOVED***/
+	/* Orange */
 	&.orange {
 		border-top: $coloredBorderSize solid $orange;
-	***REMOVED***
+	}
 	&.inverted.orange {
 		background-color: $orange !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Yellow***REMOVED***/
+	/* Yellow */
 	&.yellow {
 		border-top: $coloredBorderSize solid $yellow;
-	***REMOVED***
+	}
 	&.inverted.yellow {
 		background-color: $yellow !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Olive***REMOVED***/
+	/* Olive */
 	&.olive {
 		border-top: $coloredBorderSize solid $olive;
-	***REMOVED***
+	}
 	&.inverted.olive {
 		background-color: $olive !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Green***REMOVED***/
+	/* Green */
 	&.green {
 		border-top: $coloredBorderSize solid $green;
-	***REMOVED***
+	}
 	&.inverted.green {
 		background-color: $green !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Teal***REMOVED***/
+	/* Teal */
 	&.teal {
 		border-top: $coloredBorderSize solid $teal;
-	***REMOVED***
+	}
 	&.inverted.teal {
 		background-color: $teal !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Blue***REMOVED***/
+	/* Blue */
 	&.blue {
 		border-top: $coloredBorderSize solid $blue;
-	***REMOVED***
+	}
 	&.inverted.blue {
 		background-color: $blue !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Violet***REMOVED***/
+	/* Violet */
 	&.violet {
 		border-top: $coloredBorderSize solid $violet;
-	***REMOVED***
+	}
 	&.inverted.violet {
 		background-color: $violet !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Purple***REMOVED***/
+	/* Purple */
 	&.purple {
 		border-top: $coloredBorderSize solid $purple;
-	***REMOVED***
+	}
 	&.inverted.purple {
 		background-color: $purple !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Pink***REMOVED***/
+	/* Pink */
 	&.pink {
 		border-top: $coloredBorderSize solid $pink;
-	***REMOVED***
+	}
 	&.inverted.pink {
 		background-color: $pink !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Brown***REMOVED***/
+	/* Brown */
 	&.brown {
 		border-top: $coloredBorderSize solid $brown;
-	***REMOVED***
+	}
 	&.inverted.brown {
 		background-color: $brown !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Grey***REMOVED***/
+	/* Grey */
 	&.grey {
 		border-top: $coloredBorderSize solid $grey;
-	***REMOVED***
+	}
 	&.inverted.grey {
 		background-color: $grey !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
-	/* Black***REMOVED***/
+	/* Black */
 	&.black {
 		border-top: $coloredBorderSize solid $black;
-	***REMOVED***
+	}
 	&.inverted.black {
 		background-color: $black !important;
 		color: $white !important;
-	***REMOVED***
+	}
 
 	&.padded{
 		.tabulator-header{
@@ -849,19 +849,19 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 					.tabulator-arrow{
 						top:20px;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 		.tabulator-tableHolder{
 			.tabulator-table{
 				.tabulator-row{
 					.tabulator-cell{
 						padding: $paddedVerticalPadding $paddedHorizontalPadding;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
 		&.very{
 			.tabulator-header{
@@ -871,21 +871,21 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 						.tabulator-arrow{
 							top:26px;
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+						}
+					}
+				}
+			}
 			.tabulator-tableHolder{
 				.tabulator-table{
 					.tabulator-row{
 						.tabulator-cell{
 							padding: $veryPaddedVerticalPadding $veryPaddedHorizontalPadding;
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+						}
+					}
+				}
+			}
+		}
+	}
 
 	&.compact{
 		.tabulator-header{
@@ -895,19 +895,19 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 					.tabulator-arrow{
 						top:12px;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 		.tabulator-tableHolder{
 			.tabulator-table{
 				.tabulator-row{
 					.tabulator-cell{
 						padding: $compactVerticalPadding $compactHorizontalPadding;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
 		&.very{
 			.tabulator-header{
@@ -917,22 +917,22 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 						.tabulator-arrow{
 							top:10px;
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+						}
+					}
+				}
+			}
 			.tabulator-tableHolder{
 				.tabulator-table{
 					.tabulator-row{
 						.tabulator-cell{
 							padding: $veryCompactVerticalPadding $veryCompactHorizontalPadding;
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 
 //row element
@@ -940,7 +940,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 	position: relative;
 	box-sizing: border-box;
 
-	min-height: $textSize + ($headerMargin***REMOVED*** 2);
+	min-height: $textSize + ($headerMargin * 2);
 	border-bottom: $rowBorder;
 
 	&.tabulator-selectable:hover{
@@ -948,16 +948,16 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		background: $activeBackgroundColor !important;
 		color: $activeColor !important;
 		cursor: pointer;
-	***REMOVED***
+	}
 
 	&.tabulator-selected{
 		background-color:$rowSelectedBackground;
-	***REMOVED***
+	}
 
 	&.tabulator-selected:hover{
 		background-color:$rowSelectedBackgroundHover;
 		cursor: pointer;
-	***REMOVED***
+	}
 
 	&.tabulator-moving{
 		position: absolute;
@@ -967,7 +967,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		pointer-events: none !important;
 		z-index:15;
-	***REMOVED***
+	}
 
 	//row resize handles
 	.tabulator-row-resize-handle{
@@ -980,12 +980,12 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		&.prev{
 			top:0;
 			bottom:auto;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:ns-resize;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-frozen{
 		display: inline-block;
@@ -997,12 +997,12 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&.tabulator-frozen-left{
 			border-right:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		&.tabulator-frozen-right{
 			border-left:2px solid $rowBorderColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-responsive-collapse{
 		box-sizing:border-box;
@@ -1014,7 +1014,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&:empty{
 			display:none;
-		***REMOVED***
+		}
 
 		table{
 			font-size:$textSize;
@@ -1025,11 +1025,11 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 					&:first-of-type{
 						padding-right:10px;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+					}
+				}
+			}
+		}
+	}
 
 
 	//cell element
@@ -1046,7 +1046,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&:last-of-type{
 			border-right: none;
-		***REMOVED***
+		}
 
 		&.tabulator-editing{
 			border:1px solid  $editBoxColor;
@@ -1055,8 +1055,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			input, select{
 				border:1px;
 				background:transparent;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		&.tabulator-validation-fail{
 			border:1px solid $errorColor;
@@ -1065,15 +1065,15 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				background:transparent;
 
 				color: $errorColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//hide left resize handle on first column
 		&:first-child{
 			.tabulator-col-resize-handle.prev{
 				display: none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//movable row handle
 		&.tabulator-row-handle{
@@ -1096,9 +1096,9 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					height:3px;
 					margin-top:2px;
 					background:#666;
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		.tabulator-data-tree-branch{
 			display:inline-block;
@@ -1114,7 +1114,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			border-left:2px solid $rowBorderColor;
 			border-bottom:2px solid $rowBorderColor;
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control{
 
@@ -1137,7 +1137,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			&:hover{
 				cursor:pointer;
 				background:rgba(0, 0, 0, .2);
-			***REMOVED***
+			}
 
 			.tabulator-data-tree-control-collapse{
 				display:inline-block;
@@ -1158,8 +1158,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-data-tree-control-expand{
 				display:inline-block;
@@ -1180,10 +1180,10 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 					width: 7px;
 
 					background: $rowTextColor;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
-		***REMOVED***
+		}
 
 		.tabulator-responsive-collapse-toggle{
 			display: inline-flex;
@@ -1207,22 +1207,22 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 			&:hover{
 				opacity:.7;
-			***REMOVED***
+			}
 
 			&.open{
 				.tabulator-responsive-collapse-toggle-close{
 					display:initial;
-				***REMOVED***
+				}
 
 				.tabulator-responsive-collapse-toggle-open{
 					display:none;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			.tabulator-responsive-collapse-toggle-close{
 				display:none;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-traffic-light{
 			display: inline-block;
@@ -1230,8 +1230,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			width:14px;
 
 			border-radius:14px;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//row grouping element
 	&.tabulator-group{
@@ -1250,7 +1250,7 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		&:hover{
 			cursor:pointer;
 			background-color:rgba(0,0,0,.1);
-		***REMOVED***
+		}
 
 		&.tabulator-group-visible{
 			.tabulator-arrow{
@@ -1259,28 +1259,28 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 				border-right: 6px solid transparent;
 				border-top: 6px solid $sortArrowActive;
 				border-bottom: 0;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		&.tabulator-group-level-1{
 			padding-left:30px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-2{
 			padding-left:50px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-3{
 			padding-left:70px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-4{
 			padding-left:90px;
-		***REMOVED***
+		}
 
 		&.tabulator-group-level-5{
 			padding-left:110px;
-		***REMOVED***
+		}
 
 
 		//sorting arrow
@@ -1294,14 +1294,14 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 			border-right: 0;
 			border-left: 6px solid $sortArrowActive;
 			vertical-align:middle;
-		***REMOVED***
+		}
 
 		span{
 			margin-left:10px;
 			color:#666;
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
 .tabulator-menu{
 	position: absolute;
@@ -1327,18 +1327,18 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		&.tabulator-menu-item-disabled{
 			opacity: .5;
-		***REMOVED***
+		}
 
 		&:not(.tabulator-menu-item-disabled):hover{
 			cursor: pointer;
 			background: $headerBackgroundColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-menu-separator{
 		border-top:1px solid $rowBorderColor;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 .tabulator-edit-select-list{
 	position: absolute;
@@ -1365,21 +1365,21 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 		&.active{
 			color:$backgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
+		}
 
 		&:hover{
 			cursor:pointer;
 
 			color:$backgroundColor;
 			background:$editBoxColor;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	.tabulator-edit-select-list-notice{
 		padding:4px;
 
 		text-align: center;
-	***REMOVED***
+	}
 
 	.tabulator-edit-select-list-group{
 		border-bottom:1px solid $rowBorderColor;
@@ -1389,8 +1389,8 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 
 		color:$rowTextColor;
 		font-weight:bold;
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 // Table print styling
 
@@ -1402,11 +1402,11 @@ $footerActiveColor:#d00 !default; //footer bottom active text color
 	right:0;
 
 	z-index: 10000;
-***REMOVED***
+}
 
 body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 	display:none !important;
-***REMOVED***
+}
 
 .tabulator-print-table{
 	border-collapse: collapse;
@@ -1425,7 +1425,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 
 		border-left:2px solid $rowBorderColor;
 		border-bottom:2px solid $rowBorderColor;
-	***REMOVED***
+	}
 
 	.tabulator-data-tree-control{
 
@@ -1448,7 +1448,7 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 		&:hover{
 			cursor:pointer;
 			background:rgba(0, 0, 0, .2);
-		***REMOVED***
+		}
 
 		.tabulator-data-tree-control-collapse{
 			display:inline-block;
@@ -1469,8 +1469,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		.tabulator-data-tree-control-expand{
 			display:inline-block;
@@ -1491,8 +1491,8 @@ body.tabulator-print-fullscreen-hide>*:not(.tabulator-print-fullscreen){
 				width: 7px;
 
 				background: $rowTextColor;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+			}
+		}
+	}
+}
 

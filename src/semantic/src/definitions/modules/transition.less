@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Transition
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Transition
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,7 +18,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
           Transitions
 *******************************/
 
@@ -27,56 +27,56 @@
   animation-duration: @transitionDefaultDuration;
   animation-timing-function: @transitionDefaultEasing;
   animation-fill-mode: @transitionDefaultFill;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
             States
 *******************************/
 
 
-/* Animating***REMOVED***/
+/* Animating */
 .animating.transition {
   backface-visibility: @backfaceVisibility;
   visibility: visible !important;
-***REMOVED***
+}
 
 & when (@variationTransitionLoading) {
-  /* Loading***REMOVED***/
+  /* Loading */
   .loading.transition {
     position: absolute;
     top: -99999px;
     left: -99999px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-/* Hidden***REMOVED***/
+/* Hidden */
 .hidden.transition {
   display: none;
   visibility: hidden;
-***REMOVED***
+}
 
-/* Visible***REMOVED***/
+/* Visible */
 .visible.transition {
   display: block !important;
   visibility: visible !important;
 /*  backface-visibility: @backfaceVisibility;
   transform: @use3DAcceleration;*/
-***REMOVED***
+}
 
 & when (@variationTransitionDisabled) {
-  /* Disabled***REMOVED***/
+  /* Disabled */
   .disabled.transition {
     animation-play-state: paused;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-***REMOVED********************************
+/*******************************
           Variations
 *******************************/
 & when (@variationTransitionLoading) {
   .looping.transition {
     animation-iteration-count: infinite;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

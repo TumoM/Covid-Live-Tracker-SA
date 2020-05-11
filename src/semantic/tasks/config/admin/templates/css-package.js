@@ -5,9 +5,9 @@ var
 Package.describe({
   name    : 'semantic:ui-css',
   summary : 'Semantic UI - CSS Release of Semantic UI',
-  version : '{version***REMOVED***',
+  version : '{version}',
   git     : 'git://github.com/Semantic-Org/Semantic-UI-CSS.git',
-***REMOVED***);
+});
 
 Package.onUse(function(api) {
 
@@ -31,4 +31,4 @@ Package.onUse(function(api) {
     'semantic.js'
   ], 'client');
 
-***REMOVED***);
+});

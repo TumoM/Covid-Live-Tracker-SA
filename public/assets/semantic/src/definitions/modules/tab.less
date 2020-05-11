@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Tab
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Tab
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,15 +18,15 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
            UI Tabs
 *******************************/
 
 .ui.tab {
   display: none;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
@@ -37,7 +37,7 @@
 .ui.tab.active,
 .ui.tab.open {
   display: block;
-***REMOVED***
+}
 
 & when (@variationTabLoading) {
   /*--------------------
@@ -49,11 +49,11 @@
     overflow: hidden;
     display: block;
     min-height: @loadingMinHeight;
-***REMOVED***
-  .ui.tab.loading***REMOVED*** {
+  }
+  .ui.tab.loading * {
     position: @loadingContentPosition !important;
     left: @loadingContentOffset !important;
-***REMOVED***
+  }
 
   .ui.tab.loading:before,
   .ui.tab.loading.segment:before {
@@ -68,7 +68,7 @@
 
     border-radius: @circularRadius;
     border: @loaderLineWidth solid @loaderFillColor;
-***REMOVED***
+  }
   .ui.tab.loading:after,
   .ui.tab.loading.segment:after {
     position: absolute;
@@ -85,7 +85,7 @@
     border-radius: @circularRadius;
 
     box-shadow: 0 0 0 1px transparent;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

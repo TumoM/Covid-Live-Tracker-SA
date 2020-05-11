@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic UI - Emoji
-***REMOVED*** https://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** https://github.com/fomantic/Fomantic-UI/blob/master/LICENSE.md
-***REMOVED***
-***REMOVED***/
+ * # Fomantic UI - Emoji
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://github.com/fomantic/Fomantic-UI/blob/master/LICENSE.md
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 @import (multiple) '../../theme.config';
 
 
-***REMOVED********************************
+/*******************************
              Emoji
 *******************************/
 
@@ -29,7 +29,7 @@ em[data-emoji] {
 
   speak: none;
   backface-visibility: hidden;
-***REMOVED***
+}
 
 em[data-emoji]:before {
   content:'\00A0\00A0\00A0\00A0\00A0\00A0\00A0';
@@ -39,26 +39,26 @@ em[data-emoji]:before {
   background-position: center center;
   & when not (@emojiFileType = 'svg') {
     background-size: contain;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
 em[data-emoji].disabled {
   opacity: @disabledOpacity;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
 em[data-emoji].loading:before {
   animation: loader @loadingDuration linear infinite;
-***REMOVED***
+}
 
 
 /*-------------------
@@ -67,6 +67,6 @@ em[data-emoji].loading:before {
 
 em[data-emoji].link:not(.disabled) {
   cursor: pointer;
-***REMOVED***
+}
 
 .loadUIOverrides();

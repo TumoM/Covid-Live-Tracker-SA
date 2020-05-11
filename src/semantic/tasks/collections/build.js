@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***    Define Build Sub-Tasks
-***REMOVED*********************************/
+/*******************************
+ *    Define Build Sub-Tasks
+ *******************************/
 
 module.exports = function (gulp) {
 
@@ -29,4 +29,4 @@ module.exports = function (gulp) {
   gulp.task('build-assets', buildAssets);
   gulp.task('build-assets').description = 'Copies all assets from source';
 
-***REMOVED***;
+};

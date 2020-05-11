@@ -1,16 +1,16 @@
 /*!
-***REMOVED*** # Fomantic-UI - Shape
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Shape
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -19,7 +19,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
               Shape
 *******************************/
 
@@ -29,12 +29,12 @@
   display: @display;
   perspective: @perspective;
   transition: @transition;
-***REMOVED***
+}
 
 .ui.shape .side,
 .ui.shape .sides {
   transform-style: preserve-3d;
-***REMOVED***
+}
 
 .ui.shape .side {
   display: none;
@@ -43,13 +43,13 @@
 
   margin: @sideMargin !important;
   backface-visibility: @backfaceVisibility;
-***REMOVED***
+}
 
-.ui.shape .side***REMOVED*** {
+.ui.shape .side * {
   backface-visibility: visible !important;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
              Types
 *******************************/
 
@@ -63,7 +63,7 @@
     background-color: @cubeBackground;
     color: @cubeTextColor;
     box-shadow: @cubeBoxShadow;
-***REMOVED***
+  }
   .ui.cube.shape .side > .content {
     width: 100%;
     height: 100%;
@@ -71,31 +71,31 @@
 
     text-align: @cubeTextAlign;
     user-select: text;
-***REMOVED***
+  }
   .ui.cube.shape .side > .content > div {
     display: table-cell;
     vertical-align: middle;
     font-size: @cubeFontSize;
-***REMOVED***
-***REMOVED***
+  }
+}
 
-***REMOVED********************************
+/*******************************
           Variations
 *******************************/
 & when (@variationShapeText) {
   .ui.text.shape.animating .sides {
     position: static;
-***REMOVED***
+  }
   .ui.text.shape .side {
     white-space: nowrap;
-***REMOVED***
-  .ui.text.shape .side >***REMOVED*** {
+  }
+  .ui.text.shape .side > * {
     white-space: normal;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
@@ -108,8 +108,8 @@
     position: absolute;
     top: -9999px;
     left: -9999px;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*--------------
@@ -122,10 +122,10 @@
   left: 0;
   display: block;
   z-index: @animatingZIndex;
-***REMOVED***
+}
 .ui.shape .hidden.side {
   opacity: @hiddenSideOpacity;
-***REMOVED***
+}
 
 
 /*--------------
@@ -135,14 +135,14 @@
 .ui.shape.animating .sides {
   position: absolute;
   transition: @transition;
-***REMOVED***
+}
 .ui.shape.animating .side {
   transition: @sideTransition;
-***REMOVED***
-.ui.shape .animating.side***REMOVED***,
-.ui.shape.animating .side***REMOVED*** {
+}
+.ui.shape .animating.side *,
+.ui.shape.animating .side * {
   transition: none;
-***REMOVED***
+}
 
 /*--------------
      Active
@@ -150,6 +150,6 @@
 
 .ui.shape .active.side {
   display: block;
-***REMOVED***
+}
 
 .loadUIOverrides();

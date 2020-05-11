@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***         Build Task
-***REMOVED*********************************/
+/*******************************
+ *         Build Task
+ *******************************/
 
 var
   // dependencies
@@ -17,7 +17,7 @@ module.exports = function (callback) {
   if (!install.isSetup()) {
     console.error('Cannot find semantic.json. Run "gulp install" to set-up Semantic');
     return 1;
-***REMOVED***
+  }
 
   gulp.series('build-css', 'build-javascript', 'build-assets')(callback);
-***REMOVED***;
+};

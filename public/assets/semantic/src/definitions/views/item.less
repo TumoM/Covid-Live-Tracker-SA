@@ -1,14 +1,14 @@
 /*!
-***REMOVED*** # Fomantic-UI - Item
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Item
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -17,7 +17,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
             Standard
 *******************************/
 
@@ -38,10 +38,10 @@
   box-shadow: @boxShadow;
   transition: @transition;
   z-index: @zIndex;
-***REMOVED***
+}
 .ui.items > .item a {
   cursor: pointer;
-***REMOVED***
+}
 
 /*--------------
       Items
@@ -49,14 +49,14 @@
 
 .ui.items {
   margin: @groupMargin;
-***REMOVED***
+}
 
 .ui.items:first-child {
   margin-top: 0 !important;
-***REMOVED***
+}
 .ui.items:last-child {
   margin-bottom: 0 !important;
-***REMOVED***
+}
 
 /*--------------
       Item
@@ -69,13 +69,13 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 .ui.items > .item:first-child {
   margin-top: 0;
-***REMOVED***
+}
 .ui.items > .item:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 
 
@@ -92,18 +92,18 @@
   padding: @imagePadding;
   max-height: @imageMaxHeight;
   align-self: @imageVerticalAlign;
-***REMOVED***
+}
 .ui.items > .item > .image > img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: @imageBorderRadius;
   border: @imageBorder;
-***REMOVED***
+}
 
 .ui.items > .item > .image:only-child > img {
   border-radius: @borderRadius;
-***REMOVED***
+}
 
 
 /*--------------
@@ -121,7 +121,7 @@
   font-size: @contentFontSize;
   border: @contentBorder;
   border-radius: @contentBorderRadius;
-***REMOVED***
+}
 .ui.items > .item > .content:after {
   display: block;
   content: ' ';
@@ -129,7 +129,7 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 
 .ui.items > .item > .image + .content {
   min-width: 0;
@@ -138,7 +138,7 @@
   margin-left: @contentOffset;
   align-self: @contentVerticalAlign;
   padding-left: @contentImageDistance;
-***REMOVED***
+}
 
 .ui.items > .item > .content > .header {
   display: inline-block;
@@ -146,11 +146,11 @@
   font-family: @headerFont;
   font-weight: @headerFontWeight;
   color: @headerColor;
-***REMOVED***
-/* Default Header Size***REMOVED***/
+}
+/* Default Header Size */
 .ui.items > .item > .content > .header:not(.ui) {
   font-size: @headerFontSize;
-***REMOVED***
+}
 
 /*--------------
      Floated
@@ -158,10 +158,10 @@
 
 .ui.items > .item [class*="left floated"] {
   float: left;
-***REMOVED***
+}
 .ui.items > .item [class*="right floated"] {
   float: right;
-***REMOVED***
+}
 
 
 /*--------------
@@ -171,13 +171,13 @@
 .ui.items > .item .content img {
   align-self: @contentImageVerticalAlign;
   width: @contentImageWidth;
-***REMOVED***
+}
 .ui.items > .item img.avatar,
 .ui.items > .item .avatar img {
   width: @avatarSize;
   height: @avatarSize;
   border-radius: @avatarBorderRadius;
-***REMOVED***
+}
 
 
 /*--------------
@@ -190,7 +190,7 @@
   font-size: @descriptionFontSize;
   line-height: @descriptionLineHeight;
   color: @descriptionColor;
-***REMOVED***
+}
 
 /*--------------
     Paragraph
@@ -198,10 +198,10 @@
 
 .ui.items > .item > .content p {
   margin: 0 0 @paragraphDistance;
-***REMOVED***
+}
 .ui.items > .item > .content p:last-child {
   margin-bottom: 0;
-***REMOVED***
+}
 
 /*--------------
       Meta
@@ -212,47 +212,47 @@
   font-size: @metaFontSize;
   line-height: @metaLineHeight;
   color: @metaColor;
-***REMOVED***
-.ui.items > .item .meta***REMOVED*** {
+}
+.ui.items > .item .meta * {
   margin-right: @metaSpacing;
-***REMOVED***
+}
 .ui.items > .item .meta :last-child {
   margin-right: 0;
-***REMOVED***
+}
 
 .ui.items > .item .meta [class*="right floated"] {
   margin-right: 0;
   margin-left: @metaSpacing;
-***REMOVED***
+}
 
 /*--------------
       Links
 ---------------*/
 
-/* Generic***REMOVED***/
+/* Generic */
 .ui.items > .item > .content a:not(.ui) {
   color: @contentLinkColor;
   transition: @contentLinkTransition;
-***REMOVED***
+}
 .ui.items > .item > .content a:not(.ui):hover {
   color: @contentLinkHoverColor;
-***REMOVED***
+}
 
-/* Header***REMOVED***/
+/* Header */
 .ui.items > .item > .content > a.header {
   color: @headerLinkColor;
-***REMOVED***
+}
 .ui.items > .item > .content > a.header:hover {
   color: @headerLinkHoverColor;
-***REMOVED***
+}
 
-/* Meta***REMOVED***/
+/* Meta */
 .ui.items > .item .meta > a:not(.ui) {
   color: @metaLinkColor;
-***REMOVED***
+}
 .ui.items > .item .meta > a:not(.ui):hover {
   color: @metaLinkHoverColor;
-***REMOVED***
+}
 
 
 
@@ -260,37 +260,37 @@
      Labels
 ---------------*/
 
-/*-----Star-----***REMOVED***/
+/*-----Star----- */
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.items > .item > .content .favorite.icon {
   cursor: pointer;
   opacity: @actionOpacity;
   transition: @actionTransition;
-***REMOVED***
+}
 .ui.items > .item > .content .favorite.icon:hover {
   opacity: @actionHoverOpacity;
   color: @favoriteColor;
-***REMOVED***
+}
 .ui.items > .item > .content .active.favorite.icon {
   color: @favoriteActiveColor;
-***REMOVED***
+}
 
-/*-----Like-----***REMOVED***/
+/*-----Like----- */
 
-/* Icon***REMOVED***/
+/* Icon */
 .ui.items > .item > .content .like.icon {
   cursor: pointer;
   opacity: @actionOpacity;
   transition: @actionTransition;
-***REMOVED***
+}
 .ui.items > .item > .content .like.icon:hover {
   opacity: @actionHoverOpacity;
   color: @likeColor;
-***REMOVED***
+}
 .ui.items > .item > .content .active.like.icon {
   color: @likeActiveColor;
-***REMOVED***
+}
 
 /*----------------
   Extra Content
@@ -309,13 +309,13 @@
   box-shadow: @extraBoxShadow;
   transition: @extraTransition;
   border-top: @extraDivider;
-***REMOVED***
-.ui.items > .item .extra >***REMOVED*** {
+}
+.ui.items > .item .extra > * {
   margin: (@extraRowSpacing / 2) @extraHorizontalSpacing (@extraRowSpacing / 2) 0;
-***REMOVED***
+}
 .ui.items > .item .extra > [class*="right floated"] {
   margin: (@extraRowSpacing / 2) 0 (@extraRowSpacing / 2) @extraHorizontalSpacing;
-***REMOVED***
+}
 
 .ui.items > .item .extra:after {
   display: block;
@@ -324,59 +324,59 @@
   clear: both;
   overflow: hidden;
   visibility: hidden;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
           Responsive
 *******************************/
 
-/* Default Image Width***REMOVED***/
+/* Default Image Width */
 .ui.items > .item > .image:not(.ui) {
   width: @imageWidth;
-***REMOVED***
+}
 
 
-/* Tablet Only***REMOVED***/
+/* Tablet Only */
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
   .ui.items > .item {
     margin: @tabletItemSpacing 0;
-***REMOVED***
+  }
   .ui.items > .item > .image:not(.ui) {
     width: @tabletImageWidth;
-***REMOVED***
+  }
   .ui.items > .item > .image + .content {
     display: block;
     padding: 0 0 0 @tabletContentImageDistance;
-***REMOVED***
+  }
 
-***REMOVED***
+}
 
-/* Mobile Only***REMOVED***/
+/* Mobile Only */
 @media only screen and (max-width: @largestMobileScreen) {
   .ui.items:not(.unstackable) > .item {
     flex-direction: column;
     margin: @mobileItemSpacing 0;
-***REMOVED***
+  }
   .ui.items:not(.unstackable) > .item > .image {
     display: block;
     margin-left: auto;
     margin-right: auto;
-***REMOVED***
+  }
   .ui.items:not(.unstackable) > .item > .image,
   .ui.items:not(.unstackable) > .item > .image > img {
     max-width: 100% !important;
     width: @mobileImageWidth !important;
     max-height: @mobileImageMaxHeight !important;
-***REMOVED***
+  }
   .ui.items:not(.unstackable) > .item > .image + .content {
     display: block;
     padding: @mobileContentImageDistance 0 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -387,14 +387,14 @@
 
   .ui.items > .item > .image + [class*="top aligned"].content {
     align-self: flex-start;
-***REMOVED***
+  }
   .ui.items > .item > .image + [class*="middle aligned"].content {
     align-self: center;
-***REMOVED***
+  }
   .ui.items > .item > .image + [class*="bottom aligned"].content {
     align-self: flex-end;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationItemRelaxed) {
   /*--------------
@@ -403,11 +403,11 @@
 
   .ui.relaxed.items > .item {
     margin: @relaxedItemSpacing 0;
-***REMOVED***
+  }
   .ui[class*="very relaxed"].items > .item {
     margin: @veryRelaxedItemSpacing 0;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 & when (@variationItemDivided) {
   /*-------------------
@@ -418,28 +418,28 @@
     border-top: @dividedBorder;
     margin: @dividedMargin;
     padding: @dividedPadding;
-***REMOVED***
+  }
   .ui.divided.items > .item:first-child {
     border-top: none;
     margin-top: @dividedFirstLastMargin !important;
     padding-top: @dividedFirstLastPadding !important;
-***REMOVED***
+  }
   .ui.divided.items > .item:last-child {
     margin-bottom: @dividedFirstLastMargin !important;
     padding-bottom: @dividedFirstLastPadding !important;
-***REMOVED***
+  }
   & when (@variationItemRelaxed) {
-    /* Relaxed Divided***REMOVED***/
+    /* Relaxed Divided */
     .ui.relaxed.divided.items > .item {
       margin: 0;
       padding: @relaxedItemSpacing 0;
-  ***REMOVED***
+    }
     .ui[class*="very relaxed"].divided.items > .item {
       margin: 0;
       padding: @veryRelaxedItemSpacing 0;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationItemLink) {
   /*-------------------
@@ -449,13 +449,13 @@
   .ui.items a.item:hover,
   .ui.link.items > .item:hover {
     cursor: pointer;
-***REMOVED***
+  }
 
   .ui.items a.item:hover .content .header,
   .ui.link.items > .item:hover .content .header {
     color: @headerLinkHoverColor;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 
 /*--------------
@@ -464,15 +464,15 @@
 
 .ui.items > .item {
   font-size: @relativeMedium;
-***REMOVED***
+}
 & when not (@variationItemSizes = false) {
   each(@variationItemSizes, {
-    @s: @{value***REMOVED***ItemSize;
-    .ui.@{value***REMOVED***.items > .item  {
+    @s: @{value}ItemSize;
+    .ui.@{value}.items > .item  {
       font-size: @@s;
-  ***REMOVED***
-***REMOVED***)
-***REMOVED***
+    }
+  })
+}
 
 & when (@variationItemUnstackable) {
   /*---------------
@@ -483,9 +483,9 @@
     .ui.unstackable.items > .item > .image,
     .ui.unstackable.items > .item > .image > img {
       width: @unstackableMobileImageWidth !important;
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 & when (@variationItemInverted) {
   /*--------------
@@ -494,66 +494,66 @@
 
   .ui.inverted.items > .item {
     background: @invertedBackground;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content {
     background: @invertedContentBackground;
     color: @invertedContentColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item .extra {
     background: @invertedExtraBackground;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content > .header {
     color: @invertedHeaderColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content > .description {
     color: @invertedDescriptionColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item .meta {
     color: @invertedMetaColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content a:not(.ui) {
     color: @invertedContentLinkColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content a:not(.ui):hover {
     color: @invertedContentLinkHoverColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content > a.header {
     color: @invertedHeaderLinkColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content > a.header:hover {
     color: @invertedHeaderLinkHoverColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item .meta > a:not(.ui) {
     color: @invertedMetaLinkColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item .meta > a:not(.ui):hover {
     color: @invertedMetaLinkHoverColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content .favorite.icon:hover {
     color: @invertedFavoriteColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content .active.favorite.icon {
     color: @invertedFavoriteActiveColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content .like.icon:hover {
     color: @invertedLikeColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item > .content .active.like.icon {
     color: @invertedLikeActiveColor;
-***REMOVED***
+  }
   .ui.inverted.items > .item .extra {
     color: @invertedExtraColor;
-***REMOVED***
+  }
   .ui.inverted.items a.item:hover .content .header,
   .ui.inverted.link.items > .item:hover .content .header {
     color: @invertedHeaderLinkHoverColor;
-***REMOVED***
+  }
   .ui.inverted.divided.items > .item {
     border-top: @invertedDividedBorder;
-***REMOVED***
+  }
   .ui.inverted.divided.items > .item:first-child {
     border-top: none;
-***REMOVED***
-***REMOVED***
+  }
+}
 
 .loadUIOverrides();

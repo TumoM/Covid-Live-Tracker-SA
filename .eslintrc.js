@@ -2,7 +2,7 @@ module.exports = {
   "root": true,
   "parserOptions": {
     "ecmaVersion": 2018
-***REMOVED***
+  },
   "plugins": ["jest"],
  "env": {
    "jest/globals": true,
@@ -10,7 +10,7 @@ module.exports = {
    "node": true,
    "es6": true,
    "jquery": true
- ***REMOVED***,
+ },
  "extends": "airbnb-base",
  "rules": {
    "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")],
@@ -30,7 +30,7 @@ module.exports = {
        "svg": "always",
        "scss": "always",
        "css": "always"
-   ***REMOVED***
+     }
    ],
    'prefer-destructuring': 'warn',
    'no-await-in-loop': 'warn',
@@ -56,13 +56,13 @@ module.exports = {
        "ignoreUrls": true,
        "ignoreRegExpLiterals": true,
        "ignoreStrings": true
-   ***REMOVED***
+     }
    ],
    "no-console": "off",
    "no-mixed-operators": "off",
    "no-restricted-globals": "off",
    "no-underscore-dangle": "off",
-   "object-curly-newline": ["error", { "consistent": true ***REMOVED***],
+   "object-curly-newline": ["error", { "consistent": true }],
    "require-jsdoc": [
      "warn",
      {
@@ -71,8 +71,8 @@ module.exports = {
          "MethodDefinition": true,
          "ClassDeclaration": true,
          "ArrowFunctionExpression": true
-     ***REMOVED***
-   ***REMOVED***
+       }
+     }
    ]
- ***REMOVED***
-***REMOVED***;
+ }
+};

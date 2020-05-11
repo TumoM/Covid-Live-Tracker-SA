@@ -1,6 +1,6 @@
 var Format = function(table){
 	this.table = table; //hold Tabulator object
-***REMOVED***;
+};
 
 //initialize column formatter
 Format.prototype.initializeColumn = function(column){
@@ -8,20 +8,20 @@ Format.prototype.initializeColumn = function(column){
 
 	if(typeof column.definition.formatterPrint !== "undefined"){
 		column.modules.format.print = this.lookupFormatter(column, "Print");
-	***REMOVED***
+	}
 
 	if(typeof column.definition.formatterClipboard !== "undefined"){
 		column.modules.format.clipboard = this.lookupFormatter(column, "Clipboard");
-	***REMOVED***
+	}
 
 	if(typeof column.definition.formatterHtmlOutput !== "undefined"){
 		column.modules.format.htmlOutput = this.lookupFormatter(column, "HtmlOutput");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 Format.prototype.lookupFormatter = function(column, type){
-	var config = {params:column.definition["formatter" + type + "Params"] || {***REMOVED******REMOVED***,
+	var config = {params:column.definition["formatter" + type + "Params"] || {}},
 	formatter = column.definition["formatter" + type];
 
 	//set column formatter
@@ -33,17 +33,17 @@ Format.prototype.lookupFormatter = function(column, type){
 
 			if(typeof config.params.crossElement == "undefined"){
 				config.params.crossElement = false;
-			***REMOVED***
+			}
 
 			console.warn("DEPRECATION WARNING - the tick formatter has been deprecated, please use the tickCross formatter with the crossElement param set to false");
-		***REMOVED***
+		}
 
 		if(this.formatters[formatter]){
 			config.formatter = this.formatters[formatter];
-		***REMOVED***else{
+		}else{
 			console.warn("Formatter Error - No such formatter found: ", formatter);
 			config.formatter = this.formatters.plaintext;
-		***REMOVED***
+		}
 		break;
 
 		case "function":
@@ -53,16 +53,16 @@ Format.prototype.lookupFormatter = function(column, type){
 		default:
 		config.formatter = this.formatters.plaintext;
 		break;
-	***REMOVED***
+	}
 
 	return config;
-***REMOVED***;
+};
 
 Format.prototype.cellRendered = function(cell){
 	if(cell.modules.format && cell.modules.format.renderedCallback){
 		cell.modules.format.renderedCallback();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //return a formatted value for a cell
 Format.prototype.formatValue = function(cell){
@@ -71,14 +71,14 @@ Format.prototype.formatValue = function(cell){
 
 	function onRendered(callback){
 		if(!cell.modules.format){
-			cell.modules.format = {***REMOVED***;
-		***REMOVED***
+			cell.modules.format = {};
+		}
 
 		cell.modules.format.renderedCallback = callback;
-	***REMOVED***
+	}
 
 	return cell.column.modules.format.formatter.call(this, component, params, onRendered);
-***REMOVED***;
+};
 
 
 Format.prototype.formatExportValue = function(cell, type){
@@ -90,18 +90,18 @@ Format.prototype.formatExportValue = function(cell, type){
 
 		function onRendered(callback){
 			if(!cell.modules.format){
-				cell.modules.format = {***REMOVED***;
-			***REMOVED***
+				cell.modules.format = {};
+			}
 
 			cell.modules.format.renderedCallback = callback;
-		***REMOVED***
+		}
 
 		return formatter.formatter.call(this, cell.getComponent(), params, onRendered);
 
-	***REMOVED***else{
+	}else{
 		return this.formatValue(cell);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Format.prototype.sanitizeHTML = function(value){
 	if(value){
@@ -114,19 +114,19 @@ Format.prototype.sanitizeHTML = function(value){
 			'/': '&#x2F;',
 			'`': '&#x60;',
 			'=': '&#x3D;'
-		***REMOVED***;
+		};
 
 		return String(value).replace(/[&<>"'`=\/]/g, function (s) {
 			return entityMap[s];
-		***REMOVED***);
-	***REMOVED***else{
+		});
+	}else{
 		return value;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Format.prototype.emptyToSpace = function(value){
 	return value === null || typeof value === "undefined" || value === "" ? "&nbsp;" : value;
-***REMOVED***;
+};
 
 //get formatter for cell
 Format.prototype.getFormatter = function(formatter){
@@ -136,10 +136,10 @@ Format.prototype.getFormatter = function(formatter){
 		case "string":
 		if(this.formatters[formatter]){
 			formatter = this.formatters[formatter]
-		***REMOVED***else{
+		}else{
 			console.warn("Formatter Error - No such formatter found: ", formatter);
 			formatter = this.formatters.plaintext;
-		***REMOVED***
+		}
 		break;
 
 		case "function":
@@ -149,29 +149,29 @@ Format.prototype.getFormatter = function(formatter){
 		default:
 		formatter = this.formatters.plaintext;
 		break;
-	***REMOVED***
+	}
 
 	return formatter;
 
-***REMOVED***;
+};
 
 //default data formatters
 Format.prototype.formatters = {
 	//plain text value
 	plaintext:function(cell, formatterParams, onRendered){
 		return this.emptyToSpace(this.sanitizeHTML(cell.getValue()));
-	***REMOVED***,
+	},
 
 	//html text value
 	html:function(cell, formatterParams, onRendered){
 		return cell.getValue();
-	***REMOVED***,
+	},
 
 	//multiline text area
 	textarea:function(cell, formatterParams, onRendered){
 		cell.getElement().style.whiteSpace = "pre-wrap";
 		return this.emptyToSpace(this.sanitizeHTML(cell.getValue()));
-	***REMOVED***,
+	},
 
 	//currency formatting
 	money:function(cell, formatterParams, onRendered){
@@ -186,7 +186,7 @@ Format.prototype.formatters = {
 
 		if(isNaN(floatVal)){
 			return this.emptyToSpace(this.sanitizeHTML(cell.getValue()));
-		***REMOVED***
+		}
 
 		number = precision !== false ? floatVal.toFixed(precision) : floatVal;
 		number = String(number).split(".");
@@ -194,14 +194,14 @@ Format.prototype.formatters = {
 		integer = number[0];
 		decimal = number.length > 1 ? decimalSym + number[1] : "";
 
-		rgx = /(\d+)(\d{3***REMOVED***)/;
+		rgx = /(\d+)(\d{3})/;
 
 		while (rgx.test(integer)){
 			integer = integer.replace(rgx, "$1" + thousandSym + "$2");
-		***REMOVED***
+		}
 
 		return after ? integer + decimal + symbol : symbol + integer + decimal;
-	***REMOVED***,
+	},
 
 	//clickable anchor tag
 	link:function(cell, formatterParams, onRendered){
@@ -215,7 +215,7 @@ Format.prototype.formatters = {
 		if(formatterParams.labelField){
 			data = cell.getData();
 			label = data[formatterParams.labelField];
-		***REMOVED***
+		}
 
 		if(formatterParams.label){
 			switch(typeof formatterParams.label){
@@ -226,14 +226,14 @@ Format.prototype.formatters = {
 				case "function":
 				label = formatterParams.label(cell);
 				break;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		if(label){
 			if(formatterParams.urlField){
 				data = cell.getData();
 				value = data[formatterParams.urlField];
-			***REMOVED***
+			}
 
 			if(formatterParams.url){
 				switch(typeof formatterParams.url){
@@ -244,33 +244,33 @@ Format.prototype.formatters = {
 					case "function":
 					value = formatterParams.url(cell);
 					break;
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			el.setAttribute("href", urlPrefix + value);
 
 			if(formatterParams.target){
 				el.setAttribute("target", formatterParams.target);
-			***REMOVED***
+			}
 
 			if(formatterParams.download){
 
 				if(typeof download == "function"){
 					download = download(cell);
-				***REMOVED***else{
+				}else{
 					download = download === true ? "" : download;
-				***REMOVED***
+				}
 
 				el.setAttribute("download", download);
-			***REMOVED***
+			}
 
 			el.innerHTML = this.emptyToSpace(this.sanitizeHTML(label));
 
 			return el;
-		***REMOVED***else{
+		}else{
 			return "&nbsp;";
-		***REMOVED***
-	***REMOVED***,
+		}
+	},
 
 	//image element
 	image:function(cell, formatterParams, onRendered){
@@ -285,7 +285,7 @@ Format.prototype.formatters = {
 			case "string":
 			el.style.height = formatterParams.height;
 			break;
-		***REMOVED***
+		}
 
 		switch(typeof formatterParams.width){
 			case "number":
@@ -295,14 +295,14 @@ Format.prototype.formatters = {
 			case "string":
 			el.style.width = formatterParams.width;
 			break;
-		***REMOVED***
+		}
 
 		el.addEventListener("load", function(){
 			cell.getRow().normalizeHeight();
-		***REMOVED***);
+		});
 
 		return el;
-	***REMOVED***,
+	},
 
 	//tick or cross
 	tickCross:function(cell, formatterParams, onRendered){
@@ -316,16 +316,16 @@ Format.prototype.formatters = {
 		if((truthy && value) || (value === true || value === "true" || value === "True" || value === 1 || value === "1")){
 			element.setAttribute("aria-checked", true);
 			return tick || "";
-		***REMOVED***else{
+		}else{
 			if(empty && (value === "null" || value === "" || value === null || typeof value === "undefined")){
 				element.setAttribute("aria-checked", "mixed");
 				return "";
-			***REMOVED***else{
+			}else{
 				element.setAttribute("aria-checked", false);
 				return cross || "";
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
+			}
+		}
+	},
 
 	datetime:function(cell, formatterParams, onRendered){
 		var inputFormat = formatterParams.inputFormat || "YYYY-MM-DD hh:mm:ss";
@@ -337,17 +337,17 @@ Format.prototype.formatters = {
 
 		if(newDatetime.isValid()){
 			return newDatetime.format(outputFormat);
-		***REMOVED***else{
+		}else{
 
 			if(invalid === true){
 				return value;
-			***REMOVED***else if(typeof invalid === "function"){
+			}else if(typeof invalid === "function"){
 				return invalid(value);
-			***REMOVED***else{
+			}else{
 				return invalid;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
+			}
+		}
+	},
 
 	datetimediff: function datetime(cell, formatterParams, onRendered) {
 		var inputFormat = formatterParams.inputFormat || "YYYY-MM-DD hh:mm:ss";
@@ -363,21 +363,21 @@ Format.prototype.formatters = {
 		if (newDatetime.isValid()) {
 			if(humanize){
 				return moment.duration(newDatetime.diff(date)).humanize(suffix);
-			***REMOVED***else{
+			}else{
 				return newDatetime.diff(date, unit) + (suffix ? " " + suffix : "");
-			***REMOVED***
+			}
 
-		***REMOVED*** else {
+		} else {
 
 			if (invalid === true) {
 				return value;
-			***REMOVED*** else if (typeof invalid === "function") {
+			} else if (typeof invalid === "function") {
 				return invalid(value);
-			***REMOVED*** else {
+			} else {
 				return invalid;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***,
+			}
+		}
+	},
 
 	//select
 	lookup: function (cell, formatterParams, onRendered) {
@@ -386,10 +386,10 @@ Format.prototype.formatters = {
 		if (typeof formatterParams[value] === "undefined") {
 			console.warn('Missing display value for ' + value);
 			return value;
-		***REMOVED***
+		}
 
 		return formatterParams[value];
-	***REMOVED***,
+	},
 
 	//star rating
 	star:function(cell, formatterParams, onRendered){
@@ -420,7 +420,7 @@ Format.prototype.formatters = {
 			nextStar.innerHTML = i <= value ? starActive : starInactive;
 
 			stars.appendChild(nextStar);
-		***REMOVED***
+		}
 
 		element.style.whiteSpace = "nowrap";
 		element.style.overflow = "hidden";
@@ -429,7 +429,7 @@ Format.prototype.formatters = {
 		element.setAttribute("aria-label", value);
 
 		return stars;
-	***REMOVED***,
+	},
 
 	traffic:function(cell, formatterParams, onRendered){
 		var value = this.sanitizeHTML(cell.getValue()) || 0,
@@ -442,7 +442,7 @@ Format.prototype.formatters = {
 
 		if(isNaN(value) || typeof cell.getValue() === "undefined"){
 			return;
-		***REMOVED***
+		}
 
 		el.classList.add("tabulator-traffic-light");
 
@@ -471,13 +471,13 @@ Format.prototype.formatters = {
 				index = Math.max(index, 0);
 				color = colors[index];
 				break;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		el.style.backgroundColor = color;
 
 		return el;
-	***REMOVED***,
+	},
 
 	//progress bar
 	progress:function(cell, formatterParams, onRendered){ //progress bar
@@ -513,10 +513,10 @@ Format.prototype.formatters = {
 				index = Math.max(index, 0);
 				color = formatterParams.color[index];
 				break;
-			***REMOVED***
+			}
 			default:
 			color = "#2DC214";
-		***REMOVED***
+		}
 
 		//generate legend
 		switch(typeof formatterParams.legend){
@@ -531,7 +531,7 @@ Format.prototype.formatters = {
 			break;
 			default:
 			legend = false;
-		***REMOVED***
+		}
 
 		//set legend color
 		switch(typeof formatterParams.legendColor){
@@ -549,11 +549,11 @@ Format.prototype.formatters = {
 				index = Math.min(index, formatterParams.legendColor.length - 1);
 				index = Math.max(index, 0);
 				legendColor = formatterParams.legendColor[index];
-			***REMOVED***
+			}
 			break;
 			default:
 			legendColor = "#000";
-		***REMOVED***
+		}
 
 		element.style.minWidth = "30px";
 		element.style.position = "relative";
@@ -580,7 +580,7 @@ Format.prototype.formatters = {
 			legendEl.style.width = "100%";
 			legendEl.style.color = legendColor;
 			legendEl.innerHTML = legend;
-		***REMOVED***
+		}
 
 		onRendered(function(){
 
@@ -596,44 +596,44 @@ Format.prototype.formatters = {
 				element.appendChild(holderEl);
 
 				element = holderEl;
-			***REMOVED***
+			}
 
 			element.appendChild(barEl);
 
 			if(legend){
 				element.appendChild(legendEl);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		return "";
-	***REMOVED***,
+	},
 
 	//background color
 	color:function(cell, formatterParams, onRendered){
 		cell.getElement().style.backgroundColor = this.sanitizeHTML(cell.getValue());
 		return "";
-	***REMOVED***,
+	},
 
 	//tick icon
 	buttonTick:function(cell, formatterParams, onRendered){
 		return '<svg enable-background="new 0 0 24 24" height="14" width="14" viewBox="0 0 24 24" xml:space="preserve" ><path fill="#2DC214" clip-rule="evenodd" d="M21.652,3.211c-0.293-0.295-0.77-0.295-1.061,0L9.41,14.34  c-0.293,0.297-0.771,0.297-1.062,0L3.449,9.351C3.304,9.203,3.114,9.13,2.923,9.129C2.73,9.128,2.534,9.201,2.387,9.351  l-2.165,1.946C0.078,11.445,0,11.63,0,11.823c0,0.194,0.078,0.397,0.223,0.544l4.94,5.184c0.292,0.296,0.771,0.776,1.062,1.07  l2.124,2.141c0.292,0.293,0.769,0.293,1.062,0l14.366-14.34c0.293-0.294,0.293-0.777,0-1.071L21.652,3.211z" fill-rule="evenodd"/></svg>';
-	***REMOVED***,
+	},
 
 	//cross icon
 	buttonCross:function(cell, formatterParams, onRendered){
 		return '<svg enable-background="new 0 0 24 24" height="14" width="14" viewBox="0 0 24 24" xml:space="preserve" ><path fill="#CE1515" d="M22.245,4.015c0.313,0.313,0.313,0.826,0,1.139l-6.276,6.27c-0.313,0.312-0.313,0.826,0,1.14l6.273,6.272  c0.313,0.313,0.313,0.826,0,1.14l-2.285,2.277c-0.314,0.312-0.828,0.312-1.142,0l-6.271-6.271c-0.313-0.313-0.828-0.313-1.141,0  l-6.276,6.267c-0.313,0.313-0.828,0.313-1.141,0l-2.282-2.28c-0.313-0.313-0.313-0.826,0-1.14l6.278-6.269  c0.313-0.312,0.313-0.826,0-1.14L1.709,5.147c-0.314-0.313-0.314-0.827,0-1.14l2.284-2.278C4.308,1.417,4.821,1.417,5.135,1.73  L11.405,8c0.314,0.314,0.828,0.314,1.141,0.001l6.276-6.267c0.312-0.312,0.826-0.312,1.141,0L22.245,4.015z"/></svg>';
-	***REMOVED***,
+	},
 
 	//current row number
 	rownum:function(cell, formatterParams, onRendered){
 		return this.table.rowManager.activeRows.indexOf(cell.getRow()._getSelf()) + 1;
-	***REMOVED***,
+	},
 
 	//row handle
 	handle:function(cell, formatterParams, onRendered){
 		cell.getElement().classList.add("tabulator-row-handle");
 		return "<div class='tabulator-row-handle-box'><div class='tabulator-row-handle-bar'></div><div class='tabulator-row-handle-bar'></div><div class='tabulator-row-handle-bar'></div></div>";
-	***REMOVED***,
+	},
 
 	responsiveCollapse:function(cell, formatterParams, onRendered){
 		var self = this,
@@ -656,22 +656,22 @@ Format.prototype.formatters = {
 				if(config.open){
 					el.classList.add("open");
 					collapseEl.style.display = '';
-				***REMOVED***else{
+				}else{
 					el.classList.remove("open");
 					collapseEl.style.display = 'none';
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		el.addEventListener("click", function(e){
 			e.stopImmediatePropagation();
 			toggleList(!config.open);
-		***REMOVED***);
+		});
 
 		toggleList(config.open);
 
 		return el;
-	***REMOVED***,
+	},
 
 	rowSelection:function(cell){
 		var checkbox = document.createElement("input");
@@ -682,31 +682,31 @@ Format.prototype.formatters = {
 
 			checkbox.addEventListener("click", (e) => {
 				e.stopPropagation();
-			***REMOVED***);
+			});
 
 			if(typeof cell.getRow == 'function'){
 				var row = cell.getRow();
 
 				checkbox.addEventListener("change", (e) => {
 					row.toggleSelect();
-				***REMOVED***);
+				});
 
 				checkbox.checked = row.isSelected();
 				this.table.modules.selectRow.registerRowSelectCheckbox(row, checkbox);
-			***REMOVED***else {
+			}else {
 				checkbox.addEventListener("change", (e) => {
 					if(this.table.modules.selectRow.selectedRows.length){
 						this.table.deselectRow();
-					***REMOVED***else {
+					}else {
 						this.table.selectRow();
-					***REMOVED***
-				***REMOVED***);
+					}
+				});
 
 				this.table.modules.selectRow.registerHeaderSelectCheckbox(checkbox);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		return checkbox;
-	***REMOVED***,
-***REMOVED***;
+	},
+};
 
 Tabulator.prototype.registerModule("format", Format);

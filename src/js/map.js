@@ -9,7 +9,7 @@ var provinceList = {
     "GAUTENG": 'ZA-GT',
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
-***REMOVED***
+}
 
 var tooltip
 var tooltipText
@@ -21,23 +21,23 @@ var yPen = 220;
 var legendSet=false;
 var colourVal=1;
 
-var provCase = {***REMOVED***;
-var provDeath = {***REMOVED***;
-var provActive = {***REMOVED***;
-var provRecoveries = {***REMOVED***;
+var provCase = {};
+var provDeath = {};
+var provActive = {};
+var provRecoveries = {};
 var cardList = [];
 
 (function main() {
 	console.log('In Main');
 	cardList = [];
-***REMOVED***());
+}());
 
-***REMOVED***
-***REMOVED*** @param {string***REMOVED*** name
-***REMOVED***/
+/**
+ * @param {string} name
+ */
 function displayName(name) {
 	document.getElementById('country-name').firstChild.data = name;
-***REMOVED***
+}
 
 
 (function () {
@@ -47,8 +47,8 @@ function displayName(name) {
 	
 	for (let i = 0; i < tooltipRects.length; i++) {
 		tooltipRects[i].setAttributeNS(null, 'width', width);
-	***REMOVED***
-***REMOVED***());
+	}
+}());
 
 const svg = document.getElementById('svg-1');
 
@@ -56,7 +56,7 @@ let triggers = document.getElementsByClassName('tooltip-trigger');
 for (let i = 0; i < triggers.length; i++) {
 	triggers[i].addEventListener('mousemove', showTooltip);
 	triggers[i].addEventListener('mouseout', hideTooltip);
-***REMOVED***
+}
 
 let x;
 let
@@ -70,7 +70,7 @@ Object.values(triggers)
 		y = text.getAttribute('y');
 		text.setAttribute('x', x - xPen);
 		text.setAttribute('y', y - yPen);
-	***REMOVED***);
+	});
 
 triggers = document.getElementsByClassName('key legend');
 Object.values(triggers)
@@ -79,7 +79,7 @@ Object.values(triggers)
 		y = text.getAttribute('y');
 		text.setAttribute('x', x - xPen);
 		text.setAttribute('y', y - yPen);
-	***REMOVED***);
+	});
 
 x = $('#legTitle')
 	.attr('x');
@@ -89,7 +89,7 @@ $('#legTitle')
 	.attr({
 		x: -x - xPen,
 		y: y - yPen,
-	***REMOVED***);
+	});
 
 x = $('.lightBack')
 	.attr('x');
@@ -99,7 +99,7 @@ $('.lightBack')
 	.attr({
 		x: x - xPen,
 		y: y - yPen,
-	***REMOVED***);
+	});
 
 function showTooltip(evt) {
 	const CTM = svg.getScreenCTM();
@@ -108,7 +108,7 @@ function showTooltip(evt) {
 	const id = evt.target.getAttributeNS(null, 'id');
 	
 	tooltipText.firstChild.data = evt.target.getAttributeNS(null, 'title');
-	tooltip.setAttributeNS(null, 'transform', `translate(${x***REMOVED*** ${y***REMOVED***)`);
+	tooltip.setAttributeNS(null, 'transform', `translate(${x} ${y})`);
 	const length = tooltipText.getComputedTextLength();
 	tooltipText.setAttributeNS(null, 'x', (width - length) / 2);
 	$('#casesTooltip')
@@ -119,39 +119,39 @@ function showTooltip(evt) {
 		.text(CommaFormatted(provRecoveries[id]));
 	tooltip.style.opacity = 1;
 	// tooltip.setAttributeNS(null, "visibility", "visible");
-***REMOVED***
+}
 
 function hideTooltip() {
 	// TODO Un-hide
 	tooltip.style.opacity = 0;
 	// tooltip.setAttributeNS(null, "visibility", "hidden");
-***REMOVED***
+}
 
-***REMOVED***
-***REMOVED*** @param {string***REMOVED*** name
-***REMOVED*** @param {number|string***REMOVED*** colour
-***REMOVED***/
+/**
+ * @param {string} name
+ * @param {number|string} colour
+ */
 function colourCountry(name, colour, colourTag) {
 	const country = document.getElementById(name);
 	// country.className += ' colour' + colour;
-	$(`#${name***REMOVED***`)
+	$(`#${name}`)
 		.removeClass();
-	$(`#${name***REMOVED***`)
+	$(`#${name}`)
 		.addClass('land tooltip-trigger valid');
-	country.classList.add(`colour${colourTag***REMOVED***${colour***REMOVED***`);
-***REMOVED***
+	country.classList.add(`colour${colourTag}${colour}`);
+}
 
 
-***REMOVED***
-***REMOVED*** @param {[][]***REMOVED*** data
-***REMOVED***/
+/**
+ * @param {[][]} data
+ */
 function colourCountries(data, colourTag = 1) {
 	for (let colour = 0; colour < data.length; colour++) {
 		for (let country = 0; country < data[colour].length; country++) {
 			colourCountry(data[colour][country], colour, colourTag);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
 function legendSetup(max, min, interval) {
 	// setup text labels
@@ -161,13 +161,13 @@ function legendSetup(max, min, interval) {
 	legendCol.removeClass();
 	legendCol.addClass('key legend');
 	for (let i = 0; i < 5; i++) {
-		legendCol[i].classList.add(`colour${colourVal***REMOVED***${i***REMOVED***`);
-	***REMOVED***
-	legendTexts[0].textContent = `0 to ${CommaFormatted(min)***REMOVED***`;
-	legendTexts[1].textContent = `${CommaFormatted(min + 1)***REMOVED*** to ${CommaFormatted(min + interval)***REMOVED***`;
-	legendTexts[2].textContent = `${CommaFormatted(max - interval***REMOVED*** 3 + 1)***REMOVED*** to ${CommaFormatted(max - interval***REMOVED*** 2)***REMOVED***`;
-	legendTexts[3].textContent = `${CommaFormatted(max - interval***REMOVED*** 2 + 1)***REMOVED*** to ${CommaFormatted(max - interval)***REMOVED***`;
-	legendTexts[4].textContent = `${CommaFormatted(max - interval + 1)***REMOVED*** to ${CommaFormatted(max)***REMOVED***`;
+		legendCol[i].classList.add(`colour${colourVal}${i}`);
+	}
+	legendTexts[0].textContent = `0 to ${CommaFormatted(min)}`;
+	legendTexts[1].textContent = `${CommaFormatted(min + 1)} to ${CommaFormatted(min + interval)}`;
+	legendTexts[2].textContent = `${CommaFormatted(max - interval * 3 + 1)} to ${CommaFormatted(max - interval * 2)}`;
+	legendTexts[3].textContent = `${CommaFormatted(max - interval * 2 + 1)} to ${CommaFormatted(max - interval)}`;
+	legendTexts[4].textContent = `${CommaFormatted(max - interval + 1)} to ${CommaFormatted(max)}`;
 	// setup width
 	if (!legendSet) {
 		const width = $('rect.key:nth-child(7)')[0].getBoundingClientRect().width + $('text.keyText:nth-child(12)')[0].getBoundingClientRect().width;
@@ -176,8 +176,8 @@ function legendSetup(max, min, interval) {
 		const length = legendTitle.getComputedTextLength();
 		legendTitle.setAttributeNS(null, 'x', (width - length) / 2 - xPen);
 		legendSet = true;
-	***REMOVED***
-***REMOVED***
+	}
+}
 // colourCountries(data1)
 
 function setColours(dummyData,colour=1,) {
@@ -194,7 +194,7 @@ function setColours(dummyData,colour=1,) {
         [],
         [],
         []
-***REMOVED***;
+    ];
     
     console.log('Setting Range');
     // Get Range
@@ -202,10 +202,10 @@ function setColours(dummyData,colour=1,) {
         if (dummyData[k] !== null) {
             min = Math.min(min, dummyData[k]);
             max = Math.max(max, dummyData[k]);
-      ***REMOVED***
-  ***REMOVED***);
-    max = Math.round(Math.ceil(max / 10))***REMOVED*** 10;
-    min = Math.round(Math.floor(min / 10))***REMOVED*** 10;
+        }
+    });
+    max = Math.round(Math.ceil(max / 10)) * 10;
+    min = Math.round(Math.floor(min / 10)) * 10;
     range = max - min
     // Divide into 4 or 5
     interval = range / 4;
@@ -216,21 +216,21 @@ function setColours(dummyData,colour=1,) {
             let val = dummyData[prov];
             if ((max - interval < val) && (val <= max)) {
                 answers[4].push(prov)
-          ***REMOVED*** else if (max - (interval***REMOVED*** 2) <= val) {
+            } else if (max - (interval * 2) <= val) {
                 answers[3].push(prov)
-          ***REMOVED*** else if (max - (interval***REMOVED*** 3) <= val) {
+            } else if (max - (interval * 3) <= val) {
                 answers[2].push(prov)
-          ***REMOVED*** else if (max - (interval***REMOVED*** 4) < val) {
+            } else if (max - (interval * 4) < val) {
                 answers[1].push(prov)
-          ***REMOVED***
+            }
             else {
                 answers[0].push(prov)
-          ***REMOVED***
-      ***REMOVED***
-  ***REMOVED***)
+            }
+        }
+    })
     colourCountries(answers,colour)
     legendSetup(max,min,interval)
-***REMOVED***
+}
 
 function setProvs(cases,deaths,recoveries, active) {
     provCase = cases;
@@ -238,17 +238,17 @@ function setProvs(cases,deaths,recoveries, active) {
     provRecoveries = recoveries;
     provActive = active
     setupSideBCards()
-***REMOVED***
+}
 
 function CommaFormatted(amount) {
 	const delimiter = ','; // replace comma if desired
 	if (typeof amount === 'string' && amount.includes(delimiter) && !amount.includes(" ")){
 		return(amount);
-	***REMOVED***
+	}
 	let i = parseInt(amount);
-	if (isNaN(i)) { return 'N/A'; ***REMOVED***
+	if (isNaN(i)) { return 'N/A'; }
 	let minus = '';
-	if (i < 0) { minus = '-'; ***REMOVED***
+	if (i < 0) { minus = '-'; }
 	i = Math.abs(i);
 	let n = String(i);
 	const a = [];
@@ -256,20 +256,20 @@ function CommaFormatted(amount) {
 		const nn = n.substr(n.length - 3);
 		a.unshift(nn);
 		n = n.substr(0, n.length - 3);
-	***REMOVED***
-	if (n.length > 0) { a.unshift(n); ***REMOVED***
+	}
+	if (n.length > 0) { a.unshift(n); }
 	n = a.join(delimiter);
 	amount = n;
 	amount = minus + amount;
 	return amount;
-***REMOVED***
+}
 
 function compareValues(key, order = 'desc') {
 	return function innerSort(a, b) {
 		if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
 			// property doesn't exist on either object
 			return 0;
-		***REMOVED***
+		}
 		
 		const varA = (typeof a[key] === 'string')
 			? a[key].toUpperCase() : a[key];
@@ -280,31 +280,31 @@ function compareValues(key, order = 'desc') {
 		try {
 			if (varA > varB) {
 				comparison = 1;
-			***REMOVED*** else if (varA < varB) {
+			} else if (varA < varB) {
 				comparison = -1;
-			***REMOVED***
-		***REMOVED*** catch (e) {
+			}
+		} catch (e) {
 			console.log('Error', e);
 			console.log('-', varA);
-		***REMOVED***
+		}
 		return (
-			(order === 'desc') ? (comparison***REMOVED*** -1) : comparison
+			(order === 'desc') ? (comparison * -1) : comparison
 		);
-	***REMOVED***;
-***REMOVED***
+	};
+}
 function setupSideBCards(){
     let province;
 
     for (const [nameFull, id] of Object.entries(provinceList)) {
-        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id],active:provActive[id]***REMOVED***
+        province = {name: nameFull,cases: provCase[id],deaths: provDeath[id],recoveries:provRecoveries[id],active:provActive[id]}
         cardList.push(province);
-  ***REMOVED***
+    }
     // populateSideCards(cardList.sort(compareValues('cases')))
-***REMOVED***
+}
 
-***REMOVED***
-***REMOVED*** @param {Array***REMOVED*** cardList
-***REMOVED***/
+/**
+ * @param {Array} cardList
+ */
 function populateSideCards(cardList){
     // console.log("Card List:",cardList)
     let counter = 0;
@@ -322,19 +322,19 @@ function populateSideCards(cardList){
         figures[4].innerText=CommaFormatted(item.recoveries);
         figures[6].innerText=CommaFormatted(item.recoveries);
         counter++
-  ***REMOVED***)
-***REMOVED***
+    })
+}
 
 // Sets the height of the left sidebar using the svg + padding on top and bot.
 $('#provStatsContainer')
 	.css('max-height', $('#svg-1')
 		.height() + parseInt($('#svgColumn')
-		.css('padding-top'))***REMOVED*** 2);
+		.css('padding-top')) * 2);
 
 // Resets the container height as the window size changes. i.e when svg-1 and padding changes.
 $(window).resize(()=>{
     $("#provStatsContainer").css("max-height",$("#svg-1").height() + parseInt($("#svgColumn").css('padding-top'))*2)
-***REMOVED***)
+})
 $(document).ready(()=>{
     $(function()
     {
@@ -342,9 +342,9 @@ $(document).ready(()=>{
             {
                 showArrows: true,
                 resizeSensor: true
-          ***REMOVED***
+            }
         );
-  ***REMOVED***);
+    });
     $('.toggle.button.map')
         .click((event)=>{
             console.log("you clicked me!")
@@ -357,7 +357,7 @@ $(document).ready(()=>{
 
 
 
-      ***REMOVED***)
+        })
 
     $('#filterC')
         .click((event)=>{
@@ -367,7 +367,7 @@ $(document).ready(()=>{
             populateSideCards(cardList.sort(compareValues('cases')))
 
 
-      ***REMOVED***)
+        })
     $('#filterD')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -377,7 +377,7 @@ $(document).ready(()=>{
 
 
 
-      ***REMOVED***)
+        })
     $('#filterR')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -386,7 +386,7 @@ $(document).ready(()=>{
             populateSideCards(cardList.sort(compareValues('recoveries')))
 
 
-      ***REMOVED***)
+        })
     $('#filterA')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -395,7 +395,7 @@ $(document).ready(()=>{
             populateSideCards(cardList.sort(compareValues('active')))
 
 
-      ***REMOVED***)
+        })
     $('#filterC2')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -404,7 +404,7 @@ $(document).ready(()=>{
             populateSideCards(cardList.sort(compareValues('cases')))
 
 
-      ***REMOVED***)
+        })
     $('#filterD2')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -414,7 +414,7 @@ $(document).ready(()=>{
 
 
 
-      ***REMOVED***)
+        })
     $('#filterR2')
         .click((event)=>{
             console.log("you clicked me to filter!")
@@ -423,8 +423,8 @@ $(document).ready(()=>{
             populateSideCards(cardList.sort(compareValues('recoveries')))
 
 
-      ***REMOVED***)
-***REMOVED***)
+        })
+})
 
 //
 // setColours(dummyData)

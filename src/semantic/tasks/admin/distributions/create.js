@@ -1,12 +1,12 @@
-***REMOVED********************************
+/*******************************
      Create Distributions
 *******************************/
 
 /*
  This will create individual distribution repositories for each SUI distribution
 
- ***REMOVED*** copy distribution files to release
- ***REMOVED*** update package.json file
+  * copy distribution files to release
+  * update package.json file
 */
 
 var
@@ -59,16 +59,16 @@ module.exports = function(callback) {
         repoName        = release.distRepoRoot + distribution,
         regExp          = {
           match : {
-            files   : '{files***REMOVED***',
-            version : '{version***REMOVED***'
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+            files   : '{files}',
+            version : '{version}'
+          }
+        },
         task = {
           all     : distribution + ' copying files',
           repo    : distribution + ' create repo',
           meteor  : distribution + ' create meteor package.js',
           package : distribution + ' create package.json'
- ***REMOVED*****REMOVED***
+        },
         gatherFiles,
         createList
       ;
@@ -87,7 +87,7 @@ module.exports = function(callback) {
             'package.json',
             'bower.json',
             '.gitignore'
-      ***REMOVED***,
+          ],
           files = []
         ;
         list.forEach(function(file) {
@@ -99,14 +99,14 @@ module.exports = function(callback) {
           if(!isOmitted) {
             if(stat && stat.isDirectory()) {
               files = files.concat(gatherFiles(filePath));
-          ***REMOVED***
+            }
             else {
               files.push(filePath.replace(outputDirectory + path.sep, ''));
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***);
+            }
+          }
+        });
         return files;
-    ***REMOVED***;
+      };
 
       // spaces out list correctly
       createList = function(files) {
@@ -114,13 +114,13 @@ module.exports = function(callback) {
         for(var file in files) {
           if(file == (files.length - 1) ) {
             filenames += "'" + files[file] + "'";
-        ***REMOVED***
+          }
           else {
             filenames += "'" + files[file] + "',\n    ";
-        ***REMOVED***
-      ***REMOVED***
+          }
+        }
         return filenames;
-    ***REMOVED***;
+      };
 
       tasks.push(function() {
           var
@@ -135,7 +135,7 @@ module.exports = function(callback) {
               .pipe(rename(release.files.meteor))
               .pipe(gulp.dest(outputDirectory))
           ;
-    ***REMOVED***);
+      });
 
       if(distribution == 'CSS') {
         tasks.push(function() {
@@ -144,18 +144,18 @@ module.exports = function(callback) {
             components,
             releases
           ;
-          themes = gulp.src('dist/themes/default***REMOVED***/*', { base: 'dist/' ***REMOVED***)
+          themes = gulp.src('dist/themes/default/**/*', { base: 'dist/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          components = gulp.src('dist/components/*', { base: 'dist/' ***REMOVED***)
+          components = gulp.src('dist/components/*', { base: 'dist/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          releases = gulp.src('dist/*', { base: 'dist/' ***REMOVED***)
+          releases = gulp.src('dist/*', { base: 'dist/' })
             .pipe(gulp.dest(outputDirectory))
           ;
           return mergeStream(themes, components, releases);
-      ***REMOVED***);
-    ***REMOVED***
+        });
+      }
       else if(distribution == 'LESS') {
         tasks.push(function() {
           var
@@ -165,27 +165,27 @@ module.exports = function(callback) {
             siteTheme,
             themes
           ;
-          definitions = gulp.src('src/definitions***REMOVED***/*', { base: 'src/' ***REMOVED***)
+          definitions = gulp.src('src/definitions/**/*', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          themeImport = gulp.src('src/semantic.less', { base: 'src/' ***REMOVED***)
+          themeImport = gulp.src('src/semantic.less', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          themeImport = gulp.src('src/theme.less', { base: 'src/' ***REMOVED***)
+          themeImport = gulp.src('src/theme.less', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          themeConfig = gulp.src('src/theme.config.example', { base: 'src/' ***REMOVED***)
+          themeConfig = gulp.src('src/theme.config.example', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          siteTheme = gulp.src('src/_site***REMOVED***/*', { base: 'src/' ***REMOVED***)
+          siteTheme = gulp.src('src/_site/**/*', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          themes = gulp.src('src/themes***REMOVED***/*', { base: 'src/' ***REMOVED***)
+          themes = gulp.src('src/themes/**/*', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
           return mergeStream(definitions, themeImport, themeConfig, siteTheme, themes);
-      ***REMOVED***);
-    ***REMOVED***
+        });
+      }
 
       // extend package.json
       tasks.push(function() {
@@ -194,15 +194,15 @@ module.exports = function(callback) {
           .pipe(jsonEditor(function(package) {
             if(version) {
               package.version = version;
-          ***REMOVED***
+            }
             return package;
-        ***REMOVED***))
+          }))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***);
+      });
 
-  ***REMOVED***)(distribution);
-***REMOVED***
+    })(distribution);
+  }
 
   gulp.series(...tasks)(callback);
-***REMOVED***;
+};

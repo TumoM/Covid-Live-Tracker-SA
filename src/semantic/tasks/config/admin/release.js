@@ -1,4 +1,4 @@
-***REMOVED********************************
+/*******************************
         Release Settings
 *******************************/
 
@@ -12,7 +12,7 @@ module.exports = {
   paths: {
     source : '../themes/default/assets/',
     output : 'assets/'
-***REMOVED***
+  },
 
   templates: {
     bower    : './tasks/config/admin/templates/bower.json',
@@ -22,10 +22,10 @@ module.exports = {
       css       : './tasks/config/admin/templates/css-package.js',
       component : './tasks/config/admin/templates/component-package.js',
       less      : './tasks/config/admin/templates/less-package.js',
-  ***REMOVED***
+    },
     readme : './tasks/config/admin/templates/README.md',
     notes  : './RELEASE-NOTES.md'
-***REMOVED***
+  },
 
   org         : 'Semantic-Org',
   repo        : 'Semantic-UI',
@@ -36,7 +36,7 @@ module.exports = {
     config   : 'semantic.json',
     npm      : 'package.json',
     meteor   : 'package.js'
-***REMOVED***
+  },
 
   // root name for distribution repos
   distRepoRoot      : 'Semantic-UI-',
@@ -114,4 +114,4 @@ module.exports = {
     'transition',
     'visibility'
   ]
-***REMOVED***;
+};

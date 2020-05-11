@@ -1,6 +1,6 @@
-***REMOVED********************************
-***REMOVED***     Define Docs Sub-Tasks
-***REMOVED*********************************/
+/*******************************
+ *     Define Docs Sub-Tasks
+ *******************************/
 
 /*
   Lets you serve files to a local documentation instance
@@ -20,4 +20,4 @@ module.exports = function (gulp) {
   gulp.task('build-docs', buildDocs);
   gulp.task('build-docs').description = 'Build all files and add to SUI Docs';
 
-***REMOVED***;
+};

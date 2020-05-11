@@ -1,15 +1,15 @@
 /*!
-***REMOVED*** # Fomantic-UI - Nag
-***REMOVED*** http://github.com/fomantic/Fomantic-UI/
-***REMOVED***
-***REMOVED***
-***REMOVED*** Released under the MIT license
-***REMOVED*** http://opensource.org/licenses/MIT
-***REMOVED***
-***REMOVED***/
+ * # Fomantic-UI - Nag
+ * http://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
 
 
-***REMOVED********************************
+/*******************************
             Theme
 *******************************/
 
@@ -18,7 +18,7 @@
 
 @import (multiple) '../../theme.config';
 
-***REMOVED********************************
+/*******************************
              Nag
 *******************************/
 
@@ -46,17 +46,17 @@
 
   border-radius: @topBorderRadius;
   transition: @transition;
-***REMOVED***
+}
 
 a.ui.nag {
   cursor: pointer;
-***REMOVED***
+}
 
 .ui.nag > .title {
   display: inline-block;
   margin: @titleMargin;
   color: @titleColor;
-***REMOVED***
+}
 
 
 .ui.nag > .close.icon {
@@ -72,26 +72,26 @@ a.ui.nag {
   margin: @closeMargin;
   color: @closeColor;
   transition: @closeTransition;
-***REMOVED***
+}
 
 
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 
-/* Hover***REMOVED***/
+/* Hover */
 .ui.nag:hover {
   background: @nagHoverBackground;
   opacity: @nagHoverOpacity;
-***REMOVED***
+}
 
 .ui.nag .close:hover {
   opacity: @closeHoverOpacity;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Variations
 *******************************/
 
@@ -103,7 +103,7 @@ a.ui.nag {
 .ui.overlay.nag {
   position: absolute;
   display: block;
-***REMOVED***
+}
 
 /*--------------
      Fixed
@@ -111,7 +111,7 @@ a.ui.nag {
 
 .ui.fixed.nag {
   position: fixed;
-***REMOVED***
+}
 
 /*--------------
      Bottom
@@ -122,7 +122,7 @@ a.ui.nag {
   border-radius: @bottomBorderRadius;
   top: auto;
   bottom: @bottom;
-***REMOVED***
+}
 
 /*--------------
      White
@@ -132,27 +132,27 @@ a.ui.nag {
 .ui.inverted.nag {
   background-color: @invertedBackground;
   color: @darkTextColor;
-***REMOVED***
+}
 .ui.inverted.nags .nag .close,
 .ui.inverted.nags .nag .title,
 .ui.inverted.nag .close,
 .ui.inverted.nag .title {
   color: @lightTextColor;
-***REMOVED***
+}
 
 
-***REMOVED********************************
+/*******************************
            Groups
 *******************************/
 
 .ui.nags .nag {
   border-radius: @groupedBorderRadius !important;
-***REMOVED***
+}
 .ui.nags .nag:last-child {
   border-radius: @topBorderRadius;
-***REMOVED***
+}
 .ui.bottom.nags .nag:last-child {
   border-radius: @bottomBorderRadius;
-***REMOVED***
+}
 
 .loadUIOverrides();

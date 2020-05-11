@@ -1,17 +1,17 @@
-***REMOVED********************************
+/*******************************
      Create Component Repos
 *******************************/
 
 /*
  This will create individual component repositories for each SUI component
 
- ***REMOVED*** copy component files from release
- ***REMOVED*** create commonjs files as index.js for NPM release
- ***REMOVED*** create release notes that filter only items related to component
- ***REMOVED*** custom package.json file from template
- ***REMOVED*** create bower.json from template
- ***REMOVED*** create README from template
- ***REMOVED*** create meteor.js file
+  * copy component files from release
+  * create commonjs files as index.js for NPM release
+  * create release notes that filter only items related to component
+  * custom package.json file from template
+  * create bower.json from template
+  * create README from template
+  * create meteor.js file
 */
 
 var
@@ -72,14 +72,14 @@ module.exports = function(callback) {
           root    : outputDirectory,
           prepend : "    '",
           append  : "',"
- ***REMOVED*****REMOVED***
+        },
         regExp               = {
           match            : {
             // templated values
-            name      : '{component***REMOVED***',
-            titleName : '{Component***REMOVED***',
-            version   : '{version***REMOVED***',
-            files     : '{files***REMOVED***',
+            name      : '{component}',
+            titleName : '{Component}',
+            version   : '{version}',
+            files     : '{files}',
             // release notes
             spacedVersions    : /(###.*\n)\n+(?=###)/gm,
             spacedLists       : /(^- .*\n)\n+(?=^-)/gm,
@@ -93,7 +93,7 @@ module.exports = function(callback) {
             settingsReference : /\$\.fn\.\w+\.settings/g,
             trailingComma     : /,(?=[^,]*$)/,
             jQuery            : /jQuery/g,
-   ***REMOVED*****REMOVED***
+          },
           replace : {
             // readme
             name              : component,
@@ -110,8 +110,8 @@ module.exports = function(callback) {
             settingsExport    :  'module.exports.settings =',
             settingsReference :  '_module.exports.settings',
             jQuery            :  'require("jquery")'
-        ***REMOVED***
- ***REMOVED*****REMOVED***
+          }
+        },
         task = {
           all      : component + ' creating',
           repo     : component + ' create repo',
@@ -122,12 +122,12 @@ module.exports = function(callback) {
           composer : component + ' create composer.json',
           package  : component + ' create package.json',
           meteor   : component + ' create meteor package.js',
- ***REMOVED*****REMOVED***
+        },
         // paths to includable assets
         manifest = {
-          assets    : outputDirectory + '/assets***REMOVED***/' + component + '?(s).*',
+          assets    : outputDirectory + '/assets/**/' + component + '?(s).*',
           component : outputDirectory + '/' + component + '+(.js|.css)'
-      ***REMOVED***
+        }
       ;
 
       // copy dist files into output folder adjusting asset paths
@@ -138,7 +138,7 @@ module.exports = function(callback) {
           .pipe(replace(release.paths.source, release.paths.output))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // create npm module
       function createNpmModule() {
@@ -153,7 +153,7 @@ module.exports = function(callback) {
           .pipe(rename('index.js'))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // create readme
       function createReadme() {
@@ -164,7 +164,7 @@ module.exports = function(callback) {
           .pipe(replace(regExp.match.titleName, regExp.replace.titleName))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // extend bower.json
       function extendBower() {
@@ -179,27 +179,27 @@ module.exports = function(callback) {
                 bower.main = [
                   component + '.js',
                   component + '.css'
-            ***REMOVED***;
-            ***REMOVED***
+                ];
+              }
               else {
                 bower.main = [
                   component + '.js'
-            ***REMOVED***;
-            ***REMOVED***
+                ];
+              }
               bower.dependencies = {
                 jquery: '>=1.8'
-            ***REMOVED***;
-          ***REMOVED***
+              };
+            }
             else {
               bower.main = [
                 component + '.css'
-          ***REMOVED***;
-          ***REMOVED***
+              ];
+            }
             return bower;
-        ***REMOVED***))
+          }))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // extend package.json
       function extendPackage() {
@@ -210,24 +210,24 @@ module.exports = function(callback) {
             if(isJavascript) {
               npm.dependencies = {
                 jquery: 'x.x.x'
-            ***REMOVED***;
+              };
               npm.main = 'index.js';
-          ***REMOVED***
+            }
             npm.name = packageName;
             if(version) {
               npm.version = version;
-          ***REMOVED***
+            }
             npm.title       = 'Semantic UI - ' + capitalizedComponent;
             npm.description = 'Single component release of ' + component;
             npm.repository  = {
               type : 'git',
               url  : gitURL
-          ***REMOVED***;
+            };
             return npm;
-        ***REMOVED***))
+          }))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // extend composer.json
       function extendComposer(){
@@ -238,19 +238,19 @@ module.exports = function(callback) {
             if(isJavascript) {
               composer.dependencies = {
                 jquery: 'x.x.x'
-            ***REMOVED***;
+              };
               composer.main = component + '.js';
-          ***REMOVED***
+            }
             composer.name = 'semantic/' + component;
             if(version) {
               composer.version = version;
-          ***REMOVED***
+            }
             composer.description = 'Single component release of ' + component;
             return composer;
-        ***REMOVED***))
+          }))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // create release notes
       function createReleaseNotes() {
@@ -265,7 +265,7 @@ module.exports = function(callback) {
           .pipe(replace(regExp.match.trim, regExp.replace.trim))
           .pipe(gulp.dest(outputDirectory))
         ;
-    ***REMOVED***
+      }
 
       // Creates meteor package.js
       function createMeteorPackage() {
@@ -276,13 +276,13 @@ module.exports = function(callback) {
           .pipe(concatFileNames('empty.txt', concatSettings))
           .pipe(tap(function(file) {
             filenames += file.contents;
-        ***REMOVED***))
+          }))
           .on('end', function() {
             gulp.src(manifest.assets)
               .pipe(concatFileNames('empty.txt', concatSettings))
               .pipe(tap(function(file) {
                 filenames += file.contents;
-            ***REMOVED***))
+              }))
               .on('end', function() {
                 // remove trailing slash
                 filenames = filenames.replace(regExp.match.trailingComma, '').trim();
@@ -296,11 +296,11 @@ module.exports = function(callback) {
                   .pipe(rename(release.files.meteor))
                   .pipe(gulp.dest(outputDirectory))
                 ;
-            ***REMOVED***)
+              })
             ;
-        ***REMOVED***)
+          })
         ;
-    ***REMOVED***
+      }
 
       tasks.push(gulp.series(
           copyDist,
@@ -312,8 +312,8 @@ module.exports = function(callback) {
           createReleaseNotes,
           createMeteorPackage
       ));
-  ***REMOVED***)(component);
-***REMOVED***
+    })(component);
+  }
 
   gulp.series(...tasks)(callback);
-***REMOVED***;
+};

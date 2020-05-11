@@ -2,7 +2,7 @@ var Menu = function(table){
 	this.table = table; //hold Tabulator object
 	this.menuEl = false;
 	this.blurEvent = this.hideMenu.bind(this);
-***REMOVED***;
+};
 
 Menu.prototype.initializeColumnHeader = function(column){
 	var headerMenuEl;
@@ -14,8 +14,8 @@ Menu.prototype.initializeColumnHeader = function(column){
 			e.preventDefault();
 
 			this.loadMenu(e, column, menu);
-		***REMOVED***);
-	***REMOVED***
+		});
+	}
 
 	if(column.definition.headerMenu){
 
@@ -29,11 +29,11 @@ Menu.prototype.initializeColumnHeader = function(column){
 			e.preventDefault();
 
 			this.loadMenu(e, column, menu);
-		***REMOVED***);
+		});
 
 		column.titleElement.insertBefore(headerMenuEl, column.titleElement.firstChild);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Menu.prototype.initializeCell = function(cell){
 	cell.getElement().addEventListener("contextmenu", (e) => {
@@ -42,8 +42,8 @@ Menu.prototype.initializeCell = function(cell){
 		e.preventDefault();
 
 		this.loadMenu(e, cell, menu);
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 Menu.prototype.initializeRow = function(row){
 	row.getElement().addEventListener("contextmenu", (e) => {
@@ -52,8 +52,8 @@ Menu.prototype.initializeRow = function(row){
 		e.preventDefault();
 
 		this.loadMenu(e, row, menu);
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 
 Menu.prototype.loadMenu = function(e, component, menu){
@@ -63,7 +63,7 @@ Menu.prototype.loadMenu = function(e, component, menu){
 	//abort if no menu set
 	if(!menu || !menu.length){
 		return;
-	***REMOVED***
+	}
 
 	this.hideMenu();
 
@@ -77,38 +77,38 @@ Menu.prototype.loadMenu = function(e, component, menu){
 
 		if(item.separator){
 			itemEl.classList.add("tabulator-menu-separator");
-		***REMOVED***else{
+		}else{
 			itemEl.classList.add("tabulator-menu-item");
 
 			if(typeof label == "function"){
 				label = label(component.getComponent());
-			***REMOVED***
+			}
 
 			if(label instanceof Node){
 				itemEl.appendChild(label);
-			***REMOVED***else{
+			}else{
 				itemEl.innerHTML = label;
-			***REMOVED***
+			}
 
 			if(typeof disabled == "function"){
 				disabled = disabled(component.getComponent());
-			***REMOVED***
+			}
 
 			if(disabled){
 				itemEl.classList.add("tabulator-menu-item-disabled");
 				itemEl.addEventListener("click", (e) => {
 					e.stopPropagation();
-				***REMOVED***);
-			***REMOVED***else{
+				});
+			}else{
 				itemEl.addEventListener("click", (e) => {
 					this.hideMenu();
 					item.action(e, component.getComponent());
-				***REMOVED***);
-			***REMOVED***
-		***REMOVED***
+				});
+			}
+		}
 
 		this.menuEl.appendChild(itemEl);
-	***REMOVED***);
+	});
 
 	this.menuEl.style.top = e.pageY + "px";
 	this.menuEl.style.left = e.pageX + "px";
@@ -118,7 +118,7 @@ Menu.prototype.loadMenu = function(e, component, menu){
 
 	setTimeout(() => {
 		document.body.addEventListener("contextmenu", this.blurEvent);
-	***REMOVED***, 100);
+	}, 100);
 
 	document.body.appendChild(this.menuEl);
 
@@ -126,28 +126,28 @@ Menu.prototype.loadMenu = function(e, component, menu){
 	if((e.pageX + this.menuEl.offsetWidth) >= document.body.offsetWidth){
 		this.menuEl.style.left = "";
 		this.menuEl.style.right = (document.body.offsetWidth - e.pageX) + "px";
-	***REMOVED***
+	}
 
 	//move menu to start on bottom edge if it is too close to the edge of the screen
 	if((e.pageY + this.menuEl.offsetHeight) >= docHeight){
 		this.menuEl.style.top = "";
 		this.menuEl.style.bottom = (docHeight - e.pageY) + "px";
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Menu.prototype.hideMenu = function(){
 	if(this.menuEl.parentNode){
 		this.menuEl.parentNode.removeChild(this.menuEl);
-	***REMOVED***
+	}
 
 	if(this.blurEvent){
 		document.body.removeEventListener("click", this.blurEvent);
 		document.body.removeEventListener("contextmenu", this.blurEvent);
 		this.table.rowManager.element.removeEventListener("scroll", this.blurEvent);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //default accessors
-Menu.prototype.menus = {***REMOVED***;
+Menu.prototype.menus = {};
 
 Tabulator.prototype.registerModule("menu", Menu);

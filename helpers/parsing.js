@@ -415,7 +415,16 @@ async function main() {
      return res
         process.exit(0)
   ***REMOVED***
-)***REMOVED***/
+)*/
+function bootstrap(){
+    main().then((res)=>{
+        console.log('Res',res)
+        return res
+        process.exit(0)
+  ***REMOVED***);
+***REMOVED***
+// bootstrap()
+
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

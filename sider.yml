@@ -3,15 +3,15 @@ linter:
     exclude:
       - vendor
       - assets
-      - public/bundle***REMOVED***/
+      - public/*
     targets:
       - src/js/*.js
       - src/sass/*.scss
       - helpers***REMOVED***/*.js
       - app.js
       - views/
-      - another_target_directory/foo.rb
-      - bar.rb
+      - testing/
+      -
     locale: UK
     ignore: center,behavior
 

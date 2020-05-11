@@ -417,8 +417,8 @@ year;
   ***REMOVED***
 ***REMOVED***
 
-
 /*
+
 main()
     .then(result=>{
         console.log("main result:",result);
@@ -426,6 +426,17 @@ main()
   ***REMOVED***)
     .catch(err=> console.log('Your Err',err));
 */
+
+function bootstrap(){
+    main()
+      .then(result=>{
+          console.log("main result:",result);
+          process.exit(0)
+    ***REMOVED***)
+      .catch(err=> console.log('Your Err',err));
+***REMOVED***
+
+// bootstrap()
 
 function parseNumber(number) {
     let testInt = '';

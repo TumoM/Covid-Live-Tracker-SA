@@ -1,31 +1,4 @@
 node_modules/
 .idea
-/Coronavirus in SA  All the confirmed cases   Health24-1_files/
-/Coronavirus in SA  All the confirmed cases   Health24-2_files/
-Coronavirus in SA  All the confirmed cases   Health24-1.html
-Coronavirus in SA  All the confirmed cases   Health24-2.html
-Test1.pdf
-Test2.pdf
-test3.pdf
-testOutput_Full_Info.pdf
-yarn-error.log
-.vscode/
-/tabulator-master/
-/public/assets/tabulator/bower.json
-/public/assets/tabulator/CODE_OF_CONDUCT.md
-/public/assets/tabulator/CONTRIBUTING.md
-/public/assets/tabulator/gulpfile.js
-/public/assets/tabulator/LICENSE
-/public/assets/tabulator/package.json
-/public/assets/tabulator/package-lock.json
-/public/assets/tabulator/README.md
-/public/assets/tabulator/yarn.lock
-/node_modules
-npm-debug.log
-.DS_Store
-/*.env
-/test/.env
-/public/assests
-/public/build
-newrelic_agent.log
-assets***REMOVED***/*
+/package-lock.json
+/coverage/

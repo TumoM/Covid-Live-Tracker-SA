@@ -4,7 +4,7 @@ var Edit = function(table){
 	this.mouseClick = false; //hold mousedown state to prevent click binding being overriden by editor opening
 	this.recursionBlock = false; //prevent focus recursion
 	this.invalidEdit = false;
-***REMOVED***;
+};
 
 
 //initialize column editor
@@ -14,8 +14,8 @@ Edit.prototype.initializeColumn = function(column){
 		editor:false,
 		blocked:false,
 		check:column.definition.editable,
-		params:column.definition.editorParams || {***REMOVED***
-	***REMOVED***;
+		params:column.definition.editorParams || {}
+	};
 
 	//set column editor
 	switch(typeof column.definition.editor){
@@ -24,13 +24,13 @@ Edit.prototype.initializeColumn = function(column){
 		if(column.definition.editor === "tick"){
 			column.definition.editor = "tickCross";
 			console.warn("DEPRECATION WARNING - the tick editor has been deprecated, please use the tickCross editor");
-		***REMOVED***
+		}
 
 		if(self.editors[column.definition.editor]){
 			config.editor = self.editors[column.definition.editor];
-		***REMOVED***else{
+		}else{
 			console.warn("Editor Error - No such editor found: ", column.definition.editor);
-		***REMOVED***
+		}
 		break;
 
 		case "function":
@@ -46,28 +46,28 @@ Edit.prototype.initializeColumn = function(column){
 				if(column.definition.formatter === "tick"){
 					column.definition.formatter = "tickCross";
 					console.warn("DEPRECATION WARNING - the tick editor has been deprecated, please use the tickCross editor");
-				***REMOVED***
+				}
 
 				if(self.editors[column.definition.formatter]){
 					config.editor = self.editors[column.definition.formatter];
-				***REMOVED***else{
+				}else{
 					config.editor = self.editors["input"];
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				console.warn("Editor Error - Cannot auto lookup editor for a custom formatter: ", column.definition.formatter);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		break;
-	***REMOVED***
+	}
 
 	if(config.editor){
 		column.modules.edit = config;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Edit.prototype.getCurrentCell = function(){
 	return this.currentCell ? this.currentCell.getComponent() : false;
-***REMOVED***;
+};
 
 Edit.prototype.clearEditor = function(){
 	var cell = this.currentCell,
@@ -84,8 +84,8 @@ Edit.prototype.clearEditor = function(){
 		while(cellEl.firstChild) cellEl.removeChild(cellEl.firstChild);
 
 		cell.row.getElement().classList.remove("tabulator-row-editing");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Edit.prototype.cancelEdit = function(){
 
@@ -99,11 +99,11 @@ Edit.prototype.cancelEdit = function(){
 
 		if(cell.column.cellEvents.cellEditCancelled){
 			cell.column.cellEvents.cellEditCancelled.call(this.table, component);
-		***REMOVED***
+		}
 
 		this.table.options.cellEditCancelled.call(this.table, component);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //return a formatted value for a cell
 Edit.prototype.bindEditor = function(cell){
@@ -114,33 +114,33 @@ Edit.prototype.bindEditor = function(cell){
 
 	element.addEventListener("click", function(e){
 		if(!element.classList.contains("tabulator-editing")){
-			element.focus({preventScroll: true***REMOVED***);
-		***REMOVED***
-	***REMOVED***);
+			element.focus({preventScroll: true});
+		}
+	});
 
 	element.addEventListener("mousedown", function(e){
 		self.mouseClick = true;
-	***REMOVED***);
+	});
 
 	element.addEventListener("focus", function(e){
 		if(!self.recursionBlock){
 			self.edit(cell, e, false);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 Edit.prototype.focusCellNoEvent = function(cell, block){
 	this.recursionBlock = true;
 	if(!(block && this.table.browser === "ie")){
-		cell.getElement().focus({preventScroll: true***REMOVED***);
-	***REMOVED***
+		cell.getElement().focus({preventScroll: true});
+	}
 	this.recursionBlock = false;
-***REMOVED***;
+};
 
 Edit.prototype.editCell = function(cell, forceEdit){
 	this.focusCellNoEvent(cell);
 	this.edit(cell, false, forceEdit);
-***REMOVED***;
+};
 
 
 Edit.prototype.focusScrollAdjust = function(cell){
@@ -152,19 +152,19 @@ Edit.prototype.focusScrollAdjust = function(cell){
 
 		if(rowEl.offsetTop < topEdge){
 			this.table.rowManager.element.scrollTop -= (topEdge - rowEl.offsetTop);
-		***REMOVED***else{
+		}else{
 			if(rowEl.offsetTop + rowEl.offsetHeight  > bottomEdge){
 				this.table.rowManager.element.scrollTop += (rowEl.offsetTop + rowEl.offsetHeight - bottomEdge);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			}
+		}
+	}
+};
 
 
 Edit.prototype.edit = function(cell, e, forceEdit){
 	var self = this,
 	allowEdit = true,
-	rendered = function(){***REMOVED***,
+	rendered = function(){},
 	element = cell.getElement(),
 	cellEditor, component, params;
 
@@ -172,9 +172,9 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 	if(this.currentCell){
 		if(!this.invalidEdit){
 			this.cancelEdit();
-		***REMOVED***
+		}
 		return;
-	***REMOVED***
+	}
 
 	//handle successfull value change
 	function success(value){
@@ -183,7 +183,7 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 
 			if(cell.column.modules.validate && self.table.modExists("validate")){
 				valid = self.table.modules.validate.validate(cell.column.modules.validate, cell.getComponent(), value);
-			***REMOVED***
+			}
 
 			if(valid === true){
 				self.clearEditor();
@@ -191,10 +191,10 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 
 				if(self.table.options.dataTree && self.table.modExists("dataTree")){
 					self.table.modules.dataTree.checkForRestyle(cell);
-				***REMOVED***
+				}
 
 				return true;
-			***REMOVED***else{
+			}else{
 				self.invalidEdit = true;
 				element.classList.add("tabulator-validation-fail");
 				self.focusCellNoEvent(cell, true);
@@ -202,11 +202,11 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 				self.table.options.validationFailed.call(self.table, cell.getComponent(), value, valid);
 
 				return false;
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			// console.warn("Edit Success Error - cannot call success on a cell that is no longer being edited");
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//handle aborted edit
 	function cancel(){
@@ -215,20 +215,20 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 
 			if(self.table.options.dataTree && self.table.modExists("dataTree")){
 				self.table.modules.dataTree.checkForRestyle(cell);
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			// console.warn("Edit Success Error - cannot call cancel on a cell that is no longer being edited");
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	function onRendered(callback){
 		rendered = callback;
-	***REMOVED***
+	}
 
 	if(!cell.column.modules.edit.blocked){
 		if(e){
 			e.stopPropagation();
-		***REMOVED***
+		}
 
 		switch(typeof cell.column.modules.edit.check){
 			case "function":
@@ -238,7 +238,7 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 			case "boolean":
 			allowEdit = cell.column.modules.edit.check;
 			break;
-		***REMOVED***
+		}
 
 		if(allowEdit || forceEdit){
 
@@ -255,12 +255,12 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 
 				if(cell.column.cellEvents.cellClick){
 					cell.column.cellEvents.cellClick.call(this.table, e, component);
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			if(cell.column.cellEvents.cellEditing){
 				cell.column.cellEvents.cellEditing.call(this.table, component);
-			***REMOVED***
+			}
 
 			self.table.options.cellEditing.call(this.table, component);
 
@@ -286,31 +286,31 @@ Edit.prototype.edit = function(cell, e, forceEdit){
 					for (var i = 0; i < children.length; i++) {
 						children[i].addEventListener("click", function(e){
 							e.stopPropagation();
-						***REMOVED***);
-					***REMOVED***
-				***REMOVED***else{
+						});
+					}
+				}else{
 					console.warn("Edit Error - Editor should return an instance of Node, the editor returned:", cellEditor);
 					element.blur();
 					return false;
-				***REMOVED***
+				}
 
-			***REMOVED***else{
+			}else{
 				element.blur();
 				return false;
-			***REMOVED***
+			}
 
 			return true;
-		***REMOVED***else{
+		}else{
 			this.mouseClick = false;
 			element.blur();
 			return false;
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.mouseClick = false;
 		element.blur();
 		return false;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Edit.prototype.maskInput = function(el, options){
 	var mask = options.mask,
@@ -324,8 +324,8 @@ Edit.prototype.maskInput = function(el, options){
 		if(typeof symbol !== "undefined" && symbol !== maskWildcard && symbol !== maskLetter && symbol !== maskNumber){
 			el.value = el.value + "" + symbol;
 			fillSymbols(index+1);
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	el.addEventListener("keydown", (e) => {
 		var index = el.value.length,
@@ -337,7 +337,7 @@ Edit.prototype.maskInput = function(el, options){
 				e.stopPropagation();
 				success = false;
 				return false;
-			***REMOVED***else{
+			}else{
 				switch(mask[index]){
 					case maskLetter:
 					if(char.toUpperCase() == char.toLowerCase()){
@@ -345,7 +345,7 @@ Edit.prototype.maskInput = function(el, options){
 						e.stopPropagation();
 						success = false;
 						return false;
-					***REMOVED***
+					}
 					break;
 
 					case maskNumber:
@@ -354,7 +354,7 @@ Edit.prototype.maskInput = function(el, options){
 						e.stopPropagation();
 						success = false;
 						return false;
-					***REMOVED***
+					}
 					break;
 
 					case maskWildcard:
@@ -366,33 +366,33 @@ Edit.prototype.maskInput = function(el, options){
 						e.stopPropagation();
 						success = false;
 						return false;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			success = true;
-		***REMOVED***
+		}
 
 		return;
-	***REMOVED***);
+	});
 
 	el.addEventListener("keyup", (e) => {
 		if(e.keyCode > 46){
 			if(options.maskAutoFill){
 				fillSymbols(el.value.length);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+			}
+		}
+	});
 
 
 	if(!el.placeholder){
 		el.placeholder = mask;
-	***REMOVED***
+	}
 
 	if(options.maskAutoFill){
 		fillSymbols(el.value.length);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //default data editors
 Edit.prototype.editors = {
@@ -415,28 +415,28 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					input.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		input.value = typeof cellValue !== "undefined" ? cellValue : "";
 
 		onRendered(function(){
-			input.focus({preventScroll: true***REMOVED***);
+			input.focus({preventScroll: true});
 			input.style.height = "100%";
-		***REMOVED***);
+		});
 
 		function onChange(e){
 			if(((cellValue === null || typeof cellValue === "undefined") && input.value !== "") || input.value !== cellValue){
 				if(success(input.value)){
 					cellValue = input.value; //persist value if successfully validated incase editor is used as header filter
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				cancel();
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//submit new value on blur or change
 		input.addEventListener("change", onChange);
@@ -453,15 +453,15 @@ Edit.prototype.editors = {
 				case 27:
 				cancel();
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		if(editorParams.mask){
 			this.table.modules.edit.maskInput(input, editorParams);
-		***REMOVED***
+		}
 
 		return input;
-	***REMOVED***,
+	},
 
 	//resizable text area element
 	textarea:function(cell, onRendered, success, cancel, editorParams){
@@ -487,18 +487,18 @@ Edit.prototype.editors = {
         		if(key.charAt(0) == "+"){
         			key = key.slice(1);
         			input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-        		***REMOVED***else{
+        		}else{
         			input.setAttribute(key, editorParams.elementAttributes[key]);
-        		***REMOVED***
-        	***REMOVED***
-      ***REMOVED***
+        		}
+        	}
+        }
 
         input.value = value;
 
         onRendered(function(){
-        	input.focus({preventScroll: true***REMOVED***);
+        	input.focus({preventScroll: true});
         	input.style.height = "100%";
-      ***REMOVED***);
+        });
 
         function onChange(e){
 
@@ -506,15 +506,15 @@ Edit.prototype.editors = {
 
         		if(success(input.value)){
         			cellValue = input.value; //persist value if successfully validated incase editor is used as header filter
-        		***REMOVED***
+        		}
 
         		setTimeout(function(){
         			cell.getRow().normalizeHeight();
-        		***REMOVED***,300)
-        	***REMOVED***else{
+        		},300)
+        	}else{
         		cancel();
-        	***REMOVED***
-      ***REMOVED***
+        	}
+        }
 
         //submit new value on blur or change
         input.addEventListener("change", onChange);
@@ -531,8 +531,8 @@ Edit.prototype.editors = {
         	if(heightNow != scrollHeight){
         		scrollHeight = heightNow;
         		cell.getRow().normalizeHeight();
-        	***REMOVED***
-      ***REMOVED***);
+        	}
+        });
 
         input.addEventListener("keydown", function(e){
 
@@ -545,7 +545,7 @@ Edit.prototype.editors = {
         		if(vertNav == "editor" || (vertNav == "hybrid" && input.selectionStart)){
         			e.stopImmediatePropagation();
         			e.stopPropagation();
-        		***REMOVED***
+        		}
 
         		break;
 
@@ -553,17 +553,17 @@ Edit.prototype.editors = {
         		if(vertNav == "editor" || (vertNav == "hybrid" && input.selectionStart !== input.value.length)){
         			e.stopImmediatePropagation();
         			e.stopPropagation();
-        		***REMOVED***
+        		}
         		break;
-        	***REMOVED***
-      ***REMOVED***);
+        	}
+        });
 
         if(editorParams.mask){
         	this.table.modules.edit.maskInput(input, editorParams);
-      ***REMOVED***
+        }
 
         return input;
-  ***REMOVED***
+    },
 
     //input element with type of number
     number:function(cell, onRendered, success, cancel, editorParams){
@@ -576,15 +576,15 @@ Edit.prototype.editors = {
 
     	if(typeof editorParams.max != "undefined"){
     		input.setAttribute("max", editorParams.max);
-    	***REMOVED***
+    	}
 
     	if(typeof editorParams.min != "undefined"){
     		input.setAttribute("min", editorParams.min);
-    	***REMOVED***
+    	}
 
     	if(typeof editorParams.step != "undefined"){
     		input.setAttribute("step", editorParams.step);
-    	***REMOVED***
+    	}
 
 		//create and style input
 		input.style.padding = "4px";
@@ -596,44 +596,44 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					input.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		input.value = cellValue;
 
 		var blurFunc = function(e){
 			onChange();
-		***REMOVED***;
+		};
 
 		onRendered(function () {
 			//submit new value on blur
 			input.removeEventListener("blur", blurFunc);
 
-			input.focus({preventScroll: true***REMOVED***);
+			input.focus({preventScroll: true});
 			input.style.height = "100%";
 
 			//submit new value on blur
 			input.addEventListener("blur", blurFunc);
-		***REMOVED***);
+		});
 
 		function onChange(){
 			var value = input.value;
 
 			if(!isNaN(value) && value !==""){
 				value = Number(value);
-			***REMOVED***
+			}
 
 			if(value !== cellValue){
 				if(success(value)){
 					cellValue = value; //persist value if successfully validated incase editor is used as header filter
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				cancel();
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//submit new value on enter
 		input.addEventListener("keydown", function(e){
@@ -652,17 +652,17 @@ Edit.prototype.editors = {
 				if(vertNav == "editor"){
 					e.stopImmediatePropagation();
 					e.stopPropagation();
-				***REMOVED***
+				}
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		if(editorParams.mask){
 			this.table.modules.edit.maskInput(input, editorParams);
-		***REMOVED***
+		}
 
 		return input;
-	***REMOVED***,
+	},
 
     //input element with type of number
     range:function(cell, onRendered, success, cancel, editorParams){
@@ -674,15 +674,15 @@ Edit.prototype.editors = {
 
     	if (typeof editorParams.max != "undefined") {
     		input.setAttribute("max", editorParams.max);
-    	***REMOVED***
+    	}
 
     	if (typeof editorParams.min != "undefined") {
     		input.setAttribute("min", editorParams.min);
-    	***REMOVED***
+    	}
 
     	if (typeof editorParams.step != "undefined") {
     		input.setAttribute("step", editorParams.step);
-    	***REMOVED***
+    	}
 
     	//create and style input
     	input.style.padding = "4px";
@@ -694,39 +694,39 @@ Edit.prototype.editors = {
     			if(key.charAt(0) == "+"){
     				key = key.slice(1);
     				input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-    			***REMOVED***else{
+    			}else{
     				input.setAttribute(key, editorParams.elementAttributes[key]);
-    			***REMOVED***
-    		***REMOVED***
-    	***REMOVED***
+    			}
+    		}
+    	}
 
     	input.value = cellValue;
 
     	onRendered(function () {
-    		input.focus({preventScroll: true***REMOVED***);
+    		input.focus({preventScroll: true});
     		input.style.height = "100%";
-    	***REMOVED***);
+    	});
 
     	function onChange(){
     		var value = input.value;
 
     		if(!isNaN(value) && value !==""){
     			value = Number(value);
-    		***REMOVED***
+    		}
 
     		if(value != cellValue){
     			if(success(value)){
     				cellValue = value; //persist value if successfully validated incase editor is used as header filter
-    			***REMOVED***
-    		***REMOVED***else{
+    			}
+    		}else{
     			cancel();
-    		***REMOVED***
-    	***REMOVED***
+    		}
+    	}
 
 		//submit new value on blur
 		input.addEventListener("blur", function(e){
 			onChange();
-		***REMOVED***);
+		});
 
 		//submit new value on enter
 		input.addEventListener("keydown", function(e){
@@ -739,11 +739,11 @@ Edit.prototype.editors = {
 				case 27:
 				cancel();
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		return input;
-	***REMOVED***,
+	},
 
 	//select
 	select:function(cell, onRendered, success, cancel, editorParams){
@@ -756,26 +756,26 @@ Edit.prototype.editors = {
 		listEl = document.createElement("div"),
 		dataItems = [],
 		displayItems = [],
-		currentItem = {***REMOVED***,
+		currentItem = {},
 		blurable = true;
 
 		this.table.rowManager.element.addEventListener("scroll", cancelItem);
 
 		if(Array.isArray(editorParams) || (!Array.isArray(editorParams) && typeof editorParams === "object" && !editorParams.values)){
 			console.warn("DEPRECATION WANRING - values for the select editor must now be passed into the values property of the editorParams object, not as the editorParams object");
-			editorParams = {values:editorParams***REMOVED***;
-		***REMOVED***
+			editorParams = {values:editorParams};
+		}
 
 		function getUniqueColumnValues(field){
-			var output = {***REMOVED***,
+			var output = {},
 			data = self.table.getData(),
 			column;
 
 			if(field){
 				column = self.table.columnManager.getColumnByField(field);
-			***REMOVED***else{
+			}else{
 				column = cell.getColumn()._getSelf();
-			***REMOVED***
+			}
 
 			if(column){
 				data.forEach(function(row){
@@ -783,24 +783,24 @@ Edit.prototype.editors = {
 
 					if(val !== null && typeof val !== "undefined" && val !== ""){
 						output[val] = true;
-					***REMOVED***
-				***REMOVED***);
+					}
+				});
 
 				if(editorParams.sortValuesList){
 					if(editorParams.sortValuesList == "asc"){
 						output = Object.keys(output).sort();
-					***REMOVED***else{
+					}else{
 						output = Object.keys(output).sort().reverse();
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					output = Object.keys(output);
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				console.warn("unable to find matching column to create select lookup list:", field);
-			***REMOVED***
+			}
 
 			return output;
-		***REMOVED***
+		}
 
 		function parseItems(inputValues, curentValue){
 			var dataList = [];
@@ -811,21 +811,21 @@ Edit.prototype.editors = {
 					label:editorParams.listItemFormatter ? editorParams.listItemFormatter(item.value, item.label) : item.label,
 					value:item.value,
 					element:false,
-				***REMOVED***;
+				};
 
 				if(item.value === curentValue || (!isNaN(parseFloat(item.value)) && !isNaN(parseFloat(item.value)) && parseFloat(item.value) === parseFloat(curentValue))){
 					setCurrentItem(item);
-				***REMOVED***
+				}
 
 				dataList.push(item);
 				displayList.push(item);
 
 				return item;
-			***REMOVED***
+			}
 
 			if(typeof inputValues == "function"){
 				inputValues = inputValues(cell);
-			***REMOVED***
+			}
 
 			if(Array.isArray(inputValues)){
 				inputValues.forEach(function(value){
@@ -838,55 +838,55 @@ Edit.prototype.editors = {
 								label:value.label,
 								group:true,
 								element:false,
-							***REMOVED***;
+							};
 
 							displayList.push(item);
 
 							value.options.forEach(function(item){
 								processComplexListItem(item);
-							***REMOVED***);
-						***REMOVED***else{
+							});
+						}else{
 							processComplexListItem(value);
-						***REMOVED***
+						}
 
-					***REMOVED***else{
+					}else{
 
 						item = {
 							label:editorParams.listItemFormatter ? editorParams.listItemFormatter(value, value) : value,
 							value:value,
 							element:false,
-						***REMOVED***;
+						};
 
 						if(item.value === curentValue || (!isNaN(parseFloat(item.value)) && !isNaN(parseFloat(item.value)) && parseFloat(item.value) === parseFloat(curentValue))){
 							setCurrentItem(item);
-						***REMOVED***
+						}
 
 						dataList.push(item);
 						displayList.push(item);
-					***REMOVED***
-				***REMOVED***);
-			***REMOVED***else{
+					}
+				});
+			}else{
 				for(var key in inputValues){
 					var item = {
 						label:editorParams.listItemFormatter ? editorParams.listItemFormatter(key, inputValues[key]) : inputValues[key],
 						value:key,
 						element:false,
-					***REMOVED***;
+					};
 
 					if(item.value === curentValue || (!isNaN(parseFloat(item.value)) && !isNaN(parseFloat(item.value)) && parseFloat(item.value) === parseFloat(curentValue))){
 						setCurrentItem(item);
-					***REMOVED***
+					}
 
 					dataList.push(item);
 					displayList.push(item);
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			dataItems = dataList;
 			displayItems = displayList;
 
 			fillList();
-		***REMOVED***
+		}
 
 		function fillList(){
 			while(listEl.firstChild) listEl.removeChild(listEl.firstChild);
@@ -901,7 +901,7 @@ Edit.prototype.editors = {
 						el.classList.add("tabulator-edit-select-list-group");
 						el.tabIndex = 0;
 						el.innerHTML = item.label === "" ? "&nbsp;" : item.label;
-					***REMOVED***else{
+					}else{
 						el = document.createElement("div");
 						el.classList.add("tabulator-edit-select-list-item");
 						el.tabIndex = 0;
@@ -910,36 +910,36 @@ Edit.prototype.editors = {
 						el.addEventListener("click", function(){
 							setCurrentItem(item);
 							chooseItem();
-						***REMOVED***);
+						});
 
 						if(item === currentItem){
 							el.classList.add("active");
-						***REMOVED***
-					***REMOVED***
+						}
+					}
 
 					el.addEventListener("mousedown", function(){
 						blurable = false;
 
 						setTimeout(function(){
 							blurable = true;
-						***REMOVED***, 10);
-					***REMOVED***);
+						}, 10);
+					});
 
 					item.element = el;
 
 
-				***REMOVED***
+				}
 
 				listEl.appendChild(el);
-			***REMOVED***);
-		***REMOVED***
+			});
+		}
 
 
 		function setCurrentItem(item){
 
 			if(currentItem && currentItem.element){
 				currentItem.element.classList.remove("active");
-			***REMOVED***
+			}
 
 
 			currentItem = item;
@@ -947,8 +947,8 @@ Edit.prototype.editors = {
 
 			if(item.element){
 				item.element.classList.add("active");
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 
 		function chooseItem(){
@@ -957,26 +957,26 @@ Edit.prototype.editors = {
 			if(initialValue !== currentItem.value){
 				initialValue = currentItem.value;
 				success(currentItem.value);
-			***REMOVED***else{
+			}else{
 				cancel();
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function cancelItem(){
 			hideList();
 			cancel();
-		***REMOVED***
+		}
 
 		function showList(){
 			if(!listEl.parentNode){
 
 				if(editorParams.values === true){
 					parseItems(getUniqueColumnValues(), initialDisplayValue);
-				***REMOVED***else if(typeof editorParams.values === "string"){
+				}else if(typeof editorParams.values === "string"){
 					parseItems(getUniqueColumnValues(editorParams.values), initialDisplayValue);
-				***REMOVED***else{
+				}else{
 					parseItems(editorParams.values || [], initialDisplayValue);
-				***REMOVED***
+				}
 
 
 				var offset = Tabulator.prototype.helpers.elOffset(cellEl);
@@ -992,24 +992,24 @@ Edit.prototype.editors = {
 
 					setTimeout(function(){
 						blurable = true;
-					***REMOVED***, 10);
-				***REMOVED***);
+					}, 10);
+				});
 
 				document.body.appendChild(listEl);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function hideList(){
 			if(listEl.parentNode){
 				listEl.parentNode.removeChild(listEl);
-			***REMOVED***
+			}
 
 			removeScrollListener();
-		***REMOVED***
+		}
 
 		function removeScrollListener() {
 			self.table.rowManager.element.removeEventListener("scroll", cancelItem);
-		***REMOVED***
+		}
 
 		//style input
 		input.setAttribute("type", "text");
@@ -1025,21 +1025,21 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					input.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		input.value = typeof initialValue !== "undefined" || initialValue === null ? initialValue : "";
 
 		// if(editorParams.values === true){
 		// 	parseItems(getUniqueColumnValues(), initialValue);
-		// ***REMOVED***else if(typeof editorParams.values === "string"){
+		// }else if(typeof editorParams.values === "string"){
 		// 	parseItems(getUniqueColumnValues(editorParams.values), initialValue);
-		// ***REMOVED***else{
+		// }else{
 		// 	parseItems(editorParams.values || [], initialValue);
-		// ***REMOVED***
+		// }
 
 		//allow key based navigation
 		input.addEventListener("keydown", function(e){
@@ -1056,8 +1056,8 @@ Edit.prototype.editors = {
 
 					if(index > 0){
 						setCurrentItem(dataItems[index - 1]);
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 				break;
 
 				case 40: //down arrow
@@ -1071,11 +1071,11 @@ Edit.prototype.editors = {
 					if(index < dataItems.length - 1){
 						if(index == -1){
 							setCurrentItem(dataItems[0]);
-						***REMOVED***else{
+						}else{
 							setCurrentItem(dataItems[index + 1]);
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
+						}
+					}
+				}
 				break;
 
 				case 37: //left arrow
@@ -1092,18 +1092,18 @@ Edit.prototype.editors = {
 				case 27: //escape
 				cancelItem();
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		input.addEventListener("blur", function(e){
 			if(blurable){
 				cancelItem();
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		input.addEventListener("focus", function(e){
 			showList();
-		***REMOVED***);
+		});
 
 		//style list element
 		listEl = document.createElement("div");
@@ -1111,11 +1111,11 @@ Edit.prototype.editors = {
 
 		onRendered(function(){
 			input.style.height = "100%";
-			input.focus({preventScroll: true***REMOVED***);
-		***REMOVED***);
+			input.focus({preventScroll: true});
+		});
 
 		return input;
-	***REMOVED***,
+	},
 
 
 	//autocomplete
@@ -1147,11 +1147,11 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					input.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		//style list element
 		listEl.classList.add("tabulator-edit-select-list");
@@ -1161,19 +1161,19 @@ Edit.prototype.editors = {
 
 			setTimeout(function(){
 				blurable = true;
-			***REMOVED***, 10);
-		***REMOVED***);
+			}, 10);
+		});
 
 		function getUniqueColumnValues(field){
-			var output = {***REMOVED***,
+			var output = {},
 			data = self.table.getData(),
 			column;
 
 			if(field){
 				column = self.table.columnManager.getColumnByField(field);
-			***REMOVED***else{
+			}else{
 				column = cell.getColumn()._getSelf();
-			***REMOVED***
+			}
 
 			if(column){
 				data.forEach(function(row){
@@ -1181,25 +1181,25 @@ Edit.prototype.editors = {
 
 					if(val !== null && typeof val !== "undefined" && val !== ""){
 						output[val] = true;
-					***REMOVED***
-				***REMOVED***);
+					}
+				});
 
 				if(editorParams.sortValuesList){
 					if(editorParams.sortValuesList == "asc"){
 						output = Object.keys(output).sort();
-					***REMOVED***else{
+					}else{
 						output = Object.keys(output).sort().reverse();
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					output = Object.keys(output);
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				console.warn("unable to find matching column to create autocomplete lookup list:", field);
-			***REMOVED***
+			}
 
 
 			return output;
-		***REMOVED***
+		}
 
 		function filterList(term, intialLoad){
 			var matches = [],
@@ -1208,11 +1208,11 @@ Edit.prototype.editors = {
 			//lookup base values list
 			if(editorParams.values === true){
 				values = getUniqueColumnValues();
-			***REMOVED***else if(typeof editorParams.values === "string"){
+			}else if(typeof editorParams.values === "string"){
 				values = getUniqueColumnValues(editorParams.values);
-			***REMOVED***else{
+			}else{
 				values = editorParams.values || [];
-			***REMOVED***
+			}
 
 			if(editorParams.searchFunc){
 				matches = editorParams.searchFunc(term, values);
@@ -1223,33 +1223,33 @@ Edit.prototype.editors = {
 
 					matches.then((result) => {
 						fillListIfNotEmpty(parseItems(result), intialLoad);
-					***REMOVED***).catch((err) => {
+					}).catch((err) => {
 						console.err("error in autocomplete search promise:", err);
-					***REMOVED***);
+					});
 
-				***REMOVED***else{
+				}else{
 					fillListIfNotEmpty(parseItems(matches), intialLoad);
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				items = parseItems(values);
 
 				if(term === ""){
 					if(editorParams.showListOnEmpty){
 						matches = items;
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					items.forEach(function(item){
 						if(item.value !== null || typeof item.value !== "undefined"){
 							if(String(item.value).toLowerCase().indexOf(String(term).toLowerCase()) > -1 || String(item.title).toLowerCase().indexOf(String(term).toLowerCase()) > -1){
 								matches.push(item);
-							***REMOVED***
-						***REMOVED***
-					***REMOVED***);
-				***REMOVED***
+							}
+						}
+					});
+				}
 
 				fillListIfNotEmpty(matches, intialLoad);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function addNotice(notice){
 			var searchEl = document.createElement("div");
@@ -1262,13 +1262,13 @@ Edit.prototype.editors = {
 
 				if(notice instanceof Node){
 					searchEl.appendChild(notice);
-				***REMOVED***else{
+				}else{
 					searchEl.innerHTML = notice;
-				***REMOVED***
+				}
 
 				listEl.appendChild(searchEl);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function parseItems(inputValues){
 			var itemList = [];
@@ -1278,37 +1278,37 @@ Edit.prototype.editors = {
 					var item = {
 						title:editorParams.listItemFormatter ? editorParams.listItemFormatter(value, value) : value,
 						value:value,
-					***REMOVED***;
+					};
 
 					itemList.push(item);
-				***REMOVED***);
-			***REMOVED***else{
+				});
+			}else{
 				for(var key in inputValues){
 					var item = {
 						title:editorParams.listItemFormatter ? editorParams.listItemFormatter(key, inputValues[key]) : inputValues[key],
 						value:key,
-					***REMOVED***;
+					};
 
 					itemList.push(item);
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			return itemList;
-		***REMOVED***
+		}
 
 		function clearList(){
 			while(listEl.firstChild) listEl.removeChild(listEl.firstChild);
-		***REMOVED***
+		}
 
 		function fillListIfNotEmpty(items, intialLoad){
 			if(items.length){
 				fillList(items, intialLoad);
-			***REMOVED***else{
+			}else{
 				if(editorParams.emptyPlaceholder){
 					addNotice(editorParams.emptyPlaceholder);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		function fillList(items, intialLoad){
 			var current = false;
@@ -1329,15 +1329,15 @@ Edit.prototype.editors = {
 					el.addEventListener("click", function(e){
 						setCurrentItem(item);
 						chooseItem();
-					***REMOVED***);
+					});
 
 					el.addEventListener("mousedown", function(e){
 						blurable = false;
 
 						setTimeout(function(){
 							blurable = true;
-						***REMOVED***, 10);
-					***REMOVED***);
+						}, 10);
+					});
 
 					item.element = el;
 
@@ -1345,21 +1345,21 @@ Edit.prototype.editors = {
 						input.value = item.title;
 						item.element.classList.add("active");
 						current = true;
-					***REMOVED***
+					}
 
 					if(item === currentItem){
 						item.element.classList.add("active");
 						current = true;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				listEl.appendChild(el);
-			***REMOVED***);
+			});
 
 			if(!current){
 				setCurrentItem(false);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function chooseItem(){
 			hideList();
@@ -1369,23 +1369,23 @@ Edit.prototype.editors = {
 					initialValue = currentItem.value;
 					input.value = currentItem.title;
 					success(currentItem.value);
-				***REMOVED***else{
+				}else{
 					cancel();
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				if(editorParams.freetext){
 					initialValue = input.value;
 					success(input.value);
-				***REMOVED***else{
+				}else{
 					if(editorParams.allowEmpty && input.value === ""){
 						initialValue = input.value;
 						success(input.value);
-					***REMOVED***else{
+					}else{
 						cancel();
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+					}
+				}
+			}
+		}
 
 		function showList(){
 			if(!listEl.parentNode){
@@ -1398,38 +1398,38 @@ Edit.prototype.editors = {
 				listEl.style.top = (offset.top + cellEl.offsetHeight) + "px";
 				listEl.style.left = offset.left + "px";
 				document.body.appendChild(listEl);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function setCurrentItem(item, showInputValue){
 			if(currentItem && currentItem.element){
 				currentItem.element.classList.remove("active");
-			***REMOVED***
+			}
 
 			currentItem = item;
 
 			if(item && item.element){
 				item.element.classList.add("active");
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		function hideList(){
 			if(listEl.parentNode){
 				listEl.parentNode.removeChild(listEl);
-			***REMOVED***
+			}
 
 			removeScrollListener();
-		***REMOVED***
+		}
 
 
 		function cancelItem(){
 			hideList();
 			cancel();
-		***REMOVED***
+		}
 
 		function removeScrollListener() {
 			self.table.rowManager.element.removeEventListener("scroll", cancelItem);
-		***REMOVED***
+		}
 
 		//allow key based navigation
 		input.addEventListener("keydown", function(e){
@@ -1446,10 +1446,10 @@ Edit.prototype.editors = {
 
 					if(index > 0){
 						setCurrentItem(displayItems[index - 1]);
-					***REMOVED***else{
+					}else{
 						setCurrentItem(false);
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 				break;
 
 				case 40: //down arrow
@@ -1465,11 +1465,11 @@ Edit.prototype.editors = {
 					if(index < displayItems.length - 1){
 						if(index == -1){
 							setCurrentItem(displayItems[0]);
-						***REMOVED***else{
+						}else{
 							setCurrentItem(displayItems[index + 1]);
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
+						}
+					}
+				}
 				break;
 
 
@@ -1493,8 +1493,8 @@ Edit.prototype.editors = {
 				//prevent table navigation while using input element
 				e.stopImmediatePropagation();
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		input.addEventListener("keyup", function(e){
 
@@ -1509,39 +1509,39 @@ Edit.prototype.editors = {
 
 				default:
 				filterList(input.value);
-			***REMOVED***
+			}
 
-		***REMOVED***);
+		});
 
 		input.addEventListener("search", function(e){
 			filterList(input.value);
-		***REMOVED***);
+		});
 
 		input.addEventListener("blur", function(e){
 			if(blurable){
 				chooseItem();
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		input.addEventListener("focus", function(e){
 			var value = initialDisplayValue;
 			showList();
 			input.value = value;
 			filterList(value, true);
-		***REMOVED***);
+		});
 
 
 		onRendered(function(){
 			input.style.height = "100%";
-			input.focus({preventScroll: true***REMOVED***);
-		***REMOVED***);
+			input.focus({preventScroll: true});
+		});
 
 		if(editorParams.mask){
 			this.table.modules.edit.maskInput(input, editorParams);
-		***REMOVED***
+		}
 
 		return input;
-	***REMOVED***,
+	},
 
 	//start rating
 	star:function(cell, onRendered, success, cancel, editorParams){
@@ -1561,22 +1561,22 @@ Edit.prototype.editors = {
 				if(i < val){
 					if(self.table.browser == "ie"){
 						star.setAttribute("class", "tabulator-star-active");
-					***REMOVED***else{
+					}else{
 						star.classList.replace("tabulator-star-inactive", "tabulator-star-active");
-					***REMOVED***
+					}
 
 					star.innerHTML = '<polygon fill="#488CE9" stroke="#014AAE" stroke-width="37.6152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="259.216,29.942 330.27,173.919 489.16,197.007 374.185,309.08 401.33,467.31 259.216,392.612 117.104,467.31 144.25,309.08 29.274,197.007 188.165,173.919 "/>';
-				***REMOVED***else{
+				}else{
 					if(self.table.browser == "ie"){
 						star.setAttribute("class", "tabulator-star-inactive");
-					***REMOVED***else{
+					}else{
 						star.classList.replace("tabulator-star-active", "tabulator-star-inactive");
-					***REMOVED***
+					}
 
 					star.innerHTML = '<polygon fill="#010155" stroke="#686868" stroke-width="37.6152" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="259.216,29.942 330.27,173.919 489.16,197.007 374.185,309.08 401.33,467.31 259.216,392.612 117.104,467.31 144.25,309.08 29.274,197.007 188.165,173.919 "/>';
-				***REMOVED***
-			***REMOVED***);
-		***REMOVED***
+				}
+			});
+		}
 
 		//build stars
 		function buildStar(i){
@@ -1590,29 +1590,29 @@ Edit.prototype.editors = {
 				e.stopPropagation();
 				e.stopImmediatePropagation();
 				starChange(i);
-			***REMOVED***);
+			});
 
 			starHolder.addEventListener("mousemove", function(e){
 				e.stopPropagation();
 				e.stopImmediatePropagation();
-			***REMOVED***);
+			});
 
 			starHolder.addEventListener("click", function(e){
 				e.stopPropagation();
 				e.stopImmediatePropagation();
 				success(i);
-			***REMOVED***);
+			});
 
 			starHolder.appendChild(nextStar);
 			starsHolder.appendChild(starHolder);
 
-		***REMOVED***
+		}
 
 		//handle keyboard navigation value change
 		function changeValue(val){
 			value = val;
 			starChange(val);
-		***REMOVED***
+		}
 
 		//style cell
 		element.style.whiteSpace = "nowrap";
@@ -1636,16 +1636,16 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					starsHolder.setAttribute(key, starsHolder.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					starsHolder.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		//create correct number of stars
 		for(var i=1;i<= maxStars;i++){
 			buildStar(i);
-		***REMOVED***
+		}
 
 		//ensure value does not exceed number of stars
 		value = Math.min(parseInt(value), maxStars);
@@ -1655,15 +1655,15 @@ Edit.prototype.editors = {
 
 		starsHolder.addEventListener("mousemove", function(e){
 			starChange(0);
-		***REMOVED***);
+		});
 
 		starsHolder.addEventListener("click", function(e){
 			success(0);
-		***REMOVED***);
+		});
 
 		element.addEventListener("blur", function(e){
 			cancel();
-		***REMOVED***);
+		});
 
 		//allow key based navigation
 		element.addEventListener("keydown", function(e){
@@ -1683,11 +1683,11 @@ Edit.prototype.editors = {
 				case 27: //escape
 				cancel();
 				break;
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		return starsHolder;
-	***REMOVED***,
+	},
 
 	//draggable progress bar
 	progress:function(cell, onRendered, success, cancel, editorParams){
@@ -1702,11 +1702,11 @@ Edit.prototype.editors = {
 
 		//set new value
 		function updateValue(){
-			var calcVal = (percent***REMOVED*** Math.round(bar.offsetWidth / (element.clientWidth/100))) + min;
+			var calcVal = (percent * Math.round(bar.offsetWidth / (element.clientWidth/100))) + min;
 			success(calcVal);
 			element.setAttribute("aria-valuenow", calcVal);
 			element.setAttribute("aria-label", value);
-		***REMOVED***
+		}
 
 		//style handle
 		handle.style.position = "absolute";
@@ -1733,11 +1733,11 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					bar.setAttribute(key, bar.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					bar.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		//style cell
 		element.style.padding = "4px 4px";
@@ -1759,17 +1759,17 @@ Edit.prototype.editors = {
 		handle.addEventListener("mousedown", function(e){
 			mouseDrag = e.screenX;
 			mouseDragWidth = bar.offsetWidth;
-		***REMOVED***);
+		});
 
 		handle.addEventListener("mouseover", function(){
 			handle.style.cursor = "ew-resize";
-		***REMOVED***);
+		});
 
 		element.addEventListener("mousemove", function(e){
 			if(mouseDrag){
 				bar.style.width = (mouseDragWidth + e.screenX - mouseDrag) + "px";
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		element.addEventListener("mouseup", function(e){
 			if(mouseDrag){
@@ -1780,8 +1780,8 @@ Edit.prototype.editors = {
 				mouseDragWidth = false;
 
 				updateValue();
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		//allow key based navigation
 		element.addEventListener("keydown", function(e){
@@ -1805,15 +1805,15 @@ Edit.prototype.editors = {
 				cancel();
 				break;
 
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		element.addEventListener("blur", function(){
 			cancel();
-		***REMOVED***);
+		});
 
 		return bar;
-	***REMOVED***,
+	},
 
 	//checkbox
 	tickCross:function(cell, onRendered, success, cancel, editorParams){
@@ -1832,24 +1832,24 @@ Edit.prototype.editors = {
 				if(key.charAt(0) == "+"){
 					key = key.slice(1);
 					input.setAttribute(key, input.getAttribute(key) + editorParams.elementAttributes["+" + key]);
-				***REMOVED***else{
+				}else{
 					input.setAttribute(key, editorParams.elementAttributes[key]);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		input.value = value;
 
 		if(tristate && (typeof value === "undefined" || value === indetermValue || value === "")){
 			indetermState = true;
 			input.indeterminate = true;
-		***REMOVED***
+		}
 
 		if(this.table.browser != "firefox"){ //prevent blur issue on mac firefox
 			onRendered(function(){
-				input.focus({preventScroll: true***REMOVED***);
-			***REMOVED***);
-		***REMOVED***
+				input.focus({preventScroll: true});
+			});
+		}
 
 		input.checked = value === true || value === "true" || value === "True" || value === 1;
 
@@ -1861,43 +1861,43 @@ Edit.prototype.editors = {
 						input.indeterminate = true;
 						indetermState = true;
 						return indetermValue;
-					***REMOVED***else{
+					}else{
 						indetermState = false;
 						return input.checked;
-					***REMOVED***
-				***REMOVED***else{
+					}
+				}else{
 					if(indetermState){
 						return indetermValue;
-					***REMOVED***else{
+					}else{
 						return input.checked;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				return input.checked;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		//submit new value on blur
 		input.addEventListener("change", function(e){
 			success(setValue());
-		***REMOVED***);
+		});
 
 		input.addEventListener("blur", function(e){
 			success(setValue(true));
-		***REMOVED***);
+		});
 
 		//submit new value on enter
 		input.addEventListener("keydown", function(e){
 			if(e.keyCode == 13){
 				success(setValue());
-			***REMOVED***
+			}
 			if(e.keyCode == 27){
 				cancel();
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		return input;
-	***REMOVED***,
-***REMOVED***;
+	},
+};
 
 Tabulator.prototype.registerModule("edit", Edit);

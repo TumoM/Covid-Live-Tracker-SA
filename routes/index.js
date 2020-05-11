@@ -3,6 +3,7 @@ var router = express.Router();
 const numeral = require('numeral');
 const moment = require('moment-timezone');
 const sql = require('slonik').sql;
+var etag = require('etag')
 // const sql = slonik.sql;
 
 
@@ -19,19 +20,19 @@ const provinceList = {
     "GAUTENG": 'ZA-GT',
     "KWAZULU-NATAL": 'ZA-NL',
     "UNALLOCATED": 'ZA-UN'
-***REMOVED***;
+};
 
 const hashQuery = (query) => {
     return JSON.stringify(query);
-***REMOVED***;
+};
 const unhashQuery = (query) => {
     return JSON.parse(query);
-***REMOVED***;
+};
 
 moment.tz.setDefault("Africa/Johannesburg")
 
 router.get("/", function (req, res) {
-    res.setHeader('Cache-Control', 'public, max-age=8640');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
     const knex = res.locals.knex;
     const cache = res.locals.cache;
     const pool = res.locals.pool;
@@ -41,16 +42,17 @@ router.get("/", function (req, res) {
         // TODO Load data for the day.
         if (responseCache) {
             console.log("CACHE FOUND")
+            res.setHeader('ETag', etag(responseCache))
             res.render("index", unhashQuery(responseCache));
             return true;
-      ***REMOVED*** else {
+        } else {
             console.log("cache was null, ignoring.")
-      ***REMOVED***
+        }
         getSummarySlonik(pool, responseCache)
           .then(responseData => {
               console.log('Done');
               // console.log('R',r.summary.length);
-              // res.render("index", { data: responseData.summary,  graphData: responseData.graphs ***REMOVED***);
+              // res.render("index", { data: responseData.summary,  graphData: responseData.graphs });
               
               let returnObj = {
                   data:responseData.summary,
@@ -60,30 +62,31 @@ router.get("/", function (req, res) {
                       provDeaths:responseData.provinces.provDeaths,
                       provRecoveries:responseData.provinces.provRecoveries,
                       provActive:responseData.provinces.provActive
-      ***REMOVED*****REMOVED*****REMOVED***
+                  },
                   graphData:responseData.graphs
-            ***REMOVED***
+              }
               console.log("SETTING CACHE")
+              res.setHeader('ETag', etag(hashQuery(returnObj)))
               cache.set("data", hashQuery(returnObj));
               res.render("index",returnObj);
               return true;
     
               /*await pool.end(); // ??*/
-        ***REMOVED***);
+          });
         // If valid cache.
 
-  ***REMOVED***
+    }
     else{
         console.log("No Pool?")
-  ***REMOVED***
-***REMOVED***)
+    }
+})
 const getSummarySlonik = async (pool,responseCache) => {
     console.log("In Main.")
     
 
     {
         let value, value2, value3, graphs;
-        let provCases = {***REMOVED***, provDeaths = {***REMOVED***, provRecoveries = {***REMOVED***, provActive = {***REMOVED***,provName={***REMOVED***;
+        let provCases = {}, provDeaths = {}, provRecoveries = {}, provActive = {},provName={};
         let allProvinces = []
         const result = await pool.connect(async (connection) => {
             let mysql;
@@ -103,12 +106,12 @@ const getSummarySlonik = async (pool,responseCache) => {
                         if (value2) {
                             value.date2 = value2.date;
                             value.totalTests = value2.totalTests
-                      ***REMOVED***
+                        }
                         console.log("Done 2")
-                  ***REMOVED*** else {
+                    } else {
                         console.log('Done 2 - Skipped')
-                  ***REMOVED***
-              ***REMOVED***
+                    }
+                }
                 if (value) {
                     // Number formatting:
                     value.totalCases = numeral(value.totalCases).format('0,0');
@@ -139,23 +142,23 @@ const getSummarySlonik = async (pool,responseCache) => {
                                 provDeaths:province.deathCount,
                                 provActive:active,
                                 provRecoveries:province.recovered
-                          ***REMOVED***)
+                            })
                             // console.log("Province:",province)
-                      ***REMOVED***)
+                        })
                         console.log('Done 3')
-                  ***REMOVED***
+                    }
                     mysql = sql`-- @cache-ttl 600 \n select "date", "totalCases", "totalDeaths", "totalRecoveries", "activeCases", "totalTests", "dailyNew", "dailyDeaths" from "dates" order by "date" asc`
                     console.log("Transaction 4");
                     graphs = await transactionConnection.many(mysql)
                     if (graphs && graphs.length > 0) {
                         console.log('Done 4')
-                  ***REMOVED***
+                    }
 
-              ***REMOVED***
+                }
                 // End Transaction
                 allProvinces.sort(compareValues('provCases'));
                 console.log('Returning Value of:', value)
-                let provinces = {provName, provCases, provDeaths, provRecoveries,provActive***REMOVED***
+                let provinces = {provName, provCases, provDeaths, provRecoveries,provActive}
                 console.log('Returning Provinces: of:', provinces)
     
                 
@@ -164,24 +167,24 @@ const getSummarySlonik = async (pool,responseCache) => {
                     allProvinces,
                     provinces,
                     graphs
-              ***REMOVED***;
-          ***REMOVED***)
-      ***REMOVED***)
+                };
+            })
+        })
         if (result) {
             
             return Promise.resolve(result)
-      ***REMOVED*** else {
+        } else {
             return Promise.reject("Something went down: " + result)
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 function compareValues(key, order = 'desc') {
     return function innerSort(a, b) {
         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
             // property doesn't exist on either object
             return 0;
-      ***REMOVED***
+        }
         
         const varA = (typeof a[key] === 'string')
           ? a[key].toUpperCase() : a[key];
@@ -192,26 +195,26 @@ function compareValues(key, order = 'desc') {
         try{
             if ( varA >  varB) {
                 comparison = 1;
-          ***REMOVED*** else if (varA < varB) {
+            } else if (varA < varB) {
                 comparison = -1;
-          ***REMOVED***
-      ***REMOVED***catch (e) {
+            }
+        }catch (e) {
             console.log("Error",e);
             console.log("-",varA)
-      ***REMOVED***
+        }
         return (
-          (order === 'desc') ? (comparison***REMOVED*** -1) : comparison
+          (order === 'desc') ? (comparison * -1) : comparison
         );
-  ***REMOVED***;
-***REMOVED***
+    };
+}
 
 
 function CommaFormatted(amount) {
     const delimiter = ','; // replace comma if desired
     let i = parseInt(amount);
-    if (isNaN(i)) { return 'N/A'; ***REMOVED***
+    if (isNaN(i)) { return 'N/A'; }
     let minus = '';
-    if (i < 0) { minus = '-'; ***REMOVED***
+    if (i < 0) { minus = '-'; }
     i = Math.abs(i);
     let n = String(i);
     const a = [];
@@ -219,11 +222,11 @@ function CommaFormatted(amount) {
         const nn = n.substr(n.length - 3);
         a.unshift(nn);
         n = n.substr(0, n.length - 3);
-  ***REMOVED***
-    if (n.length > 0) { a.unshift(n); ***REMOVED***
+    }
+    if (n.length > 0) { a.unshift(n); }
     n = a.join(delimiter);
     amount = n;
     amount = minus + amount;
     return amount;
-***REMOVED***
+}
 module.exports = router;

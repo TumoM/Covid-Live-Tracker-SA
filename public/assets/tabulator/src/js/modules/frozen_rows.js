@@ -3,7 +3,7 @@ var FrozenRows = function(table){
 	this.topElement = document.createElement("div");
 	this.rows = [];
 	this.displayIndex = 0; //index in display pipeline
-***REMOVED***;
+};
 
 FrozenRows.prototype.initialize = function(){
 	this.rows = [];
@@ -12,19 +12,19 @@ FrozenRows.prototype.initialize = function(){
 
 	// this.table.columnManager.element.append(this.topElement);
 	this.table.columnManager.getElement().insertBefore(this.topElement, this.table.columnManager.headersElement.nextSibling);
-***REMOVED***;
+};
 
 FrozenRows.prototype.setDisplayIndex = function(index){
 	this.displayIndex = index;
-***REMOVED***;
+};
 
 FrozenRows.prototype.getDisplayIndex = function(){
 	return this.displayIndex;
-***REMOVED***;
+};
 
 FrozenRows.prototype.isFrozen = function(){
 	return !!this.rows.length;
-***REMOVED***;
+};
 
 //filter frozen rows out of display data
 FrozenRows.prototype.getRows = function(rows){
@@ -37,11 +37,11 @@ FrozenRows.prototype.getRows = function(rows){
 
 		if(index > -1){
 			output.splice(index, 1);
-		***REMOVED***
-	***REMOVED***);
+		}
+	});
 
 	return output;
-***REMOVED***;
+};
 
 FrozenRows.prototype.freezeRow = function(row){
 	if(!row.modules.frozen){
@@ -57,10 +57,10 @@ FrozenRows.prototype.freezeRow = function(row){
 
 		this.styleRows();
 
-	***REMOVED***else{
+	}else{
 		console.warn("Freeze Error - Row is already frozen");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 FrozenRows.prototype.unfreezeRow = function(row){
 	var index = this.rows.indexOf(row);
@@ -80,20 +80,20 @@ FrozenRows.prototype.unfreezeRow = function(row){
 
 		if(this.rows.length){
 			this.styleRows();
-		***REMOVED***
+		}
 
-	***REMOVED***else{
+	}else{
 		console.warn("Freeze Error - Row is already unfrozen");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 FrozenRows.prototype.styleRows = function(row){
 	var self = this;
 
 	this.rows.forEach(function(row, i){
 		self.table.rowManager.styleRow(row, i);
-	***REMOVED***);
-***REMOVED***
+	});
+}
 
 
 Tabulator.prototype.registerModule("frozenRows", FrozenRows);

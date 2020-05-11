@@ -7,6 +7,7 @@
   "browser": true,
   "node": true,
   "-W014": true,
+  "loopfunc": true,
 
   "esversion": 9
-***REMOVED***
+}

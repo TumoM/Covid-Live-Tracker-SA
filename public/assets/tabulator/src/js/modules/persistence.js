@@ -4,10 +4,10 @@ var Persistence = function(table){
 	this.id = "";
 	// this.persistProps = ["field", "width", "visible"];
 	this.defWatcherBlock = false;
-	this.config = {***REMOVED***;
+	this.config = {};
 	this.readFunc = false;
 	this.writeFunc = false;
-***REMOVED***;
+};
 
 // Test for whether localStorage is available for use.
 Persistence.prototype.localStorageTest = function() {
@@ -17,10 +17,10 @@ Persistence.prototype.localStorageTest = function() {
 		window.localStorage.setItem( testKey, testKey);
 		window.localStorage.removeItem( testKey );
 		return true;
-	***REMOVED*** catch(e) {
+	} catch(e) {
 		return false;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //setup parameters
 Persistence.prototype.initialize = function(){
@@ -35,38 +35,38 @@ Persistence.prototype.initialize = function(){
 	if(this.table.options.persistenceReaderFunc){
 		if(typeof this.table.options.persistenceReaderFunc === "function"){
 			this.readFunc = this.table.options.persistenceReaderFunc;
-		***REMOVED***else{
+		}else{
 			if(this.readers[this.table.options.persistenceReaderFunc]){
 				this.readFunc = this.readers[this.table.options.persistenceReaderFunc];
-			***REMOVED***else{
+			}else{
 				console.warn("Persistence Read Error - invalid reader set", this.table.options.persistenceReaderFunc);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***else{
+			}
+		}
+	}else{
 		if(this.readers[this.mode]){
 			this.readFunc = this.readers[this.mode];
-		***REMOVED***else{
+		}else{
 			console.warn("Persistence Read Error - invalid reader set", this.mode);
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	if(this.table.options.persistenceWriterFunc){
 		if(typeof this.table.options.persistenceWriterFunc === "function"){
 			this.writeFunc = this.table.options.persistenceWriterFunc;
-		***REMOVED***else{
+		}else{
 			if(this.readers[this.table.options.persistenceWriterFunc]){
 				this.writeFunc = this.readers[this.table.options.persistenceWriterFunc];
-			***REMOVED***else{
+			}else{
 				console.warn("Persistence Write Error - invalid reader set", this.table.options.persistenceWriterFunc);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***else{
+			}
+		}
+	}else{
 		if(this.writers[this.mode]){
 			this.writeFunc = this.writers[this.mode];
-		***REMOVED***else{
+		}else{
 			console.warn("Persistence Write Error - invalid writer set", this.mode);
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	//set storage tag
 	this.id = "tabulator-" + (id || (this.table.element.getAttribute("id") || ""));
@@ -77,7 +77,7 @@ Persistence.prototype.initialize = function(){
 		group:this.table.options.persistence === true || this.table.options.persistence.group,
 		page:this.table.options.persistence === true || this.table.options.persistence.page,
 		columns:this.table.options.persistence === true ? ["title", "width", "visible"] : this.table.options.persistence.columns,
-	***REMOVED***;
+	};
 
 	//load pagination data if needed
 	if(this.config.page){
@@ -86,13 +86,13 @@ Persistence.prototype.initialize = function(){
 		if(retreivedData){
 			if(typeof retreivedData.paginationSize !== "undefined" && (this.config.page === true || this.config.page.size)){
 				this.table.options.paginationSize = retreivedData.paginationSize;
-			***REMOVED***
+			}
 
 			if(typeof retreivedData.paginationInitialPage !== "undefined" && (this.config.page === true || this.config.page.page)){
 				this.table.options.paginationInitialPage = retreivedData.paginationInitialPage;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	//load group data if needed
 	if(this.config.group){
@@ -101,16 +101,16 @@ Persistence.prototype.initialize = function(){
 		if(retreivedData){
 			if(typeof retreivedData.groupBy !== "undefined" && (this.config.group === true || this.config.group.groupBy)){
 				this.table.options.groupBy = retreivedData.groupBy;
-			***REMOVED***
+			}
 			if(typeof retreivedData.groupStartOpen !== "undefined" && (this.config.group === true || this.config.group.groupStartOpen)){
 				this.table.options.groupStartOpen = retreivedData.groupStartOpen;
-			***REMOVED***
+			}
 			if(typeof retreivedData.groupHeader !== "undefined" && (this.config.group === true || this.config.group.groupHeader)){
 				this.table.options.groupHeader = retreivedData.groupHeader;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+			}
+		}
+	}
+};
 
 
 Persistence.prototype.initializeColumn = function(column){
@@ -134,26 +134,26 @@ Persistence.prototype.initializeColumn = function(column){
 
 						if(!self.defWatcherBlock){
 							self.save("columns");
-						***REMOVED***
+						}
 
 						if(props.set){
 							props.set(newValue);
-						***REMOVED***
-					***REMOVED***,
+						}
+					},
 					get:function(){
 						if(props.get){
 							props.get();
-						***REMOVED***
+						}
 						return value;
-					***REMOVED***
-				***REMOVED***);
-			***REMOVED***
-		***REMOVED***);
+					}
+				});
+			}
+		});
 
 		this.defWatcherBlock = false;
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 //load saved definitions
 Persistence.prototype.load = function(type, current){
@@ -161,15 +161,15 @@ Persistence.prototype.load = function(type, current){
 
 	if(current){
 		data = data ? this.mergeDefinition(current, data) : current;
-	***REMOVED***
+	}
 
 	return data;
-***REMOVED***;
+};
 
 //retreive data from memory
 Persistence.prototype.retreiveData = function(type){
 	return this.readFunc ? this.readFunc(this.id, type) : false;
-***REMOVED***;
+};
 
 //merge old and new column definitions
 Persistence.prototype.mergeDefinition = function(oldCols, newCols){
@@ -189,39 +189,39 @@ Persistence.prototype.mergeDefinition = function(oldCols, newCols){
 			if(self.config.columns === true || self.config.columns == undefined){
 				keys =  Object.keys(from);
 				keys.push("width");
-			***REMOVED***else{
+			}else{
 				keys = self.config.columns;
-			***REMOVED***
+			}
 
 			keys.forEach((key)=>{
 				if(typeof column[key] !== "undefined"){
 					from[key] = column[key];
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			if(from.columns){
 				from.columns = self.mergeDefinition(from.columns, column.columns);
-			***REMOVED***
+			}
 
 
 			output.push(from);
-		***REMOVED***
+		}
 
-	***REMOVED***);
+	});
 
 	oldCols.forEach(function (column, i) {
 		var from = self._findColumn(newCols, column);
 		if (!from) {
 			if(output.length>i){
 				output.splice(i, 0, column);
-			***REMOVED***else{
+			}else{
 				output.push(column);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+			}
+		}
+	});
 
 	return output;
-***REMOVED***;
+};
 
 //find matching columns
 Persistence.prototype._findColumn = function(columns, subject){
@@ -240,13 +240,13 @@ Persistence.prototype._findColumn = function(columns, subject){
 			case "object":
 			return col === subject;
 			break;
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 //save data
 Persistence.prototype.save = function(type){
-	var data = {***REMOVED***;
+	var data = {};
 
 
 	switch(type){
@@ -269,57 +269,57 @@ Persistence.prototype.save = function(type){
 		case "page":
 		data = this.getPageConfig();
 		break;
-	***REMOVED***
+	}
 
 	if(this.writeFunc){
 		this.writeFunc(this.id, type, data);
-	***REMOVED***
+	}
 
-***REMOVED***;
+};
 
 //ensure sorters contain no function data
 Persistence.prototype.validateSorters = function(data){
 	data.forEach(function(item){
 		item.column = item.field;
 		delete item.field;
-	***REMOVED***);
+	});
 
 	return data;
-***REMOVED***;
+};
 
 Persistence.prototype.getGroupConfig = function(){
 	if(this.config.group){
 		if(this.config.group === true || this.config.group.groupBy){
 			data.groupBy = this.table.options.groupBy;
-		***REMOVED***
+		}
 
 		if(this.config.group === true || this.config.group.groupStartOpen){
 			data.groupStartOpen = this.table.options.groupStartOpen;
-		***REMOVED***
+		}
 
 		if(this.config.group === true || this.config.group.groupHeader){
 			data.groupHeader = this.table.options.groupHeader;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	return data;
-***REMOVED***;
+};
 
 Persistence.prototype.getPageConfig = function(){
-	var data = {***REMOVED***;
+	var data = {};
 
 	if(this.config.page){
 		if(this.config.page === true || this.config.page.size){
 			data.paginationSize = this.table.modules.page.getPageSize();
-		***REMOVED***
+		}
 
 		if(this.config.page === true || this.config.page.page){
 			data.paginationInitialPage = this.table.modules.page.getPage();
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	return data;
-***REMOVED***;
+};
 
 
 //parse columns for data to store
@@ -328,22 +328,22 @@ Persistence.prototype.parseColumns = function(columns){
 	definitions = [];
 
 	columns.forEach(function(column){
-		var defStore = {***REMOVED***,
+		var defStore = {},
 		colDef = column.getDefinition(),
 		keys;
 
 		if(column.isGroup){
 			defStore.title = colDef.title;
 			defStore.columns = self.parseColumns(column.getColumns());
-		***REMOVED***else{
+		}else{
 			defStore.field = column.getField();
 
 			if(self.config.columns === true || self.config.columns == undefined){
 				keys =  Object.keys(colDef);
 				keys.push("width");
-			***REMOVED***else{
+			}else{
 				keys = self.config.columns;
-			***REMOVED***
+			}
 
 			keys.forEach((key)=>{
 
@@ -357,16 +357,16 @@ Persistence.prototype.parseColumns = function(columns){
 
 					default:
 					defStore[key] = colDef[key];
-				***REMOVED***
+				}
 
-			***REMOVED***);
-		***REMOVED***
+			});
+		}
 
 		definitions.push(defStore);
-	***REMOVED***);
+	});
 
 	return definitions;
-***REMOVED***;
+};
 
 // read peristence information from storage
 Persistence.prototype.readers = {
@@ -374,7 +374,7 @@ Persistence.prototype.readers = {
 		var data = localStorage.getItem(id + "-" + type);
 
 		return data ? JSON.parse(data) : false;
-	***REMOVED***,
+	},
 	cookie:function(id, type){
 		var cookie = document.cookie,
 		key = id + "-" + type,
@@ -389,28 +389,28 @@ Persistence.prototype.readers = {
 
 			if(end > -1){
 				cookie = cookie.substr(0, end);
-			***REMOVED***
+			}
 
 			data = cookie.replace(key + "=", "");
-		***REMOVED***
+		}
 
 		return data ? JSON.parse(data) : false;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //write persistence information to storage
 Persistence.prototype.writers = {
 	local:function(id, type, data){
 		localStorage.setItem(id + "-" + type, JSON.stringify(data));
-	***REMOVED***,
+	},
 	cookie:function(id, type, data){
 		var expireDate = new Date();
 
 		expireDate.setDate(expireDate.getDate() + 10000);
 
 		document.cookie = id + "-" + type + "=" + JSON.stringify(data) + "; expires=" + expireDate.toUTCString();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 Tabulator.prototype.registerModule("persistence", Persistence);

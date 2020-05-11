@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-***REMOVED********************************
+/*******************************
              Table
 *******************************/
 
@@ -28,17 +28,17 @@ $textAlign: left !default;
      Parts
 ---------------*/
 
-/* Table Row***REMOVED***/
+/* Table Row */
 $rowBorder: 1px solid $internalBorderColor !default;
 
-/* Table Cell***REMOVED***/
+/* Table Cell */
 $cellVerticalPadding: $relativeMini !default;
 $cellHorizontalPadding: $relativeMini !default;
 $cellVerticalAlign: inherit !default;
 $cellTextAlign: inherit !default;
 $cellBorder: 1px solid $internalBorderColor !default;
 
-/* Table Header***REMOVED***/
+/* Table Header */
 $headerBorder: 1px solid $internalBorderColor !default;
 $headerDivider: none !default;
 $headerBackground: $offWhite !default;
@@ -52,7 +52,7 @@ $headerFontWeight: bold !default;
 $headerTextTransform: none !default;
 $headerBoxShadow: none !default;
 
-/* Table Footer***REMOVED***/
+/* Table Footer */
 $footerBoxShadow: none !default;
 $footerBorder: 1px solid $borderColor !default;
 $footerDivider: none !default;
@@ -66,7 +66,7 @@ $footerFontStyle: normal !default;
 $footerFontWeight: normal !default;
 $footerTextTransform: none !default;
 
-/* Responsive Size***REMOVED***/
+/* Responsive Size */
 $responsiveHeaderDisplay: block !default;
 $responsiveFooterDisplay: block !default;
 $responsiveRowVerticalPadding: 1em !default;
@@ -79,7 +79,7 @@ $responsiveCellBoxShadow: none !important !default;
        Types
 --------------------*/
 
-/* Definition***REMOVED***/
+/* Definition */
 $definitionPageBackground: $white !default;
 
 $definitionHeaderBackground: transparent !default;
@@ -112,31 +112,31 @@ $iconVerticalAlign: baseline !default;
 
 $stateMarkerWidth: 0px !default;
 
-/* Positive***REMOVED***/
+/* Positive */
 $positiveColor: $positiveTextColor !default;
 $positiveBoxShadow: $stateMarkerWidth 0px 0px $positiveBorderColor inset !default;
 $positiveBackgroundHover: darken($positiveBackgroundColor, 3) !default;
 $positiveColorHover: darken($positiveColor, 3) !default;
 
-/* Negative***REMOVED***/
+/* Negative */
 $negativeColor: $negativeTextColor !default;
 $negativeBoxShadow: $stateMarkerWidth 0px 0px $negativeBorderColor inset !default;
 $negativeBackgroundHover: darken($negativeBackgroundColor, 3) !default;
 $negativeColorHover: darken($negativeColor, 3) !default;
 
-/* Error***REMOVED***/
+/* Error */
 $errorColor: $errorTextColor !default;
 $errorBoxShadow: $stateMarkerWidth 0px 0px $errorBorderColor inset !default;
 $errorBackgroundHover: darken($errorBackgroundColor, 3) !default;
 $errorColorHover: darken($errorColor, 3) !default;
 
-/* Warning***REMOVED***/
+/* Warning */
 $warningColor: $warningTextColor !default;
 $warningBoxShadow: $stateMarkerWidth 0px 0px $warningBorderColor inset !default;
 $warningBackgroundHover: darken($warningBackgroundColor, 3) !default;
 $warningColorHover: darken($warningColor, 3) !default;
 
-/* Active***REMOVED***/
+/* Active */
 $activeColor: $textColor !default;
 $activeBackgroundColor: #E0E0E0 !default;
 $activeBoxShadow: $stateMarkerWidth 0px 0px $activeColor inset !default;
@@ -148,11 +148,11 @@ $activeColorHover: $selectedTextColor !default;
      Types
 ---------------*/
 
-/* Attached***REMOVED***/
+/* Attached */
 $attachedTopOffset: 0px !default;
 $attachedBottomOffset: 0px !default;
 $attachedHorizontalOffset: -$borderWidth !default;
-$attachedWidth: calc(100% + #{$attachedHorizontalOffset***REMOVED*** -2***REMOVED***) !default;
+$attachedWidth: calc(100% + #{$attachedHorizontalOffset * -2}) !default;
 $attachedBoxShadow: none !default;
 $attachedBorder: $borderWidth solid $solidBorderColor !default;
 $attachedBottomBoxShadow:
@@ -160,17 +160,17 @@ $attachedBottomBoxShadow:
   $attachedBoxShadow
  !default;
 
-/* Striped***REMOVED***/
+/* Striped */
 $stripedBackground: rgba(0, 0, 50, 0.02) !default;
 $invertedStripedBackground: rgba(255, 255, 255, 0.05) !default;
 
-/* Selectable***REMOVED***/
+/* Selectable */
 $selectableBackground: $transparentBlack !default;
 $selectableTextColor: $selectedTextColor !default;
 $selectableInvertedBackground: $transparentWhite !default;
 $selectableInvertedTextColor: $invertedSelectedTextColor !default;
 
-/* Sortable***REMOVED***/
+/* Sortable */
 $sortableBackground: '' !default;
 $sortableColor: $textColor !default;
 
@@ -198,11 +198,11 @@ $sortableInvertedHoverColor: $invertedHoveredTextColor !default;
 $sortableInvertedActiveBackground: $strongTransparentWhite $subtleGradient !default;
 $sortableInvertedActiveColor: $invertedSelectedTextColor !default;
 
-/* Colors***REMOVED***/
+/* Colors */
 $coloredBorderSize: 0.2em !default;
 $coloredBorderRadius: 0em 0em $borderRadius $borderRadius !default;
 
-/* Inverted***REMOVED***/
+/* Inverted */
 $invertedBackground: #333333 !default;
 $invertedBorder: none !default;
 $invertedCellBorderColor: $whiteBorderColor !default;
@@ -216,7 +216,7 @@ $invertedDefinitionColumnBackground: $subtleTransparentWhite !default;
 $invertedDefinitionColumnColor: $invertedSelectedTextColor !default;
 $invertedDefinitionColumnFontWeight: bold !default;
 
-/* Basic***REMOVED***/
+/* Basic */
 $basicTableBackground: transparent !default;
 $basicTableBorder: $borderWidth solid $borderColor !default;
 $basicBoxShadow: none !default;
@@ -228,20 +228,20 @@ $basicTableCellBorder: 1px solid rgba(0, 0, 0, 0.1) !default;
 $basicTableCellPadding: '' !default;
 $basicTableStripedBackground: $transparentBlack !default;
 
-/* Padded***REMOVED***/
+/* Padded */
 $paddedVerticalPadding: 1em !default;
 $paddedHorizontalPadding: 1em !default;
 $veryPaddedVerticalPadding: 1.5em !default;
 $veryPaddedHorizontalPadding: 1.5em !default;
 
-/* Compact***REMOVED***/
+/* Compact */
 $compactVerticalPadding: 0.5em !default;
 $compactHorizontalPadding: 0.7em !default;
 $veryCompactVerticalPadding: 0.4em !default;
 $veryCompactHorizontalPadding: 0.6em !default;
 
 
-/* Sizes***REMOVED***/
+/* Sizes */
 $small: 0.9em !default;
 $medium: 1em !default;
 $large: 1.1em !default;

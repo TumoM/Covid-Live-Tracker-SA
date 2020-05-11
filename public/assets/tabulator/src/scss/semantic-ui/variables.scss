@@ -1,16 +1,16 @@
 /// Remove the unit of a length
-/// @param {Number***REMOVED*** $number - Number to remove unit from
+/// @param {Number} $number - Number to remove unit from
 /// @author Hugo Giraudel
-/// @return {Number***REMOVED*** - Unitless number
+/// @return {Number} - Unitless number
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number***REMOVED*** 0 + 1);
-***REMOVED***
+    @return $number / ($number * 0 + 1);
+  }
 
   @return $number;
-***REMOVED***
+}
 
-***REMOVED********************************
+/*******************************
          Site Settings
 *******************************/
 
@@ -30,16 +30,16 @@ $googleFontSizes   : '400,700,400italic,700italic' !default;
 $googleSubset      : 'latin' !default;
 
 $googleProtocol    : 'https://' !default;
-$googleFontRequest : '${googleFontName***REMOVED***:${googleFontSizes***REMOVED***&subset=${googleSubset***REMOVED***' !default;
+$googleFontRequest : '${googleFontName}:${googleFontSizes}&subset=${googleSubset}' !default;
 
 /*-------------------
       Base Sizes
 --------------------*/
 
-/* This is the single variable that controls them all***REMOVED***/
+/* This is the single variable that controls them all */
 $emSize   : 14px !default;
 
-/* The size of page text ***REMOVED***/
+/* The size of page text  */
 $fontSize : 14px !default;
 
 /*-------------------
@@ -205,13 +205,13 @@ $lightSecondaryColor : $lightBlack !default;
 ---------------*/
 
 $headerFontWeight : bold !default;
-$headerLineHeight : (18 / 14)***REMOVED*** 1em !default;
+$headerLineHeight : (18 / 14) * 1em !default;
 
-$h1 : (28 / 14)***REMOVED*** 1rem !default;
-$h2 : (24 / 14)***REMOVED*** 1rem !default;
-$h3 : (18 / 14)***REMOVED*** 1rem !default;
-$h4 : (15 / 14)***REMOVED*** 1rem !default;
-$h5 : (14 / 14)***REMOVED*** 1rem !default;
+$h1 : (28 / 14) * 1rem !default;
+$h2 : (24 / 14) * 1rem !default;
+$h3 : (18 / 14) * 1rem !default;
+$h4 : (15 / 14) * 1rem !default;
+$h5 : (14 / 14) * 1rem !default;
 
 
 /*-------------------
@@ -229,28 +229,28 @@ $textColor           : rgba(0, 0, 0, 0.87) !default;
    Form Input
 ---------------*/
 
-/* This adjusts the default form input across all elements***REMOVED***/
+/* This adjusts the default form input across all elements */
 $inputBackground        : $white !default;
 $inputVerticalPadding   : $relative11px !default;
 $inputHorizontalPadding : $relative14px !default;
 $inputPadding           : $inputVerticalPadding $inputHorizontalPadding !default;
 
-/* Input Text Color***REMOVED***/
+/* Input Text Color */
 $inputColor: $textColor !default;
 $inputPlaceholderColor: lighten($inputColor, 75) !default;
 $inputPlaceholderFocusColor: lighten($inputColor, 45) !default;
 
-/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em)***REMOVED***/
-$inputLineHeight: (17 / 14)***REMOVED*** 1em !default;
+/* Line Height Default For Inputs in Browser (Descendors are 17px at 14px base em) */
+$inputLineHeight: (17 / 14) * 1em !default;
 
 /*-------------------
     Focused Input
 --------------------*/
 
-/* Used on inputs, textarea etc***REMOVED***/
+/* Used on inputs, textarea etc */
 $focusedFormBorderColor: #85B7D9 !default;
 
-/* Used on dropdowns, other larger blocks***REMOVED***/
+/* Used on dropdowns, other larger blocks */
 $focusedFormMutedBorderColor: #96C8DA !default;
 
 /*-------------------
@@ -306,34 +306,34 @@ $inputHighlightColor      : $textColor !default;
   This rounds $size values to the closest pixel then expresses that value in (r)em.
   This ensures all size values round to exact pixels
 */
-$mini            : (round($miniSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$tiny            : (round($tinySize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$small           : (round($smallSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$medium          : (round($mediumSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$large           : (round($largeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$big             : (round($bigSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$huge            : (round($hugeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$massive         : (round($massiveSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
+$mini            : (round($miniSize * $emSize) / $emSize) * 1rem !default;
+$tiny            : (round($tinySize * $emSize) / $emSize) * 1rem !default;
+$small           : (round($smallSize * $emSize) / $emSize) * 1rem !default;
+$medium          : (round($mediumSize * $emSize) / $emSize) * 1rem !default;
+$large           : (round($largeSize * $emSize) / $emSize) * 1rem !default;
+$big             : (round($bigSize * $emSize) / $emSize) * 1rem !default;
+$huge            : (round($hugeSize * $emSize) / $emSize) * 1rem !default;
+$massive         : (round($massiveSize * $emSize) / $emSize) * 1rem !default;
 
-/* em***REMOVED***/
-$relativeMini    : (round($miniSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeTiny    : (round($tinySize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeSmall   : (round($smallSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeMedium  : (round($mediumSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeLarge   : (round($largeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeBig     : (round($bigSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeHuge    : (round($hugeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
-$relativeMassive : (round($massiveSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1em !default;
+/* em */
+$relativeMini    : (round($miniSize * $emSize) / $emSize) * 1em !default;
+$relativeTiny    : (round($tinySize * $emSize) / $emSize) * 1em !default;
+$relativeSmall   : (round($smallSize * $emSize) / $emSize) * 1em !default;
+$relativeMedium  : (round($mediumSize * $emSize) / $emSize) * 1em !default;
+$relativeLarge   : (round($largeSize * $emSize) / $emSize) * 1em !default;
+$relativeBig     : (round($bigSize * $emSize) / $emSize) * 1em !default;
+$relativeHuge    : (round($hugeSize * $emSize) / $emSize) * 1em !default;
+$relativeMassive : (round($massiveSize * $emSize) / $emSize) * 1em !default;
 
-/* rem***REMOVED***/
-$absoluteMini    : (round($miniSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteTiny    : (round($tinySize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteSmall   : (round($smallSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteMedium  : (round($mediumSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteLarge   : (round($largeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteBig     : (round($bigSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteHuge    : (round($hugeSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
-$absoluteMassive : (round($massiveSize***REMOVED*** $emSize) / $emSize)***REMOVED*** 1rem !default;
+/* rem */
+$absoluteMini    : (round($miniSize * $emSize) / $emSize) * 1rem !default;
+$absoluteTiny    : (round($tinySize * $emSize) / $emSize) * 1rem !default;
+$absoluteSmall   : (round($smallSize * $emSize) / $emSize) * 1rem !default;
+$absoluteMedium  : (round($mediumSize * $emSize) / $emSize) * 1rem !default;
+$absoluteLarge   : (round($largeSize * $emSize) / $emSize) * 1rem !default;
+$absoluteBig     : (round($bigSize * $emSize) / $emSize) * 1rem !default;
+$absoluteHuge    : (round($hugeSize * $emSize) / $emSize) * 1rem !default;
+$absoluteMassive : (round($massiveSize * $emSize) / $emSize) * 1rem !default;
 
 
 /*-------------------
@@ -374,43 +374,43 @@ $widescreenMonitorBreakpoint : 1920px !default;
 
 
 
-/* Columns***REMOVED***/
-$oneWide        : (1 / $columnCount***REMOVED*** 100%) !default;
-$twoWide        : (2 / $columnCount***REMOVED*** 100%) !default;
-$threeWide      : (3 / $columnCount***REMOVED*** 100%) !default;
-$fourWide       : (4 / $columnCount***REMOVED*** 100%) !default;
-$fiveWide       : (5 / $columnCount***REMOVED*** 100%) !default;
-$sixWide        : (6 / $columnCount***REMOVED*** 100%) !default;
-$sevenWide      : (7 / $columnCount***REMOVED*** 100%) !default;
-$eightWide      : (8 / $columnCount***REMOVED*** 100%) !default;
-$nineWide       : (9 / $columnCount***REMOVED*** 100%) !default;
-$tenWide        : (10 / $columnCount***REMOVED*** 100%) !default;
-$elevenWide     : (11 / $columnCount***REMOVED*** 100%) !default;
-$twelveWide     : (12 / $columnCount***REMOVED*** 100%) !default;
-$thirteenWide   : (13 / $columnCount***REMOVED*** 100%) !default;
-$fourteenWide   : (14 / $columnCount***REMOVED*** 100%) !default;
-$fifteenWide    : (15 / $columnCount***REMOVED*** 100%) !default;
-$sixteenWide    : (16 / $columnCount***REMOVED*** 100%) !default;
+/* Columns */
+$oneWide        : (1 / $columnCount * 100%) !default;
+$twoWide        : (2 / $columnCount * 100%) !default;
+$threeWide      : (3 / $columnCount * 100%) !default;
+$fourWide       : (4 / $columnCount * 100%) !default;
+$fiveWide       : (5 / $columnCount * 100%) !default;
+$sixWide        : (6 / $columnCount * 100%) !default;
+$sevenWide      : (7 / $columnCount * 100%) !default;
+$eightWide      : (8 / $columnCount * 100%) !default;
+$nineWide       : (9 / $columnCount * 100%) !default;
+$tenWide        : (10 / $columnCount * 100%) !default;
+$elevenWide     : (11 / $columnCount * 100%) !default;
+$twelveWide     : (12 / $columnCount * 100%) !default;
+$thirteenWide   : (13 / $columnCount * 100%) !default;
+$fourteenWide   : (14 / $columnCount * 100%) !default;
+$fifteenWide    : (15 / $columnCount * 100%) !default;
+$sixteenWide    : (16 / $columnCount * 100%) !default;
 
-$oneColumn      : (1 / 1***REMOVED*** 100%) !default;
-$twoColumn      : (1 / 2***REMOVED*** 100%) !default;
-$threeColumn    : (1 / 3***REMOVED*** 100%) !default;
-$fourColumn     : (1 / 4***REMOVED*** 100%) !default;
-$fiveColumn     : (1 / 5***REMOVED*** 100%) !default;
-$sixColumn      : (1 / 6***REMOVED*** 100%) !default;
-$sevenColumn    : (1 / 7***REMOVED*** 100%) !default;
-$eightColumn    : (1 / 8***REMOVED*** 100%) !default;
-$nineColumn     : (1 / 9***REMOVED*** 100%) !default;
-$tenColumn      : (1 / 10***REMOVED*** 100%) !default;
-$elevenColumn   : (1 / 11***REMOVED*** 100%) !default;
-$twelveColumn   : (1 / 12***REMOVED*** 100%) !default;
-$thirteenColumn : (1 / 13***REMOVED*** 100%) !default;
-$fourteenColumn : (1 / 14***REMOVED*** 100%) !default;
-$fifteenColumn  : (1 / 15***REMOVED*** 100%) !default;
-$sixteenColumn  : (1 / 16***REMOVED*** 100%) !default;
+$oneColumn      : (1 / 1 * 100%) !default;
+$twoColumn      : (1 / 2 * 100%) !default;
+$threeColumn    : (1 / 3 * 100%) !default;
+$fourColumn     : (1 / 4 * 100%) !default;
+$fiveColumn     : (1 / 5 * 100%) !default;
+$sixColumn      : (1 / 6 * 100%) !default;
+$sevenColumn    : (1 / 7 * 100%) !default;
+$eightColumn    : (1 / 8 * 100%) !default;
+$nineColumn     : (1 / 9 * 100%) !default;
+$tenColumn      : (1 / 10 * 100%) !default;
+$elevenColumn   : (1 / 11 * 100%) !default;
+$twelveColumn   : (1 / 12 * 100%) !default;
+$thirteenColumn : (1 / 13 * 100%) !default;
+$fourteenColumn : (1 / 14 * 100%) !default;
+$fifteenColumn  : (1 / 15 * 100%) !default;
+$sixteenColumn  : (1 / 16 * 100%) !default;
 
 
-***REMOVED********************************
+/*******************************
            Power-User
 *******************************/
 
@@ -419,28 +419,28 @@ $sixteenColumn  : (1 / 16***REMOVED*** 100%) !default;
     Emotive Colors
 --------------------*/
 
-/* Positive***REMOVED***/
+/* Positive */
 $positiveColor           : $green !default;
 $positiveBackgroundColor : #FCFFF5 !default;
 $positiveBorderColor     : #A3C293 !default;
 $positiveHeaderColor     : #1A531B !default;
 $positiveTextColor       : #2C662D !default;
 
-/* Negative***REMOVED***/
+/* Negative */
 $negativeColor           : $red !default;
 $negativeBackgroundColor : #FFF6F6 !default;
 $negativeBorderColor     : #E0B4B4 !default;
 $negativeHeaderColor     : #912D2B !default;
 $negativeTextColor       : #9F3A38 !default;
 
-/* Info***REMOVED***/
+/* Info */
 $infoColor              : #31CCEC !default;
 $infoBackgroundColor    : #F8FFFF !default;
 $infoBorderColor        : #A9D5DE !default;
 $infoHeaderColor        : #0E566C !default;
 $infoTextColor          : #276F86 !default;
 
-/* Warning***REMOVED***/
+/* Warning */
 $warningColor           : #F2C037 !default;
 $warningBorderColor     : #C9BA9B !default;
 $warningBackgroundColor : #FFFAF3 !default;
@@ -451,7 +451,7 @@ $warningTextColor       : #573A08 !default;
         Paths
 --------------------*/
 
-/* For source only. Modified in gulp for dist***REMOVED***/
+/* For source only. Modified in gulp for dist */
 $imagePath : '../../themes/default/assets/images' !default;
 $fontPath  : '../../themes/default/assets/fonts' !default;
 
@@ -460,7 +460,7 @@ $fontPath  : '../../themes/default/assets/fonts' !default;
        Icons
 --------------------*/
 
-/* Maximum Glyph Width of Icon***REMOVED***/
+/* Maximum Glyph Width of Icon */
 $iconWidth : 1.18em !default;
 
 /*-------------------
@@ -526,10 +526,10 @@ $selectedSolidWhiteBorderColor : #999999 !default;
        Accents
 --------------------*/
 
-/* Differentiating Neutrals***REMOVED***/
+/* Differentiating Neutrals */
 $subtleGradient: linear-gradient(transparent, $transparentBlack) !default;
 
-/* Differentiating Layers***REMOVED***/
+/* Differentiating Layers */
 $subtleShadow:
   0px 1px 2px 0 $borderColor
  !default;
@@ -543,28 +543,28 @@ $floatingShadow:
     Derived Values
 --------------------*/
 
-/* Loaders Position Offset***REMOVED***/
+/* Loaders Position Offset */
 $loaderOffset : -($loaderSize / 2) !default;
 $loaderMargin : $loaderOffset 0em 0em $loaderOffset !default;
 
-/* Rendered Scrollbar Width***REMOVED***/
+/* Rendered Scrollbar Width */
 $scrollbarWidth: 17px !default;
 
-/* Maximum Single Character Glyph Width, aka Capital "W"***REMOVED***/
+/* Maximum Single Character Glyph Width, aka Capital "W" */
 $glyphWidth: 1.1em !default;
 
-/* Used to match floats with text***REMOVED***/
+/* Used to match floats with text */
 $lineHeightOffset       : (($lineHeight - 1em) / 2) !default;
 $headerLineHeightOffset : ($headerLineHeight - 1em) / 2 !default;
 
-/* Header Spacing***REMOVED***/
-$headerTopMargin    : calc(2rem - #{$headerLineHeightOffset***REMOVED***) !default;
+/* Header Spacing */
+$headerTopMargin    : calc(2rem - #{$headerLineHeightOffset}) !default;
 $headerBottomMargin : 1rem !default;
 
-/* Minimum Mobile Width***REMOVED***/
+/* Minimum Mobile Width */
 $pageMinWidth       : 320px !default;
 
-/* Positive / Negative Dupes***REMOVED***/
+/* Positive / Negative Dupes */
 $successBackgroundColor : $positiveBackgroundColor !default;
 $successColor           : $positiveColor !default;
 $successBorderColor     : $positiveBorderColor !default;
@@ -578,7 +578,7 @@ $errorHeaderColor       : $negativeHeaderColor !default;
 $errorTextColor         : $negativeTextColor !default;
 
 
-/* Responsive***REMOVED***/
+/* Responsive */
 $largestMobileScreen : ($tabletBreakpoint - 1px) !default;
 $largestTabletScreen : ($computerBreakpoint - 1px) !default;
 $largestSmallMonitor : ($largeMonitorBreakpoint - 1px) !default;
@@ -586,7 +586,7 @@ $largestLargeMonitor : ($widescreenMonitorBreakpoint - 1px) !default;
 
 
 
-***REMOVED********************************
+/*******************************
              States
 *******************************/
 

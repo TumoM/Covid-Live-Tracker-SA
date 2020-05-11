@@ -1,3 +1,5 @@
-public***REMOVED***/*
-***REMOVED***/*min*.js
-assets***REMOVED***/*.js
+public/**/*
+/**/*min*
+assets/**/*.js
+src/semantic
+coverage

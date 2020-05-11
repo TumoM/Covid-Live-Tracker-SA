@@ -23,7 +23,7 @@ var MoveRows = function(table){
 
 	this.connectedTable = false;
 	this.connectedRow = false;
-***REMOVED***;
+};
 
 MoveRows.prototype.createPlaceholderElement = function(){
 	var el = document.createElement("div");
@@ -32,26 +32,26 @@ MoveRows.prototype.createPlaceholderElement = function(){
 	el.classList.add("tabulator-row-placeholder");
 
 	return el;
-***REMOVED***;
+};
 
 
 MoveRows.prototype.initialize = function(handle){
 	this.connection = this.table.options.movableRowsConnectedTables;
-***REMOVED***;
+};
 
 MoveRows.prototype.setHandle = function(handle){
 	this.hasHandle = handle;
-***REMOVED***;
+};
 
 MoveRows.prototype.initializeGroupHeader = function(group){
 	var self = this,
-	config = {***REMOVED***,
+	config = {},
 	rowEl;
 
 	//inter table drag drop
 	config.mouseup = function(e){
 		self.tableRowDrop(e, row);
-	***REMOVED***.bind(self);
+	}.bind(self);
 
 	//same table drag drop
 	config.mousemove = function(e){
@@ -60,30 +60,30 @@ MoveRows.prototype.initializeGroupHeader = function(group){
 				var rowEl = group.getElement();
 				rowEl.parentNode.insertBefore(self.placeholderElement, rowEl.nextSibling);
 				self.moveRow(group, true);
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			if(self.toRow !== group || self.toRowAfter){
 				var rowEl = group.getElement();
 				if(rowEl.previousSibling){
 					rowEl.parentNode.insertBefore(self.placeholderElement, rowEl);
 					self.moveRow(group, false);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***.bind(self);
+				}
+			}
+		}
+	}.bind(self);
 
 	group.modules.moveRow = config;
-***REMOVED***;
+};
 
 MoveRows.prototype.initializeRow = function(row){
 	var self = this,
-	config = {***REMOVED***,
+	config = {},
 	rowEl;
 
 	//inter table drag drop
 	config.mouseup = function(e){
 		self.tableRowDrop(e, row);
-	***REMOVED***.bind(self);
+	}.bind(self);
 
 	//same table drag drop
 	config.mousemove = function(e){
@@ -92,15 +92,15 @@ MoveRows.prototype.initializeRow = function(row){
 				var rowEl = row.getElement();
 				rowEl.parentNode.insertBefore(self.placeholderElement, rowEl.nextSibling);
 				self.moveRow(row, true);
-			***REMOVED***
-		***REMOVED***else{
+			}
+		}else{
 			if(self.toRow !== row || self.toRowAfter){
 				var rowEl = row.getElement();
 				rowEl.parentNode.insertBefore(self.placeholderElement, rowEl);
 				self.moveRow(row, false);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***.bind(self);
+			}
+		}
+	}.bind(self);
 
 
 	if(!this.hasHandle){
@@ -111,23 +111,23 @@ MoveRows.prototype.initializeRow = function(row){
 			if(e.which === 1){
 				self.checkTimeout = setTimeout(function(){
 					self.startMove(e, row);
-				***REMOVED***, self.checkPeriod);
-			***REMOVED***
-		***REMOVED***);
+				}, self.checkPeriod);
+			}
+		});
 
 		rowEl.addEventListener("mouseup", function(e){
 			if(e.which === 1){
 				if(self.checkTimeout){
 					clearTimeout(self.checkTimeout);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***);
+				}
+			}
+		});
 
 		this.bindTouchEvents(row, row.getElement());
-	***REMOVED***
+	}
 
 	row.modules.moveRow = config;
-***REMOVED***;
+};
 
 MoveRows.prototype.initializeCell = function(cell){
 	var self = this,
@@ -137,20 +137,20 @@ MoveRows.prototype.initializeCell = function(cell){
 		if(e.which === 1){
 			self.checkTimeout = setTimeout(function(){
 				self.startMove(e, cell.row);
-			***REMOVED***, self.checkPeriod);
-		***REMOVED***
-	***REMOVED***);
+			}, self.checkPeriod);
+		}
+	});
 
 	cellEl.addEventListener("mouseup", function(e){
 		if(e.which === 1){
 			if(self.checkTimeout){
 				clearTimeout(self.checkTimeout);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+			}
+		}
+	});
 
 	this.bindTouchEvents(cell.row, cell.getElement());
-***REMOVED***;
+};
 
 MoveRows.prototype.bindTouchEvents = function(row, element){
 	var self = this,
@@ -171,8 +171,8 @@ MoveRows.prototype.bindTouchEvents = function(row, element){
 			startYMove = false;
 
 			self.startMove(e, row);
-		***REMOVED***, self.checkPeriod);
-	***REMOVED***, {passive: true***REMOVED***);
+		}, self.checkPeriod);
+	}, {passive: true});
 	this.moving, this.toRow, this.toRowAfter
 	element.addEventListener("touchmove", function(e){
 
@@ -185,7 +185,7 @@ MoveRows.prototype.bindTouchEvents = function(row, element){
 
 			if(!startYMove){
 				startYMove = e.touches[0].pageY;
-			***REMOVED***
+			}
 
 			diff = e.touches[0].pageY - startYMove;
 
@@ -197,9 +197,9 @@ MoveRows.prototype.bindTouchEvents = function(row, element){
 						startYMove = e.touches[0].pageY
 						moveToRow.getElement().parentNode.insertBefore(self.placeholderElement, moveToRow.getElement().nextSibling);
 						self.moveRow(moveToRow, true);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***else{
+					}
+				}
+			}else{
 				if(prevRow && -diff - prevRowHeightLast >  prevRowHeight){
 					moveToRow = prevRow;
 
@@ -207,9 +207,9 @@ MoveRows.prototype.bindTouchEvents = function(row, element){
 						startYMove = e.touches[0].pageY;
 						moveToRow.getElement().parentNode.insertBefore(self.placeholderElement, moveToRow.getElement());
 						self.moveRow(moveToRow, false);
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			if(moveToRow){
 				currentRow = moveToRow;
@@ -219,20 +219,20 @@ MoveRows.prototype.bindTouchEvents = function(row, element){
 				prevRow = moveToRow.prevRow();
 				prevRowHeightLast = prevRowHeight;
 				prevRowHeight = prevRow ? prevRow.getHeight() / 2 : 0;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***);
+			}
+		}
+	});
 
 	element.addEventListener("touchend", function(e){
 		if(self.checkTimeout){
 			clearTimeout(self.checkTimeout);
-		***REMOVED***
+		}
 		if(self.moving){
 			self.endMove(e);
 			self.touchMove = false;
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveRows.prototype._bindMouseMove = function(){
 	var self = this;
@@ -240,9 +240,9 @@ MoveRows.prototype._bindMouseMove = function(){
 	self.table.rowManager.getDisplayRows().forEach(function(row){
 		if((row.type === "row" || row.type === "group") && row.modules.moveRow.mousemove){
 			row.getElement().addEventListener("mousemove", row.modules.moveRow.mousemove);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveRows.prototype._unbindMouseMove = function(){
 	var self = this;
@@ -250,9 +250,9 @@ MoveRows.prototype._unbindMouseMove = function(){
 	self.table.rowManager.getDisplayRows().forEach(function(row){
 		if((row.type === "row" || row.type === "group")  && row.modules.moveRow.mousemove){
 			row.getElement().removeEventListener("mousemove", row.modules.moveRow.mousemove);
-		***REMOVED***
-	***REMOVED***);
-***REMOVED***;
+		}
+	});
+};
 
 MoveRows.prototype.startMove = function(e, row){
 	var element = row.getElement();
@@ -270,10 +270,10 @@ MoveRows.prototype.startMove = function(e, row){
 	if(!this.connection){
 		element.parentNode.insertBefore(this.placeholderElement, element);
 		element.parentNode.removeChild(element);
-	***REMOVED***else{
+	}else{
 		this.table.element.classList.add("tabulator-movingrow-sending");
 		this.connectToTables(row);
-	***REMOVED***
+	}
 
 	//create hover element
 	this.hoverElement = element.cloneNode(true);
@@ -287,20 +287,20 @@ MoveRows.prototype.startMove = function(e, row){
 		this.hoverElement.style.whiteSpace = "nowrap";
 		this.hoverElement.style.overflow = "hidden";
 		this.hoverElement.style.pointerEvents = "none";
-	***REMOVED***else{
+	}else{
 		this.table.rowManager.getTableElement().appendChild(this.hoverElement);
 
 		this.hoverElement.style.left = "0";
 		this.hoverElement.style.top = "0";
 
 		this._bindMouseMove();
-	***REMOVED***
+	}
 
 	document.body.addEventListener("mousemove", this.moveHover);
 	document.body.addEventListener("mouseup", this.endMove);
 
 	this.moveHover(e);
-***REMOVED***;
+};
 
 
 MoveRows.prototype.setStartPosition = function(e, row){
@@ -314,10 +314,10 @@ MoveRows.prototype.setStartPosition = function(e, row){
 
 		this.startX = position.left - pageX + window.pageXOffset;
 		this.startY = position.top - pageY + window.pageYOffset;
-	***REMOVED***else{
+	}else{
 		this.startY = (pageY - element.getBoundingClientRect().top);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 MoveRows.prototype.endMove = function(e){
 	if(!e || e.which === 1 || this.touchMove){
@@ -326,7 +326,7 @@ MoveRows.prototype.endMove = function(e){
 		if(!this.connection){
 			this.placeholderElement.parentNode.insertBefore(this.moving.getElement(), this.placeholderElement.nextSibling);
 			this.placeholderElement.parentNode.removeChild(this.placeholderElement);
-		***REMOVED***
+		}
 
 		this.hoverElement.parentNode.removeChild(this.hoverElement);
 
@@ -334,7 +334,7 @@ MoveRows.prototype.endMove = function(e){
 
 		if(this.toRow){
 			this.table.rowManager.moveRow(this.moving, this.toRow, this.toRowAfter);
-		***REMOVED***
+		}
 
 		this.moving = false;
 		this.toRow = false;
@@ -346,22 +346,22 @@ MoveRows.prototype.endMove = function(e){
 		if(this.connection){
 			this.table.element.classList.remove("tabulator-movingrow-sending");
 			this.disconnectFromTables();
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 MoveRows.prototype.moveRow = function(row, after){
 	this.toRow = row;
 	this.toRowAfter = after;
-***REMOVED***;
+};
 
 MoveRows.prototype.moveHover = function(e){
 	if(this.connection){
 		this.moveHoverConnections.call(this, e);
-	***REMOVED***else{
+	}else{
 		this.moveHoverTable.call(this, e);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 MoveRows.prototype.moveHoverTable = function(e){
 	var rowHolder = this.table.rowManager.getElement(),
@@ -370,13 +370,13 @@ MoveRows.prototype.moveHoverTable = function(e){
 	scrollPos;
 
 	this.hoverElement.style.top = (yPos - this.startY) + "px";
-***REMOVED***;
+};
 
 
 MoveRows.prototype.moveHoverConnections = function(e){
 	this.hoverElement.style.left = (this.startX + (this.touchMove ? e.touches[0].pageX : e.pageX)) + "px";
 	this.hoverElement.style.top = (this.startY + (this.touchMove ? e.touches[0].pageY : e.pageY)) + "px";
-***REMOVED***;
+};
 
 
 //establish connection with other tables
@@ -388,8 +388,8 @@ MoveRows.prototype.connectToTables = function(row){
 
 	this.table.modules.comms.send(this.connection, "moveRow", "connect", {
 		row:row,
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 
 //disconnect from other tables
@@ -400,7 +400,7 @@ MoveRows.prototype.disconnectFromTables = function(){
 	this.table.options.movableRowsSendingStop.call(this.table, connections);
 
 	this.table.modules.comms.send(this.connection, "moveRow", "disconnect");
-***REMOVED***;
+};
 
 
 //accept incomming connection
@@ -415,8 +415,8 @@ MoveRows.prototype.connect = function(table, row){
 		self.table.rowManager.getDisplayRows().forEach(function(row){
 			if(row.type === "row" && row.modules.moveRow && row.modules.moveRow.mouseup){
 				row.getElement().addEventListener("mouseup", row.modules.moveRow.mouseup);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		self.tableRowDropEvent = self.tableRowDrop.bind(self);
 
@@ -425,11 +425,11 @@ MoveRows.prototype.connect = function(table, row){
 		this.table.options.movableRowsReceivingStart.call(this.table, row, table);
 
 		return true;
-	***REMOVED***else{
+	}else{
 		console.warn("Move Row Error - Table cannot accept connection, already connected to table:", this.connectedTable);
 		return false;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //close incomming connection
 MoveRows.prototype.disconnect = function(table){
@@ -443,16 +443,16 @@ MoveRows.prototype.disconnect = function(table){
 		self.table.rowManager.getDisplayRows().forEach(function(row){
 			if(row.type === "row" && row.modules.moveRow && row.modules.moveRow.mouseup){
 				row.getElement().removeEventListener("mouseup", row.modules.moveRow.mouseup);
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		self.table.element.removeEventListener("mouseup", self.tableRowDropEvent);
 
 		this.table.options.movableRowsReceivingStop.call(this.table, table);
-	***REMOVED***else{
+	}else{
 		console.warn("Move Row Error - trying to disconnect from non connected table")
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 MoveRows.prototype.dropComplete = function(table, row, success){
 	var sender = false;
@@ -467,25 +467,25 @@ MoveRows.prototype.dropComplete = function(table, row, success){
 			case "function":
 			sender = this.table.options.movableRowsSender;
 			break;
-		***REMOVED***
+		}
 
 		if(sender){
 			sender.call(this, this.moving.getComponent(), row ? row.getComponent() : undefined, table)
-		***REMOVED***else{
+		}else{
 			if(this.table.options.movableRowsSender){
 				console.warn("Mover Row Error - no matching sender found:", this.table.options.movableRowsSender);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		this.table.options.movableRowsSent.call(this.table, this.moving.getComponent(), row ? row.getComponent() : undefined, table);
 
-	***REMOVED***else{
+	}else{
 		this.table.options.movableRowsSentFailed.call(this.table, this.moving.getComponent(), row ? row.getComponent() : undefined, table);
-	***REMOVED***
+	}
 
 	this.endMove();
 
-***REMOVED***;
+};
 
 
 MoveRows.prototype.tableRowDrop = function(e, row){
@@ -502,25 +502,25 @@ MoveRows.prototype.tableRowDrop = function(e, row){
 		case "function":
 		receiver = this.table.options.movableRowsReceiver;
 		break;
-	***REMOVED***
+	}
 
 	if(receiver){
 		success = receiver.call(this, this.connectedRow.getComponent(), row ? row.getComponent() : undefined, this.connectedTable)
-	***REMOVED***else{
+	}else{
 		console.warn("Mover Row Error - no matching receiver found:", this.table.options.movableRowsReceiver)
-	***REMOVED***
+	}
 
 	if(success){
 		this.table.options.movableRowsReceived.call(this.table, this.connectedRow.getComponent(), row ? row.getComponent() : undefined, this.connectedTable);
-	***REMOVED***else{
+	}else{
 		this.table.options.movableRowsReceivedFailed.call(this.table, this.connectedRow.getComponent(), row ? row.getComponent() : undefined, this.connectedTable);
-	***REMOVED***
+	}
 
 	this.table.modules.comms.send(this.connectedTable, "moveRow", "dropcomplete", {
 		row:row,
 		success:success,
-	***REMOVED***);
-***REMOVED***;
+	});
+};
 
 
 
@@ -528,38 +528,38 @@ MoveRows.prototype.receivers = {
 	insert:function(fromRow, toRow, fromTable){
 		this.table.addRow(fromRow.getData(), undefined, toRow);
 		return true;
-	***REMOVED***,
+	},
 
 	add:function(fromRow, toRow, fromTable){
 		this.table.addRow(fromRow.getData());
 		return true;
-	***REMOVED***,
+	},
 
 	update:function(fromRow, toRow, fromTable){
 		if(toRow){
 			toRow.update(fromRow.getData());
 			return true;
-		***REMOVED***
+		}
 
 		return false;
-	***REMOVED***,
+	},
 
 	replace:function(fromRow, toRow, fromTable){
 		if(toRow){
 			this.table.addRow(fromRow.getData(), undefined, toRow);
 			toRow.delete();
 			return true;
-		***REMOVED***
+		}
 
 		return false;
-	***REMOVED***,
-***REMOVED***;
+	},
+};
 
 MoveRows.prototype.senders = {
 	delete:function(fromRow, toRow, toTable){
 		fromRow.delete();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 MoveRows.prototype.commsReceived = function(table, action, data){
@@ -575,8 +575,8 @@ MoveRows.prototype.commsReceived = function(table, action, data){
 		case "dropcomplete":
 		return this.dropComplete(table, data.row, data.success);
 		break;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 
 Tabulator.prototype.registerModule("moveRow", MoveRows);

@@ -5,7 +5,7 @@ var SelectRow = function(table){
 	this.selectPrev = []; //hold previously selected element for drag drop selection
 	this.selectedRows = []; //hold selected rows
 	this.headerCheckboxElement = null; // hold header select element
-***REMOVED***;
+};
 
 SelectRow.prototype.clearSelectionData = function(silent){
 	this.selecting = false;
@@ -15,8 +15,8 @@ SelectRow.prototype.clearSelectionData = function(silent){
 
 	if(!silent){
 		this._rowSelectionChanged();
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 SelectRow.prototype.initializeRow = function(row){
 	var self = this,
@@ -27,13 +27,13 @@ SelectRow.prototype.initializeRow = function(row){
 
 		setTimeout(function(){
 			self.selecting = false;
-		***REMOVED***, 50);
+		}, 50);
 
 		document.body.removeEventListener("mouseup", endSelect);
-	***REMOVED***;
+	};
 
 
-	row.modules.select = {selected:false***REMOVED***;
+	row.modules.select = {selected:false};
 
 	//set row selection class
 	if(self.table.options.selectableCheck.call(this.table, row.getComponent())){
@@ -63,45 +63,45 @@ SelectRow.prototype.initializeRow = function(row){
 									if(self.table.options.selectable !== true && !self.isRowSelected(row)){
 										if(self.selectedRows.length < self.table.options.selectable){
 											self.toggleRow(toggledRow);
-										***REMOVED***
-									***REMOVED***else{
+										}
+									}else{
 										self.toggleRow(toggledRow);
-									***REMOVED***
-								***REMOVED***
-							***REMOVED***);
+									}
+								}
+							});
 							self.lastClickedRow = row;
-						***REMOVED***else{
+						}else{
 							self.deselectRows(undefined, true);
 
 							if(self.table.options.selectable !== true){
 								if(toggledRows.length > self.table.options.selectable){
 									toggledRows = toggledRows.slice(0, self.table.options.selectable)
-								***REMOVED***
-							***REMOVED***
+								}
+							}
 
 							self.selectRows(toggledRows);
-						***REMOVED***
+						}
 						self.table._clearSelection();
-					***REMOVED***
+					}
 					else if(e.ctrlKey || e.metaKey){
 						self.toggleRow(row);
 						self.lastClickedRow = row;
-					***REMOVED***else{
+					}else{
 						self.deselectRows(undefined, true);
 						self.selectRows(row);
 						self.lastClickedRow = row;
-					***REMOVED***
-				***REMOVED***);
-			***REMOVED***else{
+					}
+				});
+			}else{
 				element.addEventListener("click", function(e){
 					if(!self.table.modExists("edit") || !self.table.modules.edit.getCurrentCell()){
 						self.table._clearSelection();
-					***REMOVED***
+					}
 
 					if(!self.selecting){
 						self.toggleRow(row);
-					***REMOVED***
-				***REMOVED***);
+					}
+				});
 
 				element.addEventListener("mousedown", function(e){
 					if(e.shiftKey){
@@ -117,8 +117,8 @@ SelectRow.prototype.initializeRow = function(row){
 						self.toggleRow(row);
 
 						return false;
-					***REMOVED***
-				***REMOVED***);
+					}
+				});
 
 				element.addEventListener("mouseenter", function(e){
 					if(self.selecting){
@@ -127,35 +127,35 @@ SelectRow.prototype.initializeRow = function(row){
 
 						if(self.selectPrev[1] == row){
 							self.toggleRow(self.selectPrev[0]);
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***);
+						}
+					}
+				});
 
 				element.addEventListener("mouseout", function(e){
 					if(self.selecting){
 						self.table._clearSelection();
 						self.selectPrev.unshift(row);
-					***REMOVED***
-				***REMOVED***);
-			***REMOVED***
-		***REMOVED***
+					}
+				});
+			}
+		}
 
-	***REMOVED***else{
+	}else{
 		element.classList.add("tabulator-unselectable");
 		element.classList.remove("tabulator-selectable");
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //toggle row selection
 SelectRow.prototype.toggleRow = function(row){
 	if(this.table.options.selectableCheck.call(this.table, row.getComponent())){
 		if(row.modules.select && row.modules.select.selected){
 			this._deselectRow(row);
-		***REMOVED***else{
+		}else{
 			this._selectRow(row);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 //select a number of rows
 SelectRow.prototype.selectRows = function(rows){
@@ -165,7 +165,7 @@ SelectRow.prototype.selectRows = function(rows){
 		case "undefined":
 		this.table.rowManager.rows.forEach((row) => {
 			this._selectRow(row, true, true);
-		***REMOVED***);
+		});
 
 		this._rowSelectionChanged();
 		break;
@@ -176,11 +176,11 @@ SelectRow.prototype.selectRows = function(rows){
 
 		if(rowMatch){
 			this._selectRow(rowMatch, true, true);
-		***REMOVED***else{
+		}else{
 			this.table.rowManager.getRows(rows).forEach((row) => {
 				this._selectRow(row, true, true);
-			***REMOVED***);
-		***REMOVED***
+			});
+		}
 
 		this._rowSelectionChanged();
 		break;
@@ -189,15 +189,15 @@ SelectRow.prototype.selectRows = function(rows){
 		if(Array.isArray(rows)){
 			rows.forEach((row) => {
 				this._selectRow(row, true, true);
-			***REMOVED***);
+			});
 
 			this._rowSelectionChanged();
-		***REMOVED***else{
+		}else{
 			this._selectRow(rows, false, true);
-		***REMOVED***
+		}
 		break;
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 //select an individual row
 SelectRow.prototype._selectRow = function(rowInfo, silent, force){
@@ -208,48 +208,48 @@ SelectRow.prototype._selectRow = function(rowInfo, silent, force){
 		if(this.selectedRows.length >= this.table.options.selectable){
 			if(this.table.options.selectableRollingSelection){
 				this._deselectRow(this.selectedRows[0]);
-			***REMOVED***else{
+			}else{
 				return false;
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	var row = this.table.rowManager.findRow(rowInfo);
 
 	if(row){
 		if(this.selectedRows.indexOf(row) == -1){
 			if(!row.modules.select){
-				row.modules.select = {***REMOVED***;
-			***REMOVED***
+				row.modules.select = {};
+			}
 
 			row.modules.select.selected = true;
 			if(row.modules.select.checkboxEl){
 				row.modules.select.checkboxEl.checked = true;
-			***REMOVED***
+			}
 			row.getElement().classList.add("tabulator-selected");
 
 			this.selectedRows.push(row);
 
 			if(this.table.options.dataTreeSelectPropagate){
 				this.childRowSelection(row, true);
-			***REMOVED***
+			}
 
 			if(!silent){
 				this.table.options.rowSelected.call(this.table, row.getComponent());
-			***REMOVED***
+			}
 
 			this._rowSelectionChanged(silent);
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		if(!silent){
 			console.warn("Selection Error - No such row found, ignoring selection:" + rowInfo);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 SelectRow.prototype.isRowSelected = function(row){
 	return this.selectedRows.indexOf(row) !== -1;
-***REMOVED***;
+};
 
 //deselect a number of rows
 SelectRow.prototype.deselectRows = function(rows, silent){
@@ -262,22 +262,22 @@ SelectRow.prototype.deselectRows = function(rows, silent){
 
 		for(let i = 0; i < rowCount; i++){
 			self._deselectRow(self.selectedRows[0], true);
-		***REMOVED***
+		}
 
 		self._rowSelectionChanged(silent);
 
-	***REMOVED***else{
+	}else{
 		if(Array.isArray(rows)){
 			rows.forEach(function(row){
 				self._deselectRow(row, true);
-			***REMOVED***);
+			});
 
 			self._rowSelectionChanged(silent);
-		***REMOVED***else{
+		}else{
 			self._deselectRow(rows, silent);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 //deselect an individual row
 SelectRow.prototype._deselectRow = function(rowInfo, silent){
@@ -288,47 +288,47 @@ SelectRow.prototype._deselectRow = function(rowInfo, silent){
 	if(row){
 		index = self.selectedRows.findIndex(function(selectedRow){
 			return selectedRow == row;
-		***REMOVED***);
+		});
 
 		if(index > -1){
 
 			if(!row.modules.select){
-				row.modules.select = {***REMOVED***;
-			***REMOVED***
+				row.modules.select = {};
+			}
 
 			row.modules.select.selected = false;
 			if(row.modules.select.checkboxEl){
 				row.modules.select.checkboxEl.checked = false;
-			***REMOVED***
+			}
 			row.getElement().classList.remove("tabulator-selected");
 			self.selectedRows.splice(index, 1);
 
 			if(this.table.options.dataTreeSelectPropagate){
 				this.childRowSelection(row, false);
-			***REMOVED***
+			}
 
 			if(!silent){
 				self.table.options.rowDeselected.call(this.table, row.getComponent());
-			***REMOVED***
+			}
 
 			self._rowSelectionChanged(silent);
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		if(!silent){
 			console.warn("Deselection Error - No such row found, ignoring selection:" + rowInfo);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 SelectRow.prototype.getSelectedData = function(){
 	var data = [];
 
 	this.selectedRows.forEach(function(row){
 		data.push(row.getData());
-	***REMOVED***);
+	});
 
 	return data;
-***REMOVED***;
+};
 
 SelectRow.prototype.getSelectedRows = function(){
 
@@ -336,41 +336,41 @@ SelectRow.prototype.getSelectedRows = function(){
 
 	this.selectedRows.forEach(function(row){
 		rows.push(row.getComponent());
-	***REMOVED***);
+	});
 
 	return rows;
-***REMOVED***;
+};
 
 SelectRow.prototype._rowSelectionChanged = function(silent){
 	if(this.headerCheckboxElement){
 		if(this.selectedRows.length === 0){
 			this.headerCheckboxElement.checked = false;
 			this.headerCheckboxElement.indeterminate = false;
-		***REMOVED*** else if(this.table.rowManager.rows.length === this.selectedRows.length){
+		} else if(this.table.rowManager.rows.length === this.selectedRows.length){
 			this.headerCheckboxElement.checked = true;
 			this.headerCheckboxElement.indeterminate = false;
-		***REMOVED*** else {
+		} else {
 			this.headerCheckboxElement.indeterminate = true;
 			this.headerCheckboxElement.checked = false;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	if(!silent){
 		this.table.options.rowSelectionChanged.call(this.table, this.getSelectedData(), this.getSelectedRows());
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 SelectRow.prototype.registerRowSelectCheckbox = function (row, element) {
 	if(!row._row.modules.select){
-		row._row.modules.select = {***REMOVED***;
-	***REMOVED***
+		row._row.modules.select = {};
+	}
 
 	row._row.modules.select.checkboxEl = element;
-***REMOVED***;
+};
 
 SelectRow.prototype.registerHeaderSelectCheckbox = function (element) {
 	this.headerCheckboxElement = element;
-***REMOVED***;
+};
 
 SelectRow.prototype.childRowSelection = function(row, select){
 	var children = this.table.modules.dataTree.getChildren(row);
@@ -378,12 +378,12 @@ SelectRow.prototype.childRowSelection = function(row, select){
 	if(select){
 		for(let child of children){
 			this._selectRow(child, true);
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		for(let child of children){
 			this._deselectRow(child, true);
-		***REMOVED***
-	***REMOVED***
-***REMOVED***;
+		}
+	}
+};
 
 Tabulator.prototype.registerModule("selectRow", SelectRow);

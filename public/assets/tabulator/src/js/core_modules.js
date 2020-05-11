@@ -1,16 +1,16 @@
 ;(function (global, factory) {
 	if(typeof exports === 'object' && typeof module !== 'undefined'){
 		module.exports = factory();
-	***REMOVED***else if(typeof define === 'function' && define.amd){
+	}else if(typeof define === 'function' && define.amd){
 		define(factory);
-	***REMOVED***else{
+	}else{
 		global.Tabulator = factory();
-	***REMOVED***
-***REMOVED***(this, (function () {
+	}
+}(this, (function () {
 
-	/*=include core.js***REMOVED***/
-	/*=include modules_enabled.js***REMOVED***/
+	/*=include core.js */
+	/*=include modules_enabled.js */
 
 	return Tabulator;
 
-***REMOVED***)));
+})));

@@ -2,12 +2,12 @@ var Print = function(table){
 	this.table = table; //hold Tabulator object
 	this.element = false;
 	this.manualBlock = false;
-***REMOVED***;
+};
 
 Print.prototype.initialize = function(){
 	window.addEventListener("beforeprint", this.replaceTable.bind(this));
 	window.addEventListener("afterprint", this.cleanup.bind(this));
-***REMOVED***;
+};
 
 Print.prototype.replaceTable = function(){
 	if(!this.manualBlock){
@@ -19,8 +19,8 @@ Print.prototype.replaceTable = function(){
 		this.table.element.style.display = "none";
 
 		this.table.element.parentNode.insertBefore(this.element, this.table.element);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Print.prototype.cleanup = function(){
 	document.body.classList.remove("tabulator-print-fullscreen-hide");
@@ -28,8 +28,8 @@ Print.prototype.cleanup = function(){
 	if(this.element && this.element.parentNode){
 		this.element.parentNode.removeChild(this.element);
 		this.table.element.style.display = "";
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Print.prototype.printFullscreen = function(visible, style, config){
 	var scrollX = window.scrollX,
@@ -51,12 +51,12 @@ Print.prototype.printFullscreen = function(visible, style, config){
 
 		if(typeof headerContent == "string"){
 			headerEl.innerHTML = headerContent;
-		***REMOVED***else{
+		}else{
 			headerEl.appendChild(headerContent);
-		***REMOVED***
+		}
 
 		this.element.appendChild(headerEl);
-	***REMOVED***
+	}
 
 	this.element.appendChild(tableEl);
 
@@ -68,19 +68,19 @@ Print.prototype.printFullscreen = function(visible, style, config){
 
 		if(typeof footerContent == "string"){
 			footerEl.innerHTML = footerContent;
-		***REMOVED***else{
+		}else{
 			footerEl.appendChild(footerContent);
-		***REMOVED***
+		}
 
 		this.element.appendChild(footerEl);
-	***REMOVED***
+	}
 
 	document.body.classList.add("tabulator-print-fullscreen-hide");
 	document.body.appendChild(this.element);
 
 	if(this.table.options.printFormatter){
 		this.table.options.printFormatter(this.element, tableEl);
-	***REMOVED***
+	}
 
 	window.print();
 
@@ -89,6 +89,6 @@ Print.prototype.printFullscreen = function(visible, style, config){
 	window.scrollTo(scrollX, scrollY);
 
 	this.manualBlock = false;
-***REMOVED***;
+};
 
 Tabulator.prototype.registerModule("print", Print);

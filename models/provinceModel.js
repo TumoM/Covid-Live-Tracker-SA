@@ -17,8 +17,8 @@ class Province {
     this.men = 0; // Dead
     this.women = 0; // Dead
     this.deaths = 0; // Dead
-***REMOVED***
-***REMOVED***
+  }
+}
 module.exports = Province
 
 

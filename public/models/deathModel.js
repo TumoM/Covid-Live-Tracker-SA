@@ -7,12 +7,12 @@ class DeathModel {
     this.province = province;
     this.sex = sex;
     this.age = age;
-***REMOVED***
+  }
 
   toString(){
-    return `${this.province***REMOVED***, ${this.sex***REMOVED***, ${this.age***REMOVED***`;
-***REMOVED***
-***REMOVED***
+    return `${this.province}, ${this.sex}, ${this.age}`;
+  }
+}
 module.exports = DeathModel
 // let x = new age("Swag")
 // let y = new age("Swag 2", 1,0,100)

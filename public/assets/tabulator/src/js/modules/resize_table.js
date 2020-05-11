@@ -10,7 +10,7 @@ var ResizeTable = function(table){
 	this.containerWidth = 0;
 
 	this.autoResize = false;
-***REMOVED***;
+};
 
 ResizeTable.prototype.initialize = function(row){
 	var table = this.table,
@@ -22,7 +22,7 @@ ResizeTable.prototype.initialize = function(row){
 	if(table.element.parentNode){
 		this.containerHeight = table.element.parentNode.clientHeight;
 		this.containerWidth = table.element.parentNode.clientWidth;
-	***REMOVED***
+	}
 
 	if(typeof ResizeObserver !== "undefined" && table.rowManager.getRenderMode() === "virtual"){
 
@@ -41,13 +41,13 @@ ResizeTable.prototype.initialize = function(row){
 					if(table.element.parentNode){
 						this.containerHeight = table.element.parentNode.clientHeight;
 						this.containerWidth = table.element.parentNode.clientWidth;
-					***REMOVED***
+					}
 
 					table.redraw();
-				***REMOVED***
+				}
 
-			***REMOVED***
-		***REMOVED***);
+			}
+		});
 
 		this.observer.observe(table.element);
 
@@ -68,37 +68,37 @@ ResizeTable.prototype.initialize = function(row){
 						this.tableWidth = table.element.clientWidth;
 
 						table.redraw();
-					***REMOVED***
+					}
 
 					table.redraw();
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			this.containerObserver.observe(this.table.element.parentNode);
-		***REMOVED***
-	***REMOVED***else{
+		}
+	}else{
 		this.binding = function(){
 			if(!table.browserMobile || (table.browserMobile && !table.modules.edit.currentCell)){
 				table.redraw();
-			***REMOVED***
-		***REMOVED***;
+			}
+		};
 
 		window.addEventListener("resize", this.binding);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 ResizeTable.prototype.clearBindings = function(row){
 	if(this.binding){
 		window.removeEventListener("resize", this.binding);
-	***REMOVED***
+	}
 
 	if(this.observer){
 		this.observer.unobserve(this.table.element);
-	***REMOVED***
+	}
 
 	if(this.containerObserver){
 		this.containerObserver.unobserve(this.table.element.parentNode);
-	***REMOVED***
-***REMOVED***;
+	}
+};
 
 Tabulator.prototype.registerModule("resizeTable", ResizeTable);

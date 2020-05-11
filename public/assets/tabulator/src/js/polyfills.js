@@ -8,7 +8,7 @@ if (!Array.prototype.findIndex) {
      // 1. Let O be ? ToObject(this value).
       if (this == null) {
         throw new TypeError('"this" is null or not defined');
-    ***REMOVED***
+      }
 
       var o = Object(this);
 
@@ -18,7 +18,7 @@ if (!Array.prototype.findIndex) {
       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
       if (typeof predicate !== 'function') {
         throw new TypeError('predicate must be a function');
-    ***REMOVED***
+      }
 
       // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
       var thisArg = arguments[1];
@@ -35,16 +35,16 @@ if (!Array.prototype.findIndex) {
         var kValue = o[k];
         if (predicate.call(thisArg, kValue, k, o)) {
           return k;
-      ***REMOVED***
+        }
         // e. Increase k by 1.
         k++;
-    ***REMOVED***
+      }
 
       // 7. Return -1.
       return -1;
-  ***REMOVED***
-***REMOVED***);
-***REMOVED***
+    }
+  });
+}
 
 // https://tc39.github.io/ecma262/#sec-array.prototype.find
 if (!Array.prototype.find) {
@@ -53,7 +53,7 @@ if (!Array.prototype.find) {
      // 1. Let O be ? ToObject(this value).
       if (this == null) {
         throw new TypeError('"this" is null or not defined');
-    ***REMOVED***
+      }
 
       var o = Object(this);
 
@@ -63,7 +63,7 @@ if (!Array.prototype.find) {
       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
       if (typeof predicate !== 'function') {
         throw new TypeError('predicate must be a function');
-    ***REMOVED***
+      }
 
       // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
       var thisArg = arguments[1];
@@ -80,13 +80,13 @@ if (!Array.prototype.find) {
         var kValue = o[k];
         if (predicate.call(thisArg, kValue, k, o)) {
           return kValue;
-      ***REMOVED***
+        }
         // e. Increase k by 1.
         k++;
-    ***REMOVED***
+      }
 
       // 7. Return undefined.
       return undefined;
-  ***REMOVED***
-***REMOVED***);
-***REMOVED***
+    }
+  });
+}

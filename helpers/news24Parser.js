@@ -426,7 +426,6 @@ main()
   ***REMOVED***)
     .catch(err=> console.log('Your Err',err));
 */
-
 function bootstrap() {
     main()
       .then((result) => {
@@ -436,8 +435,7 @@ function bootstrap() {
       .catch((err) => console.log('Your Err', err));
 ***REMOVED***
 
-// bootstrap()
-
+// bootstrap(
 function parseNumber(number) {
     let testInt = '';
     console.log('FUNC NUMBER:', number);

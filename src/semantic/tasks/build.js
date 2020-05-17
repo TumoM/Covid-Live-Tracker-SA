@@ -19,5 +19,5 @@ module.exports = function (callback) {
     return 1;
   }
 
-  gulp.series('build-css', 'build-javascript', 'build-assets')(callback);
+  gulp.parallel('build-css', 'build-javascript', 'build-assets')(callback);
 };

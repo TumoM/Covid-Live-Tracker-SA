@@ -415,7 +415,7 @@ async function main() {
      return res
         process.exit(0)
     }
-)*/
+) */
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

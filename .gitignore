@@ -1,6 +1,6 @@
 node_modules/
 .idea
 /package-lock.json
-coverage/
-/package-lock*
+/coverage/
+/package-lock.json~working
 .psql

@@ -18,6 +18,6 @@ module.exports = function (callback) {
     console.error('Cannot find semantic.json. Run "gulp install" to set-up Semantic');
     return 1;
   }
+  
+  gulp.parallel('build-css', 'build-javascript', 'build-assets')(callback)};
 
-  gulp.parallel('build-css', 'build-javascript', 'build-assets')(callback);
-};

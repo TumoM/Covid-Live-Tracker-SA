@@ -1,0 +1,40 @@
+
+
+.chart-container {
+  position: relative;
+  //min-height:300px;
+  min-height: 200px;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  /*height:40vh;
+  width:40vw*/
+  //position: relative;
+  //height:40vh;
+  //width:40vw;
+  //margin: 5%;
+
+}
+.chart{
+  /*width: 400px !important;
+  height: 400px !important;*/
+}
+.row {
+ /* @media only screen and (max-width: 767px) {
+    .chart{
+      width: 90vw !important;
+      height: 40vh !important;
+    }
+  }*/
+.column.chart{
+  //width:100%;
+}
+ /* {
+    //max-height:  !important;
+    //height: !important;
+
+    //height:19.5vh;
+    //width: 100%;
+    //height:40vh;
+    //width:80vw;
+  }*/
+}

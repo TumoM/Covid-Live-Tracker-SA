@@ -1,0 +1,45 @@
+language: node_js
+node_js:
+  - stable
+dist: trusty
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+    - working
+    - recover
+
+before_script:
+  - npm install -g gulp-cli
+
+install:
+  - npm install -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
+  - npm install puppeteer
+  - npm install -g codecov
+  - npm install -g jest
+  - npm install
+script:
+  - npm run test
+  - codecov
+deploy:
+  provider: heroku
+  api_key:
+    secure: TgE0gTwTFCxS512m6KierwRhgPDBP6dNgEFgf/No9fmUcplneFnasaHjh9YEkVUJUWuZEvoicbZdPXVcHOKEKvb9vzT4CacjaJoaJ2fGNxDTCTJqQjtSYgWr+mFhfc2p7Rds0emlevv7qI4DGzHip4y31YFeOuS9eiPvGZiReTDwzgu9VQ7TVaxz50J/wPzseSZjzX6CyTqTYqGtNqrE0hFZj0hzLy70ogmXg+VOIlsnzbX/SfDdWBNM+LJEn9YjYfDBhjftuOlETLmkBPod9zMbQZ8h0aT+pell4cmClOKFm8Rb+/GMMdQ2zcC71LD44X8bdXwMAUnYD9lkuKwDgwJTeuj3ski6esz8KKYA7+HMCWBAzHgKByy+/SsGR7dghffA5kKJp422MfXzXkkDI5/PAI3WFdkBegIvgnK8crYz5mic9lMNgDzBJ857+LxBq03DPOFCVcGiFTggEvGaWA42uWDe2atNOtZqnrg8EioeSDLeHD134TViQkTzhUxf9rWxYC2FN2kdZn+T3Vb5EvChj9wmhv9XJ+KtkA4Pozmce+y3DHl5RvzQOCvhriI8Zvs4Zz08ko05FZMNs49z7q3tWcfBp4buZxf3bk/6Mvmp8ht8p0pYqWKyzirJ/u0BNRoAshf+Q1ICB/dnIWR6ryEIR5PF1uS8UGdG6iZyehs=
+  app: covid-tracker-sa
+  on:
+    repo: TumoM/Covid-Live-Tracker-SA
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Hinting Tests"
+      script: npm run hint
+    - script: npm run lint
+      name: "Linting Tests"
+    - script: npm run test
+      name: "Unit Tests"
+    - script: npm run test:e2e
+      name: "Integration Tests"
+    - stage: "Build"
+      script: npm run build

@@ -122,7 +122,7 @@ async function main() {
 
     htmls = await async.concatSeries(links2, async (link) => {
          // Perform operation on file here.
-        console.log(`Processing link: ${link}`);
+        // console.log(`Processing link: ${link}`);
         let loop = true;
         index += 1;
           const i = index;
@@ -273,8 +273,7 @@ async function main() {
                                 } */ // Should we pass the tables here? Only gives cases per province.
 
                                 const date = rootChild.text.match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
-                                const cases = rootChild.text.match((/total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d]+/i))[0]
-                                  || rootChild.text.match(/total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+]+/i)[0];
+                                const cases = rootChild.text.match((/(total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+])|(total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d])+/i))[0]
                                 const tests = rootChild.text.match(/(Testing Data.*.*?\d[\s?\d].*conducted)|(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
                                 let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/i);
                                 let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+|total\s{0,10}recoveries.*?\d[\s\d]+(?=[\s.]))/i);
@@ -410,12 +409,12 @@ async function main() {
 }
 
 
-/* main().then((res)=>{
+ main().then((res)=>{
     console.log('Res',res)
      return res
         process.exit(0)
     }
-) */
+)
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

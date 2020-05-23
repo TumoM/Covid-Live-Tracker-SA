@@ -418,14 +418,12 @@ year;
 }
 
 
-/*
 main()
     .then(result=>{
         console.log("main result:",result);
         process.exit(0)
     })
     .catch(err=> console.log('Your Err',err));
-*/
 
 function parseNumber(number) {
     let testInt = '';

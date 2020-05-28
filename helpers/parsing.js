@@ -10,19 +10,7 @@ const chromedriver = require('chromedriver');
 chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
-const knex = require('knex')({
-      client: 'pg',
-      acquireConnectionTimeout: 10000,
-      pool: {
-          min: 2,
-          max: 50,
-          idleTimeoutMillis: 10000,
-          createTimeoutMillis: 10000,
-          acquireTimeoutMillis: 10000,
-      },
-      connection
-  }
-);
+
 const Province = require('../models/provinceModel');
 // DbSetup = require("../helpers/db24");
 const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
@@ -48,6 +36,19 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
 }
 
 console.log('Connection:', connection);
+const knex = require('knex')({
+      client: 'pg',
+      acquireConnectionTimeout: 10000,
+      pool: {
+          min: 2,
+          max: 50,
+          idleTimeoutMillis: 10000,
+          createTimeoutMillis: 10000,
+          acquireTimeoutMillis: 10000,
+      },
+      connection
+  }
+);
 
 const PROVINCES = { // Name, [cases, deadArr]
     GAUTENG: Province,

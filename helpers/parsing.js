@@ -3,7 +3,6 @@ const each = require('async-each');
 const async = require('async');
 
 dotenv.config();
-const cloudscraper = require('cloudscraper');
 const { Builder, By, Key, until, Driver } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const chromedriver = require('chromedriver');
@@ -11,6 +10,19 @@ const chromedriver = require('chromedriver');
 chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
+const knex = require('knex')({
+      client: 'pg',
+      acquireConnectionTimeout: 10000,
+      pool: {
+          min: 2,
+          max: 50,
+          idleTimeoutMillis: 10000,
+          createTimeoutMillis: 10000,
+          acquireTimeoutMillis: 10000,
+      },
+      connection
+  }
+);
 const Province = require('../models/provinceModel');
 // DbSetup = require("../helpers/db24");
 const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
@@ -36,19 +48,6 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
 }
 
 console.log('Connection:', connection);
-const knex = require('knex')({
-      client: 'pg',
-      acquireConnectionTimeout: 10000,
-      pool: {
-          min: 2,
-          max: 50,
-          idleTimeoutMillis: 10000,
-          createTimeoutMillis: 10000,
-          acquireTimeoutMillis: 10000,
-      },
-      connection
-  }
-);
 
 const PROVINCES = { // Name, [cases, deadArr]
     GAUTENG: Province,
@@ -273,7 +272,7 @@ async function main() {
                                 } */ // Should we pass the tables here? Only gives cases per province.
 
                                 const date = rootChild.text.match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
-                                const cases = rootChild.text.match((/(total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+])|(total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d])+/i))[0]
+                                const cases = rootChild.text.match((/(total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+])|(total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d])+/i))[0];
                                 const tests = rootChild.text.match(/(Testing Data.*.*?\d[\s?\d].*conducted)|(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
                                 let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/i);
                                 let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+|total\s{0,10}recoveries.*?\d[\s\d]+(?=[\s.]))/i);
@@ -410,12 +409,12 @@ async function main() {
 
 /*
 
- main().then((res)=>{
-    console.log('Res',res)
-     return res
-        process.exit(0)
+ main().then((res) => {
+    console.log('Res', res);
+     process.exit(0);
+     return res;
     }
-)
+);
 */
 
 module.exports = main;

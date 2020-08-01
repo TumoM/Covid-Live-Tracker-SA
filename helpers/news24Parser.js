@@ -145,27 +145,24 @@ async function main() {
                     breakdown = true;
                     p = p.findNextSibling('p');
                     for (let index = 0; index < 10; index++) {
-                        const vars = p.text.replace(/&nbsp;/g, '  ').split(/[\s+]?-[\s+]?/);
+                        let vars = p.text.replace(/&nbsp;/g, '  ').split(/[\s+]?-[\s+]?/);
+                        provinceName = p.text.replace(/&nbsp;/g, '  ');
+                        if( provinceName.split('-').length == 2) { 
+                            vars[2] = '0';
+                        } 
+                        else {provinceName = provinceName.match(/\s[a-zA-Z]+?(-\w+)?\s/)[0].trim() || null}
                         p = p.findNextSibling('p');
+                        vars = vars.length === 4 ? [vars[0],provinceName,vars[3]] : vars
                         provinceName = vars[1].trim() === 'KwaZulu' ? 'KwaZulu-Natal' : vars[1].trim();
-                        caseCount = vars[0].trim();
-                        deathCount = vars.length === 3 ? vars[2].trim().match(/(\d[\s\d]+)/)[0].trim()
-                            : vars.length === 4 ? vars[3].split(/(\d[\s\d]+)/)[0].trim()
-                                : 0;
+                        caseCount = vars[0].trim().split(/(\d[\s\d]+)/)[0].trim(); 
+                        // deathCount = vars.length === 3 ? vars[2].trim().match(/(\d[\s\d]+)/)[0].trim()
+                        //     : vars.length === 4 ? vars[3].trim().split(/(\d[\s\d]+)/)[0].trim()
+                        deathCount = vars[2].trim().match(/([\d?\s?]+)/)[0].trim() ||  0;
                         let caseInt = '';
                         let deathInt = '';
-                        caseCount.split(/\s/).forEach((digit) => {
-                            caseInt += digit;
-                        });
-                        caseInt = parseInt(caseInt);
-                        if (deathCount.length > 0) {
-                            deathCount.split(/\s/).forEach((digit) => {
-                                deathInt += digit;
-                            });
-                            deathInt = parseInt(deathInt);
-                        } else {
-                            deathInt = 0;
-                        }
+                        caseInt = parseInt(vars[0].split(" ").join(""));
+                        deathInt = parseInt(deathCount.split(" ").join(""));
+
                         const tempProv = new Province(provinceName, caseInt);
                         tempProv.deaths = deathInt;
                         tempProv.date = date;
@@ -417,12 +414,12 @@ provinceName;
 }
 
 
-// main()
-//     .then(result=>{
-//         console.log("main result:",result);
-//         process.exit(0)
-//     })
-//     .catch(err=> console.log('Your Err',err));
+main()
+    .then(result=>{
+        console.log("main result:",result);
+        process.exit(0)
+    })
+    .catch(err=> console.log('Your Err',err));
 
 
 function parseNumber(number) {

@@ -3,7 +3,6 @@ const each = require('async-each');
 const async = require('async');
 
 dotenv.config();
-const cloudscraper = require('cloudscraper');
 const { Builder, By, Key, until, Driver } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const chromedriver = require('chromedriver');
@@ -11,16 +10,6 @@ const chromedriver = require('chromedriver');
 chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
-const Province = require('../models/provinceModel');
-// DbSetup = require("../helpers/db24");
-const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
-// const url = "http://sacoronavirus.co.za/?s=update";
-// const url = "https://www.nicd.ac.za/media/alerts/";
-// const url = "https://sacoronavirus.co.za/page/2/?s=update";
-// const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
-const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i;
-const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
-
 
 let connection;
 console.log('Host: ', process.env.AWS_HOST);
@@ -36,6 +25,7 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
 }
 
 console.log('Connection:', connection);
+
 const knex = require('knex')({
       client: 'pg',
       acquireConnectionTimeout: 10000,
@@ -49,6 +39,16 @@ const knex = require('knex')({
       connection
   }
 );
+const Province = require('../models/provinceModel');
+// DbSetup = require("../helpers/db24");
+const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
+// const url = "http://sacoronavirus.co.za/?s=update";
+// const url = "https://www.nicd.ac.za/media/alerts/";
+// const url = "https://sacoronavirus.co.za/page/2/?s=update";
+// const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
+const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i;
+const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
+
 
 const PROVINCES = { // Name, [cases, deadArr]
     GAUTENG: Province,
@@ -273,10 +273,11 @@ async function main() {
                                 } */ // Should we pass the tables here? Only gives cases per province.
 
                                 const date = rootChild.text.match(/\d{1,2}(\w{2})?\s\w{3,9}\s20(\d{2})?/i)[0];
-                                const cases = rootChild.text.match((/(total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+])|(total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d])+/i))[0]
+                                const cases = rootChild.text.match((/(total.*confirmed.*(?:covid-19)? cases.*?\s[\s??\d+])|(total\s{0,10}(?=number)(?=.*confirmed cases).*?\d[\s?\d])+/i))[0];
                                 const tests = rootChild.text.match(/(Testing Data.*.*?\d[\s?\d].*conducted)|(Testing Data.*total.*?\d[\s?\d]+.*?tests)|(Tests.*?conducted.*?\d[\s?\d]+)/i)[0];
-                                let deaths = rootChild.text.match(/total deaths.*?\d[\s\d]+|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/i);
-                                let recoveries = rootChild.text.match(/((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+|total\s{0,10}recoveries.*?\d[\s\d]+(?=[\s.]))/i);
+                                let deaths = rootChild.text.match(/cumulative.{0,20}(death.{0,20}\d[\s\d]+)|(total.?deaths.*?\d[\s\d]+)|(total.{0,30}deaths.*?\d[\s\d]+)|(total of)[\s\S]{0,20}?related deaths.*?\d[\s\d]+/i);
+                                // let recoveries = rootChild.text.match(/recoveries[a-z\s]{0,30}?stands.*?\d[\s\d]{5,}|((\d[\s\d]+ )recoveries)|(recoveries[a-z\s]{0,30}?\d[\s\d]+|total\s{0,10}recoveries.*?\d[\s\d]+(?=[\s.]))/i);
+                                let recoveries = rootChild.text.match(/recoveries[a-z\s]{0,30}?stands.*?\d[\s\d]{5,}/i);
                                 let totalDeaths = null;
                                 if (!deaths) {
                                     deaths = null;
@@ -408,15 +409,14 @@ async function main() {
     return Promise.resolve(false);
 }
 
-/*
 
- main().then((res)=>{
-    console.log('Res',res)
-     return res
-        process.exit(0)
-    }
-)
-*/
+//  main().then((res) => {
+//     console.log('Res', res);
+//      process.exit(0);
+//      return res;
+//     }
+// );
+
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

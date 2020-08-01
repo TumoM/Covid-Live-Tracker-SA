@@ -111,7 +111,7 @@ async function main() {
             // #######################################################################################
 
             // TODO 1: Parse info on Recoveries by Province
-            const recoveriesLines = soupBody.text.match(/(?:recoveries?.*)?[\d*\s?]*recoveries?/);
+            const recoveriesLines = soupBody.text.match(/((\d[\s\d]+).{0,10}recoveries)|(?:recoveries?.*)?[\d*\s?]*recoveries?/);
             /* recoveriesLines.length === 2 ? recoveriesLines.unshift(date) : recoveriesLines;
             recoveryDate = recoveriesLines[0].match(/\d+.*!/)[0];
 */
@@ -149,11 +149,11 @@ async function main() {
                         p = p.findNextSibling('p');
                         provinceName = vars[1].trim() === 'KwaZulu' ? 'KwaZulu-Natal' : vars[1].trim();
                         caseCount = vars[0].trim();
-                        deathCount = vars.length === 3 ? vars[2].trim().split(/\s+/)[0].trim()
-                            : vars.length === 4 ? vars[3].split(/\s+/)[0].trim()
+                        deathCount = vars.length === 3 ? vars[2].trim().match(/(\d[\s\d]+)/)[0].trim()
+                            : vars.length === 4 ? vars[3].split(/(\d[\s\d]+)/)[0].trim()
                                 : 0;
                         let caseInt = '';
-let deathInt = '';
+                        let deathInt = '';
                         caseCount.split(/\s/).forEach((digit) => {
                             caseInt += digit;
                         });
@@ -195,7 +195,7 @@ let deathInt = '';
                 }
             }
 
-            console.log(`Recovery Counts (${recoveryDate}):`);
+            // console.log(`Recovery Counts (${recoveryDate}):`);
             count = 0;
             console.log('Starting the parsing of province Recoveries.');
             for (let index = 0; index < provinceRecoveries.length; index++) {
@@ -272,8 +272,7 @@ provinceName;
                         loop = false;
                     } else { // Inserting a fresh record mate.
                         let valid = true;
-                        let day; let month; let
-year;
+                        let day; let month; let year;
                         [day, month, year] = (new Date(date).toLocaleDateString().split('/', 3));
                         const value = await knex(tableName).update({ recovered: itemData.recovered })
                             .where({ provDate: recoveryDate, provinceName: itemData.provinceName })
@@ -337,12 +336,12 @@ year;
         return Promise.resolve(false);
     }
     function getNumber(line) {
-        let intString = '';
+        const intString = '';
         const total = line.match(/\d?[\d+\s?]*\d+/)[0].split(' ');
-        total.forEach((digit) => {
-            intString += digit;
-        });
-        return (+intString);
+        // total.forEach((digit) => {
+        //     intString += digit;
+        // });
+        return (+(total.join('')));
     }
 
     async function updateDaysGood(itemData) {
@@ -417,15 +416,14 @@ year;
     }
 }
 
-/*
 
-main()
-    .then(result=>{
-        console.log("main result:",result);
-        process.exit(0)
-    })
-    .catch(err=> console.log('Your Err',err));
-*/
+// main()
+//     .then(result=>{
+//         console.log("main result:",result);
+//         process.exit(0)
+//     })
+//     .catch(err=> console.log('Your Err',err));
+
 
 function parseNumber(number) {
     let testInt = '';

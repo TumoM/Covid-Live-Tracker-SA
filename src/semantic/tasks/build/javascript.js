@@ -80,7 +80,7 @@ function pack(type, compress) {
     .pipe(gulpif(compress, uglify(settings.concatUglify)))
     .pipe(header(banner, settings.header))
     .pipe(gulpif(config.hasPermissions, chmod(config.parsedPermissions)))
-    .pipe(gulp.dest(output.packagedJS))
+    .pipe(gulp.dest(output.packaged))
     .pipe(print(log.created))
     ;
 }
@@ -99,21 +99,24 @@ function buildJS(src, type, config, callback) {
     src      = config.paths.source.definitions + '/**/' + config.globs.components + (config.globs.ignored || '') + '.js';
   }
 
+  if (globs.individuals !== undefined && typeof src === 'string') {
+    const individuals = config.globs.individuals.replace('{','');
+    const components = config.globs.components.replace('}',',').concat(individuals);
+
+    src = config.paths.source.definitions + '/**/' + components + (config.globs.ignored || '') + '.js';
+  }
+
   // copy source javascript
   const js       = () => build(src, type, config);
   js.displayName = "Building un/compressed Javascript";
 
-/*
   const packUncompressed       = () => pack(type, false);
   packUncompressed.displayName = 'Packing uncompressed Javascript';
-*/
 
   const packCompressed       = () => pack(type, true);
   packCompressed.displayName = 'Packing compressed Javascript';
 
-  gulp.series(js, gulp.parallel(
-      // packUncompressed,
-      packCompressed))(callback);
+  gulp.series(js, gulp.parallel(packUncompressed, packCompressed))(callback);
 }
 
 module.exports = function (callback) {

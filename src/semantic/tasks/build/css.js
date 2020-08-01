@@ -107,7 +107,7 @@ function pack(type, compress) {
     .pipe(gulpif(config.hasPermissions, chmod(config.parsedPermissions)))
     .pipe(gulpif(compress, minifyCSS(settings.concatMinify)))
     .pipe(header(banner, settings.header))
-    .pipe(gulp.dest(output.packagedCSS))
+    .pipe(gulp.dest(output.packaged))
     .pipe(print(log.created))
     ;
 }
@@ -126,10 +126,16 @@ function buildCSS(src, type, config, opts, callback) {
     type     = src;
     src      = config.paths.source.definitions + '/**/' + config.globs.components + '.less';
   }
-/*
+
+  if (globs.individuals !== undefined && typeof src === 'string') {
+    const individuals = config.globs.individuals.replace('{','');
+    const components = config.globs.components.replace('}',',').concat(individuals);
+
+    src = config.paths.source.definitions + '/**/' + components + '.less';
+  }
+
   const buildUncompressed       = () => build(src, type, false, config, opts);
   buildUncompressed.displayName = 'Building uncompressed CSS';
-*/
 
   const buildCompressed       = () => build(src, type, true, config, opts);
   buildCompressed.displayName = 'Building compressed CSS';
@@ -141,8 +147,11 @@ function buildCSS(src, type, config, opts, callback) {
   packCompressed.displayName = 'Packing compressed CSS';
 
   gulp.parallel(
-    // gulp.series(buildUncompressed, packUncompressed),
-    gulp.series(buildCompressed, packCompressed)
+    gulp.series(
+      buildUncompressed,
+      gulp.parallel(packUncompressed, packCompressed)
+    ),
+    gulp.series(buildCompressed)
   )(callback);
 }
 

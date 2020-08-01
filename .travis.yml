@@ -3,9 +3,11 @@ node_js:
   - stable
 dist: trusty
 cache:
+  yarn: true
   directories:
     - node_modules
-    - assets/js/vendor
+    - $HOME/.yarn-cache
+    - $HOME/.node-cache
 branches:
   only:
     - master
@@ -13,16 +15,16 @@ branches:
     - recover
 
 before_script:
-  - npm install -g gulp-cli
+  - npm i -g yarn
+  - yarn add -g gulp-cli
 
 install:
-  - npm install -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
-  - npm install puppeteer
-  - npm install -g codecov
-  - npm install -g jest
-  - npm install
+  - yarn add -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
+  - yarn add puppeteer
+  - yarn add -g codecov jest
+  - yarn
 script:
-  - npm run test
+  - yarn test
   - codecov
 deploy:
   provider: heroku
@@ -31,33 +33,33 @@ deploy:
   app: covid-tracker-sa
   on:
     repo: TumoM/Covid-Live-Tracker-SA
-jobs:
-  include:
-    - stage: "Style Tests"
-      name: "Hinting Tests"
-      script: npm run hint
-      name: "Linting Tests"
-      script: npm run lint
-    - stage: "Intergration Tests"
-      name: "Unit Tests"
-      script: npm run test
-      name: "Integration Tests"
-      script: npm run test:e2e
-    - stage: "Build"
-      name: " Build Phase"
-      script: npm run build
+# jobs:
+#   include:
+#     - stage: "Style Tests"
+#       name: "Hinting Tests"
+#       script: yarn hint
+#       name: "Linting Tests"
+#       script: yarn lint
+#     - stage: "Intergration Tests"
+#       name: "Unit Tests"
+#       script: yarn test
+#       name: "Integration Tests"
+#       script: yarn test:e2e
+#     - stage: "Build"
+#       name: " Build Phase"
+#       script: yarn build
 jobs:
   include:
     - stage: "Style Tests"                # naming the Tests stage
       name: "Hinting Tests"            # names the first Tests stage job
-      script: npm run hint
-    - script: npm run lint
+      script: yarn hint
+    - script: yarn lint
       name: "Linting Tests"     # names the second Tests stage job
     - stage: "Integration Tests"                # naming the Tests stage
       name: "Unit Tests"            # names the first Tests stage job
-      script: npm run test
-    - script: npm run test:e2e
+      script: yarn test
+    - script: yarn test:e2e
       name: "Integration Test"     # names the second Tests stage job
     - stage: "Build"
       name: "Build Phase"
-      script: npm run build
+      script: yarn build

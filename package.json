@@ -15,7 +15,7 @@
     "start": "nodemon app.js",
     "sass": "sass --watch src/sass:public/stylesheets",
     "heroku": "git push heroku working:master",
-    "reinstall": "rmdir /S /Q node_modules & npm i",
+    "reinstall": "rmdir /S /Q node_modules & yarn",
     "build": "echo Bulding Semanti-UI for the look && gulp build --gulpfile src/semantic/gulpfile.js && echo Bulding Main Site, for the functionality && gulp build"
   },
   "jest": {
@@ -59,7 +59,6 @@
     "minify": "^5.1.1",
     "moment": "^2.25.1",
     "moment-timezone": "^0.5.28",
-    "newrelic": "^6.6.0",
     "node-cache": "^5.1.0",
     "node-html-parser": "^1.2.14",
     "nodemon": "^2.0.3",
@@ -115,7 +114,8 @@
     "postcss-combine-duplicated-selectors": "^8.1.0",
     "postcss-combine-media-query": "^1.0.1",
     "postcss-font-magician": "^2.3.1",
-    "readable-stream": "^3.6.0"
+    "readable-stream": "^3.6.0",
+    "yarn": "^1.22.4"
   },
   "browserslist": {
     "production": [

@@ -1,0 +1,9 @@
+node_modules/
+.idea
+/package-lock.json
+coverage/
+/package-lock*
+.psql
+package-lock.json
+.vscode
+**.PNG

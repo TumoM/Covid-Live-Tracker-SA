@@ -147,21 +147,20 @@ async function main() {
                     for (let index = 0; index < 10; index++) {
                         let vars = p.text.replace(/&nbsp;/g, '  ').split(/[\s+]?-[\s+]?/);
                         provinceName = p.text.replace(/&nbsp;/g, '  ');
-                        if( provinceName.split('-').length == 2) { 
+                        if (provinceName.split('-').length === 2) {
                             vars[2] = '0';
-                        } 
-                        else {provinceName = provinceName.match(/\s[a-zA-Z]+?(-\w+)?\s/)[0].trim() || null}
+                        } else { provinceName = provinceName.match(/\s[a-zA-Z]+?(-\w+)?\s/)[0].trim() || null; }
                         p = p.findNextSibling('p');
-                        vars = vars.length === 4 ? [vars[0],provinceName,vars[3]] : vars
+                        vars = vars.length === 4 ? [vars[0], provinceName, vars[3]] : vars;
                         provinceName = vars[1].trim() === 'KwaZulu' ? 'KwaZulu-Natal' : vars[1].trim();
-                        caseCount = vars[0].trim().split(/(\d[\s\d]+)/)[0].trim(); 
+                        caseCount = vars[0].trim().split(/(\d[\s\d]+)/)[0].trim();
                         // deathCount = vars.length === 3 ? vars[2].trim().match(/(\d[\s\d]+)/)[0].trim()
                         //     : vars.length === 4 ? vars[3].trim().split(/(\d[\s\d]+)/)[0].trim()
-                        deathCount = vars[2].trim().match(/([\d?\s?]+)/)[0].trim() ||  0;
+                        deathCount = vars[2].trim().match(/([\d?\s?]+)/)[0].trim() || 0;
                         let caseInt = '';
                         let deathInt = '';
-                        caseInt = parseInt(vars[0].split(" ").join(""));
-                        deathInt = parseInt(deathCount.split(" ").join(""));
+                        caseInt = parseInt(vars[0].split(' ').join(''));
+                        deathInt = parseInt(deathCount.split(' ').join(''));
 
                         const tempProv = new Province(provinceName, caseInt);
                         tempProv.deaths = deathInt;

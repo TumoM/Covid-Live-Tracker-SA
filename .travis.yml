@@ -35,14 +35,14 @@ jobs:
   include:
     - stage: "Style Tests"
       name: "Hinting Tests"
-      script: npm run hint
-    - script: npm run lint
+    - script: npm run hint
       name: "Linting Tests"
+    - script: npm run lint
     - stage: "Intergration Tests"
-    - script: npm run test
       name: "Unit Tests"
-    - script: npm run test:e2e
+    - script: npm run test
       name: "Integration Tests"
+    - script: npm run test:e2e
     - stage: "Build"
       name: " Build Phase"
       script: npm run build

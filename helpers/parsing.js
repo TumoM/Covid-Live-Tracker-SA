@@ -11,17 +11,6 @@ chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
 const HTMLParser = require('node-html-parser');
 
-const Province = require('../models/provinceModel');
-// DbSetup = require("../helpers/db24");
-const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
-// const url = "http://sacoronavirus.co.za/?s=update";
-// const url = "https://www.nicd.ac.za/media/alerts/";
-// const url = "https://sacoronavirus.co.za/page/2/?s=update";
-// const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
-const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i;
-const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
-
-
 let connection;
 console.log('Host: ', process.env.AWS_HOST);
 if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
@@ -36,6 +25,8 @@ if (process.env.DBMODE && process.env.DBMODE === 'herokuDB') {
 }
 
 console.log('Connection:', connection);
+
+
 const knex = require('knex')({
       client: 'pg',
       acquireConnectionTimeout: 10000,
@@ -49,6 +40,17 @@ const knex = require('knex')({
       connection
   }
 );
+const Province = require('../models/provinceModel');
+// DbSetup = require("../helpers/db24");
+const url = 'https://sacoronavirus.co.za/category/press-releases-and-notices/';
+// const url = "http://sacoronavirus.co.za/?s=update";
+// const url = "https://www.nicd.ac.za/media/alerts/";
+// const url = "https://sacoronavirus.co.za/page/2/?s=update";
+// const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\//
+const linkRegex = /.*\d{4}\/\d{2}\/\d{2}\/update-.*covid[-|_](?:19)?.*\d{2}/i;
+const regex = RegExp('.*\d{4}\/\d{2}\/\d{2}\/update-.*covid-.*20\d{2}\/', 'g');
+
+
 
 const PROVINCES = { // Name, [cases, deadArr]
     GAUTENG: Province,
@@ -408,7 +410,7 @@ async function main() {
     return Promise.resolve(false);
 }
 
-/*
+
 
  main().then((res) => {
     console.log('Res', res);
@@ -416,7 +418,7 @@ async function main() {
      return res;
     }
 );
-*/
+
 
 module.exports = main;
 // console.log("ProvincesList:",JSON.stringify(provincesList,null,2));

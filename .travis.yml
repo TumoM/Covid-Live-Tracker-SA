@@ -5,6 +5,7 @@ dist: trusty
 cache:
   directories:
     - node_modules
+    - assets/js/vendor
 branches:
   only:
     - master
@@ -32,14 +33,16 @@ deploy:
     repo: TumoM/Covid-Live-Tracker-SA
 jobs:
   include:
-    - stage: "Tests"
+    - stage: "Style Tests"
       name: "Hinting Tests"
       script: npm run hint
     - script: npm run lint
       name: "Linting Tests"
+    - stage: "Intergration Tests"
     - script: npm run test
       name: "Unit Tests"
     - script: npm run test:e2e
       name: "Integration Tests"
     - stage: "Build"
+      name: " Build Phase"
       script: npm run build

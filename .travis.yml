@@ -15,13 +15,13 @@ branches:
     - recover
 
 before_script:
-  - npm i -g yarn
-  - yarn add -g gulp-cli
+  - npm i -g yarn gulp-cli
+  # - yarn global add 
 
 install:
   - yarn add -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
   - yarn add puppeteer
-  - yarn add -g codecov jest
+  - yarn global add  codecov
   - yarn
 script:
   - yarn test

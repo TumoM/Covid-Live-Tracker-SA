@@ -20,8 +20,8 @@ before_script:
 
 install:
   - yarn add -D jest-puppeteer jshint eslint eslint-config-airbnb-base eslint-plugin-import eslint-plugin-import eslint-plugin-jest eslint-plugin-jsx-a11y eslint-config-airbnb
-  - yarn add puppeteer
-  - yarn global add  codecov
+  # - yarn add puppeteer
+  - yarn global add codecov
   - yarn
 script:
   - yarn test

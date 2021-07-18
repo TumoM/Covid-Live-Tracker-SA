@@ -16,10 +16,10 @@ async function main() {
         connection = process.env.DATABASE_URL;
     } else {
         connection = {
-            host: process.env.AWS_HOST || process.env.PG_HOST || '127.0.0.1',
-            user: process.env.AWS_USER || process.env.PG_USER || 'test_user',
-            password: process.env.AWS_PASSWORD || process.env.PG_PASS || 'temp_pass',
-            database: process.env.AWS_DB || process.env.DB_NAME || 'covid-tracker-sa2'
+            host: process.env.PG_HOST || process.env.AWS_HOST ||  '127.0.0.1',
+            user: process.env.PG_USER || process.env.AWS_USER ||  'test_user',
+            password: process.env.PG_PASS || process.env.AWS_PASSWORD ||  'temp_pass',
+            database: process.env.PG_DB || process.env.AWS_DB || 'covid-tracker-sa2'
         };
     }
 
